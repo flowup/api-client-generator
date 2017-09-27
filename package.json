@@ -1,0 +1,60 @@
+{
+  "name": "ngx-swagger-client-generator",
+  "version": "0.0.0",
+  "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
+  "homepage": "https://github.com/lotjomik/angular4-swagger-client-generator",
+  "main": "index.ts",
+  "bin": {
+    "ngx-client-gen": "./bin/ngx-client-gen.js"
+  },
+  "author": {
+    "name": "FlowUp",
+    "email": "hello@flowup.cz"
+  },
+  "bugs": {
+    "url": "https://github.com/flowup/ngx-swagger-client-generator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:flowup/ngx-swagger-client-generator.git"
+  },
+  "keywords": [
+    "swagger",
+    "rest",
+    "angular5",
+    "angular4",
+    "angular",
+    "ngx",
+    "scaffolding",
+    "webapi",
+    "api",
+    "generator",
+    "camelCase"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/main.ts -s /home/vmasek/PROJECTS/ngx-swagger-client-generator/src/swagger.yaml",
+    "build": "./node_modules/.bin/ts-node ./src/main.ts -s /home/vmasek/PROJECTS/ngx-swagger-client-generator/src/swagger.yaml"
+  },
+  "dependencies": {
+    "js-yaml": "^3.10.0",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "mustache": "^2.3.0",
+    "optimist": "^0.6.1",
+    "request": "^2.81.0",
+    "tslint": "^5.7.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^3.9.1",
+    "@types/lodash": "^4.14.76",
+    "@types/mkdirp": "^0.5.1",
+    "@types/mustache": "^0.8.30",
+    "@types/node": "^8.0.31",
+    "@types/optimist": "0.0.29",
+    "nodemon": "^1.12.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.5.3"
+  }
+}

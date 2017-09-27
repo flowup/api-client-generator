@@ -1,0 +1,5 @@
+src/
+tests/
+output/
+node_modules/
+.gitignore

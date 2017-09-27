@@ -1,0 +1,12 @@
+typings
+node_modules
+.idea
+.vs
+.vscode
+.idea
+bin
+obj
+output
+temp
+lib
+npm-debug.log
