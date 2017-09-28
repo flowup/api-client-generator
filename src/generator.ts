@@ -32,6 +32,7 @@ export interface MustacheData {
 
 export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined' | 'any';
 export type In = 'body' | 'path' | 'query' | 'modelbinding' | 'header' | 'formData';
+export type MethodType = 'get' | 'post' | 'put' | 'delete';
 
 export interface Parameter {
   camelCaseName?: string;
@@ -56,23 +57,22 @@ export interface Parameter {
 }
 
 export interface Method {
-  path?: string;
+  path?: string;  // path appended to base in method
   backTickPath?: string;
-  methodName?: any;
+  methodName?: any;  // mane of the generated method
   method?: string;
-  angular2httpMethod?: string;
+  methodType?: MethodType;  // type of the http method
   isGET?: boolean;
   hasPayload?: boolean;
   summaryLines?: any[];
   isSecure?: boolean;
   parameters: Parameter[];
-  hasBodyParameters?: boolean;
-  hasJsonResponse?: boolean;
-  response?: any;
+  hasBodyParameters?: boolean;  // if this is true, body will be JSON stringified
+  hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
+  response?: string;  // method return type
 }
 
 export class Generator {
-
   templates: TemplatesModel;
   swaggerParsed: any;
   viewModel: MustacheData;
@@ -215,7 +215,7 @@ export class Generator {
               op['x-swagger-js-method-name'] :
               (op.operationId ? op.operationId : Generator.getPathToMethodName(m, path))),
           method: m.toUpperCase(),
-          angular2httpMethod: m.toLowerCase(),
+          methodType: <MethodType>m.toLowerCase(),
           isGET: m.toUpperCase() === 'GET',
           hasPayload: !_.includes(['GET', 'DELETE', 'HEAD'], m.toUpperCase()),
           summaryLines: summaryLines,
@@ -236,7 +236,7 @@ export class Generator {
 
         params = params.concat(globalParams);
 
-        // Index file!
+        // Index file
         params.forEach((parameter) => {
           // Ignore headers which are injected by proxies & app servers
           // eg: https://cloud.google.com/appengine/docs/go/requests#Go_Request_headers
@@ -369,21 +369,15 @@ export class Generator {
 
         if (property.isRef) {
           definition.refs.push(property);
-
-          // Don't duplicate import statements
-          let addImport = true;
-          for (let i = 0; i < definition.imports.length; i++) {
-            if (definition.imports[i] === property.type) {
-              addImport = false;
-            }
-          }
-          if (addImport) {
-            definition.imports.push(property.type);
-          }
+          definition.imports.push(property.type);
         }
         else {
           definition.properties.push(property);
         }
+      });
+
+      definition.imports.sort().filter((item, pos, ary) => {
+        return !pos || item !== ary[pos - 1];
       });
 
       data.definitions.push(definition);
@@ -438,7 +432,7 @@ export class Generator {
   }
 
   static dashCase(text: string = ''): string {
-    return text.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
+    return text.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace(/^-/, '');
   }
 
   LogMessage(text: string, param: string = '') {

@@ -2,7 +2,11 @@ import { Inject, Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { {{#definitions}}{{name}}{{^last}}, {{/last}}{{/definitions}} } from './models';
+import {
+  {{#definitions}}
+  {{name}}{{^last}},{{/last}}
+  {{/definitions}}
+} from './models';
 
 /**
 * Created with ngx-swagger-client-generator.
@@ -68,7 +72,7 @@ export class ApiClientService {
         {{/isSingleton}}
       {{/isHeaderParameter}}
     {{/parameters}}
-    return this.sendRequest<{{&response}}>('{{angular2httpMethod}}', path, headers, params, {{#hasBodyParameters}}JSON.stringify({{#parameters}}{{#isBodyParameter}}{{&camelCaseName}}{{/isBodyParameter}}{{/parameters}}){{/hasBodyParameters}}{{^hasBodyParameters}}null{{/hasBodyParameters}});
+    return this.sendRequest<{{&response}}>('{{methodType}}', path, headers, params, {{#hasBodyParameters}}JSON.stringify({{#parameters}}{{#isBodyParameter}}{{&camelCaseName}}{{/isBodyParameter}}{{/parameters}}){{/hasBodyParameters}}{{^hasBodyParameters}}null{{/hasBodyParameters}});
   }
 
 {{/methods}}
