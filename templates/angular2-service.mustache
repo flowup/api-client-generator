@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { {{#definitions}}{{name}}{{^last}}, {{/last}}{{/definitions}} } from './models';
 
 /**
-* Created with angular4-swagger-client-generator.
+* Created with ngx-swagger-client-generator.
 */
 @Injectable()
 export class ApiClientService {
@@ -19,8 +19,8 @@ export class ApiClientService {
   }
 
 {{#methods}}
-  public {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{typescriptType}}{{^last}}, {{/last}}{{/parameters}}): Observable<{{&response}}> {
-    const uri = `{{&backTickPath}}`;
+  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{typescriptType}}{{^last}}, {{/last}}{{/parameters}}): Observable<{{&response}}> {
+    const path = `{{&backTickPath}}`;
     const headers = new HttpHeaders();
     let params = new HttpParams();
     {{#parameters}}
@@ -68,19 +68,19 @@ export class ApiClientService {
         {{/isSingleton}}
       {{/isHeaderParameter}}
     {{/parameters}}
-    return this.sendRequest<{{&response}}>('{{angular2httpMethod}}', uri, headers, params, {{#hasBodyParameters}}JSON.stringify({{#parameters}}{{#isBodyParameter}}{{&camelCaseName}}{{/isBodyParameter}}{{/parameters}}){{/hasBodyParameters}}{{^hasBodyParameters}}null{{/hasBodyParameters}});
+    return this.sendRequest<{{&response}}>('{{angular2httpMethod}}', path, headers, params, {{#hasBodyParameters}}JSON.stringify({{#parameters}}{{#isBodyParameter}}{{&camelCaseName}}{{/isBodyParameter}}{{/parameters}}){{/hasBodyParameters}}{{^hasBodyParameters}}null{{/hasBodyParameters}});
   }
 
 {{/methods}}
-  private sendRequest<T>(method: string, uri: string, headers: HttpHeaders, params: HttpParams, body: any): Observable<T> {
+  private sendRequest<T>(method: string, path: string, headers: HttpHeaders, params: HttpParams, body: any): Observable<T> {
     if (method === 'get') {
-      return this.http.get<T>(this.domain + uri, { headers: headers, params: params });
+      return this.http.get<T>(this.domain + path, { headers: headers, params: params });
     } else if (method === 'put') {
-      return this.http.put<T>(this.domain + uri, body, { headers: headers, params: params });
+      return this.http.put<T>(this.domain + path, body, { headers: headers, params: params });
     } else if (method === 'post') {
-      return this.http.post<T>(this.domain + uri, body, { headers: headers, params: params });
+      return this.http.post<T>(this.domain + path, body, { headers: headers, params: params });
     } else if (method === 'delete') {
-      return this.http.delete<T>(this.domain + uri, { headers: headers, params: params });
+      return this.http.delete<T>(this.domain + path, { headers: headers, params: params });
     } else {
       console.error('Unsupported request: ' + method);
       return Observable.throw('Unsupported request: ' + method);

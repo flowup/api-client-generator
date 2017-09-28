@@ -1,4 +1,4 @@
-import { GeneratorClass } from './generator';
+import { Generator } from './generator';
 import * as opt from 'optimist';
 import * as fs from 'fs';
 
@@ -40,5 +40,5 @@ if (!fs.existsSync(outputdir)) {
 
 let sourceFile = argv.source;
 
-let g = new GeneratorClass(sourceFile, outputdir, true);
+let g = new Generator(sourceFile, outputdir, true);
 g.generateAPIClient();

@@ -1,6 +1,6 @@
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
+import * as recursiveDir from 'mkdirp';
 import * as Mustache from 'mustache';
 import * as _ from 'lodash';
 import * as path from 'path';
@@ -8,7 +8,7 @@ import * as path from 'path';
 export interface TemplatesModel {
   service: string;
   model: string;
-  models_export: string;
+  modelsExport: string;
 }
 
 export interface Definition {
@@ -16,7 +16,7 @@ export interface Definition {
   properties: any[];
   refs: any[];
   imports: any[];
-  lower?: () => (text, render) => string; // lower keyword to templates
+  dashCase?: () => (text, render) => string; // generate dash-case file names to templates
   last?: boolean;
 }
 
@@ -71,12 +71,11 @@ export interface Method {
   response?: any;
 }
 
-export class GeneratorClass {
+export class Generator {
 
   templates: TemplatesModel;
-
   swaggerParsed: any;
-  viewModel: any;
+  viewModel: MustacheData;
 
   constructor(swaggerFile: string,
               private outputPath: string,
@@ -97,7 +96,7 @@ export class GeneratorClass {
     this.templates = {
       service: fs.readFileSync(__dirname + '/../templates/angular2-service.mustache', 'utf-8'),
       model: fs.readFileSync(__dirname + '/../templates/angular2-model.mustache', 'utf-8'),
-      models_export: fs.readFileSync(__dirname + '/../templates/angular2-models-export.mustache', 'utf-8')
+      modelsExport: fs.readFileSync(__dirname + '/../templates/angular2-models-export.mustache', 'utf-8')
     };
 
     this.LogMessage('Creating Mustache view model');
@@ -106,8 +105,8 @@ export class GeneratorClass {
 
   generateAPIClient() {
     this.generateClient();
-    // this.generateModels();
-    // this.generateCommonModelsExportDefinition();
+    this.generateModels();
+    this.generateCommonModelsExportDefinition();
 
     this.LogMessage('API client generated successfully');
   }
@@ -116,9 +115,7 @@ export class GeneratorClass {
     // generate main API client class
     this.LogMessage('Rendering template for API');
 
-    fs.writeFileSync(this.outputPath + '/' + 'viewModel.json', JSON.stringify(this.viewModel, null, 2), 'utf-8');
-
-    let result = GeneratorClass.renderLintAndBeautify(this.templates.service, this.viewModel, this.templates);
+    let result = Generator.renderLintAndBeautify(this.templates.service, this.viewModel, this.templates);
 
     let outfile = this.outputPath + '/' + 'index.ts';
     this.LogMessage('Creating output file', outfile);
@@ -133,16 +130,15 @@ export class GeneratorClass {
     }
 
     // generate API models
-
     this.viewModel.definitions.forEach((definition) => {
       this.LogMessage('Rendering template for model ', definition.name);
-      let result = GeneratorClass.renderLintAndBeautify(this.templates.model, definition, this.templates);
+      let result = Generator.renderLintAndBeautify(this.templates.model, definition, this.templates);
 
-      let outfile = path.join(outputDir, definition.name.toLowerCase() + '.model.ts');
+      let outfile = path.join(outputDir, Generator.dashCase(definition.name) + '.model.ts');
 
       this.LogMessage('Creating output file', outfile);
 
-      mkdirp(path.dirname(outfile), () => {
+      recursiveDir(path.dirname(outfile), () => {
         fs.writeFileSync(outfile, result, 'utf-8');
       });
     });
@@ -156,7 +152,7 @@ export class GeneratorClass {
     }
 
     this.LogMessage('Rendering common models export');
-    let result = GeneratorClass.renderLintAndBeautify(this.templates.models_export, this.viewModel, this.templates);
+    let result = Generator.renderLintAndBeautify(this.templates.modelsExport, this.viewModel, this.templates);
 
     let outfile = outputDir + '/models.ts';
 
@@ -168,7 +164,15 @@ export class GeneratorClass {
     return Mustache.render(template, model, templates);
   };
 
-  createMustacheViewModel() {
+  private generateDomain(schemes: string[] = []): string {
+    return `
+    ${this.swaggerParsed.schemes && this.swaggerParsed.schemes.length > 0 ? this.swaggerParsed.schemes[0] : 'http'}
+    ://
+    ${this.swaggerParsed.host ? this.swaggerParsed.host : 'localhost'}
+    ${('/' === this.swaggerParsed.basePath ? '' : this.swaggerParsed.basePath)}`;
+  }
+
+  createMustacheViewModel(): MustacheData {
     let swagger = this.swaggerParsed;
     let authorizedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
     let data: MustacheData = {
@@ -184,7 +188,6 @@ export class GeneratorClass {
 
     Object.entries(swagger.paths).forEach(([path, api]) => {
       let globalParams = [];
-
 
       Object.entries(api).forEach(([m, op]) => {
         if (m.toLowerCase() === 'parameters') {
@@ -207,9 +210,10 @@ export class GeneratorClass {
         let method: Method = {
           path: path,
           backTickPath: path.replace(/({.*?})/g, '$$$1'),
-          methodName: op['x-swagger-js-method-name'] ?
-            op['x-swagger-js-method-name'] :
-            (op.operationId ? op.operationId : this.getPathToMethodName(m, path)),
+          methodName: Generator.camelCase(
+            op['x-swagger-js-method-name'] ?
+              op['x-swagger-js-method-name'] :
+              (op.operationId ? op.operationId : Generator.getPathToMethodName(m, path))),
           method: m.toUpperCase(),
           angular2httpMethod: m.toLowerCase(),
           isGET: m.toUpperCase() === 'GET',
@@ -218,10 +222,10 @@ export class GeneratorClass {
           isSecure: swagger.security !== undefined || op.security !== undefined,
           parameters: [],
           hasBodyParameters: false,
-          hasJsonResponse: _.some(_.defaults([], swagger.produces, op.produces), (response) => { // FIXME TODO PREROBIT
-            // return response.indexOf('/json') !== -1;
-            return true;
-          })
+          hasJsonResponse: true,
+          // _.some(_.defaults([], swagger.produces, op.produces), (response) => { // FIXME
+          //   return response.indexOf('/json') !== -1;
+          // })
         };
 
         let params: Parameter[] = [];
@@ -241,10 +245,10 @@ export class GeneratorClass {
           }
 
           if ('schema' in parameter && _.isString(parameter.schema.$ref)) {
-            parameter.type = this.camelCase(GeneratorClass.getRefType(parameter.schema.$ref));
+            parameter.type = Generator.camelCase(Generator.getRefType(parameter.schema.$ref));
           }
 
-          parameter.camelCaseName = this.camelCase(parameter.name);
+          parameter.camelCaseName = Generator.camelCase(parameter.name);
 
           // lets also check for a bunch of Java objects!
           if (parameter.type === 'integer' || parameter.type === 'double' || parameter.type === 'Integer') {
@@ -257,14 +261,14 @@ export class GeneratorClass {
             parameter.typescriptType = 'any';
           } else if (parameter.type === 'array') {
             if (parameter.items) {
-              parameter.typescriptType = this.camelCase(parameter.items.type) + '[]';
+              parameter.typescriptType = Generator.camelCase(parameter.items.type) + '[]';
             } else {
               parameter.typescriptType = 'any[]';
             }
 
             parameter.isArray = true;
           } else {
-            parameter.typescriptType = this.camelCase(parameter.type);
+            parameter.typescriptType = Generator.camelCase(parameter.type);
           }
 
           if (parameter.enum && parameter.enum.length === 1) {
@@ -302,15 +306,15 @@ export class GeneratorClass {
             if (responseSchema['type'] === 'array') {
               let items = responseSchema.items;
               if ('$ref' in items) {
-                method.response = this.camelCase(items['$ref'].replace('#/definitions/', '')) + '[]';
+                method.response = Generator.camelCase(items['$ref'].replace('#/definitions/', '')) + '[]';
               } else {
-                method.response = this.camelCase(items['type']) + '[]';
+                method.response = Generator.camelCase(items['type']) + '[]';
               }
             } else {
               method.response = 'any';
             }
           } else if ('$ref' in responseSchema) {
-            method.response = this.camelCase(responseSchema['$ref'].replace('#/definitions/', ''));
+            method.response = Generator.camelCase(responseSchema['$ref'].replace('#/definitions/', ''));
           } else {
             method.response = 'any';
           }
@@ -322,37 +326,36 @@ export class GeneratorClass {
       });
     });
 
-    // console.log('\n-----------\n\n', typeof swagger.definitions, '\n\n\n', swagger.definitions);
+    Object.entries(swagger.definitions || {}).forEach(([defVal, defIn]) => {
 
-    Object.entries(swagger.paths).forEach(([defVal]) => {
-      let defName: string = this.camelCase(defVal);
+      let defName: string = Generator.camelCase(defVal);
 
       let definition: Definition = {
         name: defName,
         properties: [],
         refs: [],
         imports: [],
-        lower: () => (text, render) => render(text).toLowerCase(),
+        dashCase: () => (text, render) => Generator.dashCase(render(text)),
       };
 
-      Object.entries(swagger.paths).forEach(([propVal, propin]) => {
+      Object.entries(defIn.properties || {}).forEach(([propVal, propIn]) => {
         let property: Parameter = {
           name: propVal,
-          isRef: '$ref' in propin || (propin.type === 'array' && '$ref' in propin.items),
-          isArray: propin.type === 'array',
+          isRef: '$ref' in propIn || (propIn.type === 'array' && '$ref' in propIn.items),
+          isArray: propIn.type === 'array',
         };
 
         if (property.isArray)
-          if ('$ref' in propin.items) {
-            property.type = this.camelCase(propin.items['$ref'].replace('#/definitions/', ''));
-          } else if ('type' in propin.items) {
-            property.type = this.camelCase(propin.items['type']);
+          if ('$ref' in propIn.items) {
+            property.type = Generator.camelCase(propIn.items['$ref'].replace('#/definitions/', ''));
+          } else if ('type' in propIn.items) {
+            property.type = Generator.camelCase(propIn.items['type']);
           } else {
-            property.type = propin.type;
+            property.type = propIn.type;
           }
 
         else {
-          property.type = '$ref' in propin ? this.camelCase(propin['$ref'].replace('#/definitions/', '')) : propin.type;
+          property.type = '$ref' in propIn ? Generator.camelCase(propIn['$ref'].replace('#/definitions/', '')) : propIn.type;
         }
 
         if (property.type === 'integer' || property.type === 'double') {
@@ -398,10 +401,12 @@ export class GeneratorClass {
     return segments.length === 3 ? segments[2] : segments[0];
   };
 
-  getPathToMethodName(m, path) {
+  static getPathToMethodName(m, path) {
     if (path === '/' || path === '') {
       return m;
     }
+
+    console.log('==> -->', path, m);
 
     // clean url path for requests ending with '/'
     let cleanPath = path;
@@ -420,39 +425,25 @@ export class GeneratorClass {
       result.push(segment);
     });
 
-    let result = this.camelCase(segments.join('-'));
+    let result = Generator.camelCase(segments.join('-'));
 
     return m.toLowerCase() + result[0].toUpperCase() + result.substring(1);
   }
 
-  camelCase(text: string = ''): string {
-    if (!text) {
-      return text;
-    }
+  static camelCase(text: string = '', lowerFirstLetter = true): string {
 
-    if (text.indexOf('-') === -1 && text.indexOf('.') === -1) {
-      return text;
-    }
+    let camelText = text.split(/[-.]/).map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
 
-    let tokens: string[] = [];
+    return lowerFirstLetter ? `${camelText[0].toLowerCase()}${camelText.substring(1)}` : camelText;
+  }
 
-    text.split('-').forEach((token, index) => {
-      tokens.push((index > 0 ? token[0].toUpperCase() : token[0]) + token.substring(1));
-    });
-
-    let partialres = tokens.join('');
-    tokens = [];
-
-    partialres.split('.').forEach((token, index) => {
-      tokens.push((index > 0 ? token[0].toUpperCase() : token[0]) + token.substring(1));
-    });
-
-    return tokens.join('');
+  static dashCase(text: string = ''): string {
+    return text.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
   }
 
   LogMessage(text: string, param: string = '') {
     if (this.debug) {
-      console.log('\n----> ' + text, param);
+      console.log('--> ' + text, param);
     }
   }
 }
