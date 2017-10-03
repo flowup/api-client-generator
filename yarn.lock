@@ -10,11 +10,17 @@
   version "4.14.76"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.76.tgz#87874f766774d54e89589697340be9496fb8bf70"
 
+"@types/mkdirp@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@types/mkdirp/-/mkdirp-0.5.1.tgz#ea887cd024f691c1ca67cce20b7606b053e43b0f"
+  dependencies:
+    "@types/node" "*"
+
 "@types/mustache@^0.8.30":
   version "0.8.30"
   resolved "https://registry.yarnpkg.com/@types/mustache/-/mustache-0.8.30.tgz#65e479073bc15e8ac834347f8f311b24220a277d"
 
-"@types/node@^8.0.31":
+"@types/node@*", "@types/node@^8.0.31":
   version "8.0.31"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.31.tgz#d9af61093cf4bfc9f066ca34de0175012cfb0ce9"
 

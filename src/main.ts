@@ -2,6 +2,23 @@ import { Generator } from './generator';
 import * as opt from 'optimist';
 import * as fs from 'fs';
 
+/**
+ * Object.entries polyfill
+ *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+ */
+if (!Object.entries) {
+  Object.entries = function (obj) {
+    let ownProps = Object.keys(obj),
+      i = ownProps.length,
+      resArray = new Array(i); // preallocate the Array
+    while (i--)
+      resArray[i] = [ownProps[i], obj[ownProps[i]]];
+
+    return resArray;
+  };
+}
+
 let optimist = opt
   .usage('Usage: a4apigen -s path/to/swagger.json')
   .alias('h', 'help')
