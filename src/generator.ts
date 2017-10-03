@@ -46,8 +46,8 @@ export interface Parameter {
   isQueryParameter?: boolean;
   isSingleton?: boolean;
   last?: boolean;
-  in?: In;
-  enum?: any[];
+  'in'?: In;
+  'enum'?: any[];
   items?: Parameter;
   name?: string,
   schema?: any,
@@ -94,9 +94,9 @@ export class Generator {
     this.LogMessage('Reading Mustache templates');
 
     this.templates = {
-      service: fs.readFileSync(__dirname + '/../templates/angular2-service.mustache', 'utf-8'),
-      model: fs.readFileSync(__dirname + '/../templates/angular2-model.mustache', 'utf-8'),
-      modelsExport: fs.readFileSync(__dirname + '/../templates/angular2-models-export.mustache', 'utf-8')
+      service: <string>fs.readFileSync(__dirname + '/../templates/angular2-service.mustache', 'utf-8'),
+      model: <string>fs.readFileSync(__dirname + '/../templates/angular2-model.mustache', 'utf-8'),
+      modelsExport: <string>fs.readFileSync(__dirname + '/../templates/angular2-models-export.mustache', 'utf-8')
     };
 
     this.LogMessage('Creating Mustache view model');
@@ -425,6 +425,9 @@ export class Generator {
   }
 
   static camelCase(text: string = '', lowerFirstLetter = true): string {
+    if (text.match(/[A-Z0-9]/)) {
+      return text;
+    }
 
     let camelText = text.split(/[-.]/).map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
 
@@ -434,6 +437,10 @@ export class Generator {
   static dashCase(text: string = ''): string {
     return text.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace(/^-/, '');
   }
+
+  private static modelName(typeName: string = ''): string {
+    return `${Generator.camelCase(typeName, false)}Model`;
+  };
 
   LogMessage(text: string, param: string = '') {
     if (this.debug) {
