@@ -425,7 +425,7 @@ export class Generator {
   }
 
   static camelCase(text: string = '', lowerFirstLetter = true): string {
-    if (text.match(/[A-Z0-9]/)) {
+    if (/^[A-Z0-9]+$/.test(text)) {
       return text;
     }
 
