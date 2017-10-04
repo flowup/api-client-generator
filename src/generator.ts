@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as recursiveDir from 'mkdirp';
 import * as Mustache from 'mustache';
 import * as _ from 'lodash';
-import * as path from 'path';
+import { dirname, join } from 'path';
 
 export interface TemplatesModel {
   service: string;
@@ -116,14 +116,14 @@ export class Generator {
     this.logMessage('Rendering template for API');
 
     let result = Generator.renderLintAndBeautify(this.templates.service, this.viewModel, this.templates);
-    let outfile = path.join(this.outputPath, 'api-client-service.ts');
+    let outfile = join(this.outputPath, 'api-client-service.ts');
 
     this.logMessage('Creating output file', outfile);
     fs.writeFileSync(outfile, result, 'utf-8');
   }
 
   generateModels() {
-    let outputDir = path.join(this.outputPath, 'models');
+    let outputDir = join(this.outputPath, 'models');
 
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir);
@@ -134,11 +134,11 @@ export class Generator {
       this.logMessage('Rendering template for model ', definition.name);
       let result = Generator.renderLintAndBeautify(this.templates.model, definition, this.templates);
 
-      let outfile = path.join(outputDir, Generator.dashCase(definition.name) + '.model.ts');
+      let outfile = join(outputDir, Generator.dashCase(definition.name) + '.model.ts');
 
       this.logMessage('Creating output file', outfile);
 
-      recursiveDir(path.dirname(outfile), () => {
+      recursiveDir(dirname(outfile), () => {
         fs.writeFileSync(outfile, result, 'utf-8');
       });
     });
@@ -154,7 +154,7 @@ export class Generator {
     this.logMessage('Rendering common models export');
     let result = Generator.renderLintAndBeautify(this.templates.modelsExport, this.viewModel, this.templates);
 
-    let outfile = path.join(outputDir, '/index.ts');
+    let outfile = join(outputDir, '/index.ts');
 
     this.logMessage('Creating output file', outfile);
     fs.writeFileSync(outfile, result, 'utf-8');
