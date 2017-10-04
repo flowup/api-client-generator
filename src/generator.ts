@@ -333,7 +333,6 @@ export class Generator {
           }
         } else {
           property.type = Generator.modelName('$ref' in propIn ? propIn['$ref'].replace('#/definitions/', '') : propIn.type);
-          console.log('not Arr', property.type);
         }
 
         Generator.toTypescriptType(property);
@@ -362,15 +361,17 @@ export class Generator {
   }
 
   private static toTypescriptType(parameter: Parameter) {
-    if (parameter.type === 'integer' || parameter.type === 'double' || parameter.type === 'Integer') {
+    if (!parameter.type) {
+      return 'any'
+    }
+
+    if (/^number|integer|double$/i.test(parameter.type)) {
       parameter.typescriptType = 'number';
-    } else if (parameter.type === 'String') {
-      parameter.typescriptType = 'string';
-    } else if (parameter.type === 'Boolean') {
-      parameter.typescriptType = 'boolean';
-    } else if (parameter.type === 'object') {
+    } else if (/^string|boolean$/i.test(parameter.type)) {
+      parameter.typescriptType = parameter.type.toLocaleLowerCase();
+    } else if (/^object$/i.test(parameter.type)) {
       parameter.typescriptType = 'any';
-    } else if (parameter.type === 'array') {
+    } else if (/^array$/i.test(parameter.type)) {
 
       if (parameter.items) {
         parameter.typescriptType = Generator.modelName(parameter.items.type, true);
@@ -438,7 +439,7 @@ export class Generator {
 
     if (/.+Model$/.test(typeName)) {
       type = typeName;
-    } else if (/^(?:string)|(?:number)|(?:boolean)|(?:undefined)|(?:any)|(?:object)$/i.test(typeName)) {
+    } else if (/^(?:string)|(?:number)|(?:integer)|(?:boolean)|(?:undefined)|(?:any)|(?:object)$/i.test(typeName)) {
       type = typeName;
     } else {
       type = `${Generator.camelCase(typeName, false)}Model`;
