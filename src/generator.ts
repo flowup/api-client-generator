@@ -2,7 +2,6 @@ import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as recursiveDir from 'mkdirp';
 import * as Mustache from 'mustache';
-import * as _ from 'lodash';
 import { dirname, join } from 'path';
 
 export interface TemplatesModel {
@@ -215,7 +214,7 @@ export class Generator {
           method: m.toUpperCase(),
           methodType: <MethodType>m.toLowerCase(),
           isGET: m.toUpperCase() === 'GET',
-          hasPayload: !_.includes(['GET', 'DELETE', 'HEAD'], m.toUpperCase()),
+          hasPayload: !['GET', 'DELETE', 'HEAD'].some(i => i === m.toUpperCase()),
           summaryLines: summaryLines,
           isSecure: swagger.security !== undefined || op.security !== undefined,
           parameters: [],
@@ -228,7 +227,7 @@ export class Generator {
 
         let params: Parameter[] = [];
 
-        if (_.isArray(op.parameters)) {
+        if (Array.isArray(op.parameters)) {
           params = op.parameters;
         }
 
@@ -242,7 +241,7 @@ export class Generator {
             return;
           }
 
-          if ('schema' in parameter && _.isString(parameter.schema.$ref)) {
+          if ('schema' in parameter && typeof parameter.schema.$ref === 'string') {
             parameter.type = Generator.camelCase(Generator.getRefType(parameter.schema.$ref));
           }
 
@@ -360,9 +359,10 @@ export class Generator {
     return data;
   }
 
-  private static toTypescriptType(parameter: Parameter) {
+  private static toTypescriptType(parameter: Parameter): void {
     if (!parameter.type) {
-      return 'any'
+      parameter.typescriptType = 'any';
+      return;
     }
 
     if (/^number|integer|double$/i.test(parameter.type)) {
@@ -391,7 +391,7 @@ export class Generator {
     return segments.length === 3 ? segments[2] : segments[0];
   };
 
-  static getPathToMethodName(m, path) {
+  static getPathToMethodName(m, path): string {
     if (path === '/' || path === '') {
       return m;
     }
