@@ -10,38 +10,26 @@ The generated service class uses new [HttpClient](https://angular.io/guide/http)
 
 ## Installation
 
-`npm install ngx-swagger-client-generator`
+`git clone https://github.com/flowup/ngx-swagger-client-generator`
 
-or  
-
-`git clone https://github.com/lotjomik/ngx-swagger-client-generator`
 `cd ngx-swagger-client-generator`
-`npm install`  
-`npm run build`  
+
+`yarn` or `npm install`
 
 ## Usage
 
-From command line, run:
-```
-a4apigen -s [yopur/path/to/swagger.json]
-```
+`npm run generate -s ./path/to/swagger.[yaml|json]`
 
-or
-```
-a4apigen -u [url/of/your/swagger.json]
-```
+## Options
+
+ - `s` -  path to the swagger file
+ - `o` -  path where the generated files should be emitted
 
 ## Example usage:
+This command will generate API client described in swagger.json file to ./output folder
 
-This command will generate API client described in swagger.json file to ./out folder
-```
-a4apigen -s ./tests/apis/swagger.json -o ./out
-```
-
-or from repository directory run:
-```
-node ./src/a4apigen -s ./tests/apis/swagger.json -o ./out
-```
+`npm run generate -s ./path/to/swagger.json -o ./output`
 
 ## Note:
 This project was inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen) project.
+This project was based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator) project.
