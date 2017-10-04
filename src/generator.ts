@@ -116,14 +116,14 @@ export class Generator {
     this.LogMessage('Rendering template for API');
 
     let result = Generator.renderLintAndBeautify(this.templates.service, this.viewModel, this.templates);
+    let outfile = path.join(this.outputPath, 'api-client-service.ts');
 
-    let outfile = this.outputPath + '/' + 'index.ts';
     this.LogMessage('Creating output file', outfile);
     fs.writeFileSync(outfile, result, 'utf-8');
   }
 
   generateModels() {
-    let outputDir: string = this.outputPath + '/models';
+    let outputDir = path.join(this.outputPath, 'models');
 
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir);
@@ -154,7 +154,7 @@ export class Generator {
     this.LogMessage('Rendering common models export');
     let result = Generator.renderLintAndBeautify(this.templates.modelsExport, this.viewModel, this.templates);
 
-    let outfile = outputDir + '/models.ts';
+    let outfile = path.join(outputDir, '/index.ts');
 
     this.LogMessage('Creating output file', outfile);
     fs.writeFileSync(outfile, result, 'utf-8');
@@ -165,11 +165,10 @@ export class Generator {
   };
 
   private generateDomain(schemes: string[] = []): string {
-    return `
-    ${this.swaggerParsed.schemes && this.swaggerParsed.schemes.length > 0 ? this.swaggerParsed.schemes[0] : 'http'}
-    ://
-    ${this.swaggerParsed.host ? this.swaggerParsed.host : 'localhost'}
-    ${('/' === this.swaggerParsed.basePath ? '' : this.swaggerParsed.basePath)}`;
+    const protocol = this.swaggerParsed.schemes && this.swaggerParsed.schemes.length > 0 ? this.swaggerParsed.schemes[0] : 'http';
+    const domain = this.swaggerParsed.host ? this.swaggerParsed.host : 'localhost';
+    const base = ('/' === this.swaggerParsed.basePath ? '' : this.swaggerParsed.basePath);
+    return `${protocol}://${domain}${base}`;
   }
 
   createMustacheViewModel(): MustacheData {
@@ -180,8 +179,7 @@ export class Generator {
       description: swagger.info.description,
       isSecure: swagger.securityDefinitions !== undefined,
       swagger: swagger,
-      domain: (swagger.schemes && swagger.schemes.length > 0 ? swagger.schemes[0] : 'http') + '://' +
-      (swagger.host ? swagger.host : 'localhost') + ('/' === swagger.basePath ? '' : swagger.basePath),
+      domain: this.generateDomain(swagger.schemes),
       methods: [],
       definitions: []
     };
@@ -236,7 +234,7 @@ export class Generator {
 
         params = params.concat(globalParams);
 
-        // Index file
+        // method parameters
         params.forEach((parameter) => {
           // Ignore headers which are injected by proxies & app servers
           // eg: https://cloud.google.com/appengine/docs/go/requests#Go_Request_headers
@@ -250,26 +248,7 @@ export class Generator {
 
           parameter.camelCaseName = Generator.camelCase(parameter.name);
 
-          // lets also check for a bunch of Java objects!
-          if (parameter.type === 'integer' || parameter.type === 'double' || parameter.type === 'Integer') {
-            parameter.typescriptType = 'number';
-          } else if (parameter.type === 'String') {
-            parameter.typescriptType = 'string';
-          } else if (parameter.type === 'Boolean') {
-            parameter.typescriptType = 'boolean';
-          } else if (parameter.type === 'object') {
-            parameter.typescriptType = 'any';
-          } else if (parameter.type === 'array') {
-            if (parameter.items) {
-              parameter.typescriptType = Generator.camelCase(parameter.items.type) + '[]';
-            } else {
-              parameter.typescriptType = 'any[]';
-            }
-
-            parameter.isArray = true;
-          } else {
-            parameter.typescriptType = Generator.camelCase(parameter.type);
-          }
+          Generator.toTypescriptType(parameter);
 
           if (parameter.enum && parameter.enum.length === 1) {
             parameter.isSingleton = true;
@@ -306,15 +285,15 @@ export class Generator {
             if (responseSchema['type'] === 'array') {
               let items = responseSchema.items;
               if ('$ref' in items) {
-                method.response = Generator.camelCase(items['$ref'].replace('#/definitions/', '')) + '[]';
+                method.response = Generator.modelName(items['$ref'].replace('#/definitions/', ''), true);
               } else {
-                method.response = Generator.camelCase(items['type']) + '[]';
+                method.response = Generator.modelName(items['type'], true);
               }
             } else {
               method.response = 'any';
             }
           } else if ('$ref' in responseSchema) {
-            method.response = Generator.camelCase(responseSchema['$ref'].replace('#/definitions/', ''));
+            method.response = Generator.modelName(responseSchema['$ref'].replace('#/definitions/', ''));
           } else {
             method.response = 'any';
           }
@@ -328,10 +307,9 @@ export class Generator {
 
     Object.entries(swagger.definitions || {}).forEach(([defVal, defIn]) => {
 
-      let defName: string = Generator.camelCase(defVal);
-
+      /* service models import */
       let definition: Definition = {
-        name: defName,
+        name: Generator.modelName(defVal),
         properties: [],
         refs: [],
         imports: [],
@@ -345,27 +323,20 @@ export class Generator {
           isArray: propIn.type === 'array',
         };
 
-        if (property.isArray)
+        if (property.isArray) {
           if ('$ref' in propIn.items) {
-            property.type = Generator.camelCase(propIn.items['$ref'].replace('#/definitions/', ''));
+            property.type = Generator.modelName(propIn.items['$ref'].replace('#/definitions/', ''));
           } else if ('type' in propIn.items) {
-            property.type = Generator.camelCase(propIn.items['type']);
+            property.type = Generator.modelName(propIn.items['type']);
           } else {
             property.type = propIn.type;
           }
-
-        else {
-          property.type = '$ref' in propIn ? Generator.camelCase(propIn['$ref'].replace('#/definitions/', '')) : propIn.type;
-        }
-
-        if (property.type === 'integer' || property.type === 'double') {
-          property.typescriptType = 'number';
-        } else if (property.type === 'object') {
-          property.typescriptType = 'any';
         } else {
-          property.typescriptType = property.type;
+          property.type = Generator.modelName('$ref' in propIn ? propIn['$ref'].replace('#/definitions/', '') : propIn.type);
+          console.log('not Arr', property.type);
         }
 
+        Generator.toTypescriptType(property);
 
         if (property.isRef) {
           definition.refs.push(property);
@@ -388,6 +359,30 @@ export class Generator {
     }
 
     return data;
+  }
+
+  private static toTypescriptType(parameter: Parameter) {
+    if (parameter.type === 'integer' || parameter.type === 'double' || parameter.type === 'Integer') {
+      parameter.typescriptType = 'number';
+    } else if (parameter.type === 'String') {
+      parameter.typescriptType = 'string';
+    } else if (parameter.type === 'Boolean') {
+      parameter.typescriptType = 'boolean';
+    } else if (parameter.type === 'object') {
+      parameter.typescriptType = 'any';
+    } else if (parameter.type === 'array') {
+
+      if (parameter.items) {
+        parameter.typescriptType = Generator.modelName(parameter.items.type, true);
+      } else {
+        parameter.typescriptType = 'any[]';
+      }
+
+      parameter.isArray = true;
+
+    } else {
+      parameter.typescriptType = Generator.modelName(parameter.type);
+    }
   }
 
   static getRefType(refString) {
@@ -438,8 +433,18 @@ export class Generator {
     return text.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace(/^-/, '');
   }
 
-  private static modelName(typeName: string = ''): string {
-    return `${Generator.camelCase(typeName, false)}Model`;
+  private static modelName(typeName: string = '', isArray: boolean = false): string {
+    let type: string;
+
+    if (/.+Model$/.test(typeName)) {
+      type = typeName;
+    } else if (/^(?:string)|(?:number)|(?:boolean)|(?:undefined)|(?:any)|(?:object)$/i.test(typeName)) {
+      type = typeName;
+    } else {
+      type = `${Generator.camelCase(typeName, false)}Model`;
+    }
+
+    return `${type}${isArray ? '[]' : ''}`;
   };
 
   LogMessage(text: string, param: string = '') {
