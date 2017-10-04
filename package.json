@@ -1,6 +1,6 @@
 {
   "name": "ngx-swagger-client-generator",
-  "version": "0.0.0",
+  "version": "0.9.0",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
   "homepage": "https://github.com/lotjomik/angular4-swagger-client-generator",
   "main": "index.ts",
@@ -34,7 +34,6 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/main.ts -s /home/vmasek/PROJECTS/ngx-swagger-client-generator/src/swagger.yaml",
     "build": "./node_modules/.bin/ts-node ./src/main.ts -s /home/vmasek/PROJECTS/ngx-swagger-client-generator/src/swagger.yaml"
   },
   "dependencies": {
@@ -43,7 +42,6 @@
     "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",
     "optimist": "^0.6.1",
-    "request": "^2.81.0",
     "tslint": "^5.7.0"
   },
   "devDependencies": {
@@ -53,7 +51,6 @@
     "@types/mustache": "^0.8.30",
     "@types/node": "^8.0.31",
     "@types/optimist": "0.0.29",
-    "nodemon": "^1.12.1",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.3"
   }

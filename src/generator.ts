@@ -80,18 +80,18 @@ export class Generator {
   constructor(swaggerFile: string,
               private outputPath: string,
               private debug = false) {
-    this.LogMessage('Reading Swagger file', swaggerFile);
+    this.logMessage('Reading Swagger file', swaggerFile);
     let swaggerFileContent = fs.readFileSync(swaggerFile, 'UTF-8');
 
     if (swaggerFile.match(/.*\.ya?ml/)) {
-      this.LogMessage('Parsing Swagger YAML');
+      this.logMessage('Parsing Swagger YAML');
       this.swaggerParsed = yaml.load(swaggerFileContent);
     } else {
-      this.LogMessage('Parsing Swagger JSON');
+      this.logMessage('Parsing Swagger JSON');
       this.swaggerParsed = JSON.parse(swaggerFileContent);
     }
 
-    this.LogMessage('Reading Mustache templates');
+    this.logMessage('Reading Mustache templates');
 
     this.templates = {
       service: <string>fs.readFileSync(__dirname + '/../templates/angular2-service.mustache', 'utf-8'),
@@ -99,7 +99,7 @@ export class Generator {
       modelsExport: <string>fs.readFileSync(__dirname + '/../templates/angular2-models-export.mustache', 'utf-8')
     };
 
-    this.LogMessage('Creating Mustache view model');
+    this.logMessage('Creating Mustache view model');
     this.viewModel = this.createMustacheViewModel();
   }
 
@@ -108,17 +108,17 @@ export class Generator {
     this.generateModels();
     this.generateCommonModelsExportDefinition();
 
-    this.LogMessage('API client generated successfully');
+    this.logMessage('API client generated successfully');
   }
 
   generateClient() {
     // generate main API client class
-    this.LogMessage('Rendering template for API');
+    this.logMessage('Rendering template for API');
 
     let result = Generator.renderLintAndBeautify(this.templates.service, this.viewModel, this.templates);
     let outfile = path.join(this.outputPath, 'api-client-service.ts');
 
-    this.LogMessage('Creating output file', outfile);
+    this.logMessage('Creating output file', outfile);
     fs.writeFileSync(outfile, result, 'utf-8');
   }
 
@@ -131,12 +131,12 @@ export class Generator {
 
     // generate API models
     this.viewModel.definitions.forEach((definition) => {
-      this.LogMessage('Rendering template for model ', definition.name);
+      this.logMessage('Rendering template for model ', definition.name);
       let result = Generator.renderLintAndBeautify(this.templates.model, definition, this.templates);
 
       let outfile = path.join(outputDir, Generator.dashCase(definition.name) + '.model.ts');
 
-      this.LogMessage('Creating output file', outfile);
+      this.logMessage('Creating output file', outfile);
 
       recursiveDir(path.dirname(outfile), () => {
         fs.writeFileSync(outfile, result, 'utf-8');
@@ -151,12 +151,12 @@ export class Generator {
       fs.mkdirSync(outputDir);
     }
 
-    this.LogMessage('Rendering common models export');
+    this.logMessage('Rendering common models export');
     let result = Generator.renderLintAndBeautify(this.templates.modelsExport, this.viewModel, this.templates);
 
     let outfile = path.join(outputDir, '/index.ts');
 
-    this.LogMessage('Creating output file', outfile);
+    this.logMessage('Creating output file', outfile);
     fs.writeFileSync(outfile, result, 'utf-8');
   }
 
@@ -448,9 +448,9 @@ export class Generator {
     return `${type}${isArray ? '[]' : ''}`;
   };
 
-  LogMessage(text: string, param: string = '') {
+  logMessage(text: string, param: string = '') {
     if (this.debug) {
-      console.log('--> ' + text, param);
+      console.log(text, param);
     }
   }
 }
