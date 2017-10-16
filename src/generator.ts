@@ -345,9 +345,8 @@ export class Generator {
         }
       });
 
-      definition.imports.sort().filter((item, pos, ary) => {
-        return !pos || item !== ary[pos - 1];
-      });
+      // sort an filter duplicate imports
+      definition.imports = definition.imports.sort().filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0);
 
       data.definitions.push(definition);
     });

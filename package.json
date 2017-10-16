@@ -1,6 +1,6 @@
 {
   "name": "ngx-swagger-client-generator",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
   "homepage": "https://github.com/lotjomik/angular4-swagger-client-generator",
   "main": "src/main.ts",
