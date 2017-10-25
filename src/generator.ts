@@ -12,10 +12,11 @@ export interface TemplatesModel {
 
 export interface Definition {
   name?: string;
-  properties: any[];
+  properties: Parameter[];
   refs: any[];
-  imports: any[];
-  dashCase?: () => (text, render) => string; // generate dash-case file names to templates
+  imports: string[];
+  isEnum?: boolean,
+  fileName?: () => (text, render) => string; // generate dash-case file names to templates
   last?: boolean;
 }
 
@@ -64,7 +65,7 @@ export interface Method {
   isGET?: boolean;
   hasPayload?: boolean;
   summaryLines?: any[];
-  isSecure?: boolean;
+  isSecure?: boolean;  // currently unused TODO
   parameters: Parameter[];
   hasBodyParameters?: boolean;  // if this is true, body will be JSON stringified
   hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
@@ -133,7 +134,7 @@ export class Generator {
       this.logMessage('Rendering template for model ', definition.name);
       let result = Generator.renderLintAndBeautify(this.templates.model, definition, this.templates);
 
-      let outfile = join(outputDir, Generator.dashCase(definition.name) + '.model.ts');
+      let outfile = join(outputDir, Generator.fileName(definition.name, definition.isEnum ? 'enum' : 'model') + '.ts');
 
       this.logMessage('Creating output file', outfile);
 
@@ -307,43 +308,60 @@ export class Generator {
     Object.entries(swagger.definitions || {}).forEach(([defVal, defIn]) => {
 
       /* service models import */
-      let definition: Definition = {
-        name: Generator.modelName(defVal),
-        properties: [],
-        refs: [],
-        imports: [],
-        dashCase: () => (text, render) => Generator.dashCase(render(text)),
-      };
+      let definition: Definition;
 
-      Object.entries(defIn.properties || {}).forEach(([propVal, propIn]) => {
-        let property: Parameter = {
-          name: propVal,
-          isRef: '$ref' in propIn || (propIn.type === 'array' && '$ref' in propIn.items),
-          isArray: propIn.type === 'array',
+      if (defIn.enum && defIn.enum.length !== 0) {
+        console.log(' ==> ', defIn);
+        definition = {
+          name: Generator.enumName(defVal),
+          properties: defIn.enum.map((val) => ({
+            name: val,
+            camelCaseName: Generator.camelCase(val)
+          })),
+          isEnum: true,
+          refs: [],
+          imports: [],
+          fileName: () => (text, render) => Generator.fileName(render(text), 'enum'),
+        };
+      } else {
+        definition = {
+          name: Generator.modelName(defVal),
+          properties: [],
+          refs: [],
+          imports: [],
+          isEnum: false,
+          fileName: () => (text, render) => Generator.fileName(render(text), 'model'),
         };
 
-        if (property.isArray) {
-          if ('$ref' in propIn.items) {
-            property.type = Generator.modelName(propIn.items['$ref'].replace('#/definitions/', ''));
-          } else if ('type' in propIn.items) {
-            property.type = Generator.modelName(propIn.items['type']);
+        Object.entries(defIn.properties || {}).forEach(([propVal, propIn]) => {
+          let property: Parameter = {
+            name: propVal,
+            isRef: '$ref' in propIn || (propIn.type === 'array' && '$ref' in propIn.items),
+            isArray: propIn.type === 'array',
+          };
+
+          if (property.isArray) {
+            if ('$ref' in propIn.items) {
+              property.type = Generator.modelName(propIn.items['$ref'].replace('#/definitions/', ''));
+            } else if ('type' in propIn.items) {
+              property.type = Generator.modelName(propIn.items['type']);
+            } else {
+              property.type = propIn.type;
+            }
           } else {
-            property.type = propIn.type;
+            property.type = Generator.modelName('$ref' in propIn ? propIn['$ref'].replace('#/definitions/', '') : propIn.type);
           }
-        } else {
-          property.type = Generator.modelName('$ref' in propIn ? propIn['$ref'].replace('#/definitions/', '') : propIn.type);
-        }
 
-        Generator.toTypescriptType(property);
+          Generator.toTypescriptType(property);
 
-        if (property.isRef) {
-          definition.refs.push(property);
-          definition.imports.push(property.type);
-        }
-        else {
-          definition.properties.push(property);
-        }
-      });
+          if (property.isRef) {
+            definition.refs.push(property);
+            definition.imports.push(property.type || '');
+          } else {
+            definition.properties.push(property);
+          }
+        });
+      }
 
       // sort an filter duplicate imports
       definition.imports = definition.imports.sort().filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0);
@@ -395,8 +413,6 @@ export class Generator {
       return m;
     }
 
-    console.log('==> -->', path, m);
-
     // clean url path for requests ending with '/'
     let cleanPath = path;
 
@@ -445,6 +461,14 @@ export class Generator {
     }
 
     return `${type}${isArray ? '[]' : ''}`;
+  };
+
+  private static enumName(typeName: string = ''): string {
+    return `${Generator.camelCase(typeName, false)}Enum`;
+  };
+
+  private static fileName(name: string = '', type: 'model' | 'enum' = 'model'): string {
+    return `${Generator.dashCase(name.replace(/model|enum/i, ''))}.${type}`;
   };
 
   logMessage(text: string, param: string = '') {

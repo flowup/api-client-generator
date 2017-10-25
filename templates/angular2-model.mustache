@@ -1,7 +1,7 @@
 /* tslint:disable */
-
+{{^isEnum}}
 {{#imports}}
-import { {{.}} } from './{{#dashCase}}{{.}}{{/dashCase}}.model';
+import { {{.}} } from './{{#fileName}}{{.}}{{/fileName}}';
 {{/imports}}
 
 export interface {{&name}} {
@@ -22,3 +22,12 @@ export interface {{&name}} {
   {{/isArray}}
 {{/refs}}
 }
+{{/isEnum}}
+{{#isEnum}}
+
+export enum {{&name}} {
+{{#properties}}
+  {{camelCaseName}} = "{{name}}",
+{{/properties}}
+}
+{{/isEnum}}
