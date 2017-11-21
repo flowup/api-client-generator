@@ -311,7 +311,6 @@ export class Generator {
       let definition: Definition;
 
       if (defIn.enum && defIn.enum.length !== 0) {
-        console.log(' ==> ', defIn);
         definition = {
           name: Generator.enumName(defVal),
           properties: defIn.enum.map((val) => ({
