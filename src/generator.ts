@@ -3,12 +3,7 @@ import * as fs from 'fs';
 import * as recursiveDir from 'mkdirp';
 import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
-
-export interface TemplatesModel {
-  service: string;
-  model: string;
-  modelsExport: string;
-}
+import { promisify } from 'util';
 
 export interface Definition {
   name?: string;
@@ -73,7 +68,6 @@ export interface Method {
 }
 
 export class Generator {
-  templates: TemplatesModel;
   swaggerParsed: any;
   viewModel: MustacheData;
 
@@ -93,46 +87,47 @@ export class Generator {
 
     this.logMessage('Reading Mustache templates');
 
-    this.templates = {
-      service: <string>fs.readFileSync(__dirname + '/../templates/angular2-service.mustache', 'utf-8'),
-      model: <string>fs.readFileSync(__dirname + '/../templates/angular2-model.mustache', 'utf-8'),
-      modelsExport: <string>fs.readFileSync(__dirname + '/../templates/angular2-models-export.mustache', 'utf-8')
-    };
-
     this.logMessage('Creating Mustache view model');
     this.viewModel = this.createMustacheViewModel();
   }
 
-  generateAPIClient() {
-    this.generateClient();
-    this.generateModels();
-    this.generateCommonModelsExportDefinition();
+  async generateAPIClient() {
+    /* Create output folder if not already present */
+    if (! await promisify(fs.exists)(this.outputPath)) {
+      await promisify(fs.mkdir)(this.outputPath);
+    }
 
-    this.logMessage('API client generated successfully');
+    await this.generateClient();
+    await this.generateModels();
+    await this.generateExportDefinition();
   }
 
-  generateClient() {
-    // generate main API client class
+  async generateClient() {
+    /* generate main API client class */
     this.logMessage('Rendering template for API');
 
-    let result = Generator.renderLintAndBeautify(this.templates.service, this.viewModel, this.templates);
+    const clientTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/angular2-service.mustache')).toString();
+
+    let result = Mustache.render(clientTemplate, this.viewModel);
     let outfile = join(this.outputPath, 'api-client-service.ts');
 
     this.logMessage('Creating output file', outfile);
-    fs.writeFileSync(outfile, result, 'utf-8');
+    await promisify(fs.writeFile)(outfile, result, 'utf-8');
   }
 
-  generateModels() {
+  async generateModels() {
     let outputDir = join(this.outputPath, 'models');
 
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir);
+    const modelTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/angular2-model.mustache')).toString();
+
+    if (! await promisify(fs.exists)(outputDir)) {
+      await promisify(fs.mkdir)(outputDir);
     }
 
     // generate API models
     this.viewModel.definitions.forEach((definition) => {
       this.logMessage('Rendering template for model ', definition.name);
-      let result = Generator.renderLintAndBeautify(this.templates.model, definition, this.templates);
+      let result = Mustache.render(modelTemplate, definition);
 
       let outfile = join(outputDir, Generator.fileName(definition.name, definition.isEnum ? 'enum' : 'model') + '.ts');
 
@@ -144,28 +139,24 @@ export class Generator {
     });
   }
 
-  generateCommonModelsExportDefinition() {
-    let outputDir: string = this.outputPath;
-
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir);
-    }
+  async generateExportDefinition() {
+    const exportTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/angular2-models-export.mustache')).toString();
 
     this.logMessage('Rendering common models export');
-    let result = Generator.renderLintAndBeautify(this.templates.modelsExport, this.viewModel, this.templates);
+    let result =Mustache.render(exportTemplate, this.viewModel);
 
-    let outfile = join(outputDir, '/index.ts');
+    let outfile = join(this.outputPath, '/index.ts');
 
     this.logMessage('Creating output file', outfile);
     fs.writeFileSync(outfile, result, 'utf-8');
   }
 
-  static renderLintAndBeautify(template: string, model: any, templates?: any) {
-    return Mustache.render(template, model, templates);
-  };
-
-  private generateDomain(schemes: string[] = []): string {
-    const protocol = this.swaggerParsed.schemes && this.swaggerParsed.schemes.length > 0 ? this.swaggerParsed.schemes[0] : 'http';
+  private generateDomain(): string {
+    const protocol =
+        this.swaggerParsed.schemes &&
+        this.swaggerParsed.schemes.length > 0
+            ? this.swaggerParsed.schemes[0]
+            : 'http';
     const domain = this.swaggerParsed.host ? this.swaggerParsed.host : 'localhost';
     const base = ('/' === this.swaggerParsed.basePath ? '' : this.swaggerParsed.basePath);
     return `${protocol}://${domain}${base}`;
@@ -179,7 +170,7 @@ export class Generator {
       description: swagger.info.description,
       isSecure: swagger.securityDefinitions !== undefined,
       swagger: swagger,
-      domain: this.generateDomain(swagger.schemes),
+      domain: this.generateDomain(),
       methods: [],
       definitions: []
     };
@@ -323,6 +314,7 @@ export class Generator {
           fileName: () => (text, render) => Generator.fileName(render(text), 'enum'),
         };
       } else {
+        console.log('model', Generator.modelName(defVal));
         definition = {
           name: Generator.modelName(defVal),
           properties: [],
@@ -333,11 +325,16 @@ export class Generator {
         };
 
         Object.entries(defIn.properties || {}).forEach(([propVal, propIn]) => {
+
+          console.log('property name', propVal);
           let property: Parameter = {
             name: propVal,
             isRef: '$ref' in propIn || (propIn.type === 'array' && '$ref' in propIn.items),
             isArray: propIn.type === 'array',
           };
+
+          console.log(propIn);
+          console.log(propVal);
 
           if (property.isArray) {
             if ('$ref' in propIn.items) {
@@ -348,7 +345,11 @@ export class Generator {
               property.type = propIn.type;
             }
           } else {
-            property.type = Generator.modelName('$ref' in propIn ? propIn['$ref'].replace('#/definitions/', '') : propIn.type);
+            property.type = Generator.modelName(
+              '$ref' in propIn
+                ? propIn['$ref'].replace('#/definitions/', '')
+                : propIn.type
+            );
           }
 
           Generator.toTypescriptType(property);
@@ -398,11 +399,11 @@ export class Generator {
       parameter.isArray = true;
 
     } else {
-      parameter.typescriptType = Generator.modelName(parameter.type);
+      parameter.typescriptType = Generator.modelName(parameter.type); //todo here?
     }
   }
 
-  static getRefType(refString) {
+  static getRefType(refString): string {
     let segments = refString.split('/');
     return segments.length === 3 ? segments[2] : segments[0];
   };
