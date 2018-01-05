@@ -17,12 +17,12 @@ export interface Definition {
 }
 
 export interface MustacheData {
-  description: string,
-  isSecure: boolean,
-  swagger: Swagger,
-  domain: string,
-  methods: Method[],
-  definitions: Definition[]
+  readonly  description: string,
+  readonly  isSecure: boolean,
+  readonly  swagger: Swagger,
+  readonly  domain: string,
+  readonly  methods: Method[],
+  readonly  definitions: Definition[]
 }
 
 export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined' | 'any';
@@ -52,19 +52,18 @@ export interface Parameter {
 }
 
 export interface Method {
-  path?: string;  // path appended to base in method
-  backTickPath?: string;
-  methodName?: any;  // mane of the generated method
-  method?: string;
-  methodType?: MethodType;  // type of the http method
-  isGET?: boolean;
-  hasPayload?: boolean;
-  summaryLines?: any[];
-  isSecure?: boolean;  // currently unused TODO
-  parameters: Parameter[];
-  hasBodyParameters?: boolean;  // if this is true, body will be JSON stringified
-  hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
-  response?: string;  // method return type
+  readonly path?: string;  // path appended to base in method
+  readonly backTickPath?: string;
+  readonly methodName?: any;  // mane of the generated method
+  readonly method?: string;
+  readonly methodType?: MethodType;  // type of the http method
+  readonly isGET?: boolean;
+  readonly hasPayload?: boolean;
+  readonly summaryLines?: any[];
+  readonly isSecure?: boolean;  // currently unused TODO
+  readonly parameters: Parameter[];
+  readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
+  response?: string;  // method return type // todo make readonly
 }
 
 export class Generator {
@@ -219,95 +218,37 @@ export class Generator {
     };
 
     Object.entries(swagger.paths).forEach(([path, api]) => {
-      // const globalParams = Object.entries(api)
-      //   .filter(([m]) => m.toLowerCase() !== 'parameters')
-      //   .map(([, op]) => op);
-
-      let globalParams = [];
-      Object.entries(api).forEach(([m, op]) => {
-        if (m.toLowerCase() === 'parameters') {
-          globalParams = op;
-        }
-      });
+      if (api.parameters) {
+        console.warn('Path parameters currently not supported');
+      }
 
       Object.entries(api).forEach(([m, op]) => {
+        // skip unsupported methods
         if (authorizedMethods.indexOf(m.toUpperCase()) === -1) {
           return;
         }
 
-        // The description line is optional in the spec
-        let summaryLines = [];
-        if (op.description) {
-          summaryLines = op.description.split('\n');
-          summaryLines.splice(summaryLines.length - 1, 1);
-        }
-
-        let method: Method = {
+        const method: Method = {
           path: path,
           backTickPath: path.replace(/({.*?})/g, '$$$1'),  //todo rename this
           methodName: Generator.camelCase(
-              op.operationId
-                ? op.operationId
-                : console.error('Method name could not be determined, operationID is undefined')
+            op.operationId
+              ? op.operationId
+              : console.error('Method name could not be determined, operationID is undefined')
           ),
           method: m.toUpperCase(),
           methodType: <MethodType>m.toLowerCase(),
           isGET: m.toUpperCase() === 'GET',
           hasPayload: !['GET', 'DELETE', 'HEAD'].some(i => i === m.toUpperCase()),
-          summaryLines: summaryLines,
+          summaryLines: op.description ? op.description.split('\n') : [], // description summary is optional
           isSecure: swagger.security !== undefined || op.security !== undefined,
-          parameters: [],
-          hasBodyParameters: false,
+          parameters: this.transformParameters(op.parameters),
           hasJsonResponse: true,
         };
-
-        let params: Parameter[] = []; // todo: refactor this
-
-        if (Array.isArray(op.parameters)) {
-          params = op.parameters;
-        }
-
-        params = params.concat(globalParams);
-
-        // method parameters
-        params.forEach((parameter) => {
-          if ('schema' in parameter && typeof parameter.schema.$ref === 'string') {
-            parameter.type = Generator.camelCase(Generator.getRefType(parameter.schema.$ref));
-          }
-
-          parameter.camelCaseName = Generator.camelCase(parameter.name);
-
-          Generator.toTypescriptType(parameter);
-
-          if (parameter.enum && parameter.enum.length === 1) {
-            parameter.isSingleton = true;
-            parameter.singleton = parameter.enum[0];
-          }
-
-          if (parameter.in === 'body') {
-            parameter.isBodyParameter = true;
-            method.hasBodyParameters = true;
-          } else if (parameter.in === 'path') {
-            parameter.isPathParameter = true;
-          } else if (parameter.in === 'query' || parameter.in === 'modelbinding') {
-            parameter.isQueryParameter = true;
-            if (parameter['x-name-pattern']) {
-              parameter.isPatternType = true;
-            }
-          } else if (parameter.in === 'header') {
-            parameter.isHeaderParameter = true;
-          } else if (parameter.in === 'formData') {
-            parameter.isFormParameter = true;
-          }
-
-          method.parameters.push(parameter);
-        });
 
         if (method.parameters.length > 0) {
           method.parameters[method.parameters.length - 1].last = true;
         }
-
-
 
         if (op.responses['200'] !== undefined) {
           let responseSchema = op.responses['200'].schema;
@@ -421,5 +362,39 @@ export class Generator {
     if (this.debug) {
       console.log(text, param);
     }
+  }
+
+  private transformParameters(parameters: Parameter[]): Parameter[] {
+    return Array.isArray(parameters)
+      ? parameters.map((parameter) => {
+          if ('schema' in parameter && typeof parameter.schema.$ref === 'string') {
+            parameter.type = Generator.camelCase(Generator.getRefType(parameter.schema.$ref));
+          }
+
+          parameter.camelCaseName = Generator.camelCase(parameter.name);
+
+          Generator.toTypescriptType(parameter); // todo : refactor this
+
+          if (parameter.enum && parameter.enum.length === 1) {
+            parameter.isSingleton = true;
+            parameter.singleton = parameter.enum[0];
+          }
+
+          if (parameter.in === 'body') {
+            parameter.isBodyParameter = true;
+          } else if (parameter.in === 'path') {
+            parameter.isPathParameter = true;
+          } else if (parameter.in === 'query' || parameter.in === 'modelbinding') {
+            parameter.isQueryParameter = true;
+          } else if (parameter.in === 'header') {
+            parameter.isHeaderParameter = true;
+          } else if (parameter.in === 'formData') {
+            parameter.isFormParameter = true;
+          }
+
+          return parameter;
+        }
+      )
+      : [];
   }
 }

@@ -9,9 +9,7 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-
-    "noImplicitAny": false,
-
+    "noImplicitAny": true,
     "emitDecoratorMetadata": true,
     "declarationDir": "dist/types",
     "outDir": "compiled",
