@@ -3,7 +3,7 @@ import * as recursiveDir from 'mkdirp';
 import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
 import { parse as swaggerFile } from 'swagger-parser';
-import { Schema, Spec as Swagger } from 'swagger-schema-official';
+import { Response, Schema, Spec as Swagger } from 'swagger-schema-official';
 import { promisify } from 'util';
 
 export interface Definition {
@@ -244,33 +244,11 @@ export class Generator {
           isSecure: swagger.security !== undefined || op.security !== undefined,
           parameters: this.transformParameters(op.parameters),
           hasJsonResponse: true,
+          response: this.determineResponseType(op.responses),
         };
 
         if (method.parameters.length > 0) {
           method.parameters[method.parameters.length - 1].last = true;
-        }
-
-        if (op.responses['200'] !== undefined) {
-          let responseSchema = op.responses['200'].schema;
-
-          if (responseSchema.type) {
-            if (responseSchema['type'] === 'array') {
-              let items = responseSchema.items;
-              if (items.$ref) {
-                method.response = Generator.modelName(items.$ref.replace('#/definitions/', ''), true);
-              } else {
-                method.response = Generator.modelName(items['type'], true);
-              }
-            } else {
-              method.response = 'any';
-            }
-          } else if (responseSchema.$ref) {
-            method.response = Generator.modelName(responseSchema.$ref.replace('#/definitions/', ''));
-          } else {
-            method.response = 'any';
-          }
-        } else { //todo check non-200 response codes
-          method.response = 'any';
         }
 
         data.methods.push(method);
@@ -312,8 +290,7 @@ export class Generator {
           };
 
           if (Array.isArray(propIn.items)) {
-            console.warn('Multiple type arrays not supported');
-            // TODO: array can have multiple item types
+            console.warn('Multiple type arrays are not supported');
             property.type = 'any';
             return;
           }
@@ -362,6 +339,31 @@ export class Generator {
     if (this.debug) {
       console.log(text, param);
     }
+  }
+
+  private determineResponseType(responses: { [responseName: string]: Response }): string {
+    if (responses['200'] !== undefined) { //TODO: check non-200 response codes
+      const responseSchema = responses['200'].schema;
+
+      if (responseSchema && responseSchema.type) {
+        if (responseSchema.type === 'array') {
+          const items = responseSchema.items;
+          if (!Array.isArray(items)) {
+            if (items && items.$ref) {
+              return Generator.modelName(items.$ref.replace('#/definitions/', ''), true);
+            } else if (items) {
+              return Generator.modelName(items.type, true);
+            }
+          } else {
+            console.warn('Multiple type arrays are not supported');
+          }
+        }
+      } else if (responseSchema && responseSchema.$ref) {
+        return Generator.modelName(responseSchema.$ref.replace('#/definitions/', ''));
+      }
+    }
+
+    return 'any';
   }
 
   private transformParameters(parameters: Parameter[]): Parameter[] {
