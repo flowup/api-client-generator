@@ -2,25 +2,8 @@ import { Generator } from './generator';
 import * as opt from 'optimist';
 import * as fs from 'fs';
 
-/**
- * Object.entries polyfill
- *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
- */
-if (!Object.entries) {
-  Object.entries = (obj) => {
-    let ownProps = Object.keys(obj),
-      i = ownProps.length,
-      resArray = new Array(i); // preallocate the Array
-    while (i--)
-      resArray[i] = [ownProps[i], obj[ownProps[i]]];
-
-    return resArray;
-  };
-}
-
 let optimist = opt
-  .usage('Usage: a4apigen -s path/to/swagger.[json|yaml]')
+  .usage('Usage: ngx-swag-client -s path/to/swagger.[json|yaml]')
   .alias('h', 'help')
   .alias('s', 'source')
   .alias('o', 'output')
@@ -50,6 +33,6 @@ if (!fs.existsSync(outputDir)) {
 }
 
 let sourceFile = argv.source;
-let g = new Generator(sourceFile, outputDir, true);
+let g = new Generator(sourceFile, outputDir, false);
 
 g.generateAPIClient().then(() => console.log('Angular API client generated successfully'));
