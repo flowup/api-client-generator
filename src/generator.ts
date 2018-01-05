@@ -167,7 +167,7 @@ export class Generator {
 
   async generateClient(viewContext: MustacheData) {
     /* generate main API client class */
-    const clientTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/angular2-service.mustache')).toString();
+    const clientTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-service.mustache')).toString();
 
     let result = Mustache.render(clientTemplate, viewContext);
     let outfile = join(this.outputPath, 'api-client-service.ts');
@@ -179,7 +179,7 @@ export class Generator {
   async generateModels(viewContext: MustacheData) {
     let outputDir = join(this.outputPath, 'models');
 
-    const modelTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/angular2-model.mustache')).toString();
+    const modelTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-model.mustache')).toString();
 
     if (!await promisify(fs.exists)(outputDir)) {
       await promisify(fs.mkdir)(outputDir);
@@ -199,7 +199,7 @@ export class Generator {
   }
 
   async generateExportDefinition(viewContext: MustacheData) {
-    const exportTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/angular2-models-export.mustache')).toString();
+    const exportTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-models-export.mustache')).toString();
     let result = Mustache.render(exportTemplate, viewContext);
     let outfile = join(this.outputPath, '/index.ts');
 
