@@ -6,7 +6,7 @@
 
 [![GitHub forks](https://img.shields.io/github/forks/flowup/ngx-swagger-client-generator.svg?style=social&label=Fork)](https://github.com/flowup/ngx-swagger-client-generator/fork)
 [![GitHub stars](https://img.shields.io/github/stars/flowup/ngx-swagger-client-generator.svg?style=social&label=Star)](https://github.com/flowup/ngx-swagger-client-generator)
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://github.com/flowup/ngx-swagger-client-generator)
+[![Twitter URL](https://img.shields.io/twitter/url/http/flowup.cz.svg?style=social)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20api%20cliet%20from%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/ngx-swagger-client-generator)
 
 # ngx-swagger-client-generator
 Angular REST API client generator from Swagger YAML or JSON file with camel case settigs
