@@ -18,7 +18,7 @@ The generated service class uses new [HttpClient](https://angular.io/guide/http)
 
 ## Usage
 
-`npm run generate -s ./path/to/swagger.[yaml|json]`
+`npm run generate -- -s ./path/to/swagger.[yaml|json]`
 
 ## Options
 

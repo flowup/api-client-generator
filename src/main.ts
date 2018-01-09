@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Generator } from './generator';
 import * as opt from 'optimist';
 import * as fs from 'fs';

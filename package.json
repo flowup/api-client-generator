@@ -1,6 +1,6 @@
 {
-  "name": "ngx-swagger-client-generator",
-  "version": "2.0.0-alpha-2",
+  "name": "@flowup/ngx-swagger-client-generator",
+  "version": "2.0.0-alpha-3",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
   "homepage": "https://github.com/lotjomik/angular4-swagger-client-generator",
   "main": "src/main.ts",
@@ -9,8 +9,19 @@
     "email": "hello@flowup.cz"
   },
   "bin": {
-    "ngx-swag-client": "bin/ngx-swag-client.js"
+    "ngx-swag-client": "./dist/main.js"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/main.js",
+    "dist/main.js.map",
+    "dist/generator.js",
+    "dist/generator.js.map",
+    "templates/ngx-model.mustache",
+    "templates/ngx-models-export.mustache",
+    "templates/ngx-service.mustache"
+  ],
   "bugs": {
     "url": "https://github.com/flowup/ngx-swagger-client-generator/issues"
   },
@@ -36,7 +47,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "generate": "./node_modules/.bin/ts-node ./src/main.ts",
+    "generate": "node ./dist/main.js",
     "build": "rimraf dist && tsc"
   },
   "dependencies": {

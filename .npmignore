@@ -1,5 +1,8 @@
 src/
-tests/
 output/
+output_reference/
 node_modules/
 .gitignore
+.idea
+tsconfig.json
+yarn.lock
