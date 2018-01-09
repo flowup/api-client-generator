@@ -66,16 +66,9 @@ export class Generator {
               private outputPath: string) {
   }
 
-  /**
-   * Strip #/definitions prefix from a type string
-   * @param {string} refString
-   * @returns {string}
-   */
-  static dereferenceType(refString: string): string {
-    return refString.replace('#/definitions/', '');
-  };
-
   static camelCase(text: string = '', lowerFirstLetter = true): string {
+    text = Generator.removeDuplicateWords(text);
+
     if (/^[A-Z0-9]+$/.test(text) || text === '') {
       return text;
     }
@@ -89,6 +82,27 @@ export class Generator {
     return text.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace(/^-/, '');
     // todo: here take care of `horse-i-d-bar` it should be `horse-id-bar`
   }
+
+  /**
+   * Strip #/definitions prefix from a type string
+   * @param {string} refString
+   * @returns {string}
+   */
+  private static dereferenceType(refString: string): string {
+    return refString.replace('#/definitions/', '');
+  };
+
+  /**
+   * Removes duplicate words from type name
+   *
+   * example: shipmentShipmentAddress --> ShipmentAddress
+   *
+   * @param {string} text
+   * @returns {string}
+   */
+  private static removeDuplicateWords(text: string): string {
+    return text.replace(/(.{4,})(?=\1)/ig, '');
+  };
 
   private static toTypescriptType({type, items}: Parameter): string {
     if (!type) {
@@ -323,7 +337,7 @@ export class Generator {
 
   createMustacheViewModel(swagger: Swagger): MustacheData {
     const authorizedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
-    let data: MustacheData = {
+    return {
       description: swagger.info.description || '',
       isSecure: !!swagger.securityDefinitions,
       swagger: swagger,
@@ -351,7 +365,5 @@ export class Generator {
         )),
       definitions: Generator.generateDefinitions(swagger.definitions)
     };
-
-    return data;
   }
 }
