@@ -6,28 +6,29 @@ import { parse as swaggerFile } from 'swagger-parser';
 import { Response, Schema, Spec as Swagger } from 'swagger-schema-official';
 import { promisify } from 'util';
 
+export type RenderFileName = (text: string, render: any) => string;
+
 export interface Definition {
   name?: string;
   properties: Parameter[];
-  refs: any[];
   imports: string[];
   isEnum?: boolean;
-  fileName?: () => (text: string, render: any) => string; // generate dash-case file names to templates
+  renderFileName?: () => RenderFileName; // generate dash-case file names to templates
   last?: boolean;
 }
 
 export interface MustacheData {
-  readonly  description: string,
-  readonly  isSecure: boolean,
-  readonly  swagger: Swagger,
-  readonly  domain: string,
-  readonly  methods: Method[],
-  readonly  definitions: Definition[]
+  readonly description: string,
+  readonly isSecure: boolean,
+  readonly swagger: Swagger,
+  readonly domain: string,
+  readonly methods: Method[],
+  readonly definitions: Definition[]
 }
 
 export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined' | 'any';
 export type In = 'body' | 'path' | 'query' | 'modelbinding' | 'header' | 'formData';
-export type MethodType = 'get' | 'post' | 'put' | 'delete';
+export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 export interface Parameter {
   camelCaseName?: string;
@@ -55,10 +56,7 @@ export interface Method {
   readonly path?: string;  // path appended to base in method
   readonly backTickPath?: string;
   readonly methodName?: any;  // mane of the generated method
-  readonly method?: string;
   readonly methodType?: MethodType;  // type of the http method
-  readonly isGET?: boolean;
-  readonly hasPayload?: boolean;
   readonly summaryLines?: any[];
   readonly isSecure?: boolean;  // currently unused TODO
   readonly parameters: Parameter[];
@@ -72,9 +70,13 @@ export class Generator {
               private debug = false) {
   }
 
-  static getRefType(refString: string): string {
-    let segments = refString.split('/');
-    return segments.length === 3 ? segments[2] : segments[0];
+  /**
+   * Strip #/definitions prefix from a type string
+   * @param {string} refString
+   * @returns {string}
+   */
+  static dereferenceType(refString: string): string {
+    return refString.replace('#/definitions/', '');
   };
 
   static camelCase(text: string = '', lowerFirstLetter = true): string {
@@ -92,30 +94,25 @@ export class Generator {
     // todo: here take care of `horse-i-d-bar` it should be `horse-id-bar`
   }
 
-  private static toTypescriptType(parameter: Parameter): void {
-    if (!parameter.type) {
-      parameter.typescriptType = 'any';
-      return;
+  private static toTypescriptType({type, items}: Parameter): string {
+    if (!type) {
+      return 'any';
     }
 
-    if (/^number|integer|double$/i.test(parameter.type)) {
-      parameter.typescriptType = 'number';
-    } else if (/^string|boolean$/i.test(parameter.type)) {
-      parameter.typescriptType = parameter.type.toLocaleLowerCase();
-    } else if (/^object$/i.test(parameter.type)) {
-      parameter.typescriptType = 'any';
-    } else if (/^array$/i.test(parameter.type)) {
-
-      if (parameter.items) {
-        parameter.typescriptType = Generator.modelName(parameter.items.type, true);
+    if (/^number|integer|double$/i.test(type)) {
+      return 'number';
+    } else if (/^string|boolean$/i.test(type)) {
+      return type.toLocaleLowerCase();
+    } else if (/^object$/i.test(type)) {
+      return 'any';
+    } else if (/^array$/i.test(type)) {
+      if (items) {
+        return Generator.modelName(items.type, true);
       } else {
-        parameter.typescriptType = 'any[]';
+        return 'any[]';
       }
-
-      parameter.isArray = true;
-
     } else {
-      parameter.typescriptType = Generator.modelName(parameter.type); //todo here?
+      return Generator.modelName(type);
     }
   }
 
@@ -149,6 +146,138 @@ export class Generator {
     const domain = host ? host : 'localhost';
     const base = ('/' === basePath ? '' : basePath);
     return `${protocol}://${domain}${base}`;
+  }
+
+  private static generateDefinitions(definitions: { [definitionsName: string]: Schema } = {}): Definition[] {
+    return Object.entries(definitions).map(([defVal, defIn]) => {
+      /* service models import */
+
+      if (defIn.enum && defIn.enum.length !== 0) {
+        return {
+          name: Generator.enumName(defVal),
+          properties: defIn.enum.map((val) => ({
+            name: val.toString(),
+            camelCaseName: Generator.camelCase(val.toString())
+          })),
+          isEnum: true,
+          refs: [],
+          imports: [],
+          renderFileName: (): RenderFileName => ((text: string, render: any): string => Generator.fileName(render(text), 'enum')),
+        };
+      } else {
+        const properties: Parameter[] = Object.entries<Schema>(defIn.properties || {})
+          .map(
+            ([propVal, propIn]: [string, Schema]) => {
+              let property: Parameter = {
+                name: propVal,
+                isRef: '$ref' in propIn || (propIn.type === 'array' && propIn.items && '$ref' in propIn.items),
+                isArray: propIn.type === 'array',
+              };
+
+              if (Array.isArray(propIn.items)) {
+                console.warn('Multiple type arrays are not supported');
+                property.type = 'any';
+                return property;
+              }
+
+              if (property.isArray) {
+                if (propIn.items && propIn.items.$ref) {
+                  property.type = Generator.modelName(Generator.dereferenceType(propIn.items.$ref));
+                } else if (propIn.items && propIn.items.type) {
+                  property.type = Generator.modelName(propIn.items.type);
+                } else {
+                  property.type = propIn.type;
+                }
+              } else {
+                property.type = Generator.modelName(
+                  propIn.$ref
+                    ? Generator.dereferenceType(propIn.$ref)
+                    : propIn.type
+                );
+              }
+
+              property.typescriptType = Generator.toTypescriptType(property);
+
+              return property;
+            }
+          )
+          .sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
+
+        return {
+          name: Generator.modelName(defVal),
+          properties: properties,
+          imports: properties
+            .filter(({isRef}) => isRef)
+            .map(({type}) => type || '')
+            // filter duplicate imports
+            .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),
+          isEnum: false,
+          renderFileName: (): RenderFileName => (text: string, render: any): string => Generator.fileName(render(text), 'model'),
+        };
+      }
+    });
+  }
+
+  private static determineResponseType(responses: { [responseName: string]: Response }): string {
+    if (responses['200'] !== undefined) { //TODO: check non-200 response codes
+      const responseSchema = responses['200'].schema;
+
+      if (responseSchema && responseSchema.type) {
+        if (responseSchema.type === 'array') {
+          const items = responseSchema.items;
+          if (!Array.isArray(items)) {
+            if (items && items.$ref) {
+              return Generator.modelName(Generator.dereferenceType(items.$ref), true);
+            } else if (items) {
+              return Generator.modelName(items.type, true);
+            }
+          } else {
+            console.warn('Multiple type arrays are not supported');
+          }
+        }
+      } else if (responseSchema && responseSchema.$ref) {
+        return Generator.modelName(Generator.dereferenceType(responseSchema.$ref));
+      }
+    }
+
+    return 'any';
+  }
+
+  private static transformParameters(parameters: Parameter[]): Parameter[] {
+    return Array.isArray(parameters)
+      ? parameters.map((param) => {
+          console.log(param);
+
+          const parameter = {...param};
+
+          if ('schema' in param && typeof param.schema.$ref === 'string') {
+            parameter.type = Generator.camelCase(Generator.dereferenceType(param.schema.$ref));
+          }
+
+          parameter.camelCaseName = Generator.camelCase(param.name);
+          parameter.typescriptType = Generator.toTypescriptType(parameter);
+
+          if (param.enum && param.enum.length === 1) {
+            parameter.isSingleton = true;
+            parameter.singleton = param.enum[0];
+          }
+
+          if (param.in === 'body') {
+            parameter.isBodyParameter = true;
+          } else if (param.in === 'path') {
+            parameter.isPathParameter = true;
+          } else if (param.in === 'query' || param.in === 'modelbinding') {
+            parameter.isQueryParameter = true;
+          } else if (param.in === 'header') {
+            parameter.isHeaderParameter = true;
+          } else if (param.in === 'formData') {
+            parameter.isFormParameter = true;
+          }
+
+          return parameter;
+        }
+      )
+      : [];
   }
 
   async generateAPIClient() {
@@ -213,120 +342,30 @@ export class Generator {
       isSecure: !!swagger.securityDefinitions,
       swagger: swagger,
       domain: Generator.generateDomain(swagger),
-      methods: [],
-      definitions: []
+      methods: [].concat.apply([], Object.entries(swagger.paths)
+        .map(
+          ([path, api]) => Object.entries(api)
+            .filter(([method,]) => authorizedMethods.indexOf(method.toUpperCase()) !== -1)  // skip unsupported methods
+            .map(
+              ([method, op]) => ({
+                path: path,
+                backTickPath: path.replace(/({.*?})/g, '$$$1'),  //todo rename this
+                methodName: Generator.camelCase(
+                  op.operationId
+                    ? op.operationId
+                    : console.error('Method name could not be determined, operationID is undefined')
+                ),
+                methodType: <MethodType>method.toUpperCase(),
+                summaryLines: op.description ? op.description.split('\n') : [], // description summary is optional
+                isSecure: swagger.security !== undefined || op.security !== undefined,
+                parameters: Generator.transformParameters(op.parameters),
+                hasJsonResponse: true,
+                response: Generator.determineResponseType(op.responses),
+              })
+            )
+        )),
+      definitions: Generator.generateDefinitions(swagger.definitions)
     };
-
-    Object.entries(swagger.paths).forEach(([path, api]) => {
-      if (api.parameters) {
-        console.warn('Path parameters currently not supported');
-      }
-
-      Object.entries(api).forEach(([m, op]) => {
-        // skip unsupported methods
-        if (authorizedMethods.indexOf(m.toUpperCase()) === -1) {
-          return;
-        }
-
-        const method: Method = {
-          path: path,
-          backTickPath: path.replace(/({.*?})/g, '$$$1'),  //todo rename this
-          methodName: Generator.camelCase(
-            op.operationId
-              ? op.operationId
-              : console.error('Method name could not be determined, operationID is undefined')
-          ),
-          method: m.toUpperCase(),
-          methodType: <MethodType>m.toLowerCase(),
-          isGET: m.toUpperCase() === 'GET',
-          hasPayload: !['GET', 'DELETE', 'HEAD'].some(i => i === m.toUpperCase()),
-          summaryLines: op.description ? op.description.split('\n') : [], // description summary is optional
-          isSecure: swagger.security !== undefined || op.security !== undefined,
-          parameters: this.transformParameters(op.parameters),
-          hasJsonResponse: true,
-          response: this.determineResponseType(op.responses),
-        };
-
-        if (method.parameters.length > 0) {
-          method.parameters[method.parameters.length - 1].last = true;
-        }
-
-        data.methods.push(method);
-      });
-    });
-
-    Object.entries(swagger.definitions || {}).forEach(([defVal, defIn]) => {
-
-      /* service models import */
-      let definition: Definition;
-
-      if (defIn.enum && defIn.enum.length !== 0) {
-        definition = {
-          name: Generator.enumName(defVal),
-          properties: defIn.enum.map((val) => ({
-            name: val.toString(),
-            camelCaseName: Generator.camelCase(val.toString())
-          })),
-          isEnum: true,
-          refs: [],
-          imports: [],
-          fileName: () => (text, render) => Generator.fileName(render(text), 'enum'),
-        };
-      } else {
-        definition = {
-          name: Generator.modelName(defVal),
-          properties: [],
-          refs: [],
-          imports: [],
-          isEnum: false,
-          fileName: () => (text, render) => Generator.fileName(render(text), 'model'),
-        };
-
-        Object.entries<Schema>(defIn.properties || {}).forEach(([propVal, propIn]: [string, Schema]) => {
-          let property: Parameter = {
-            name: propVal,
-            isRef: '$ref' in propIn || (propIn.type === 'array' && propIn.items && '$ref' in propIn.items),
-            isArray: propIn.type === 'array',
-          };
-
-          if (Array.isArray(propIn.items)) {
-            console.warn('Multiple type arrays are not supported');
-            property.type = 'any';
-            return;
-          }
-
-          if (property.isArray) {
-            if (propIn.items && propIn.items.$ref) {
-              property.type = Generator.modelName(propIn.items.$ref.replace('#/definitions/', ''));
-            } else if (propIn.items && propIn.items.type) {
-              property.type = Generator.modelName(propIn.items.type);
-            } else {
-              property.type = propIn.type;
-            }
-          } else {
-            property.type = Generator.modelName(
-              propIn.$ref
-                ? propIn.$ref.replace('#/definitions/', '')
-                : propIn.type
-            );
-          }
-
-          Generator.toTypescriptType(property);
-
-          if (property.isRef) {
-            definition.refs.push(property);
-            definition.imports.push(property.type || '');
-          } else {
-            definition.properties.push(property);
-          }
-        });
-      }
-
-      // sort an filter duplicate imports
-      definition.imports = definition.imports.sort().filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0);
-
-      data.definitions.push(definition);
-    });
 
     if (data.definitions.length > 0) {
       data.definitions[data.definitions.length - 1].last = true;
@@ -339,64 +378,5 @@ export class Generator {
     if (this.debug) {
       console.log(text, param);
     }
-  }
-
-  private determineResponseType(responses: { [responseName: string]: Response }): string {
-    if (responses['200'] !== undefined) { //TODO: check non-200 response codes
-      const responseSchema = responses['200'].schema;
-
-      if (responseSchema && responseSchema.type) {
-        if (responseSchema.type === 'array') {
-          const items = responseSchema.items;
-          if (!Array.isArray(items)) {
-            if (items && items.$ref) {
-              return Generator.modelName(items.$ref.replace('#/definitions/', ''), true);
-            } else if (items) {
-              return Generator.modelName(items.type, true);
-            }
-          } else {
-            console.warn('Multiple type arrays are not supported');
-          }
-        }
-      } else if (responseSchema && responseSchema.$ref) {
-        return Generator.modelName(responseSchema.$ref.replace('#/definitions/', ''));
-      }
-    }
-
-    return 'any';
-  }
-
-  private transformParameters(parameters: Parameter[]): Parameter[] {
-    return Array.isArray(parameters)
-      ? parameters.map((parameter) => {
-          if ('schema' in parameter && typeof parameter.schema.$ref === 'string') {
-            parameter.type = Generator.camelCase(Generator.getRefType(parameter.schema.$ref));
-          }
-
-          parameter.camelCaseName = Generator.camelCase(parameter.name);
-
-          Generator.toTypescriptType(parameter); // todo : refactor this
-
-          if (parameter.enum && parameter.enum.length === 1) {
-            parameter.isSingleton = true;
-            parameter.singleton = parameter.enum[0];
-          }
-
-          if (parameter.in === 'body') {
-            parameter.isBodyParameter = true;
-          } else if (parameter.in === 'path') {
-            parameter.isPathParameter = true;
-          } else if (parameter.in === 'query' || parameter.in === 'modelbinding') {
-            parameter.isQueryParameter = true;
-          } else if (parameter.in === 'header') {
-            parameter.isHeaderParameter = true;
-          } else if (parameter.in === 'formData') {
-            parameter.isFormParameter = true;
-          }
-
-          return parameter;
-        }
-      )
-      : [];
   }
 }

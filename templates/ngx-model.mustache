@@ -1,7 +1,7 @@
 /* tslint:disable */
 {{^isEnum}}
 {{#imports}}
-import { {{.}} } from './{{#fileName}}{{.}}{{/fileName}}';
+import { {{.}} } from './{{#renderFileName}}{{.}}{{/renderFileName}}';
 {{/imports}}
 
 export interface {{&name}} {
@@ -13,14 +13,6 @@ export interface {{&name}} {
   {{name}}: {{typescriptType}};
   {{/isArray}}
 {{/properties}}
-{{#refs}}
-  {{#isArray}}
-  {{name}}: {{typescriptType}}[];
-  {{/isArray}}
-  {{^isArray}}
-  {{name}}: {{typescriptType}};
-  {{/isArray}}
-{{/refs}}
 }
 {{/isEnum}}
 {{#isEnum}}

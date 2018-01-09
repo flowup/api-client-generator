@@ -97,13 +97,13 @@ export class ApiClientService {
 
 {{/methods}}
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    if (method === 'get') {
+    if (method === 'GET') {
       return this.http.get<T>(`${this.domain}${path}`, options);
-    } else if (method === 'put') {
+    } else if (method === 'PUT') {
       return this.http.put<T>(`${this.domain}${path}`, body, options);
-    } else if (method === 'post') {
+    } else if (method === 'POST') {
       return this.http.post<T>(`${this.domain}${path}`, body, options);
-    } else if (method === 'delete') {
+    } else if (method === 'DELETE') {
       return this.http.delete<T>(`${this.domain}${path}`, options);
     } else {
       console.error('Unsupported request: ' + method);
