@@ -4,31 +4,47 @@ Angular REST API client generator from Swagger YAML or JSON file with camel case
 # Description
 This package generates a Angular TypeScript classes from a Swagger v2.0 specification file. The code is generated using Mustache templates.
 
-The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular 4.
+The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular (introduced in version 4.3).
 
-# How to get it working
-
+# Local usage
 ## Installation
 
-`git clone https://github.com/flowup/ngx-swagger-client-generator`
+`yarn add @flowup/ngx-swagger-client-generator`
 
-`cd ngx-swagger-client-generator`
+or
 
-`yarn` or `npm install`
+`npm install @flowup/ngx-swagger-client-generator`
 
 ## Usage
 
-`npm run generate -- -s ./path/to/swagger.[yaml|json]`
+- for quick usage create run script in your `package.json` scricpts
+```
+"scripts": {
+  "generate-api-client": "ngx-swag-client -s ./swagger.yaml -o ./output-folder"
+},
+```
+- then just run
+
+`npm run generate-api-client`
 
 ## Options
 
- - `s` -  path to the swagger file
+ - `s` -  path to the swagger file (yaml or json)
  - `o` -  path where the generated files should be emitted
 
-## Example usage:
+# Global usage:
+
+## Installation
+
+`[sudo] yarn global add @flowup/ngx-swagger-client-generator`
+
+or
+
+`[sudo] npm install -g @flowup/ngx-swagger-client-generator`
+
 This command will generate API client described in swagger.json file to ./output folder
 
-`npm run generate -s ./path/to/swagger.json -o ./output`
+`ngx-swag-client -s ./path/to/swagger.json -o ./output`
 
 ## Note:
 This project was inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen) project.
