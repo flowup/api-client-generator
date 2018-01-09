@@ -18,12 +18,12 @@ export interface Definition {
 }
 
 export interface MustacheData {
-  readonly description: string,
-  readonly isSecure: boolean,
-  readonly swagger: Swagger,
-  readonly domain: string,
-  readonly methods: Method[],
-  readonly definitions: Definition[]
+  readonly description: string;
+  readonly isSecure: boolean;
+  readonly swagger: Swagger;
+  readonly domain: string;
+  readonly methods: Method[];
+  readonly definitions: Definition[];
 }
 
 export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined' | 'any';
@@ -31,23 +31,23 @@ export type In = 'body' | 'path' | 'query' | 'modelbinding' | 'header' | 'formDa
 export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 export interface Parameter {
-  camelCaseName?: string;
-  isArray?: boolean;
-  isBodyParameter?: boolean;
-  isFormParameter?: boolean;
-  isHeaderParameter?: boolean;
-  isPathParameter?: boolean;
-  isPatternType?: boolean;
-  isRef?: boolean;
-  isQueryParameter?: boolean;
-  isSingleton?: boolean;
-  last?: boolean;
-  'in'?: In;
-  'enum'?: any[];
-  items?: Parameter;
-  name?: string,
-  schema?: any,
-  singleton?: any,
+  readonly camelCaseName?: string;
+  readonly isArray?: boolean;
+  readonly isBodyParameter?: boolean;
+  readonly isFormParameter?: boolean;
+  readonly isHeaderParameter?: boolean;
+  readonly isPathParameter?: boolean;
+  readonly isPatternType?: boolean;
+  readonly isRef?: boolean;
+  readonly isQueryParameter?: boolean;
+  readonly isSingleton?: boolean;
+  readonly last?: boolean;
+  readonly 'in'?: In;
+  readonly 'enum'?: any[];
+  readonly items?: Parameter;
+  readonly name?: string,
+  readonly schema?: any,
+  readonly singleton?: any,
   type?: string,
   typescriptType?: TypescriptBasicTypes | string;
 }
@@ -61,7 +61,7 @@ export interface Method {
   readonly isSecure?: boolean;  // currently unused TODO
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
-  response?: string;  // method return type // todo make readonly
+  readonly response?: string;  // method return type // todo make readonly
 }
 
 export class Generator {
@@ -245,6 +245,7 @@ export class Generator {
 
   private static transformParameters(parameters: Parameter[]): Parameter[] {
     return Array.isArray(parameters)
+      // todo: required params
       ? parameters.map((param) => {
           const parameter = {...param};
 
