@@ -1,3 +1,13 @@
+[![npm](https://img.shields.io/npm/v/%40flowup/ngx-swagger-client-generator.svg)](https://www.npmjs.com/package/@flowup/ngx-swagger-client-generator)
+[![npm](https://img.shields.io/npm/l/%40flowup/ngx-swagger-client-generator.svg)](https://www.npmjs.com/package/@flowup/ngx-swagger-client-generator)
+[![npm](https://img.shields.io/npm/dm/@40flowup/ngx-swagger-client-generator.svg)](https://www.npmjs.com/package/@flowup/ngx-swagger-client-generator)
+
+[![Caretaker](https://img.shields.io/badge/caretaker-vmasek-blue.svg)](https://github.com/vmasek)
+
+[![GitHub forks](https://img.shields.io/github/forks/flowup/ngx-swagger-client-generator.svg?style=social&label=Fork)](https://github.com/flowup/ngx-swagger-client-generator/fork)
+[![GitHub stars](https://img.shields.io/github/stars/flowup/ngx-swagger-client-generator.svg?style=social&label=Star)](https://github.com/flowup/ngx-swagger-client-generator)
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://github.com/flowup/ngx-swagger-client-generator)
+
 # ngx-swagger-client-generator
 Angular REST API client generator from Swagger YAML or JSON file with camel case settigs
 
