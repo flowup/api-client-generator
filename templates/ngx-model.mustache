@@ -3,9 +3,9 @@
 {{#imports.length}}
 import {
 {{#imports}}
-  {{.}}
+  {{.}},
 {{/imports}}
-} from '..';
+} from './..';
 {{/imports.length}}
 
 export interface {{&name}} {

@@ -14,7 +14,6 @@ export interface Definition {
   imports: string[];
   isEnum?: boolean;
   renderFileName?: () => RenderFileName; // generate dash-case file names to templates
-  last?: boolean;
 }
 
 export interface MustacheData {
@@ -41,7 +40,6 @@ export interface Parameter {
   readonly isRef?: boolean;
   readonly isQueryParameter?: boolean;
   readonly isSingleton?: boolean;
-  readonly last?: boolean;
   readonly 'in'?: In;
   readonly 'enum'?: any[];
   readonly items?: Parameter;
@@ -54,14 +52,13 @@ export interface Parameter {
 
 export interface Method {
   readonly path?: string;  // path appended to base in method
-  readonly backTickPath?: string;
   readonly methodName?: any;  // mane of the generated method
   readonly methodType?: MethodType;  // type of the http method
   readonly summaryLines?: any[];
   readonly isSecure?: boolean;  // currently unused TODO
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
-  readonly response?: string;  // method return type // todo make readonly
+  readonly response?: string;  // method return type
 }
 
 export class Generator {
@@ -106,31 +103,25 @@ export class Generator {
       return 'any';
     } else if (/^array$/i.test(type)) {
       if (items) {
-        return Generator.modelName(items.type, true);
+        return Generator.typeName(items.type, true);
       } else {
         return 'any[]';
       }
     } else {
-      return Generator.modelName(type);
+      return Generator.typeName(type);
     }
   }
 
-  private static modelName(typeName: string = '', isArray: boolean = false): string {
+  private static typeName(typeName: string = '', isArray: boolean = false): string {
     let type: string;
 
-    if (/.+Model$/.test(typeName)) {
-      type = typeName;
-    } else if (/^(?:string)|(?:number)|(?:integer)|(?:boolean)|(?:undefined)|(?:any)|(?:object)$/i.test(typeName)) {
+    if (/^(?:string)|(?:number)|(?:integer)|(?:boolean)|(?:undefined)|(?:any)|(?:object)$/i.test(typeName)) {
       type = typeName;
     } else {
-      type = `${Generator.camelCase(typeName, false)}Model`;
+      type = Generator.camelCase(typeName, false);
     }
 
     return `${type}${isArray ? '[]' : ''}`;
-  };
-
-  private static enumName(typeName: string = ''): string {
-    return `${Generator.camelCase(typeName, false)}Enum`;
   };
 
   private static fileName(name: string = '', type: 'model' | 'enum' = 'model'): string {
@@ -153,7 +144,7 @@ export class Generator {
 
       if (defIn.enum && defIn.enum.length !== 0) {
         return {
-          name: Generator.enumName(defVal),
+          name: Generator.typeName(defVal),
           properties: defIn.enum.map((val) => ({
             name: val.toString(),
             camelCaseName: Generator.camelCase(val.toString())
@@ -181,14 +172,14 @@ export class Generator {
 
               if (property.isArray) {
                 if (propIn.items && propIn.items.$ref) {
-                  property.type = Generator.modelName(Generator.dereferenceType(propIn.items.$ref));
+                  property.type = Generator.typeName(Generator.dereferenceType(propIn.items.$ref));
                 } else if (propIn.items && propIn.items.type) {
-                  property.type = Generator.modelName(propIn.items.type);
+                  property.type = Generator.typeName(propIn.items.type);
                 } else {
                   property.type = propIn.type;
                 }
               } else {
-                property.type = Generator.modelName(
+                property.type = Generator.typeName(
                   propIn.$ref
                     ? Generator.dereferenceType(propIn.$ref)
                     : propIn.type
@@ -203,7 +194,7 @@ export class Generator {
           .sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
 
         return {
-          name: Generator.modelName(defVal),
+          name: Generator.typeName(defVal),
           properties: properties,
           imports: properties
             .filter(({isRef}) => isRef)
@@ -227,16 +218,16 @@ export class Generator {
           const items = responseSchema.items;
           if (!Array.isArray(items)) {
             if (items && items.$ref) {
-              return Generator.modelName(Generator.dereferenceType(items.$ref), true);
+              return Generator.typeName(Generator.dereferenceType(items.$ref), true);
             } else if (items) {
-              return Generator.modelName(items.type, true);
+              return Generator.typeName(items.type, true);
             }
           } else {
             console.warn('Multiple type arrays are not supported');
           }
         }
       } else if (responseSchema && responseSchema.$ref) {
-        return Generator.modelName(Generator.dereferenceType(responseSchema.$ref));
+        return Generator.typeName(Generator.dereferenceType(responseSchema.$ref));
       }
     }
 
@@ -343,8 +334,7 @@ export class Generator {
             .filter(([method,]) => authorizedMethods.indexOf(method.toUpperCase()) !== -1)  // skip unsupported methods
             .map(
               ([method, op]) => ({
-                path: path,
-                backTickPath: path.replace(/({.*?})/g, '$$$1'),  //todo rename this
+                path: path.replace(/({.*?})/g, '$$$1'),
                 methodName: Generator.camelCase(
                   op.operationId
                     ? op.operationId
@@ -361,10 +351,6 @@ export class Generator {
         )),
       definitions: Generator.generateDefinitions(swagger.definitions)
     };
-
-    if (data.definitions.length > 0) {
-      data.definitions[data.definitions.length - 1].last = true;
-    }
 
     return data;
   }

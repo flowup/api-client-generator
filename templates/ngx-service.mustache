@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import {
   {{#definitions}}
-  {{name}}{{^last}},{{/last}}
+  {{name}},
   {{/definitions}}
 } from '.';
 
@@ -45,7 +45,7 @@ export class ApiClientService {
 
 {{#methods}}
   {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{typescriptType}}, {{/parameters}}options: HttpOptions = this.httpOptions): Observable<{{&response}}> {
-    const path = `{{&backTickPath}}`;
+    const path = `{{&path}}`;
 
     {{#parameters}}
       {{#isQueryParameter}}

@@ -6,3 +6,5 @@ node_modules/
 .idea
 tsconfig.json
 yarn.lock
+CODE_OF_CONDUCT.md
+PULL_REQUEST_TEMPLATE.md
