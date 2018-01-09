@@ -1,8 +1,12 @@
 /* tslint:disable */
 {{^isEnum}}
+{{#imports.length}}
+import {
 {{#imports}}
-import { {{.}} } from './{{#renderFileName}}{{.}}{{/renderFileName}}';
+  {{.}}
 {{/imports}}
+} from '..';
+{{/imports.length}}
 
 export interface {{&name}} {
 {{#properties}}

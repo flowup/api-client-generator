@@ -209,6 +209,7 @@ export class Generator {
           imports: properties
             .filter(({isRef}) => isRef)
             .map(({type}) => type || '')
+            .sort()
             // filter duplicate imports
             .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),
           isEnum: false,
@@ -246,8 +247,6 @@ export class Generator {
   private static transformParameters(parameters: Parameter[]): Parameter[] {
     return Array.isArray(parameters)
       ? parameters.map((param) => {
-          console.log(param);
-
           const parameter = {...param};
 
           if ('schema' in param && typeof param.schema.$ref === 'string') {
