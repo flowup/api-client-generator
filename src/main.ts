@@ -33,7 +33,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 let sourceFile = argv.source;
-let g = new Generator(sourceFile, outputDir, false);
+let g = new Generator(sourceFile, outputDir);
 
 g.generateAPIClient()
   .then(() => console.log('Angular API client generated successfully'))

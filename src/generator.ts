@@ -66,8 +66,7 @@ export interface Method {
 
 export class Generator {
   constructor(private swaggerFilePath: string,
-              private outputPath: string,
-              private debug = false) {
+              private outputPath: string) {
   }
 
   /**
@@ -299,7 +298,6 @@ export class Generator {
     let result = Mustache.render(clientTemplate, viewContext);
     let outfile = join(this.outputPath, 'api-client-service.ts');
 
-    this.logMessage('Creating output file', outfile);
     await promisify(fs.writeFile)(outfile, result, 'utf-8');
   }
 
@@ -317,8 +315,6 @@ export class Generator {
       let result = Mustache.render(modelTemplate, definition);
       let outfile = join(outputDir, Generator.fileName(definition.name, definition.isEnum ? 'enum' : 'model') + '.ts');
 
-      this.logMessage('Creating output file', outfile);
-
       recursiveDir(dirname(outfile), () => {
         fs.writeFileSync(outfile, result, 'utf-8');
       });
@@ -330,7 +326,6 @@ export class Generator {
     let result = Mustache.render(exportTemplate, viewContext);
     let outfile = join(this.outputPath, '/index.ts');
 
-    this.logMessage('Creating output file', outfile);
     fs.writeFileSync(outfile, result, 'utf-8');
   }
 
@@ -371,11 +366,5 @@ export class Generator {
     }
 
     return data;
-  }
-
-  logMessage(text: string, param: string = '') {
-    if (this.debug) {
-      console.log(text, param);
-    }
   }
 }
