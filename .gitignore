@@ -2,9 +2,7 @@ node_modules
 .idea
 .vs
 .vscode
-bin/
 obj
 output
 temp
-lib/
 npm-debug.log
