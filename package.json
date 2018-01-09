@@ -1,6 +1,6 @@
 {
   "name": "ngx-swagger-client-generator",
-  "version": "2.0.0-alpha-1",
+  "version": "2.0.0-alpha-2",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
   "homepage": "https://github.com/lotjomik/angular4-swagger-client-generator",
   "main": "src/main.ts",
@@ -28,29 +28,31 @@
     "scaffolding",
     "webapi",
     "api",
+    "apiclient",
     "generator",
-    "camelCase"
+    "camelCase",
+    "http",
+    "httpclient"
   ],
   "license": "MIT",
   "scripts": {
-    "generate": "./node_modules/.bin/ts-node ./src/main.ts"
+    "generate": "./node_modules/.bin/ts-node ./src/main.ts",
+    "build": "rimraf dist && tsc"
   },
   "dependencies": {
     "@types/swagger-parser": "^4.0.2",
-    "js-yaml": "^3.10.0",
     "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",
     "optimist": "^0.6.1",
-    "swagger-parser": "^4.0.1",
-    "tslint": "^5.7.0"
+    "swagger-parser": "^4.0.1"
   },
   "devDependencies": {
-    "@types/js-yaml": "^3.9.1",
-    "@types/mkdirp": "^0.5.1",
+    "@types/mkdirp": "^0.5.2",
     "@types/mustache": "^0.8.30",
-    "@types/node": "^8.0.31",
+    "@types/node": "^9.3.0",
     "@types/optimist": "0.0.29",
-    "ts-node": "^3.3.0",
+    "rimraf": "^2.5.2",
+    "ts-node": "^4.1.0",
     "typescript": "^2.6.1"
   }
 }
