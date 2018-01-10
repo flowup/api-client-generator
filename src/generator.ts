@@ -36,16 +36,13 @@ export interface Parameter {
   readonly isFormParameter?: boolean;
   readonly isHeaderParameter?: boolean;
   readonly isPathParameter?: boolean;
-  readonly isPatternType?: boolean;
   readonly isRef?: boolean;
   readonly isQueryParameter?: boolean;
-  readonly isSingleton?: boolean;
   readonly 'in'?: In;
   readonly 'enum'?: any[];
   readonly items?: Parameter;
   readonly name?: string,
   readonly schema?: any,
-  readonly singleton?: any,
   type?: string,
   typescriptType?: TypescriptBasicTypes | string;
 }
@@ -97,11 +94,13 @@ export class Generator {
    *
    * example: shipmentShipmentAddress --> ShipmentAddress
    *
+   * note: minimum is 3 letters otherwise words are not striped
+   *
    * @param {string} text
    * @returns {string}
    */
   private static removeDuplicateWords(text: string): string {
-    return text.replace(/(.{4,})(?=\1)/ig, '');
+    return text.replace(/^(.{3,})(?=\1)/ig, '');
   };
 
   private static toTypescriptType({type, items}: Parameter): string {
@@ -261,21 +260,18 @@ export class Generator {
           parameter.camelCaseName = Generator.camelCase(param.name);
           parameter.typescriptType = Generator.toTypescriptType(parameter);
 
-          if (param.enum && param.enum.length === 1) {
-            parameter.isSingleton = true;
-            parameter.singleton = param.enum[0];
-          }
-
           if (param.in === 'body') {
             parameter.isBodyParameter = true;
           } else if (param.in === 'path') {
+            // param is included in method path string interpolation
             parameter.isPathParameter = true;
           } else if (param.in === 'query' || param.in === 'modelbinding') {
             parameter.isQueryParameter = true;
           } else if (param.in === 'header') {
             parameter.isHeaderParameter = true;
           } else if (param.in === 'formData') {
-            parameter.isFormParameter = true;
+            parameter.isFormParameter = true; // TODO: currently unsupported
+            console.warn('Path parameters are currently unsupported and will not be generated properly');
           }
 
           return parameter;
