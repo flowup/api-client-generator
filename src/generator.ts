@@ -76,8 +76,8 @@ export class Generator {
   }
 
   static dashCase(text: string = ''): string {
+    text = text.replace(/([A-Z]+)(?![^A-Z])/g, (g) => `-${g.toLowerCase()}`); // transform abbreviations (for example: ID, HTTP, ...)
     return text.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace(/^-/, '');
-    // todo: here take care of `horse-i-d-bar` it should be `horse-id-bar`
   }
 
   /**
