@@ -2,6 +2,7 @@ src/
 output/
 output_reference/
 node_modules/
+example/
 .gitignore
 .idea
 tsconfig.json
