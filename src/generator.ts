@@ -205,13 +205,15 @@ export class Generator {
             }
           )
           .sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
+        const name = Generator.typeName(defVal);
 
         return {
-          name: Generator.typeName(defVal),
+          name: name,
           properties: properties,
           imports: properties
             .filter(({isRef}) => isRef)
             .map(({type}) => type || '')
+            .filter((type) => type !== name)
             .sort()
             // filter duplicate imports
             .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),
