@@ -4,7 +4,6 @@
 
 [![Caretaker](https://img.shields.io/badge/caretaker-vmasek-blue.svg)](https://github.com/vmasek)
 
-[![GitHub forks](https://img.shields.io/github/forks/flowup/ngx-swagger-client-generator.svg?style=social&label=Fork)](https://github.com/flowup/ngx-swagger-client-generator/fork)
 [![GitHub stars](https://img.shields.io/github/stars/flowup/ngx-swagger-client-generator.svg?style=social&label=Star)](https://github.com/flowup/ngx-swagger-client-generator)
 [![Twitter URL](https://img.shields.io/twitter/url/http/flowup.cz.svg?style=social)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/ngx-swagger-client-generator)
 
@@ -38,7 +37,7 @@ or
 
 `npm install @flowup/ngx-swagger-client-generator`
 
-- for quick usage create run script in your `package.json` scricpts
+- for quick usage create run script in your `package.json` scripts
 ```
 "scripts": {
   "generate-api-client": "ngx-swag-client -s ./swagger.yaml -o ./output-folder"
@@ -57,7 +56,19 @@ or
 
 - if you are interested on how will the generated client with models look like, take a look in a `example/` folder
 
-# Note:
+```
+output
+ ├─ models
+ │   ├─ some.enum.ts
+ │   ├─ some.model.ts
+ │   │  ...
+ │   └─ another.model.ts
+ ├─ api-client-service.ts
+ └─ index.ts
+```
 
-- inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen)
-- generator based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator)
+-------
+
+*Inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen)*
+
+*Generator based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator)*
