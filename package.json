@@ -1,6 +1,6 @@
 {
   "name": "@flowup/ngx-swagger-client-generator",
-  "version": "2.0.0-beta-1",
+  "version": "2.0.0",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
   "homepage": "https://github.com/flowup/ngx-swagger-client-generator/blob/master/README.md",
   "main": "src/main.ts",
