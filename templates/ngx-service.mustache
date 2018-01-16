@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 import { Inject, Injectable, Optional } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpObserve, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import {
@@ -11,11 +11,9 @@ import {
 } from '.';
 
 interface HttpOptions {
-  headers?: HttpHeaders | { [header: string]: string | string[] },
-  observe?: HttpObserve,
-  params?: HttpParams | { [param: string]: string | string[] },
+  headers?: HttpHeaders,
+  params?: HttpParams,
   reportProgress?: boolean,
-  responseType?: 'arraybuffer' | 'blob' | 'json' | 'text',
   withCredentials?: boolean,
 }
 
