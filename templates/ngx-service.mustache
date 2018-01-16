@@ -1,7 +1,7 @@
 /* tslint:disable */
 
-import { Inject, Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import {
@@ -23,27 +23,26 @@ interface HttpOptions {
 @Injectable()
 export class ApiClientService {
 
+  readonly options: HttpOptions;
   private domain = 'http://localhost:8080';
-  private httpOptions: HttpOptions = {
-    headers: new HttpHeaders(),
-    params: new HttpParams()
-  };
 
   constructor(private http: HttpClient,
               @Optional() @Inject('domain') domain: string,
-              @Optional() @Inject('httpOptions') httpOptions: HttpOptions) {
+              @Optional() @Inject('httpOptions') options: HttpOptions) {
     if (domain) {
       this.domain = domain;
     }
 
-    if (httpOptions) {
-      this.httpOptions = httpOptions;
-    }
+    this.options = {
+      headers: options && options.headers ? options.headers : new HttpHeaders(),
+      params: options && options.params ? options.params : new HttpParams()
+    };
   }
 
 {{#methods}}
-  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{typescriptType}}, {{/parameters}}options: HttpOptions = this.httpOptions): Observable<{{&response}}> {
+  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{typescriptType}}, {{/parameters}}options?: HttpOptions): Observable<{{&response}}> {
     const path = `{{&path}}`;
+    options = {...this.options, ...options};
 
     {{#parameters}}
       {{#isQueryParameter}}
