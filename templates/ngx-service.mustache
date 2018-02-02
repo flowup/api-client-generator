@@ -17,6 +17,8 @@ interface HttpOptions {
   withCredentials?: boolean,
 }
 
+declare var window;
+
 /**
  * Created with ngx-swagger-client-generator (https://github.com/flowup/ngx-swagger-client-generator)
  */
@@ -24,13 +26,16 @@ interface HttpOptions {
 export class ApiClientService {
 
   readonly options: HttpOptions;
-  private domain = 'http://localhost:8080';
+  private domain: string;
 
   constructor(private http: HttpClient,
               @Optional() @Inject('domain') domain: string,
               @Optional() @Inject('httpOptions') options: HttpOptions) {
-    if (domain) {
-      this.domain = domain;
+
+    this.domain = domain;
+    if (!this.domain) {
+      // if no domain is specified emulate a relative path.
+      this.domain = "//"+window.location.hostname + (window.location.port ? ":"+window.location.port : "") + "/";
     }
 
     this.options = {
