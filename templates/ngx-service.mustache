@@ -24,14 +24,15 @@ interface HttpOptions {
 export class ApiClientService {
 
   readonly options: HttpOptions;
-  private domain: string;
+  private domain: string = `{{&domain}}`;
 
   constructor(private http: HttpClient,
               @Optional() @Inject('domain') domain: string,
               @Optional() @Inject('httpOptions') options: HttpOptions) {
 
-    // if no domain is specified emulate a relative path.
-    this.domain = domain || `//${window.location.hostname}${window.location.port ? ":"+window.location.port : ""}/`;
+    if (domain) {
+        this.domain = domain;
+    }
 
     this.options = {
       headers: options && options.headers ? options.headers : new HttpHeaders(),

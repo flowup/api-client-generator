@@ -144,11 +144,11 @@ export class Generator {
   private static generateDomain({schemes, host, basePath}: Swagger): string {
     const protocol =
       schemes && schemes.length > 0
-        ? schemes[0]
-        : 'http';
-    const domain = host ? host : 'localhost';
+        ? `${schemes[0]}://`
+        : '//';
+    const domain = host ? host : "${window.location.hostname}${window.location.port ? ':'+window.location.port : ''}";
     const base = ('/' === basePath ? '' : basePath);
-    return `${protocol}://${domain}${base}`;
+    return `${protocol}${domain}${base}`;
   }
 
   private static generateDefinitions(definitions: { [definitionsName: string]: Schema } = {}): Definition[] {
