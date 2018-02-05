@@ -143,10 +143,11 @@ export class Generator {
 
   private static generateDomain({schemes, host, basePath}: Swagger): string {
 
-    const protocol =
-        host && schemes && schemes.length > 0
-        ? `${schemes[0]}://`
-        : '//';
+    // if the host is defined then try and use a protocol from the swagger file. Otherwise just send
+    // requests using the same protocol as the library was loaded with.
+    const protocol = host && schemes && schemes.length > 0 ? `${schemes[0]}://` : '//';
+
+    // if no host exists in the swagger file default to effectively a relative path.
     const domain = host ? host : "${window.location.hostname}${window.location.port ? ':'+window.location.port : ''}";
     const base = ('/' === basePath || !basePath ? '' : basePath);
     return `${protocol}${domain}${base}`;
