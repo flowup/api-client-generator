@@ -24,11 +24,12 @@ interface HttpOptions {
 export class ApiClientService {
 
   readonly options: HttpOptions;
-  private domain = 'http://localhost:8080';
+  private domain: string = `{{&domain}}`;
 
   constructor(private http: HttpClient,
               @Optional() @Inject('domain') domain: string,
               @Optional() @Inject('httpOptions') options: HttpOptions) {
+
     if (domain) {
       this.domain = domain;
     }
