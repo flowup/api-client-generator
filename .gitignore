@@ -3,6 +3,8 @@ node_modules
 .vs
 .vscode
 obj
-output
 temp
 npm-debug.log
+output*/
+ref*/
+dist/

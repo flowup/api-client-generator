@@ -1,7 +1,5 @@
 /* tslint:disable */
 
 {{#definitions}}
-export { {{name}} } from './models/{{#renderFileName}}{{name}}{{/renderFileName}}';
+export { {{name}} } from './{{#renderFileName}}{{name}}{{/renderFileName}}';
 {{/definitions}}
-
-export { ApiClientService } from './api-client-service';

@@ -4,11 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import {
-  {{#definitions}}
-  {{name}},
-  {{/definitions}}
-} from '.';
+import * as models from './models';
 
 interface HttpOptions {
   headers?: HttpHeaders,
@@ -41,7 +37,7 @@ export class ApiClientService {
   }
 
 {{#methods}}
-  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{typescriptType}}, {{/parameters}}options?: HttpOptions): Observable<{{&response}}> {
+  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{importType}}, {{/parameters}}options?: HttpOptions): Observable<{{&response}}> {
     const path = `{{&path}}`;
     options = {...this.options, ...options};
 

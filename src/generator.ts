@@ -8,6 +8,8 @@ import { promisify } from 'util';
 
 export type RenderFileName = (text: string, render: any) => string;
 
+const BASIC_TS_TYPE_REGEX = /^string|number|integer|boolean|undefined|any|object$/i;
+
 export interface Definition {
   name?: string;
   properties: Parameter[];
@@ -45,6 +47,7 @@ export interface Parameter {
   readonly schema?: any,
   type?: string,
   typescriptType?: TypescriptBasicTypes | string;
+  readonly importType?: string;
 }
 
 export interface Method {
@@ -92,7 +95,7 @@ export class Generator {
   /**
    * Removes duplicate words from type name
    *
-   * example: shipmentShipmentAddress --> ShipmentAddress
+   * example: shipmentShipmentAddress --> shipmentAddress
    *
    * note: minimum is 3 letters otherwise words are not striped
    *
@@ -128,7 +131,7 @@ export class Generator {
   private static typeName(typeName: string = '', isArray: boolean = false): string {
     let type: string;
 
-    if (/^(?:string)|(?:number)|(?:integer)|(?:boolean)|(?:undefined)|(?:any)|(?:object)$/i.test(typeName)) {
+    if (BASIC_TS_TYPE_REGEX.test(typeName)) {
       type = typeName;
     } else {
       type = Generator.camelCase(typeName, false);
@@ -148,7 +151,7 @@ export class Generator {
     const protocol = host && schemes && schemes.length > 0 ? `${schemes[0]}://` : '//';
 
     // if no host exists in the swagger file default to effectively a relative path.
-    const domain = host ? host : "${window.location.hostname}${window.location.port ? ':'+window.location.port : ''}";
+    const domain = host ? host : '${window.location.hostname}${window.location.port ? \':\'+window.location.port : \'\'}';
     const base = ('/' === basePath || !basePath ? '' : basePath);
     return `${protocol}${domain}${base}`;
   }
@@ -251,6 +254,10 @@ export class Generator {
     return 'any';
   }
 
+  private static prefixImportedModels(type: string): string {
+    return BASIC_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
+  }
+
   private static transformParameters(parameters: Parameter[]): Parameter[] {
     return Array.isArray(parameters)
       // todo: required params
@@ -263,6 +270,7 @@ export class Generator {
 
           parameter.camelCaseName = Generator.camelCase(param.name);
           parameter.typescriptType = Generator.toTypescriptType(parameter);
+          parameter.importType = Generator.prefixImportedModels(parameter.typescriptType);
 
           if (param.in === 'body') {
             parameter.isBodyParameter = true;
@@ -284,7 +292,7 @@ export class Generator {
       : [];
   }
 
-  async generateAPIClient() {
+  async generateAPIClient(): Promise<void> {
     /* Create output folder if not already present */
     if (!await promisify(fs.exists)(this.outputPath)) {
       await promisify(fs.mkdir)(this.outputPath);
@@ -294,27 +302,32 @@ export class Generator {
 
     await this.generateClient(mustacheData);
     await this.generateModels(mustacheData);
-    await this.generateExportDefinition(mustacheData);
+    await this.generateModuleExportIndex(mustacheData);
   }
 
-  async generateClient(viewContext: MustacheData) {
+  async generateClient(viewContext: MustacheData): Promise<void> {
     /* generate main API client class */
     const clientTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-service.mustache')).toString();
 
-    let result = Mustache.render(clientTemplate, viewContext);
-    let outfile = join(this.outputPath, 'api-client-service.ts');
+    const result = Mustache.render(clientTemplate, viewContext);
+    const outfile = join(this.outputPath, 'api-client-service.ts');
 
     await promisify(fs.writeFile)(outfile, result, 'utf-8');
   }
 
-  async generateModels(viewContext: MustacheData) {
-    let outputDir = join(this.outputPath, 'models');
+  async generateModels(viewContext: MustacheData): Promise<void> {
+    const outputDir = join(this.outputPath, 'models');
+    const outIndexFile = join(outputDir, '/index.ts');
 
     const modelTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-model.mustache')).toString();
+    const modelExportTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-models-export.mustache')).toString();
 
     if (!await promisify(fs.exists)(outputDir)) {
       await promisify(fs.mkdir)(outputDir);
     }
+
+    // generate model export index here
+    fs.writeFileSync(outIndexFile, Mustache.render(modelExportTemplate, viewContext), 'utf-8');
 
     // generate API models
     viewContext.definitions.forEach((definition) => {
@@ -327,10 +340,10 @@ export class Generator {
     });
   }
 
-  async generateExportDefinition(viewContext: MustacheData) {
-    const exportTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-models-export.mustache')).toString();
-    let result = Mustache.render(exportTemplate, viewContext);
-    let outfile = join(this.outputPath, '/index.ts');
+  async generateModuleExportIndex(viewContext: MustacheData): Promise<void> {
+    const exportTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-module-export.mustache')).toString();
+    const result = Mustache.render(exportTemplate, viewContext);
+    const outfile = join(this.outputPath, '/index.ts');
 
     fs.writeFileSync(outfile, result, 'utf-8');
   }
@@ -359,7 +372,7 @@ export class Generator {
                 isSecure: swagger.security !== undefined || op.security !== undefined,
                 parameters: Generator.transformParameters(op.parameters),
                 hasJsonResponse: true,
-                response: Generator.determineResponseType(op.responses),
+                response: Generator.prefixImportedModels(Generator.determineResponseType(op.responses)),
               })
             )
         )),
