@@ -1,30 +1,26 @@
 /* tslint:disable */
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
+import { HttpOptions } from './';
 import * as models from './models';
 
-interface HttpOptions {
-  headers?: HttpHeaders,
-  params?: HttpParams,
-  reportProgress?: boolean,
-  withCredentials?: boolean,
-}
+export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
+export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
 
 /**
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
-export class ApiClientService {
+export class APIClient {
 
   readonly options: HttpOptions;
   private domain: string = `{{&domain}}`;
 
   constructor(private http: HttpClient,
-              @Optional() @Inject('domain') domain: string,
-              @Optional() @Inject('httpOptions') options: HttpOptions) {
+              @Optional() @Inject(USE_DOMAIN) domain: string,
+              @Optional() @Inject(USE_HTTP_OPTIONS) options: HttpOptions) {
 
     if (domain) {
       this.domain = domain;

@@ -62,8 +62,9 @@ output
  │   ├─ some.enum.ts
  │   ├─ some.model.ts
  │   │  ...
- │   └─ another.model.ts
- ├─ api-client-service.ts
+ │   ├─ another.model.ts
+ │   └─ index.ts
+ ├─ api-client.service.ts
  └─ index.ts
 ```
 

@@ -309,7 +309,7 @@ export class Generator {
     const clientTemplate = (await promisify(fs.readFile)(__dirname + '/../templates/ngx-service.mustache')).toString();
 
     const result = Mustache.render(clientTemplate, viewContext);
-    const outfile = join(this.outputPath, 'api-client-service.ts');
+    const outfile = join(this.outputPath, 'api-client.service.ts');
 
     await promisify(fs.writeFile)(outfile, result, 'utf-8');
   }
