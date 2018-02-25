@@ -165,7 +165,6 @@ export class Generator {
           name: Generator.typeName(defVal),
           properties: defIn.enum.map((val) => ({
             name: val.toString(),
-            camelCaseName: Generator.camelCase(val.toString())
           })),
           isEnum: true,
           refs: [],
