@@ -1,14 +1,14 @@
-[![npm](https://img.shields.io/npm/v/%40flowup/ngx-swagger-client-generator.svg)](https://www.npmjs.com/package/@flowup/ngx-swagger-client-generator)
-[![npm](https://img.shields.io/npm/l/%40flowup/ngx-swagger-client-generator.svg)](https://www.npmjs.com/package/@flowup/ngx-swagger-client-generator)
-[![npm](https://img.shields.io/npm/dm/%40flowup/ngx-swagger-client-generator.svg)](https://www.npmjs.com/package/@flowup/ngx-swagger-client-generator)
+[![npm](https://img.shields.io/npm/v/%40flowup/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+[![npm](https://img.shields.io/npm/l/%40flowup/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+[![npm](https://img.shields.io/npm/dm/%40flowup/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
 
 [![Caretaker](https://img.shields.io/badge/caretaker-vmasek-blue.svg)](https://github.com/vmasek)
 
-[![GitHub stars](https://img.shields.io/github/stars/flowup/ngx-swagger-client-generator.svg?style=social&label=Star)](https://github.com/flowup/ngx-swagger-client-generator)
-[![Twitter URL](https://img.shields.io/twitter/url/http/flowup.cz.svg?style=social)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/ngx-swagger-client-generator)
+[![GitHub stars](https://img.shields.io/github/stars/flowup/api-client-generator.svg?style=social&label=Star)](https://github.com/flowup/api-client-generator)
+[![Twitter URL](https://img.shields.io/twitter/url/http/flowup.cz.svg?style=social)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/api-client-generator)
 
-# ngx-swagger-client-generator
-Angular REST API client generator from Swagger YAML or JSON file with camel case settigs
+# api-client-generator
+Angular REST API client generator from Swagger YAML or JSON file with camel case settings
 
 # Description
 This package generates a Angular TypeScript classes from a Swagger v2.0 specification file. The code is generated using Mustache templates.
@@ -19,28 +19,28 @@ The generated service class uses new [HttpClient](https://angular.io/guide/http)
 
 ## Global usage:
 
-`[sudo] yarn global add @flowup/ngx-swagger-client-generator`
+`[sudo] yarn global add api-client-generator`
 
 or
 
-`[sudo] npm install -g @flowup/ngx-swagger-client-generator`
+`[sudo] npm install -g api-client-generator`
 
 This command will generate API client described in swagger.json file to ./output folder
 
-`ngx-swag-client -s ./path/to/swagger.json -o ./output`
+`api-client-generator -s ./path/to/swagger.json -o ./output`
 
 ## Local usage
 
-`yarn add @flowup/ngx-swagger-client-generator`
+`yarn add api-client-generator`
 
 or
 
-`npm install @flowup/ngx-swagger-client-generator`
+`npm install api-client-generator`
 
 - for quick usage create run script in your `package.json` scripts
 ```
 "scripts": {
-  "generate-api-client": "ngx-swag-client -s ./swagger.yaml -o ./output-folder"
+  "generate-api-client": "api-client-generator -s ./swagger.yaml -o ./output-folder"
 },
 ```
 - then just run

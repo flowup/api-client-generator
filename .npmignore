@@ -1,6 +1,6 @@
-src/
-output/
-output_reference/
+src/*
+output*/
+ref*/
 node_modules/
 example/
 .gitignore
