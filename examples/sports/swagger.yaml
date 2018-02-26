@@ -1,0 +1,2061 @@
+swagger: '2.0'
+info:
+  title: sports
+  version: "1.0.1"
+host: apisports.entradas.com
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+definitions:
+  Period:
+    description: A period of time defined by two dates (date & time)
+    properties:
+      startDate:
+        type: string
+        format: date-time
+      endDate:
+        type: string
+        format: date-time
+    required:
+      - startDate
+      - endDate
+    type: object
+  PromotionType:
+    description: Promotion type
+    enum:
+      - VOUCHER
+      - DIRECT
+      - CARNETJOVEN
+      - LAVANGUARDIA
+    type: string
+  PromotionDiscountType:
+    description: Promotion discount type
+    enum:
+      - PERCENT
+      - CONSTANT
+    type: string
+  Promotion:
+    description: Promotion
+    properties:
+      code:
+        type: string
+      type:
+        $ref: '#/definitions/PromotionType'
+      description:
+        type: string
+      period:
+        $ref: '#/definitions/Period'
+      discountType:
+        $ref: '#/definitions/PromotionDiscountType'
+      discountValue:
+        type: number
+      minPrice:
+        type: number
+      maxPrice:
+        type: number
+      minTickets:
+        type: integer
+      maxTickets:
+        type: integer
+      zoneList:
+        type: array
+        items:
+          $ref: '#/definitions/Zone'
+  AdyenInfo:
+    description: Information to access Adyen skin for payment
+    properties:
+      urlService:
+        type: string
+      merchantReference:
+        type: string
+      amount:
+        type: string
+      currencyCode:
+        type: string
+      date:
+        type: string
+      skin:
+        type: string
+      merchant:
+        type: string
+      locale:
+        type: string
+      reference:
+        type: string
+      sessionValidity:
+        type: string
+      signature:
+        type: string
+      countryCode:
+        type: string
+      shopperEmail:
+        type: string
+      shopperReference:
+        type: string
+    required:
+      - urlService
+      - merchantReference
+      - amount
+      - currencyCode
+      - date
+      - skin
+      - merchant
+      - locale
+      - reference
+      - sessionValidity
+      - signature
+      - countryCode
+      - shopperEmail
+      - shopperReference
+    type: object
+  TransactionalBuy:
+    description: Transaction
+    properties:
+      purchaseId:
+        type: string
+      purchaseDate:
+        type: string
+        format: date-time
+      totalPrice:
+        type: number
+      generalTickets:
+        type: array
+        items:
+          $ref: '#/definitions/Ticket'
+      memberTickets:
+        type: array
+        items:
+          $ref: '#/definitions/MemberTicket'
+    required:
+      - purchaseId
+      - purchaseDate
+      - totalPrice
+      - generalTickets
+      - memberTickets
+    type: object
+  Seat:
+    description: Seat belonging to a zone
+    properties:
+      code:
+        type: string
+      zoneCode:
+        type: string
+      rowName:
+        type: string
+      seatName:
+        type: string
+      rowGraph:
+        type: string
+      seatGraph:
+        type: string
+      gate:
+        type: string
+      vomitory:
+        type: string
+      price:
+        type: number
+      state:
+        type: string
+    required:
+      - code
+      - zoneCode
+      - rowName
+      - seatName
+      - rowGraph
+      - seatGraph
+      - gate
+      - vomitory
+      - price
+      - state
+    type: object
+  IncludedServices:
+    description: Services included in VIP Zones
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      location:
+        type: string
+      characteristics:
+        type: string
+      lang:
+        type: string
+    required:
+      - name
+      - description
+      - location
+      - characteristics
+      - lang
+    type: object
+  Team:
+    description: A team belonging to a club
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+      clubCode:
+        type: string
+      sportsName:
+        type: string
+    required:
+      - code
+      - name
+      - clubCode
+      - sportsName
+    type: object
+  Club:
+    description: A club
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+      teams:
+        type: array
+        items:
+          $ref: '#/definitions/Team'
+    required:
+      - code
+      - name
+      - teams
+    type: object
+  Competition:
+    description: The competition that any event belongs to
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      sport:
+        type: string
+    required:
+      - id
+      - name
+      - sport
+    type: object
+  Collective:
+    description: The collective any user belongs to
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+    required:
+      - id
+      - name
+    type: object
+  SalePeriod:
+    description: The period an specific collective can buy
+    properties:
+      period:
+        $ref: '#/definitions/Period'
+      collective:
+        $ref: '#/definitions/Collective'
+    required:
+      - period
+      - collective
+    type: object
+  PrintingMedia:
+    description: The printing media a ticket can be printed
+    enum:
+      - PAH
+      - PASSBOOK
+    type: string
+  PrintingMediaPeriod:
+    description: The period a ticket can be printed using a printing media
+    properties:
+      printingMedia:
+        $ref: '#/definitions/PrintingMedia'
+      period:
+        $ref: '#/definitions/Period'
+    required:
+      - printingMedia
+      - period
+    type: object
+  Event:
+    description: Event for selling
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+      competitionName:
+        type: string
+      venueName:
+        type: string
+      eventDate:
+        type: string
+        format: date-time
+      isDateConfirm:
+        type: boolean
+      onSale:
+        type: boolean
+    required:
+      - code
+      - name
+      - competitionName
+      - venueName
+      - eventDate
+      - isDateConfirm
+      - onSale
+    type: object
+  FullEvent:
+    description: Full event for selling
+    properties:
+      event:
+        $ref: '#/definitions/Event'
+      venue:
+        $ref: '#/definitions/Venue'
+      round:
+        type: string
+      numbered:
+        type: boolean
+      maxTickets:
+        type: number
+      maxFriendTickets:
+        type: number
+      maxDiscountOnFriendTickets:
+        type: number
+      printingMediaPeriods:
+        type: array
+        items:
+          $ref: '#/definitions/PrintingMediaPeriod'
+      salePeriods:
+        type: array
+        items:
+          $ref: '#/definitions/SalePeriod'
+    required:
+      - event
+      - venue
+      - round
+      - numbered
+      - maxTickets
+      - maxFriendTickets
+      - maxDiscountOnFriendTickets
+      - printingMediaPeriods
+      - salePeriods
+    type: object
+  Venue:
+    description: A venue where events are held
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+      address:
+        type: string
+      city:
+        type: string
+      province:
+        type: string
+      country:
+        type: string
+    required:
+      - code
+      - name
+      - address
+      - city
+      - province
+      - country
+    type: object
+  Zone:
+    description: Zone belonging to a venue
+    properties:
+      code:
+        type: string
+      venueCode:
+        type: string
+      description:
+        type: string
+      freeSeats:
+        type: integer
+      isVip:
+        type: boolean
+      priceType:
+        type: integer
+      price:
+        type: number
+      isSmoker:
+        type: boolean
+      isVisibilityReduced:
+        type: boolean
+      isAccesible:
+        type: boolean
+      isNumbered:
+        type: boolean
+      hasPromotion:
+        type: boolean
+      includedServices:
+        type: array
+        items:
+          $ref: '#/definitions/IncludedServices'
+      images:
+        type: array
+        items:
+          type: string
+    required:
+      - code
+      - venueCode
+      - description
+      - freeSeats
+      - isVip
+      - priceType
+      - price
+      - isSmoker
+      - isVisibilityReduced
+      - isAccesible
+      - isNumbered
+      - hasPromotion
+    type: object
+  CustomerField:
+    description: User data form field
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+      type:
+        type: string
+      required:
+        type: boolean
+      regexValidation:
+        type: string
+    required:
+      - name
+      - value
+      - type
+      - required
+      - regexValidation
+    type: object
+  CustomerFieldValidator:
+    description: Info for user data form field
+    properties:
+      field:
+        $ref: '#/definitions/CustomerField'
+      type:
+        type: string
+      required:
+        type: boolean
+      regexValidation:
+        type: string
+    required:
+      - field
+      - type
+      - required
+      - regexValidation
+    type: object
+  CustomerFieldError:
+    description: Validating user data form field error
+    properties:
+      field:
+        $ref: '#/definitions/CustomerField'
+      errorDesc:
+        type: string
+      lang:
+        type: string
+    required:
+      - field
+      - errorDesc
+      - lang
+    type: object
+  Customer:
+    description: List of user data form fields
+    properties:
+      collective:
+        $ref: '#/definitions/Collective'
+      customerFields:
+        type: array
+        items:
+          $ref: '#/definitions/CustomerField'
+    required:
+      - collective
+      - customerFields
+    type: object
+  CustomerValidator:
+    description: List of info for user data form fields
+    properties:
+      customerFieldValidators:
+        type: array
+        items:
+          $ref: '#/definitions/CustomerFieldValidator'
+    required:
+      - customerFieldValidators
+    type: object
+  PurchaseUserData:
+    description: User data info about all users from a purchase
+    properties:
+      customer:
+        $ref: '#/definitions/Customer'
+      companions:
+        properties:
+          customes:
+            type: array
+            items:
+              $ref: '#/definitions/Customer'
+        required:
+          - customes
+        type: object
+    required:
+      - customer
+      - companions
+    type: object
+  UserDataFormInfo:
+    description: Complete user data fields in form
+    properties:
+      customer:
+        $ref: '#/definitions/CustomerValidator'
+      companions:
+        properties:
+          customerValidators:
+            type: array
+            items:
+              $ref: '#/definitions/CustomerValidator'
+        required:
+          - customerValidators
+        type: object
+    required:
+      - customer
+      - companions
+    type: object
+  Error:
+    description: Information about the error of an operation
+    properties:
+      errorCode:
+        type: string
+      errorDesc:
+        type: string
+    required:
+      - errorCode
+      - errorDesc
+    type: object
+  Member:
+    description: Member of any collective of a club
+    properties:
+      user:
+        type: string
+      pin:
+        type: string
+      collective:
+        $ref: '#/definitions/Collective'
+    required:
+      - user
+      - pin
+      - collective
+    type: object
+  Ticket:
+    description: Ticket
+    properties:
+      id:
+        type: number
+      seat:
+        $ref: '#/definitions/Seat'
+      barCode:
+        type: string
+    required:
+      - id
+      - seat
+      - barCode
+    type: object
+  MemberTicket:
+    description: Ticket of any collective of a club
+    properties:
+      ticket:
+        $ref: '#/definitions/Ticket'
+      member:
+        $ref: '#/definitions/Member'
+    required:
+      - ticket
+      - member
+    type: object
+  BookingStatus:
+    description: Status of a booking
+    enum:
+      - NEW
+      - PREBOOKED
+      - WITHDRAW
+      - TIMEOUT
+      - CONFIRMATION_NOT_SENT
+      - CONFIRMED
+      - CANCELLATION_REQUESTED
+      - CANCELLED_CLUB_CONFIRMED
+      - CANCELLED_NO_CLUB_CONFIRMED
+      - ERROR
+    type: string
+  PaymentStatus:
+    description: Status of a payment
+    properties:
+      status:
+        enum:
+          - IN_PROGRESS
+          - AUTHORISED
+          - REFUSED
+          - CANCELLED
+          - PENDING
+          - ERROR
+          - SYSTEM_REFUNDED
+          - TIMEOUT
+          - REFUNDED_CLUB_CONFIRMED
+          - REFUNDED_NO_CLUB_CONFIRMED
+          - NOT_APPLICABLE
+          - AGENCY_PAYMENT
+        type: string
+      description:
+        type: string
+    required:
+      - status
+      - description
+    type: object
+paths:
+  '/events':
+    get:
+      operationId: GET_events
+      summary: Gets all events currently on sale.
+      responses:
+        '200':
+          description: 'Gets all events currently on sale'
+          schema:
+            properties:
+              events:
+                type: array
+                items:
+                  $ref: '#/definitions/Event'
+            required:
+              - events
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - type: string
+          in: query
+          name: name
+          required: false
+          description: If is present, only events with this name are returned
+        - type: string
+          in: query
+          name: competitionName
+          required: false
+          description: If is present, only events belonging this competition are returned
+        - type: string
+          in: query
+          name: clubCode
+          required: false
+          description: If is present, only events belonging this club are returned
+        - type: string
+          in: query
+          name: clubCode
+          required: false
+          description: If is present, only events belonging this team are returned
+        - type: string
+          in: query
+          name: city
+          required: false
+          description: If is present, only events helded on this city are returned
+#  '/event/findByCompetition':
+#    get:
+#      operationId: GET_events-competitionName
+#      summary: Gets all events, currently on sale, belonging to a certain competition.
+#      responses:
+#        '200':
+#          description: ''
+#          schema:
+#            properties:
+#              events:
+#                type: array
+#                items:
+#                  $ref: '#/definitions/Event'
+#            required:
+#              - events
+#        '500':
+#          description: ''
+#          schema:
+#            properties:
+#              error:
+#                $ref: '#/definitions/Error'
+#            required:
+#              - error
+#    parameters:
+#      - type: string
+#        in: path
+#        name: competitionName
+#        required: true
+#  '/event/findByName':
+#    get:
+#      operationId: GET_event-findByName-name
+#      summary: Gets all events, currently on sale, whose name matches the parameter.
+#      responses:
+#        '200':
+#          description: ''
+#          schema:
+#            properties:
+#              events:
+#                type: array
+#                items:
+#                  $ref: '#/definitions/Event'
+#            required:
+#              - events
+#        '500':
+#          description: ''
+#          schema:
+#            properties:
+#              error:
+#                $ref: '#/definitions/Error'
+#            required:
+#              - error
+#    parameters:
+#      - type: string
+#        in: path
+#        name: name
+#        required: true
+#  '/event/findByClub/{clubCode}':
+#    get:
+#      operationId: GET_event-findByClub-clubCode
+#      summary: Gets all events, currently on sale, from a certain club.
+#      responses:
+#        '200':
+#          description: ''
+#          schema:
+#            properties:
+#              events:
+#                type: array
+#                items:
+#                  $ref: '#/definitions/Event'
+#            required:
+#              - events
+#        '500':
+#          description: ''
+#          schema:
+#            properties:
+#              error:
+#                $ref: '#/definitions/Error'
+#            required:
+#              - error
+#    parameters:
+#      - type: string
+#        in: path
+#        name: clubCode
+#        required: true
+#  '/event/findByTeam/{teamCode}':
+#    get:
+#      operationId: GET_event-findByTeam-teamCode
+#      summary: Gets all events, currently on sale, from a certain team.
+#      responses:
+#        '200':
+#          description: ''
+#          schema:
+#            properties:
+#              events:
+#                type: array
+#                items:
+#                  $ref: '#/definitions/Event'
+#            required:
+#              - events
+#        '500':
+#          description: ''
+#          schema:
+#            properties:
+#              error:
+#                $ref: '#/definitions/Error'
+#            required:
+#              - error
+#    parameters:
+#      - type: string
+#        in: path
+#        name: teamCode
+#        required: true
+#  '/event/findByCity/{city}':
+#    get:
+#      operationId: GET_event-findByCity-city
+#      summary: Gets all events, currently on sale, held in a certain city.
+#      responses:
+#        '200':
+#          description: ''
+#          schema:
+#            properties:
+#              events:
+#                type: array
+#                items:
+#                  $ref: '#/definitions/Event'
+#            required:
+#              - events
+#        '500':
+#          description: ''
+#          schema:
+#            properties:
+#              error:
+#                $ref: '#/definitions/Error'
+#            required:
+#              - error
+#    parameters:
+#      - type: string
+#        in: path
+#        name: city
+#        required: true
+  '/events/{eventId}':
+    get:
+      operationId: GET_events-eventId
+      summary: Gets a specific event by its identifier code. This info will be cached since it should not change.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              event:
+                $ref: '#/definitions/FullEvent'
+            required:
+              - event
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/events/{eventId}/zones':
+    get:
+      operationId: GET_events-eventId-zones
+      summary: Gets a certain event zones info for getting first level availability info. Must take into account possible   restrictions, so the client's IP must be known. It could be cached a few minutes.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              zones:
+                type: array
+                items:
+                  $ref: '#/definitions/Zone'
+            required:
+              - zones
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/events/{eventId}/zones/{zoneId}/availableSeats':
+    get:
+      operationId: GET_events-eventId-zones-zoneId-availableSeats
+      summary: Gets an array with only the available idseats for a certain zone.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              seats:
+                type: array
+                items:
+                  type: string
+            required:
+              - seats
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: zoneId
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/events/{eventId}/promotions':
+    get:
+      operationId: GET_events-eventId-promotions-lang
+      summary: Gets all promotions that can be currently applied to the event for the partner. Only returns the promotions whose end date has not passed.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              promotions:
+                type: array
+                items:
+                  $ref: '#/definitions/Promotion'
+            required:
+              - promotions
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - type: string
+          in: query
+          name: lang
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/events/{eventId}/prebook':
+    post:
+      operationId: POST_events-eventId-prebook
+      summary: Makes a prebook of a certain number of seats. This request could contains a list of members.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              purchaseData:
+                $ref: '#/definitions/TransactionalBuy'
+            required:
+              - purchaseData
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - schema:
+            properties:
+              zoneCode:
+                type: string
+              priceCode:
+                type: string
+              generalTicketsNumber:
+                type: integer
+              collectiveTicketsNumber:
+                type: integer
+              seatsId:
+                type: array
+                items:
+                  type: integer
+            required:
+              - zoneCode
+              - priceCode
+              - generalTicketsNumber
+              - collectiveTicketsNumber
+              - seatsId
+            type: object
+          in: body
+          name: body
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/venues':
+    get:
+      operationId: GET_venues
+      summary: Gets all venues.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              map:
+                type: array
+                items:
+                  $ref: '#/definitions/Venue'
+            required:
+              - map
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+  '/venues/{venueCode}':
+    get:
+      operationId: GET_venues-venueCode
+      summary: Gets a certain venue. The venueCode refers to the UVC code.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              map:
+                $ref: '#/definitions/Venue'
+            required:
+              - map
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - type: string
+          in: path
+          name: venueCode
+          required: true
+  '/venues/{venueCode}/mapSvg':
+    get:
+      operationId: GET_venues-venueCode-mapSvg
+      summary: Gets the map (the content of SVG file) for an event without any availability info. This info will be cached since it should not change.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              map:
+                type: string
+            required:
+              - map
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: venueCode
+        required: true
+  '/venues/{venueCode}/zones/{zoneId}/seats':
+    get:
+      operationId: GET_venues-venueCode-zones-zoneId-seats
+      summary: Gets zone info and seats list of a certain zone for an event without any availability info. This info will be cached since it should not change.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              zone:
+                $ref: '#/definitions/Zone'
+              seats:
+                type: array
+                items:
+                  $ref: '#/definitions/Seat'
+            required:
+              - zone
+              - seats
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: zoneId
+        required: true
+      - type: string
+        in: path
+        name: venueCode
+        required: true
+  '/promotions/{promotionCode}':
+    get:
+      operationId: GET_promotions-promotionCode
+      summary: Gets a certain promotion.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              promotion:
+                $ref: '#/definitions/Promotion'
+            required:
+              - promotion
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: promotionCode
+        required: true
+  '/promotions/{promotionCode}/validate':
+    post:
+      operationId: POST_promotions-promotionCode-validate
+      summary: Validates a code for a specific promotion to be applied.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              result:
+                type: string
+            required:
+              - result
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - schema:
+            properties:
+              code:
+                type: string
+            required:
+              - code
+            type: object
+          in: body
+          name: body
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: promotionCode
+        required: true
+  '/promotions/{promotionCode}/apply':
+    post:
+      operationId: POST_promotions-promotionCode-apply
+      summary: Validates a code for a specific promotion to be applied and binds the promotion with a certain booking identified by its shopId. This should be used when the validation is produced after seats selection.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              result:
+                type: boolean
+            required:
+              - result
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - schema:
+            properties:
+              code:
+                type: string
+              purchaseData:
+                $ref: '#/definitions/TransactionalBuy'
+            required:
+              - code
+              - purchaseData
+            type: object
+          in: body
+          name: body
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: promotionCode
+        required: true
+  '/promotions/{promotionCode}/applyByHash':
+    post:
+      operationId: POST_promotions-promotionCode-applyByHash
+      summary: Applies a promotion previously validated using the hash returned by apply method.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              result:
+                type: boolean
+            required:
+              - result
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - schema:
+            properties:
+              hash:
+                type: string
+              code:
+                type: string
+              purchaseData:
+                $ref: '#/definitions/TransactionalBuy'
+            required:
+              - hash
+              - code
+              - purchaseData
+            type: object
+          in: body
+          name: body
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: promotionCode
+        required: true
+  '/clubs':
+    get:
+      operationId: GET_clubs
+      summary: Gets the list of all clubs.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              clubs:
+                type: array
+                items:
+                  $ref: '#/definitions/Club'
+            required:
+              - clubs
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+      - type: string
+        in: query
+        name: name
+        required: false
+        description: If is present, only clubs with this name are returned
+#  '/club/findByName/{name}':
+#    get:
+#      operationId: GET_club-findByName-name
+#      summary: Gets a certain club by its name as exists in out database.
+#      responses:
+#        '200':
+#          description: ''
+#          schema:
+#            $ref: '#/definitions/Club'
+#        '500':
+#          description: ''
+#          schema:
+#            properties:
+#              error:
+#                $ref: '#/definitions/Error'
+#            required:
+#              - error
+#    parameters:
+#      - type: string
+#        in: path
+#        name: name
+#        required: true
+  '/clubs/{clubCode}':
+    get:
+      operationId: GET_clubs-clubCode
+      summary: Gets a certain club by its code. This code refers to the ucc code.
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Club'
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: clubCode
+        required: true
+  '/clubs/{clubCode}/member/validate':
+    post:
+      operationId: POST_clubs-clubCode-member-validate
+      summary: Validates the user and pin of a club member belonging a certain collective.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              member:
+                $ref: '#/definitions/Member'
+            required:
+              - member
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - schema:
+            properties:
+              user:
+                type: string
+              pin:
+                type: string
+            required:
+              - user
+              - pin
+            type: object
+          in: body
+          name: body
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: clubCode
+        required: true
+  '/clubs/{clubCode}/generalConditionsInfo':
+    get:
+      operationId: GET_clubs-clubCode-generalConditionsInfo-lang
+      summary: Gets general conditions information for a club.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              text:
+                type: string
+            required:
+              - text
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - type: string
+          in: query
+          name: lang
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: clubCode
+        required: true
+  '/clubs/{clubCode}/privacyInfo':
+    get:
+      operationId: GET_clubs-clubCode-privacyInfo-lang
+      summary: Gets privacy information for a club.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              text:
+                type: string
+            required:
+              - text
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - type: string
+          in: query
+          name: lang
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: clubCode
+        required: true
+  '/clubs/{clubCode}/userDataFormInfo':
+    get:
+      operationId: GET_club-clubCode-userDataFormInfo
+      summary: Gets user data fields required for user registration. It could be cacheable.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              userDataFormInfo:
+                $ref: '#/definitions/UserDataFormInfo'
+            required:
+              - userDataFormInfo
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: clubCode
+        required: true
+  '/teams':
+    get:
+      operationId: GET_teams
+      summary: Gets the list of all teams.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              teams:
+                type: array
+                items:
+                  $ref: '#/definitions/Team'
+            required:
+              - teams
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: query
+        name: name
+        required: false
+        description: If present, only teams with this name are returned
+#  '/team/findByName':
+#    get:
+#      operationId: GET_team-findByName
+#      summary: Gets a certain team by its name.
+#      responses:
+#        '200':
+#          description: ''
+#          schema:
+#            $ref: '#/definitions/Team'
+#        '500':
+#          description: ''
+#          schema:
+#            properties:
+#              error:
+#                $ref: '#/definitions/Error'
+#            required:
+#              - error
+#      parameters:
+#        - type: string
+#          in: query
+#          name: name
+#          required: true
+  '/teams/{teamCode}':
+    get:
+      operationId: GET_teams-teamCode
+      summary: Gets a certain team by its code. This code refers to the ucc code.
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Team'
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: teamCode
+        required: true
+  '/teams/{teamCode}/venueAccessInfo':
+    get:
+      operationId: GET_teams-teamCode-venueAccessInfo-lang
+      summary: Gets acces information for a venue.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              text:
+                type: string
+            required:
+              - text
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - type: string
+          in: query
+          name: lang
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: teamCode
+        required: true
+  '/competitions':
+    get:
+      operationId: GET_competitions-getAll
+      summary: Gets all competitions.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              competitions:
+                type: array
+                items:
+                  $ref: '#/definitions/Competition'
+            required:
+              - competitions
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+  '/booking/{eventId}/getApplicablePromotions/{lang}':
+    post:
+      operationId: POST_booking-eventId-getApplicablePromotions-lang
+      summary: Gets the list of promotions that can be currently applied to the event for the partner and the booking. It will be used when the promotions were consumed in user data page.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              promotions:
+                type: array
+                items:
+                  $ref: '#/definitions/Promotion'
+            required:
+              - promotions
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - schema:
+            properties:
+              purchaseData:
+                $ref: '#/definitions/TransactionalBuy'
+            required:
+              - purchaseData
+            type: object
+          in: body
+          name: body
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: lang
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/booking/{eventId}/userData/{lang}':
+    post:
+      operationId: POST_booking-eventId-userData-lang
+      summary: Sends user data form info.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              bookingLocator:
+                type: string
+            required:
+              - bookingLocator
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - schema:
+            properties:
+              purchaseData:
+                $ref: '#/definitions/TransactionalBuy'
+              userData:
+                $ref: '#/definitions/PurchaseUserData'
+              validationErrors:
+                type: array
+                items:
+                  $ref: '#/definitions/CustomerFieldError'
+            required:
+              - purchaseData
+              - userData
+              - validationErrors
+            type: object
+          in: body
+          name: body
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: lang
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/booking/{eventId}/{purchaseId}/addSeat/{seatId}':
+    post:
+      operationId: POST_booking-eventId-purchaseId-addSeat-seatId
+      summary: Adds a seat to a certain prebook. The web service operation addSeat returns all seats belonging the booking, included seats just added.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              purchaseData:
+                $ref: '#/definitions/TransactionalBuy'
+            required:
+              - purchaseData
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - schema:
+            properties:
+              zoneCode:
+                type: string
+              priceCode:
+                type: string
+              member:
+                $ref: '#/definitions/Member'
+            required:
+              - zoneCode
+              - priceCode
+              - member
+            type: object
+          in: body
+          name: body
+          required: true
+    parameters:
+      - type: string
+        in: path
+        name: seatId
+        required: true
+      - type: string
+        in: path
+        name: purchaseId
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/booking/{eventId}/{purchaseId}/removeSeat/{seatId}':
+    post:
+      operationId: POST_booking-eventId-purchaseId-removeSeat-seatId
+      summary: Removes a seat from a certain prebook.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              purchaseData:
+                $ref: '#/definitions/TransactionalBuy'
+            required:
+              - purchaseData
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: seatId
+        required: true
+      - type: string
+        in: path
+        name: purchaseId
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/booking/{eventId}/{purchaseId}/cancel':
+    post:
+      operationId: POST_booking-eventId-purchaseId-cancel
+      summary: Cancels a booking that is in PREBOOKED state.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              result:
+                type: boolean
+            required:
+              - result
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: purchaseId
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/booking/{eventId}/{purchaseId}/getTickets':
+    get:
+      operationId: GET_booking-bookingLocator-getTickets
+      summary: Gets all tickets belonging a booking.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              tickets:
+                type: array
+                items:
+                  $ref: '#/definitions/Ticket'
+              memberTickets:
+                type: array
+                items:
+                  $ref: '#/definitions/MemberTicket'
+            required:
+              - tickets
+              - memberTickets
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: purchaseId
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/booking/{eventId}/{purchaseId}/confirm':
+    get:
+      operationId: GET_booking-bookingLocator-confirm
+      summary: Confirms a booking.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              result:
+                type: boolean
+            required:
+              - result
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: purchaseId
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/booking/{eventId}/{purchaseId}/status':
+    get:
+      operationId: GET_booking-bookingLocator-status
+      summary: Return the status of a booking.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              result:
+                $ref: '#/definitions/BookingStatus'
+            required:
+              - result
+        '500':
+          description: ''
+          schema:
+            properties:
+              result:
+                $ref: '#/definitions/Error'
+            required:
+              - result
+    parameters:
+      - type: string
+        in: path
+        name: purchaseId
+        required: true
+      - type: string
+        in: path
+        name: eventId
+        required: true
+  '/payments/{locator}/adyenInfo':
+    get:
+      operationId: GET_payments-locator-adyenInfo
+      summary: Gets the info to include inside a hidden form in order to access adyen payment form.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              adyenInfo:
+                $ref: '#/definitions/AdyenInfo'
+            required:
+              - adyenInfo
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+    parameters:
+      - type: string
+        in: path
+        name: locator
+        required: true
+  '/payments/{locator}/paymentStatus':
+    get:
+      operationId: GET_payments-locator-paymentStatus
+      summary: Return the payment status of a booking.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              result:
+                $ref: '#/definitions/PaymentStatus'
+            required:
+              - result
+        '500':
+          description: ''
+          schema:
+            properties:
+              result:
+                $ref: '#/definitions/Error'
+            required:
+              - result
+    parameters:
+      - type: string
+        in: path
+        name: locator
+        required: true
+  '/purchases/{bookingLocator}/{email}/mailText':
+    get:
+      operationId: GET_mails-bookingLocator-email-text
+      summary: Returns the mail text for sending for the idBooking if the email is right. Mail images belongs to ecom domain, and the URL to download PAH and passbook must be a link to partner servers that will invoke our print operations (/pah/{bookingLocator}/{email} and/passbook/{bookingLocator}/{idTicket}/{email}).
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              emailSubject:
+                type: string
+              emailBody:
+                type: string
+            required:
+              - emailSubject
+              - emailBody
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - description: >-
+            The language of the mail text. If this parameter is not provided,
+            the language of the purchase will be used.
+          type: string
+          in: query
+          name: lang
+    parameters:
+      - type: string
+        in: path
+        name: bookingLocator
+        required: true
+      - type: string
+        in: path
+        name: email
+        required: true
+  '/purchases/{bookingLocator}/{email}/sendMail':
+    get:
+      operationId: GET_purchases-bookingLocator-email-sendMail
+      summary: Sends the mail belonging the booking locator in the desired language if the email is right. This method should only be used by ecom, since each partner must send confirmations emails by themselves.
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              result:
+                type: boolean
+            required:
+              - result
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - description: >-
+            The language of the mail that will be sent. If this parameter is not
+            provided, the language of the purchase will be used.
+          type: string
+          in: query
+          name: lang
+    parameters:
+      - type: string
+        in: path
+        name: bookingLocator
+        required: true
+      - type: string
+        in: path
+        name: email
+        required: true
+  '/purchases/{bookingLocator}/{email}/tickets/{idTicket}/printPassbook':
+    get:
+      operationId: GET_purchases-bookingLocator-email-tickets-idTicket-printPassbook
+      summary: Request to download a single ticket in passbook mode.
+      produces: [application/vnd.apple.pkpass,application/json]
+      responses:
+        '200':
+          description: 'A single ticket of the booking in pkpass format (application/vnd.apple.pkpass)'
+          schema:
+            type: file
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - description: >-
+            The language of the ticket. If this parameter is not provided, the
+            language of th purchase the will be used.
+          type: string
+          in: query
+          name: lang
+    parameters:
+      - type: string
+        in: path
+        name: bookingLocator
+        required: true
+      - type: string
+        in: path
+        name: email
+        required: true
+      - type: string
+        in: path
+        name: idTicket
+        required: true
+  '/purchases/{bookingLocator}/{email}/printPah':
+    get:
+      operationId: GET_purchases-bookingLocator-email-printPah
+      summary: Request to download all booking tickets in pdf format.
+      produces: [application/pdf,application/json]
+      responses:
+        '200':
+          description: 'The tickets of the booking in PDF format (application/pdf)'
+          schema:
+            type: file
+        '500':
+          description: ''
+          schema:
+            properties:
+              error:
+                $ref: '#/definitions/Error'
+            required:
+              - error
+      parameters:
+        - description: >-
+            The language of the ticket. If this parameter is not provided, the
+            language of the purchase the will be used.
+          type: string
+          in: query
+          name: lang
+    parameters:
+      - type: string
+        in: path
+        name: bookingLocator
+        required: true
+      - type: string
+        in: path
+        name: email
+        required: true
