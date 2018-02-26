@@ -13,14 +13,15 @@
     "api-client-generator": "./dist/main.js"
   },
   "files": [
-    "LICENSE",
-    "README.md",
-    "dist/main.js",
-    "dist/main.js.map",
     "dist/generator.js",
     "dist/generator.js.map",
+    "dist/main.js",
+    "dist/main.js.map",
+    "LICENSE",
+    "README.md",
     "templates/ngx-model.mustache",
     "templates/ngx-models-export.mustache",
+    "templates/ngx-module-export.mustache",
     "templates/ngx-service.mustache"
   ],
   "bugs": {
