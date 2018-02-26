@@ -17,7 +17,7 @@ The generated service class uses new [HttpClient](https://angular.io/guide/http)
 
 # Installation
 
-## Global usage:
+### Global usage:
 
 `[sudo] yarn global add api-client-generator`
 
@@ -29,7 +29,7 @@ This command will generate API client described in swagger.json file to ./output
 
 `api-client-generator -s ./path/to/swagger.json -o ./output`
 
-## Local usage
+### Local usage
 
 `yarn add api-client-generator`
 
@@ -66,6 +66,50 @@ output
  │   └─ index.ts
  ├─ api-client.service.ts
  └─ index.ts
+```
+
+# How to use generated client
+
+1. import the `APIClientModule` in your `app.module.ts` (main module)
+- domain and configuration should be passed to module imports using `.forRoot` method
+- options and domain are optional
+- when domain is not passed, host property form swagger file is used as default
+  - if host property is not defined `window.href` with current port is used instead
+```typescript
+@NgModule({
+  imports: [
+    APIClientModule.forRoot({
+      domain: 'https://api.url', // or use value defined in environment `environment.apiUrl`
+    }),
+    /* ... other imports */
+  ],
+  /* ... other stuff */
+})
+export class AppModule {
+}
+```
+
+2. use `APIClient` service in your components/services/...
+
+```typescript
+@Component({
+  selector: 'my-component',
+  templateUrl: `
+    <div *ngFor="let user of users$ | async">
+      <p>User name: {{user.name}}</p>
+    </div>
+  `,
+})
+export class MyComponent {
+  
+  users$ = this.api.getUsers();
+
+  constructor(private readonly api: APIClient) {
+    this.api.getSomething().subscribe(
+      (something: Something) => console.log('something', something)
+    );
+  }
+}
 ```
 
 -------
