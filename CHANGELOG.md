@@ -1,3 +1,16 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="3.0.0-alpha.1"></a>
+# [3.0.0-alpha.1](https://github.com/flowup/api-client-generator/compare/3.0.0-alpha.0...3.0.0-alpha.1) (2018-02-26)
+
+
+### Bug Fixes
+
+* module template file ([8f813b6](https://github.com/flowup/api-client-generator/commit/8f813b6))
+
+
 
 <a name="3.0.0-alpha.0"></a>
 # [3.0.0-alpha.0](https://github.com/flowup/api-client-generator/compare/2.1.0...3.0.0-alpha.0) (2018-02-26)
