@@ -5,7 +5,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { APIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
 
 export * from './models';
-export { APIClient } from './models';
+export { APIClient } from './api-client.service';
 
 export interface HttpOptions {
   headers?: HttpHeaders, // provided headers will be used as default for each request
