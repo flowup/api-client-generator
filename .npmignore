@@ -1,8 +1,8 @@
-src/
-output/
-output_reference/
+src/*
+output*/
+ref*/
 node_modules/
-example/
+examples/*
 .gitignore
 .idea
 tsconfig.json

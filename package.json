@@ -1,33 +1,35 @@
 {
-  "name": "@flowup/ngx-swagger-client-generator",
-  "version": "2.0.1",
+  "name": "api-client-generator",
+  "version": "3.0.0-alpha.1",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
-  "homepage": "https://github.com/flowup/ngx-swagger-client-generator/blob/master/README.md",
+  "homepage": "https://github.com/flowup/api-client-generator/blob/master/README.md",
   "main": "src/main.ts",
   "author": {
     "name": "FlowUp",
-    "email": "hello@flowup.cz"
+    "email": "hello@flowup.cz",
+    "url": "https://flowup.cz"
   },
   "bin": {
-    "ngx-swag-client": "./dist/main.js"
+    "api-client-generator": "./dist/main.js"
   },
   "files": [
-    "LICENSE",
-    "README.md",
-    "dist/main.js",
-    "dist/main.js.map",
     "dist/generator.js",
     "dist/generator.js.map",
+    "dist/main.js",
+    "dist/main.js.map",
+    "LICENSE",
+    "README.md",
     "templates/ngx-model.mustache",
     "templates/ngx-models-export.mustache",
+    "templates/ngx-module-export.mustache",
     "templates/ngx-service.mustache"
   ],
   "bugs": {
-    "url": "https://github.com/flowup/ngx-swagger-client-generator/issues"
+    "url": "https://github.com/flowup/api-client-generator/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:flowup/ngx-swagger-client-generator.git"
+    "url": "git@github.com:flowup/api-client-generator.git"
   },
   "keywords": [
     "swagger",
@@ -50,10 +52,11 @@
     "generate": "node ./dist/main.js",
     "build": "rimraf dist && tsc",
     "gen": "ts-node ./src/main.ts",
-    "publish": "npm run build && npm publish --access public"
+    "gen-sports": "rimraf ./examples/sports/api && ts-node ./src/main.ts -s ./examples/sports/swagger.yaml -o ./examples/sports/api",
+    "gen-esquare": "rimraf ./examples/esquare/api && ts-node ./src/main.ts -s ./examples/esquare/swagger.yaml -o ./examples/esquare/api",
+    "release": "npm run build && standard-version --tag-prefix=''"
   },
   "dependencies": {
-    "@types/swagger-parser": "^4.0.2",
     "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",
     "optimist": "^0.6.1",
@@ -64,7 +67,9 @@
     "@types/mustache": "^0.8.30",
     "@types/node": "^9.3.0",
     "@types/optimist": "0.0.29",
+    "@types/swagger-parser": "^4.0.2",
     "rimraf": "^2.5.2",
+    "standard-version": "^4.3.0",
     "ts-node": "^4.1.0",
     "typescript": "^2.6.1"
   }

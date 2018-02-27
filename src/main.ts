@@ -5,7 +5,7 @@ import * as opt from 'optimist';
 import * as fs from 'fs';
 
 let optimist = opt
-  .usage('Usage: ngx-swag-client -s path/to/swagger.[json|yaml]')
+  .usage('Usage: api-client-generator -s path/to/swagger.[json|yaml]')
   .alias('h', 'help')
   .alias('s', 'source')
   .alias('o', 'output')

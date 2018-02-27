@@ -1,34 +1,26 @@
 /* tslint:disable */
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { HttpOptions } from './';
+import * as models from './models';
 
-import {
-  {{#definitions}}
-  {{name}},
-  {{/definitions}}
-} from '.';
-
-interface HttpOptions {
-  headers?: HttpHeaders,
-  params?: HttpParams,
-  reportProgress?: boolean,
-  withCredentials?: boolean,
-}
+export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
+export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
 
 /**
- * Created with ngx-swagger-client-generator (https://github.com/flowup/ngx-swagger-client-generator)
+ * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
-export class ApiClientService {
+export class APIClient {
 
   readonly options: HttpOptions;
   private domain: string = `{{&domain}}`;
 
   constructor(private http: HttpClient,
-              @Optional() @Inject('domain') domain: string,
-              @Optional() @Inject('httpOptions') options: HttpOptions) {
+              @Optional() @Inject(USE_DOMAIN) domain: string,
+              @Optional() @Inject(USE_HTTP_OPTIONS) options: HttpOptions) {
 
     if (domain) {
       this.domain = domain;
@@ -41,7 +33,7 @@ export class ApiClientService {
   }
 
 {{#methods}}
-  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{typescriptType}}, {{/parameters}}options?: HttpOptions): Observable<{{&response}}> {
+  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{importType}}, {{/parameters}}options?: HttpOptions): Observable<{{&response}}> {
     const path = `{{&path}}`;
     options = {...this.options, ...options};
 
@@ -76,17 +68,18 @@ export class ApiClientService {
 
 {{/methods}}
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    if (method === 'GET') {
-      return this.http.get<T>(`${this.domain}${path}`, options);
-    } else if (method === 'PUT') {
-      return this.http.put<T>(`${this.domain}${path}`, body, options);
-    } else if (method === 'POST') {
-      return this.http.post<T>(`${this.domain}${path}`, body, options);
-    } else if (method === 'DELETE') {
-      return this.http.delete<T>(`${this.domain}${path}`, options);
-    } else {
-      console.error('Unsupported request: ' + method);
-      return Observable.throw('Unsupported request: ' + method);
+    switch (method) {
+      case 'GET':
+        return this.http.get<T>(`${this.domain}${path}`, options);
+      case 'PUT':
+        return this.http.put<T>(`${this.domain}${path}`, body, options);
+      case 'POST':
+        return this.http.post<T>(`${this.domain}${path}`, body, options);
+      case 'DELETE':
+        return this.http.delete<T>(`${this.domain}${path}`, options);
+      default:
+        console.error(`Unsupported request: ${method}`);
+        return Observable.throw(`Unsupported request: ${method}`);
     }
   }
 }
