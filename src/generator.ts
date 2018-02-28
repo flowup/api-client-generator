@@ -182,7 +182,7 @@ export class Generator {
               };
 
               if (Array.isArray(propIn.items)) {
-                console.warn('Multiple type arrays are not supported');
+                console.warn('Arrays with type diversity are currently not supported');
                 property.type = 'any';
                 return property;
               }
@@ -242,7 +242,7 @@ export class Generator {
               return Generator.typeName(items.type, true);
             }
           } else {
-            console.warn('Multiple type arrays are not supported');
+            console.warn('Arrays with type diversity are currently not supported, `any[]` will be used instead');
           }
         }
       } else if (responseSchema && responseSchema.$ref) {
@@ -282,7 +282,7 @@ export class Generator {
             parameter.isHeaderParameter = true;
           } else if (param.in === 'formData') {
             parameter.isFormParameter = true; // TODO: currently unsupported
-            console.warn('Path parameters are currently unsupported and will not be generated properly');
+            console.warn(`Form parameters are currently unsupported and will not be generated properly    [ ${param.name} ]`);
           }
 
           return parameter;
