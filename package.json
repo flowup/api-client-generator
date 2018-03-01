@@ -54,6 +54,7 @@
     "gen": "ts-node ./src/main.ts",
     "gen-sports": "rimraf ./examples/sports/api && ts-node ./src/main.ts -s ./examples/sports/swagger.yaml -o ./examples/sports/api",
     "gen-esquare": "rimraf ./examples/esquare/api && ts-node ./src/main.ts -s ./examples/esquare/swagger.yaml -o ./examples/esquare/api",
+    "gen-google-cloud-firestore": "rimraf ./examples/google-cloud-firestore/api && ts-node ./src/main.ts -s ./examples/google-cloud-firestore/swagger.yaml -o ./examples/google-cloud-firestore/api",
     "release": "npm run build && standard-version --tag-prefix=''"
   },
   "dependencies": {
