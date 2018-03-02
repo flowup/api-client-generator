@@ -129,7 +129,7 @@ export class Generator {
   }
 
   private static typeName(typeName: string = '', isArray: boolean = false): string {
-    let type: string;
+    let type: string; // todo: this could be prettyfied with ternary
 
     if (BASIC_TS_TYPE_REGEX.test(typeName)) {
       type = typeName;
@@ -184,6 +184,7 @@ export class Generator {
               if (Array.isArray(propIn.items)) {
                 console.warn('Arrays with type diversity are currently not supported');
                 property.type = 'any';
+
                 return property;
               }
 

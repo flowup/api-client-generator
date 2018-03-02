@@ -54,6 +54,7 @@
     "gen": "ts-node ./src/main.ts",
     "gen-sports": "rimraf ./examples/sports/api && ts-node ./src/main.ts -s ./examples/sports/swagger.yaml -o ./examples/sports/api",
     "gen-esquare": "rimraf ./examples/esquare/api && ts-node ./src/main.ts -s ./examples/esquare/swagger.yaml -o ./examples/esquare/api",
+    "gen-esquare-min": "rimraf ./examples/esquare-min/api && ts-node ./src/main.ts -s ./examples/esquare-min/swagger.yaml -o ./examples/esquare-min/api",
     "gen-google-cloud-firestore": "rimraf ./examples/google-cloud-firestore/api && ts-node ./src/main.ts -s ./examples/google-cloud-firestore/swagger.yaml -o ./examples/google-cloud-firestore/api",
     "release": "npm run build && standard-version --tag-prefix=''"
   },
@@ -72,6 +73,8 @@
     "rimraf": "^2.5.2",
     "standard-version": "^4.3.0",
     "ts-node": "^4.1.0",
-    "typescript": "^2.6.1"
+    "tslint": "^5.9.1",
+    "tslint-immutable": "^4.5.2",
+    "typescript": "^2.7.2"
   }
 }
