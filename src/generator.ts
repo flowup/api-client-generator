@@ -129,13 +129,9 @@ export class Generator {
   }
 
   private static typeName(typeName: string = '', isArray: boolean = false): string {
-    let type: string; // todo: this could be prettyfied with ternary
-
-    if (BASIC_TS_TYPE_REGEX.test(typeName)) {
-      type = typeName;
-    } else {
-      type = Generator.camelCase(typeName, false);
-    }
+    const type = BASIC_TS_TYPE_REGEX.test(typeName)
+      ? typeName
+      : Generator.camelCase(typeName, false);
 
     return `${type}${isArray ? '[]' : ''}`;
   };
@@ -156,77 +152,80 @@ export class Generator {
     return `${protocol}${domain}${base}`;
   }
 
-  private static generateDefinitions(definitions: { [definitionsName: string]: Schema } = {}): Definition[] {
-    return Object.entries(definitions).map(([defVal, defIn]) => {
-      /* service models import */
+  private static parseDefinitions(definitions: { [definitionsName: string]: Schema } = {}): Definition[] {
+    return Object.entries(definitions).map(([key, definition]) =>
+      definition.enum && definition.enum.length !== 0
+        ? Generator.defineEnum(definition.enum, key)
+        : Generator.defineInterface(definition, key)
+    );
+  }
 
-      if (defIn.enum && defIn.enum.length !== 0) {
-        return {
-          name: Generator.typeName(defVal),
-          properties: defIn.enum.map((val) => ({
-            name: val.toString(),
-          })),
-          isEnum: true,
-          refs: [],
-          imports: [],
-          renderFileName: (): RenderFileName => ((text: string, render: any): string => Generator.fileName(render(text), 'enum')),
+  private static defineEnum(enumSchema: Array<string | boolean | number | {}>, definitionKey: string): Definition {
+    return {
+      name: Generator.typeName(definitionKey),
+      properties: enumSchema.map((val) => ({
+        name: val.toString(),
+      })),
+      isEnum: true,
+      imports: [],
+      renderFileName: (): RenderFileName => ((text: string, render: any): string => Generator.fileName(render(text), 'enum')),
+    };
+  }
+
+  private static defineInterface(schema: Schema, definitionKey: string): Definition {
+    const properties: Parameter[] = Object.entries<Schema>(schema.properties || {}).map(
+      ([propVal, propIn]: [string, Schema]) => {
+        let property: Parameter = {
+          name: propVal,
+          isRef: '$ref' in propIn || (propIn.type === 'array' && propIn.items && '$ref' in propIn.items),
+          isArray: propIn.type === 'array',
         };
-      } else {
-        const properties: Parameter[] = Object.entries<Schema>(defIn.properties || {})
-          .map(
-            ([propVal, propIn]: [string, Schema]) => {
-              let property: Parameter = {
-                name: propVal,
-                isRef: '$ref' in propIn || (propIn.type === 'array' && propIn.items && '$ref' in propIn.items),
-                isArray: propIn.type === 'array',
-              };
 
-              if (Array.isArray(propIn.items)) {
-                console.warn('Arrays with type diversity are currently not supported');
-                property.type = 'any';
+        if (Array.isArray(propIn.items)) {
+          console.warn('Arrays with type diversity are currently not supported');
+          property.type = 'any';
 
-                return property;
-              }
+          return property;
+        }
 
-              if (property.isArray) {
-                if (propIn.items && propIn.items.$ref) {
-                  property.type = Generator.typeName(Generator.dereferenceType(propIn.items.$ref));
-                } else if (propIn.items && propIn.items.type) {
-                  property.type = Generator.typeName(propIn.items.type);
-                } else {
-                  property.type = propIn.type;
-                }
-              } else {
-                property.type = Generator.typeName(
-                  propIn.$ref
-                    ? Generator.dereferenceType(propIn.$ref)
-                    : propIn.type
-                );
-              }
+        if (property.isArray) {
+          if (propIn.items && propIn.items.$ref) {
+            property.type = Generator.typeName(Generator.dereferenceType(propIn.items.$ref));
+          } else if (propIn.items && propIn.items.type) {
+            property.type = Generator.typeName(propIn.items.type);
+          } else {
+            property.type = propIn.type;
+          }
+        } else {
+          property.type = Generator.typeName(
+            propIn.$ref
+              ? Generator.dereferenceType(propIn.$ref)
+              : propIn.type
+          );
+        }
 
-              property.typescriptType = Generator.toTypescriptType(property);
+        property.typescriptType = Generator.toTypescriptType(property);
 
-              return property;
-            }
-          )
-          .sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
-        const name = Generator.typeName(defVal);
-
-        return {
-          name: name,
-          properties: properties,
-          imports: properties
-            .filter(({isRef}) => isRef)
-            .map(({type}) => type || '')
-            .filter((type) => type !== name)
-            .sort()
-            // filter duplicate imports
-            .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),
-          isEnum: false,
-          renderFileName: (): RenderFileName => (text: string, render: any): string => Generator.fileName(render(text), 'model'),
-        };
+        return property;
       }
-    });
+    )
+      .sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
+
+    const name = Generator.typeName(definitionKey);
+
+    return {
+      name: name,
+      properties: properties,
+      imports: properties
+        .filter(({isRef}) => isRef)
+        .map(({type}) => type || '')
+        .filter((type) => type !== name)
+        .sort()
+        // filter duplicate imports
+        .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),
+      isEnum: false,
+      renderFileName: (): RenderFileName => (text: string, render: any): string => Generator.fileName(render(text), 'model'),
+    };
   }
 
   private static determineResponseType(responses: { [responseName: string]: Response }): string {
@@ -376,7 +375,7 @@ export class Generator {
               })
             )
         )),
-      definitions: Generator.generateDefinitions(swagger.definitions)
+      definitions: Generator.parseDefinitions(swagger.definitions)
     };
   }
 }
