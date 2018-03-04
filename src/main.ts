@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Generator } from './generator';
+import { generateAPIClient } from './generator';
 import * as opt from 'optimist';
 import * as fs from 'fs';
 
@@ -35,8 +35,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 let sourceFile = argv.source;
-let g = new Generator(sourceFile, outputDir);
 
-g.generateAPIClient()
+generateAPIClient(sourceFile, outputDir)
   .then(() => console.log('Angular API client generated successfully'))
-  .catch((error) => console.error('Error encored during generating', error));
+  .catch((error: Error) => console.error('Error encored during generating', error));
