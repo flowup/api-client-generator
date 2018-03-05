@@ -51,6 +51,7 @@
   "scripts": {
     "generate": "node ./dist/main.js",
     "build": "rimraf dist && tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "gen": "ts-node ./src/main.ts",
     "gen-sports": "rimraf ./examples/sports/api && ts-node ./src/main.ts -s ./examples/sports/swagger.yaml -o ./examples/sports/api",
     "gen-esquare": "rimraf ./examples/esquare/api && ts-node ./src/main.ts -s ./examples/esquare/swagger.yaml -o ./examples/esquare/api",
@@ -70,8 +71,10 @@
     "@types/node": "^9.3.0",
     "@types/optimist": "0.0.29",
     "@types/swagger-parser": "^4.0.2",
+    "@types/swagger-schema-official": "^2.0.9",
     "rimraf": "^2.5.2",
     "standard-version": "^4.3.0",
+    "swagger-schema-official": "^2.0.0-bab6bed",
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "tslint-immutable": "^4.5.2",

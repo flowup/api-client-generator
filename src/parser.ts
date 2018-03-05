@@ -1,5 +1,5 @@
 import { Response, Schema, Spec as Swagger } from 'swagger-schema-official';
-import { Definition, MethodType, MustacheData, Parameter, RenderFileName } from './types';
+import { Definition, MethodType, MustacheData, Parameter, Render, RenderFileName } from './types';
 import { camelCase, dereferenceType, determineDomain, fileName, prefixImportedModels, toTypescriptType, typeName } from './helper';
 
 export function createMustacheViewModel(swagger: Swagger): MustacheData {
@@ -12,7 +12,7 @@ export function createMustacheViewModel(swagger: Swagger): MustacheData {
     methods: [].concat.apply([], Object.entries(swagger.paths)
       .map(
         ([path, api]) => Object.entries(api)
-          .filter(([method,]) => authorizedMethods.indexOf(method.toUpperCase()) !== -1)  // skip unsupported methods
+          .filter(([method, ]) => authorizedMethods.indexOf(method.toUpperCase()) !== -1)  // skip unsupported methods
           .map(
             ([method, op]) => ({
               path: path.replace(/({.*?})/g, '$$$1'),
@@ -31,7 +31,7 @@ export function createMustacheViewModel(swagger: Swagger): MustacheData {
           )
       )),
     definitions: parseDefinitions(swagger.definitions)
-  }
+  };
 }
 
 function parseDefinitions(definitions: { [definitionsName: string]: Schema } = {}): Definition[] {
@@ -42,7 +42,7 @@ function parseDefinitions(definitions: { [definitionsName: string]: Schema } = {
   );
 }
 
-function defineEnum(enumSchema: Array<string | boolean | number | {}>, definitionKey: string): Definition {
+function defineEnum(enumSchema: (string | boolean | number | {})[], definitionKey: string): Definition {
   return {
     name: typeName(definitionKey),
     properties: enumSchema.map((val) => ({
@@ -50,14 +50,14 @@ function defineEnum(enumSchema: Array<string | boolean | number | {}>, definitio
     })),
     isEnum: true,
     imports: [],
-    renderFileName: (): RenderFileName => ((text: string, render: any): string => fileName(render(text), 'enum')),
+    renderFileName: (): RenderFileName => ((text: string, render: Render): string => fileName(render(text), 'enum')),
   };
 }
 
 function defineInterface(schema: Schema, definitionKey: string): Definition {
   const properties: Parameter[] = Object.entries<Schema>(schema.properties || {}).map(
     ([propVal, propIn]: [string, Schema]) => {
-      let property: Parameter = {
+      const property: Parameter = {
         name: propVal,
         isRef: '$ref' in propIn || (propIn.type === 'array' && propIn.items && '$ref' in propIn.items),
         isArray: propIn.type === 'array',
@@ -106,12 +106,12 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
       // filter duplicate imports
       .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),
     isEnum: false,
-    renderFileName: (): RenderFileName => (text: string, render: any): string => fileName(render(text), 'model'),
+    renderFileName: (): RenderFileName => (text: string, render: Render): string => fileName(render(text), 'model'),
   };
 }
 
 function determineResponseType(responses: { [responseName: string]: Response }): string {
-  if (responses['200'] !== undefined) { //TODO: check non-200 response codes
+  if (responses['200'] !== undefined) { // TODO: check non-200 response codes
     const responseSchema = responses['200'].schema;
 
     if (responseSchema && responseSchema.type) {

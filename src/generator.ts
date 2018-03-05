@@ -47,8 +47,8 @@ async function generateModels(viewContext: MustacheData, outputPath: string): Pr
 
   // generate API models
   viewContext.definitions.forEach((definition) => {
-    let result = Mustache.render(modelTemplate, definition);
-    let outfile = join(outputDir, fileName(definition.name, definition.isEnum ? 'enum' : 'model') + '.ts');
+    const result = Mustache.render(modelTemplate, definition);
+    const outfile = join(outputDir, fileName(definition.name, definition.isEnum ? 'enum' : 'model') + '.ts');
 
     recursiveDir(dirname(outfile), () => {
       fs.writeFileSync(outfile, result, 'utf-8');

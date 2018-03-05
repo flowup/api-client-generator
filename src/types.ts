@@ -1,13 +1,14 @@
 import { Spec as Swagger } from 'swagger-schema-official';
 
-export type RenderFileName = (text: string, render: any) => string;
+export type RenderFileName = (text: string, render: Render) => string;
+export type Render = (text: string) => string;
 
 export interface Definition {
   name?: string;
   properties: Parameter[];
   imports: string[];
   isEnum?: boolean;
-  renderFileName?: () => RenderFileName; // generate dash-case file names to templates
+  renderFileName?(): RenderFileName; // generate dash-case file names to templates
 }
 
 export interface MustacheData {
@@ -33,18 +34,18 @@ export interface Parameter {
   readonly isRef?: boolean;
   readonly isQueryParameter?: boolean;
   readonly 'in'?: In;
-  readonly 'enum'?: any[];
+  readonly 'enum'?: (string | boolean | number | {})[];
   readonly items?: Parameter;
-  readonly name?: string,
-  readonly schema?: any,
-  type?: string,
+  readonly name?: string;
+  readonly schema?: any;
+  type?: string;
   typescriptType?: TypescriptBasicTypes | string;
   readonly importType?: string;
 }
 
 export interface Method {
   readonly path?: string;  // path appended to base in method
-  readonly methodName?: any;  // mane of the generated method
+  readonly methodName?: string;  // mane of the generated method
   readonly methodType?: MethodType;  // type of the http method
   readonly summaryLines?: any[];
   readonly isSecure?: boolean;  // currently unused TODO

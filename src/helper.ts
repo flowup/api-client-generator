@@ -3,14 +3,14 @@ import { Spec as Swagger } from 'swagger-schema-official';
 
 const BASIC_TS_TYPE_REGEX = /^string|number|integer|boolean|undefined|any|object$/i;
 
-export function camelCase(text: string = '', lowerFirstLetter = true): string {
+export function camelCase(text: string = '', lowerFirstLetter: boolean = true): string {
   text = removeDuplicateWords(text);
 
   if (/^[A-Z0-9]+$/.test(text) || text === '') {
     return text;
   }
 
-  let camelText = text.split(/[-.]/).map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
+  const camelText = text.split(/[-.]/).map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
 
   return lowerFirstLetter ? `${camelText[0].toLowerCase()}${camelText.substring(1)}` : camelText;
 }
@@ -65,10 +65,8 @@ export function toTypescriptType({type, items}: Parameter): string {
   }
 }
 
-export function typeName(typeName: string = '', isArray: boolean = false): string {
-  const type = BASIC_TS_TYPE_REGEX.test(typeName)
-    ? typeName
-    : camelCase(typeName, false);
+export function typeName(name: string = '', isArray: boolean = false): string {
+  const type = BASIC_TS_TYPE_REGEX.test(name) ? name : camelCase(name, false);
 
   return `${type}${isArray ? '[]' : ''}`;
 }
@@ -88,7 +86,9 @@ export function determineDomain({schemes, host, basePath}: Swagger): string {
   const protocol = host && schemes && schemes.length > 0 ? `${schemes[0]}://` : '//';
 
   // if no host exists in the swagger file use a window location relative path
-  const domain = host ? host : '${window.location.hostname}${window.location.port ? \':\'+window.location.port : \'\'}';
+  const domain = host
+    ? host
+    : '${window.location.hostname}${window.location.port ? \':\'+window.location.port : \'\'}'; /* tslint:disable-line */
   const base = ('/' === basePath || !basePath ? '' : basePath);
   return `${protocol}${domain}${base}`;
 }
