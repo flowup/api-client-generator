@@ -5,7 +5,7 @@ export type Render = (text: string) => string;
 
 export interface Definition {
   name?: string;
-  properties: Parameter[];
+  properties: Property[];
   imports: string[];
   isEnum?: boolean;
   renderFileName?(): RenderFileName; // generate dash-case file names to templates
@@ -24,19 +24,23 @@ export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined'
 export type In = 'body' | 'path' | 'query' | 'modelbinding' | 'header' | 'formData';
 export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
-export interface Parameter {
-  readonly camelCaseName?: string;
-  readonly isArray?: boolean;
+export interface Parameter extends Property {
   readonly isBodyParameter?: boolean;
   readonly isFormParameter?: boolean;
   readonly isHeaderParameter?: boolean;
   readonly isPathParameter?: boolean;
-  readonly isRef?: boolean;
   readonly isQueryParameter?: boolean;
+}
+
+export interface Property {
+  readonly camelCaseName?: string;
+  readonly isArray?: boolean;
+  readonly isRef?: boolean;
   readonly 'in'?: In;
   readonly 'enum'?: (string | boolean | number | {})[];
   readonly items?: Parameter;
   readonly name?: string;
+  readonly $ref?: string;
   readonly schema?: any;
   type?: string;
   typescriptType?: TypescriptBasicTypes | string;

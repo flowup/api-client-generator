@@ -26,7 +26,11 @@ export function dashCase(text: string = ''): string {
  * @returns {string}
  */
 export function dereferenceType(refString: string): string {
-  return refString.replace('#/definitions/', '');
+  if (!refString) {
+    return '';
+  }
+
+  return refString.replace(/#\/(?:definitions|parameters)\//, '');
 }
 
 /**
@@ -43,7 +47,7 @@ export function removeDuplicateWords(text: string): string {
   return text.replace(/^(.{3,})(?=\1)/ig, '');
 }
 
-export function toTypescriptType({type, items}: Parameter): string {
+export function toTypescriptType(type: string | undefined, items: Parameter | undefined): string {
   if (!type) {
     return 'any';
   }
@@ -75,7 +79,7 @@ export function fileName(name: string = '', type: 'model' | 'enum' = 'model'): s
   return `${dashCase(name.replace(/model|enum/i, ''))}.${type}`;
 }
 
-export function prefixImportedModels(type: string): string {
+export function prefixImportedModels(type: string = ''): string {
   return BASIC_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
 }
 

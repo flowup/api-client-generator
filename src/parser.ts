@@ -1,37 +1,41 @@
 import { Response, Schema, Spec as Swagger } from 'swagger-schema-official';
-import { Definition, MethodType, MustacheData, Parameter, Render, RenderFileName } from './types';
+import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName } from './types';
 import { camelCase, dereferenceType, determineDomain, fileName, prefixImportedModels, toTypescriptType, typeName } from './helper';
 
+
 export function createMustacheViewModel(swagger: Swagger): MustacheData {
-  const authorizedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
   return {
     description: swagger.info.description || '',
     isSecure: !!swagger.securityDefinitions,
     swagger: swagger,
     domain: determineDomain(swagger),
-    methods: [].concat.apply([], Object.entries(swagger.paths)
-      .map(
-        ([path, api]) => Object.entries(api)
-          .filter(([method, ]) => authorizedMethods.indexOf(method.toUpperCase()) !== -1)  // skip unsupported methods
-          .map(
-            ([method, op]) => ({
-              path: path.replace(/({.*?})/g, '$$$1'),
-              methodName: camelCase(
-                op.operationId
-                  ? op.operationId
-                  : console.error('Method name could not be determined, operationID is undefined')
-              ),
-              methodType: <MethodType>method.toUpperCase(),
-              summaryLines: op.description ? op.description.split('\n') : [], // description summary is optional
-              isSecure: swagger.security !== undefined || op.security !== undefined,
-              parameters: transformParameters(op.parameters),
-              hasJsonResponse: true,
-              response: prefixImportedModels(determineResponseType(op.responses)),
-            })
-          )
-      )),
+    methods: parseMethods(swagger),
     definitions: parseDefinitions(swagger.definitions)
   };
+}
+
+function parseMethods({paths, security}: Swagger): Method[] {
+  const authorizedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+
+  return [].concat.apply([], Object.entries(paths)
+    .map(([pathName, apiPath]) => Object.entries(apiPath)
+      .filter(([methodType,]) => authorizedMethods.indexOf(methodType.toUpperCase()) !== -1)  // skip unsupported methods
+      .map(([methodType, operation]) => ({
+          path: pathName.replace(/({.*?})/g, '$$$1'),
+          methodName: camelCase(
+            operation.operationId
+              ? operation.operationId
+              : console.error(`Method name could not be determined, path will be used instead of operation id   [ ${pathName} ]`)
+          ),
+          methodType: methodType.toUpperCase() as MethodType,
+          summaryLines: operation.description ? operation.description.split('\n') : [], // description summary is optional
+          isSecure: security !== undefined || operation.security !== undefined,
+          parameters: transformParameters(operation.parameters),
+          hasJsonResponse: true,
+          response: prefixImportedModels(determineResponseType(operation.responses)),
+        })
+      )
+    ));
 }
 
 function parseDefinitions(definitions: { [definitionsName: string]: Schema } = {}): Definition[] {
@@ -50,20 +54,20 @@ function defineEnum(enumSchema: (string | boolean | number | {})[], definitionKe
     })),
     isEnum: true,
     imports: [],
-    renderFileName: (): RenderFileName => ((text: string, render: Render): string => fileName(render(text), 'enum')),
+    renderFileName: (): RenderFileName => (text: string, render: Render): string => fileName(render(text), 'enum'),
   };
 }
 
-function defineInterface(schema: Schema, definitionKey: string): Definition {
-  const properties: Parameter[] = Object.entries<Schema>(schema.properties || {}).map(
-    ([propVal, propIn]: [string, Schema]) => {
-      const property: Parameter = {
-        name: propVal,
-        isRef: '$ref' in propIn || (propIn.type === 'array' && propIn.items && '$ref' in propIn.items),
-        isArray: propIn.type === 'array',
+function parseInterfaceProperties({properties}: Schema = {}): Property[] {
+  return Object.entries<Schema>(properties || {}).map(
+    ([propName, propSchema]: [string, Schema]) => {
+      const property: Property = {
+        name: propName,
+        isRef: '$ref' in propSchema || (propSchema.type === 'array' && propSchema.items && '$ref' in propSchema.items),
+        isArray: propSchema.type === 'array',
       };
 
-      if (Array.isArray(propIn.items)) {
+      if (Array.isArray(propSchema.items)) {
         console.warn('Arrays with type diversity are currently not supported');
         property.type = 'any';
 
@@ -71,28 +75,30 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
       }
 
       if (property.isArray) {
-        if (propIn.items && propIn.items.$ref) {
-          property.type = typeName(dereferenceType(propIn.items.$ref));
-        } else if (propIn.items && propIn.items.type) {
-          property.type = typeName(propIn.items.type);
+        if (propSchema.items && propSchema.items.$ref) {
+          property.type = typeName(dereferenceType(propSchema.items.$ref));
+        } else if (propSchema.items && propSchema.items.type) {
+          property.type = typeName(propSchema.items.type);
         } else {
-          property.type = propIn.type;
+          property.type = propSchema.type;
         }
       } else {
         property.type = typeName(
-          propIn.$ref
-            ? dereferenceType(propIn.$ref)
-            : propIn.type
+          propSchema.$ref
+            ? dereferenceType(propSchema.$ref)
+            : propSchema.type
         );
       }
 
-      property.typescriptType = toTypescriptType(property);
+      property.typescriptType = toTypescriptType(property.type, property.items);
 
       return property;
     }
-  )
-    .sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
+  ).sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
+}
 
+function defineInterface(schema: Schema, definitionKey: string): Definition {
+  const properties: Property[] = parseInterfaceProperties(schema.properties);
   const name = typeName(definitionKey);
 
   return {
@@ -139,31 +145,28 @@ function transformParameters(parameters: Parameter[]): Parameter[] {
   return Array.isArray(parameters)
     // todo: required params
     ? parameters.map((param) => {
-        const parameter = {...param};
+        console.log('==>', param);
 
-        if ('schema' in param && typeof param.schema.$ref === 'string') {
-          parameter.type = camelCase(dereferenceType(param.schema.$ref));
-        }
+        const typescriptType = toTypescriptType(
+          dereferenceType(param.$ref || ('schema' in param && param.schema.$ref)) || param.type,
+          param.items
+        );
+        const camelCaseName = camelCase(param.name ? param.name : typescriptType); // if name is not defined, use type name
 
-        parameter.camelCaseName = camelCase(param.name);
-        parameter.typescriptType = toTypescriptType(parameter);
-        parameter.importType = prefixImportedModels(parameter.typescriptType);
+        return {
+          ...param,
 
-        if (param.in === 'body') {
-          parameter.isBodyParameter = true;
-        } else if (param.in === 'path') {
-          // param is included in method path string interpolation
-          parameter.isPathParameter = true;
-        } else if (param.in === 'query' || param.in === 'modelbinding') {
-          parameter.isQueryParameter = true;
-        } else if (param.in === 'header') {
-          parameter.isHeaderParameter = true;
-        } else if (param.in === 'formData') {
-          parameter.isFormParameter = true; // TODO: currently unsupported
-          console.warn(`Form parameters are currently unsupported and will not be generated properly    [ ${param.name} ]`);
-        }
-
-        return parameter;
+          camelCaseName,
+          importType: prefixImportedModels(typescriptType),
+          isBodyParameter: param.in === 'body',
+          isFormParameter: param.in === 'formData'
+            ? console.warn(`Form parameters are currently unsupported and will not be generated properly  [ ${param.name} ]`) || true
+            : false,
+          isHeaderParameter: param.in === 'header',
+          isPathParameter: param.in === 'path',
+          isQueryParameter: param.in === 'query' || param.in === 'modelbinding',
+          typescriptType,
+        };
       }
     )
     : [];
