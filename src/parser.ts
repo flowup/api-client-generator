@@ -2,6 +2,17 @@ import { BodyParameter, QueryParameter, Response, Schema, Spec as Swagger } from
 import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName } from './types';
 import { camelCase, dereferenceType, determineDomain, fileName, prefixImportedModels, toTypescriptType, typeName } from './helper';
 
+interface Parameters {
+  [parameterName: string]: BodyParameter | QueryParameter
+}
+
+interface ExtendedParameters {
+  [parameterName: string]: (BodyParameter | QueryParameter) & { 'enum': any }
+}
+
+interface Definitions {
+  [definitionsName: string]: Schema
+}
 
 export function createMustacheViewModel(swagger: Swagger): MustacheData {
   return {
@@ -39,16 +50,16 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
 }
 
 function parseDefinitions(
-  definitions: { [definitionsName: string]: Schema } = {},
-  parameters: { [parameterName: string]: BodyParameter | QueryParameter } = {},
+  definitions: Definitions = {},
+  parameters: Parameters = {},
 ): Definition[] {
   return Object.entries({
     ...definitions,
-    ...(parameters as { [key: string]: Schema }),  // type cast because of wrong typing in BaseParameter (should contain enum property)
+    ...(parameters as ExtendedParameters),  // type cast because of wrong typing in BaseParameter (should contain enum property)
   }).map(([key, definition]) =>
     definition.enum && definition.enum.length !== 0
       ? defineEnum(definition.enum, key)
-      : defineInterface(definition, key)
+      : defineInterface(('schema' in definition ? definition.schema : definition) || {}, key)
   );
 }
 
@@ -149,7 +160,7 @@ function determineResponseType(responses: { [responseName: string]: Response }):
 
 function transformParameters(
   parameters: Parameter[],
-  swaggerParams: { [parameterName: string]: BodyParameter | QueryParameter }
+  swaggerParams: Parameters
 ): Parameter[] {
   return Array.isArray(parameters)
     // todo: required params

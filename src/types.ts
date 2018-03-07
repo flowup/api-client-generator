@@ -1,4 +1,4 @@
-import { Spec as Swagger } from 'swagger-schema-official';
+import { Schema, Spec as Swagger } from 'swagger-schema-official';
 
 export type RenderFileName = (text: string, render: Render) => string;
 export type Render = (text: string) => string;
@@ -41,7 +41,7 @@ export interface Property {
   readonly items?: Parameter;
   readonly name?: string;
   readonly $ref?: string;
-  readonly schema?: any;
+  readonly schema?: Schema;
   type?: string;
   typescriptType?: TypescriptBasicTypes | string;
   readonly importType?: string;
@@ -51,7 +51,7 @@ export interface Method {
   readonly path?: string;  // path appended to base in method
   readonly methodName?: string;  // mane of the generated method
   readonly methodType?: MethodType;  // type of the http method
-  readonly summaryLines?: any[];
+  readonly summaryLines?: string[];
   readonly isSecure?: boolean;  // currently unused TODO
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
