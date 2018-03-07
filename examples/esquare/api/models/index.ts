@@ -50,3 +50,7 @@ export { PasswordVerificationPolicies } from './password-verification-policies.m
 export { PasswordCreationPolicies } from './password-creation-policies.model';
 export { OtherSecuritySettings } from './other-security-settings.model';
 export { NotificationEditableListItem } from './notification-editable-list-item.model';
+export { Period } from './period.enum';
+export { IssueStatus } from './issue-status.enum';
+export { ImportStatus } from './import-status.enum';
+export { RoleUpdateDetails } from './role-update-details.model';
