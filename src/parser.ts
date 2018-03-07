@@ -58,14 +58,16 @@ function defineEnum(enumSchema: (string | boolean | number | {})[], definitionKe
   };
 }
 
-function parseInterfaceProperties({properties}: Schema = {}): Property[] {
-  return Object.entries<Schema>(properties || {}).map(
+function parseInterfaceProperties(properties: {[propertyName: string]: Schema} = {}): Property[] {
+  return Object.entries<Schema>(properties).map(
     ([propName, propSchema]: [string, Schema]) => {
       const property: Property = {
         name: propName,
         isRef: '$ref' in propSchema || (propSchema.type === 'array' && propSchema.items && '$ref' in propSchema.items),
         isArray: propSchema.type === 'array',
       };
+
+      // console.log('prop', property.name);
 
       if (Array.isArray(propSchema.items)) {
         console.warn('Arrays with type diversity are currently not supported');
@@ -98,8 +100,8 @@ function parseInterfaceProperties({properties}: Schema = {}): Property[] {
 }
 
 function defineInterface(schema: Schema, definitionKey: string): Definition {
-  const properties: Property[] = parseInterfaceProperties(schema.properties);
   const name = typeName(definitionKey);
+  const properties: Property[] = parseInterfaceProperties(schema.properties);
 
   return {
     name: name,
@@ -145,7 +147,7 @@ function transformParameters(parameters: Parameter[]): Parameter[] {
   return Array.isArray(parameters)
     // todo: required params
     ? parameters.map((param) => {
-        console.log('==>', param);
+        // console.log('==>', param);
 
         const typescriptType = toTypescriptType(
           dereferenceType(param.$ref || ('schema' in param && param.schema.$ref)) || param.type,
