@@ -25,7 +25,7 @@ export function dashCase(text: string = ''): string {
  * @param {string} refString
  * @returns {string}
  */
-export function dereferenceType(refString: string): string {
+export function dereferenceType(refString: string | undefined): string {
   if (!refString) {
     return '';
   }

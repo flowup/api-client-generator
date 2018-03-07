@@ -1,4 +1,4 @@
-import { Response, Schema, Spec as Swagger } from 'swagger-schema-official';
+import { BodyParameter, QueryParameter, Response, Schema, Spec as Swagger } from 'swagger-schema-official';
 import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName } from './types';
 import { camelCase, dereferenceType, determineDomain, fileName, prefixImportedModels, toTypescriptType, typeName } from './helper';
 
@@ -10,11 +10,11 @@ export function createMustacheViewModel(swagger: Swagger): MustacheData {
     swagger: swagger,
     domain: determineDomain(swagger),
     methods: parseMethods(swagger),
-    definitions: parseDefinitions(swagger.definitions)
+    definitions: parseDefinitions(swagger.definitions, swagger.parameters)
   };
 }
 
-function parseMethods({paths, security}: Swagger): Method[] {
+function parseMethods({paths, security, parameters}: Swagger): Method[] {
   const authorizedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 
   return [].concat.apply([], Object.entries(paths)
@@ -30,7 +30,7 @@ function parseMethods({paths, security}: Swagger): Method[] {
           methodType: methodType.toUpperCase() as MethodType,
           summaryLines: operation.description ? operation.description.split('\n') : [], // description summary is optional
           isSecure: security !== undefined || operation.security !== undefined,
-          parameters: transformParameters(operation.parameters),
+          parameters: transformParameters(operation.parameters, parameters || {}),
           hasJsonResponse: true,
           response: prefixImportedModels(determineResponseType(operation.responses)),
         })
@@ -38,18 +38,24 @@ function parseMethods({paths, security}: Swagger): Method[] {
     ));
 }
 
-function parseDefinitions(definitions: { [definitionsName: string]: Schema } = {}): Definition[] {
-  return Object.entries(definitions).map(([key, definition]) =>
+function parseDefinitions(
+  definitions: { [definitionsName: string]: Schema } = {},
+  parameters: { [parameterName: string]: BodyParameter | QueryParameter } = {},
+): Definition[] {
+  return Object.entries({
+    ...definitions,
+    ...(parameters as { [key: string]: Schema }),  // type cast because of wrong typing in BaseParameter (should contain enum property)
+  }).map(([key, definition]) =>
     definition.enum && definition.enum.length !== 0
       ? defineEnum(definition.enum, key)
       : defineInterface(definition, key)
   );
 }
 
-function defineEnum(enumSchema: (string | boolean | number | {})[], definitionKey: string): Definition {
+function defineEnum(enumSchema: (string | boolean | number | {})[] = [], definitionKey: string): Definition {
   return {
     name: typeName(definitionKey),
-    properties: enumSchema.map((val) => ({
+    properties: enumSchema && enumSchema.map((val) => ({
       name: val.toString(),
     })),
     isEnum: true,
@@ -58,7 +64,7 @@ function defineEnum(enumSchema: (string | boolean | number | {})[], definitionKe
   };
 }
 
-function parseInterfaceProperties(properties: {[propertyName: string]: Schema} = {}): Property[] {
+function parseInterfaceProperties(properties: { [propertyName: string]: Schema } = {}): Property[] {
   return Object.entries<Schema>(properties).map(
     ([propName, propSchema]: [string, Schema]) => {
       const property: Property = {
@@ -66,8 +72,6 @@ function parseInterfaceProperties(properties: {[propertyName: string]: Schema} =
         isRef: '$ref' in propSchema || (propSchema.type === 'array' && propSchema.items && '$ref' in propSchema.items),
         isArray: propSchema.type === 'array',
       };
-
-      // console.log('prop', property.name);
 
       if (Array.isArray(propSchema.items)) {
         console.warn('Arrays with type diversity are currently not supported');
@@ -143,33 +147,63 @@ function determineResponseType(responses: { [responseName: string]: Response }):
   return 'any';
 }
 
-function transformParameters(parameters: Parameter[]): Parameter[] {
+function transformParameters(
+  parameters: Parameter[],
+  swaggerParams: { [parameterName: string]: BodyParameter | QueryParameter }
+): Parameter[] {
   return Array.isArray(parameters)
     // todo: required params
     ? parameters.map((param) => {
         // console.log('==>', param);
 
+        const ref = param.$ref || (param.schema && param.schema.$ref) || '';
+        const derefName = dereferenceType(ref);
+        const paramRef = swaggerParams[derefName];
+        const name = paramRef ? paramRef.name : param.name;
         const typescriptType = toTypescriptType(
-          dereferenceType(param.$ref || ('schema' in param && param.schema.$ref)) || param.type,
+          ref ? derefName : param.type,
           param.items
         );
-        const camelCaseName = camelCase(param.name ? param.name : typescriptType); // if name is not defined, use type name
 
         return {
           ...param,
+          ...determineParamType(paramRef ? paramRef.in : param.in),
 
-          camelCaseName,
+          camelCaseName: camelCase(name),
           importType: prefixImportedModels(typescriptType),
-          isBodyParameter: param.in === 'body',
-          isFormParameter: param.in === 'formData'
-            ? console.warn(`Form parameters are currently unsupported and will not be generated properly  [ ${param.name} ]`) || true
-            : false,
-          isHeaderParameter: param.in === 'header',
-          isPathParameter: param.in === 'path',
-          isQueryParameter: param.in === 'query' || param.in === 'modelbinding',
+          name,
           typescriptType,
         };
       }
     )
     : [];
+}
+
+function determineParamType(paramType: string | undefined):
+  { isBodyParameter?: boolean } |
+  { isFormParameter?: boolean } |
+  { isHeaderParameter?: boolean } |
+  { isPathParameter?: boolean } |
+  { isQueryParameter?: boolean } {
+
+  if (!paramType) {
+    return {};
+  }
+
+  switch (paramType) {
+    case 'body':
+      return {isBodyParameter: true};
+    case 'formData':
+      console.warn(`Form parameters are currently unsupported and will not be generated properly`);
+      return {isFormParameter: true};
+    case 'header':
+      return {isHeaderParameter: true};
+    case 'path':
+      return {isPathParameter: true};
+    case 'query' || 'modelbinding':
+      return {isQueryParameter: true};
+    default:
+      console.warn(`Unsupported parameter type  [ ${paramType} ]`);
+      return {};
+  }
 }
