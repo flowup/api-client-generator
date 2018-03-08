@@ -7,7 +7,7 @@ interface Parameters {
 }
 
 interface ExtendedParameters {
-  [parameterName: string]: (BodyParameter | QueryParameter) & { 'enum': any }
+  [parameterName: string]: (BodyParameter | QueryParameter) & { 'enum': (string | boolean | number | {})[] }
 }
 
 interface Definitions {
