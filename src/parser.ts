@@ -7,8 +7,14 @@ interface Parameters {
 }
 
 interface ExtendedParameters {
-  [parameterName: string]: (BodyParameter | QueryParameter) & { 'enum': (string | boolean | number | {})[] }
+  [parameterName: string]: ExtendedParameter
 }
+
+type ExtendedParameter = (BodyParameter | QueryParameter) & {
+  'enum': (string | boolean | number | {})[],
+  schema: Schema,
+}
+
 
 interface Definitions {
   [definitionsName: string]: Schema
@@ -53,14 +59,20 @@ function parseDefinitions(
   definitions: Definitions = {},
   parameters: Parameters = {},
 ): Definition[] {
-  return Object.entries({
-    ...definitions,
-    ...(parameters as ExtendedParameters),  // type cast because of wrong typing in BaseParameter (should contain enum property)
-  }).map(([key, definition]) =>
-    definition.enum && definition.enum.length !== 0
-      ? defineEnum(definition.enum, key)
-      : defineInterface(('schema' in definition ? definition.schema : definition) || {}, key)
-  );
+  return [
+    ...Object.entries(definitions)
+      .map(([key, definition]) => defineEnumOrInterface(key, definition)),
+    ...Object.entries(
+      parameters as ExtendedParameters  // type cast because of wrong typing in BaseParameter (should contain enum property)
+    ).filter(([, definition]) => (definition.enum && definition.enum.length !== 0) || definition.schema)
+      .map(([key, definition]) => defineEnumOrInterface(key, definition)),
+  ];
+}
+
+function defineEnumOrInterface(key: string, definition: Schema | ExtendedParameter): Definition {
+  return definition.enum && definition.enum.length !== 0
+    ? defineEnum(definition.enum, key)
+    : defineInterface(('schema' in definition ? definition.schema : definition) || {}, key);
 }
 
 function defineEnum(enumSchema: (string | boolean | number | {})[] = [], definitionKey: string): Definition {
