@@ -1,4 +1,3 @@
-
 declare module 'dir-compare' {
   export function compare(path1: string, path2: string, config: any): Promise<Result>;
 

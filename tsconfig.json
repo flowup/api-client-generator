@@ -19,6 +19,10 @@
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "emitDecoratorMetadata": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "outDir": "dist",
     "typeRoots": [
       "node_modules/@types",

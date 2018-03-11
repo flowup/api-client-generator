@@ -12,7 +12,6 @@ export interface Definition {
 }
 
 export interface MustacheData {
-  readonly description: string;
   readonly isSecure: boolean;
   readonly swagger: Swagger;
   readonly domain: string;

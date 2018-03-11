@@ -172,10 +172,7 @@
     "prefer-readonly": true,
     "prefer-method-signature": true,
     "prefer-object-spread": true,
-    "prefer-template": [
-      true,
-      "allow-single-concat"
-    ],
+    "prefer-template": true,
     "quotemark": [
       true,
       "single"
