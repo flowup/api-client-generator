@@ -21,7 +21,6 @@ interface Definitions {
 
 export function createMustacheViewModel(swagger: Swagger): MustacheData {
   return {
-    description: swagger.info.description || '',
     isSecure: !!swagger.securityDefinitions,
     swagger: swagger,
     domain: determineDomain(swagger),

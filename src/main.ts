@@ -2,7 +2,6 @@
 
 import { generateAPIClient } from './generator';
 import * as opt from 'optimist';
-import * as fs from 'fs';
 
 const optimist = opt
   .usage('Usage: api-client-generator -s path/to/swagger.[json|yaml]')
@@ -25,11 +24,6 @@ if (typeof argv.source === 'undefined' && argv.source !== true) {
 }
 
 const outputDir = argv.output || './output';
-
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir);
-}
-
 const sourceFile = argv.source;
 
 generateAPIClient(sourceFile, outputDir)
