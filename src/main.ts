@@ -19,11 +19,7 @@ if (argv.help) {
   process.exit(0);
 }
 
-let fromSource = false;
-
-if (typeof argv.source !== 'undefined' && argv.source !== true) {
-  fromSource = true;
-} else {
+if (typeof argv.source === 'undefined' && argv.source !== true) {
   console.error('Swagger file (-s) must be specified. See --help');
   process.exit(1);
 }

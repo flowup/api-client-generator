@@ -55,7 +55,7 @@
   "scripts": {
     "generate": "node ./dist/main.js",
     "build": "rimraf dist && tsc",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts'",
     "gen": "ts-node ./src/main.ts",
     "gen-sports": "rimraf ./examples/sports/api && ts-node ./src/main.ts -s ./examples/sports/swagger.yaml -o ./examples/sports/api",
     "gen-esquare": "rimraf ./examples/esquare/api && ts-node ./src/main.ts -s ./examples/esquare/swagger.yaml -o ./examples/esquare/api",

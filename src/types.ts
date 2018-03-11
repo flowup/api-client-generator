@@ -24,14 +24,6 @@ export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined'
 export type In = 'body' | 'path' | 'query' | 'modelbinding' | 'header' | 'formData';
 export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
-export interface Parameter extends Property {
-  readonly isBodyParameter?: boolean;
-  readonly isFormParameter?: boolean;
-  readonly isHeaderParameter?: boolean;
-  readonly isPathParameter?: boolean;
-  readonly isQueryParameter?: boolean;
-}
-
 export interface Property {
   readonly camelCaseName?: string;
   readonly isArray?: boolean;
@@ -45,6 +37,14 @@ export interface Property {
   type?: string;
   typescriptType?: TypescriptBasicTypes | string;
   readonly importType?: string;
+}
+
+export interface Parameter extends Property {
+  readonly isBodyParameter?: boolean;
+  readonly isFormParameter?: boolean;
+  readonly isHeaderParameter?: boolean;
+  readonly isPathParameter?: boolean;
+  readonly isQueryParameter?: boolean;
 }
 
 export interface Method {

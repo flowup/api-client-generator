@@ -13,8 +13,7 @@ interface ExtendedParameters {
 type ExtendedParameter = (BodyParameter | QueryParameter) & {
   'enum': (string | boolean | number | {})[],
   schema: Schema,
-}
-
+};
 
 interface Definitions {
   [definitionsName: string]: Schema
@@ -36,7 +35,9 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
 
   return [].concat.apply([], Object.entries(paths)
     .map(([pathName, apiPath]) => Object.entries(apiPath)
-      .filter(([methodType,]) => authorizedMethods.indexOf(methodType.toUpperCase()) !== -1)  // skip unsupported methods
+      .filter(([methodType,]) => // tslint:disable-line:whitespace
+        authorizedMethods.indexOf(methodType.toUpperCase()) !== -1  // skip unsupported methods
+      )
       .map(([methodType, operation]) => ({
           path: pathName.replace(/({.*?})/g, '$$$1'),
           methodName: camelCase(
