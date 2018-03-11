@@ -102,10 +102,13 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
-  getReportsList(pageSize: number, page: number, orderBy: string, options?: HttpOptions): Observable<any> {
+  getReportsList(status: models.Status, pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
     const path = `/report`;
     options = {...this.options, ...options};
 
+    if (status) {
+      options.params = options.params.set('status', String(status));
+    }
     if (pageSize) {
       options.params = options.params.set('pageSize', String(pageSize));
     }
@@ -114,6 +117,9 @@ export class APIClient {
     }
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
+    }
+    if (order) {
+      options.params = options.params.set('order', String(order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
@@ -125,7 +131,7 @@ export class APIClient {
     return this.sendRequest<models.ReportItem[]>('GET', path, options);
   }
 
-  getReportPreview(templateId: number, pageSize: number, page: number, orderBy: number, options?: HttpOptions): Observable<any> {
+  getReportPreview(templateId: number, pageSize: number, page: number, orderBy: number, order: models.Order, options?: HttpOptions): Observable<any> {
     const path = `/report/preview/${templateId}`;
     options = {...this.options, ...options};
 
@@ -138,6 +144,9 @@ export class APIClient {
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
     }
+    if (order) {
+      options.params = options.params.set('order', String(order));
+    }
     return this.sendRequest<any>('GET', path, options);
   }
 
@@ -148,7 +157,7 @@ export class APIClient {
     return this.sendRequest<models.ImportHistoryItem[]>('GET', path, options);
   }
 
-  uploadFile(templateId: number, file: File, options?: HttpOptions): Observable<any> {
+  uploadFile(templateId: number, file: models.File, options?: HttpOptions): Observable<any> {
     const path = `/report/wizard/uploadfile/${templateId}`;
     options = {...this.options, ...options};
 
@@ -221,24 +230,33 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options);
   }
 
-  overrideImport(id: number, description: string, file: File, options?: HttpOptions): Observable<any> {
+  overrideImport(id: number, description: string, file: models.File, options?: HttpOptions): Observable<any> {
     const path = `/report/wizard/${id}/override`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('POST', path, options);
   }
 
-  geImportStats(options?: HttpOptions): Observable<models.TotalImportStats> {
+  geImportStats(period: models.Period, options?: HttpOptions): Observable<models.TotalImportStats> {
     const path = `/report/ministry/statistic`;
     options = {...this.options, ...options};
 
+    if (period) {
+      options.params = options.params.set('period', String(period));
+    }
     return this.sendRequest<models.TotalImportStats>('GET', path, options);
   }
 
-  getIssuesList(pageSize: number, page: number, orderBy: string, options?: HttpOptions): Observable<any> {
+  getIssuesList(period: models.Period, status: models.IssueStatus, pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
     const path = `/report/ministry/issues`;
     options = {...this.options, ...options};
 
+    if (period) {
+      options.params = options.params.set('period', String(period));
+    }
+    if (status) {
+      options.params = options.params.set('status', String(status));
+    }
     if (pageSize) {
       options.params = options.params.set('pageSize', String(pageSize));
     }
@@ -248,13 +266,22 @@ export class APIClient {
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
     }
+    if (order) {
+      options.params = options.params.set('order', String(order));
+    }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  getStatusesList(pageSize: number, page: number, orderBy: string, options?: HttpOptions): Observable<any> {
+  getStatusesList(period: models.Period, status: models.ImportStatus, pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
     const path = `/report/ministry/statuses`;
     options = {...this.options, ...options};
 
+    if (period) {
+      options.params = options.params.set('period', String(period));
+    }
+    if (status) {
+      options.params = options.params.set('status', String(status));
+    }
     if (pageSize) {
       options.params = options.params.set('pageSize', String(pageSize));
     }
@@ -263,14 +290,23 @@ export class APIClient {
     }
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
+    }
+    if (order) {
+      options.params = options.params.set('order', String(order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  getUsersList(pageSize: number, page: number, orderBy: string, assignedToRole: number, unassignedFromRole: number, options?: HttpOptions): Observable<any> {
+  getUsersList(period: models.Period, status: models.ImportStatus, pageSize: number, page: number, orderBy: string, order: models.Order, assignedToRole: number, unassignedFromRole: number, options?: HttpOptions): Observable<any> {
     const path = `/users`;
     options = {...this.options, ...options};
 
+    if (period) {
+      options.params = options.params.set('period', String(period));
+    }
+    if (status) {
+      options.params = options.params.set('status', String(status));
+    }
     if (pageSize) {
       options.params = options.params.set('pageSize', String(pageSize));
     }
@@ -279,6 +315,9 @@ export class APIClient {
     }
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
+    }
+    if (order) {
+      options.params = options.params.set('order', String(order));
     }
     if (assignedToRole) {
       options.params = options.params.set('assignedToRole', String(assignedToRole));
@@ -352,11 +391,11 @@ export class APIClient {
     return this.sendRequest<models.RoleDetailsItem[]>('GET', path, options);
   }
 
-  updateRole(id: number, options?: HttpOptions): Observable<models.RoleDetailsItem> {
+  updateRole(id: number, body: models.RoleUpdateDetails, options?: HttpOptions): Observable<models.RoleDetailsItem> {
     const path = `/users/roles/${id}`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.RoleDetailsItem>('PUT', path, options);
+    return this.sendRequest<models.RoleDetailsItem>('PUT', path, options, JSON.stringify(body));
   }
 
   deleteRole(id: number, options?: HttpOptions): Observable<any> {
@@ -380,7 +419,7 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options, JSON.stringify(body));
   }
 
-  getNotificationsList(pageSize: number, page: number, orderBy: string, options?: HttpOptions): Observable<any> {
+  getNotificationsList(pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
     const path = `/notifications/all`;
     options = {...this.options, ...options};
 
@@ -392,6 +431,9 @@ export class APIClient {
     }
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
+    }
+    if (order) {
+      options.params = options.params.set('order', String(order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
@@ -410,7 +452,7 @@ export class APIClient {
     return this.sendRequest<models.NotificationTrigger[]>('GET', path, options);
   }
 
-  getModuleNotificationsList(moduleId: number, pageSize: number, page: number, orderBy: string, options?: HttpOptions): Observable<any> {
+  getModuleNotificationsList(moduleId: number, pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
     const path = `/notifications/modules/${moduleId}`;
     options = {...this.options, ...options};
 
@@ -422,6 +464,9 @@ export class APIClient {
     }
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
+    }
+    if (order) {
+      options.params = options.params.set('order', String(order));
     }
     return this.sendRequest<any>('GET', path, options);
   }

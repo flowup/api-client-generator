@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { Generator } from './generator';
+import { generateAPIClient } from './generator';
 import * as opt from 'optimist';
 import * as fs from 'fs';
 
-let optimist = opt
+const optimist = opt
   .usage('Usage: api-client-generator -s path/to/swagger.[json|yaml]')
   .alias('h', 'help')
   .alias('s', 'source')
@@ -12,7 +12,7 @@ let optimist = opt
   .describe('s', 'Path to the swagger file')
   .describe('o', 'Path where generated files should be emitted');
 
-let argv = optimist.argv;
+const argv = optimist.argv;
 
 if (argv.help) {
   optimist.showHelp();
@@ -28,15 +28,14 @@ if (typeof argv.source !== 'undefined' && argv.source !== true) {
   process.exit(1);
 }
 
-let outputDir = argv.output || './output';
+const outputDir = argv.output || './output';
 
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir);
 }
 
-let sourceFile = argv.source;
-let g = new Generator(sourceFile, outputDir);
+const sourceFile = argv.source;
 
-g.generateAPIClient()
-  .then(() => console.log('Angular API client generated successfully'))
-  .catch((error) => console.error('Error encored during generating', error));
+generateAPIClient(sourceFile, outputDir)
+  .then(() => console.info('Angular API client generated successfully'))
+  .catch((error: Error) => console.error('Error encored during generating', error));
