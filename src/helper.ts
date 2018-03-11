@@ -1,4 +1,3 @@
-import { Parameter } from './types';
 import { Spec as Swagger } from 'swagger-schema-official';
 
 const BASIC_TS_TYPE_REGEX = /^string|number|integer|boolean|undefined|any|object$/i;
@@ -47,7 +46,7 @@ export function removeDuplicateWords(text: string): string {
   return text.replace(/^(.{3,})(?=\1)/ig, '');
 }
 
-export function toTypescriptType(type: string | undefined, items: Parameter | undefined): string {
+export function toTypescriptType(type: string | undefined): string {
   if (!type) {
     return 'any';
   }
@@ -59,17 +58,14 @@ export function toTypescriptType(type: string | undefined, items: Parameter | un
   } else if (/^object$/i.test(type)) {
     return 'any';
   } else if (/^array$/i.test(type)) {
-    if (items) {
-      return typeName(items.type, true);
-    } else {
-      return 'any[]';
-    }
-  } else {
-    return typeName(type);
+    console.warn('Support for nested arrays is limited, using any[] as type');
+    return 'any[]';
   }
+
+  return typeName(type);
 }
 
-export function typeName(name: string = '', isArray: boolean = false): string {
+export function typeName(name: string = 'any', isArray: boolean = false): string {
   const type = BASIC_TS_TYPE_REGEX.test(name) ? name : camelCase(name, false);
 
   return `${type}${isArray ? '[]' : ''}`;

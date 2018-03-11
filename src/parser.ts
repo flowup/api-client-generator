@@ -78,40 +78,43 @@ function defineEnum(enumSchema: (string | boolean | number | {})[] = [], definit
 function parseInterfaceProperties(properties: { [propertyName: string]: Schema } = {}): Property[] {
   return Object.entries<Schema>(properties).map(
     ([propName, propSchema]: [string, Schema]) => {
-      const property: Property = {
+      const isArray = /^array$/i.test(propSchema.type || '');
+      const typescriptType = toTypescriptType(isArray
+        ? determineArrayType(propSchema)
+        : propSchema.$ref
+          ? dereferenceType(propSchema.$ref)
+          : propSchema.type
+      );
+
+      return {
         name: propName,
-        isRef: '$ref' in propSchema || (propSchema.type === 'array' && propSchema.items && '$ref' in propSchema.items),
-        isArray: propSchema.type === 'array',
+        isRef: '$ref' in propSchema || propSchema.type === 'array' && propSchema.items &&
+        ('$ref' in propSchema.items || (!Array.isArray(propSchema.items) && propSchema.items.items && '$ref' in propSchema.items.items)),
+        isArray,
+        type: typescriptType.replace('[]', ''),
+        typescriptType,
       };
-
-      if (Array.isArray(propSchema.items)) {
-        console.warn('Arrays with type diversity are currently not supported');
-        property.type = 'any';
-
-        return property;
-      }
-
-      if (property.isArray) {
-        if (propSchema.items && propSchema.items.$ref) {
-          property.type = typeName(dereferenceType(propSchema.items.$ref));
-        } else if (propSchema.items && propSchema.items.type) {
-          property.type = typeName(propSchema.items.type);
-        } else {
-          property.type = propSchema.type;
-        }
-      } else {
-        property.type = typeName(
-          propSchema.$ref
-            ? dereferenceType(propSchema.$ref)
-            : propSchema.type
-        );
-      }
-
-      property.typescriptType = toTypescriptType(property.type, property.items);
-
-      return property;
     }
   ).sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
+}
+
+function determineArrayType(property: Schema = {}): string {
+  if (Array.isArray(property.items)) {
+    console.warn('Arrays with type diversity are currently not supported');
+    return 'any';
+  }
+
+  if (property.items && property.items.$ref) {
+    return typeName(dereferenceType(property.items.$ref));
+  } else if (property.items && property.items.type) {
+    if (/^array$/i.test(property.items.type || '')) {
+      return `${determineArrayType(property.items)}[]`;
+    }
+
+    return typeName(property.items.type);
+  }
+
+  return typeName(property.type);
 }
 
 function defineInterface(schema: Schema, definitionKey: string): Definition {
@@ -165,16 +168,11 @@ function transformParameters(
   return Array.isArray(parameters)
     // todo: required params
     ? parameters.map((param) => {
-        // console.log('==>', param);
-
         const ref = param.$ref || (param.schema && param.schema.$ref) || '';
         const derefName = dereferenceType(ref);
         const paramRef = swaggerParams[derefName];
         const name = paramRef ? paramRef.name : param.name;
-        const typescriptType = toTypescriptType(
-          ref ? derefName : param.type,
-          param.items
-        );
+        const typescriptType = toTypescriptType(ref ? derefName : param.type);
 
         return {
           ...param,
