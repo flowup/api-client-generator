@@ -54,3 +54,5 @@ export { Write } from './write.model';
 export { WriteRequest } from './write-request.model';
 export { WriteResponse } from './write-response.model';
 export { WriteResult } from './write-result.model';
+export { $Xgafv } from './$-xgafv.enum';
+export { Alt } from './alt.enum';

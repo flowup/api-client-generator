@@ -1,9 +1,10 @@
 /* tslint:disable */
 import {
   Column,
+  TableCell,
 } from './..';
 
 export interface Table {
-  tableData: any[][];
+  tableData: TableCell[][];
   tableHead: Column[];
 }
