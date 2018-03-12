@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpOptions } from './';
+
 import * as models from './models';
 
 export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
@@ -87,12 +88,14 @@ export class APIClient {
     return this.sendRequest<models.Empty>('DELETE', path, options);
   }
 
-  firestoreProjectsDatabasesIndexesGet(maskFieldPaths: string[], name: string, readTime: string, transaction: string, options?: HttpOptions): Observable<models.Index> {
+  firestoreProjectsDatabasesIndexesGet(maskFieldPaths: any[], name: string, readTime: string, transaction: string, options?: HttpOptions): Observable<models.Index> {
     const path = `/${name}`;
     options = {...this.options, ...options};
 
     if (maskFieldPaths) {
-      options.params = options.params.set('mask.fieldPaths', String(maskFieldPaths));
+      Object.keys(maskFieldPaths).map(value => {
+        options.params = options.params.append('mask.fieldPaths', `${value}`);
+      });
     }
     if (readTime) {
       options.params = options.params.set('readTime', String(readTime));
@@ -103,7 +106,7 @@ export class APIClient {
     return this.sendRequest<models.Index>('GET', path, options);
   }
 
-  firestoreProjectsDatabasesDocumentsPatch(body: models.Document, currentDocumentExists: boolean, currentDocumentUpdateTime: string, maskFieldPaths: string[], name: string, updateMaskFieldPaths: string[], options?: HttpOptions): Observable<models.Document> {
+  firestoreProjectsDatabasesDocumentsPatch(body: models.Document, currentDocumentExists: boolean, currentDocumentUpdateTime: string, maskFieldPaths: any[], name: string, updateMaskFieldPaths: any[], options?: HttpOptions): Observable<models.Document> {
     const path = `/${name}`;
     options = {...this.options, ...options};
 
@@ -114,10 +117,14 @@ export class APIClient {
       options.params = options.params.set('currentDocument.updateTime', String(currentDocumentUpdateTime));
     }
     if (maskFieldPaths) {
-      options.params = options.params.set('mask.fieldPaths', String(maskFieldPaths));
+      Object.keys(maskFieldPaths).map(value => {
+        options.params = options.params.append('mask.fieldPaths', `${value}`);
+      });
     }
     if (updateMaskFieldPaths) {
-      options.params = options.params.set('updateMask.fieldPaths', String(updateMaskFieldPaths));
+      Object.keys(updateMaskFieldPaths).map(value => {
+        options.params = options.params.append('updateMask.fieldPaths', `${value}`);
+      });
     }
     return this.sendRequest<models.Document>('PATCH', path, options, JSON.stringify(body));
   }
@@ -145,12 +152,14 @@ export class APIClient {
     return this.sendRequest<models.Operation>('POST', path, options, JSON.stringify(body));
   }
 
-  firestoreProjectsDatabasesDocumentsList(collectionId: string, maskFieldPaths: string[], orderBy: string, pageSize: number, pageToken: string, parent: string, readTime: string, showMissing: boolean, transaction: string, options?: HttpOptions): Observable<models.ListDocumentsResponse> {
+  firestoreProjectsDatabasesDocumentsList(collectionId: string, maskFieldPaths: any[], orderBy: string, pageSize: number, pageToken: string, parent: string, readTime: string, showMissing: boolean, transaction: string, options?: HttpOptions): Observable<models.ListDocumentsResponse> {
     const path = `/${parent}/${collectionId}`;
     options = {...this.options, ...options};
 
     if (maskFieldPaths) {
-      options.params = options.params.set('mask.fieldPaths', String(maskFieldPaths));
+      Object.keys(maskFieldPaths).map(value => {
+        options.params = options.params.append('mask.fieldPaths', `${value}`);
+      });
     }
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
@@ -173,7 +182,7 @@ export class APIClient {
     return this.sendRequest<models.ListDocumentsResponse>('GET', path, options);
   }
 
-  firestoreProjectsDatabasesDocumentsCreateDocument(body: models.Document, collectionId: string, documentId: string, maskFieldPaths: string[], parent: string, options?: HttpOptions): Observable<models.Document> {
+  firestoreProjectsDatabasesDocumentsCreateDocument(body: models.Document, collectionId: string, documentId: string, maskFieldPaths: any[], parent: string, options?: HttpOptions): Observable<models.Document> {
     const path = `/${parent}/${collectionId}`;
     options = {...this.options, ...options};
 
@@ -181,7 +190,9 @@ export class APIClient {
       options.params = options.params.set('documentId', String(documentId));
     }
     if (maskFieldPaths) {
-      options.params = options.params.set('mask.fieldPaths', String(maskFieldPaths));
+      Object.keys(maskFieldPaths).map(value => {
+        options.params = options.params.append('mask.fieldPaths', `${value}`);
+      });
     }
     return this.sendRequest<models.Document>('POST', path, options, JSON.stringify(body));
   }

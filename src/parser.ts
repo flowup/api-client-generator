@@ -185,6 +185,7 @@ function transformParameters(
         const paramRef = swaggerParams[derefName];
         const name = paramRef ? paramRef.name : param.name;
         const typescriptType = toTypescriptType(ref ? derefName : param.type);
+        const isArray = param.type === 'array';
 
         return {
           ...param,
@@ -194,6 +195,7 @@ function transformParameters(
           importType: prefixImportedModels(typescriptType),
           name,
           typescriptType,
+          isArray
         };
       }
     )
