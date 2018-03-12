@@ -8,10 +8,10 @@ const testReferences = ['esquare', 'gcloud-firestore'];
 
 const compareOptions = {compareSize: true};
 const stateSymbols: {[key in State]: string} = {
-  'equal': '==',
-  'left': '->',
-  'right': '<-',
-  'distinct': '!=',
+  equal: '==',
+  left: '->',
+  right: '<-',
+  distinct: '!=',
 };
 
 async function runTests(): Promise<number> {
@@ -24,7 +24,7 @@ async function runTests(): Promise<number> {
   await promisify(mkdir)(testsOutDir);
 
   const testReturnValues = await Promise.all(testReferences.map(async (reference) => {
-    console.log(`Running test for ${reference}`);
+    console.info(`Running test for ${reference}`);
 
     const refDir = `${__dirname}/${reference}`;
     const genDir = `${testsOutDir}/${reference}`;
@@ -36,27 +36,27 @@ async function runTests(): Promise<number> {
 
     if (!same) {
       console.group(`Stats for ${reference}`);
-      console.log(`equal: ${equal}`);
-      console.log(`distinct: ${distinct}`);
-      console.log(`left: ${left}`);
-      console.log(`right: ${right}`);
-      console.log(`differences: ${differences}\n`);
+      console.info(`equal: ${equal}`);
+      console.info(`distinct: ${distinct}`);
+      console.info(`left: ${left}`);
+      console.info(`right: ${right}`);
+      console.info(`differences: ${differences}\n`);
 
-      console.log('[ reference dir ]         [ test dir ]');
+      console.info('[ reference dir ]         [ test dir ]');
       diffSet.forEach(({name1, name2, state, type1, type2}: DiffSet) => {
         if (stateSymbols[state] !== stateSymbols.equal) {
-          console.log(`(${type1}) ${name1}  ${stateSymbols[state]}  ${name2} (${type2})`);
+          console.info(`(${type1}) ${name1}  ${stateSymbols[state]}  ${name2} (${type2})`);
         }
       });
 
-      console.log(`\nUse diff on folders below to acquire more info`);
-      console.log(`diff ${refDir}/api ${genDir}\n\n`);
+      console.info(`\nUse diff on folders below to acquire more info`);
+      console.info(`diff ${refDir}/api ${genDir}\n\n`);
 
       console.groupEnd();
 
       return 1;
     } else {
-      console.log(`Test for ${reference} has successfully passed\n\n`);
+      console.info(`Test for ${reference} has successfully passed\n\n`);
       await promisify(rimraf)(genDir);
       return 0;
     }

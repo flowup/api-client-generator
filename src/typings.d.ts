@@ -1,5 +1,5 @@
 declare module 'dir-compare' {
-  export function compare(path1: string, path2: string, config: any): Promise<Result>;
+  export function compare(path1: string, path2: string, config: { [key: string]: string | boolean }): Promise<Result>;
 
   export type State = 'equal' | 'left' | 'right' | 'distinct';
 
