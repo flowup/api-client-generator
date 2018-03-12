@@ -68,14 +68,20 @@ export class APIClient {
 {{/methods}}
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
     switch (method) {
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
       case 'DELETE':
         return this.http.delete<T>(`${this.domain}${path}`, options);
+      case 'GET':
+        return this.http.get<T>(`${this.domain}${path}`, options);
+      case 'HEAD':
+        return this.http.head<T>(`${this.domain}${path}`, options);
+      case 'OPTIONS':
+        return this.http.options<T>(`${this.domain}${path}`, options);
+      case 'PATCH':
+        return this.http.patch<T>(`${this.domain}${path}`, body, options);
+      case 'POST':
+        return this.http.post<T>(`${this.domain}${path}`, body, options);
+      case 'PUT':
+        return this.http.put<T>(`${this.domain}${path}`, body, options);
       default:
         console.error(`Unsupported request: ${method}`);
         return Observable.throw(`Unsupported request: ${method}`);

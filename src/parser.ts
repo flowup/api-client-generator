@@ -31,12 +31,12 @@ export function createMustacheViewModel(swagger: Swagger): MustacheData {
 }
 
 function parseMethods({paths, security, parameters}: Swagger): Method[] {
-  const authorizedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+  const supportedMethods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT'];
 
   return [].concat.apply([], Object.entries(paths)
     .map(([pathName, apiPath]) => Object.entries(apiPath)
       .filter(([methodType,]) => // tslint:disable-line:whitespace
-        authorizedMethods.indexOf(methodType.toUpperCase()) !== -1  // skip unsupported methods
+        supportedMethods.indexOf(methodType.toUpperCase()) !== -1  // skip unsupported methods
       )
       .map(([methodType, operation]) => ({
           path: pathName.replace(/({.*?})/g, '$$$1'), // turn path interpolation `{this}` into string template `${this}
