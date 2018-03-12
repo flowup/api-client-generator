@@ -2,16 +2,20 @@ import { Spec as Swagger } from 'swagger-schema-official';
 
 const BASIC_TS_TYPE_REGEX = /^string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob$/;
 
-export function camelCase(text: string = '', lowerFirstLetter: boolean = true): string {
+export function camelCase(text: string = '', lowerFirst: boolean = true): string {
   text = removeDuplicateWords(text);
 
   if (/^[A-Z0-9]+$/.test(text) || text === '') {
     return text;
   }
 
-  const camelText = text.split(/[-.]/).map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
+  const camelText = text.split(/[-._]/).map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
 
-  return lowerFirstLetter ? `${camelText[0].toLowerCase()}${camelText.substring(1)}` : camelText;
+  return lowerFirst
+    ? /^([A-Z]+(?=[A-Z]))/.test(camelText)
+      ? camelText.replace(/^([A-Z]+(?=[A-Z]))/, (firstWord) => firstWord.toLowerCase())
+      : `${camelText[0].toLowerCase()}${camelText.substring(1)}`
+    : camelText;
 }
 
 export function dashCase(text: string = ''): string {
@@ -88,7 +92,8 @@ export function determineDomain({schemes, host, basePath}: Swagger): string {
   // if no host exists in the swagger file use a window location relative path
   const domain = host
     ? host
-    : '${window.location.hostname}${window.location.port ? \':\'+window.location.port : \'\'}'; /* tslint:disable-line */
+    : '${window.location.hostname}${window.location.port ? \':\'+window.location.port : \'\'}';
+  /* tslint:disable-line */
   const base = ('/' === basePath || !basePath ? '' : basePath);
   return `${protocol}${domain}${base}`;
 }

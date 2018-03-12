@@ -39,17 +39,18 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
         supportedMethods.indexOf(methodType.toUpperCase()) !== -1  // skip unsupported methods
       )
       .map(([methodType, operation]) => ({
-          path: pathName.replace(/({.*?})/g, '$$$1'), // turn path interpolation `{this}` into string template `${this}
+          hasJsonResponse: true,
+          isSecure: security !== undefined || operation.security !== undefined,
           methodName: camelCase(operation.operationId
             ? operation.operationId
-            : console.error(`Method name could not be determined, path will be used instead of operation id [ ${pathName} ]`) || pathName
-          ),
+            : console.error(`Method name could not be determined, path will be used instead of operation id [ ${pathName} ]`) || pathName),
           methodType: methodType.toUpperCase() as MethodType,
-          summaryLines: operation.description ? (operation.description || '').split('\n') : [], // description summary is optional
-          isSecure: security !== undefined || operation.security !== undefined,
           parameters: transformParameters(operation.parameters, parameters || {}),
-          hasJsonResponse: true,
+          path: pathName.replace(/({.*?})/g, '$$$1'), // turn path interpolation `{this}` into string template `${this}
           response: prefixImportedModels(determineResponseType(operation.responses)),
+          summaryLines: operation.description
+            ? (operation.description || '').split('\n')
+            : [], // description summary is optional
         })
       )
     ));
