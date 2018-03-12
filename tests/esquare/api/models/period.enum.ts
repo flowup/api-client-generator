@@ -1,0 +1,7 @@
+/* tslint:disable */
+
+export enum Period {
+  1 = "1",
+  2 = "2",
+  3 = "3",
+}
