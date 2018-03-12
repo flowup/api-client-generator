@@ -14,7 +14,7 @@ const stateSymbols: {[key in State]: string} = {
   'distinct': '!=',
 };
 
-async function runTests(): Promise<void> {
+async function runTests(): Promise<number> {
   const testsOutDir = `${__dirname}/tests-output`;
 
   if (await promisify(exists)(testsOutDir)) {
@@ -23,7 +23,7 @@ async function runTests(): Promise<void> {
 
   await promisify(mkdir)(testsOutDir);
 
-  await Promise.all(testReferences.map(async (reference) => {
+  const testReturnValues = await Promise.all(testReferences.map(async (reference) => {
     console.log(`Running test for ${reference}`);
 
     const refDir = `${__dirname}/${reference}`;
@@ -53,11 +53,23 @@ async function runTests(): Promise<void> {
       console.log(`diff ${refDir}/api ${genDir}\n\n`);
 
       console.groupEnd();
+
+      return 1;
     } else {
       console.log(`Test for ${reference} has successfully passed\n\n`);
       await promisify(rimraf)(genDir);
+      return 0;
     }
   }));
+
+  return testReturnValues.reduce((acc: number, cur: 0 | 1) => acc + cur, 0);
 }
 
-runTests().then(() => console.info('Tests execution has ended successfully'));
+runTests().then((failedTestsCount) => {
+  if (failedTestsCount) {
+    console.info(`Tests execution has ended. ${failedTestsCount} of ${testReferences.length} tests has failed\n`);
+    process.exit(1);
+  } else {
+    console.info('Tests execution has ended successfully');
+  }
+});
