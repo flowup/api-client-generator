@@ -213,7 +213,6 @@ function transformParameters(
           isArray,
           name,
           typescriptType,
-          isArray
         };
       }
     )
