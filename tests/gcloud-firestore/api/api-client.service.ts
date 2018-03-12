@@ -88,7 +88,7 @@ export class APIClient {
     return this.sendRequest<models.Empty>('DELETE', path, options);
   }
 
-  firestoreProjectsDatabasesIndexesGet(maskFieldPaths: any[], name: string, readTime: string, transaction: string, options?: HttpOptions): Observable<models.Index> {
+  firestoreProjectsDatabasesIndexesGet(maskFieldPaths: string[], name: string, readTime: string, transaction: string, options?: HttpOptions): Observable<models.Index> {
     const path = `/${name}`;
     options = {...this.options, ...options};
 
@@ -104,7 +104,7 @@ export class APIClient {
     return this.sendRequest<models.Index>('GET', path, options);
   }
 
-  firestoreProjectsDatabasesDocumentsPatch(body: models.Document, currentDocumentExists: boolean, currentDocumentUpdateTime: string, maskFieldPaths: any[], name: string, updateMaskFieldPaths: any[], options?: HttpOptions): Observable<models.Document> {
+  firestoreProjectsDatabasesDocumentsPatch(body: models.Document, currentDocumentExists: boolean, currentDocumentUpdateTime: string, maskFieldPaths: string[], name: string, updateMaskFieldPaths: string[], options?: HttpOptions): Observable<models.Document> {
     const path = `/${name}`;
     options = {...this.options, ...options};
 
@@ -146,7 +146,7 @@ export class APIClient {
     return this.sendRequest<models.Operation>('POST', path, options, JSON.stringify(body));
   }
 
-  firestoreProjectsDatabasesDocumentsList(collectionId: string, maskFieldPaths: any[], orderBy: string, pageSize: number, pageToken: string, parent: string, readTime: string, showMissing: boolean, transaction: string, options?: HttpOptions): Observable<models.ListDocumentsResponse> {
+  firestoreProjectsDatabasesDocumentsList(collectionId: string, maskFieldPaths: string[], orderBy: string, pageSize: number, pageToken: string, parent: string, readTime: string, showMissing: boolean, transaction: string, options?: HttpOptions): Observable<models.ListDocumentsResponse> {
     const path = `/${parent}/${collectionId}`;
     options = {...this.options, ...options};
 
@@ -174,7 +174,7 @@ export class APIClient {
     return this.sendRequest<models.ListDocumentsResponse>('GET', path, options);
   }
 
-  firestoreProjectsDatabasesDocumentsCreateDocument(body: models.Document, collectionId: string, documentId: string, maskFieldPaths: any[], parent: string, options?: HttpOptions): Observable<models.Document> {
+  firestoreProjectsDatabasesDocumentsCreateDocument(body: models.Document, collectionId: string, documentId: string, maskFieldPaths: string[], parent: string, options?: HttpOptions): Observable<models.Document> {
     const path = `/${parent}/${collectionId}`;
     options = {...this.options, ...options};
 
