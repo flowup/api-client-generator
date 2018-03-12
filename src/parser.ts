@@ -38,14 +38,13 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
         authorizedMethods.indexOf(methodType.toUpperCase()) !== -1  // skip unsupported methods
       )
       .map(([methodType, operation]) => ({
-          path: pathName.replace(/({.*?})/g, '$$$1'),
-          methodName: camelCase(
-            operation.operationId
-              ? operation.operationId
-              : console.error(`Method name could not be determined, path will be used instead of operation id   [ ${pathName} ]`)
+          path: pathName.replace(/({.*?})/g, '$$$1'), // turn path interpolation `{this}` into string template `${this}
+          methodName: camelCase(operation.operationId
+            ? operation.operationId
+            : console.error(`Method name could not be determined, path will be used instead of operation id [ ${pathName} ]`) || pathName
           ),
           methodType: methodType.toUpperCase() as MethodType,
-          summaryLines: operation.description ? operation.description.split('\n') : [], // description summary is optional
+          summaryLines: operation.description ? (operation.description || '').split('\n') : [], // description summary is optional
           isSecure: security !== undefined || operation.security !== undefined,
           parameters: transformParameters(operation.parameters, parameters || {}),
           hasJsonResponse: true,
@@ -99,15 +98,28 @@ function parseInterfaceProperties(properties: { [propertyName: string]: Schema }
       );
 
       return {
-        name: propName,
-        isRef: '$ref' in propSchema || propSchema.type === 'array' && propSchema.items &&
-        ('$ref' in propSchema.items || (!Array.isArray(propSchema.items) && propSchema.items.items && '$ref' in propSchema.items.items)),
         isArray,
+        isRef: !!parseReference(propSchema),
+        name: propName,
         type: typescriptType.replace('[]', ''),
         typescriptType,
       };
     }
   ).sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
+}
+
+function parseReference(schema: Schema): string {
+  if ('$ref' in schema && schema.$ref) {
+    return schema.$ref;
+  } else if (schema.type === 'array' && schema.items) {
+    if ('$ref' in schema.items && schema.items.$ref) {
+      return schema.items.$ref;
+    } else if (!Array.isArray(schema.items) && schema.items.items && '$ref' in schema.items.items && schema.items.items.$ref) {
+      return schema.items.items.$ref;
+    }
+  }
+
+  return '';
 }
 
 function determineArrayType(property: Schema = {}): string {
@@ -181,10 +193,16 @@ function transformParameters(
     // todo: required params
     ? parameters.map((param) => {
         const ref = param.$ref || (param.schema && param.schema.$ref) || '';
-        const derefName = dereferenceType(ref);
-        const paramRef = swaggerParams[derefName];
+        const derefName = ref ? dereferenceType(ref) : undefined;
+        const paramRef = derefName ? swaggerParams[derefName] : undefined;
         const name = paramRef ? paramRef.name : param.name;
-        const typescriptType = toTypescriptType(ref ? derefName : param.type);
+        const isArray = /^array$/i.test(param.type || '');
+        const typescriptType = toTypescriptType(isArray
+          ? determineArrayType(param)
+          : ref
+            ? dereferenceType(ref)
+            : param.type
+        );
 
         return {
           ...param,
@@ -192,6 +210,7 @@ function transformParameters(
 
           camelCaseName: camelCase(name),
           importType: prefixImportedModels(typescriptType),
+          isArray,
           name,
           typescriptType,
         };

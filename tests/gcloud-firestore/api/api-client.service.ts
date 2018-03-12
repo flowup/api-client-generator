@@ -92,7 +92,7 @@ export class APIClient {
     options = {...this.options, ...options};
 
     if (maskFieldPaths) {
-      options.params = options.params.set('mask.fieldPaths', String(maskFieldPaths));
+      options.params = maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
     }
     if (readTime) {
       options.params = options.params.set('readTime', String(readTime));
@@ -114,10 +114,10 @@ export class APIClient {
       options.params = options.params.set('currentDocument.updateTime', String(currentDocumentUpdateTime));
     }
     if (maskFieldPaths) {
-      options.params = options.params.set('mask.fieldPaths', String(maskFieldPaths));
+      options.params = maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
     }
     if (updateMaskFieldPaths) {
-      options.params = options.params.set('updateMask.fieldPaths', String(updateMaskFieldPaths));
+      options.params = updateMaskFieldPaths.reduce((acc, cur) => acc.append('updateMask.fieldPaths', `${cur}`), options.params);
     }
     return this.sendRequest<models.Document>('PATCH', path, options, JSON.stringify(body));
   }
@@ -150,7 +150,7 @@ export class APIClient {
     options = {...this.options, ...options};
 
     if (maskFieldPaths) {
-      options.params = options.params.set('mask.fieldPaths', String(maskFieldPaths));
+      options.params = maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
     }
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
@@ -181,7 +181,7 @@ export class APIClient {
       options.params = options.params.set('documentId', String(documentId));
     }
     if (maskFieldPaths) {
-      options.params = options.params.set('mask.fieldPaths', String(maskFieldPaths));
+      options.params = maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
     }
     return this.sendRequest<models.Document>('POST', path, options, JSON.stringify(body));
   }
