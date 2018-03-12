@@ -4,7 +4,10 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { APIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
 
+{{#definitions.length}}
 export * from './models';
+{{/definitions.length}}
+
 export { APIClient } from './api-client.service';
 
 export interface HttpOptions {

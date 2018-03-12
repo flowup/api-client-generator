@@ -4,7 +4,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpOptions } from './';
+
+{{#definitions.length}}
 import * as models from './models';
+{{/definitions.length}}
 
 export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
 export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
