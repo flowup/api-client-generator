@@ -26,10 +26,11 @@
     "outDir": "dist",
     "typeRoots": [
       "node_modules/@types",
-      "typings.d.ts"
+      "src/typings.d.ts"
     ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "tests/tests.ts"
   ]
 }

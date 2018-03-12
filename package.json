@@ -55,11 +55,11 @@
   "scripts": {
     "generate": "node ./dist/main.js",
     "build": "rimraf dist && tsc",
-    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts'",
+    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts' 'tests/tests.ts'",
     "gen": "ts-node ./src/main.ts",
     "gen-sports": "rimraf ./tests/sports/api && ts-node ./src/main.ts -s ./tests/sports/swagger.yaml -o ./tests/sports/api",
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
-    "gen-google-cloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
+    "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
     "release": "npm run build && standard-version --tag-prefix=''",
     "test": "ts-node ./tests/tests.ts"
   },

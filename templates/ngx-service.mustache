@@ -36,7 +36,7 @@ export class APIClient {
   }
 
 {{#methods}}
-  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{importType}}, {{/parameters}}options?: HttpOptions): Observable<{{&response}}> {
+  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{importType}}{{#isArray}}[]{{/isArray}}, {{/parameters}}options?: HttpOptions): Observable<{{&response}}> {
     const path = `{{&path}}`;
     options = {...this.options, ...options};
 
@@ -44,9 +44,7 @@ export class APIClient {
       {{#isQueryParameter}}
     if ({{&camelCaseName}}) {
           {{#isArray}}
-      Object.keys({{&camelCaseName}}).map(value => {
-        options.params = options.params.append('{{&name}}', `${value}`);
-      });
+      options.params = {{&camelCaseName}}.reduce((acc, cur) => acc.append('{{&name}}', `${cur}`), options.params);
           {{/isArray}}
           {{^isArray}}
       options.params = options.params.set('{{&name}}', String({{&camelCaseName}}));
@@ -56,9 +54,7 @@ export class APIClient {
       {{#isHeaderParameter}}
     if ({{&camelCaseName}}) {
           {{#isArray}}
-      Object.keys({{&camelCaseName}}).map(value => {
-        options.headers = options.headers.set('{{&name}}', `${value}`);
-      });
+      options.headers = options.headers.set('{{&name}}', {{&camelCaseName}}.map(value => `${value}`));
           {{/isArray}}
           {{^isArray}}
       options.headers = options.headers.set('{{&name}}', String({{&camelCaseName}}));

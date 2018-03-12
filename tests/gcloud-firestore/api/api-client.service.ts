@@ -93,9 +93,7 @@ export class APIClient {
     options = {...this.options, ...options};
 
     if (maskFieldPaths) {
-      Object.keys(maskFieldPaths).map(value => {
-        options.params = options.params.append('mask.fieldPaths', `${value}`);
-      });
+      options.params = maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
     }
     if (readTime) {
       options.params = options.params.set('readTime', String(readTime));
@@ -117,14 +115,10 @@ export class APIClient {
       options.params = options.params.set('currentDocument.updateTime', String(currentDocumentUpdateTime));
     }
     if (maskFieldPaths) {
-      Object.keys(maskFieldPaths).map(value => {
-        options.params = options.params.append('mask.fieldPaths', `${value}`);
-      });
+      options.params = maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
     }
     if (updateMaskFieldPaths) {
-      Object.keys(updateMaskFieldPaths).map(value => {
-        options.params = options.params.append('updateMask.fieldPaths', `${value}`);
-      });
+      options.params = updateMaskFieldPaths.reduce((acc, cur) => acc.append('updateMask.fieldPaths', `${cur}`), options.params);
     }
     return this.sendRequest<models.Document>('PATCH', path, options, JSON.stringify(body));
   }
@@ -157,9 +151,7 @@ export class APIClient {
     options = {...this.options, ...options};
 
     if (maskFieldPaths) {
-      Object.keys(maskFieldPaths).map(value => {
-        options.params = options.params.append('mask.fieldPaths', `${value}`);
-      });
+      options.params = maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
     }
     if (orderBy) {
       options.params = options.params.set('orderBy', String(orderBy));
@@ -190,9 +182,7 @@ export class APIClient {
       options.params = options.params.set('documentId', String(documentId));
     }
     if (maskFieldPaths) {
-      Object.keys(maskFieldPaths).map(value => {
-        options.params = options.params.append('mask.fieldPaths', `${value}`);
-      });
+      options.params = maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
     }
     return this.sendRequest<models.Document>('POST', path, options, JSON.stringify(body));
   }

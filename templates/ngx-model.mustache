@@ -10,12 +10,7 @@ import {
 
 export interface {{&name}} {
 {{#properties}}
-  {{#isArray}}
-  {{name}}: {{typescriptType}}[];
-  {{/isArray}}
-  {{^isArray}}
-  {{name}}: {{typescriptType}};
-  {{/isArray}}
+  {{name}}: {{typescriptType}}{{#isArray}}[]{{/isArray}};
 {{/properties}}
 }
 {{/isEnum}}
