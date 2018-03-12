@@ -158,7 +158,7 @@ export class APIClient {
     return this.sendRequest<models.ImportHistoryItem[]>('GET', path, options);
   }
 
-  uploadFile(templateId: number, file: models.File, options?: HttpOptions): Observable<any> {
+  uploadFile(templateId: number, file: File, options?: HttpOptions): Observable<any> {
     const path = `/report/wizard/uploadfile/${templateId}`;
     options = {...this.options, ...options};
 
@@ -231,7 +231,7 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options);
   }
 
-  overrideImport(id: number, description: string, file: models.File, options?: HttpOptions): Observable<any> {
+  overrideImport(id: number, description: string, file: File, options?: HttpOptions): Observable<any> {
     const path = `/report/wizard/${id}/override`;
     options = {...this.options, ...options};
 
