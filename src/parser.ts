@@ -43,7 +43,8 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
           isSecure: security !== undefined || operation.security !== undefined,
           methodName: camelCase(operation.operationId
             ? operation.operationId
-            : console.error(`Method name could not be determined, path will be used instead of operation id [ ${pathName} ]`) || pathName),
+            : `${methodType}_${pathName.replace(/[{}]/g, '')}`
+          ),
           methodType: methodType.toUpperCase() as MethodType,
           parameters: transformParameters(operation.parameters, parameters || {}),
           path: pathName.replace(/({.*?})/g, '$$$1'), // turn path interpolation `{this}` into string template `${this}

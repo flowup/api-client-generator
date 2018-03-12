@@ -9,7 +9,9 @@ export function camelCase(text: string = '', lowerFirst: boolean = true): string
     return text;
   }
 
-  const camelText = text.split(/[-._]/).map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
+  const camelText = text.split(/[-._\/\\+*]/)
+    .filter(word => !!word) // skip empty words
+    .map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
 
   return lowerFirst
     ? /^([A-Z]+(?=[A-Z]))/.test(camelText)
