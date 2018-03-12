@@ -15,10 +15,20 @@ export interface {{&name}} {
 }
 {{/isEnum}}
 {{#isEnum}}
+  {{#isNumeric}}
 
 export enum {{&name}} {
-{{#properties}}
-  {{name}} = "{{name}}",
-{{/properties}}
+    {{#properties}}
+  {{name}} = {{value}},
+    {{/properties}}
 }
+  {{/isNumeric}}
+  {{^isNumeric}}
+
+export enum {{&name}} {
+    {{#properties}}
+  {{name}} = "{{value}}",
+    {{/properties}}
+}
+  {{/isNumeric}}
 {{/isEnum}}

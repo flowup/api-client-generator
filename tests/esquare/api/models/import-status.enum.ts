@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export enum ImportStatus {
-  1 = "1",
-  2 = "2",
+  Live = 1,
+  PastDeadline = 2,
 }

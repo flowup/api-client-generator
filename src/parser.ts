@@ -13,6 +13,7 @@ interface ExtendedParameters {
 type ExtendedParameter = (BodyParameter | QueryParameter) & {
   'enum': (string | boolean | number | {})[],
   schema: Schema,
+  type: 'string' | 'integer'
 };
 
 interface Definitions {
@@ -70,17 +71,34 @@ function parseDefinitions(
 
 function defineEnumOrInterface(key: string, definition: Schema | ExtendedParameter): Definition {
   return definition.enum && definition.enum.length !== 0
-    ? defineEnum(definition.enum, key)
+    ? defineEnum(definition.enum, key, definition.type === 'integer', definition.description)
     : defineInterface(('schema' in definition ? definition.schema : definition) || {}, key);
 }
 
-function defineEnum(enumSchema: (string | boolean | number | {})[] = [], definitionKey: string): Definition {
+function defineEnum(enumSchema: (string | boolean | number | {})[] = [],
+                    definitionKey: string,
+                    isNumeric: boolean = false,
+                    enumDesc: string = '',
+): Definition {
+  const splitDesc = enumDesc.split('\n');
+  const descKeys: { [key: string]: string } | null = splitDesc.length > 1
+    ? splitDesc
+      .reduce((acc, cur) => {
+        const captured = /(\d) (\w+)/.exec(cur); // parse the `- 42 UltimateAnswer` description syntax
+        return captured ? {...acc, [captured[1]]: captured[2]} : acc;
+      }, {})
+    : null;
+
   return {
     name: typeName(definitionKey),
     properties: enumSchema && enumSchema.map((val) => ({
-      name: val.toString(),
+      name: isNumeric
+        ? descKeys ? descKeys[val.toString()] : val.toString()
+        : val.toString(),
+      value: val.toString(),
     })),
     isEnum: true,
+    isNumeric,
     imports: [],
     renderFileName: (): RenderFileName => (text: string, render: Render): string => fileName(render(text), 'enum'),
   };

@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export enum Period {
-  1 = "1",
-  2 = "2",
-  3 = "3",
+  Year = 1,
+  Month = 2,
+  Week = 3,
 }

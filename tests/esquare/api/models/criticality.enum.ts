@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export enum Criticality {
-  1 = "1",
-  2 = "2",
-  3 = "3",
+  Low = 1,
+  Medium = 2,
+  High = 3,
 }

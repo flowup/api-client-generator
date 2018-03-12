@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export enum Status {
-  1 = "1",
-  2 = "2",
-  3 = "3",
+  Pending = 1,
+  InProgress = 2,
+  Complete = 3,
 }

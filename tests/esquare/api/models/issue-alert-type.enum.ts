@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export enum IssueAlertType {
-  1 = "1",
-  2 = "2",
+  Validation = 1,
+  Data = 2,
 }

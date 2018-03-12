@@ -8,6 +8,7 @@ export interface Definition {
   properties: Property[];
   imports: string[];
   isEnum?: boolean;
+  isNumeric?: boolean; // used for determining if string or numeric enum should be generated
   renderFileName?(): RenderFileName; // generate dash-case file names to templates
 }
 

@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export enum Frequency {
-  1 = "1",
-  2 = "2",
-  3 = "3",
+  Daily = 1,
+  Weekly = 2,
+  Yearly = 3,
 }

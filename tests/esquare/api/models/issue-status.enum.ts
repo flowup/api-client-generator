@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export enum IssueStatus {
-  1 = "1",
-  2 = "2",
+  Pending = 1,
+  Resolved = 2,
 }
