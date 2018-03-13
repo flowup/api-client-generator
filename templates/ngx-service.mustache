@@ -36,33 +36,40 @@ export class APIClient {
   }
 
 {{#methods}}
-  {{&methodName}}({{#parameters}}{{&camelCaseName}}: {{importType}}{{#isArray}}[]{{/isArray}}, {{/parameters}}options?: HttpOptions): Observable<{{&response}}> {
+  {{&methodName}}(
+  {{#parameters.length}}
+    args: {
+      {{#parameters}}{{&camelCaseName}}: {{importType}}{{#isArray}}[]{{/isArray}},{{/parameters}}
+    },
+  {{/parameters.length}}
+    options?: HttpOptions
+  ): Observable<{{&response}}> {
     const path = `{{&path}}`;
     options = {...this.options, ...options};
 
     {{#parameters}}
       {{#isQueryParameter}}
-    if ({{&camelCaseName}}) {
+    if (args.{{&camelCaseName}}) {
           {{#isArray}}
-      options.params = {{&camelCaseName}}.reduce((acc, cur) => acc.append('{{&name}}', `${cur}`), options.params);
+      options.params = args.{{&camelCaseName}}.reduce((acc, cur) => acc.append('{{&name}}', `${cur}`), options.params);
           {{/isArray}}
           {{^isArray}}
-      options.params = options.params.set('{{&name}}', String({{&camelCaseName}}));
+      options.params = options.params.set('{{&name}}', String(args.{{&camelCaseName}}));
           {{/isArray}}
     }
       {{/isQueryParameter}}
       {{#isHeaderParameter}}
-    if ({{&camelCaseName}}) {
+    if (args.{{&camelCaseName}}) {
           {{#isArray}}
-      options.headers = options.headers.set('{{&name}}', {{&camelCaseName}}.map(value => `${value}`));
+      options.headers = options.headers.set('{{&name}}', args.{{&camelCaseName}}.map(value => `${value}`));
           {{/isArray}}
           {{^isArray}}
-      options.headers = options.headers.set('{{&name}}', String({{&camelCaseName}}));
+      options.headers = options.headers.set('{{&name}}', String(args.{{&camelCaseName}}));
           {{/isArray}}
     }
       {{/isHeaderParameter}}
     {{/parameters}}
-    return this.sendRequest<{{&response}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify({{&camelCaseName}}){{/isBodyParameter}}{{/parameters}});
+    return this.sendRequest<{{&response}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{/parameters}});
   }
 
 {{/methods}}

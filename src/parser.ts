@@ -47,7 +47,7 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
           ),
           methodType: methodType.toUpperCase() as MethodType,
           parameters: transformParameters(operation.parameters, parameters || {}),
-          path: pathName.replace(/({.*?})/g, '$$$1'), // turn path interpolation `{this}` into string template `${this}
+          path: pathName.replace(/{(.*?)}/g, '$${args.$1}'), // turn path interpolation `{this}` into string template `${this}
           response: prefixImportedModels(determineResponseType(operation.responses)),
           summaryLines: operation.description
             ? (operation.description || '').split('\n')
