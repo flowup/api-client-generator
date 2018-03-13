@@ -69,7 +69,7 @@ export class APIClient {
     }
       {{/isHeaderParameter}}
     {{/parameters}}
-    return this.sendRequest<{{&response}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{/parameters}});
+    return this.sendRequest<{{&response}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{#isFormParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isFormParameter}}{{/parameters}});
   }
 
 {{/methods}}
