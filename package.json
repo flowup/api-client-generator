@@ -60,6 +60,7 @@
     "gen-sports": "rimraf ./tests/sports/api && ts-node ./src/main.ts -s ./tests/sports/swagger.yaml -o ./tests/sports/api",
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
     "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
+    "gen-github": "rimraf ./tests/github/api && ts-node ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api",
     "release": "npm run build && standard-version --tag-prefix=''",
     "test": "ts-node ./tests/tests.ts"
   },
