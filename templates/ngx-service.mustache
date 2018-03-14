@@ -39,7 +39,9 @@ export class APIClient {
   {{&methodName}}(
   {{#parameters.length}}
     args: {
-      {{#parameters}}{{&camelCaseName}}: {{importType}}{{#isArray}}[]{{/isArray}},{{/parameters}}
+      {{#parameters}}
+      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{importType}}{{#isArray}}[]{{/isArray}},
+      {{/parameters}}
     },
   {{/parameters.length}}
     options?: HttpOptions

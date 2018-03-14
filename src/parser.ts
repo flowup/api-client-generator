@@ -11,9 +11,10 @@ interface ExtendedParameters {
 }
 
 type ExtendedParameter = (BodyParameter | QueryParameter) & {
-  'enum': (string | boolean | number | {})[],
-  schema: Schema,
-  type: 'string' | 'integer'
+  'enum': (string | boolean | number | {})[];
+  schema: Schema;
+  type: 'string' | 'integer';
+  required: boolean;
 };
 
 interface Definitions {
@@ -206,15 +207,15 @@ function determineResponseType(responses: { [responseName: string]: Response }):
 }
 
 function transformParameters(
-  parameters: Parameter[],
-  swaggerParams: Parameters
+  parameters: Parameters,
+  allParams: Parameters
 ): Parameter[] {
   return Array.isArray(parameters)
     // todo: required params
     ? parameters.map((param) => {
         const ref = param.$ref || (param.schema && param.schema.$ref) || '';
         const derefName = ref ? dereferenceType(ref) : undefined;
-        const paramRef = derefName ? swaggerParams[derefName] : undefined;
+        const paramRef = derefName ? allParams[derefName] : undefined;
         const name = paramRef ? paramRef.name : param.name;
         const isArray = /^array$/i.test(param.type || '');
         const typescriptType = toTypescriptType(isArray
@@ -231,6 +232,7 @@ function transformParameters(
           camelCaseName: camelCase(name),
           importType: prefixImportedModels(typescriptType),
           isArray,
+          isRequired: !!param.required,
           name,
           typescriptType,
         };

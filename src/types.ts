@@ -45,6 +45,7 @@ export interface Parameter extends Property {
   readonly isHeaderParameter?: boolean;
   readonly isPathParameter?: boolean;
   readonly isQueryParameter?: boolean;
+  readonly isRequired?: boolean;
 }
 
 export interface Method {
