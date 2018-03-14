@@ -33,520 +33,810 @@ export class APIClient {
     };
   }
 
-  auth(body: models.AuthForm, options?: HttpOptions): Observable<any> {
+  auth(
+    args: {
+      body: models.AuthForm,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/auth`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(body));
+    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
-  authRef(options?: HttpOptions): Observable<any> {
+  authRef(
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/auth/refresh`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('POST', path, options);
   }
 
-  passwordRestoreRequest(body: models.RestoreForm, options?: HttpOptions): Observable<any> {
+  passwordRestoreRequest(
+    args: {
+      body: models.RestoreForm,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/restore`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(body));
+    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
-  passwordRestoreEmailRequest(body: models.RestoreRequestForm, options?: HttpOptions): Observable<any> {
+  passwordRestoreEmailRequest(
+    args: {
+      body: models.RestoreRequestForm,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/restore/request`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(body));
+    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
-  passwordRestoreCheckRestoreGuid(restoreGuid: string, options?: HttpOptions): Observable<any> {
+  passwordRestoreCheckRestoreGuid(
+    args: {
+      restoreGuid: string,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/restore/checkGuid`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('POST', path, options);
+    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.restoreGuid));
   }
 
-  getAclList(options?: HttpOptions): Observable<models.AclItem[]> {
+  getAclList(
+    options?: HttpOptions
+  ): Observable<models.AclItem[]> {
     const path = `/acl`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.AclItem[]>('GET', path, options);
   }
 
-  getStructureEntitiesList(options?: HttpOptions): Observable<models.Structure[]> {
+  getStructureEntitiesList(
+    options?: HttpOptions
+  ): Observable<models.Structure[]> {
     const path = `/structure`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.Structure[]>('GET', path, options);
   }
 
-  addStructureEntity(body: models.StructureAddParameters, options?: HttpOptions): Observable<models.Structure> {
+  addStructureEntity(
+    args: {
+      body: models.StructureAddParameters,
+    },
+    options?: HttpOptions
+  ): Observable<models.Structure> {
     const path = `/structure`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.Structure>('POST', path, options, JSON.stringify(body));
+    return this.sendRequest<models.Structure>('POST', path, options, JSON.stringify(args.body));
   }
 
-  updateStructureEntity(structureId: number, body: models.StructureForm, options?: HttpOptions): Observable<models.Structure> {
-    const path = `/structure/${structureId}`;
+  updateStructureEntity(
+    args: {
+      structureId: number,
+      body: models.StructureForm,
+    },
+    options?: HttpOptions
+  ): Observable<models.Structure> {
+    const path = `/structure/${args.structureId}`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.Structure>('PUT', path, options, JSON.stringify(body));
+    return this.sendRequest<models.Structure>('PUT', path, options, JSON.stringify(args.body));
   }
 
-  deleteStructureEntity(structureId: number, options?: HttpOptions): Observable<any> {
-    const path = `/structure/${structureId}`;
+  deleteStructureEntity(
+    args: {
+      structureId: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/structure/${args.structureId}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('DELETE', path, options);
   }
 
-  getReportsList(status: models.Status, pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
+  getReportsList(
+    args: {
+      status?: models.Status,
+      pageSize: number,
+      page: number,
+      orderBy: string,
+      order?: models.Order,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/report`;
     options = {...this.options, ...options};
 
-    if (status) {
-      options.params = options.params.set('status', String(status));
+    if ('status' in args) {
+      options.params = options.params.set('status', String(args.status));
     }
-    if (pageSize) {
-      options.params = options.params.set('pageSize', String(pageSize));
+    if ('pageSize' in args) {
+      options.params = options.params.set('pageSize', String(args.pageSize));
     }
-    if (page) {
-      options.params = options.params.set('page', String(page));
+    if ('page' in args) {
+      options.params = options.params.set('page', String(args.page));
     }
-    if (orderBy) {
-      options.params = options.params.set('orderBy', String(orderBy));
+    if ('orderBy' in args) {
+      options.params = options.params.set('orderBy', String(args.orderBy));
     }
-    if (order) {
-      options.params = options.params.set('order', String(order));
+    if ('order' in args) {
+      options.params = options.params.set('order', String(args.order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  getReportDetails(id: number, options?: HttpOptions): Observable<models.ReportItem[]> {
-    const path = `/report/${id}`;
+  getReportDetails(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.ReportItem[]> {
+    const path = `/report/${args.id}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.ReportItem[]>('GET', path, options);
   }
 
-  getReportPreview(templateId: number, pageSize: number, page: number, orderBy: number, order: models.Order, options?: HttpOptions): Observable<any> {
-    const path = `/report/preview/${templateId}`;
+  getReportPreview(
+    args: {
+      templateId: number,
+      pageSize: number,
+      page: number,
+      orderBy?: number,
+      order?: models.Order,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/report/preview/${args.templateId}`;
     options = {...this.options, ...options};
 
-    if (pageSize) {
-      options.params = options.params.set('pageSize', String(pageSize));
+    if ('pageSize' in args) {
+      options.params = options.params.set('pageSize', String(args.pageSize));
     }
-    if (page) {
-      options.params = options.params.set('page', String(page));
+    if ('page' in args) {
+      options.params = options.params.set('page', String(args.page));
     }
-    if (orderBy) {
-      options.params = options.params.set('orderBy', String(orderBy));
+    if ('orderBy' in args) {
+      options.params = options.params.set('orderBy', String(args.orderBy));
     }
-    if (order) {
-      options.params = options.params.set('order', String(order));
+    if ('order' in args) {
+      options.params = options.params.set('order', String(args.order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  getImportHistory(templateId: number, options?: HttpOptions): Observable<models.ImportHistoryItem[]> {
-    const path = `/report/history/${templateId}`;
+  getImportHistory(
+    args: {
+      templateId: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.ImportHistoryItem[]> {
+    const path = `/report/history/${args.templateId}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.ImportHistoryItem[]>('GET', path, options);
   }
 
-  uploadFile(templateId: number, file: File, options?: HttpOptions): Observable<any> {
-    const path = `/report/wizard/uploadfile/${templateId}`;
+  uploadFile(
+    args: {
+      templateId: number,
+      file: File,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/report/wizard/uploadfile/${args.templateId}`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('POST', path, options);
+    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.file));
   }
 
-  listTemplateColumns(templateId: number, options?: HttpOptions): Observable<models.Column[]> {
-    const path = `/report/wizard/${templateId}/templateColumns`;
+  listTemplateColumns(
+    args: {
+      templateId: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.Column[]> {
+    const path = `/report/wizard/${args.templateId}/templateColumns`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.Column[]>('GET', path, options);
   }
 
-  listReportColumns(id: number, options?: HttpOptions): Observable<models.Column[]> {
-    const path = `/report/wizard/${id}/reportColumns`;
+  listReportColumns(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.Column[]> {
+    const path = `/report/wizard/${args.id}/reportColumns`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.Column[]>('GET', path, options);
   }
 
-  saveColumnsMapping(id: number, body: any, options?: HttpOptions): Observable<models.Table> {
-    const path = `/report/wizard/${id}/mapping`;
+  saveColumnsMapping(
+    args: {
+      id: number,
+      body: any,
+    },
+    options?: HttpOptions
+  ): Observable<models.Table> {
+    const path = `/report/wizard/${args.id}/mapping`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.Table>('POST', path, options, JSON.stringify(body));
+    return this.sendRequest<models.Table>('POST', path, options, JSON.stringify(args.body));
   }
 
-  getValidationTable(id: number, options?: HttpOptions): Observable<models.ValidatedTable> {
-    const path = `/report/wizard/${id}/validationTable`;
+  getValidationTable(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.ValidatedTable> {
+    const path = `/report/wizard/${args.id}/validationTable`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.ValidatedTable>('GET', path, options);
   }
 
-  downloadImportedFile(id: number, all: boolean, options?: HttpOptions): Observable<any> {
-    const path = `/report/wizard/${id}/downloadImported`;
+  downloadImportedFile(
+    args: {
+      id: number,
+      all?: boolean,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/report/wizard/${args.id}/downloadImported`;
     options = {...this.options, ...options};
 
-    if (all) {
-      options.params = options.params.set('all', String(all));
+    if ('all' in args) {
+      options.params = options.params.set('all', String(args.all));
     }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  importConfirmation(id: number, options?: HttpOptions): Observable<models.ImportResponse> {
-    const path = `/report/wizard/${id}/import`;
+  importConfirmation(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.ImportResponse> {
+    const path = `/report/wizard/${args.id}/import`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.ImportResponse>('POST', path, options);
   }
 
-  downloadImportOriginalFile(id: number, options?: HttpOptions): Observable<any> {
-    const path = `/report/wizard/${id}/downloadOriginal`;
+  downloadImportOriginalFile(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/report/wizard/${args.id}/downloadOriginal`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('GET', path, options);
   }
 
-  downloadImportSkippedFile(id: number, options?: HttpOptions): Observable<any> {
-    const path = `/report/wizard/${id}/downloadSkipped`;
+  downloadImportSkippedFile(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/report/wizard/${args.id}/downloadSkipped`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('GET', path, options);
   }
 
-  cancelImport(id: number, options?: HttpOptions): Observable<any> {
-    const path = `/report/wizard/${id}/cancelImport`;
+  cancelImport(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/report/wizard/${args.id}/cancelImport`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('POST', path, options);
   }
 
-  overrideImport(id: number, description: string, file: File, options?: HttpOptions): Observable<any> {
-    const path = `/report/wizard/${id}/override`;
+  overrideImport(
+    args: {
+      id: number,
+      description: string,
+      file: File,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/report/wizard/${args.id}/override`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('POST', path, options);
+    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.description), JSON.stringify(args.file));
   }
 
-  geImportStats(period: models.Period, options?: HttpOptions): Observable<models.TotalImportStats> {
+  geImportStats(
+    args: {
+      period?: models.Period,
+    },
+    options?: HttpOptions
+  ): Observable<models.TotalImportStats> {
     const path = `/report/ministry/statistic`;
     options = {...this.options, ...options};
 
-    if (period) {
-      options.params = options.params.set('period', String(period));
+    if ('period' in args) {
+      options.params = options.params.set('period', String(args.period));
     }
     return this.sendRequest<models.TotalImportStats>('GET', path, options);
   }
 
-  getIssuesList(period: models.Period, status: models.IssueStatus, pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
+  getIssuesList(
+    args: {
+      period?: models.Period,
+      status?: models.IssueStatus,
+      pageSize: number,
+      page: number,
+      orderBy: string,
+      order?: models.Order,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/report/ministry/issues`;
     options = {...this.options, ...options};
 
-    if (period) {
-      options.params = options.params.set('period', String(period));
+    if ('period' in args) {
+      options.params = options.params.set('period', String(args.period));
     }
-    if (status) {
-      options.params = options.params.set('status', String(status));
+    if ('status' in args) {
+      options.params = options.params.set('status', String(args.status));
     }
-    if (pageSize) {
-      options.params = options.params.set('pageSize', String(pageSize));
+    if ('pageSize' in args) {
+      options.params = options.params.set('pageSize', String(args.pageSize));
     }
-    if (page) {
-      options.params = options.params.set('page', String(page));
+    if ('page' in args) {
+      options.params = options.params.set('page', String(args.page));
     }
-    if (orderBy) {
-      options.params = options.params.set('orderBy', String(orderBy));
+    if ('orderBy' in args) {
+      options.params = options.params.set('orderBy', String(args.orderBy));
     }
-    if (order) {
-      options.params = options.params.set('order', String(order));
+    if ('order' in args) {
+      options.params = options.params.set('order', String(args.order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  getStatusesList(period: models.Period, status: models.ImportStatus, pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
+  getStatusesList(
+    args: {
+      period?: models.Period,
+      status?: models.ImportStatus,
+      pageSize: number,
+      page: number,
+      orderBy: string,
+      order?: models.Order,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/report/ministry/statuses`;
     options = {...this.options, ...options};
 
-    if (period) {
-      options.params = options.params.set('period', String(period));
+    if ('period' in args) {
+      options.params = options.params.set('period', String(args.period));
     }
-    if (status) {
-      options.params = options.params.set('status', String(status));
+    if ('status' in args) {
+      options.params = options.params.set('status', String(args.status));
     }
-    if (pageSize) {
-      options.params = options.params.set('pageSize', String(pageSize));
+    if ('pageSize' in args) {
+      options.params = options.params.set('pageSize', String(args.pageSize));
     }
-    if (page) {
-      options.params = options.params.set('page', String(page));
+    if ('page' in args) {
+      options.params = options.params.set('page', String(args.page));
     }
-    if (orderBy) {
-      options.params = options.params.set('orderBy', String(orderBy));
+    if ('orderBy' in args) {
+      options.params = options.params.set('orderBy', String(args.orderBy));
     }
-    if (order) {
-      options.params = options.params.set('order', String(order));
-    }
-    return this.sendRequest<any>('GET', path, options);
-  }
-
-  getUsersList(period: models.Period, status: models.ImportStatus, pageSize: number, page: number, orderBy: string, order: models.Order, assignedToRole: number, unassignedFromRole: number, options?: HttpOptions): Observable<any> {
-    const path = `/users`;
-    options = {...this.options, ...options};
-
-    if (period) {
-      options.params = options.params.set('period', String(period));
-    }
-    if (status) {
-      options.params = options.params.set('status', String(status));
-    }
-    if (pageSize) {
-      options.params = options.params.set('pageSize', String(pageSize));
-    }
-    if (page) {
-      options.params = options.params.set('page', String(page));
-    }
-    if (orderBy) {
-      options.params = options.params.set('orderBy', String(orderBy));
-    }
-    if (order) {
-      options.params = options.params.set('order', String(order));
-    }
-    if (assignedToRole) {
-      options.params = options.params.set('assignedToRole', String(assignedToRole));
-    }
-    if (unassignedFromRole) {
-      options.params = options.params.set('unassignedFromRole', String(unassignedFromRole));
+    if ('order' in args) {
+      options.params = options.params.set('order', String(args.order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  createUser(body: models.UserDetails, options?: HttpOptions): Observable<models.UserDetails> {
+  getUsersList(
+    args: {
+      period?: models.Period,
+      status?: models.ImportStatus,
+      pageSize: number,
+      page: number,
+      orderBy: string,
+      order?: models.Order,
+      assignedToRole?: number,
+      unassignedFromRole?: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/users`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.UserDetails>('POST', path, options, JSON.stringify(body));
+    if ('period' in args) {
+      options.params = options.params.set('period', String(args.period));
+    }
+    if ('status' in args) {
+      options.params = options.params.set('status', String(args.status));
+    }
+    if ('pageSize' in args) {
+      options.params = options.params.set('pageSize', String(args.pageSize));
+    }
+    if ('page' in args) {
+      options.params = options.params.set('page', String(args.page));
+    }
+    if ('orderBy' in args) {
+      options.params = options.params.set('orderBy', String(args.orderBy));
+    }
+    if ('order' in args) {
+      options.params = options.params.set('order', String(args.order));
+    }
+    if ('assignedToRole' in args) {
+      options.params = options.params.set('assignedToRole', String(args.assignedToRole));
+    }
+    if ('unassignedFromRole' in args) {
+      options.params = options.params.set('unassignedFromRole', String(args.unassignedFromRole));
+    }
+    return this.sendRequest<any>('GET', path, options);
   }
 
-  getAclStructure(options?: HttpOptions): Observable<models.Acl[]> {
+  createUser(
+    args: {
+      body: models.UserDetails,
+    },
+    options?: HttpOptions
+  ): Observable<models.UserDetails> {
+    const path = `/users`;
+    options = {...this.options, ...options};
+
+    return this.sendRequest<models.UserDetails>('POST', path, options, JSON.stringify(args.body));
+  }
+
+  getAclStructure(
+    options?: HttpOptions
+  ): Observable<models.Acl[]> {
     const path = `/users/acl`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.Acl[]>('GET', path, options);
   }
 
-  getUserDetails(id: number, options?: HttpOptions): Observable<models.UserDetails[]> {
-    const path = `/users/${id}`;
+  getUserDetails(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.UserDetails[]> {
+    const path = `/users/${args.id}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.UserDetails[]>('GET', path, options);
   }
 
-  updateUser(id: number, body: models.UserDetails, options?: HttpOptions): Observable<models.UserDetails> {
-    const path = `/users/${id}`;
+  updateUser(
+    args: {
+      id: number,
+      body: models.UserDetails,
+    },
+    options?: HttpOptions
+  ): Observable<models.UserDetails> {
+    const path = `/users/${args.id}`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.UserDetails>('PUT', path, options, JSON.stringify(body));
+    return this.sendRequest<models.UserDetails>('PUT', path, options, JSON.stringify(args.body));
   }
 
-  deleteUser(id: number, options?: HttpOptions): Observable<any> {
-    const path = `/users/${id}`;
+  deleteUser(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/users/${args.id}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('DELETE', path, options);
   }
 
-  getRolesList(options?: HttpOptions): Observable<models.RoleListItem[]> {
+  getRolesList(
+    options?: HttpOptions
+  ): Observable<models.RoleListItem[]> {
     const path = `/users/roles`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.RoleListItem[]>('GET', path, options);
   }
 
-  createRole(body: any, options?: HttpOptions): Observable<models.RoleDetailsItem> {
+  createRole(
+    args: {
+      body: any,
+    },
+    options?: HttpOptions
+  ): Observable<models.RoleDetailsItem> {
     const path = `/users/roles`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.RoleDetailsItem>('POST', path, options, JSON.stringify(body));
+    return this.sendRequest<models.RoleDetailsItem>('POST', path, options, JSON.stringify(args.body));
   }
 
-  getList(options?: HttpOptions): Observable<models.PrivilegeTreeItem[]> {
+  getList(
+    options?: HttpOptions
+  ): Observable<models.PrivilegeTreeItem[]> {
     const path = `/users/privileges`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.PrivilegeTreeItem[]>('GET', path, options);
   }
 
-  getRoleDetails(id: number, options?: HttpOptions): Observable<models.RoleDetailsItem[]> {
-    const path = `/users/roles/${id}`;
+  getRoleDetails(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.RoleDetailsItem[]> {
+    const path = `/users/roles/${args.id}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.RoleDetailsItem[]>('GET', path, options);
   }
 
-  updateRole(id: number, body: models.RoleUpdateDetails, options?: HttpOptions): Observable<models.RoleDetailsItem> {
-    const path = `/users/roles/${id}`;
+  updateRole(
+    args: {
+      id: number,
+      body?: models.RoleUpdateDetails,
+    },
+    options?: HttpOptions
+  ): Observable<models.RoleDetailsItem> {
+    const path = `/users/roles/${args.id}`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.RoleDetailsItem>('PUT', path, options, JSON.stringify(body));
+    return this.sendRequest<models.RoleDetailsItem>('PUT', path, options, JSON.stringify(args.body));
   }
 
-  deleteRole(id: number, options?: HttpOptions): Observable<any> {
-    const path = `/users/roles/${id}`;
+  deleteRole(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/users/roles/${args.id}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('DELETE', path, options);
   }
 
-  getNewNotificationsList(options?: HttpOptions): Observable<models.NotificationListItem[]> {
+  getNewNotificationsList(
+    options?: HttpOptions
+  ): Observable<models.NotificationListItem[]> {
     const path = `/notifications/new`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.NotificationListItem[]>('GET', path, options);
   }
 
-  markViewedNotifications(body: any, options?: HttpOptions): Observable<any> {
+  markViewedNotifications(
+    args: {
+      body?: any,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/notifications/markAsViewed`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('PUT', path, options, JSON.stringify(body));
+    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
   }
 
-  getNotificationsList(pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
+  getNotificationsList(
+    args: {
+      pageSize: number,
+      page: number,
+      orderBy: string,
+      order?: models.Order,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/notifications/all`;
     options = {...this.options, ...options};
 
-    if (pageSize) {
-      options.params = options.params.set('pageSize', String(pageSize));
+    if ('pageSize' in args) {
+      options.params = options.params.set('pageSize', String(args.pageSize));
     }
-    if (page) {
-      options.params = options.params.set('page', String(page));
+    if ('page' in args) {
+      options.params = options.params.set('page', String(args.page));
     }
-    if (orderBy) {
-      options.params = options.params.set('orderBy', String(orderBy));
+    if ('orderBy' in args) {
+      options.params = options.params.set('orderBy', String(args.orderBy));
     }
-    if (order) {
-      options.params = options.params.set('order', String(order));
+    if ('order' in args) {
+      options.params = options.params.set('order', String(args.order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  getModulesList(options?: HttpOptions): Observable<models.NotificationModule[]> {
+  getModulesList(
+    options?: HttpOptions
+  ): Observable<models.NotificationModule[]> {
     const path = `/notifications/modules`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.NotificationModule[]>('GET', path, options);
   }
 
-  getTriggersList(options?: HttpOptions): Observable<models.NotificationTrigger[]> {
+  getTriggersList(
+    options?: HttpOptions
+  ): Observable<models.NotificationTrigger[]> {
     const path = `/notifications/triggers`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.NotificationTrigger[]>('GET', path, options);
   }
 
-  getModuleNotificationsList(moduleId: number, pageSize: number, page: number, orderBy: string, order: models.Order, options?: HttpOptions): Observable<any> {
-    const path = `/notifications/modules/${moduleId}`;
+  getModuleNotificationsList(
+    args: {
+      moduleId: number,
+      pageSize: number,
+      page: number,
+      orderBy: string,
+      order?: models.Order,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/notifications/modules/${args.moduleId}`;
     options = {...this.options, ...options};
 
-    if (pageSize) {
-      options.params = options.params.set('pageSize', String(pageSize));
+    if ('pageSize' in args) {
+      options.params = options.params.set('pageSize', String(args.pageSize));
     }
-    if (page) {
-      options.params = options.params.set('page', String(page));
+    if ('page' in args) {
+      options.params = options.params.set('page', String(args.page));
     }
-    if (orderBy) {
-      options.params = options.params.set('orderBy', String(orderBy));
+    if ('orderBy' in args) {
+      options.params = options.params.set('orderBy', String(args.orderBy));
     }
-    if (order) {
-      options.params = options.params.set('order', String(order));
+    if ('order' in args) {
+      options.params = options.params.set('order', String(args.order));
     }
     return this.sendRequest<any>('GET', path, options);
   }
 
-  enableNotification(id: number, options?: HttpOptions): Observable<any> {
-    const path = `/notifications/enable/${id}`;
+  enableNotification(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/notifications/enable/${args.id}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('PUT', path, options);
   }
 
-  disableNotification(id: number, options?: HttpOptions): Observable<any> {
-    const path = `/notifications/disable/${id}`;
+  disableNotification(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/notifications/disable/${args.id}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<any>('PUT', path, options);
   }
 
-  getNotification(id: number, options?: HttpOptions): Observable<models.NotificationEditableListItem> {
-    const path = `/notifications/${id}`;
+  getNotification(
+    args: {
+      id: number,
+    },
+    options?: HttpOptions
+  ): Observable<models.NotificationEditableListItem> {
+    const path = `/notifications/${args.id}`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.NotificationEditableListItem>('GET', path, options);
   }
 
-  updateNotification(id: number, body: models.NotificationEditable, options?: HttpOptions): Observable<any> {
-    const path = `/notifications/${id}`;
+  updateNotification(
+    args: {
+      id: number,
+      body?: models.NotificationEditable,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
+    const path = `/notifications/${args.id}`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('PUT', path, options, JSON.stringify(body));
+    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
   }
 
-  createNotification(body: models.NotificationEditable, options?: HttpOptions): Observable<any> {
+  createNotification(
+    args: {
+      body?: models.NotificationEditable,
+    },
+    options?: HttpOptions
+  ): Observable<any> {
     const path = `/notifications`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(body));
+    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
-  getPassVerificationPolicies(options?: HttpOptions): Observable<models.PasswordVerificationPolicies> {
+  getPassVerificationPolicies(
+    options?: HttpOptions
+  ): Observable<models.PasswordVerificationPolicies> {
     const path = `/security-policy/password-verification`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.PasswordVerificationPolicies>('GET', path, options);
   }
 
-  udatePassVerificationPolicies(body: models.PasswordVerificationPolicies, options?: HttpOptions): Observable<models.PasswordVerificationPolicies> {
+  udatePassVerificationPolicies(
+    args: {
+      body?: models.PasswordVerificationPolicies,
+    },
+    options?: HttpOptions
+  ): Observable<models.PasswordVerificationPolicies> {
     const path = `/security-policy/password-verification`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.PasswordVerificationPolicies>('PUT', path, options, JSON.stringify(body));
+    return this.sendRequest<models.PasswordVerificationPolicies>('PUT', path, options, JSON.stringify(args.body));
   }
 
-  getPassCreationPolicies(options?: HttpOptions): Observable<models.PasswordCreationPolicies> {
+  getPassCreationPolicies(
+    options?: HttpOptions
+  ): Observable<models.PasswordCreationPolicies> {
     const path = `/security-policy/password-creation`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.PasswordCreationPolicies>('GET', path, options);
   }
 
-  udatePassCreationPolicies(body: models.PasswordCreationPolicies, options?: HttpOptions): Observable<models.PasswordCreationPolicies> {
+  udatePassCreationPolicies(
+    args: {
+      body?: models.PasswordCreationPolicies,
+    },
+    options?: HttpOptions
+  ): Observable<models.PasswordCreationPolicies> {
     const path = `/security-policy/password-creation`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.PasswordCreationPolicies>('PUT', path, options, JSON.stringify(body));
+    return this.sendRequest<models.PasswordCreationPolicies>('PUT', path, options, JSON.stringify(args.body));
   }
 
-  getOtherSecuritySettings(options?: HttpOptions): Observable<models.OtherSecuritySettings> {
+  getOtherSecuritySettings(
+    options?: HttpOptions
+  ): Observable<models.OtherSecuritySettings> {
     const path = `/security-policy/other-settings`;
     options = {...this.options, ...options};
 
     return this.sendRequest<models.OtherSecuritySettings>('GET', path, options);
   }
 
-  udateOtherSecuritySettings(body: models.OtherSecuritySettings, options?: HttpOptions): Observable<models.OtherSecuritySettings> {
+  udateOtherSecuritySettings(
+    args: {
+      body?: models.OtherSecuritySettings,
+    },
+    options?: HttpOptions
+  ): Observable<models.OtherSecuritySettings> {
     const path = `/security-policy/other-settings`;
     options = {...this.options, ...options};
 
-    return this.sendRequest<models.OtherSecuritySettings>('PUT', path, options, JSON.stringify(body));
+    return this.sendRequest<models.OtherSecuritySettings>('PUT', path, options, JSON.stringify(args.body));
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
