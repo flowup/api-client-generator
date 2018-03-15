@@ -6,18 +6,9 @@ pipeline:
       - npm run lint
       - npm run test
       - npm run build
-  build-release:
-    when:
-      event: tag
-    image: node:9
-    commands:
-      - npm install
-      - npm run lint
-      - npm run test
-      - npm run build
   release:
-    when:
-      event: tag
     image: plugins/npm
+    username: flowup
     email: hello@flowup.cz
-    secrets: [token]
+    password: $PASSWORD
+    secrets: [password]
