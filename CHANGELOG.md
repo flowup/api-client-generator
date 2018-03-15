@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/flowup/api-client-generator/compare/3.0.0-alpha.1...3.0.0) (2018-03-15)
+
+
+### Bug Fixes
+
+* **api-client:** array method parameters and headers appended ([34ded75](https://github.com/flowup/api-client-generator/commit/34ded75)), closes [#36](https://github.com/flowup/api-client-generator/issues/36)
+* **api-client:** File, Blob, Date and Object types are not imported from models ([37e358b](https://github.com/flowup/api-client-generator/commit/37e358b)), closes [#27](https://github.com/flowup/api-client-generator/issues/27)
+* **api-client:** form parameter used as body in request ([ce9f124](https://github.com/flowup/api-client-generator/commit/ce9f124)), closes [#40](https://github.com/flowup/api-client-generator/issues/40)
+* **api-client:** models are not imported if there are none ([42cf4c0](https://github.com/flowup/api-client-generator/commit/42cf4c0)), closes [#31](https://github.com/flowup/api-client-generator/issues/31)
+* **parser:** empty or native types parameters won't be generated into models ([ff55939](https://github.com/flowup/api-client-generator/commit/ff55939))
+* **parser:** interface properties were skipped during generation ([3e694ad](https://github.com/flowup/api-client-generator/commit/3e694ad))
+
+
+### Features
+
+* **api-client:** create output dir even if path does not exists ([8ff9be8](https://github.com/flowup/api-client-generator/commit/8ff9be8)), closes [#34](https://github.com/flowup/api-client-generator/issues/34)
+* **api-client:** method names with underscore converted to camelCase ([b09a679](https://github.com/flowup/api-client-generator/commit/b09a679)), closes [#37](https://github.com/flowup/api-client-generator/issues/37)
+* **api-client:** method parameters nested to args object ([efaca5b](https://github.com/flowup/api-client-generator/commit/efaca5b)), closes [#8](https://github.com/flowup/api-client-generator/issues/8)
+* **api-client:** optional param skipped if not in args ([135db91](https://github.com/flowup/api-client-generator/commit/135db91))
+* **api-client:** reference parameters are dereferenced ([0a0de44](https://github.com/flowup/api-client-generator/commit/0a0de44))
+* **api-client:** referenced method parameters generated and used ([0e26c53](https://github.com/flowup/api-client-generator/commit/0e26c53))
+* **api-client:** support for head, options and patch http methods ([bd240f5](https://github.com/flowup/api-client-generator/commit/bd240f5))
+* **api-client:** support for optional method parameters ([9d0cedc](https://github.com/flowup/api-client-generator/commit/9d0cedc)), closes [#8](https://github.com/flowup/api-client-generator/issues/8)
+* **api-client:** when no operation id, method names generated from path and method type ([4afcdbc](https://github.com/flowup/api-client-generator/commit/4afcdbc))
+* **enums:** numeric enums, using keys from description ([45bb096](https://github.com/flowup/api-client-generator/commit/45bb096)), closes [#28](https://github.com/flowup/api-client-generator/issues/28)
+* **parser:** interface property type improvements, including nested array types ([c70d2a3](https://github.com/flowup/api-client-generator/commit/c70d2a3)), closes [#35](https://github.com/flowup/api-client-generator/issues/35)
+
+
+
 <a name="3.0.0-alpha.1"></a>
 # [3.0.0-alpha.1](https://github.com/flowup/api-client-generator/compare/3.0.0-alpha.0...3.0.0-alpha.1) (2018-02-26)
 
