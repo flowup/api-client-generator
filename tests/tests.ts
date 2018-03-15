@@ -4,7 +4,7 @@ import * as rimraf from 'rimraf';
 import { promisify } from 'util';
 import { generateAPIClient } from '../src/generator';
 
-const testReferences = ['esquare', 'gcloud-firestore'];
+const testReferences = ['esquare', 'gcloud-firestore', 'github'];
 
 const compareOptions = {compareSize: true};
 const stateSymbols: {[key in State]: string} = {
