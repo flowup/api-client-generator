@@ -10,5 +10,4 @@ pipeline:
     image: plugins/npm
     username: flowup
     email: hello@flowup.cz
-    password: $PASSWORD
-    secrets: [password]
+    secrets: [npm_password]
