@@ -93,9 +93,8 @@ export function determineDomain({schemes, host, basePath}: Swagger): string {
 
   // if no host exists in the swagger file use a window location relative path
   const domain = host
-    ? host
+    ? host // tslint:disable-next-line:no-invalid-template-strings
     : '${window.location.hostname}${window.location.port ? \':\'+window.location.port : \'\'}';
-  /* tslint:disable-line */
   const base = ('/' === basePath || !basePath ? '' : basePath);
   return `${protocol}${domain}${base}`;
 }

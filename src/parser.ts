@@ -48,6 +48,7 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
           ),
           methodType: methodType.toUpperCase() as MethodType,
           parameters: transformParameters(operation.parameters, parameters || {}),
+          // tslint:disable-next-line:no-invalid-template-strings
           path: pathName.replace(/{(.*?)}/g, '$${args.$1}'), // turn path interpolation `{this}` into string template `${this}
           response: prefixImportedModels(determineResponseType(operation.responses)),
           summaryLines: operation.description
@@ -85,11 +86,13 @@ function defineEnum(enumSchema: (string | boolean | number | {})[] = [],
 ): Definition {
   const splitDesc = enumDesc.split('\n');
   const descKeys: { [key: string]: string } | null = splitDesc.length > 1
-    ? splitDesc
-      .reduce((acc, cur) => {
+    ? splitDesc.reduce<{ [key: string]: string }>(
+      (acc, cur) => {
         const captured = /(\d) (\w+)/.exec(cur); // parse the `- 42 UltimateAnswer` description syntax
         return captured ? {...acc, [captured[1]]: captured[2]} : acc;
-      }, {})
+      },
+      {}
+    )
     : null;
 
   return {
