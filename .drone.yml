@@ -7,6 +7,8 @@ pipeline:
       - npm run test
       - npm run build
   release:
+    when:
+      event: tag
     image: plugins/npm
     username: flowup
     email: hello@flowup.cz
