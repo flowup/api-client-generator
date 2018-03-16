@@ -12,18 +12,6 @@
   "bin": {
     "api-client-generator": "./dist/main.js"
   },
-  "files": [
-    "dist/generator.js",
-    "dist/generator.js.map",
-    "dist/main.js",
-    "dist/main.js.map",
-    "LICENSE",
-    "README.md",
-    "templates/ngx-model.mustache",
-    "templates/ngx-models-export.mustache",
-    "templates/ngx-module-export.mustache",
-    "templates/ngx-service.mustache"
-  ],
   "bugs": {
     "url": "https://github.com/flowup/api-client-generator/issues"
   },
@@ -58,14 +46,14 @@
   "scripts": {
     "generate": "node ./dist/main.js",
     "build": "rimraf dist && tsc",
-    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts' 'tests/tests.ts'",
+    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts' 'src/tests.ts'",
     "gen": "ts-node ./src/main.ts",
     "gen-sports": "rimraf ./tests/sports/api && ts-node ./src/main.ts -s ./tests/sports/swagger.yaml -o ./tests/sports/api",
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
     "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
     "gen-github": "rimraf ./tests/github/api && ts-node ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api",
     "release": "npm run build && standard-version --tag-prefix=''",
-    "test": "ts-node ./tests/tests.ts"
+    "test": "ts-node ./src/tests.ts"
   },
   "dependencies": {
     "fs-extra": "^5.0.0",
