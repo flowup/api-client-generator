@@ -15,7 +15,7 @@ const stateSymbols: {[key in State]: string} = {
 };
 
 async function runTests(): Promise<number> {
-  const testsOutDir = `${__dirname}/tests-output`;
+  const testsOutDir = `${__dirname}/../tests/tests-output`;
 
   if (await promisify(exists)(testsOutDir)) {
     await promisify(rimraf)(testsOutDir);
@@ -26,7 +26,7 @@ async function runTests(): Promise<number> {
   const testReturnValues = await Promise.all(testReferences.map(async (reference) => {
     console.info(`Running test for ${reference}`);
 
-    const refDir = `${__dirname}/${reference}`;
+    const refDir = `${__dirname}/../tests/${reference}`;
     const genDir = `${testsOutDir}/${reference}`;
 
     await generateAPIClient(`${refDir}/swagger.yaml`, genDir)
