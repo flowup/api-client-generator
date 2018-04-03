@@ -49,7 +49,7 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
           methodType: methodType.toUpperCase() as MethodType,
           parameters: transformParameters(operation.parameters, parameters || {}),
           // tslint:disable-next-line:no-invalid-template-strings
-          path: pathName.replace(/{(.*?)}/g, '$${args.$1}'), // turn path interpolation `{this}` into string template `${this}
+          path: pathName.replace(/{(.*?)}/g, (substring: string, ...args: any[]): string => '${args.' + camelCase(args[0]) + '}' ), // turn path interpolation `{this}` into string template `${this}
           response: prefixImportedModels(determineResponseType(operation.responses)),
           summaryLines: operation.description
             ? (operation.description || '').split('\n')
