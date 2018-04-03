@@ -7120,7 +7120,7 @@ export class APIClient {
     },
     options?: HttpOptions
   ): Observable<any> {
-    const path = `/repos/${args.owner}/${args.repo}/${args.archive_format}/${args.path}`;
+    const path = `/repos/${args.owner}/${args.repo}/${args.archiveFormat}/${args.path}`;
     options = {...this.options, ...options};
 
     if ('xGitHubMediaType' in args) {
