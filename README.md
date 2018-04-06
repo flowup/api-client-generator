@@ -1,6 +1,6 @@
-[![npm](https://img.shields.io/npm/v/%40flowup/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
-[![npm](https://img.shields.io/npm/l/%40flowup/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
-[![npm](https://img.shields.io/npm/dm/%40flowup/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+[![npm](https://img.shields.io/npm/v/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+[![npm](https://img.shields.io/npm/l/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+[![npm](https://img.shields.io/npm/dm/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
 
 [![Caretaker](https://img.shields.io/badge/caretaker-vmasek-blue.svg)](https://github.com/vmasek)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
