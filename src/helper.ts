@@ -1,6 +1,6 @@
 import { Spec as Swagger } from 'swagger-schema-official';
 
-const BASIC_TS_TYPE_REGEX = /^string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob$/;
+const BASIC_TS_TYPE_REGEX = /\b(string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
 
 export function camelCase(text: string = '', lowerFirst: boolean = true): string {
   text = removeDuplicateWords(text);

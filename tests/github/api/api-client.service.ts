@@ -2877,10 +2877,10 @@ export class APIClient {
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
-      body: deleteFileBody,
+      body: models.DeleteFileBody,
     },
     options?: HttpOptions
-  ): Observable<deleteFile> {
+  ): Observable<models.DeleteFile> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
     options = {...this.options, ...options};
 
@@ -2902,7 +2902,7 @@ export class APIClient {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<deleteFile>('DELETE', path, options, JSON.stringify(args.body));
+    return this.sendRequest<models.DeleteFile>('DELETE', path, options, JSON.stringify(args.body));
   }
 
   getReposOwnerRepoContentsPath(
@@ -2962,10 +2962,10 @@ export class APIClient {
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
-      body: createFileBody,
+      body: models.CreateFileBody,
     },
     options?: HttpOptions
-  ): Observable<createFile> {
+  ): Observable<models.CreateFile> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
     options = {...this.options, ...options};
 
@@ -2987,7 +2987,7 @@ export class APIClient {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<createFile>('PUT', path, options, JSON.stringify(args.body));
+    return this.sendRequest<models.CreateFile>('PUT', path, options, JSON.stringify(args.body));
   }
 
   getReposOwnerRepoContributors(
