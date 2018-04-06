@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-export interface createFile {
+export interface CreateFile {
   commit: any;
   content: any;
 }

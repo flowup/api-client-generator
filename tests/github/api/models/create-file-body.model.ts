@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-export interface createFileBody {
+export interface CreateFileBody {
   committer: any;
   content: string;
   message: string;
