@@ -49,7 +49,6 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
           methodType: methodType.toUpperCase() as MethodType,
           parameters: transformParameters(operation.parameters, parameters || {}),
           // turn path interpolation `{this}` into string template `${args.this}
-          // tslint:disable-next-line:no-invalid-template-strings
           path: pathName.replace(
               /{(.*?)}/g,
               (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
