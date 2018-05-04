@@ -1,0 +1,34 @@
+/* tslint:disable */
+{{^isEnum}}
+{{#imports.length}}
+import {
+{{#imports}}
+  {{.}},
+{{/imports}}
+} from './..';
+{{/imports.length}}
+
+export interface {{&name}} {
+{{#properties}}
+  {{name}}: {{typescriptType}}{{#isArray}}[]{{/isArray}};
+{{/properties}}
+}
+{{/isEnum}}
+{{#isEnum}}
+  {{#isNumeric}}
+
+export enum {{&name}} {
+    {{#properties}}
+  {{name}} = {{value}},
+    {{/properties}}
+}
+  {{/isNumeric}}
+  {{^isNumeric}}
+
+export enum {{&name}} {
+    {{#properties}}
+  {{name}} = "{{value}}",
+    {{/properties}}
+}
+  {{/isNumeric}}
+{{/isEnum}}

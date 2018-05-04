@@ -1,5 +1,13 @@
-src/
-tests/
-output/
 node_modules/
+output*/
+src/*
+tests/
+.drone.yml
 .gitignore
+.idea
+CODE_OF_CONDUCT.md
+package-lock.json
+PULL_REQUEST_TEMPLATE.md
+tsconfig.json
+tslint.json
+yarn.lock

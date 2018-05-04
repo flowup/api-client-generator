@@ -1,35 +1,120 @@
-# ngx-swagger-client-generator
-Angular REST API client generator from Swagger YAML or JSON file with camel case settigs
+[![npm](https://img.shields.io/npm/v/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+[![npm](https://img.shields.io/npm/l/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+[![npm](https://img.shields.io/npm/dm/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+
+[![Caretaker](https://img.shields.io/badge/caretaker-vmasek-blue.svg)](https://github.com/vmasek)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+
+[![GitHub stars](https://img.shields.io/github/stars/flowup/api-client-generator.svg?style=social&label=Star)](https://github.com/flowup/api-client-generator)
+[![Twitter URL](https://img.shields.io/twitter/url/http/flowup.cz.svg?style=social)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/api-client-generator)
+
+# api-client-generator
+Angular REST API client generator from Swagger YAML or JSON file with camel case settings
 
 # Description
 This package generates a Angular TypeScript classes from a Swagger v2.0 specification file. The code is generated using Mustache templates.
 
-The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular 4.
+The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular (introduced in version 4.3).
 
-# How to get it working
+# Installation
 
-## Installation
+### Global usage:
 
-`git clone https://github.com/flowup/ngx-swagger-client-generator`
+`[sudo] yarn global add api-client-generator`
 
-`cd ngx-swagger-client-generator`
+or
 
-`yarn` or `npm install`
+`[sudo] npm install -g api-client-generator`
 
-## Usage
-
-`npm run generate -s ./path/to/swagger.[yaml|json]`
-
-## Options
-
- - `s` -  path to the swagger file
- - `o` -  path where the generated files should be emitted
-
-## Example usage:
 This command will generate API client described in swagger.json file to ./output folder
 
-`npm run generate -s ./path/to/swagger.json -o ./output`
+`api-client-generator -s ./path/to/swagger.json -o ./output`
 
-## Note:
-This project was inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen) project.
-This project was based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator) project.
+### Local usage
+
+`yarn add api-client-generator`
+
+or
+
+`npm install api-client-generator`
+
+- for quick usage create run script in your `package.json` scripts
+```
+"scripts": {
+  "generate-api-client": "api-client-generator -s ./swagger.yaml -o ./output-folder"
+},
+```
+- then just run
+
+`npm run generate-api-client`
+
+# Options
+
+ - `s` -  path to the swagger file (yaml or json)
+ - `o` -  path where the generated files should be emitted
+
+# Generated structure
+
+- if you are interested on how will the generated client with models look like, take a look in a `example/` folder
+
+```
+output
+ ├─ models
+ │   ├─ some.enum.ts
+ │   ├─ some.model.ts
+ │   │  ...
+ │   ├─ another.model.ts
+ │   └─ index.ts
+ ├─ api-client.service.ts
+ └─ index.ts
+```
+
+# How to use generated client
+
+1. import the `APIClientModule` in your `app.module.ts` (main module)
+- domain and configuration should be passed to module imports using `.forRoot` method
+- options and domain are optional
+- when domain is not passed, host property form swagger file is used as default
+  - if host property is not defined `window.href` with current port is used instead
+```typescript
+@NgModule({
+  imports: [
+    APIClientModule.forRoot({
+      domain: 'https://api.url', // or use value defined in environment `environment.apiUrl`
+    }),
+    /* ... other imports */
+  ],
+  /* ... other stuff */
+})
+export class AppModule {
+}
+```
+
+2. use `APIClient` service in your components/services/...
+
+```typescript
+@Component({
+  selector: 'my-component',
+  templateUrl: `
+    <div *ngFor="let user of users$ | async">
+      <p>User name: {{user.name}}</p>
+    </div>
+  `,
+})
+export class MyComponent {
+  
+  users$ = this.api.getUsers();
+
+  constructor(private readonly api: APIClient) {
+    this.api.getSomething().subscribe(
+      (something: Something) => console.log('something', something)
+    );
+  }
+}
+```
+
+-------
+
+*Inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen)*
+
+*Generator based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator)*

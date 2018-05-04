@@ -1,19 +1,26 @@
 {
-  "name": "ngx-swagger-client-generator",
-  "version": "1.0.0",
+  "name": "api-client-generator",
+  "version": "3.0.3",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
-  "homepage": "https://github.com/lotjomik/angular4-swagger-client-generator",
+  "homepage": "https://github.com/flowup/api-client-generator/blob/master/README.md",
   "main": "src/main.ts",
   "author": {
     "name": "FlowUp",
-    "email": "hello@flowup.cz"
+    "email": "hello@flowup.cz",
+    "url": "https://flowup.cz"
+  },
+  "bin": {
+    "api-client-generator": "./dist/main.js"
   },
   "bugs": {
-    "url": "https://github.com/flowup/ngx-swagger-client-generator/issues"
+    "url": "https://github.com/flowup/api-client-generator/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:flowup/ngx-swagger-client-generator.git"
+    "url": "git@github.com:flowup/api-client-generator.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "keywords": [
     "swagger",
@@ -25,27 +32,50 @@
     "scaffolding",
     "webapi",
     "api",
+    "apiclient",
     "generator",
-    "camelCase"
+    "camelCase",
+    "HTTP",
+    "HTTPClient"
   ],
+  "engines": {
+    "node": ">=8.9.1",
+    "yarn": ">=1.4.0"
+  },
   "license": "MIT",
   "scripts": {
-    "generate": "./node_modules/.bin/ts-node ./src/main.ts"
+    "generate": "node ./dist/main.js",
+    "build": "rimraf dist && tsc",
+    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts' 'src/tests.ts'",
+    "gen": "ts-node ./src/main.ts",
+    "gen-sports": "rimraf ./tests/sports/api && ts-node ./src/main.ts -s ./tests/sports/swagger.yaml -o ./tests/sports/api",
+    "gen-esquare": "rimraf ./tests/esquare/api && ts-node ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
+    "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
+    "gen-github": "rimraf ./tests/github/api && ts-node ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api",
+    "release": "npm run build && standard-version --tag-prefix=''",
+    "test": "ts-node ./src/tests.ts"
   },
   "dependencies": {
-    "js-yaml": "^3.10.0",
-    "mkdirp": "^0.5.1",
+    "fs-extra": "^5.0.0",
     "mustache": "^2.3.0",
     "optimist": "^0.6.1",
-    "tslint": "^5.7.0"
+    "swagger-parser": "^4.0.1"
   },
   "devDependencies": {
-    "@types/js-yaml": "^3.9.1",
-    "@types/mkdirp": "^0.5.1",
+    "@types/fs-extra": "^5.0.1",
     "@types/mustache": "^0.8.30",
-    "@types/node": "^8.0.31",
+    "@types/node": "^9.3.0",
     "@types/optimist": "0.0.29",
-    "ts-node": "^3.3.0",
-    "typescript": "^2.5.3"
+    "@types/rimraf": "^2.0.2",
+    "@types/swagger-parser": "^4.0.2",
+    "@types/swagger-schema-official": "^2.0.9",
+    "dir-compare": "^1.4.0",
+    "rimraf": "^2.5.2",
+    "standard-version": "^4.3.0",
+    "swagger-schema-official": "^2.0.0-bab6bed",
+    "ts-node": "^5.0.1",
+    "tslint": "^5.9.1",
+    "tslint-immutable": "^4.5.2",
+    "typescript": "^2.7.2"
   }
 }

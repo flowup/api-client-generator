@@ -1,0 +1,2587 @@
+swagger: '2.0'
+info:
+  description: |
+    API doc
+  version: "1.0.0"
+  title: Esquare
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+# host: petstore.swagger.io
+# basePath: /v2
+tags:
+- name: Auth
+  description: Everything about auth & security
+- name: Structure
+  description: Everything about Structure
+- name: Data Import
+  description: Access to Reports data
+- name: Data Import (Ministry)
+  description: Access to Reports data for ministry
+
+- name: User management
+  description: Access to User management
+- name: Notifications
+  description: Everything about notifications
+- name: SecurityPolicy
+  description: Password an other security settings
+
+paths:
+  /auth:
+    post:
+      tags:
+      - Auth
+      operationId: auth
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+        - in: body
+          name: body
+          description: Structure entity object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/AuthForm'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              status:
+                type: boolean
+              token:
+                type: string
+                description: |
+                  JWT token that's gonna use in Authorization header
+              errorDescription:
+                type: string
+        405:
+          description: Invalid input
+  /auth/refresh:
+    post:
+      tags:
+      - Auth
+      operationId: authRef
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              status:
+                type: boolean
+              token:
+                type: string
+                description: |
+                  JWT token that's gonna use in Authorization header
+              errorDescription:
+                type: string
+        405:
+          description: Invalid input
+  /restore:
+    post:
+      tags:
+      - Auth
+      operationId: passwordRestoreRequest
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+        - in: body
+          name: body
+          description: Structure entity object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreForm'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              status:
+                type: boolean
+              token:
+                type: string
+              errorDescription:
+                type: string
+        405:
+          description: Invalid input
+  /restore/request:
+    post:
+      tags:
+      - Auth
+      operationId: passwordRestoreEmailRequest
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+        - in: body
+          name: body
+          description: Structure entity object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreRequestForm'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              status:
+                type: boolean
+              errorDescription:
+                type: string
+        405:
+          description: Invalid input
+  /restore/checkGuid:
+    post:
+      tags:
+      - Auth
+      operationId: passwordRestoreCheckRestoreGuid
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+        - in: formData
+          name: restoreGuid
+          description: RestoreGuid for check
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              status:
+                type: boolean
+              errorDescription:
+                type: string
+        405:
+          description: Invalid input
+
+  /acl:
+    get:
+      tags:
+      - Auth
+      operationId: getAclList
+      summary: Get list of roles to permissions mapping
+      produces:
+      - application/json
+      - application/xml
+      responses:
+        200:
+          description: List of acl
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AclItem'
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
+  /structure:
+    get:
+      tags:
+      - Structure
+      summary: Get structure entities list
+      operationId: getStructureEntitiesList
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Structure'
+        400:
+          description: Invalid status value
+    post:
+      tags:
+      - Structure
+      summary: Add a new structure entity
+      operationId: addStructureEntity
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+        - in: body
+          name: body
+          description: Structure entity object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/StructureAddParameters'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Structure'
+        401:
+          description: Unauthorized access
+        405:
+          description: Invalid input
+  /structure/{structureId}:
+    put:
+      tags:
+      - Structure
+      summary: Update an existing structure entity
+      operationId: updateStructureEntity
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: structureId
+        in: path
+        description: structure id to update
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: body
+        description: Structure entity object that needs to be updated
+        required: true
+        schema:
+          $ref: '#/definitions/StructureForm'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Structure'
+        400:
+          description: Invalid ID supplied
+        401:
+          description: Unauthorized access
+        404:
+          description: Structure not found
+        405:
+          description: Validation exception
+    delete:
+      tags:
+      - Structure
+      summary: Deletes a structure entity
+      operationId: deleteStructureEntity
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: structureId
+        in: path
+        description: structure id to delete
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: Invalid ID supplied
+        401:
+          description: Unauthorized access
+        404:
+          description: Structure not found
+  /report:
+    get:
+      tags:
+      - Data Import
+      summary: Get reports list
+      description: |
+        [Screenshot from design](http://prntscr.com/hy4z8d)
+      operationId: getReportsList
+      parameters:
+      - $ref: '#/parameters/Status'
+      - name: pageSize
+        in: query
+        required: true
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: page number
+        required: true
+        type: integer
+        format: int32
+      - name: orderBy
+        in: query
+        enum:
+          - id
+          - title
+          - subtitle
+          - criticality
+          - status
+          - issues
+          - deadline
+        description: id | title | subtitle
+          | criticality | status | issues | deadline
+        required: true
+        type: string
+      - $ref: '#/parameters/Order'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/ReportListItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /report/{id}:
+    get:
+      tags:
+      - Data Import
+      summary: Get report details
+      description: |
+        [Screenshot from design](http://prntscr.com/hywkd5)
+      operationId: getReportDetails
+      parameters:
+      - name: id
+        in: path
+        description: report id to get
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReportItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /report/preview/{templateId}:
+    get:
+      tags:
+      - Data Import
+      summary: Get report preview
+      description: |
+        [Screenshot from design](http://prntscr.com/i3z8zb)
+      operationId: getReportPreview
+      parameters:
+      - name: templateId
+        in: path
+        description: |
+          [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)
+        required: true
+        type: integer
+        format: int64
+      - name: pageSize
+        in: query
+        required: true
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: page number
+        required: true
+        type: integer
+        format: int32
+      - name: orderBy
+        in: query
+        required: false
+        type: number
+        description: column id
+      - $ref: '#/parameters/Order'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+              list:
+                type: array
+                items:
+                  type: object
+                  allOf:
+                  - $ref: '#/definitions/PagedTable'
+                  - $ref: '#/definitions/OrderableTable'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /report/history/{templateId}:
+    get:
+      tags:
+      - Data Import
+      summary: Get import history
+      description: |
+        [Screenshot from design](http://prntscr.com/i3ym4j)
+      operationId: getImportHistory
+      parameters:
+      - name: templateId
+        in: path
+        description: |
+          [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ImportHistoryItem'
+        401:
+          description: Unauthorized access
+  /report/wizard/uploadfile/{templateId}:
+    post:
+      tags:
+      - Data Import
+
+      summary: Upload a completed template
+      description: |
+        [Screenshot from design](http://prntscr.com/hy521p)
+      operationId: uploadFile
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: templateId
+        in: path
+        description: |
+          [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)
+        required: true
+        type: integer
+        format: int64
+      - name: file
+        in: formData
+        description: file to upload
+        required: true
+        type: file
+      responses:
+        200:
+          description: Id of current import
+          schema:
+            type: integer
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /report/wizard/{templateId}/templateColumns:
+    get:
+      tags:
+      - Data Import
+
+      summary: Get list of current Import template columns
+      description: |
+        [Screenshot from design](http://prntscr.com/hy52hi)
+      operationId: listTemplateColumns
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: templateId
+        in: path
+        description: |
+          [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)
+        required: true
+        type: integer
+        format: int64
+
+      responses:
+        200:
+          description: List of template columns
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Column'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+  /report/wizard/{id}/reportColumns:
+    get:
+      tags:
+      - Data Import
+
+      summary: Get list of current Import template columns
+      description: |
+        [Screenshot from design](http://prntscr.com/hy52zr)
+      operationId: listReportColumns
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+
+      responses:
+        200:
+          description: List of columns
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Column'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+
+  /report/wizard/{id}/mapping:
+    post:
+      tags:
+      - Data Import
+
+      summary: Save columns mapping
+      description: |
+        [Screenshot from design](http://prntscr.com/hy53jt)
+      operationId: saveColumnsMapping
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: body
+        description: Column mappint for current import
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/ColumnMapping'
+      responses:
+        200:
+          description: |
+            Preview data
+            [Screenshot from design](http://prntscr.com/hy540m)
+          schema:
+            $ref: '#/definitions/Table'
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
+
+  /report/wizard/{id}/validationTable:
+    get:
+      tags:
+      - Data Import
+
+      summary: Get validation table
+      description: |
+        [Screenshot from design](http://prntscr.com/hy5fct)
+      operationId: getValidationTable
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: |
+            Validation data
+            [Screenshot from design](http://prntscr.com/hy54zh)
+          schema:
+            $ref: '#/definitions/ValidatedTable'
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
+
+  /report/wizard/{id}/downloadImported:
+    get:
+      tags:
+      - Data Import
+      operationId: downloadImportedFile
+      summary: Download imported data
+      description: |
+        [Screenshot from design](http://prntscr.com/hy55ga)
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+      - name: all
+        in: query
+        description: Indicator of downloading data(all or errors only)
+        required: false
+        type: boolean
+      produces:
+        - application/vnd.ms-excel
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: Exported file.
+          schema:
+            type: file
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
+  /report/wizard/{id}/import:
+    post:
+      tags:
+      - Data Import
+      operationId: importConfirmation
+      summary: Confirm final import
+      description: |
+        [Screenshot from design](http://prntscr.com/hy57nj)
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: Import status.
+          schema:
+            $ref: '#/definitions/ImportResponse'
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
+  /report/wizard/{id}/downloadOriginal:
+    get:
+      tags:
+      - Data Import
+      operationId: downloadImportOriginalFile
+      summary: Download original file
+      description: |
+        [Screenshot from design](http://prntscr.com/hy5a54)
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+      produces:
+        - application/vnd.ms-excel
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: Exported file.
+          schema:
+            type: file
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
+  /report/wizard/{id}/downloadSkipped:
+    get:
+      tags:
+      - Data Import
+      operationId: downloadImportSkippedFile
+      summary: Download skipped rows file
+      description: |
+        [Screenshot from design](http://prntscr.com/hy5ae7)
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+      produces:
+        - application/vnd.ms-excel
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: Exported file.
+          schema:
+            type: file
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
+
+  /report/wizard/{id}/cancelImport:
+    post:
+      tags:
+      - Data Import
+      operationId: cancelImport
+      summary: Cancel current import
+      description: |
+        [Screenshot from design](http://prntscr.com/hy5aqq)
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
+
+  /report/wizard/{id}/override:
+    post:
+      tags:
+      - Data Import
+      operationId: overrideImport
+      summary: Request override data for import
+      description: |
+        [Screenshot from design](http://prntscr.com/hy5bi6)
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: id
+        in: path
+        description: Id of current import
+        required: true
+        type: integer
+        format: int64
+      - name: description
+        in: formData
+        description: description of override request
+        required: true
+        type: string
+      - name: file
+        in: formData
+        description: file to upload
+        required: true
+        type: file
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+  /report/ministry/statistic:
+    get:
+      tags:
+      - Data Import (Ministry)
+      summary: Get import stats
+      description: |
+        [Screenshot from design](http://prntscr.com/i4052r)
+      operationId: geImportStats
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - $ref: '#/parameters/Period'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TotalImportStats'
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+  /report/ministry/issues:
+    get:
+      tags:
+      - Data Import (Ministry)
+      summary: Get issues list
+      description: |
+        [Screenshot from design](http://prntscr.com/i40s18)
+      operationId: getIssuesList
+      parameters:
+      - $ref: '#/parameters/Period'
+      - $ref: '#/parameters/IssueStatus'
+      - name: pageSize
+        in: query
+        required: true
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: page number
+        required: true
+        type: integer
+        format: int32
+      - name: orderBy
+        in: query
+        enum:
+          - name
+          - school
+          - dueDate
+          - alert
+        description: name | school | dueDate | alert
+        required: true
+        type: string
+      - $ref: '#/parameters/Order'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/Issue'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /report/ministry/statuses:
+    get:
+      tags:
+      - Data Import (Ministry)
+      summary: Get import statuses list
+      description: |
+        [Screenshot from design](http://prntscr.com/i4byyx)
+      operationId: getStatusesList
+      parameters:
+      - $ref: '#/parameters/Period'
+      - $ref: '#/parameters/ImportStatus'
+      - name: pageSize
+        in: query
+        required: true
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: page number
+        required: true
+        type: integer
+        format: int32
+      - name: orderBy
+        in: query
+        enum:
+          - name
+          - issues
+          - dueDate
+          - progress
+        description: name | issues | dueDate | progress
+        required: true
+        type: string
+      - $ref: '#/parameters/Order'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/ImportStatusItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+
+
+  /users:
+    get:
+      tags:
+      - User management
+      summary: Get users list
+      operationId: getUsersList
+      #todo: write correct request responce
+      parameters:
+      - $ref: '#/parameters/Period'
+      - $ref: '#/parameters/ImportStatus'
+      - name: pageSize
+        in: query
+        required: true
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: page number
+        required: true
+        type: integer
+        format: int32
+      - name: orderBy
+        in: query
+        enum:
+          - name
+          - issues
+          - dueDate
+          - progress
+        description: name | issues | dueDate | progress
+        required: true
+        type: string
+      - $ref: '#/parameters/Order'
+      - name: assignedToRole
+        in: query
+        description: role id |
+          [Screenshot from design](http://prntscr.com/ib9yal)
+        required: false
+        type: integer
+        format: int64
+      - name: unassignedFromRole
+        in: query
+        description: role id |
+          [Screenshot from design](http://prntscr.com/ib9z16)
+        required: false
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/UserListItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    post:
+      tags:
+      - User management
+      operationId: createUser
+      summary: Create user
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+        - in: body
+          name: body
+          description: User entity object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/UserDetails'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/UserDetails'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /users/acl:
+    get:
+      tags:
+      - User management
+      operationId: getAclStructure
+      summary: Get acl structure
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Acl'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /users/{id}:
+    get:
+      tags:
+      - User management
+      operationId: getUserDetails
+      summary: getUserDetails
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+        format: int32
+
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserDetails'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    put:
+      tags:
+      - User management
+      operationId: updateUser
+      summary: update user by id
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+          format: int32
+        - in: body
+          name: body
+          description: User entity object that needs to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/UserDetails'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/UserDetails'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    delete:
+      tags:
+      - User management
+      operationId: deleteUser
+      summary: delete user by id
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+          format: int32
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /users/roles:
+    get:
+      tags:
+      - User management
+      summary: Get roles list
+      operationId: getRolesList
+      description: |
+        [Screenshot from design](http://prntscr.com/i93q0s)
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RoleListItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    post:
+      tags:
+      - User management
+      operationId: createRole
+      summary: Create role
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - in: body
+        name: body
+        description: Role entity object that needs to be added
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+          required:
+            - name
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/RoleDetailsItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /users/privileges:
+    get:
+      tags:
+      - User management
+      summary: Get privileges list
+      operationId: getList
+      description: |
+        [Screenshot from design](http://prntscr.com/i947a3)
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PrivilegeTreeItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /users/roles/{id}:
+    get:
+      tags:
+      - User management
+      operationId: getRoleDetails
+      summary: Get role details
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+        format: int32
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RoleDetailsItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    put:
+      tags:
+      - User management
+      operationId: updateRole
+      summary: Update role by id
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+          format: int32
+        - $ref: '#/parameters/RoleUpdateDetails'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/RoleDetailsItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    delete:
+      tags:
+      - User management
+      operationId: deleteRole
+      summary: Ddelete role by id
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+          format: int32
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /notifications/new:
+    get:
+      tags:
+      - Notifications
+      summary: Get unviewed notifications list
+      operationId: getNewNotificationsList
+      description: |
+        [Screenshot from design](http://prntscr.com/iba7xr)
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NotificationListItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /notifications/markAsViewed:
+    put:
+      tags:
+      - Notifications
+      summary: Mark notifications as viewed
+      operationId: markViewedNotifications
+      parameters:
+      - name: body
+        in: body
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+            description: notification ids
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /notifications/all:
+    get:
+      tags:
+      - Notifications
+      summary: Get user's notifications list
+      operationId: getNotificationsList
+      description: |
+        [Screenshot from design](http://prntscr.com/iba8tq)
+      parameters:
+      - name: pageSize
+        in: query
+        required: true
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: page number
+        required: true
+        type: integer
+        format: int32
+      - name: orderBy
+        in: query
+        enum:
+          - name
+          - description
+          - priority
+          - date
+        description: name | description | priority | date
+        required: true
+        type: string
+      - $ref: '#/parameters/Order'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/NotificationListItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /notifications/modules:
+    get:
+      tags:
+      - Notifications
+      summary: Get modules list
+      operationId: getModulesList
+      description: |
+        [Screenshot from design](http://prntscr.com/ibac47) |
+        [Screenshot from design](http://prntscr.com/ibacgu)
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NotificationModule'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /notifications/triggers:
+    get:
+      tags:
+      - Notifications
+      summary: Get triggers list
+      operationId: getTriggersList
+      description: |
+        [Screenshot from design](http://prntscr.com/ibad9m)
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NotificationTrigger'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /notifications/modules/{moduleId}:
+    get:
+      tags:
+      - Notifications
+      summary: Get module's notifications list
+      operationId: getModuleNotificationsList
+      description: |
+        [Screenshot from design](http://prntscr.com/iba8tq)
+      parameters:
+      - name: moduleId
+        in: path
+        required: true
+        type: integer
+        format: int64
+      - name: pageSize
+        in: query
+        required: true
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: page number
+        required: true
+        type: integer
+        format: int32
+      - name: orderBy
+        in: query
+        enum:
+          - name
+          - description
+          - priority
+          - date
+        description: name | description | priority | date
+        required: true
+        type: string
+      - $ref: '#/parameters/Order'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/NotificationEditableListItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /notifications/enable/{id}:
+    put:
+      tags:
+      - Notifications
+      summary: Enable notification
+      operationId: enableNotification
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+        401:
+          description: Unauthorized access
+  /notifications/disable/{id}:
+    put:
+      tags:
+      - Notifications
+      summary: Disable notification
+      operationId: disableNotification
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+        401:
+          description: Unauthorized access
+  /notifications/{id}:
+    get:
+      tags:
+      - Notifications
+      summary: Get notification details
+      operationId: getNotification
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int64
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/NotificationEditableListItem'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    put:
+      tags:
+      - Notifications
+      summary: Update notification
+      operationId: updateNotification
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int64
+      - name: body
+        in: body
+        schema:
+          $ref: '#/definitions/NotificationEditable'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /notifications:
+    post:
+      tags:
+      - Notifications
+      summary: Create notification
+      operationId: createNotification
+      parameters:
+      - name: body
+        in: body
+        schema:
+          $ref: '#/definitions/NotificationEditable'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: number
+            format: int64
+            description: notification id
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /security-policy/password-verification:
+    get:
+      tags:
+      - SecurityPolicy
+      summary: Get password verefication settings
+      description: |
+        [Screenshot from design](http://prntscr.com/ijzt2b)
+      operationId: getPassVerificationPolicies
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/PasswordVerificationPolicies'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    put:
+      tags:
+      - SecurityPolicy
+      summary: Update password verefication settings
+      description: |
+        [Screenshot from design](http://prntscr.com/ijzt2b)
+      operationId: udatePassVerificationPolicies
+      parameters:
+      - name: body
+        in: body
+        schema:
+          $ref: '#/definitions/PasswordVerificationPolicies'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/PasswordVerificationPolicies'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /security-policy/password-creation:
+    get:
+      tags:
+      - SecurityPolicy
+      summary: Get password creation settings
+      description: |
+        [Screenshot from design](http://prntscr.com/ijzuv3)
+      operationId: getPassCreationPolicies
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/PasswordCreationPolicies'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    put:
+      tags:
+      - SecurityPolicy
+      summary: Update password creation settings
+      description: |
+        [Screenshot from design](http://prntscr.com/ijzuv3)
+      operationId: udatePassCreationPolicies
+      parameters:
+      - name: body
+        in: body
+        schema:
+          $ref: '#/definitions/PasswordCreationPolicies'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/PasswordCreationPolicies'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+  /security-policy/other-settings:
+    get:
+      tags:
+      - SecurityPolicy
+      summary: Get other security settings settings
+      description: |
+        [Screenshot from design](http://prntscr.com/ijzvo3)
+      operationId: getOtherSecuritySettings
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/OtherSecuritySettings'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+    put:
+      tags:
+      - SecurityPolicy
+      summary: Update other security settings settings
+      description: |
+        [Screenshot from design](http://prntscr.com/ijzvo3)
+      operationId: udateOtherSecuritySettings
+      parameters:
+      - name: body
+        in: body
+        schema:
+          $ref: '#/definitions/OtherSecuritySettings'
+      produces:
+      - application/json
+      - application/xml
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/OtherSecuritySettings'
+        400:
+          description: Invalid status value
+        401:
+          description: Unauthorized access
+securityDefinitions:
+  JWT:
+    type: apiKey
+    in: header
+    name: Autorization
+    description: |
+      [JWT](https://jwt.io/)
+      for authorization and transferring base user data
+      like: role,email,name
+
+parameters:
+  Period:
+    name: period
+    in: query
+    type: integer
+    enum:
+      - 1 #Year
+      - 2 #Month
+      - 3 #Week
+    description: |
+      - 1 Year
+      - 2 Month
+      - 3 Week
+  Order:
+    name: order
+    in: query
+    type: string
+    enum:
+      - asc #asc
+      - desc #desc
+    description: |
+      - asc
+      - desc
+  Status:
+    name: status
+    in: query
+    type: integer
+    enum:
+      - 1 #Pending
+      - 2 #InProgress
+      - 3 #Complete
+    description: |
+      - 1 Pending
+      - 2 InProgress
+      - 3 Complete
+  IssueStatus:
+    name: status
+    in: query
+    type: integer
+    enum:
+      - 1 #Pending
+      - 2 #Resolved
+    description: |
+      - 1 Pending
+      - 2 Resolved
+  ImportStatus:
+    name: status
+    in: query
+    type: integer
+    enum:
+      - 1 #Live
+      - 2 #PastDeadline
+    description: |
+      - 1 Live
+      - 2 PastDeadline
+  RoleUpdateDetails:
+    in: body
+    name: body
+    schema:
+      type: object
+      properties:
+        status:
+          $ref: '#/definitions/RoleStatus'
+        privilegesToAssing:
+          type: array
+          items:
+            type: number
+        privilegesToUnassing:
+          type: array
+          items:
+            type: number
+        usersToAssing:
+          type: array
+          items:
+            type: number
+        usersToUnassing:
+          type: array
+          items:
+            type: number
+
+definitions:
+  AuthForm:
+    type: object
+    required:
+    - email
+    - password
+    properties:
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+        format: password
+      rememberMe:
+        type: boolean
+  RestoreRequestForm:
+    type: object
+    required:
+    - email
+    properties:
+      email:
+        type: string
+        format: email
+  RestoreForm:
+    type: object
+    required:
+    - password
+    - passwordСonfirm
+    properties:
+      password:
+        type: string
+        format: password
+      passwordСonfirm:
+        type: string
+        format: password
+      guid:
+        type: string
+
+  StructureForm:
+    type: object
+    required:
+    - code
+    - name
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      address:
+        type: string
+  StructureAddParameters:
+    allOf:
+      - $ref: '#/definitions/StructureForm'
+    properties:
+      parentId:
+        type: integer
+        format: int64
+  Structure:
+    allOf:
+      - $ref: '#/definitions/StructureForm'
+    properties:
+      id:
+        type: integer
+        format: int64
+      parentId:
+        type: integer
+        format: int64
+  Criticality:
+    type: integer
+    enum:
+      - 1 #Low
+      - 2 #Medium
+      - 3 #High
+    description: |
+      - 1 Low
+      - 2 Medium
+      - 3 High
+  Status:
+    type: integer
+    enum:
+      - 1 #Pending
+      - 2 #InProgress
+      - 3 #Complete
+    description: |
+      - 1 Pending
+      - 2 InProgress
+      - 3 Complete
+  Order:
+    type: string
+    enum:
+      - asc #asc
+      - desc #desc
+    description: |
+      - asc
+      - desc
+  ReportListItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      title:
+        type: string
+      subtitle:
+        type: string
+      description:
+        type: string
+      criticality:
+        $ref: '#/definitions/Criticality'
+      status:
+        $ref: '#/definitions/Status'
+      issues:
+        type: integer
+        format: int32
+      # progress:
+      #   type: integer
+      #   format: int32
+      deadline:
+        type: string
+        format: date-time
+  ReportTemplate:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      title:
+        type: string
+      subtitle:
+        type: string
+      status:
+        $ref: '#/definitions/Status'
+      issues:
+        type: integer
+        format: int32
+      sampleFileUrl:
+        type: string
+  ReportTemplateGroup:
+    type: object
+    properties:
+      title:
+        type: string
+      imports:
+        type: array
+        items:
+          $ref: '#/definitions/ReportTemplate'
+      issues:
+        type: integer
+        format: int32
+  ReportItem:
+    allOf:
+      - $ref: '#/definitions/ReportListItem'
+    properties:
+      description:
+        type: string
+      progress:
+        type: number
+      groups:
+        type: array
+        items:
+          $ref: '#/definitions/ReportTemplateGroup'
+  ImportType:
+    type: integer
+    enum:
+      - 1 #ThirdParty
+      - 2 #File
+    description: |
+      - 1 ThirdParty
+      - 2 File
+  ImportHistoryItem:
+    properties:
+      datetime:
+        type: string
+        format: data-time
+      filename:
+        type: string
+      type:
+        $ref: '#/definitions/ImportType'
+      user:
+        type: string
+      status:
+        $ref: '#/definitions/Status'
+      details:
+        type: string
+  Column:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      title:
+        type: string
+  ColumnMapping:
+    type: object
+    properties:
+      templateColumnId:
+        type: integer
+        format: int64
+      reportColumnId:
+        type: integer
+        format: int64
+
+  TableCell:
+    type: object
+    properties:
+      columnId:
+        type: integer
+        format: int64
+      value:
+        type: string
+  ValidatedTableCell:
+    allOf:
+      - $ref: '#/definitions/TableCell'
+    properties:
+      error:
+        type: string
+        example: null
+  Table:
+    type: object
+    properties:
+      tableHead:
+        type: array
+        items:
+          $ref: '#/definitions/Column'
+      tableData:
+        type: array
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/TableCell'
+  PagedTable:
+    allOf:
+      - $ref: '#/definitions/Table'
+    properties:
+      totalRows:
+        type: number
+  OrderableTable:
+    allOf:
+      - $ref: '#/definitions/Table'
+    properties:
+      orderBy:
+        type: number
+        description: column id
+      order:
+        $ref: '#/definitions/Order'
+  ValidatedTable:
+    type: object
+    properties:
+      tableHead:
+        type: array
+        items:
+          $ref: '#/definitions/Column'
+      tableData:
+        type: array
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/ValidatedTableCell'
+  ImportResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+      skipperRows:
+        type: integer
+        format: int32
+  ImportStats:
+    type: object
+    properties:
+      onTime:
+        type: integer
+        format: int32
+        description: 0-100
+      late:
+        type: integer
+        format: int32
+        description: 0-100
+  ImportStatsGroup:
+    type: object
+    properties:
+      imported:
+        type: array
+        items:
+          $ref: '#/definitions/ImportStats'
+      pending:
+        type: array
+        items:
+          $ref: '#/definitions/ImportStats'
+  SchoolImportStats:
+    type: object
+    properties:
+      title:
+        type: string
+        description: School name
+      stats:
+        $ref: '#/definitions/ImportStatsGroup'
+  TotalImportStats:
+    type: object
+    properties:
+      total:
+        $ref: '#/definitions/ImportStatsGroup'
+      bySchools:
+        type: array
+        items:
+          $ref: '#/definitions/SchoolImportStats'
+  IssueAlertType:
+    type: integer
+    enum:
+      - 1 #Validation error
+      - 2 #Data override
+    description: |
+      - 1 Validation error
+      - 2 Data override
+  Issue:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      school:
+        type: string
+      dueDate:
+        type: string
+        format: data-time
+      alert:
+        $ref: '#/definitions/IssueAlertType'
+      reportName:
+        type: string
+      description:
+        type: string
+      rootCause:
+        type: string
+  ImportStatusDetailsItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      title:
+        type: string
+      subtitle:
+        type: string
+      status:
+        $ref: '#/definitions/Status'
+      issues:
+        type: integer
+        format: int32
+      progress:
+         type: integer
+         format: int32
+  ImportStatusItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      title:
+        type: string
+      criticality:
+        $ref: '#/definitions/Criticality'
+      issues:
+        type: integer
+        format: int32
+      progress:
+         type: integer
+         format: int32
+      dueDate:
+        type: string
+        format: date-time
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/ImportStatusDetailsItem'
+  AclItem:
+    type: object
+    properties:
+      role:
+        type: string
+      permissions:
+        type: array
+        items:
+          type: string
+  Acl:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      parrentId:
+        type: integer
+        format: int64
+  UserStatus:
+    type: integer
+    enum:
+      - 1 #Active
+      - 2 #Blocked
+    description: |
+      - 1 Active
+      - 2 Blocked
+  UserListItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      status:
+        $ref: '#/definitions/UserStatus'
+      entityIds:
+        type: array
+        items:
+          type: integer
+          format: int64
+      roleId:
+          type: integer
+          format: int64
+  UserDetails:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      login:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+        format: email
+      phone:
+        type: string
+        format: phone
+      title:
+        type: string
+        format: phone
+      status:
+        $ref: '#/definitions/UserStatus'
+      entities:
+        type: array
+        items:
+          type: number
+          format: int64
+      roleId:
+        type: number
+        format: int64
+      imageData:
+        type: string
+        description: base64 user uploaded image string
+      imageUrl:
+        type: string
+        description: url to user avatar image
+  RoleStatus:
+    allOf:
+    - $ref: '#/definitions/UserStatus'
+  RoleListItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      status:
+        $ref: '#/definitions/RoleStatus'
+      privileges:
+        type: string
+  RoleDetailsItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      status:
+        $ref: '#/definitions/RoleStatus'
+      privileges:
+        type: array
+        items:
+          type: number
+      users:
+        type: array
+        items:
+          type: number
+  PrivilegeTreeItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      parentId:
+        type: integer
+        format: int64
+      name:
+        type: string
+  NotificationListItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      description:
+        type: string
+      date:
+        type: string
+        format: date-time
+      priority:
+        $ref: '#/definitions/Criticality'
+  NotificationModule:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      notificationsCount:
+        type: integer
+  NotificationTrigger:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+  Frequency:
+    type: integer
+    enum:
+      - 1 #Daily
+      - 2 #Weekly
+      - 3 #Yearly
+    description: |
+      - 1 Daily
+      - 2 Weekly
+      - 3 Yearly
+  NotificationEditable:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      moduleId:
+        type: integer
+        format: int64
+      triggerId:
+        type: integer
+        format: int64
+      priority:
+        $ref: '#/definitions/Criticality'
+      frequency:
+        $ref: '#/definitions/Frequency'
+  PasswordVerificationPolicies:
+    type: object
+    properties:
+      changePasswordInterval:
+        type: integer
+        format: int32
+      passwordExpiryNotification:
+        type: integer
+        format: int32
+      lockAfterAttempts:
+        type: integer
+        format: int32
+      reenableTimeout:
+        type: integer
+        format: int32
+  PasswordCreationPolicies:
+    type: object
+    properties:
+      passwordMinLength:
+        type: integer
+        format: int32
+      passwordMinChars:
+        type: integer
+        format: int32
+      passwordMinUpperChars:
+        type: integer
+        format: int32
+      passwordMinDigits:
+        type: integer
+        format: int32
+      passwordMinSpecialChars:
+        type: integer
+        format: int32
+      passwordResetLinkExpiration:
+        type: integer
+        format: int32
+      preventOldPasswordReuse:
+        type: boolean
+      passwordNotMatchPrevious:
+        type: integer
+        format: int32
+  OtherSecuritySettings:
+    type: object
+    properties:
+      inactivityTimeout:
+        type: integer
+        format: int32
+  NotificationEditableListItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      enabled:
+        type: boolean
+    allOf:
+    - $ref: '#/definitions/NotificationEditable'
+# Added by API Auto Mocking Plugin
+# host: virtserver.swaggerhub.com
+# basePath: /Esquare/EsquareAPI/1.0.0
+# schemes:
+# - https
+# - http
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /Esquare/EsquareAPI/1.0.0
+schemes:
+ - https
