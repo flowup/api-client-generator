@@ -31,7 +31,9 @@ export class APIClient {
 
     this.options = {
       headers: options && options.headers ? options.headers : new HttpHeaders(),
-      params: options && options.params ? options.params : new HttpParams()
+      params: options && options.params ? options.params : new HttpParams(),
+      ...(options && options.reportProgress ? { reportProgress: options.reportProgress } : {}),
+      ...(options && options.withCredentials ? { withCredentials: options.withCredentials } : {})
     };
   }
 
