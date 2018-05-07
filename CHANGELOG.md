@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/flowup/api-client-generator/compare/3.0.3...3.1.0) (2018-05-07)
+
+
+### Features
+
+* **api-client:** rxjs 6 compatible import for Observable ([431d61f](https://github.com/flowup/api-client-generator/commit/431d61f))
+
+
+
 <a name="3.0.3"></a>
 ## [3.0.3](https://github.com/flowup/api-client-generator/compare/3.0.0-alpha.1...3.0.3) (2018-04-06)
 
