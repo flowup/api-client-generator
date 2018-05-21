@@ -10,14 +10,20 @@ import * as models from './models';
 export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
 export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
 
+type APIHttpOptions = HttpOptions & {
+  headers: HttpHeaders,
+  params: HttpParams,
+};
+
 /**
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
 export class APIClient {
 
-  readonly options: HttpOptions;
-  private domain: string = `https://firestore.googleapis.com/v1beta1`;
+  readonly options: APIHttpOptions;
+
+  private readonly domain: string = `https://firestore.googleapis.com/v1beta1`;
 
   constructor(private http: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain: string,
@@ -40,10 +46,10 @@ export class APIClient {
       body?: models.BatchGetDocumentsRequest,
       database: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.BatchGetDocumentsResponse> {
     const path = `/${args.database}/documents:batchGet`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.BatchGetDocumentsResponse>('POST', path, options, JSON.stringify(args.body));
   }
@@ -53,10 +59,10 @@ export class APIClient {
       body?: models.BeginTransactionRequest,
       database: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.BeginTransactionResponse> {
     const path = `/${args.database}/documents:beginTransaction`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.BeginTransactionResponse>('POST', path, options, JSON.stringify(args.body));
   }
@@ -66,10 +72,10 @@ export class APIClient {
       body?: models.CommitRequest,
       database: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.CommitResponse> {
     const path = `/${args.database}/documents:commit`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.CommitResponse>('POST', path, options, JSON.stringify(args.body));
   }
@@ -79,10 +85,10 @@ export class APIClient {
       body?: models.ListenRequest,
       database: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ListenResponse> {
     const path = `/${args.database}/documents:listen`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.ListenResponse>('POST', path, options, JSON.stringify(args.body));
   }
@@ -92,10 +98,10 @@ export class APIClient {
       body?: models.RollbackRequest,
       database: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Empty> {
     const path = `/${args.database}/documents:rollback`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Empty>('POST', path, options, JSON.stringify(args.body));
   }
@@ -105,10 +111,10 @@ export class APIClient {
       body?: models.WriteRequest,
       database: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.WriteResponse> {
     const path = `/${args.database}/documents:write`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.WriteResponse>('POST', path, options, JSON.stringify(args.body));
   }
@@ -119,10 +125,10 @@ export class APIClient {
       currentDocumentUpdateTime?: string,
       name: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Empty> {
     const path = `/${args.name}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('currentDocumentExists' in args) {
       options.params = options.params.set('currentDocument.exists', String(args.currentDocumentExists));
@@ -140,14 +146,14 @@ export class APIClient {
       readTime?: string,
       transaction?: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Index> {
     const path = `/${args.name}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('maskFieldPaths' in args) {
       if (args.maskFieldPaths && args.maskFieldPaths.length) {
-        options.params = args.maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
+        options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
       }
     }
     if ('readTime' in args) {
@@ -168,10 +174,10 @@ export class APIClient {
       name: string,
       updateMaskFieldPaths?: string[],
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Document> {
     const path = `/${args.name}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('currentDocumentExists' in args) {
       options.params = options.params.set('currentDocument.exists', String(args.currentDocumentExists));
@@ -181,12 +187,12 @@ export class APIClient {
     }
     if ('maskFieldPaths' in args) {
       if (args.maskFieldPaths && args.maskFieldPaths.length) {
-        options.params = args.maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
+        options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
       }
     }
     if ('updateMaskFieldPaths' in args) {
       if (args.updateMaskFieldPaths && args.updateMaskFieldPaths.length) {
-        options.params = args.updateMaskFieldPaths.reduce((acc, cur) => acc.append('updateMask.fieldPaths', `${cur}`), options.params);
+        options.params = args.updateMaskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('updateMask.fieldPaths', `${cur}`), options.params);
       }
     }
     return this.sendRequest<models.Document>('PATCH', path, options, JSON.stringify(args.body));
@@ -199,10 +205,10 @@ export class APIClient {
       pageToken?: string,
       parent: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ListIndexesResponse> {
     const path = `/${args.parent}/indexes`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('filter' in args) {
       options.params = options.params.set('filter', String(args.filter));
@@ -221,10 +227,10 @@ export class APIClient {
       body?: models.Index,
       parent: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Operation> {
     const path = `/${args.parent}/indexes`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Operation>('POST', path, options, JSON.stringify(args.body));
   }
@@ -241,14 +247,14 @@ export class APIClient {
       showMissing?: boolean,
       transaction?: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ListDocumentsResponse> {
     const path = `/${args.parent}/${args.collectionId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('maskFieldPaths' in args) {
       if (args.maskFieldPaths && args.maskFieldPaths.length) {
-        options.params = args.maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
+        options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
       }
     }
     if ('orderBy' in args) {
@@ -280,17 +286,17 @@ export class APIClient {
       maskFieldPaths?: string[],
       parent: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Document> {
     const path = `/${args.parent}/${args.collectionId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('documentId' in args) {
       options.params = options.params.set('documentId', String(args.documentId));
     }
     if ('maskFieldPaths' in args) {
       if (args.maskFieldPaths && args.maskFieldPaths.length) {
-        options.params = args.maskFieldPaths.reduce((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
+        options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
       }
     }
     return this.sendRequest<models.Document>('POST', path, options, JSON.stringify(args.body));
@@ -301,10 +307,10 @@ export class APIClient {
       body?: models.ListCollectionIdsRequest,
       parent: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ListCollectionIdsResponse> {
     const path = `/${args.parent}:listCollectionIds`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.ListCollectionIdsResponse>('POST', path, options, JSON.stringify(args.body));
   }
@@ -314,10 +320,10 @@ export class APIClient {
       body?: models.RunQueryRequest,
       parent: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RunQueryResponse> {
     const path = `/${args.parent}:runQuery`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.RunQueryResponse>('POST', path, options, JSON.stringify(args.body));
   }

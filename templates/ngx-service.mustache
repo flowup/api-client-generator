@@ -12,14 +12,20 @@ import * as models from './models';
 export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
 export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
 
+type APIHttpOptions = HttpOptions & {
+  headers: HttpHeaders;
+  params: HttpParams;
+};
+
 /**
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
 export class APIClient {
 
-  readonly options: HttpOptions;
-  private domain: string = `{{&domain}}`;
+  readonly options: APIHttpOptions;
+
+  private readonly domain: string = `{{&domain}}`;
 
   constructor(private http: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain: string,
@@ -46,17 +52,17 @@ export class APIClient {
       {{/parameters}}
     },
   {{/parameters.length}}
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<{{&response}}> {
     const path = `{{&path}}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     {{#parameters}}
       {{#isQueryParameter}}
     if ('{{&camelCaseName}}' in args) {
           {{#isArray}}
       if (args.{{&camelCaseName}} && args.{{&camelCaseName}}.length) {
-        options.params = args.{{&camelCaseName}}.reduce((acc, cur) => acc.append('{{&name}}', `${cur}`), options.params);
+        options.params = args.{{&camelCaseName}}.reduce<HttpParams>((acc, cur) => acc.append('{{&name}}', `${cur}`), options.params);
       }
           {{/isArray}}
           {{^isArray}}

@@ -10,14 +10,20 @@ import * as models from './models';
 export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
 export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
 
+type APIHttpOptions = HttpOptions & {
+  headers: HttpHeaders,
+  params: HttpParams,
+};
+
 /**
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
 export class APIClient {
 
-  readonly options: HttpOptions;
-  private domain: string = `https://virtserver.swaggerhub.com/Esquare/EsquareAPI/1.0.0`;
+  readonly options: APIHttpOptions;
+
+  private readonly domain: string = `https://virtserver.swaggerhub.com/Esquare/EsquareAPI/1.0.0`;
 
   constructor(private http: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain: string,
@@ -39,19 +45,19 @@ export class APIClient {
     args: {
       body: models.AuthForm,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/auth`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
   authRef(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/auth/refresh`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options);
   }
@@ -60,10 +66,10 @@ export class APIClient {
     args: {
       body: models.RestoreForm,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/restore`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
@@ -72,10 +78,10 @@ export class APIClient {
     args: {
       body: models.RestoreRequestForm,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/restore/request`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
@@ -84,28 +90,28 @@ export class APIClient {
     args: {
       restoreGuid: string,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/restore/checkGuid`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.restoreGuid));
   }
 
   getAclList(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.AclItem[]> {
     const path = `/acl`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.AclItem[]>('GET', path, options);
   }
 
   getStructureEntitiesList(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Structure[]> {
     const path = `/structure`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Structure[]>('GET', path, options);
   }
@@ -114,10 +120,10 @@ export class APIClient {
     args: {
       body: models.StructureAddParameters,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Structure> {
     const path = `/structure`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Structure>('POST', path, options, JSON.stringify(args.body));
   }
@@ -127,10 +133,10 @@ export class APIClient {
       structureId: number,
       body: models.StructureForm,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Structure> {
     const path = `/structure/${args.structureId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Structure>('PUT', path, options, JSON.stringify(args.body));
   }
@@ -139,10 +145,10 @@ export class APIClient {
     args: {
       structureId: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/structure/${args.structureId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('DELETE', path, options);
   }
@@ -155,10 +161,10 @@ export class APIClient {
       orderBy: string,
       order?: models.Order,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('status' in args) {
       options.params = options.params.set('status', String(args.status));
@@ -182,10 +188,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ReportItem[]> {
     const path = `/report/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.ReportItem[]>('GET', path, options);
   }
@@ -198,10 +204,10 @@ export class APIClient {
       orderBy?: number,
       order?: models.Order,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/preview/${args.templateId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('pageSize' in args) {
       options.params = options.params.set('pageSize', String(args.pageSize));
@@ -222,10 +228,10 @@ export class APIClient {
     args: {
       templateId: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ImportHistoryItem[]> {
     const path = `/report/history/${args.templateId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.ImportHistoryItem[]>('GET', path, options);
   }
@@ -235,10 +241,10 @@ export class APIClient {
       templateId: number,
       file: File,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/wizard/uploadfile/${args.templateId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.file));
   }
@@ -247,10 +253,10 @@ export class APIClient {
     args: {
       templateId: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Column[]> {
     const path = `/report/wizard/${args.templateId}/templateColumns`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Column[]>('GET', path, options);
   }
@@ -259,10 +265,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Column[]> {
     const path = `/report/wizard/${args.id}/reportColumns`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Column[]>('GET', path, options);
   }
@@ -272,10 +278,10 @@ export class APIClient {
       id: number,
       body: any,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Table> {
     const path = `/report/wizard/${args.id}/mapping`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Table>('POST', path, options, JSON.stringify(args.body));
   }
@@ -284,10 +290,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ValidatedTable> {
     const path = `/report/wizard/${args.id}/validationTable`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.ValidatedTable>('GET', path, options);
   }
@@ -297,10 +303,10 @@ export class APIClient {
       id: number,
       all?: boolean,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/wizard/${args.id}/downloadImported`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('all' in args) {
       options.params = options.params.set('all', String(args.all));
@@ -312,10 +318,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ImportResponse> {
     const path = `/report/wizard/${args.id}/import`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.ImportResponse>('POST', path, options);
   }
@@ -324,10 +330,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/wizard/${args.id}/downloadOriginal`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('GET', path, options);
   }
@@ -336,10 +342,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/wizard/${args.id}/downloadSkipped`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('GET', path, options);
   }
@@ -348,10 +354,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/wizard/${args.id}/cancelImport`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options);
   }
@@ -362,10 +368,10 @@ export class APIClient {
       description: string,
       file: File,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/wizard/${args.id}/override`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.description), JSON.stringify(args.file));
   }
@@ -374,10 +380,10 @@ export class APIClient {
     args: {
       period?: models.Period,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.TotalImportStats> {
     const path = `/report/ministry/statistic`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('period' in args) {
       options.params = options.params.set('period', String(args.period));
@@ -394,10 +400,10 @@ export class APIClient {
       orderBy: string,
       order?: models.Order,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/ministry/issues`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('period' in args) {
       options.params = options.params.set('period', String(args.period));
@@ -429,10 +435,10 @@ export class APIClient {
       orderBy: string,
       order?: models.Order,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/report/ministry/statuses`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('period' in args) {
       options.params = options.params.set('period', String(args.period));
@@ -466,10 +472,10 @@ export class APIClient {
       assignedToRole?: number,
       unassignedFromRole?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('period' in args) {
       options.params = options.params.set('period', String(args.period));
@@ -502,19 +508,19 @@ export class APIClient {
     args: {
       body: models.UserDetails,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.UserDetails> {
     const path = `/users`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.UserDetails>('POST', path, options, JSON.stringify(args.body));
   }
 
   getAclStructure(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Acl[]> {
     const path = `/users/acl`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.Acl[]>('GET', path, options);
   }
@@ -523,10 +529,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.UserDetails[]> {
     const path = `/users/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.UserDetails[]>('GET', path, options);
   }
@@ -536,10 +542,10 @@ export class APIClient {
       id: number,
       body: models.UserDetails,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.UserDetails> {
     const path = `/users/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.UserDetails>('PUT', path, options, JSON.stringify(args.body));
   }
@@ -548,19 +554,19 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('DELETE', path, options);
   }
 
   getRolesList(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RoleListItem[]> {
     const path = `/users/roles`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.RoleListItem[]>('GET', path, options);
   }
@@ -569,19 +575,19 @@ export class APIClient {
     args: {
       body: any,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
     const path = `/users/roles`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.RoleDetailsItem>('POST', path, options, JSON.stringify(args.body));
   }
 
   getList(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PrivilegeTreeItem[]> {
     const path = `/users/privileges`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.PrivilegeTreeItem[]>('GET', path, options);
   }
@@ -590,10 +596,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem[]> {
     const path = `/users/roles/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.RoleDetailsItem[]>('GET', path, options);
   }
@@ -603,10 +609,10 @@ export class APIClient {
       id: number,
       body?: models.RoleUpdateDetails,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
     const path = `/users/roles/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.RoleDetailsItem>('PUT', path, options, JSON.stringify(args.body));
   }
@@ -615,19 +621,19 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/roles/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('DELETE', path, options);
   }
 
   getNewNotificationsList(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.NotificationListItem[]> {
     const path = `/notifications/new`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.NotificationListItem[]>('GET', path, options);
   }
@@ -636,10 +642,10 @@ export class APIClient {
     args: {
       body?: any,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/markAsViewed`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
   }
@@ -651,10 +657,10 @@ export class APIClient {
       orderBy: string,
       order?: models.Order,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/all`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('pageSize' in args) {
       options.params = options.params.set('pageSize', String(args.pageSize));
@@ -672,19 +678,19 @@ export class APIClient {
   }
 
   getModulesList(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.NotificationModule[]> {
     const path = `/notifications/modules`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.NotificationModule[]>('GET', path, options);
   }
 
   getTriggersList(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.NotificationTrigger[]> {
     const path = `/notifications/triggers`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.NotificationTrigger[]>('GET', path, options);
   }
@@ -697,10 +703,10 @@ export class APIClient {
       orderBy: string,
       order?: models.Order,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/modules/${args.moduleId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('pageSize' in args) {
       options.params = options.params.set('pageSize', String(args.pageSize));
@@ -721,10 +727,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/enable/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('PUT', path, options);
   }
@@ -733,10 +739,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/disable/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('PUT', path, options);
   }
@@ -745,10 +751,10 @@ export class APIClient {
     args: {
       id: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.NotificationEditableListItem> {
     const path = `/notifications/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.NotificationEditableListItem>('GET', path, options);
   }
@@ -758,10 +764,10 @@ export class APIClient {
       id: number,
       body?: models.NotificationEditable,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
   }
@@ -770,19 +776,19 @@ export class APIClient {
     args: {
       body?: models.NotificationEditable,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
   getPassVerificationPolicies(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PasswordVerificationPolicies> {
     const path = `/security-policy/password-verification`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.PasswordVerificationPolicies>('GET', path, options);
   }
@@ -791,19 +797,19 @@ export class APIClient {
     args: {
       body?: models.PasswordVerificationPolicies,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PasswordVerificationPolicies> {
     const path = `/security-policy/password-verification`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.PasswordVerificationPolicies>('PUT', path, options, JSON.stringify(args.body));
   }
 
   getPassCreationPolicies(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PasswordCreationPolicies> {
     const path = `/security-policy/password-creation`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.PasswordCreationPolicies>('GET', path, options);
   }
@@ -812,19 +818,19 @@ export class APIClient {
     args: {
       body?: models.PasswordCreationPolicies,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PasswordCreationPolicies> {
     const path = `/security-policy/password-creation`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.PasswordCreationPolicies>('PUT', path, options, JSON.stringify(args.body));
   }
 
   getOtherSecuritySettings(
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.OtherSecuritySettings> {
     const path = `/security-policy/other-settings`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.OtherSecuritySettings>('GET', path, options);
   }
@@ -833,10 +839,10 @@ export class APIClient {
     args: {
       body?: models.OtherSecuritySettings,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.OtherSecuritySettings> {
     const path = `/security-policy/other-settings`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     return this.sendRequest<models.OtherSecuritySettings>('PUT', path, options, JSON.stringify(args.body));
   }

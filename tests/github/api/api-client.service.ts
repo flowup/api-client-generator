@@ -10,14 +10,20 @@ import * as models from './models';
 export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
 export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
 
+type APIHttpOptions = HttpOptions & {
+  headers: HttpHeaders,
+  params: HttpParams,
+};
+
 /**
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
 export class APIClient {
 
-  readonly options: HttpOptions;
-  private domain: string = `https://api.github.com`;
+  readonly options: APIHttpOptions;
+
+  private readonly domain: string = `https://api.github.com`;
 
   constructor(private http: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain: string,
@@ -44,10 +50,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Emojis> {
     const path = `/emojis`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -79,10 +85,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/events`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -114,10 +120,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Feeds> {
     const path = `/feeds`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -150,10 +156,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -189,10 +195,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PostGist,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -225,10 +231,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists/public`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -264,10 +270,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists/starred`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -303,10 +309,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -339,10 +345,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gist> {
     const path = `/gists/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -376,10 +382,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PatchGist,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gist> {
     const path = `/gists/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -412,10 +418,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Comments> {
     const path = `/gists/${args.id}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -449,10 +455,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.CommentBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -486,10 +492,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -523,10 +529,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Comment> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -561,10 +567,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.Comment,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Comment> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -597,10 +603,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/forks`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -633,10 +639,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/star`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -669,10 +675,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/star`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -705,10 +711,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/star`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -740,10 +746,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/gitignore/templates`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -776,10 +782,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.GitignoreLang> {
     const path = `/gitignore/templates/${args.language}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -817,10 +823,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Issues> {
     const path = `/issues`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('filter' in args) {
       options.params = options.params.set('filter', String(args.filter));
@@ -874,10 +880,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.SearchIssuesByKeyword> {
     const path = `/legacy/issues/search/${args.owner}/${args.repository}/${args.state}/${args.keyword}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -914,10 +920,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.SearchRepositoriesByKeyword> {
     const path = `/legacy/repos/search/${args.keyword}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
@@ -962,10 +968,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.SearchUserByEmail> {
     const path = `/legacy/user/email/${args.email}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1001,10 +1007,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.SearchUsersByKeyword> {
     const path = `/legacy/user/search/${args.keyword}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
@@ -1046,10 +1052,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.Markdown,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/markdown`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1081,10 +1087,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/markdown/raw`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1116,10 +1122,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Meta> {
     const path = `/meta`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1153,10 +1159,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/networks/${args.owner}/${args.repo}/events`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1191,10 +1197,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/notifications`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('all' in args) {
       options.params = options.params.set('all', String(args.all));
@@ -1236,10 +1242,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.NotificationMarkRead,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1272,10 +1278,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/notifications/threads/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1308,10 +1314,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/threads/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1344,10 +1350,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1380,10 +1386,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Subscription> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1417,10 +1423,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PutSubscription,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Subscription> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1453,10 +1459,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Organization> {
     const path = `/orgs/${args.org}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1490,10 +1496,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PatchOrg,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Organization> {
     const path = `/orgs/${args.org}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1526,10 +1532,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/orgs/${args.org}/events`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1568,10 +1574,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Issues> {
     const path = `/orgs/${args.org}/issues`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('filter' in args) {
       options.params = options.params.set('filter', String(args.filter));
@@ -1622,10 +1628,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/orgs/${args.org}/members`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1659,10 +1665,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/members/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1696,10 +1702,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/members/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1732,10 +1738,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/orgs/${args.org}/public_members`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1769,10 +1775,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1806,10 +1812,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1843,10 +1849,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1880,10 +1886,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Repos> {
     const path = `/orgs/${args.org}/repos`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('type' in args) {
       options.params = options.params.set('type', String(args.type));
@@ -1920,10 +1926,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PostRepo,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/repos`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1956,10 +1962,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Teams> {
     const path = `/orgs/${args.org}/teams`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1993,10 +1999,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.OrgTeamsPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/teams`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2028,10 +2034,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RateLimit> {
     const path = `/rate_limit`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2065,10 +2071,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2102,10 +2108,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2140,10 +2146,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.RepoEdit,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2177,10 +2183,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Assignees> {
     const path = `/repos/${args.owner}/${args.repo}/assignees`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2215,10 +2221,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/assignees/${args.assignee}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2252,10 +2258,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Branches> {
     const path = `/repos/${args.owner}/${args.repo}/branches`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2290,10 +2296,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Branch> {
     const path = `/repos/${args.owner}/${args.repo}/branches/${args.branch}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2327,10 +2333,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2365,10 +2371,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2403,10 +2409,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2441,10 +2447,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2478,10 +2484,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RepoComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2516,10 +2522,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2554,10 +2560,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2593,10 +2599,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.CommentBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2635,10 +2641,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Commits> {
     const path = `/repos/${args.owner}/${args.repo}/commits`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -2688,10 +2694,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RefStatus> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.ref}/status`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2726,10 +2732,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Commit> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2764,10 +2770,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RepoComments> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2803,10 +2809,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.CommitBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2842,10 +2848,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.CompareCommits> {
     const path = `/repos/${args.owner}/${args.repo}/compare/${args.baseId}...${args.headId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2881,10 +2887,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.DeleteFileBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.DeleteFile> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2921,10 +2927,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ContentsPath> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('path' in args) {
       options.params = options.params.set('path', String(args.path));
@@ -2966,10 +2972,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.CreateFileBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.CreateFile> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3004,10 +3010,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Contributors> {
     const path = `/repos/${args.owner}/${args.repo}/contributors`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('anon' in args) {
       options.params = options.params.set('anon', String(args.anon));
@@ -3044,10 +3050,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RepoDeployments> {
     const path = `/repos/${args.owner}/${args.repo}/deployments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3082,10 +3088,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.Deployment,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/deployments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3120,10 +3126,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.DeploymentStatuses> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3159,10 +3165,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.DeploymentStatusesCreate,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3196,10 +3202,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Downloads> {
     const path = `/repos/${args.owner}/${args.repo}/downloads`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3234,10 +3240,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3272,10 +3278,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Downloads> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3309,10 +3315,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/events`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3347,10 +3353,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Forks> {
     const path = `/repos/${args.owner}/${args.repo}/forks`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('sort' in args) {
       options.params = options.params.set('sort', String(args.sort));
@@ -3388,10 +3394,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.ForkBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/forks`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3426,10 +3432,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: Blob,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3464,10 +3470,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<Blob> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs/${args.shaCode}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3502,10 +3508,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.RepoCommitBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/git/commits`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3540,10 +3546,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.RepoCommit> {
     const path = `/repos/${args.owner}/${args.repo}/git/commits/${args.shaCode}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3577,10 +3583,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Refs> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3615,10 +3621,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.RefsBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3653,10 +3659,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3691,10 +3697,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3730,10 +3736,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.GitRefPatch,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3768,10 +3774,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.Tag,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/git/tags`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3806,10 +3812,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Tag> {
     const path = `/repos/${args.owner}/${args.repo}/git/tags/${args.shaCode}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3844,10 +3850,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.Tree,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/git/trees`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3883,10 +3889,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Tree> {
     const path = `/repos/${args.owner}/${args.repo}/git/trees/${args.shaCode}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('recursive' in args) {
       options.params = options.params.set('recursive', String(args.recursive));
@@ -3923,10 +3929,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3961,10 +3967,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.HookBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/hooks`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3999,10 +4005,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4037,10 +4043,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4076,10 +4082,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.HookBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4114,10 +4120,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}/tests`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4157,10 +4163,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Issues> {
     const path = `/repos/${args.owner}/${args.repo}/issues`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('filter' in args) {
       options.params = options.params.set('filter', String(args.filter));
@@ -4213,10 +4219,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.Issue,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4253,10 +4259,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('direction' in args) {
       options.params = options.params.set('direction', String(args.direction));
@@ -4300,10 +4306,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4338,10 +4344,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4377,10 +4383,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.CommentBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4414,10 +4420,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/issues/events`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4452,10 +4458,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Event> {
     const path = `/repos/${args.owner}/${args.repo}/issues/events/${args.eventId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4490,10 +4496,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Issue> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4529,10 +4535,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.Issue,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Issue> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4567,10 +4573,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4606,10 +4612,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.CommentBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4644,10 +4650,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/events`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4682,10 +4688,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4720,10 +4726,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4759,10 +4765,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.EmailsPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4798,10 +4804,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.EmailsPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4837,10 +4843,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels/${args.name}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4874,10 +4880,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Keys> {
     const path = `/repos/${args.owner}/${args.repo}/keys`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4912,10 +4918,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.UserKeysPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/keys`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4950,10 +4956,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4988,10 +4994,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5025,10 +5031,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/labels`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5063,10 +5069,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.EmailsPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/labels`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5101,10 +5107,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5139,10 +5145,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5178,10 +5184,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.EmailsPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5215,10 +5221,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Languages> {
     const path = `/repos/${args.owner}/${args.repo}/languages`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5253,10 +5259,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.MergesBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/merges`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5293,10 +5299,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('state' in args) {
       options.params = options.params.set('state', String(args.state));
@@ -5340,10 +5346,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.MilestoneUpdate,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/milestones`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5378,10 +5384,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5416,10 +5422,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5455,10 +5461,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.MilestoneUpdate,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5493,10 +5499,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}/labels`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5533,10 +5539,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('all' in args) {
       options.params = options.params.set('all', String(args.all));
@@ -5580,10 +5586,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.NotificationMarkRead,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5620,10 +5626,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Pulls> {
     const path = `/repos/${args.owner}/${args.repo}/pulls`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('state' in args) {
       options.params = options.params.set('state', String(args.state));
@@ -5667,10 +5673,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PullsPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/pulls`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5707,10 +5713,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('direction' in args) {
       options.params = options.params.set('direction', String(args.direction));
@@ -5754,10 +5760,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5792,10 +5798,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5831,10 +5837,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.CommentBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5869,10 +5875,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PullRequest> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5908,10 +5914,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PullUpdate,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5946,10 +5952,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5985,10 +5991,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PullsCommentPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/comments`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6023,10 +6029,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Commits> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/commits`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6061,10 +6067,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Pulls> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/files`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6099,10 +6105,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6138,10 +6144,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.MergePullBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Merge> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6176,10 +6182,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ContentsPath> {
     const path = `/repos/${args.owner}/${args.repo}/readme`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('ref' in args) {
       options.params = options.params.set('ref', String(args.ref));
@@ -6216,10 +6222,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Releases> {
     const path = `/repos/${args.owner}/${args.repo}/releases`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6254,10 +6260,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.ReleaseCreate,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/releases`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6292,10 +6298,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6330,10 +6336,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Asset> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6369,10 +6375,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.AssetPatch,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Asset> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6407,10 +6413,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6445,10 +6451,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Release> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6484,10 +6490,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.ReleaseCreate,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Release> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6522,10 +6528,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Assets> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}/assets`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6559,10 +6565,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/stargazers`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6596,10 +6602,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/code_frequency`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6633,10 +6639,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.CommitActivityStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/commit_activity`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6670,10 +6676,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ContributorsStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/contributors`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6707,10 +6713,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.ParticipationStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/participation`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6744,10 +6750,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/punch_card`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6782,10 +6788,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Ref> {
     const path = `/repos/${args.owner}/${args.repo}/statuses/${args.ref}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6821,10 +6827,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.HeadBranch,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/statuses/${args.ref}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6858,10 +6864,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/subscribers`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6895,10 +6901,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6932,10 +6938,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Subscribition> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -6970,10 +6976,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.SubscribitionBody,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Subscribition> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7007,10 +7013,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Tags> {
     const path = `/repos/${args.owner}/${args.repo}/tags`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7044,10 +7050,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Teams> {
     const path = `/repos/${args.owner}/${args.repo}/teams`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7081,10 +7087,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/watchers`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7120,10 +7126,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/${args.archiveFormat}/${args.path}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7156,10 +7162,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Repositories> {
     const path = `/repositories`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -7197,10 +7203,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.SearchCode> {
     const path = `/search/code`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
@@ -7244,10 +7250,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.SearchIssues> {
     const path = `/search/issues`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
@@ -7291,10 +7297,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.SearchRepositories> {
     const path = `/search/repositories`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
@@ -7338,10 +7344,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.SearchUsers> {
     const path = `/search/users`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
@@ -7383,10 +7389,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/teams/${args.teamId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7419,10 +7425,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Team> {
     const path = `/teams/${args.teamId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7456,10 +7462,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.EditTeam,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Team> {
     const path = `/teams/${args.teamId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7492,10 +7498,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/teams/${args.teamId}/members`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7529,10 +7535,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/teams/${args.teamId}/members/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7566,10 +7572,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/teams/${args.teamId}/members/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7603,10 +7609,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/teams/${args.teamId}/members/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7640,10 +7646,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/teams/${args.teamId}/memberships/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7677,10 +7683,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.TeamMembership> {
     const path = `/teams/${args.teamId}/memberships/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7714,10 +7720,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.TeamMembership> {
     const path = `/teams/${args.teamId}/memberships/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7750,10 +7756,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.TeamRepos> {
     const path = `/teams/${args.teamId}/repos`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7788,10 +7794,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/teams/${args.teamId}/repos/${args.org}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7826,10 +7832,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/teams/${args.teamId}/repos/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7864,10 +7870,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/teams/${args.teamId}/repos/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7899,10 +7905,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.User> {
     const path = `/user`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7935,10 +7941,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.UserUpdate,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.User> {
     const path = `/user`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -7971,10 +7977,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.UserEmails,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/emails`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8006,10 +8012,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.UserEmails> {
     const path = `/user/emails`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8042,10 +8048,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.EmailsPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/emails`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8077,10 +8083,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/user/followers`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8112,10 +8118,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/user/following`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8148,10 +8154,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/following/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8184,10 +8190,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/following/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8220,10 +8226,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/following/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8261,10 +8267,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Issues> {
     const path = `/user/issues`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('filter' in args) {
       options.params = options.params.set('filter', String(args.filter));
@@ -8314,10 +8320,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/user/keys`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8350,10 +8356,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.UserKeysPost,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/keys`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8386,10 +8392,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/keys/${args.keyId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8422,10 +8428,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     const path = `/user/keys/${args.keyId}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8457,10 +8463,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/user/orgs`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8493,10 +8499,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Repos> {
     const path = `/user/repos`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('type' in args) {
       options.params = options.params.set('type', String(args.type));
@@ -8532,10 +8538,10 @@ export class APIClient {
       xGitHubRequestId?: number,
       body: models.PostRepo,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/repos`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8569,10 +8575,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/user/starred`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('direction' in args) {
       options.params = options.params.set('direction', String(args.direction));
@@ -8612,10 +8618,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8649,10 +8655,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8686,10 +8692,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8721,10 +8727,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.UserUserIdSubscribitions> {
     const path = `/user/subscriptions`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8758,10 +8764,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8795,10 +8801,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8832,10 +8838,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8867,10 +8873,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.TeamsList> {
     const path = `/user/teams`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8903,10 +8909,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/users`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -8942,10 +8948,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/users/${args.username}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -8978,10 +8984,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/${args.username}/events`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9015,10 +9021,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/${args.username}/events/orgs/${args.org}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9051,10 +9057,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/users/${args.username}/followers`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9088,10 +9094,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/${args.username}/following/${args.targetUser}`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9125,10 +9131,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/users/${args.username}/gists`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -9164,10 +9170,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/users/${args.username}/keys`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9200,10 +9206,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/users/${args.username}/orgs`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9236,10 +9242,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/${args.username}/received_events`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9272,10 +9278,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/${args.username}/received_events/public`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9309,10 +9315,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<models.Repos> {
     const path = `/users/${args.username}/repos`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('type' in args) {
       options.params = options.params.set('type', String(args.type));
@@ -9348,10 +9354,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/${args.username}/starred`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -9384,10 +9390,10 @@ export class APIClient {
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
-    options?: HttpOptions
+    passedOptions?: HttpOptions
   ): Observable<any> {
     const path = `/users/${args.username}/subscriptions`;
-    options = {...this.options, ...options};
+    const options: APIHttpOptions = {...this.options, ...passedOptions};
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
