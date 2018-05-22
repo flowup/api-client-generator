@@ -11,18 +11,22 @@
 # api-client-generator
 Angular REST API client generator from Swagger YAML or JSON file with camel case settings
 
+Generated files are compatible with Angular 6 (should be compatible with 5 version too). RxJS imports are targeted for version 6.
+
 # Description
 This package generates a Angular TypeScript classes from a Swagger v2.0 specification file. The code is generated using Mustache templates.
 
 The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular (introduced in version 4.3).
 
+# Compatibility
+
+- **Angular 6** (should also work with 5 and 4.3+)
+- **RxJS 6** (Observable imports)
+  - in case of rxjs <6 update or rewrite the rxjs import to match older version
+
 # Installation
 
 ### Global usage:
-
-`[sudo] yarn global add api-client-generator`
-
-or
 
 `[sudo] npm install -g api-client-generator`
 
@@ -32,11 +36,7 @@ This command will generate API client described in swagger.json file to ./output
 
 ### Local usage
 
-`yarn add api-client-generator`
-
-or
-
-`npm install api-client-generator`
+`npm install api-client-generator --save-dev`
 
 - for quick usage create run script in your `package.json` scripts
 ```
@@ -53,22 +53,6 @@ or
  - `s` -  path to the swagger file (yaml or json)
  - `o` -  path where the generated files should be emitted
 
-# Generated structure
-
-- if you are interested on how will the generated client with models look like, take a look in a `example/` folder
-
-```
-output
- ├─ models
- │   ├─ some.enum.ts
- │   ├─ some.model.ts
- │   │  ...
- │   ├─ another.model.ts
- │   └─ index.ts
- ├─ api-client.service.ts
- └─ index.ts
-```
-
 # How to use generated client
 
 1. import the `APIClientModule` in your `app.module.ts` (main module)
@@ -76,13 +60,19 @@ output
 - options and domain are optional
 - when domain is not passed, host property form swagger file is used as default
   - if host property is not defined `window.href` with current port is used instead
+
 ```typescript
 @NgModule({
   imports: [
+    /* Default configuration and all of it's properties is optional */
     APIClientModule.forRoot({
       domain: 'https://api.url', // or use value defined in environment `environment.apiUrl`
+      headers: {myCustomHeader: 'this will appear in every request as one of the headers'},
+      params: {someParam: 'customParam'},
     }),
     /* ... other imports */
+    HttpClientModule, // <<= this is very important import
+    // API client relies on HttpClient module and will throw and provider error if not there
   ],
   /* ... other stuff */
 })
@@ -113,8 +103,52 @@ export class MyComponent {
 }
 ```
 
+# Generated structure
+
+- if you are interested on how will the generated client with models look like, take a look in a `example/` folder
+
+```
+output
+ ├─ models
+ │   ├─ some.enum.ts
+ │   ├─ some.model.ts
+ │   │  ...
+ │   ├─ another.model.ts
+ │   └─ index.ts
+ ├─ api-client.service.ts
+ └─ index.ts
+```
+
+# Common problems
+
+### HttpClient not provided
+
+This or very similar error means that you forgot to import `HttpClientModule` in your root module
+```
+StaticInjectorError(AppModule)[APIClient -> HttpClient]: 
+  StaticInjectorError(Platform: core)[APIClient -> HttpClient]: 
+    NullInjectorError: No provider for HttpClient!
+```
+
+Fix:
+ - add `HttpClientModule` to your root module (see NgModule imports in [usage](https://github.com/flowup/api-client-generator#how-to-use-generated-client))
+
+# Problem reporting and contributions
+
+Please report any problems you have and issues you find so they can be resolved.
+
+Feel free to discuss desired improvements or functionality in issues. Afterwards the pull requests are very welcome.
+
 -------
 
-*Inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen)*
+.
 
-*Generator based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator)*
+.
+
+.
+
+.
+
+<small>*Inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen)*</small>
+
+<small>*Generator based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator)*</small>
