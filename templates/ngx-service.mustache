@@ -3,7 +3,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpOptions } from './';
+import { DefaultHttpOptions, HttpOptions } from './';
 
 {{#definitions.length}}
 import * as models from './models';
@@ -29,15 +29,15 @@ export class APIClient {
 
   constructor(private http: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options: HttpOptions) {
+              @Optional() @Inject(USE_HTTP_OPTIONS) options: DefaultHttpOptions) {
 
     if (domain) {
       this.domain = domain;
     }
 
     this.options = {
-      headers: options && options.headers ? options.headers : new HttpHeaders(),
-      params: options && options.params ? options.params : new HttpParams(),
+      headers: new HttpHeaders(options && options.headers ? options.headers : {}),
+      params: new HttpParams(options && options.params ? options.params : {}),
       ...(options && options.reportProgress ? { reportProgress: options.reportProgress } : {}),
       ...(options && options.withCredentials ? { withCredentials: options.withCredentials } : {})
     };
@@ -52,10 +52,10 @@ export class APIClient {
       {{/parameters}}
     },
   {{/parameters.length}}
-    passedOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions
   ): Observable<{{&response}}> {
     const path = `{{&path}}`;
-    const options: APIHttpOptions = {...this.options, ...passedOptions};
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
     {{#parameters}}
       {{#isQueryParameter}}

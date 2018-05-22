@@ -10,16 +10,26 @@ export * from './models';
 
 export { APIClient } from './api-client.service';
 
+/**
+ * provided options, headers and params will be used as default for each request
+ */
+export interface DefaultHttpOptions {
+  headers?: {[key: string]: string};
+  params?: {[key: string]: string};
+  reportProgress?: boolean;
+  withCredentials?: boolean;
+}
+
 export interface HttpOptions {
-  headers?: HttpHeaders, // provided headers will be used as default for each request
-  params?: HttpParams,   // provided params will be used as default for each request
-  reportProgress?: boolean,
-  withCredentials?: boolean,
+  headers?: HttpHeaders;
+  params?: HttpParams;
+  reportProgress?: boolean;
+  withCredentials?: boolean;
 }
 
 export interface APIClientModuleConfig {
   domain?: string;
-  httpOptions?: HttpOptions;
+  httpOptions?: DefaultHttpOptions;
 }
 
 @NgModule({})
