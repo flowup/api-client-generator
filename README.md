@@ -67,8 +67,10 @@ This command will generate API client described in swagger.json file to ./output
     /* Default configuration and all of it's properties is optional */
     APIClientModule.forRoot({
       domain: 'https://api.url', // or use value defined in environment `environment.apiUrl`
-      headers: {myCustomHeader: 'this will appear in every request as one of the headers'},
-      params: {someParam: 'customParam'},
+      httpOptions: {
+        headers: {myCustomHeader: 'this will appear in every request as one of the headers'},
+        params: {someParam: 'customParam'},
+      }
     }),
     /* ... other imports */
     HttpClientModule, // <<= this is very important import
