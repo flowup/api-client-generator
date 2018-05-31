@@ -78,7 +78,7 @@ export function typeName(name: string = 'any', isArray: boolean = false): string
 }
 
 export function fileName(name: string = '', type: 'model' | 'enum' = 'model'): string {
-  return `${dashCase(name.replace(/model|enum/i, ''))}.${type}`;
+  return `${dashCase(name)}.${type}`;
 }
 
 export function prefixImportedModels(type: string = ''): string {
