@@ -4,6 +4,12 @@ import * as rimraf from 'rimraf';
 import { promisify } from 'util';
 import { generateAPIClient } from '../src/generator';
 
+const enum Colors {
+  Reset = "\x1b[0m",
+  Red = "\x1b[31m",
+  Green = "\x1b[32m",
+}
+
 const testReferences = ['esquare', 'gcloud-firestore', 'github'];
 
 const compareOptions = {compareSize: true};
@@ -35,6 +41,7 @@ async function runTests(): Promise<number> {
     const {same, equal, distinct, differences, left, right, diffSet} = await compare(`${refDir}/api`, genDir, compareOptions);
 
     if (!same) {
+      console.info(Colors.Red, `Test for ${reference} has failed\n`, Colors.Reset);
       console.group(`Stats for ${reference}`);
       console.info(`equal: ${equal}`);
       console.info(`distinct: ${distinct}`);
@@ -56,7 +63,7 @@ async function runTests(): Promise<number> {
 
       return 1;
     } else {
-      console.info(`Test for ${reference} has successfully passed\n\n`);
+      console.info(Colors.Green, `Test for ${reference} has successfully passed\n\n`, Colors.Reset);
       await promisify(rimraf)(genDir);
       return 0;
     }
@@ -67,9 +74,9 @@ async function runTests(): Promise<number> {
 
 runTests().then((failedTestsCount) => {
   if (failedTestsCount) {
-    console.info(`Tests execution has ended. ${failedTestsCount} of ${testReferences.length} tests has failed\n`);
+    console.info(Colors.Red, `Tests execution has ended. ${failedTestsCount} of ${testReferences.length} tests has failed\n`, Colors.Reset);
     process.exit(1);
   } else {
-    console.info('Tests execution has ended successfully');
+    console.info(Colors.Green, 'Tests execution has ended successfully', Colors.Reset);
   }
 });
