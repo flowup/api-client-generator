@@ -56,26 +56,26 @@
     "test": "ts-node ./src/tests.ts"
   },
   "dependencies": {
-    "fs-extra": "^6.0.0",
+    "fs-extra": "^6.0.1",
     "mustache": "^2.3.0",
     "optimist": "^0.6.1",
-    "swagger-parser": "^4.1.0"
+    "swagger-parser": "^5.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.2",
     "@types/mustache": "^0.8.30",
-    "@types/node": "^10.0.4",
+    "@types/node": "^10.1.4",
     "@types/optimist": "0.0.29",
     "@types/rimraf": "^2.0.2",
     "@types/swagger-parser": "^4.0.2",
     "@types/swagger-schema-official": "^2.0.9",
     "dir-compare": "^1.4.0",
     "rimraf": "^2.5.2",
-    "standard-version": "^4.3.0",
+    "standard-version": "^4.4.0",
     "swagger-schema-official": "^2.0.0-bab6bed",
-    "ts-node": "^6.0.3",
+    "ts-node": "^6.0.5",
     "tslint": "^5.10.0",
     "tslint-immutable": "^4.5.4",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.4"
   }
 }
