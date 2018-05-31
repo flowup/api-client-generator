@@ -1,4 +1,4 @@
-import { exists, mkdir, readFile, writeFile } from 'fs';
+import { existsSync, mkdir, readFile, writeFile } from 'fs';
 import { ensureDir } from 'fs-extra';
 import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
@@ -10,7 +10,7 @@ import { createMustacheViewModel } from './parser';
 
 export async function generateAPIClient(swaggerFilePath: string, outputPath: string): Promise<void> {
   /* Create output folder if not already present */
-  if (!await promisify(exists)(outputPath)) {
+  if (!existsSync(outputPath)) {
     await ensureDir(outputPath);
   }
 
@@ -38,7 +38,7 @@ async function generateModels(viewContext: MustacheData, outputPath: string): Pr
   const modelTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-model.mustache`)).toString();
   const modelExportTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-models-export.mustache`)).toString();
 
-  if (!await promisify(exists)(outputDir)) {
+  if (!existsSync(outputDir)) {
     await promisify(mkdir)(outputDir);
   }
 

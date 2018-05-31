@@ -1,13 +1,13 @@
 import { compare, DiffSet, State } from 'dir-compare';
-import { exists, mkdir } from 'fs';
+import { existsSync, mkdir } from 'fs';
 import * as rimraf from 'rimraf';
 import { promisify } from 'util';
 import { generateAPIClient } from '../src/generator';
 
 const enum Colors {
-  Reset = "\x1b[0m",
-  Red = "\x1b[31m",
-  Green = "\x1b[32m",
+  Reset = '\x1b[0m',
+  Red = '\x1b[31m',
+  Green = '\x1b[32m',
 }
 
 const testReferences = ['esquare', 'gcloud-firestore', 'github'];
@@ -23,7 +23,7 @@ const stateSymbols: {[key in State]: string} = {
 async function runTests(): Promise<number> {
   const testsOutDir = `${__dirname}/../tests/tests-output`;
 
-  if (await promisify(exists)(testsOutDir)) {
+  if (existsSync(testsOutDir)) {
     await promisify(rimraf)(testsOutDir);
   }
 
