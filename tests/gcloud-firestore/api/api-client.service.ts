@@ -2,7 +2,7 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { DefaultHttpOptions, HttpOptions } from './';
 
 import * as models from './models';
@@ -25,7 +25,7 @@ export class APIClient {
 
   private readonly domain: string = `https://firestore.googleapis.com/v1beta1`;
 
-  constructor(private http: HttpClient,
+  constructor(private readonly http: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain: string,
               @Optional() @Inject(USE_HTTP_OPTIONS) options: DefaultHttpOptions) {
 
@@ -346,7 +346,7 @@ export class APIClient {
         return this.http.put<T>(`${this.domain}${path}`, body, options);
       default:
         console.error(`Unsupported request: ${method}`);
-        return Observable.throw(`Unsupported request: ${method}`);
+        return throwError(`Unsupported request: ${method}`);
     }
   }
 }
