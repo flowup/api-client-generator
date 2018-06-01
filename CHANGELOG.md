@@ -2,8 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+
+<a name="3.1.1"></a>
+# [3.2.0](https://github.com/flowup/api-client-generator/compare/''3.1.0...3.1.1) (2018-06-01)
+
+
+### Bug Fixes
+
+* **api-client:** http options without headers and params constructing (AOT compatible) ([eca03c3](https://github.com/flowup/api-client-generator/commit/eca03c3)), closes [#47](https://github.com/flowup/api-client-generator/issues/47)
+* **api-client:** possibly undefined http options params and headers ([539ba46](https://github.com/flowup/api-client-generator/commit/539ba46))
+* **models:** model no longer stripped from the name of file if explicitly named that way ([dfdf90d](https://github.com/flowup/api-client-generator/commit/dfdf90d)), closes [#49](https://github.com/flowup/api-client-generator/issues/49)
+
+
+
 <a name="3.1.0"></a>
-# [3.1.0](https://github.com/flowup/api-client-generator/compare/3.0.3...3.1.0) (2018-05-07)
+# [3.1.0](https://github.com/flowup/api-client-generator/compare/3.0.3...''3.1.0) (2018-05-07)
 
 
 ### Features
