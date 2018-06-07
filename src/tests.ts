@@ -10,7 +10,7 @@ const enum Colors {
   Green = '\x1b[32m',
 }
 
-const testReferences = ['esquare', 'gcloud-firestore', 'github'];
+const testReferences = ['custom', 'esquare', 'gcloud-firestore', 'github'];
 
 const compareOptions = {compareSize: true};
 const stateSymbols: {[key in State]: string} = {
@@ -77,6 +77,6 @@ runTests().then((failedTestsCount) => {
     console.info(Colors.Red, `Tests execution has ended. ${failedTestsCount} of ${testReferences.length} tests has failed\n`, Colors.Reset);
     process.exit(1);
   } else {
-    console.info(Colors.Green, 'Tests execution has ended successfully', Colors.Reset);
+    console.info(Colors.Green, 'Tests execution has ended successfully, all tests have passed.', Colors.Reset);
   }
 });
