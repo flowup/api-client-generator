@@ -21,7 +21,7 @@ type APIHttpOptions = HttpOptions & {
 @Injectable()
 export class APIClient {
 
-  readonly options: APIHttpOptions;
+  private readonly options: APIHttpOptions;
 
   private readonly domain: string = `https://firestore.googleapis.com/v1beta1`;
 
