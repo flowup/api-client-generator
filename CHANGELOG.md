@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/flowup/api-client-generator/compare/3.1.1...3.2.0) (2018-06-07)
+
+
+### Bug Fixes
+
+* **models:** escape keys with non-word characters and ones starting with a number ([1757135](https://github.com/flowup/api-client-generator/commit/1757135)), closes [#54](https://github.com/flowup/api-client-generator/issues/54)
+
+
+### Features
+
+* **models:** extend interface with model in allOf property definition ([0d7b83c](https://github.com/flowup/api-client-generator/commit/0d7b83c)), closes [#53](https://github.com/flowup/api-client-generator/issues/53)
+
+
 
 <a name="3.1.1"></a>
 # [3.2.0](https://github.com/flowup/api-client-generator/compare/''3.1.0...3.1.1) (2018-06-01)
