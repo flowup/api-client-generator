@@ -8,7 +8,7 @@ import {
 } from './..';
 {{/imports.length}}
 
-export interface {{&name}} {
+export interface {{&name}} {{#extend}}extends {{.}} {{/extend}}{
 {{#properties}}
   {{name}}: {{typescriptType}}{{#isArray}}[]{{/isArray}};
 {{/properties}}

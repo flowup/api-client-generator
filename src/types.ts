@@ -7,6 +7,7 @@ export interface Definition {
   name?: string;
   properties: Property[];
   imports: string[];
+  extend?: string;
   isEnum?: boolean;
   isNumeric?: boolean; // used for determining if string or numeric enum should be generated
   renderFileName?(): RenderFileName; // generate dash-case file names to templates

@@ -50,8 +50,8 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
           parameters: transformParameters(operation.parameters, parameters || {}),
           // turn path interpolation `{this}` into string template `${args.this}
           path: pathName.replace(
-              /{(.*?)}/g,
-              (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
+            /{(.*?)}/g,
+            (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
           response: prefixImportedModels(determineResponseType(operation.responses)),
           summaryLines: operation.description
             ? (operation.description || '').split('\n')
@@ -68,6 +68,7 @@ function parseDefinitions(
   return [
     ...Object.entries(definitions)
       .map(([key, definition]) => defineEnumOrInterface(key, definition)),
+
     ...Object.entries(
       parameters as ExtendedParameters  // type cast because of wrong typing in BaseParameter (should contain enum property)
     ).filter(([, definition]) => (definition.enum && definition.enum.length !== 0) || definition.schema)
@@ -169,7 +170,14 @@ function determineArrayType(property: Schema = {}): string {
 
 function defineInterface(schema: Schema, definitionKey: string): Definition {
   const name = typeName(definitionKey);
-  const properties: Property[] = parseInterfaceProperties(schema.properties);
+  const extendInterface: string | undefined = schema.allOf
+    ? dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref)
+    : undefined;
+  const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({...props, ...allOfSchema.properties}), {}) : {};
+  const properties: Property[] = parseInterfaceProperties({
+    ...schema.properties,
+    ...allOfProps,
+  } as { [propertyName: string]: Schema });
 
   return {
     name: name,
@@ -178,10 +186,12 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
       .filter(({isRef}) => isRef)
       .map(({type}) => type || '')
       .filter((type) => type !== name)
+      .concat(extendInterface ? [extendInterface] : [])
       .sort()
       // filter duplicate imports
       .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),
     isEnum: false,
+    extend: extendInterface,
     renderFileName: (): RenderFileName => (text: string, render: Render): string => fileName(render(text), 'model'),
   };
 }

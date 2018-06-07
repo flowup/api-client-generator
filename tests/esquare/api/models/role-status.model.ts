@@ -1,4 +1,7 @@
 /* tslint:disable */
+import {
+  UserStatus,
+} from './..';
 
-export interface RoleStatus {
+export interface RoleStatus extends UserStatus {
 }

@@ -49,10 +49,11 @@
     "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts' 'src/tests.ts'",
     "gen": "ts-node ./src/main.ts",
     "gen-custom": "rimraf ./tests/custom/api && ts-node ./src/main.ts -s ./tests/custom/swagger.yaml -o ./tests/custom/api",
-    "gen-sports": "rimraf ./tests/sports/api && ts-node ./src/main.ts -s ./tests/sports/swagger.yaml -o ./tests/sports/api",
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
     "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
     "gen-github": "rimraf ./tests/github/api && ts-node ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api",
+    "gen-petstore": "rimraf ./tests/petstore/api && ts-node ./src/main.ts -s ./tests/petstore/swagger.yaml -o ./tests/petstore/api",
+    "gen-sports": "rimraf ./tests/sports/api && ts-node ./src/main.ts -s ./tests/sports/swagger.yaml -o ./tests/sports/api",
     "release": "npm run build && standard-version --tag-prefix=''",
     "test": "ts-node ./src/tests.ts"
   },

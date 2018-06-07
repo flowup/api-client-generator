@@ -61,28 +61,42 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/ItemModelList'
+  /pets:
+    patch:
+#      requestBody:
+#        content:
+#          application/json:
+#            schema:
+#              oneOf:
+#                - $ref: '#/definitions/Cat'
+#                - $ref: '#/definitions/Dog'
+#              discriminator:
+#                propertyName: pet_type
+      responses:
+        '200':
+          description: Updated
 definitions:
   ItemList:
-        description: List of items,
-        required: data
-        type: object,
-        properties:
-          data:
-            description: List of controllers in the system (this can be empty)
-            type: array
-            items:
-              $ref: "#/definitions/Data"
+    description: List of items,
+    required: data
+    type: object,
+    properties:
+      data:
+        description: List of controllers in the system (this can be empty)
+        type: array
+        items:
+          $ref: "#/definitions/Data"
   ItemModelList:
-        description: List of Item models
-        required:
-          data
-        type: object
-        properties:
-          data:
-            description: The list of available ItemModels and their configurations
-            type: array
-            items:
-              $ref: "#/definitions/DataModel"
+    description: List of Item models
+    required:
+      data
+    type: object
+    properties:
+      data:
+        description: The list of available ItemModels and their configurations
+        type: array
+        items:
+          $ref: "#/definitions/DataModel"
   Data:
     type: object
     properties:
@@ -128,3 +142,45 @@ definitions:
         count:
           type: integer
           description: url to user avatar image
+  Pet:
+    type: object
+    required:
+      - pet_type
+    properties:
+      pet_type:
+        type: string
+    discriminator:
+      propertyName: pet_type
+  Dog:
+    allOf: # Combines the main `Pet` schema with `Dog`-specific properties
+      - $ref: '#/definitions/Pet'
+      - type: object
+        # all other properties specific to a `Dog`
+        properties:
+          bark:
+            type: boolean
+          breed:
+            type: string
+            enum: [Dingo, Husky, Retriever, Shepherd]
+  Cat:
+    allOf: # Combines the main `Pet` schema with `Cat`-specific properties
+      - $ref: '#/definitions/Pet'
+      - type: object
+        # all other properties specific to a `Cat`
+        properties:
+          hunts:
+            type: boolean
+          age:
+            type: integer
+          eaten:
+            type: array
+            items:
+              type: object
+              $ref: '#/definitions/Mouse'
+  Mouse:
+    properties:
+      color:
+        type: string
+    allOf:
+      - $ref: '#/definitions/Pet'
+      - type: object

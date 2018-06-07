@@ -1,5 +1,8 @@
 /* tslint:disable */
+import {
+  Table,
+} from './..';
 
-export interface PagedTable {
+export interface PagedTable extends Table {
   totalRows: number;
 }

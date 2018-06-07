@@ -79,6 +79,15 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  patchPets(
+    requestHttpOptions?: HttpOptions
+  ): Observable<any> {
+    const path = `/pets`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<any>('PATCH', path, options);
+  }
+
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
     switch (method) {
       case 'DELETE':

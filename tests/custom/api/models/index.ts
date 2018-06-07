@@ -5,3 +5,7 @@ export { ItemModelList } from './item-model-list.model';
 export { Data } from './data.model';
 export { DataModel } from './data-model.model';
 export { TestModel } from './test-model.model';
+export { Pet } from './pet.model';
+export { Dog } from './dog.model';
+export { Cat } from './cat.model';
+export { Mouse } from './mouse.model';
