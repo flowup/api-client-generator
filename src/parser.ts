@@ -127,7 +127,7 @@ function parseInterfaceProperties(properties: { [propertyName: string]: Schema }
       return {
         isArray,
         isRef: !!parseReference(propSchema),
-        name: propName,
+        name: /^[A-Za-z_$][\w$]*$/.test(propName) ? propName : `'${propName}'`,
         type: typescriptType.replace('[]', ''),
         typescriptType,
       };

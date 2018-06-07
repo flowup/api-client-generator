@@ -10,7 +10,7 @@ import {
 
 export interface {{&name}} {{#extend}}extends {{.}} {{/extend}}{
 {{#properties}}
-  {{name}}: {{typescriptType}}{{#isArray}}[]{{/isArray}};
+  {{&name}}: {{typescriptType}}{{#isArray}}[]{{/isArray}};
 {{/properties}}
 }
 {{/isEnum}}

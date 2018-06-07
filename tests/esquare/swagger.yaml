@@ -1985,7 +1985,7 @@ definitions:
       password:
         type: string
         format: password
-      passwordСonfirm:
+      passwordСonfirm: # `C` is the cyrillic character `С` http://www.codetable.net/decimal/1057 (key should be escaped)
         type: string
         format: password
       guid:
