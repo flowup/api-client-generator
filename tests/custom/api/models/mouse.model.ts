@@ -1,8 +1,8 @@
 /* tslint:disable */
 import {
-  pet,
+  Pet,
 } from './..';
 
-export interface Mouse extends pet {
+export interface Mouse extends Pet {
   color: string;
 }

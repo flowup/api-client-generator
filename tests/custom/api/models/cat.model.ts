@@ -1,10 +1,10 @@
 /* tslint:disable */
 import {
   Mouse,
-  pet,
+  Pet,
 } from './..';
 
-export interface Cat extends pet {
+export interface Cat extends Pet {
   age: number;
   eaten: Mouse[];
   hunts: boolean;

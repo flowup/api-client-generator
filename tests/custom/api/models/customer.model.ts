@@ -1,9 +1,9 @@
 /* tslint:disable */
 import {
-  model,
+  Model,
 } from './..';
 
-export interface Customer extends model {
+export interface Customer extends Model {
   address: string;
   name: string;
 }
