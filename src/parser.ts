@@ -171,7 +171,7 @@ function determineArrayType(property: Schema = {}): string {
 function defineInterface(schema: Schema, definitionKey: string): Definition {
   const name = typeName(definitionKey);
   const extendInterface: string | undefined = schema.allOf
-    ? dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref)
+    ? camelCase(dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref))
     : undefined;
   const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({...props, ...allOfSchema.properties}), {}) : {};
   const properties: Property[] = parseInterfaceProperties({

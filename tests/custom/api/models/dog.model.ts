@@ -1,9 +1,9 @@
 /* tslint:disable */
 import {
-  Pet,
+  pet,
 } from './..';
 
-export interface Dog extends Pet {
+export interface Dog extends pet {
   bark: boolean;
   breed: string;
 }

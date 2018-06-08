@@ -192,3 +192,23 @@ definitions:
     allOf:
       - $ref: '#/definitions/Pet'
       - type: object
+  model:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      created:
+        type: "integer"
+      updated:
+        type: "integer"
+      deleted:
+        type: "integer"
+  customer:
+    type: "object"
+    allOf:
+    - $ref: "#/definitions/model"
+    properties:
+      name:
+        type: "string"
+      address:
+        type: "string"

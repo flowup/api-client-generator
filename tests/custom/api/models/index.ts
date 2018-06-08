@@ -9,3 +9,5 @@ export { Pet } from './pet.model';
 export { Dog } from './dog.model';
 export { Cat } from './cat.model';
 export { Mouse } from './mouse.model';
+export { Model } from './model.model';
+export { Customer } from './customer.model';
