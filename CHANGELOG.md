@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.1"></a>
+## [3.2.1](https://github.com/flowup/api-client-generator/compare/3.2.0...3.2.1) (2018-06-08)
+
+
+### Bug Fixes
+
+* **models:** extending interface name corrected to camelCase ([b02dc2f](https://github.com/flowup/api-client-generator/commit/b02dc2f))
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/flowup/api-client-generator/compare/3.1.1...3.2.0) (2018-06-07)
 
