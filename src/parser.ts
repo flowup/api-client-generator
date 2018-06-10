@@ -62,9 +62,7 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
             /{(.*?)}/g,
             (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
           response: prefixImportedModels(determineResponseType(operation.responses)),
-          summaryLines: operation.description
-            ? (operation.description || '').split('\n')
-            : [], // description summary is optional
+          description: replaceNewLines(operation.description, '$1   * '),
         })
       )
     ));

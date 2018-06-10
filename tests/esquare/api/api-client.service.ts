@@ -153,6 +153,10 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy4z8d)
+   * 
+   */
   getReportsList(
     args: {
       status?: models.Status,
@@ -184,6 +188,10 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hywkd5)
+   * 
+   */
   getReportDetails(
     args: {
       id: number,
@@ -196,6 +204,10 @@ export class APIClient {
     return this.sendRequest<models.ReportItem[]>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i3z8zb)
+   * 
+   */
   getReportPreview(
     args: {
       templateId: number,
@@ -224,6 +236,10 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i3ym4j)
+   * 
+   */
   getImportHistory(
     args: {
       templateId: number,
@@ -236,6 +252,10 @@ export class APIClient {
     return this.sendRequest<models.ImportHistoryItem[]>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy521p)
+   * 
+   */
   uploadFile(
     args: {
       templateId: number,
@@ -249,6 +269,10 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.file));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy52hi)
+   * 
+   */
   listTemplateColumns(
     args: {
       templateId: number,
@@ -261,6 +285,10 @@ export class APIClient {
     return this.sendRequest<models.Column[]>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy52zr)
+   * 
+   */
   listReportColumns(
     args: {
       id: number,
@@ -273,6 +301,10 @@ export class APIClient {
     return this.sendRequest<models.Column[]>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy53jt)
+   * 
+   */
   saveColumnsMapping(
     args: {
       id: number,
@@ -286,6 +318,10 @@ export class APIClient {
     return this.sendRequest<models.Table>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5fct)
+   * 
+   */
   getValidationTable(
     args: {
       id: number,
@@ -298,6 +334,10 @@ export class APIClient {
     return this.sendRequest<models.ValidatedTable>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy55ga)
+   * 
+   */
   downloadImportedFile(
     args: {
       id: number,
@@ -314,6 +354,10 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy57nj)
+   * 
+   */
   importConfirmation(
     args: {
       id: number,
@@ -326,6 +370,10 @@ export class APIClient {
     return this.sendRequest<models.ImportResponse>('POST', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5a54)
+   * 
+   */
   downloadImportOriginalFile(
     args: {
       id: number,
@@ -338,6 +386,10 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5ae7)
+   * 
+   */
   downloadImportSkippedFile(
     args: {
       id: number,
@@ -350,6 +402,10 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5aqq)
+   * 
+   */
   cancelImport(
     args: {
       id: number,
@@ -362,6 +418,10 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5bi6)
+   * 
+   */
   overrideImport(
     args: {
       id: number,
@@ -376,6 +436,10 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.description), JSON.stringify(args.file));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i4052r)
+   * 
+   */
   geImportStats(
     args: {
       period?: models.Period,
@@ -391,6 +455,10 @@ export class APIClient {
     return this.sendRequest<models.TotalImportStats>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i40s18)
+   * 
+   */
   getIssuesList(
     args: {
       period?: models.Period,
@@ -426,6 +494,10 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i4byyx)
+   * 
+   */
   getStatusesList(
     args: {
       period?: models.Period,
@@ -562,6 +634,10 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i93q0s)
+   * 
+   */
   getRolesList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleListItem[]> {
@@ -583,6 +659,10 @@ export class APIClient {
     return this.sendRequest<models.RoleDetailsItem>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i947a3)
+   * 
+   */
   getList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.PrivilegeTreeItem[]> {
@@ -629,6 +709,10 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/iba7xr)
+   * 
+   */
   getNewNotificationsList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationListItem[]> {
@@ -650,6 +734,10 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/iba8tq)
+   * 
+   */
   getNotificationsList(
     args: {
       pageSize: number,
@@ -677,6 +765,11 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ibac47) |
+   * [Screenshot from design](http://prntscr.com/ibacgu)
+   * 
+   */
   getModulesList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationModule[]> {
@@ -686,6 +779,10 @@ export class APIClient {
     return this.sendRequest<models.NotificationModule[]>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ibad9m)
+   * 
+   */
   getTriggersList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationTrigger[]> {
@@ -695,6 +792,10 @@ export class APIClient {
     return this.sendRequest<models.NotificationTrigger[]>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/iba8tq)
+   * 
+   */
   getModuleNotificationsList(
     args: {
       moduleId: number,
@@ -784,6 +885,10 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzt2b)
+   * 
+   */
   getPassVerificationPolicies(
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordVerificationPolicies> {
@@ -793,6 +898,10 @@ export class APIClient {
     return this.sendRequest<models.PasswordVerificationPolicies>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzt2b)
+   * 
+   */
   udatePassVerificationPolicies(
     args: {
       body?: models.PasswordVerificationPolicies,
@@ -805,6 +914,10 @@ export class APIClient {
     return this.sendRequest<models.PasswordVerificationPolicies>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzuv3)
+   * 
+   */
   getPassCreationPolicies(
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordCreationPolicies> {
@@ -814,6 +927,10 @@ export class APIClient {
     return this.sendRequest<models.PasswordCreationPolicies>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzuv3)
+   * 
+   */
   udatePassCreationPolicies(
     args: {
       body?: models.PasswordCreationPolicies,
@@ -826,6 +943,10 @@ export class APIClient {
     return this.sendRequest<models.PasswordCreationPolicies>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzvo3)
+   * 
+   */
   getOtherSecuritySettings(
     requestHttpOptions?: HttpOptions
   ): Observable<models.OtherSecuritySettings> {
@@ -835,6 +956,10 @@ export class APIClient {
     return this.sendRequest<models.OtherSecuritySettings>('GET', path, options);
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzvo3)
+   * 
+   */
   udateOtherSecuritySettings(
     args: {
       body?: models.OtherSecuritySettings,

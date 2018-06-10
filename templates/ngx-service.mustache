@@ -44,7 +44,11 @@ export class APIClient {
   }
 
 {{#methods}}
-  {{&methodName}}(
+  {{#description}}
+  /**
+   * {{&.}}
+   */
+{{/description}}  {{&methodName}}(
   {{#parameters.length}}
     args: {
       {{#parameters}}

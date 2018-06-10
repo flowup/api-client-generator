@@ -41,6 +41,13 @@ export class APIClient {
     };
   }
 
+  /**
+   * Gets multiple documents.
+   * 
+   * 
+   * Documents returned by this method are not guaranteed to be returned in the
+   * same order that they were requested.
+   */
   firestoreProjectsDatabasesDocumentsBatchGet(
     args: {
       body?: models.BatchGetDocumentsRequest,
@@ -54,6 +61,9 @@ export class APIClient {
     return this.sendRequest<models.BatchGetDocumentsResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Starts a new transaction.
+   */
   firestoreProjectsDatabasesDocumentsBeginTransaction(
     args: {
       body?: models.BeginTransactionRequest,
@@ -67,6 +77,9 @@ export class APIClient {
     return this.sendRequest<models.BeginTransactionResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Commits a transaction, while optionally updating documents.
+   */
   firestoreProjectsDatabasesDocumentsCommit(
     args: {
       body?: models.CommitRequest,
@@ -80,6 +93,9 @@ export class APIClient {
     return this.sendRequest<models.CommitResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Listens to changes.
+   */
   firestoreProjectsDatabasesDocumentsListen(
     args: {
       body?: models.ListenRequest,
@@ -93,6 +109,9 @@ export class APIClient {
     return this.sendRequest<models.ListenResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Rolls back a transaction.
+   */
   firestoreProjectsDatabasesDocumentsRollback(
     args: {
       body?: models.RollbackRequest,
@@ -106,6 +125,9 @@ export class APIClient {
     return this.sendRequest<models.Empty>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Streams batches of document updates and deletes, in order.
+   */
   firestoreProjectsDatabasesDocumentsWrite(
     args: {
       body?: models.WriteRequest,
@@ -119,6 +141,9 @@ export class APIClient {
     return this.sendRequest<models.WriteResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Deletes an index.
+   */
   firestoreProjectsDatabasesIndexesDelete(
     args: {
       currentDocumentExists?: boolean,
@@ -139,6 +164,9 @@ export class APIClient {
     return this.sendRequest<models.Empty>('DELETE', path, options);
   }
 
+  /**
+   * Gets an index.
+   */
   firestoreProjectsDatabasesIndexesGet(
     args: {
       maskFieldPaths?: string[],
@@ -165,6 +193,9 @@ export class APIClient {
     return this.sendRequest<models.Index>('GET', path, options);
   }
 
+  /**
+   * Updates or inserts a document.
+   */
   firestoreProjectsDatabasesDocumentsPatch(
     args: {
       body?: models.Document,
@@ -198,6 +229,9 @@ export class APIClient {
     return this.sendRequest<models.Document>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Lists the indexes that match the specified filters.
+   */
   firestoreProjectsDatabasesIndexesList(
     args: {
       filter?: string,
@@ -222,6 +256,23 @@ export class APIClient {
     return this.sendRequest<models.ListIndexesResponse>('GET', path, options);
   }
 
+  /**
+   * Creates the specified index.
+   * A newly created index's initial state is `CREATING`. On completion of the
+   * returned google.longrunning.Operation, the state will be `READY`.
+   * If the index already exists, the call will return an `ALREADY_EXISTS`
+   * status.
+   * 
+   * 
+   * During creation, the process could result in an error, in which case the
+   * index will move to the `ERROR` state. The process can be recovered by
+   * fixing the data that caused the error, removing the index with
+   * delete, then re-creating the index with
+   * create.
+   * 
+   * 
+   * Indexes with a single field cannot be created.
+   */
   firestoreProjectsDatabasesIndexesCreate(
     args: {
       body?: models.Index,
@@ -235,6 +286,9 @@ export class APIClient {
     return this.sendRequest<models.Operation>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Lists documents.
+   */
   firestoreProjectsDatabasesDocumentsList(
     args: {
       collectionId: string,
@@ -278,6 +332,9 @@ export class APIClient {
     return this.sendRequest<models.ListDocumentsResponse>('GET', path, options);
   }
 
+  /**
+   * Creates a new document.
+   */
   firestoreProjectsDatabasesDocumentsCreateDocument(
     args: {
       body?: models.Document,
@@ -302,6 +359,9 @@ export class APIClient {
     return this.sendRequest<models.Document>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Lists all the collection IDs underneath a document.
+   */
   firestoreProjectsDatabasesDocumentsListCollectionIds(
     args: {
       body?: models.ListCollectionIdsRequest,
@@ -315,6 +375,9 @@ export class APIClient {
     return this.sendRequest<models.ListCollectionIdsResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Runs a query.
+   */
   firestoreProjectsDatabasesDocumentsRunQuery(
     args: {
       body?: models.RunQueryRequest,

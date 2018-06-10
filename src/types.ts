@@ -55,7 +55,7 @@ export interface Method {
   readonly path?: string;  // path appended to base in method
   readonly methodName?: string;  // mane of the generated method
   readonly methodType?: MethodType;  // type of the http method
-  readonly summaryLines?: string[];
+  readonly description?: string;
   readonly isSecure?: boolean;  // currently unused TODO
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO

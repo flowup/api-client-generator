@@ -41,6 +41,9 @@ export class APIClient {
     };
   }
 
+  /**
+   * Lists all the emojis available to use on GitHub.
+   */
   getEmojis(
     args: {
       xGitHubMediaType?: string,
@@ -76,6 +79,9 @@ export class APIClient {
     return this.sendRequest<models.Emojis>('GET', path, options);
   }
 
+  /**
+   * List public events.
+   */
   getEvents(
     args: {
       xGitHubMediaType?: string,
@@ -111,6 +117,13 @@ export class APIClient {
     return this.sendRequest<models.Events>('GET', path, options);
   }
 
+  /**
+   * List Feeds.
+   * GitHub provides several timeline resources in Atom format. The Feeds API
+   * 
+   *  lists all the feeds available to the authenticating user.
+   * 
+   */
   getFeeds(
     args: {
       xGitHubMediaType?: string,
@@ -146,6 +159,11 @@ export class APIClient {
     return this.sendRequest<models.Feeds>('GET', path, options);
   }
 
+  /**
+   * List the authenticated user's gists or if called anonymously, this will
+   * return all public gists.
+   * 
+   */
   getGists(
     args: {
       since?: string,
@@ -185,6 +203,9 @@ export class APIClient {
     return this.sendRequest<models.Gists>('GET', path, options);
   }
 
+  /**
+   * Create a gist.
+   */
   postGists(
     args: {
       xGitHubMediaType?: string,
@@ -221,6 +242,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List all public gists.
+   */
   getGistsPublic(
     args: {
       since?: string,
@@ -260,6 +284,9 @@ export class APIClient {
     return this.sendRequest<models.Gists>('GET', path, options);
   }
 
+  /**
+   * List the authenticated user's starred gists.
+   */
   getGistsStarred(
     args: {
       since?: string,
@@ -299,6 +326,9 @@ export class APIClient {
     return this.sendRequest<models.Gists>('GET', path, options);
   }
 
+  /**
+   * Delete a gist.
+   */
   deleteGistsId(
     args: {
       id: number,
@@ -335,6 +365,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single gist.
+   */
   getGistsId(
     args: {
       id: number,
@@ -371,6 +404,9 @@ export class APIClient {
     return this.sendRequest<models.Gist>('GET', path, options);
   }
 
+  /**
+   * Edit a gist.
+   */
   patchGistsId(
     args: {
       id: number,
@@ -408,6 +444,9 @@ export class APIClient {
     return this.sendRequest<models.Gist>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List comments on a gist.
+   */
   getGistsIdComments(
     args: {
       id: number,
@@ -444,6 +483,9 @@ export class APIClient {
     return this.sendRequest<models.Comments>('GET', path, options);
   }
 
+  /**
+   * Create a commen
+   */
   postGistsIdComments(
     args: {
       id: number,
@@ -481,6 +523,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete a comment.
+   */
   deleteGistsIdCommentsCommentId(
     args: {
       id: number,
@@ -518,6 +563,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single comment.
+   */
   getGistsIdCommentsCommentId(
     args: {
       id: number,
@@ -555,6 +603,9 @@ export class APIClient {
     return this.sendRequest<models.Comment>('GET', path, options);
   }
 
+  /**
+   * Edit a comment.
+   */
   patchGistsIdCommentsCommentId(
     args: {
       id: number,
@@ -593,6 +644,9 @@ export class APIClient {
     return this.sendRequest<models.Comment>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Fork a gist.
+   */
   postGistsIdForks(
     args: {
       id: number,
@@ -629,6 +683,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options);
   }
 
+  /**
+   * Unstar a gist.
+   */
   deleteGistsIdStar(
     args: {
       id: number,
@@ -665,6 +722,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Check if a gist is starred.
+   */
   getGistsIdStar(
     args: {
       id: number,
@@ -701,6 +761,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Star a gist.
+   */
   putGistsIdStar(
     args: {
       id: number,
@@ -737,6 +800,11 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options);
   }
 
+  /**
+   * Listing available templates.
+   * List all templates available to pass as an option when creating a repository.
+   * 
+   */
   getGitignoreTemplates(
     args: {
       xGitHubMediaType?: string,
@@ -772,6 +840,9 @@ export class APIClient {
     return this.sendRequest<models.Gitignore>('GET', path, options);
   }
 
+  /**
+   * Get a single template.
+   */
   getGitignoreTemplatesLanguage(
     args: {
       language: string,
@@ -808,6 +879,11 @@ export class APIClient {
     return this.sendRequest<models.GitignoreLang>('GET', path, options);
   }
 
+  /**
+   * List issues.
+   * List all issues across all the authenticated user's visible repositories.
+   * 
+   */
   getIssues(
     args: {
       filter: string,
@@ -867,6 +943,9 @@ export class APIClient {
     return this.sendRequest<models.Issues>('GET', path, options);
   }
 
+  /**
+   * Find issues by state and keyword.
+   */
   getLegacyIssuesSearchOwnerRepositoryStateKeyword(
     args: {
       keyword: string,
@@ -906,6 +985,9 @@ export class APIClient {
     return this.sendRequest<models.SearchIssuesByKeyword>('GET', path, options);
   }
 
+  /**
+   * Find repositories by keyword. Note, this legacy method does not follow the v3 pagination pattern. This method returns up to 100 results per page and pages can be fetched using the start_page parameter.
+   */
   getLegacyReposSearchKeyword(
     args: {
       keyword: string,
@@ -958,6 +1040,9 @@ export class APIClient {
     return this.sendRequest<models.SearchRepositoriesByKeyword>('GET', path, options);
   }
 
+  /**
+   * This API call is added for compatibility reasons only.
+   */
   getLegacyUserEmailEmail(
     args: {
       email: string,
@@ -994,6 +1079,9 @@ export class APIClient {
     return this.sendRequest<models.SearchUserByEmail>('GET', path, options);
   }
 
+  /**
+   * Find users by keyword.
+   */
   getLegacyUserSearchKeyword(
     args: {
       keyword: string,
@@ -1042,6 +1130,9 @@ export class APIClient {
     return this.sendRequest<models.SearchUsersByKeyword>('GET', path, options);
   }
 
+  /**
+   * Render an arbitrary Markdown document
+   */
   postMarkdown(
     args: {
       xGitHubMediaType?: string,
@@ -1078,6 +1169,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Render a Markdown document in raw mode
+   */
   postMarkdownRaw(
     args: {
       xGitHubMediaType?: string,
@@ -1113,6 +1207,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options);
   }
 
+  /**
+   * This gives some information about GitHub.com, the service.
+   */
   getMeta(
     args: {
       xGitHubMediaType?: string,
@@ -1148,6 +1245,9 @@ export class APIClient {
     return this.sendRequest<models.Meta>('GET', path, options);
   }
 
+  /**
+   * List public events for a network of repositories.
+   */
   getNetworksOwnerRepoEvents(
     args: {
       owner: string,
@@ -1185,6 +1285,11 @@ export class APIClient {
     return this.sendRequest<models.Events>('GET', path, options);
   }
 
+  /**
+   * List your notifications.
+   * List all notifications for the current user, grouped by repository.
+   * 
+   */
   getNotifications(
     args: {
       all?: boolean,
@@ -1232,6 +1337,11 @@ export class APIClient {
     return this.sendRequest<models.Notifications>('GET', path, options);
   }
 
+  /**
+   * Mark as read.
+   * Marking a notification as "read" removes it from the default view on GitHub.com.
+   * 
+   */
   putNotifications(
     args: {
       xGitHubMediaType?: string,
@@ -1268,6 +1378,9 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * View a single thread.
+   */
   getNotificationsThreadsId(
     args: {
       id: number,
@@ -1304,6 +1417,9 @@ export class APIClient {
     return this.sendRequest<models.Notifications>('GET', path, options);
   }
 
+  /**
+   * Mark a thread as read
+   */
   patchNotificationsThreadsId(
     args: {
       id: number,
@@ -1340,6 +1456,9 @@ export class APIClient {
     return this.sendRequest<any>('PATCH', path, options);
   }
 
+  /**
+   * Delete a Thread Subscription.
+   */
   deleteNotificationsThreadsIdSubscription(
     args: {
       id: number,
@@ -1376,6 +1495,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a Thread Subscription.
+   */
   getNotificationsThreadsIdSubscription(
     args: {
       id: number,
@@ -1412,6 +1534,13 @@ export class APIClient {
     return this.sendRequest<models.Subscription>('GET', path, options);
   }
 
+  /**
+   * Set a Thread Subscription.
+   * This lets you subscribe to a thread, or ignore it. Subscribing to a thread
+   * is unnecessary if the user is already subscribed to the repository. Ignoring
+   * a thread will mute all future notifications (until you comment or get @mentioned).
+   * 
+   */
   putNotificationsThreadsIdSubscription(
     args: {
       id: number,
@@ -1449,6 +1578,9 @@ export class APIClient {
     return this.sendRequest<models.Subscription>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get an Organization.
+   */
   getOrgsOrg(
     args: {
       org: string,
@@ -1485,6 +1617,9 @@ export class APIClient {
     return this.sendRequest<models.Organization>('GET', path, options);
   }
 
+  /**
+   * Edit an Organization.
+   */
   patchOrgsOrg(
     args: {
       org: string,
@@ -1522,6 +1657,9 @@ export class APIClient {
     return this.sendRequest<models.Organization>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List public events for an organization.
+   */
   getOrgsOrgEvents(
     args: {
       org: string,
@@ -1558,6 +1696,11 @@ export class APIClient {
     return this.sendRequest<models.Events>('GET', path, options);
   }
 
+  /**
+   * List issues.
+   * List all issues for a given organization for the authenticated user.
+   * 
+   */
   getOrgsOrgIssues(
     args: {
       org: string,
@@ -1618,6 +1761,15 @@ export class APIClient {
     return this.sendRequest<models.Issues>('GET', path, options);
   }
 
+  /**
+   * Members list.
+   * List all users who are members of an organization. A member is a user tha
+   * belongs to at least 1 team in the organization. If the authenticated user
+   * is also an owner of this organization then both concealed and public members
+   * will be returned. If the requester is not an owner of the organization the
+   * query will be redirected to the public members list.
+   * 
+   */
   getOrgsOrgMembers(
     args: {
       org: string,
@@ -1654,6 +1806,12 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Remove a member.
+   * Removing a user from this list will remove them from all teams and they
+   * will no longer have any access to the organization's repositories.
+   * 
+   */
   deleteOrgsOrgMembersUsername(
     args: {
       org: string,
@@ -1691,6 +1849,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Check if a user is, publicly or privately, a member of the organization.
+   */
   getOrgsOrgMembersUsername(
     args: {
       org: string,
@@ -1728,6 +1889,12 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Public members list.
+   * Members of an organization can choose to have their membership publicized
+   * or not.
+   * 
+   */
   getOrgsOrgPublicMembers(
     args: {
       org: string,
@@ -1764,6 +1931,9 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Conceal a user's membership.
+   */
   deleteOrgsOrgPublicMembersUsername(
     args: {
       org: string,
@@ -1801,6 +1971,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Check public membership.
+   */
   getOrgsOrgPublicMembersUsername(
     args: {
       org: string,
@@ -1838,6 +2011,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Publicize a user's membership.
+   */
   putOrgsOrgPublicMembersUsername(
     args: {
       org: string,
@@ -1875,6 +2051,9 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options);
   }
 
+  /**
+   * List repositories for the specified org.
+   */
   getOrgsOrgRepos(
     args: {
       org: string,
@@ -1915,6 +2094,11 @@ export class APIClient {
     return this.sendRequest<models.Repos>('GET', path, options);
   }
 
+  /**
+   * Create a new repository for the authenticated user. OAuth users must supply
+   * repo scope.
+   * 
+   */
   postOrgsOrgRepos(
     args: {
       org: string,
@@ -1952,6 +2136,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List teams.
+   */
   getOrgsOrgTeams(
     args: {
       org: string,
@@ -1988,6 +2175,11 @@ export class APIClient {
     return this.sendRequest<models.Teams>('GET', path, options);
   }
 
+  /**
+   * Create team.
+   * In order to create a team, the authenticated user must be an owner of organization.
+   * 
+   */
   postOrgsOrgTeams(
     args: {
       org: string,
@@ -2025,6 +2217,11 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get your current rate limit status
+   * Note: Accessing this endpoint does not count against your rate limit.
+   * 
+   */
   getRateLimit(
     args: {
       xGitHubMediaType?: string,
@@ -2060,6 +2257,12 @@ export class APIClient {
     return this.sendRequest<models.RateLimit>('GET', path, options);
   }
 
+  /**
+   * Delete a Repository.
+   * Deleting a repository requires admin access. If OAuth is used, the delete_repo
+   * scope is required.
+   * 
+   */
   deleteReposOwnerRepo(
     args: {
       owner: string,
@@ -2097,6 +2300,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get repository.
+   */
   getReposOwnerRepo(
     args: {
       owner: string,
@@ -2134,6 +2340,9 @@ export class APIClient {
     return this.sendRequest<models.Repo>('GET', path, options);
   }
 
+  /**
+   * Edit repository.
+   */
   patchReposOwnerRepo(
     args: {
       owner: string,
@@ -2172,6 +2381,12 @@ export class APIClient {
     return this.sendRequest<models.Repo>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List assignees.
+   * This call lists all the available assignees (owner + collaborators) to which
+   * issues may be assigned.
+   * 
+   */
   getReposOwnerRepoAssignees(
     args: {
       owner: string,
@@ -2209,6 +2424,11 @@ export class APIClient {
     return this.sendRequest<models.Assignees>('GET', path, options);
   }
 
+  /**
+   * Check assignee.
+   * You may also check to see if a particular user is an assignee for a repository.
+   * 
+   */
   getReposOwnerRepoAssigneesAssignee(
     args: {
       owner: string,
@@ -2247,6 +2467,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Get list of branches
+   */
   getReposOwnerRepoBranches(
     args: {
       owner: string,
@@ -2284,6 +2507,9 @@ export class APIClient {
     return this.sendRequest<models.Branches>('GET', path, options);
   }
 
+  /**
+   * Get Branch
+   */
   getReposOwnerRepoBranchesBranch(
     args: {
       owner: string,
@@ -2322,6 +2548,14 @@ export class APIClient {
     return this.sendRequest<models.Branch>('GET', path, options);
   }
 
+  /**
+   * List.
+   * When authenticating as an organization owner of an organization-owned
+   * repository, all organization owners are included in the list of
+   * collaborators. Otherwise, only users with access to the repository are
+   * returned in the collaborators list.
+   * 
+   */
   getReposOwnerRepoCollaborators(
     args: {
       owner: string,
@@ -2359,6 +2593,9 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Remove collaborator.
+   */
   deleteReposOwnerRepoCollaboratorsUser(
     args: {
       owner: string,
@@ -2397,6 +2634,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Check if user is a collaborator
+   */
   getReposOwnerRepoCollaboratorsUser(
     args: {
       owner: string,
@@ -2435,6 +2675,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Add collaborator.
+   */
   putReposOwnerRepoCollaboratorsUser(
     args: {
       owner: string,
@@ -2473,6 +2716,11 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options);
   }
 
+  /**
+   * List commit comments for a repository.
+   * Comments are ordered by ascending ID.
+   * 
+   */
   getReposOwnerRepoComments(
     args: {
       owner: string,
@@ -2510,6 +2758,9 @@ export class APIClient {
     return this.sendRequest<models.RepoComments>('GET', path, options);
   }
 
+  /**
+   * Delete a commit comment
+   */
   deleteReposOwnerRepoCommentsCommentId(
     args: {
       owner: string,
@@ -2548,6 +2799,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single commit comment.
+   */
   getReposOwnerRepoCommentsCommentId(
     args: {
       owner: string,
@@ -2586,6 +2840,9 @@ export class APIClient {
     return this.sendRequest<models.CommitComments>('GET', path, options);
   }
 
+  /**
+   * Update a commit comment.
+   */
   patchReposOwnerRepoCommentsCommentId(
     args: {
       owner: string,
@@ -2625,6 +2882,9 @@ export class APIClient {
     return this.sendRequest<models.CommitComments>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List commits on a repository.
+   */
   getReposOwnerRepoCommits(
     args: {
       owner: string,
@@ -2682,6 +2942,13 @@ export class APIClient {
     return this.sendRequest<models.Commits>('GET', path, options);
   }
 
+  /**
+   * Get the combined Status for a specific Ref
+   * The Combined status endpoint is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the blog post for full details.
+   * To access this endpoint during the preview period, you must provide a custom media type in the Accept header:
+   * application/vnd.github.she-hulk-preview+json
+   * 
+   */
   getReposOwnerRepoCommitsRefStatus(
     args: {
       owner: string,
@@ -2720,6 +2987,9 @@ export class APIClient {
     return this.sendRequest<models.RefStatus>('GET', path, options);
   }
 
+  /**
+   * Get a single commit.
+   */
   getReposOwnerRepoCommitsShaCode(
     args: {
       owner: string,
@@ -2758,6 +3028,9 @@ export class APIClient {
     return this.sendRequest<models.Commit>('GET', path, options);
   }
 
+  /**
+   * List comments for a single commitList comments for a single commit.
+   */
   getReposOwnerRepoCommitsShaCodeComments(
     args: {
       owner: string,
@@ -2796,6 +3069,9 @@ export class APIClient {
     return this.sendRequest<models.RepoComments>('GET', path, options);
   }
 
+  /**
+   * Create a commit comment.
+   */
   postReposOwnerRepoCommitsShaCodeComments(
     args: {
       owner: string,
@@ -2835,6 +3111,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Compare two commits
+   */
   getReposOwnerRepoCompareBaseIdHeadId(
     args: {
       owner: string,
@@ -2874,6 +3153,11 @@ export class APIClient {
     return this.sendRequest<models.CompareCommits>('GET', path, options);
   }
 
+  /**
+   * Delete a file.
+   * This method deletes a file in a repository.
+   * 
+   */
   deleteReposOwnerRepoContentsPath(
     args: {
       owner: string,
@@ -2913,6 +3197,15 @@ export class APIClient {
     return this.sendRequest<models.DeleteFile>('DELETE', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get contents.
+   * This method returns the contents of a file or directory in a repository.
+   * Files and symlinks support a custom media type for getting the raw content.
+   * Directories and submodules do not support custom media types.
+   * Note: This API supports files up to 1 megabyte in size.
+   * Here can be many outcomes. For details see "http://developer.github.com/v3/repos/contents/"
+   * 
+   */
   getReposOwnerRepoContentsPath(
     args: {
       owner: string,
@@ -2959,6 +3252,9 @@ export class APIClient {
     return this.sendRequest<models.ContentsPath>('GET', path, options);
   }
 
+  /**
+   * Create a file.
+   */
   putReposOwnerRepoContentsPath(
     args: {
       owner: string,
@@ -2998,6 +3294,9 @@ export class APIClient {
     return this.sendRequest<models.CreateFile>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get list of contributors.
+   */
   getReposOwnerRepoContributors(
     args: {
       owner: string,
@@ -3039,6 +3338,9 @@ export class APIClient {
     return this.sendRequest<models.Contributors>('GET', path, options);
   }
 
+  /**
+   * Users with pull access can view deployments for a repository
+   */
   getReposOwnerRepoDeployments(
     args: {
       owner: string,
@@ -3076,6 +3378,9 @@ export class APIClient {
     return this.sendRequest<models.RepoDeployments>('GET', path, options);
   }
 
+  /**
+   * Users with push access can create a deployment for a given ref
+   */
   postReposOwnerRepoDeployments(
     args: {
       owner: string,
@@ -3114,6 +3419,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Users with pull access can view deployment statuses for a deployment
+   */
   getReposOwnerRepoDeploymentsIdStatuses(
     args: {
       owner: string,
@@ -3152,6 +3460,11 @@ export class APIClient {
     return this.sendRequest<models.DeploymentStatuses>('GET', path, options);
   }
 
+  /**
+   * Create a Deployment Status
+   * Users with push access can create deployment statuses for a given deployment:
+   * 
+   */
   postReposOwnerRepoDeploymentsIdStatuses(
     args: {
       owner: string,
@@ -3191,6 +3504,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Deprecated. List downloads for a repository.
+   */
   getReposOwnerRepoDownloads(
     args: {
       owner: string,
@@ -3228,6 +3544,9 @@ export class APIClient {
     return this.sendRequest<models.Downloads>('GET', path, options);
   }
 
+  /**
+   * Deprecated. Delete a download.
+   */
   deleteReposOwnerRepoDownloadsDownloadId(
     args: {
       owner: string,
@@ -3266,6 +3585,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Deprecated. Get a single download.
+   */
   getReposOwnerRepoDownloadsDownloadId(
     args: {
       owner: string,
@@ -3304,6 +3626,9 @@ export class APIClient {
     return this.sendRequest<models.Downloads>('GET', path, options);
   }
 
+  /**
+   * Get list of repository events.
+   */
   getReposOwnerRepoEvents(
     args: {
       owner: string,
@@ -3341,6 +3666,9 @@ export class APIClient {
     return this.sendRequest<models.Events>('GET', path, options);
   }
 
+  /**
+   * List forks.
+   */
   getReposOwnerRepoForks(
     args: {
       owner: string,
@@ -3382,6 +3710,13 @@ export class APIClient {
     return this.sendRequest<models.Forks>('GET', path, options);
   }
 
+  /**
+   * Create a fork.
+   * Forking a Repository happens asynchronously. Therefore, you may have to wai
+   * a short period before accessing the git objects. If this takes longer than 5
+   * minutes, be sure to contact Support.
+   * 
+   */
   postReposOwnerRepoForks(
     args: {
       owner: string,
@@ -3420,6 +3755,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Create a Blob.
+   */
   postReposOwnerRepoGitBlobs(
     args: {
       owner: string,
@@ -3458,6 +3796,14 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get a Blob.
+   * Since blobs can be any arbitrary binary data, the input and responses for
+   * the blob API takes an encoding parameter that can be either utf-8 or
+   * base64. If your data cannot be losslessly sent as a UTF-8 string, you can
+   * base64 encode it.
+   * 
+   */
   getReposOwnerRepoGitBlobsShaCode(
     args: {
       owner: string,
@@ -3496,6 +3842,9 @@ export class APIClient {
     return this.sendRequest<Blob>('GET', path, options);
   }
 
+  /**
+   * Create a Commit.
+   */
   postReposOwnerRepoGitCommits(
     args: {
       owner: string,
@@ -3534,6 +3883,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get a Commit.
+   */
   getReposOwnerRepoGitCommitsShaCode(
     args: {
       owner: string,
@@ -3572,6 +3924,9 @@ export class APIClient {
     return this.sendRequest<models.RepoCommit>('GET', path, options);
   }
 
+  /**
+   * Get all References
+   */
   getReposOwnerRepoGitRefs(
     args: {
       owner: string,
@@ -3609,6 +3964,9 @@ export class APIClient {
     return this.sendRequest<models.Refs>('GET', path, options);
   }
 
+  /**
+   * Create a Reference
+   */
   postReposOwnerRepoGitRefs(
     args: {
       owner: string,
@@ -3647,6 +4005,12 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete a Reference
+   * Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a 
+   * Example: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
+   * 
+   */
   deleteReposOwnerRepoGitRefsRef(
     args: {
       owner: string,
@@ -3685,6 +4049,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a Reference
+   */
   getReposOwnerRepoGitRefsRef(
     args: {
       owner: string,
@@ -3723,6 +4090,9 @@ export class APIClient {
     return this.sendRequest<models.HeadBranch>('GET', path, options);
   }
 
+  /**
+   * Update a Reference
+   */
   patchReposOwnerRepoGitRefsRef(
     args: {
       owner: string,
@@ -3762,6 +4132,15 @@ export class APIClient {
     return this.sendRequest<models.HeadBranch>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Create a Tag Object.
+   * Note that creating a tag object does not create the reference that makes a
+   * tag in Git. If you want to create an annotated tag in Git, you have to do
+   * this call to create the tag object, and then create the refs/tags/[tag]
+   * reference. If you want to create a lightweight tag, you only have to create
+   * the tag reference - this call would be unnecessary.
+   * 
+   */
   postReposOwnerRepoGitTags(
     args: {
       owner: string,
@@ -3800,6 +4179,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get a Tag.
+   */
   getReposOwnerRepoGitTagsShaCode(
     args: {
       owner: string,
@@ -3838,6 +4220,13 @@ export class APIClient {
     return this.sendRequest<models.Tag>('GET', path, options);
   }
 
+  /**
+   * Create a Tree.
+   * The tree creation API will take nested entries as well. If both a tree and
+   * a nested path modifying that tree are specified, it will overwrite the
+   * contents of that tree with the new path contents and write a new tree out.
+   * 
+   */
   postReposOwnerRepoGitTrees(
     args: {
       owner: string,
@@ -3876,6 +4265,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get a Tree.
+   */
   getReposOwnerRepoGitTreesShaCode(
     args: {
       owner: string,
@@ -3918,6 +4310,9 @@ export class APIClient {
     return this.sendRequest<models.Tree>('GET', path, options);
   }
 
+  /**
+   * Get list of hooks.
+   */
   getReposOwnerRepoHooks(
     args: {
       owner: string,
@@ -3955,6 +4350,9 @@ export class APIClient {
     return this.sendRequest<models.Hook>('GET', path, options);
   }
 
+  /**
+   * Create a hook.
+   */
   postReposOwnerRepoHooks(
     args: {
       owner: string,
@@ -3993,6 +4391,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete a hook.
+   */
   deleteReposOwnerRepoHooksHookId(
     args: {
       owner: string,
@@ -4031,6 +4432,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get single hook.
+   */
   getReposOwnerRepoHooksHookId(
     args: {
       owner: string,
@@ -4069,6 +4473,9 @@ export class APIClient {
     return this.sendRequest<models.Hook>('GET', path, options);
   }
 
+  /**
+   * Edit a hook.
+   */
   patchReposOwnerRepoHooksHookId(
     args: {
       owner: string,
@@ -4108,6 +4515,15 @@ export class APIClient {
     return this.sendRequest<models.Hook>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Test a push hook.
+   * This will trigger the hook with the latest push to the current repository
+   * if the hook is subscribed to push events. If the hook is not subscribed
+   * to push events, the server will respond with 204 but no test POST will
+   * be generated.
+   * Note: Previously /repos/:owner/:repo/hooks/:id/tes
+   * 
+   */
   postReposOwnerRepoHooksHookIdTests(
     args: {
       owner: string,
@@ -4146,6 +4562,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options);
   }
 
+  /**
+   * List issues for a repository.
+   */
   getReposOwnerRepoIssues(
     args: {
       owner: string,
@@ -4207,6 +4626,11 @@ export class APIClient {
     return this.sendRequest<models.Issues>('GET', path, options);
   }
 
+  /**
+   * Create an issue.
+   * Any user with pull access to a repository can create an issue.
+   * 
+   */
   postReposOwnerRepoIssues(
     args: {
       owner: string,
@@ -4245,6 +4669,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List comments in a repository.
+   */
   getReposOwnerRepoIssuesComments(
     args: {
       owner: string,
@@ -4294,6 +4721,9 @@ export class APIClient {
     return this.sendRequest<models.IssuesComments>('GET', path, options);
   }
 
+  /**
+   * Delete a comment.
+   */
   deleteReposOwnerRepoIssuesCommentsCommentId(
     args: {
       owner: string,
@@ -4332,6 +4762,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single comment.
+   */
   getReposOwnerRepoIssuesCommentsCommentId(
     args: {
       owner: string,
@@ -4370,6 +4803,9 @@ export class APIClient {
     return this.sendRequest<models.IssuesComment>('GET', path, options);
   }
 
+  /**
+   * Edit a comment.
+   */
   patchReposOwnerRepoIssuesCommentsCommentId(
     args: {
       owner: string,
@@ -4409,6 +4845,9 @@ export class APIClient {
     return this.sendRequest<models.IssuesComment>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List issue events for a repository.
+   */
   getReposOwnerRepoIssuesEvents(
     args: {
       owner: string,
@@ -4446,6 +4885,9 @@ export class APIClient {
     return this.sendRequest<models.Events>('GET', path, options);
   }
 
+  /**
+   * Get a single event.
+   */
   getReposOwnerRepoIssuesEventsEventId(
     args: {
       owner: string,
@@ -4484,6 +4926,9 @@ export class APIClient {
     return this.sendRequest<models.Event>('GET', path, options);
   }
 
+  /**
+   * Get a single issue
+   */
   getReposOwnerRepoIssuesNumber(
     args: {
       owner: string,
@@ -4522,6 +4967,11 @@ export class APIClient {
     return this.sendRequest<models.Issue>('GET', path, options);
   }
 
+  /**
+   * Edit an issue.
+   * Issue owners and users with push access can edit an issue.
+   * 
+   */
   patchReposOwnerRepoIssuesNumber(
     args: {
       owner: string,
@@ -4561,6 +5011,9 @@ export class APIClient {
     return this.sendRequest<models.Issue>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List comments on an issue.
+   */
   getReposOwnerRepoIssuesNumberComments(
     args: {
       owner: string,
@@ -4599,6 +5052,9 @@ export class APIClient {
     return this.sendRequest<models.IssuesComments>('GET', path, options);
   }
 
+  /**
+   * Create a comment.
+   */
   postReposOwnerRepoIssuesNumberComments(
     args: {
       owner: string,
@@ -4638,6 +5094,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List events for an issue.
+   */
   getReposOwnerRepoIssuesNumberEvents(
     args: {
       owner: string,
@@ -4676,6 +5135,9 @@ export class APIClient {
     return this.sendRequest<models.Events>('GET', path, options);
   }
 
+  /**
+   * Remove all labels from an issue.
+   */
   deleteReposOwnerRepoIssuesNumberLabels(
     args: {
       owner: string,
@@ -4714,6 +5176,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * List labels on an issue.
+   */
   getReposOwnerRepoIssuesNumberLabels(
     args: {
       owner: string,
@@ -4752,6 +5217,9 @@ export class APIClient {
     return this.sendRequest<models.Labels>('GET', path, options);
   }
 
+  /**
+   * Add labels to an issue.
+   */
   postReposOwnerRepoIssuesNumberLabels(
     args: {
       owner: string,
@@ -4791,6 +5259,11 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Replace all labels for an issue.
+   * Sending an empty array ([]) will remove all Labels from the Issue.
+   * 
+   */
   putReposOwnerRepoIssuesNumberLabels(
     args: {
       owner: string,
@@ -4830,6 +5303,9 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Remove a label from an issue.
+   */
   deleteReposOwnerRepoIssuesNumberLabelsName(
     args: {
       owner: string,
@@ -4869,6 +5345,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get list of keys.
+   */
   getReposOwnerRepoKeys(
     args: {
       owner: string,
@@ -4906,6 +5385,9 @@ export class APIClient {
     return this.sendRequest<models.Keys>('GET', path, options);
   }
 
+  /**
+   * Create a key.
+   */
   postReposOwnerRepoKeys(
     args: {
       owner: string,
@@ -4944,6 +5426,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete a key.
+   */
   deleteReposOwnerRepoKeysKeyId(
     args: {
       owner: string,
@@ -4982,6 +5467,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a key
+   */
   getReposOwnerRepoKeysKeyId(
     args: {
       owner: string,
@@ -5020,6 +5508,9 @@ export class APIClient {
     return this.sendRequest<models.UserKeysKeyId>('GET', path, options);
   }
 
+  /**
+   * List all labels for this repository.
+   */
   getReposOwnerRepoLabels(
     args: {
       owner: string,
@@ -5057,6 +5548,9 @@ export class APIClient {
     return this.sendRequest<models.Labels>('GET', path, options);
   }
 
+  /**
+   * Create a label.
+   */
   postReposOwnerRepoLabels(
     args: {
       owner: string,
@@ -5095,6 +5589,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete a label.
+   */
   deleteReposOwnerRepoLabelsName(
     args: {
       owner: string,
@@ -5133,6 +5630,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single label.
+   */
   getReposOwnerRepoLabelsName(
     args: {
       owner: string,
@@ -5171,6 +5671,9 @@ export class APIClient {
     return this.sendRequest<models.Label>('GET', path, options);
   }
 
+  /**
+   * Update a label.
+   */
   patchReposOwnerRepoLabelsName(
     args: {
       owner: string,
@@ -5210,6 +5713,12 @@ export class APIClient {
     return this.sendRequest<models.Label>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List languages.
+   * List languages for the specified repository. The value on the right of a
+   * language is the number of bytes of code written in that language.
+   * 
+   */
   getReposOwnerRepoLanguages(
     args: {
       owner: string,
@@ -5247,6 +5756,9 @@ export class APIClient {
     return this.sendRequest<models.Languages>('GET', path, options);
   }
 
+  /**
+   * Perform a merge.
+   */
   postReposOwnerRepoMerges(
     args: {
       owner: string,
@@ -5285,6 +5797,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List milestones for a repository.
+   */
   getReposOwnerRepoMilestones(
     args: {
       owner: string,
@@ -5334,6 +5849,9 @@ export class APIClient {
     return this.sendRequest<models.Milestone>('GET', path, options);
   }
 
+  /**
+   * Create a milestone.
+   */
   postReposOwnerRepoMilestones(
     args: {
       owner: string,
@@ -5372,6 +5890,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete a milestone.
+   */
   deleteReposOwnerRepoMilestonesNumber(
     args: {
       owner: string,
@@ -5410,6 +5931,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single milestone.
+   */
   getReposOwnerRepoMilestonesNumber(
     args: {
       owner: string,
@@ -5448,6 +5972,9 @@ export class APIClient {
     return this.sendRequest<models.Milestone>('GET', path, options);
   }
 
+  /**
+   * Update a milestone.
+   */
   patchReposOwnerRepoMilestonesNumber(
     args: {
       owner: string,
@@ -5487,6 +6014,9 @@ export class APIClient {
     return this.sendRequest<models.Milestone>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get labels for every issue in a milestone.
+   */
   getReposOwnerRepoMilestonesNumberLabels(
     args: {
       owner: string,
@@ -5525,6 +6055,11 @@ export class APIClient {
     return this.sendRequest<models.Labels>('GET', path, options);
   }
 
+  /**
+   * List your notifications in a repository
+   * List all notifications for the current user.
+   * 
+   */
   getReposOwnerRepoNotifications(
     args: {
       owner: string,
@@ -5574,6 +6109,12 @@ export class APIClient {
     return this.sendRequest<models.Notifications>('GET', path, options);
   }
 
+  /**
+   * Mark notifications as read in a repository.
+   * Marking all notifications in a repository as "read" removes them from the
+   * default view on GitHub.com.
+   * 
+   */
   putReposOwnerRepoNotifications(
     args: {
       owner: string,
@@ -5612,6 +6153,9 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List pull requests.
+   */
   getReposOwnerRepoPulls(
     args: {
       owner: string,
@@ -5661,6 +6205,9 @@ export class APIClient {
     return this.sendRequest<models.Pulls>('GET', path, options);
   }
 
+  /**
+   * Create a pull request.
+   */
   postReposOwnerRepoPulls(
     args: {
       owner: string,
@@ -5699,6 +6246,11 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List comments in a repository.
+   * By default, Review Comments are ordered by ascending ID.
+   * 
+   */
   getReposOwnerRepoPullsComments(
     args: {
       owner: string,
@@ -5748,6 +6300,9 @@ export class APIClient {
     return this.sendRequest<models.IssuesComments>('GET', path, options);
   }
 
+  /**
+   * Delete a comment.
+   */
   deleteReposOwnerRepoPullsCommentsCommentId(
     args: {
       owner: string,
@@ -5786,6 +6341,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single comment.
+   */
   getReposOwnerRepoPullsCommentsCommentId(
     args: {
       owner: string,
@@ -5824,6 +6382,9 @@ export class APIClient {
     return this.sendRequest<models.PullsComment>('GET', path, options);
   }
 
+  /**
+   * Edit a comment.
+   */
   patchReposOwnerRepoPullsCommentsCommentId(
     args: {
       owner: string,
@@ -5863,6 +6424,9 @@ export class APIClient {
     return this.sendRequest<models.PullsComment>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get a single pull request.
+   */
   getReposOwnerRepoPullsNumber(
     args: {
       owner: string,
@@ -5901,6 +6465,9 @@ export class APIClient {
     return this.sendRequest<models.PullRequest>('GET', path, options);
   }
 
+  /**
+   * Update a pull request.
+   */
   patchReposOwnerRepoPullsNumber(
     args: {
       owner: string,
@@ -5940,6 +6507,9 @@ export class APIClient {
     return this.sendRequest<models.Repo>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List comments on a pull request.
+   */
   getReposOwnerRepoPullsNumberComments(
     args: {
       owner: string,
@@ -5978,6 +6548,31 @@ export class APIClient {
     return this.sendRequest<models.PullsComment>('GET', path, options);
   }
 
+  /**
+   * Create a comment.
+   * 
+   *   #TODO Alternative input
+   * ( http://developer.github.com/v3/pulls/comments/ )
+   * 
+   *   description: |
+   * 
+   *     Alternative Input.
+   * 
+   *     Instead of passing commit_id, path, and position you can reply to an
+   * 
+   *     existing Pull Request Comment like this:
+   * 
+   * 
+   * 
+   *         body
+   * 
+   *            Required string
+   * 
+   *         in_reply_to
+   * 
+   *            Required number - Comment id to reply to.
+   * 
+   */
   postReposOwnerRepoPullsNumberComments(
     args: {
       owner: string,
@@ -6017,6 +6612,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List commits on a pull request.
+   */
   getReposOwnerRepoPullsNumberCommits(
     args: {
       owner: string,
@@ -6055,6 +6653,9 @@ export class APIClient {
     return this.sendRequest<models.Commits>('GET', path, options);
   }
 
+  /**
+   * List pull requests files.
+   */
   getReposOwnerRepoPullsNumberFiles(
     args: {
       owner: string,
@@ -6093,6 +6694,9 @@ export class APIClient {
     return this.sendRequest<models.Pulls>('GET', path, options);
   }
 
+  /**
+   * Get if a pull request has been merged.
+   */
   getReposOwnerRepoPullsNumberMerge(
     args: {
       owner: string,
@@ -6131,6 +6735,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Merge a pull request (Merge Button's)
+   */
   putReposOwnerRepoPullsNumberMerge(
     args: {
       owner: string,
@@ -6170,6 +6777,11 @@ export class APIClient {
     return this.sendRequest<models.Merge>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get the README.
+   * This method returns the preferred README for a repository.
+   * 
+   */
   getReposOwnerRepoReadme(
     args: {
       owner: string,
@@ -6211,6 +6823,9 @@ export class APIClient {
     return this.sendRequest<models.ContentsPath>('GET', path, options);
   }
 
+  /**
+   * Users with push access to the repository will receive all releases (i.e., published releases and draft releases). Users with pull access will receive published releases only
+   */
   getReposOwnerRepoReleases(
     args: {
       owner: string,
@@ -6248,6 +6863,11 @@ export class APIClient {
     return this.sendRequest<models.Releases>('GET', path, options);
   }
 
+  /**
+   * Create a release
+   * Users with push access to the repository can create a release.
+   * 
+   */
   postReposOwnerRepoReleases(
     args: {
       owner: string,
@@ -6286,6 +6906,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete a release asset
+   */
   deleteReposOwnerRepoReleasesAssetsId(
     args: {
       owner: string,
@@ -6324,6 +6947,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single release asset
+   */
   getReposOwnerRepoReleasesAssetsId(
     args: {
       owner: string,
@@ -6362,6 +6988,11 @@ export class APIClient {
     return this.sendRequest<models.Asset>('GET', path, options);
   }
 
+  /**
+   * Edit a release asset
+   * Users with push access to the repository can edit a release asset.
+   * 
+   */
   patchReposOwnerRepoReleasesAssetsId(
     args: {
       owner: string,
@@ -6401,6 +7032,9 @@ export class APIClient {
     return this.sendRequest<models.Asset>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Users with push access to the repository can delete a release.
+   */
   deleteReposOwnerRepoReleasesId(
     args: {
       owner: string,
@@ -6439,6 +7073,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single release
+   */
   getReposOwnerRepoReleasesId(
     args: {
       owner: string,
@@ -6477,6 +7114,9 @@ export class APIClient {
     return this.sendRequest<models.Release>('GET', path, options);
   }
 
+  /**
+   * Users with push access to the repository can edit a release
+   */
   patchReposOwnerRepoReleasesId(
     args: {
       owner: string,
@@ -6516,6 +7156,9 @@ export class APIClient {
     return this.sendRequest<models.Release>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List assets for a release
+   */
   getReposOwnerRepoReleasesIdAssets(
     args: {
       owner: string,
@@ -6554,6 +7197,9 @@ export class APIClient {
     return this.sendRequest<models.Assets>('GET', path, options);
   }
 
+  /**
+   * List Stargazers.
+   */
   getReposOwnerRepoStargazers(
     args: {
       owner: string,
@@ -6591,6 +7237,12 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Get the number of additions and deletions per week.
+   * Returns a weekly aggregate of the number of additions and deletions pushed
+   * to a repository.
+   * 
+   */
   getReposOwnerRepoStatsCodeFrequency(
     args: {
       owner: string,
@@ -6628,6 +7280,12 @@ export class APIClient {
     return this.sendRequest<models.CodeFrequencyStats>('GET', path, options);
   }
 
+  /**
+   * Get the last year of commit activity data.
+   * Returns the last year of commit activity grouped by week. The days array
+   * is a group of commits per day, starting on Sunday.
+   * 
+   */
   getReposOwnerRepoStatsCommitActivity(
     args: {
       owner: string,
@@ -6665,6 +7323,9 @@ export class APIClient {
     return this.sendRequest<models.CommitActivityStats>('GET', path, options);
   }
 
+  /**
+   * Get contributors list with additions, deletions, and commit counts.
+   */
   getReposOwnerRepoStatsContributors(
     args: {
       owner: string,
@@ -6702,6 +7363,9 @@ export class APIClient {
     return this.sendRequest<models.ContributorsStats>('GET', path, options);
   }
 
+  /**
+   * Get the weekly commit count for the repo owner and everyone else.
+   */
   getReposOwnerRepoStatsParticipation(
     args: {
       owner: string,
@@ -6739,6 +7403,19 @@ export class APIClient {
     return this.sendRequest<models.ParticipationStats>('GET', path, options);
   }
 
+  /**
+   * Get the number of commits per hour in each day.
+   * Each array contains the day number, hour number, and number of commits
+   * 0-6 Sunday - Saturday
+   * 0-23 Hour of day
+   * Number of commits
+   * 
+   * 
+   * For example, [2, 14, 25] indicates that there were 25 total commits, during
+   * the 2.00pm hour on Tuesdays. All times are based on the time zone of
+   * individual commits.
+   * 
+   */
   getReposOwnerRepoStatsPunchCard(
     args: {
       owner: string,
@@ -6776,6 +7453,9 @@ export class APIClient {
     return this.sendRequest<models.CodeFrequencyStats>('GET', path, options);
   }
 
+  /**
+   * List Statuses for a specific Ref.
+   */
   getReposOwnerRepoStatusesRef(
     args: {
       owner: string,
@@ -6814,6 +7494,9 @@ export class APIClient {
     return this.sendRequest<models.Ref>('GET', path, options);
   }
 
+  /**
+   * Create a Status.
+   */
   postReposOwnerRepoStatusesRef(
     args: {
       owner: string,
@@ -6853,6 +7536,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List watchers.
+   */
   getReposOwnerRepoSubscribers(
     args: {
       owner: string,
@@ -6890,6 +7576,9 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Delete a Repository Subscription.
+   */
   deleteReposOwnerRepoSubscription(
     args: {
       owner: string,
@@ -6927,6 +7616,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a Repository Subscription.
+   */
   getReposOwnerRepoSubscription(
     args: {
       owner: string,
@@ -6964,6 +7656,9 @@ export class APIClient {
     return this.sendRequest<models.Subscribition>('GET', path, options);
   }
 
+  /**
+   * Set a Repository Subscription
+   */
   putReposOwnerRepoSubscription(
     args: {
       owner: string,
@@ -7002,6 +7697,9 @@ export class APIClient {
     return this.sendRequest<models.Subscribition>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Get list of tags.
+   */
   getReposOwnerRepoTags(
     args: {
       owner: string,
@@ -7039,6 +7737,9 @@ export class APIClient {
     return this.sendRequest<models.Tags>('GET', path, options);
   }
 
+  /**
+   * Get list of teams
+   */
   getReposOwnerRepoTeams(
     args: {
       owner: string,
@@ -7076,6 +7777,9 @@ export class APIClient {
     return this.sendRequest<models.Teams>('GET', path, options);
   }
 
+  /**
+   * List Stargazers. New implementation.
+   */
   getReposOwnerRepoWatchers(
     args: {
       owner: string,
@@ -7113,6 +7817,15 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Get archive link.
+   * This method will return a 302 to a URL to download a tarball or zipball
+   * archive for a repository. Please make sure your HTTP framework is
+   * configured to follow redirects or you will need to use the Location header
+   * to make a second GET request.
+   * Note: For private repositories, these links are temporary and expire quickly.
+   * 
+   */
   getReposOwnerRepoArchiveFormatPath(
     args: {
       owner: string,
@@ -7152,6 +7865,14 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * List all public repositories.
+   * This provides a dump of every public repository, in the order that they
+   * were created.
+   * Note: Pagination is powered exclusively by the since parameter. is the
+   * Link header to get the URL for the next page of repositories.
+   * 
+   */
   getRepositories(
     args: {
       since?: string,
@@ -7191,6 +7912,9 @@ export class APIClient {
     return this.sendRequest<models.Repositories>('GET', path, options);
   }
 
+  /**
+   * Search code.
+   */
   getSearchCode(
     args: {
       order?: string,
@@ -7238,6 +7962,9 @@ export class APIClient {
     return this.sendRequest<models.SearchCode>('GET', path, options);
   }
 
+  /**
+   * Find issues by state and keyword. (This method returns up to 100 results per page.)
+   */
   getSearchIssues(
     args: {
       order?: string,
@@ -7285,6 +8012,9 @@ export class APIClient {
     return this.sendRequest<models.SearchIssues>('GET', path, options);
   }
 
+  /**
+   * Search repositories.
+   */
   getSearchRepositories(
     args: {
       order?: string,
@@ -7332,6 +8062,9 @@ export class APIClient {
     return this.sendRequest<models.SearchRepositories>('GET', path, options);
   }
 
+  /**
+   * Search users.
+   */
   getSearchUsers(
     args: {
       order?: string,
@@ -7379,6 +8112,12 @@ export class APIClient {
     return this.sendRequest<models.SearchUsers>('GET', path, options);
   }
 
+  /**
+   * Delete team.
+   * In order to delete a team, the authenticated user must be an owner of the
+   * org that the team is associated with.
+   * 
+   */
   deleteTeamsTeamId(
     args: {
       teamId: number,
@@ -7415,6 +8154,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get team.
+   */
   getTeamsTeamId(
     args: {
       teamId: number,
@@ -7451,6 +8193,12 @@ export class APIClient {
     return this.sendRequest<models.Team>('GET', path, options);
   }
 
+  /**
+   * Edit team.
+   * In order to edit a team, the authenticated user must be an owner of the org
+   * that the team is associated with.
+   * 
+   */
   patchTeamsTeamId(
     args: {
       teamId: number,
@@ -7488,6 +8236,12 @@ export class APIClient {
     return this.sendRequest<models.Team>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List team members.
+   * In order to list members in a team, the authenticated user must be a member
+   * of the team.
+   * 
+   */
   getTeamsTeamIdMembers(
     args: {
       teamId: number,
@@ -7524,6 +8278,17 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * The "Remove team member" API is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Remove team membership API instead. It allows you to remove both active and pending memberships.
+   * 
+   * 
+   * Remove team member.
+   * In order to remove a user from a team, the authenticated user must have 'admin'
+   * permissions to the team or be an owner of the org that the team is associated
+   * with.
+   * NOTE This does not delete the user, it just remove them from the team.
+   * 
+   */
   deleteTeamsTeamIdMembersUsername(
     args: {
       teamId: number,
@@ -7561,6 +8326,15 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * The "Get team member" API is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Get team membership API instead. It allows you to get both active and pending memberships.
+   * 
+   * 
+   * Get team member.
+   * In order to get if a user is a member of a team, the authenticated user mus
+   * be a member of the team.
+   * 
+   */
   getTeamsTeamIdMembersUsername(
     args: {
       teamId: number,
@@ -7598,6 +8372,16 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * The API (described below) is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Add team membership API instead. It allows you to invite new organization members to your teams.
+   * 
+   * 
+   * Add team member.
+   * In order to add a user to a team, the authenticated user must have 'admin'
+   * permissions to the team or be an owner of the org that the team is associated
+   * with.
+   * 
+   */
   putTeamsTeamIdMembersUsername(
     args: {
       teamId: number,
@@ -7635,6 +8419,11 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options);
   }
 
+  /**
+   * Remove team membership.
+   * In order to remove a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with. NOTE: This does not delete the user, it just removes their membership from the team.
+   * 
+   */
   deleteTeamsTeamIdMembershipsUsername(
     args: {
       teamId: number,
@@ -7672,6 +8461,11 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get team membership.
+   * In order to get a user's membership with a team, the authenticated user must be a member of the team or an owner of the team's organization.
+   * 
+   */
   getTeamsTeamIdMembershipsUsername(
     args: {
       teamId: number,
@@ -7709,6 +8503,17 @@ export class APIClient {
     return this.sendRequest<models.TeamMembership>('GET', path, options);
   }
 
+  /**
+   * Add team membership.
+   * In order to add a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with.
+   * 
+   * 
+   * If the user is already a part of the team's organization (meaning they're on at least one other team in the organization), this endpoint will add the user to the team.
+   * 
+   * 
+   * If the user is completely unaffiliated with the team's organization (meaning they're on none of the organization's teams), this endpoint will send an invitation to the user via email. This newly-created membership will be in the 'pending' state until the user accepts the invitation, at which point the membership will transition to the 'active' state and the user will be added as a member of the team.
+   * 
+   */
   putTeamsTeamIdMembershipsUsername(
     args: {
       teamId: number,
@@ -7746,6 +8551,9 @@ export class APIClient {
     return this.sendRequest<models.TeamMembership>('PUT', path, options);
   }
 
+  /**
+   * List team repos
+   */
   getTeamsTeamIdRepos(
     args: {
       teamId: number,
@@ -7782,6 +8590,9 @@ export class APIClient {
     return this.sendRequest<models.TeamRepos>('GET', path, options);
   }
 
+  /**
+   * In order to add a repository to a team, the authenticated user must be an owner of the org that the team is associated with. Also, the repository must be owned by the organization, or a direct fork of a repository owned by the organization.
+   */
   putTeamsTeamIdReposOrgRepo(
     args: {
       teamId: number,
@@ -7820,6 +8631,9 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options);
   }
 
+  /**
+   * In order to remove a repository from a team, the authenticated user must be an owner of the org that the team is associated with. NOTE: This does not delete the repository, it just removes it from the team.
+   */
   deleteTeamsTeamIdReposOwnerRepo(
     args: {
       teamId: number,
@@ -7858,6 +8672,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Check if a team manages a repository
+   */
   getTeamsTeamIdReposOwnerRepo(
     args: {
       teamId: number,
@@ -7896,6 +8713,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Get the authenticated user.
+   */
   getUser(
     args: {
       xGitHubMediaType?: string,
@@ -7931,6 +8751,9 @@ export class APIClient {
     return this.sendRequest<models.User>('GET', path, options);
   }
 
+  /**
+   * Update the authenticated user.
+   */
   patchUser(
     args: {
       xGitHubMediaType?: string,
@@ -7967,6 +8790,11 @@ export class APIClient {
     return this.sendRequest<models.User>('PATCH', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete email address(es).
+   * You can include a single email address or an array of addresses.
+   * 
+   */
   deleteUserEmails(
     args: {
       xGitHubMediaType?: string,
@@ -8003,6 +8831,15 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List email addresses for a user.
+   * In the final version of the API, this method will return an array of hashes
+   * with extended information for each email address indicating if the address
+   * has been verified and if it's primary email address for GitHub.
+   * Until API v3 is finalized, use the application/vnd.github.v3 media type to
+   * get other response format.
+   * 
+   */
   getUserEmails(
     args: {
       xGitHubMediaType?: string,
@@ -8038,6 +8875,11 @@ export class APIClient {
     return this.sendRequest<models.UserEmails>('GET', path, options);
   }
 
+  /**
+   * Add email address(es).
+   * You can post a single email address or an array of addresses.
+   * 
+   */
   postUserEmails(
     args: {
       xGitHubMediaType?: string,
@@ -8074,6 +8916,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List the authenticated user's followers
+   */
   getUserFollowers(
     args: {
       xGitHubMediaType?: string,
@@ -8109,6 +8954,9 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * List who the authenticated user is following.
+   */
   getUserFollowing(
     args: {
       xGitHubMediaType?: string,
@@ -8144,6 +8992,12 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Unfollow a user.
+   * Unfollowing a user requires the user to be logged in and authenticated with
+   * basic auth or OAuth with the user:follow scope.
+   * 
+   */
   deleteUserFollowingUsername(
     args: {
       username: string,
@@ -8180,6 +9034,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Check if you are following a user.
+   */
   getUserFollowingUsername(
     args: {
       username: string,
@@ -8216,6 +9073,12 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Follow a user.
+   * Following a user requires the user to be logged in and authenticated with
+   * basic auth or OAuth with the user:follow scope.
+   * 
+   */
   putUserFollowingUsername(
     args: {
       username: string,
@@ -8252,6 +9115,12 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options);
   }
 
+  /**
+   * List issues.
+   * List all issues across owned and member repositories for the authenticated
+   * user.
+   * 
+   */
   getUserIssues(
     args: {
       filter: string,
@@ -8311,6 +9180,12 @@ export class APIClient {
     return this.sendRequest<models.Issues>('GET', path, options);
   }
 
+  /**
+   * List your public keys.
+   * Lists the current user's keys. Management of public keys via the API requires
+   * that you are authenticated through basic auth, or OAuth with the 'user', 'write:public_key' scopes.
+   * 
+   */
   getUserKeys(
     args: {
       xGitHubMediaType?: string,
@@ -8346,6 +9221,9 @@ export class APIClient {
     return this.sendRequest<models.Gitignore>('GET', path, options);
   }
 
+  /**
+   * Create a public key.
+   */
   postUserKeys(
     args: {
       xGitHubMediaType?: string,
@@ -8382,6 +9260,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Delete a public key. Removes a public key. Requires that you are authenticated via Basic Auth or via OAuth with at least admin:public_key scope.
+   */
   deleteUserKeysKeyId(
     args: {
       keyId: number,
@@ -8418,6 +9299,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Get a single public key.
+   */
   getUserKeysKeyId(
     args: {
       keyId: number,
@@ -8454,6 +9338,9 @@ export class APIClient {
     return this.sendRequest<models.UserKeysKeyId>('GET', path, options);
   }
 
+  /**
+   * List public and private organizations for the authenticated user.
+   */
   getUserOrgs(
     args: {
       xGitHubMediaType?: string,
@@ -8489,6 +9376,12 @@ export class APIClient {
     return this.sendRequest<models.Gitignore>('GET', path, options);
   }
 
+  /**
+   * List repositories for the authenticated user. Note that this does not include
+   * repositories owned by organizations which the user can access. You can lis
+   * user organizations and list organization repositories separately.
+   * 
+   */
   getUserRepos(
     args: {
       type?: string,
@@ -8528,6 +9421,11 @@ export class APIClient {
     return this.sendRequest<models.Repos>('GET', path, options);
   }
 
+  /**
+   * Create a new repository for the authenticated user. OAuth users must supply
+   * repo scope.
+   * 
+   */
   postUserRepos(
     args: {
       xGitHubMediaType?: string,
@@ -8564,6 +9462,9 @@ export class APIClient {
     return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * List repositories being starred by the authenticated user.
+   */
   getUserStarred(
     args: {
       direction?: string,
@@ -8607,6 +9508,9 @@ export class APIClient {
     return this.sendRequest<models.Gitignore>('GET', path, options);
   }
 
+  /**
+   * Unstar a repository
+   */
   deleteUserStarredOwnerRepo(
     args: {
       owner: string,
@@ -8644,6 +9548,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Check if you are starring a repository.
+   */
   getUserStarredOwnerRepo(
     args: {
       owner: string,
@@ -8681,6 +9588,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Star a repository.
+   */
   putUserStarredOwnerRepo(
     args: {
       owner: string,
@@ -8718,6 +9628,9 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options);
   }
 
+  /**
+   * List repositories being watched by the authenticated user.
+   */
   getUserSubscriptions(
     args: {
       xGitHubMediaType?: string,
@@ -8753,6 +9666,9 @@ export class APIClient {
     return this.sendRequest<models.UserUserIdSubscribitions>('GET', path, options);
   }
 
+  /**
+   * Stop watching a repository
+   */
   deleteUserSubscriptionsOwnerRepo(
     args: {
       owner: string,
@@ -8790,6 +9706,9 @@ export class APIClient {
     return this.sendRequest<any>('DELETE', path, options);
   }
 
+  /**
+   * Check if you are watching a repository.
+   */
   getUserSubscriptionsOwnerRepo(
     args: {
       owner: string,
@@ -8827,6 +9746,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * Watch a repository.
+   */
   putUserSubscriptionsOwnerRepo(
     args: {
       owner: string,
@@ -8864,6 +9786,9 @@ export class APIClient {
     return this.sendRequest<any>('PUT', path, options);
   }
 
+  /**
+   * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires user or repo scope when authenticating via OAuth.
+   */
   getUserTeams(
     args: {
       xGitHubMediaType?: string,
@@ -8899,6 +9824,13 @@ export class APIClient {
     return this.sendRequest<models.TeamsList>('GET', path, options);
   }
 
+  /**
+   * Get all users.
+   * This provides a dump of every user, in the order that they signed up for GitHub.
+   * Note: Pagination is powered exclusively by the since parameter. Use the Link
+   * header to get the URL for the next page of users.
+   * 
+   */
   getUsers(
     args: {
       since?: number,
@@ -8938,6 +9870,9 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Get a single user.
+   */
   getUsersUsername(
     args: {
       username: string,
@@ -8974,6 +9909,9 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
+   */
   getUsersUsernameEvents(
     args: {
       username: string,
@@ -9010,6 +9948,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * This is the user's organization dashboard. You must be authenticated as the user to view this.
+   */
   getUsersUsernameEventsOrgsOrg(
     args: {
       username: string,
@@ -9047,6 +9988,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * List a user's followers
+   */
   getUsersUsernameFollowers(
     args: {
       username: string,
@@ -9083,6 +10027,9 @@ export class APIClient {
     return this.sendRequest<models.Users>('GET', path, options);
   }
 
+  /**
+   * Check if one user follows another.
+   */
   getUsersUsernameFollowingTargetUser(
     args: {
       username: string,
@@ -9120,6 +10067,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * List a users gists.
+   */
   getUsersUsernameGists(
     args: {
       username: string,
@@ -9160,6 +10110,11 @@ export class APIClient {
     return this.sendRequest<models.Gists>('GET', path, options);
   }
 
+  /**
+   * List public keys for a user.
+   * Lists the verified public keys for a user. This is accessible by anyone.
+   * 
+   */
   getUsersUsernameKeys(
     args: {
       username: string,
@@ -9196,6 +10151,9 @@ export class APIClient {
     return this.sendRequest<models.Gitignore>('GET', path, options);
   }
 
+  /**
+   * List all public organizations for a user.
+   */
   getUsersUsernameOrgs(
     args: {
       username: string,
@@ -9232,6 +10190,9 @@ export class APIClient {
     return this.sendRequest<models.Gitignore>('GET', path, options);
   }
 
+  /**
+   * These are events that you'll only see public events.
+   */
   getUsersUsernameReceivedEvents(
     args: {
       username: string,
@@ -9268,6 +10229,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * List public events that a user has received
+   */
   getUsersUsernameReceivedEventsPublic(
     args: {
       username: string,
@@ -9304,6 +10268,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * List public repositories for the specified user.
+   */
   getUsersUsernameRepos(
     args: {
       username: string,
@@ -9344,6 +10311,9 @@ export class APIClient {
     return this.sendRequest<models.Repos>('GET', path, options);
   }
 
+  /**
+   * List repositories being starred by a user.
+   */
   getUsersUsernameStarred(
     args: {
       username: string,
@@ -9380,6 +10350,9 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
+  /**
+   * List repositories being watched by a user.
+   */
   getUsersUsernameSubscriptions(
     args: {
       username: string,

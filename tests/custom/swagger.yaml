@@ -78,8 +78,9 @@ paths:
 definitions:
   ItemList:
     description: List of items,
-    required: data
-    type: object,
+    required:
+      - data
+    type: object
     properties:
       data:
         description: List of controllers in the system (this can be empty)
@@ -89,7 +90,7 @@ definitions:
   ItemModelList:
     description: List of Item models
     required:
-      data
+      - data
     type: object
     properties:
       data:
@@ -157,8 +158,7 @@ definitions:
     properties:
       pet_type:
         type: string
-    discriminator:
-      propertyName: pet_type
+    discriminator: pet_type
   Dog:
     allOf: # Combines the main `Pet` schema with `Dog`-specific properties
       - $ref: '#/definitions/Pet'
