@@ -4,12 +4,13 @@ export type RenderFileName = (text: string, render: Render) => string;
 export type Render = (text: string) => string;
 
 export interface Definition {
-  name?: string;
-  properties: Property[];
-  imports: string[];
-  extend?: string;
-  isEnum?: boolean;
-  isNumeric?: boolean; // used for determining if string or numeric enum should be generated
+  readonly name?: string;
+  readonly properties: Property[];
+  readonly imports: string[];
+  readonly extend?: string;
+  readonly description?: string;
+  readonly isEnum?: boolean;
+  readonly isNumeric?: boolean; // used for determining if string or numeric enum should be generated
   renderFileName?(): RenderFileName; // generate dash-case file names to templates
 }
 
@@ -33,10 +34,11 @@ export interface Property {
   readonly 'enum'?: (string | boolean | number | {})[];
   readonly items?: Parameter;
   readonly name?: string;
+  readonly description?: string;
   readonly $ref?: string;
   readonly schema?: Schema;
-  type?: string;
-  typescriptType?: TypescriptBasicTypes | string;
+  readonly type?: string;
+  readonly typescriptType?: TypescriptBasicTypes | string;
   readonly importType?: string;
 }
 
