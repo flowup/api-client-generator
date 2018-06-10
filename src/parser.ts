@@ -179,10 +179,6 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
     ...allOfProps,
   } as { [propertyName: string]: Schema });
 
-  if (extendInterface) {
-    console.log('->', extendInterface)
-  }
-
   return {
     name: name,
     properties: properties,
