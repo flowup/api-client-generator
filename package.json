@@ -45,8 +45,8 @@
   "license": "MIT",
   "scripts": {
     "generate": "node ./dist/main.js",
-    "build": "rimraf dist && tsc",
-    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts' 'src/tests.ts'",
+    "build": "npm run lint && rimraf dist && tsc",
+    "lint": "tslint -p tsconfig.json -c tslint.json src/**/*.ts",
     "gen": "ts-node ./src/main.ts",
     "gen-custom": "rimraf ./tests/custom/api && ts-node ./src/main.ts -s ./tests/custom/swagger.yaml -o ./tests/custom/api",
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
