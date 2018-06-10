@@ -6,7 +6,7 @@ export interface User {
   blog: string;
   collaborators: number;
   company: string;
-  created_at: string;
+  created_at: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
   disk_usage: number;
   email: string;
   followers: number;

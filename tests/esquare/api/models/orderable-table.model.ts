@@ -6,5 +6,5 @@ import {
 
 export interface OrderableTable extends Table {
   order: Order;
-  orderBy: number;
+  orderBy: number;  // column id
 }

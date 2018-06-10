@@ -5,5 +5,5 @@ export interface TestModel {
   'anotherKey@': string;
   'some-key': string;
   'yet@notherKey': string;
-  count: number;
+  count: number;  // sum of everything there is converted to bananas
 }

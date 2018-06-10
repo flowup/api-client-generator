@@ -1,5 +1,5 @@
 /* tslint:disable */
 
 export interface MergesConflict {
-  message: string;
+  message: string;  // Error message
 }

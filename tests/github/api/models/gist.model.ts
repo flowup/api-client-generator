@@ -3,7 +3,7 @@
 export interface Gist {
   comments: number;
   comments_url: string;
-  created_at: string;
+  created_at: string;  // Timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
   description: string;
   files: any;
   forks: any[];

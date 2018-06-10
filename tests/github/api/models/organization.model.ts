@@ -4,7 +4,7 @@ export interface Organization {
   avatar_url: string;
   blog: string;
   company: string;
-  created_at: string;
+  created_at: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
   email: string;
   followers: number;
   following: number;

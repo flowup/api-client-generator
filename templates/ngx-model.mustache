@@ -8,17 +8,25 @@ import {
 } from './..';
 {{/imports.length}}
 
-export interface {{&name}} {{#extend}}extends {{.}} {{/extend}}{
+{{#description}}
+/**
+ * {{&.}}
+ */
+{{/description}}export interface {{&name}} {{#extend}}extends {{.}} {{/extend}}{
 {{#properties}}
-  {{&name}}: {{typescriptType}}{{#isArray}}[]{{/isArray}};
+  {{&name}}: {{typescriptType}}{{#isArray}}[]{{/isArray}};{{#description}}  // {{&.}}{{/description}}
 {{/properties}}
 }
 {{/isEnum}}
 {{#isEnum}}
 
-export enum {{&name}} {
-{{#properties}}
-  {{name}} = {{#isNumeric}}{{value}}{{/isNumeric}}{{^isNumeric}}"{{value}}"{{/isNumeric}},
-{{/properties}}
+{{#description}}
+/**
+ * {{&.}}
+ */
+{{/description}}export enum {{&name}} {
+    {{#properties}}
+  {{name}} = {{#isNumeric}}"{{value}}"{{/isNumeric}}{{^isNumeric}}{{value}}{{/isNumeric}},
+    {{/properties}}
 }
 {{/isEnum}}

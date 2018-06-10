@@ -7,7 +7,7 @@ export interface CreateDownload {
   content_type: string;
   description: string;
   download_count: number;
-  expirationdate: string;
+  expirationdate: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
   html_url: string;
   id: number;
   mime_type: string;

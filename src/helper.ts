@@ -98,3 +98,7 @@ export function determineDomain({schemes, host, basePath}: Swagger): string {
   const base = ('/' === basePath || !basePath ? '' : basePath);
   return `${protocol}${domain}${base}`;
 }
+
+export function replaceNewLines(str: string = '', replaceValue: string = ''): string {
+  return str.replace(/(\r\n|\r|\n)/g, replaceValue);
+}

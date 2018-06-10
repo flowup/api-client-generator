@@ -1,6 +1,15 @@
 import { BodyParameter, QueryParameter, Response, Schema, Spec as Swagger } from 'swagger-schema-official';
 import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName } from './types';
-import { camelCase, dereferenceType, determineDomain, fileName, prefixImportedModels, toTypescriptType, typeName } from './helper';
+import {
+  camelCase,
+  dereferenceType,
+  determineDomain,
+  fileName,
+  prefixImportedModels,
+  replaceNewLines,
+  toTypescriptType,
+  typeName,
+} from './helper';
 
 interface Parameters {
   [parameterName: string]: BodyParameter | QueryParameter
@@ -106,6 +115,7 @@ function defineEnum(enumSchema: (string | boolean | number | {})[] = [],
         : val.toString(),
       value: val.toString(),
     })),
+    description: replaceNewLines(enumDesc, '$1 * '),
     isEnum: true,
     isNumeric,
     imports: [],
@@ -128,6 +138,7 @@ function parseInterfaceProperties(properties: { [propertyName: string]: Schema }
         isArray,
         isRef: !!parseReference(propSchema),
         name: /^[A-Za-z_$][\w$]*$/.test(propName) ? propName : `'${propName}'`,
+        description: replaceNewLines(propSchema.description),
         type: typescriptType.replace('[]', ''),
         typescriptType,
       };
@@ -181,6 +192,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
 
   return {
     name: name,
+    description: replaceNewLines(schema.description, '$1 * '),
     properties: properties,
     imports: properties
       .filter(({isRef}) => isRef)

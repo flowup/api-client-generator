@@ -141,7 +141,7 @@ definitions:
       properties:
         count:
           type: integer
-          description: url to user avatar image
+          description: sum of everything there is converted to bananas
         42test:
           type: string
         some-key:

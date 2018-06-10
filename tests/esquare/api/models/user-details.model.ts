@@ -8,8 +8,8 @@ export interface UserDetails {
   entities: number[];
   firstName: string;
   id: number;
-  imageData: string;
-  imageUrl: string;
+  imageData: string;  // base64 user uploaded image string
+  imageUrl: string;  // url to user avatar image
   lastName: string;
   login: string;
   phone: string;

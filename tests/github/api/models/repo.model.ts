@@ -2,7 +2,7 @@
 
 export interface Repo {
   clone_url: string;
-  created_at: string;
+  created_at: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
   description: string;
   fork: boolean;
   forks: number;
@@ -23,14 +23,14 @@ export interface Repo {
   open_issues_count: number;
   organization: any;
   owner: any;
-  parent: any;
+  parent: any;  // Is present when the repo is a fork. Parent is the repo this repo was forked from.
   private: boolean;
-  pushed_at: string;
+  pushed_at: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
   size: number;
-  source: any;
+  source: any;  // Is present when the repo is a fork. Source is the ultimate source for the network.
   ssh_url: string;
   svn_url: string;
-  updated_at: string;
+  updated_at: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
   url: string;
   watchers: number;
   watchers_count: number;

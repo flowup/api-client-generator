@@ -3,6 +3,9 @@ import {
   Value,
 } from './..';
 
+/**
+ * An array value.
+ */
 export interface ArrayValue {
-  values: Value[];
+  values: Value[];  // Values in the array.
 }
