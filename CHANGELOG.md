@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/flowup/api-client-generator/compare/3.2.2...3.3.0) (2018-06-11)
+
+
+### Bug Fixes
+
+* **enums:** numeric enums values ([ce511c8](https://github.com/flowup/api-client-generator/commit/ce511c8))
+
+
+### Features
+
+* **api-client:** API method descriptions ([e7e767f](https://github.com/flowup/api-client-generator/commit/e7e767f)), closes [#29](https://github.com/flowup/api-client-generator/issues/29)
+* **api-client:** API method parameter descriptions ([320fabc](https://github.com/flowup/api-client-generator/commit/320fabc)), closes [#29](https://github.com/flowup/api-client-generator/issues/29)
+* **models, enums:** description for models and enums ([ae7262d](https://github.com/flowup/api-client-generator/commit/ae7262d)), closes [#29](https://github.com/flowup/api-client-generator/issues/29)
+
+
+
 <a name="3.2.2"></a>
 ## [3.2.2](https://github.com/flowup/api-client-generator/compare/3.2.1...3.2.2) (2018-06-08)
 
