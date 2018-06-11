@@ -212,3 +212,24 @@ definitions:
         type: "string"
       address:
         type: "string"
+      right:
+        $ref: "#/definitions/right"
+  right:
+    type: string
+    enum:
+      - MEMBER
+      - ADMIN
+      - "VIEW_ALL"
+      - "VIEW_MY"
+      - "VIEW_EDIT"
+      - "CONTROL"
+  possition:
+    type: integer
+    enum:
+      - 1
+      - 2
+      - 3
+    description: |
+      - 1 First
+      - 2 Second
+      - 3 Third

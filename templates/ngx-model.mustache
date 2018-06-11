@@ -26,7 +26,7 @@ import {
  */
 {{/description}}export enum {{&name}} {
     {{#properties}}
-  {{name}} = {{#isNumeric}}"{{value}}"{{/isNumeric}}{{^isNumeric}}{{value}}{{/isNumeric}},
+  {{name}} = {{#isNumeric}}{{value}}{{/isNumeric}}{{^isNumeric}}"{{value}}"{{/isNumeric}},
     {{/properties}}
 }
 {{/isEnum}}

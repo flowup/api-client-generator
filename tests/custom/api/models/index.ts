@@ -11,3 +11,5 @@ export { Cat } from './cat.model';
 export { Mouse } from './mouse.model';
 export { Model } from './model.model';
 export { Customer } from './customer.model';
+export { Right } from './right.enum';
+export { Possition } from './possition.enum';

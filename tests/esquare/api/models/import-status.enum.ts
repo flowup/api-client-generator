@@ -6,6 +6,6 @@
  * 
  */
 export enum ImportStatus {
-  Live = "1",
-  PastDeadline = "2",
+  Live = 1,
+  PastDeadline = 2,
 }

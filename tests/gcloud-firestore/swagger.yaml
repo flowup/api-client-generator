@@ -38,13 +38,16 @@ securityDefinitions:
     type: oauth2
 parameters:
   $.xgafv:
-    description: V1 error format.
+    description: |
+      - error format
+      - 1 V1
+      - 2 V2
     enum:
-      - '1'
-      - '2'
+      - 1
+      - 2
     in: query
     name: $.xgafv
-    type: string
+    type: integer
   access_token:
     description: OAuth access token.
     in: query

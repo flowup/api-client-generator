@@ -1,9 +1,12 @@
 /* tslint:disable */
 
 /**
- * V1 error format.
+ * - error format
+ * - 1 V1
+ * - 2 V2
+ * 
  */
 export enum $Xgafv {
-  1 = 1,
-  2 = 2,
+  V1 = 1,
+  V2 = 2,
 }
