@@ -44,7 +44,7 @@ export class APIClient {
   getItems(
     args: {
       pageSize: number,
-      page: number,
+      page: number,  // page number
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ItemList> {
@@ -63,7 +63,7 @@ export class APIClient {
   getItemModels(
     args: {
       pageSize: number,
-      page: number,
+      page: number,  // page number
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {

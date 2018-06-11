@@ -43,7 +43,7 @@ export class APIClient {
 
   auth(
     args: {
-      body: models.AuthForm,
+      body: models.AuthForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -64,7 +64,7 @@ export class APIClient {
 
   passwordRestoreRequest(
     args: {
-      body: models.RestoreForm,
+      body: models.RestoreForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -76,7 +76,7 @@ export class APIClient {
 
   passwordRestoreEmailRequest(
     args: {
-      body: models.RestoreRequestForm,
+      body: models.RestoreRequestForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -88,7 +88,7 @@ export class APIClient {
 
   passwordRestoreCheckRestoreGuid(
     args: {
-      restoreGuid: string,
+      restoreGuid: string,  // RestoreGuid for check
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -118,7 +118,7 @@ export class APIClient {
 
   addStructureEntity(
     args: {
-      body: models.StructureAddParameters,
+      body: models.StructureAddParameters,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure> {
@@ -130,8 +130,8 @@ export class APIClient {
 
   updateStructureEntity(
     args: {
-      structureId: number,
-      body: models.StructureForm,
+      structureId: number,  // structure id to update
+      body: models.StructureForm,  // Structure entity object that needs to be updated
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure> {
@@ -143,7 +143,7 @@ export class APIClient {
 
   deleteStructureEntity(
     args: {
-      structureId: number,
+      structureId: number,  // structure id to delete
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -161,8 +161,8 @@ export class APIClient {
     args: {
       status?: models.Status,
       pageSize: number,
-      page: number,
-      orderBy: string,
+      page: number,  // page number
+      orderBy: string,  // id | title | subtitle | criticality | status | issues | deadline
       order?: models.Order,
     },
     requestHttpOptions?: HttpOptions
@@ -194,7 +194,7 @@ export class APIClient {
    */
   getReportDetails(
     args: {
-      id: number,
+      id: number,  // report id to get
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ReportItem[]> {
@@ -210,10 +210,10 @@ export class APIClient {
    */
   getReportPreview(
     args: {
-      templateId: number,
+      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
       pageSize: number,
-      page: number,
-      orderBy?: number,
+      page: number,  // page number
+      orderBy?: number,  // (optional) column id
       order?: models.Order,
     },
     requestHttpOptions?: HttpOptions
@@ -242,7 +242,7 @@ export class APIClient {
    */
   getImportHistory(
     args: {
-      templateId: number,
+      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportHistoryItem[]> {
@@ -258,8 +258,8 @@ export class APIClient {
    */
   uploadFile(
     args: {
-      templateId: number,
-      file: File,
+      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
+      file: File,  // file to upload
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -275,7 +275,7 @@ export class APIClient {
    */
   listTemplateColumns(
     args: {
-      templateId: number,
+      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]> {
@@ -291,7 +291,7 @@ export class APIClient {
    */
   listReportColumns(
     args: {
-      id: number,
+      id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]> {
@@ -307,8 +307,8 @@ export class APIClient {
    */
   saveColumnsMapping(
     args: {
-      id: number,
-      body: any,
+      id: number,  // Id of current import
+      body: any,  // Column mappint for current import
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Table> {
@@ -324,7 +324,7 @@ export class APIClient {
    */
   getValidationTable(
     args: {
-      id: number,
+      id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ValidatedTable> {
@@ -340,8 +340,8 @@ export class APIClient {
    */
   downloadImportedFile(
     args: {
-      id: number,
-      all?: boolean,
+      id: number,  // Id of current import
+      all?: boolean,  // (optional) Indicator of downloading data(all or errors only)
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -360,7 +360,7 @@ export class APIClient {
    */
   importConfirmation(
     args: {
-      id: number,
+      id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportResponse> {
@@ -376,7 +376,7 @@ export class APIClient {
    */
   downloadImportOriginalFile(
     args: {
-      id: number,
+      id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -392,7 +392,7 @@ export class APIClient {
    */
   downloadImportSkippedFile(
     args: {
-      id: number,
+      id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -408,7 +408,7 @@ export class APIClient {
    */
   cancelImport(
     args: {
-      id: number,
+      id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -424,9 +424,9 @@ export class APIClient {
    */
   overrideImport(
     args: {
-      id: number,
-      description: string,
-      file: File,
+      id: number,  // Id of current import
+      description: string,  // description of override request
+      file: File,  // file to upload
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -464,8 +464,8 @@ export class APIClient {
       period?: models.Period,
       status?: models.IssueStatus,
       pageSize: number,
-      page: number,
-      orderBy: string,
+      page: number,  // page number
+      orderBy: string,  // name | school | dueDate | alert
       order?: models.Order,
     },
     requestHttpOptions?: HttpOptions
@@ -503,8 +503,8 @@ export class APIClient {
       period?: models.Period,
       status?: models.ImportStatus,
       pageSize: number,
-      page: number,
-      orderBy: string,
+      page: number,  // page number
+      orderBy: string,  // name | issues | dueDate | progress
       order?: models.Order,
     },
     requestHttpOptions?: HttpOptions
@@ -538,11 +538,11 @@ export class APIClient {
       period?: models.Period,
       status?: models.ImportStatus,
       pageSize: number,
-      page: number,
-      orderBy: string,
+      page: number,  // page number
+      orderBy: string,  // name | issues | dueDate | progress
       order?: models.Order,
-      assignedToRole?: number,
-      unassignedFromRole?: number,
+      assignedToRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9yal)
+      unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
@@ -578,7 +578,7 @@ export class APIClient {
 
   createUser(
     args: {
-      body: models.UserDetails,
+      body: models.UserDetails,  // User entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails> {
@@ -612,7 +612,7 @@ export class APIClient {
   updateUser(
     args: {
       id: number,
-      body: models.UserDetails,
+      body: models.UserDetails,  // User entity object that needs to be updated
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails> {
@@ -649,7 +649,7 @@ export class APIClient {
 
   createRole(
     args: {
-      body: any,
+      body: any,  // Role entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
@@ -741,8 +741,8 @@ export class APIClient {
   getNotificationsList(
     args: {
       pageSize: number,
-      page: number,
-      orderBy: string,
+      page: number,  // page number
+      orderBy: string,  // name | description | priority | date
       order?: models.Order,
     },
     requestHttpOptions?: HttpOptions
@@ -800,8 +800,8 @@ export class APIClient {
     args: {
       moduleId: number,
       pageSize: number,
-      page: number,
-      orderBy: string,
+      page: number,  // page number
+      orderBy: string,  // name | description | priority | date
       order?: models.Order,
     },
     requestHttpOptions?: HttpOptions

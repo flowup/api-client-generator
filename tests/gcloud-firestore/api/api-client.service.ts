@@ -51,7 +51,7 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsBatchGet(
     args: {
       body?: models.BatchGetDocumentsRequest,
-      database: string,
+      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.BatchGetDocumentsResponse> {
@@ -67,7 +67,7 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsBeginTransaction(
     args: {
       body?: models.BeginTransactionRequest,
-      database: string,
+      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.BeginTransactionResponse> {
@@ -83,7 +83,7 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsCommit(
     args: {
       body?: models.CommitRequest,
-      database: string,
+      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitResponse> {
@@ -99,7 +99,7 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsListen(
     args: {
       body?: models.ListenRequest,
-      database: string,
+      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListenResponse> {
@@ -115,7 +115,7 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsRollback(
     args: {
       body?: models.RollbackRequest,
-      database: string,
+      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Empty> {
@@ -131,7 +131,7 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsWrite(
     args: {
       body?: models.WriteRequest,
-      database: string,
+      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`. This is only required in the first message.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.WriteResponse> {
@@ -146,9 +146,9 @@ export class APIClient {
    */
   firestoreProjectsDatabasesIndexesDelete(
     args: {
-      currentDocumentExists?: boolean,
-      currentDocumentUpdateTime?: string,
-      name: string,
+      currentDocumentExists?: boolean,  // (optional) When set to `true`, the target document must exist. When set to `false`, the target document must not exist.
+      currentDocumentUpdateTime?: string,  // (optional) When set, the target document must exist and have been last updated at that time.
+      name: string,  // The index name. For example: `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Empty> {
@@ -169,10 +169,10 @@ export class APIClient {
    */
   firestoreProjectsDatabasesIndexesGet(
     args: {
-      maskFieldPaths?: string[],
-      name: string,
-      readTime?: string,
-      transaction?: string,
+      maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
+      name: string,  // The name of the index. For example: `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
+      readTime?: string,  // (optional) Reads the version of the document at the given time. This may not be older than 60 seconds.
+      transaction?: string,  // (optional) Reads the document in a transaction.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Index> {
@@ -199,11 +199,11 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsPatch(
     args: {
       body?: models.Document,
-      currentDocumentExists?: boolean,
-      currentDocumentUpdateTime?: string,
-      maskFieldPaths?: string[],
-      name: string,
-      updateMaskFieldPaths?: string[],
+      currentDocumentExists?: boolean,  // (optional) When set to `true`, the target document must exist. When set to `false`, the target document must not exist.
+      currentDocumentUpdateTime?: string,  // (optional) When set, the target document must exist and have been last updated at that time.
+      maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
+      name: string,  // The resource name of the document, for example `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+      updateMaskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Document> {
@@ -235,9 +235,9 @@ export class APIClient {
   firestoreProjectsDatabasesIndexesList(
     args: {
       filter?: string,
-      pageSize?: number,
-      pageToken?: string,
-      parent: string,
+      pageSize?: number,  // (optional) The standard List page size.
+      pageToken?: string,  // (optional) The standard List page token.
+      parent: string,  // The database name. For example: `projects/{project_id}/databases/{database_id}`
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListIndexesResponse> {
@@ -276,7 +276,7 @@ export class APIClient {
   firestoreProjectsDatabasesIndexesCreate(
     args: {
       body?: models.Index,
-      parent: string,
+      parent: string,  // The name of the database this index will apply to. For example: `projects/{project_id}/databases/{database_id}`
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Operation> {
@@ -291,15 +291,15 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsList(
     args: {
-      collectionId: string,
-      maskFieldPaths?: string[],
-      orderBy?: string,
-      pageSize?: number,
-      pageToken?: string,
-      parent: string,
-      readTime?: string,
-      showMissing?: boolean,
-      transaction?: string,
+      collectionId: string,  // The collection ID, relative to `parent`, to list. For example: `chatrooms` or `messages`.
+      maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
+      orderBy?: string,  // (optional) The order to sort results by. For example: `priority desc, name`.
+      pageSize?: number,  // (optional) The maximum number of documents to return.
+      pageToken?: string,  // (optional) The `next_page_token` value returned from a previous List request, if any.
+      parent: string,  // The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+      readTime?: string,  // (optional) Reads documents as they were at the given time. This may not be older than 60 seconds.
+      showMissing?: boolean,  // (optional) If the list should show missing documents. A missing document is a document that does not exist but has sub-documents. These documents will be returned with a key but will not have fields, Document.create_time, or Document.update_time set.   Requests with `show_missing` may not specify `where` or `order_by`.
+      transaction?: string,  // (optional) Reads documents in a transaction.
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListDocumentsResponse> {
@@ -338,10 +338,10 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsCreateDocument(
     args: {
       body?: models.Document,
-      collectionId: string,
-      documentId?: string,
-      maskFieldPaths?: string[],
-      parent: string,
+      collectionId: string,  // The collection ID, relative to `parent`, to list. For example: `chatrooms`.
+      documentId?: string,  // (optional) The client-assigned document ID to use for this document.  Optional. If not specified, an ID will be assigned by the service.
+      maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
+      parent: string,  // The parent resource. For example: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Document> {
@@ -365,7 +365,7 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsListCollectionIds(
     args: {
       body?: models.ListCollectionIdsRequest,
-      parent: string,
+      parent: string,  // The parent document. In the format: `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListCollectionIdsResponse> {
@@ -381,7 +381,7 @@ export class APIClient {
   firestoreProjectsDatabasesDocumentsRunQuery(
     args: {
       body?: models.RunQueryRequest,
-      parent: string,
+      parent: string,  // The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.RunQueryResponse> {

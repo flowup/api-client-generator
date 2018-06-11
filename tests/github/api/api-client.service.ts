@@ -46,8 +46,8 @@ export class APIClient {
    */
   getEmojis(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -84,8 +84,8 @@ export class APIClient {
    */
   getEvents(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -126,8 +126,8 @@ export class APIClient {
    */
   getFeeds(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -166,9 +166,9 @@ export class APIClient {
    */
   getGists(
     args: {
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -208,8 +208,8 @@ export class APIClient {
    */
   postGists(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -247,9 +247,9 @@ export class APIClient {
    */
   getGistsPublic(
     args: {
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -289,9 +289,9 @@ export class APIClient {
    */
   getGistsStarred(
     args: {
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -331,9 +331,9 @@ export class APIClient {
    */
   deleteGistsId(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -370,9 +370,9 @@ export class APIClient {
    */
   getGistsId(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -409,9 +409,9 @@ export class APIClient {
    */
   patchGistsId(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -449,9 +449,9 @@ export class APIClient {
    */
   getGistsIdComments(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -488,9 +488,9 @@ export class APIClient {
    */
   postGistsIdComments(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -528,10 +528,10 @@ export class APIClient {
    */
   deleteGistsIdCommentsCommentId(
     args: {
-      id: number,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -568,10 +568,10 @@ export class APIClient {
    */
   getGistsIdCommentsCommentId(
     args: {
-      id: number,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -608,10 +608,10 @@ export class APIClient {
    */
   patchGistsIdCommentsCommentId(
     args: {
-      id: number,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -649,9 +649,9 @@ export class APIClient {
    */
   postGistsIdForks(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -688,9 +688,9 @@ export class APIClient {
    */
   deleteGistsIdStar(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -727,9 +727,9 @@ export class APIClient {
    */
   getGistsIdStar(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -766,9 +766,9 @@ export class APIClient {
    */
   putGistsIdStar(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of gist.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -807,8 +807,8 @@ export class APIClient {
    */
   getGitignoreTemplates(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -846,8 +846,8 @@ export class APIClient {
   getGitignoreTemplatesLanguage(
     args: {
       language: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -886,14 +886,14 @@ export class APIClient {
    */
   getIssues(
     args: {
-      filter: string,
+      filter: string,  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
       state: string,
-      labels: string,
+      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
       sort: string,
       direction: string,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -948,12 +948,12 @@ export class APIClient {
    */
   getLegacyIssuesSearchOwnerRepositoryStateKeyword(
     args: {
-      keyword: string,
-      state: string,
+      keyword: string,  // The search term.
+      state: string,  // Indicates the state of the issues to return. Can be either open or closed.
       owner: string,
       repository: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -990,13 +990,13 @@ export class APIClient {
    */
   getLegacyReposSearchKeyword(
     args: {
-      keyword: string,
-      order?: string,
-      language?: string,
-      startPage?: string,
-      sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      keyword: string,  // The search term
+      order?: string,  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
+      language?: string,  // (optional) Filter results by language
+      startPage?: string,  // (optional) The page number to fetch
+      sort?: string,  // (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1045,9 +1045,9 @@ export class APIClient {
    */
   getLegacyUserEmailEmail(
     args: {
-      email: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      email: string,  // The email address
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1084,12 +1084,12 @@ export class APIClient {
    */
   getLegacyUserSearchKeyword(
     args: {
-      keyword: string,
-      order?: string,
-      startPage?: string,
-      sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      keyword: string,  // The search term
+      order?: string,  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
+      startPage?: string,  // (optional) The page number to fetch
+      sort?: string,  // (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1135,8 +1135,8 @@ export class APIClient {
    */
   postMarkdown(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1174,8 +1174,8 @@ export class APIClient {
    */
   postMarkdownRaw(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1212,8 +1212,8 @@ export class APIClient {
    */
   getMeta(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1250,10 +1250,10 @@ export class APIClient {
    */
   getNetworksOwnerRepoEvents(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of the owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1292,11 +1292,11 @@ export class APIClient {
    */
   getNotifications(
     args: {
-      all?: boolean,
-      participating?: boolean,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      all?: boolean,  // (optional) True to show notifications marked as read.
+      participating?: boolean,  // (optional) True to show only notifications in which the user is directly participating or mentioned. 
+      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1344,8 +1344,8 @@ export class APIClient {
    */
   putNotifications(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1383,9 +1383,9 @@ export class APIClient {
    */
   getNotificationsThreadsId(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of thread.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1422,9 +1422,9 @@ export class APIClient {
    */
   patchNotificationsThreadsId(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of thread.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1461,9 +1461,9 @@ export class APIClient {
    */
   deleteNotificationsThreadsIdSubscription(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of thread.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1500,9 +1500,9 @@ export class APIClient {
    */
   getNotificationsThreadsIdSubscription(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of thread.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1543,9 +1543,9 @@ export class APIClient {
    */
   putNotificationsThreadsIdSubscription(
     args: {
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      id: number,  // Id of thread.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1583,9 +1583,9 @@ export class APIClient {
    */
   getOrgsOrg(
     args: {
-      org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1622,9 +1622,9 @@ export class APIClient {
    */
   patchOrgsOrg(
     args: {
-      org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1662,9 +1662,9 @@ export class APIClient {
    */
   getOrgsOrgEvents(
     args: {
-      org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1703,15 +1703,15 @@ export class APIClient {
    */
   getOrgsOrgIssues(
     args: {
-      org: string,
-      filter: string,
+      org: string,  // Name of organisation.
+      filter: string,  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
       state: string,
-      labels: string,
+      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
       sort: string,
       direction: string,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1772,9 +1772,9 @@ export class APIClient {
    */
   getOrgsOrgMembers(
     args: {
-      org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1814,10 +1814,10 @@ export class APIClient {
    */
   deleteOrgsOrgMembersUsername(
     args: {
-      org: string,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      username: string,  // Name of the user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1854,10 +1854,10 @@ export class APIClient {
    */
   getOrgsOrgMembersUsername(
     args: {
-      org: string,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      username: string,  // Name of the user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1897,9 +1897,9 @@ export class APIClient {
    */
   getOrgsOrgPublicMembers(
     args: {
-      org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1936,10 +1936,10 @@ export class APIClient {
    */
   deleteOrgsOrgPublicMembersUsername(
     args: {
-      org: string,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      username: string,  // Name of the user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -1976,10 +1976,10 @@ export class APIClient {
    */
   getOrgsOrgPublicMembersUsername(
     args: {
-      org: string,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      username: string,  // Name of the user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2016,10 +2016,10 @@ export class APIClient {
    */
   putOrgsOrgPublicMembersUsername(
     args: {
-      org: string,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      username: string,  // Name of the user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2056,10 +2056,10 @@ export class APIClient {
    */
   getOrgsOrgRepos(
     args: {
-      org: string,
+      org: string,  // Name of organisation.
       type?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2101,9 +2101,9 @@ export class APIClient {
    */
   postOrgsOrgRepos(
     args: {
-      org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2141,9 +2141,9 @@ export class APIClient {
    */
   getOrgsOrgTeams(
     args: {
-      org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2182,9 +2182,9 @@ export class APIClient {
    */
   postOrgsOrgTeams(
     args: {
-      org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      org: string,  // Name of organisation.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2224,8 +2224,8 @@ export class APIClient {
    */
   getRateLimit(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2265,10 +2265,10 @@ export class APIClient {
    */
   deleteReposOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2305,10 +2305,10 @@ export class APIClient {
    */
   getReposOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2345,10 +2345,10 @@ export class APIClient {
    */
   patchReposOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2389,10 +2389,10 @@ export class APIClient {
    */
   getReposOwnerRepoAssignees(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2431,11 +2431,11 @@ export class APIClient {
    */
   getReposOwnerRepoAssigneesAssignee(
     args: {
-      owner: string,
-      repo: string,
-      assignee: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      assignee: string,  // Login of the assignee.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2472,10 +2472,10 @@ export class APIClient {
    */
   getReposOwnerRepoBranches(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2512,11 +2512,11 @@ export class APIClient {
    */
   getReposOwnerRepoBranchesBranch(
     args: {
-      owner: string,
-      repo: string,
-      branch: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      branch: string,  // Name of the branch.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2558,10 +2558,10 @@ export class APIClient {
    */
   getReposOwnerRepoCollaborators(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2598,11 +2598,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoCollaboratorsUser(
     args: {
-      owner: string,
-      repo: string,
-      user: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      user: string,  // Login of the user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2639,11 +2639,11 @@ export class APIClient {
    */
   getReposOwnerRepoCollaboratorsUser(
     args: {
-      owner: string,
-      repo: string,
-      user: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      user: string,  // Login of the user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2680,11 +2680,11 @@ export class APIClient {
    */
   putReposOwnerRepoCollaboratorsUser(
     args: {
-      owner: string,
-      repo: string,
-      user: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      user: string,  // Login of the user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2723,10 +2723,10 @@ export class APIClient {
    */
   getReposOwnerRepoComments(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2763,11 +2763,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2804,11 +2804,11 @@ export class APIClient {
    */
   getReposOwnerRepoCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2845,11 +2845,11 @@ export class APIClient {
    */
   patchReposOwnerRepoCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2887,15 +2887,15 @@ export class APIClient {
    */
   getReposOwnerRepoCommits(
     args: {
-      owner: string,
-      repo: string,
-      since?: string,
-      sha?: string,
-      path?: string,
-      author?: string,
-      until?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
+      sha?: string,  // (optional) Sha or branch to start listing commits from.
+      path?: string,  // (optional) Only commits containing this file path will be returned.
+      author?: string,  // (optional) GitHub login, name, or email by which to filter by commit author.
+      until?: string,  // (optional) ISO 8601 Date - Only commits before this date will be returned.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2951,11 +2951,11 @@ export class APIClient {
    */
   getReposOwnerRepoCommitsRefStatus(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       ref: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -2992,11 +2992,11 @@ export class APIClient {
    */
   getReposOwnerRepoCommitsShaCode(
     args: {
-      owner: string,
-      repo: string,
-      shaCode: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      shaCode: string,  // SHA-1 code of the commit.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3033,11 +3033,11 @@ export class APIClient {
    */
   getReposOwnerRepoCommitsShaCodeComments(
     args: {
-      owner: string,
-      repo: string,
-      shaCode: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      shaCode: string,  // SHA-1 code of the commit.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3074,11 +3074,11 @@ export class APIClient {
    */
   postReposOwnerRepoCommitsShaCodeComments(
     args: {
-      owner: string,
-      repo: string,
-      shaCode: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      shaCode: string,  // SHA-1 code of the commit.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3116,12 +3116,12 @@ export class APIClient {
    */
   getReposOwnerRepoCompareBaseIdHeadId(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       baseId: string,
       headId: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3160,11 +3160,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoContentsPath(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       path: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3208,13 +3208,13 @@ export class APIClient {
    */
   getReposOwnerRepoContentsPath(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       path: string,
-      path?: string,
-      ref?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      queryPath?: string,  // (optional) The content path.
+      ref?: string,  // (optional) The String name of the Commit/Branch/Tag. Defaults to 'master'.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3225,8 +3225,8 @@ export class APIClient {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    if ('path' in args) {
-      options.params = options.params.set('path', String(args.path));
+    if ('queryPath' in args) {
+      options.params = options.params.set('queryPath', String(args.queryPath));
     }
     if ('ref' in args) {
       options.params = options.params.set('ref', String(args.ref));
@@ -3257,11 +3257,11 @@ export class APIClient {
    */
   putReposOwnerRepoContentsPath(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       path: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3299,11 +3299,11 @@ export class APIClient {
    */
   getReposOwnerRepoContributors(
     args: {
-      owner: string,
-      repo: string,
-      anon: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      anon: string,  // Set to 1 or true to include anonymous contributors in results.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3343,10 +3343,10 @@ export class APIClient {
    */
   getReposOwnerRepoDeployments(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3383,10 +3383,10 @@ export class APIClient {
    */
   postReposOwnerRepoDeployments(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3424,11 +3424,11 @@ export class APIClient {
    */
   getReposOwnerRepoDeploymentsIdStatuses(
     args: {
-      owner: string,
-      repo: string,
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      id: number,  // The Deployment ID to list the statuses from.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3467,11 +3467,11 @@ export class APIClient {
    */
   postReposOwnerRepoDeploymentsIdStatuses(
     args: {
-      owner: string,
-      repo: string,
-      id: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      id: number,  // The Deployment ID to list the statuses from.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3509,10 +3509,10 @@ export class APIClient {
    */
   getReposOwnerRepoDownloads(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3549,11 +3549,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoDownloadsDownloadId(
     args: {
-      owner: string,
-      repo: string,
-      downloadId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      downloadId: number,  // Id of download.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3590,11 +3590,11 @@ export class APIClient {
    */
   getReposOwnerRepoDownloadsDownloadId(
     args: {
-      owner: string,
-      repo: string,
-      downloadId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      downloadId: number,  // Id of download.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3631,10 +3631,10 @@ export class APIClient {
    */
   getReposOwnerRepoEvents(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3671,11 +3671,11 @@ export class APIClient {
    */
   getReposOwnerRepoForks(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3719,10 +3719,10 @@ export class APIClient {
    */
   postReposOwnerRepoForks(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3760,10 +3760,10 @@ export class APIClient {
    */
   postReposOwnerRepoGitBlobs(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3806,11 +3806,11 @@ export class APIClient {
    */
   getReposOwnerRepoGitBlobsShaCode(
     args: {
-      owner: string,
-      repo: string,
-      shaCode: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      shaCode: string,  // SHA-1 code.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3847,10 +3847,10 @@ export class APIClient {
    */
   postReposOwnerRepoGitCommits(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3888,11 +3888,11 @@ export class APIClient {
    */
   getReposOwnerRepoGitCommitsShaCode(
     args: {
-      owner: string,
-      repo: string,
-      shaCode: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      shaCode: string,  // SHA-1 code.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3929,10 +3929,10 @@ export class APIClient {
    */
   getReposOwnerRepoGitRefs(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -3969,10 +3969,10 @@ export class APIClient {
    */
   postReposOwnerRepoGitRefs(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4013,11 +4013,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoGitRefsRef(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       ref: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4054,11 +4054,11 @@ export class APIClient {
    */
   getReposOwnerRepoGitRefsRef(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       ref: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4095,11 +4095,11 @@ export class APIClient {
    */
   patchReposOwnerRepoGitRefsRef(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       ref: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4143,10 +4143,10 @@ export class APIClient {
    */
   postReposOwnerRepoGitTags(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4184,11 +4184,11 @@ export class APIClient {
    */
   getReposOwnerRepoGitTagsShaCode(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       shaCode: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4229,10 +4229,10 @@ export class APIClient {
    */
   postReposOwnerRepoGitTrees(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4270,12 +4270,12 @@ export class APIClient {
    */
   getReposOwnerRepoGitTreesShaCode(
     args: {
-      owner: string,
-      repo: string,
-      shaCode: string,
-      recursive?: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      shaCode: string,  // Tree SHA.
+      recursive?: number,  // (optional) Get a Tree Recursively. (0 or 1)
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4315,10 +4315,10 @@ export class APIClient {
    */
   getReposOwnerRepoHooks(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4355,10 +4355,10 @@ export class APIClient {
    */
   postReposOwnerRepoHooks(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4396,11 +4396,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoHooksHookId(
     args: {
-      owner: string,
-      repo: string,
-      hookId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      hookId: number,  // Id of hook.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4437,11 +4437,11 @@ export class APIClient {
    */
   getReposOwnerRepoHooksHookId(
     args: {
-      owner: string,
-      repo: string,
-      hookId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      hookId: number,  // Id of hook.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4478,11 +4478,11 @@ export class APIClient {
    */
   patchReposOwnerRepoHooksHookId(
     args: {
-      owner: string,
-      repo: string,
-      hookId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      hookId: number,  // Id of hook.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4526,11 +4526,11 @@ export class APIClient {
    */
   postReposOwnerRepoHooksHookIdTests(
     args: {
-      owner: string,
-      repo: string,
-      hookId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      hookId: number,  // Id of hook.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4567,16 +4567,16 @@ export class APIClient {
    */
   getReposOwnerRepoIssues(
     args: {
-      owner: string,
-      repo: string,
-      filter: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      filter: string,  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
       state: string,
-      labels: string,
+      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
       sort: string,
       direction: string,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4633,10 +4633,10 @@ export class APIClient {
    */
   postReposOwnerRepoIssues(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4674,13 +4674,13 @@ export class APIClient {
    */
   getReposOwnerRepoIssuesComments(
     args: {
-      owner: string,
-      repo: string,
-      direction?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      direction?: string,  // (optional) Ignored without 'sort' parameter.
       sort?: string,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4726,11 +4726,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoIssuesCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // ID of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4767,11 +4767,11 @@ export class APIClient {
    */
   getReposOwnerRepoIssuesCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // ID of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4808,11 +4808,11 @@ export class APIClient {
    */
   patchReposOwnerRepoIssuesCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // ID of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4850,10 +4850,10 @@ export class APIClient {
    */
   getReposOwnerRepoIssuesEvents(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4890,11 +4890,11 @@ export class APIClient {
    */
   getReposOwnerRepoIssuesEventsEventId(
     args: {
-      owner: string,
-      repo: string,
-      eventId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      eventId: number,  // Id of the event.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4931,11 +4931,11 @@ export class APIClient {
    */
   getReposOwnerRepoIssuesNumber(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -4974,11 +4974,11 @@ export class APIClient {
    */
   patchReposOwnerRepoIssuesNumber(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5016,11 +5016,11 @@ export class APIClient {
    */
   getReposOwnerRepoIssuesNumberComments(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5057,11 +5057,11 @@ export class APIClient {
    */
   postReposOwnerRepoIssuesNumberComments(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5099,11 +5099,11 @@ export class APIClient {
    */
   getReposOwnerRepoIssuesNumberEvents(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5140,11 +5140,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoIssuesNumberLabels(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5181,11 +5181,11 @@ export class APIClient {
    */
   getReposOwnerRepoIssuesNumberLabels(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5222,11 +5222,11 @@ export class APIClient {
    */
   postReposOwnerRepoIssuesNumberLabels(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5266,11 +5266,11 @@ export class APIClient {
    */
   putReposOwnerRepoIssuesNumberLabels(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5308,12 +5308,12 @@ export class APIClient {
    */
   deleteReposOwnerRepoIssuesNumberLabelsName(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      name: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of issue.
+      name: string,  // Name of the label.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5350,10 +5350,10 @@ export class APIClient {
    */
   getReposOwnerRepoKeys(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5390,10 +5390,10 @@ export class APIClient {
    */
   postReposOwnerRepoKeys(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5431,11 +5431,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoKeysKeyId(
     args: {
-      owner: string,
-      repo: string,
-      keyId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      keyId: number,  // Id of key.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5472,11 +5472,11 @@ export class APIClient {
    */
   getReposOwnerRepoKeysKeyId(
     args: {
-      owner: string,
-      repo: string,
-      keyId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      keyId: number,  // Id of key.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5513,10 +5513,10 @@ export class APIClient {
    */
   getReposOwnerRepoLabels(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5553,10 +5553,10 @@ export class APIClient {
    */
   postReposOwnerRepoLabels(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5594,11 +5594,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoLabelsName(
     args: {
-      owner: string,
-      repo: string,
-      name: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      name: string,  // Name of the label.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5635,11 +5635,11 @@ export class APIClient {
    */
   getReposOwnerRepoLabelsName(
     args: {
-      owner: string,
-      repo: string,
-      name: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      name: string,  // Name of the label.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5676,11 +5676,11 @@ export class APIClient {
    */
   patchReposOwnerRepoLabelsName(
     args: {
-      owner: string,
-      repo: string,
-      name: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      name: string,  // Name of the label.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5721,10 +5721,10 @@ export class APIClient {
    */
   getReposOwnerRepoLanguages(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5761,10 +5761,10 @@ export class APIClient {
    */
   postReposOwnerRepoMerges(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5802,13 +5802,13 @@ export class APIClient {
    */
   getReposOwnerRepoMilestones(
     args: {
-      owner: string,
-      repo: string,
-      state?: string,
-      direction?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      state?: string,  // (optional) String to filter by state.
+      direction?: string,  // (optional) Ignored without 'sort' parameter.
       sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5854,10 +5854,10 @@ export class APIClient {
    */
   postReposOwnerRepoMilestones(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5895,11 +5895,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoMilestonesNumber(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of milestone.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5936,11 +5936,11 @@ export class APIClient {
    */
   getReposOwnerRepoMilestonesNumber(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of milestone.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -5977,11 +5977,11 @@ export class APIClient {
    */
   patchReposOwnerRepoMilestonesNumber(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of milestone.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6019,11 +6019,11 @@ export class APIClient {
    */
   getReposOwnerRepoMilestonesNumberLabels(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Number of milestone.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6062,13 +6062,13 @@ export class APIClient {
    */
   getReposOwnerRepoNotifications(
     args: {
-      owner: string,
-      repo: string,
-      all?: boolean,
-      participating?: boolean,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      all?: boolean,  // (optional) True to show notifications marked as read.
+      participating?: boolean,  // (optional) True to show only notifications in which the user is directly participating or mentioned. 
+      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6117,10 +6117,10 @@ export class APIClient {
    */
   putReposOwnerRepoNotifications(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6158,13 +6158,13 @@ export class APIClient {
    */
   getReposOwnerRepoPulls(
     args: {
-      owner: string,
-      repo: string,
-      state?: string,
-      head?: string,
-      base?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      state?: string,  // (optional) String to filter by state.
+      head?: string,  // (optional) Filter pulls by head user and branch name in the format of 'user:ref-name'. Example: github:new-script-format. 
+      base?: string,  // (optional) Filter pulls by base branch name. Example - gh-pages.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6210,10 +6210,10 @@ export class APIClient {
    */
   postReposOwnerRepoPulls(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6253,13 +6253,13 @@ export class APIClient {
    */
   getReposOwnerRepoPullsComments(
     args: {
-      owner: string,
-      repo: string,
-      direction?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      direction?: string,  // (optional) Ignored without 'sort' parameter.
       sort?: string,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6305,11 +6305,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoPullsCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6346,11 +6346,11 @@ export class APIClient {
    */
   getReposOwnerRepoPullsCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6387,11 +6387,11 @@ export class APIClient {
    */
   patchReposOwnerRepoPullsCommentsCommentId(
     args: {
-      owner: string,
-      repo: string,
-      commentId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      commentId: number,  // Id of comment.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6429,11 +6429,11 @@ export class APIClient {
    */
   getReposOwnerRepoPullsNumber(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Id of pull.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6470,11 +6470,11 @@ export class APIClient {
    */
   patchReposOwnerRepoPullsNumber(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Id of pull.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6512,11 +6512,11 @@ export class APIClient {
    */
   getReposOwnerRepoPullsNumberComments(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Id of pull.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6575,11 +6575,11 @@ export class APIClient {
    */
   postReposOwnerRepoPullsNumberComments(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Id of pull.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6617,11 +6617,11 @@ export class APIClient {
    */
   getReposOwnerRepoPullsNumberCommits(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Id of pull.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6658,11 +6658,11 @@ export class APIClient {
    */
   getReposOwnerRepoPullsNumberFiles(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Id of pull.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6699,11 +6699,11 @@ export class APIClient {
    */
   getReposOwnerRepoPullsNumberMerge(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Id of pull.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6740,11 +6740,11 @@ export class APIClient {
    */
   putReposOwnerRepoPullsNumberMerge(
     args: {
-      owner: string,
-      repo: string,
-      number: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      number: number,  // Id of pull.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6784,11 +6784,11 @@ export class APIClient {
    */
   getReposOwnerRepoReadme(
     args: {
-      owner: string,
-      repo: string,
-      ref?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      ref?: string,  // (optional) The String name of the Commit/Branch/Tag. Defaults to master.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6828,10 +6828,10 @@ export class APIClient {
    */
   getReposOwnerRepoReleases(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6870,10 +6870,10 @@ export class APIClient {
    */
   postReposOwnerRepoReleases(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6911,11 +6911,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoReleasesAssetsId(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       id: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6952,11 +6952,11 @@ export class APIClient {
    */
   getReposOwnerRepoReleasesAssetsId(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       id: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -6995,11 +6995,11 @@ export class APIClient {
    */
   patchReposOwnerRepoReleasesAssetsId(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       id: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7037,11 +7037,11 @@ export class APIClient {
    */
   deleteReposOwnerRepoReleasesId(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       id: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7078,11 +7078,11 @@ export class APIClient {
    */
   getReposOwnerRepoReleasesId(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       id: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7119,11 +7119,11 @@ export class APIClient {
    */
   patchReposOwnerRepoReleasesId(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       id: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7161,11 +7161,11 @@ export class APIClient {
    */
   getReposOwnerRepoReleasesIdAssets(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       id: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7202,10 +7202,10 @@ export class APIClient {
    */
   getReposOwnerRepoStargazers(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7245,10 +7245,10 @@ export class APIClient {
    */
   getReposOwnerRepoStatsCodeFrequency(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7288,10 +7288,10 @@ export class APIClient {
    */
   getReposOwnerRepoStatsCommitActivity(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7328,10 +7328,10 @@ export class APIClient {
    */
   getReposOwnerRepoStatsContributors(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7368,10 +7368,10 @@ export class APIClient {
    */
   getReposOwnerRepoStatsParticipation(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7418,10 +7418,10 @@ export class APIClient {
    */
   getReposOwnerRepoStatsPunchCard(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7458,11 +7458,11 @@ export class APIClient {
    */
   getReposOwnerRepoStatusesRef(
     args: {
-      owner: string,
-      repo: string,
-      ref: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      ref: string,  // Ref to list the statuses from. It can be a SHA, a branch name, or a tag name. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7499,11 +7499,11 @@ export class APIClient {
    */
   postReposOwnerRepoStatusesRef(
     args: {
-      owner: string,
-      repo: string,
-      ref: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      ref: string,  // Ref to list the statuses from. It can be a SHA, a branch name, or a tag name. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7541,10 +7541,10 @@ export class APIClient {
    */
   getReposOwnerRepoSubscribers(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7581,10 +7581,10 @@ export class APIClient {
    */
   deleteReposOwnerRepoSubscription(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7621,10 +7621,10 @@ export class APIClient {
    */
   getReposOwnerRepoSubscription(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7661,10 +7661,10 @@ export class APIClient {
    */
   putReposOwnerRepoSubscription(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7702,10 +7702,10 @@ export class APIClient {
    */
   getReposOwnerRepoTags(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7742,10 +7742,10 @@ export class APIClient {
    */
   getReposOwnerRepoTeams(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7782,10 +7782,10 @@ export class APIClient {
    */
   getReposOwnerRepoWatchers(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7828,12 +7828,12 @@ export class APIClient {
    */
   getReposOwnerRepoArchiveFormatPath(
     args: {
-      owner: string,
-      repo: string,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
       archiveFormat: string,
-      path: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      path: string,  // Valid Git reference, defaults to 'master'.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7875,9 +7875,9 @@ export class APIClient {
    */
   getRepositories(
     args: {
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7917,11 +7917,11 @@ export class APIClient {
    */
   getSearchCode(
     args: {
-      order?: string,
-      q: string,
-      sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      order?: string,  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
+      q: string,  // The search terms. This can be any combination of the supported code search parameters: 'Search In' Qualifies which fields are searched. With this qualifier you can restrict the search to just the file contents, the file path, or both. 'Languages' Searches code based on the language it's written in. 'Forks' Filters repositories based on the number of forks, and/or whether code from forked repositories should be included in the results at all. 'Size' Finds files that match a certain size (in bytes). 'Path' Specifies the path that the resulting file must be at. 'Extension' Matches files with a certain extension. 'Users' or 'Repositories' Limits searches to a specific user or repository. 
+      sort?: string,  // (optional) Can only be 'indexed', which indicates how recently a file has been indexed by the GitHub search infrastructure. If not provided, results are sorted by best match. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -7967,11 +7967,11 @@ export class APIClient {
    */
   getSearchIssues(
     args: {
-      order?: string,
-      q: string,
-      sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      order?: string,  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
+      q: string,  // The q search term can also contain any combination of the supported issue search qualifiers:
+      sort?: string,  // (optional) The sort field. Can be comments, created, or updated. Default: results are sorted by best match.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8017,11 +8017,11 @@ export class APIClient {
    */
   getSearchRepositories(
     args: {
-      order?: string,
-      q: string,
-      sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      order?: string,  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
+      q: string,  // The search terms. This can be any combination of the supported repository search parameters: 'Search In' Qualifies which fields are searched. With this qualifier you can restrict the search to just the repository name, description, readme, or any combination of these. 'Size' Finds repositories that match a certain size (in kilobytes). 'Forks' Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all. 'Created' and 'Last Updated' Filters repositories based on times of creation, or when they were last updated. 'Users or Repositories' Limits searches to a specific user or repository. 'Languages' Searches repositories based on the language they are written in. 'Stars' Searches repositories based on the number of stars. 
+      sort?: string,  // (optional) If not provided, results are sorted by best match.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8067,11 +8067,11 @@ export class APIClient {
    */
   getSearchUsers(
     args: {
-      order?: string,
-      q: string,
-      sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      order?: string,  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
+      q: string,  // The search terms. This can be any combination of the supported user search parameters: 'Search In' Qualifies which fields are searched. With this qualifier you can restrict the search to just the username, public email, full name, location, or any combination of these. 'Repository count' Filters users based on the number of repositories they have. 'Location' Filter users by the location indicated in their profile. 'Language' Search for users that have repositories that match a certain language. 'Created' Filter users based on when they joined. 'Followers' Filter users based on the number of followers they have. 
+      sort?: string,  // (optional) If not provided, results are sorted by best match.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8120,9 +8120,9 @@ export class APIClient {
    */
   deleteTeamsTeamId(
     args: {
-      teamId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8159,9 +8159,9 @@ export class APIClient {
    */
   getTeamsTeamId(
     args: {
-      teamId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8201,9 +8201,9 @@ export class APIClient {
    */
   patchTeamsTeamId(
     args: {
-      teamId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8244,9 +8244,9 @@ export class APIClient {
    */
   getTeamsTeamIdMembers(
     args: {
-      teamId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8291,10 +8291,10 @@ export class APIClient {
    */
   deleteTeamsTeamIdMembersUsername(
     args: {
-      teamId: number,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      username: string,  // Name of a member.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8337,10 +8337,10 @@ export class APIClient {
    */
   getTeamsTeamIdMembersUsername(
     args: {
-      teamId: number,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      username: string,  // Name of a member.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8384,10 +8384,10 @@ export class APIClient {
    */
   putTeamsTeamIdMembersUsername(
     args: {
-      teamId: number,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      username: string,  // Name of a member.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8426,10 +8426,10 @@ export class APIClient {
    */
   deleteTeamsTeamIdMembershipsUsername(
     args: {
-      teamId: number,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      username: string,  // Name of a member.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8468,10 +8468,10 @@ export class APIClient {
    */
   getTeamsTeamIdMembershipsUsername(
     args: {
-      teamId: number,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      username: string,  // Name of a member.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8516,10 +8516,10 @@ export class APIClient {
    */
   putTeamsTeamIdMembershipsUsername(
     args: {
-      teamId: number,
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      username: string,  // Name of a member.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8556,9 +8556,9 @@ export class APIClient {
    */
   getTeamsTeamIdRepos(
     args: {
-      teamId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8595,11 +8595,11 @@ export class APIClient {
    */
   putTeamsTeamIdReposOrgRepo(
     args: {
-      teamId: number,
-      org: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      org: string,  // Name of a organization.
+      repo: string,  // Name of a repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8636,11 +8636,11 @@ export class APIClient {
    */
   deleteTeamsTeamIdReposOwnerRepo(
     args: {
-      teamId: number,
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      owner: string,  // Name of a repository owner.
+      repo: string,  // Name of a repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8677,11 +8677,11 @@ export class APIClient {
    */
   getTeamsTeamIdReposOwnerRepo(
     args: {
-      teamId: number,
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      teamId: number,  // Id of team.
+      owner: string,  // Name of a repository owner.
+      repo: string,  // Name of a repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8718,8 +8718,8 @@ export class APIClient {
    */
   getUser(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8756,8 +8756,8 @@ export class APIClient {
    */
   patchUser(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8797,8 +8797,8 @@ export class APIClient {
    */
   deleteUserEmails(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8842,8 +8842,8 @@ export class APIClient {
    */
   getUserEmails(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8882,8 +8882,8 @@ export class APIClient {
    */
   postUserEmails(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8921,8 +8921,8 @@ export class APIClient {
    */
   getUserFollowers(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -8959,8 +8959,8 @@ export class APIClient {
    */
   getUserFollowing(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9000,9 +9000,9 @@ export class APIClient {
    */
   deleteUserFollowingUsername(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9039,9 +9039,9 @@ export class APIClient {
    */
   getUserFollowingUsername(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9081,9 +9081,9 @@ export class APIClient {
    */
   putUserFollowingUsername(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9123,14 +9123,14 @@ export class APIClient {
    */
   getUserIssues(
     args: {
-      filter: string,
+      filter: string,  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
       state: string,
-      labels: string,
+      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
       sort: string,
       direction: string,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9188,8 +9188,8 @@ export class APIClient {
    */
   getUserKeys(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9226,8 +9226,8 @@ export class APIClient {
    */
   postUserKeys(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9265,9 +9265,9 @@ export class APIClient {
    */
   deleteUserKeysKeyId(
     args: {
-      keyId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      keyId: number,  // ID of key.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9304,9 +9304,9 @@ export class APIClient {
    */
   getUserKeysKeyId(
     args: {
-      keyId: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      keyId: number,  // ID of key.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9343,8 +9343,8 @@ export class APIClient {
    */
   getUserOrgs(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9385,8 +9385,8 @@ export class APIClient {
   getUserRepos(
     args: {
       type?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9428,8 +9428,8 @@ export class APIClient {
    */
   postUserRepos(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9467,10 +9467,10 @@ export class APIClient {
    */
   getUserStarred(
     args: {
-      direction?: string,
+      direction?: string,  // (optional) Ignored without 'sort' parameter.
       sort?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9513,10 +9513,10 @@ export class APIClient {
    */
   deleteUserStarredOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of a repository owner.
+      repo: string,  // Name of a repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9553,10 +9553,10 @@ export class APIClient {
    */
   getUserStarredOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of a repository owner.
+      repo: string,  // Name of a repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9593,10 +9593,10 @@ export class APIClient {
    */
   putUserStarredOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of a repository owner.
+      repo: string,  // Name of a repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9633,8 +9633,8 @@ export class APIClient {
    */
   getUserSubscriptions(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9671,10 +9671,10 @@ export class APIClient {
    */
   deleteUserSubscriptionsOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of the owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9711,10 +9711,10 @@ export class APIClient {
    */
   getUserSubscriptionsOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of the owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9751,10 +9751,10 @@ export class APIClient {
    */
   putUserSubscriptionsOwnerRepo(
     args: {
-      owner: string,
-      repo: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      owner: string,  // Name of the owner.
+      repo: string,  // Name of repository.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9791,8 +9791,8 @@ export class APIClient {
    */
   getUserTeams(
     args: {
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9833,9 +9833,9 @@ export class APIClient {
    */
   getUsers(
     args: {
-      since?: number,
-      xGitHubMediaType?: string,
-      accept?: string,
+      since?: number,  // (optional) The integer ID of the last User that you've seen.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9875,9 +9875,9 @@ export class APIClient {
    */
   getUsersUsername(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9914,9 +9914,9 @@ export class APIClient {
    */
   getUsersUsernameEvents(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9953,10 +9953,10 @@ export class APIClient {
    */
   getUsersUsernameEventsOrgsOrg(
     args: {
-      username: string,
+      username: string,  // Name of user.
       org: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -9993,9 +9993,9 @@ export class APIClient {
    */
   getUsersUsernameFollowers(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10032,10 +10032,10 @@ export class APIClient {
    */
   getUsersUsernameFollowingTargetUser(
     args: {
-      username: string,
-      targetUser: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      targetUser: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10072,10 +10072,10 @@ export class APIClient {
    */
   getUsersUsernameGists(
     args: {
-      username: string,
-      since?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10117,9 +10117,9 @@ export class APIClient {
    */
   getUsersUsernameKeys(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10156,9 +10156,9 @@ export class APIClient {
    */
   getUsersUsernameOrgs(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10195,9 +10195,9 @@ export class APIClient {
    */
   getUsersUsernameReceivedEvents(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10234,9 +10234,9 @@ export class APIClient {
    */
   getUsersUsernameReceivedEventsPublic(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10273,10 +10273,10 @@ export class APIClient {
    */
   getUsersUsernameRepos(
     args: {
-      username: string,
+      username: string,  // Name of user.
       type?: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10316,9 +10316,9 @@ export class APIClient {
    */
   getUsersUsernameStarred(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
@@ -10355,9 +10355,9 @@ export class APIClient {
    */
   getUsersUsernameSubscriptions(
     args: {
-      username: string,
-      xGitHubMediaType?: string,
-      accept?: string,
+      username: string,  // Name of user.
+      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
+      accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,

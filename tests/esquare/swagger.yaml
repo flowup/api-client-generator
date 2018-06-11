@@ -861,7 +861,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: Id of current import
+        description: Id of current import # todo: this is generated as two body (with file) params and not as multipart form
         required: true
         type: integer
         format: int64

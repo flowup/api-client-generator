@@ -254,6 +254,7 @@ function transformParameters(
           ...param,
           ...determineParamType(paramRef ? paramRef.in : param.in),
 
+          description: replaceNewLines(param.description, ' '),
           camelCaseName: camelCase(name),
           importType: prefixImportedModels(typescriptType),
           isArray,

@@ -52,7 +52,7 @@ export class APIClient {
   {{#parameters.length}}
     args: {
       {{#parameters}}
-      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{importType}}{{#isArray}}[]{{/isArray}},
+      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{importType}}{{#isArray}}[]{{/isArray}},{{#description}}  //{{^isRequired}} (optional){{/isRequired}} {{&.}}{{/description}}
       {{/parameters}}
     },
   {{/parameters.length}}

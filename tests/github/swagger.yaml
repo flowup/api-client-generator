@@ -3857,7 +3857,7 @@ paths:
           type: string
         - description: The content path.
           in: query
-          name: path
+          name: queryPath
           type: string
         - description: "The String name of the Commit/Branch/Tag. Defaults to 'master'."
           in: query
