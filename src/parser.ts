@@ -1,4 +1,4 @@
-import { BodyParameter, QueryParameter, Response, Schema, Spec as Swagger } from 'swagger-schema-official';
+import { BodyParameter, QueryParameter, Response, Schema, Spec as Swagger, Operation } from 'swagger-schema-official';
 import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName } from './types';
 import {
   camelCase,
@@ -30,29 +30,36 @@ interface Definitions {
   [definitionsName: string]: Schema
 }
 
-export function createMustacheViewModel(swagger: Swagger): MustacheData {
+export function createMustacheViewModel(swagger: Swagger, apiName?: string): MustacheData {
+  const methods = parseMethods(swagger, apiName);
   return {
     isSecure: !!swagger.securityDefinitions,
     swagger: swagger,
     domain: determineDomain(swagger),
-    methods: parseMethods(swagger),
-    definitions: parseDefinitions(swagger.definitions, swagger.parameters)
+    methods: methods,
+    definitions: parseDefinitions(swagger.definitions, swagger.parameters, apiName ? methods : undefined),
+    serviceName: apiName ? `${apiName}Service` : 'APIClient',
+    fileName: fileName(apiName ? apiName : 'api-client', 'service')
   };
 }
 
-function parseMethods({paths, security, parameters}: Swagger): Method[] {
+function parseMethods({ paths, security, parameters }: Swagger, apiName?: string): Method[] {
   const supportedMethods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT'];
 
   return [].concat.apply([], Object.entries(paths)
     .map(([pathName, apiPath]) => Object.entries(apiPath)
-      .filter(([methodType,]) => // tslint:disable-line:whitespace
-        supportedMethods.indexOf(methodType.toUpperCase()) !== -1  // skip unsupported methods
-      )
-      .map(([methodType, operation]) => ({
+      .filter(([methodType, operation]) => { // tslint:disable-line:whitespace
+        const op = (<Operation>operation);
+        return supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
+          (!apiName || (op.operationId && op.operationId.startsWith(apiName))); // if apiName is defined take only paths from this api
+      })
+      .map(([methodType, operation]) => {
+        const responseType = determineResponseType(operation.responses);
+        return {
           hasJsonResponse: true,
           isSecure: security !== undefined || operation.security !== undefined,
           methodName: camelCase(operation.operationId
-            ? operation.operationId
+            ? (!apiName ? operation.operationId : operation.operationId.replace(`${apiName}_`, ''))
             : `${methodType}_${pathName.replace(/[{}]/g, '')}`
           ),
           methodType: methodType.toUpperCase() as MethodType,
@@ -61,9 +68,11 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
           path: pathName.replace(
             /{(.*?)}/g,
             (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
-          response: prefixImportedModels(determineResponseType(operation.responses)),
+          responseType: responseType,
+          response: prefixImportedModels(responseType),
           description: replaceNewLines(operation.description, '$1   * '),
-        })
+        };
+      }
       )
     ));
 }
@@ -71,8 +80,9 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
 function parseDefinitions(
   definitions: Definitions = {},
   parameters: Parameters = {},
+  methods?: Method[]
 ): Definition[] {
-  return [
+  const allDefs = [
     ...Object.entries(definitions)
       .map(([key, definition]) => defineEnumOrInterface(key, definition)),
 
@@ -81,6 +91,32 @@ function parseDefinitions(
     ).filter(([, definition]) => (definition.enum && definition.enum.length !== 0) || definition.schema)
       .map(([key, definition]) => defineEnumOrInterface(key, definition)),
   ];
+
+  if (methods) {
+    const usedDefs: Definition[] = [];
+    const filterByName = (name?: string) => {
+      const filtered = allDefs.filter(d => d.name === name);
+
+      const childs: Definition[] = [];
+      filtered.forEach(d => d.properties.forEach(p => {
+        if (p.typescriptType && p.isRef) {
+          childs.push(...filterByName(p.typescriptType));
+        }
+      }));
+      filtered.push(...childs);
+      return filtered;
+    };
+    methods.forEach(method => {
+      usedDefs.push(...filterByName(method.responseType));
+      method.parameters.forEach(param => {
+        usedDefs.push(...filterByName(param.typescriptType));
+      });
+    });
+
+    return Array.from(new Set(usedDefs));
+  } else {
+    return allDefs;
+  }
 }
 
 function defineEnumOrInterface(key: string, definition: Schema | ExtendedParameter): Definition {
@@ -89,17 +125,18 @@ function defineEnumOrInterface(key: string, definition: Schema | ExtendedParamet
     : defineInterface(('schema' in definition ? definition.schema : definition) || {}, key);
 }
 
-function defineEnum(enumSchema: (string | boolean | number | {})[] = [],
-                    definitionKey: string,
-                    isNumeric: boolean = false,
-                    enumDesc: string = '',
+function defineEnum(
+  enumSchema: (string | boolean | number | {})[] = [],
+  definitionKey: string,
+  isNumeric: boolean = false,
+  enumDesc: string = '',
 ): Definition {
   const splitDesc = enumDesc.split('\n');
   const descKeys: { [key: string]: string } | null = splitDesc.length > 1
     ? splitDesc.reduce<{ [key: string]: string }>(
       (acc, cur) => {
         const captured = /(\d) (\w+)/.exec(cur); // parse the `- 42 UltimateAnswer` description syntax
-        return captured ? {...acc, [captured[1]]: captured[2]} : acc;
+        return captured ? { ...acc, [captured[1]]: captured[2] } : acc;
       },
       {}
     )
@@ -182,7 +219,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   const extendInterface: string | undefined = schema.allOf
     ? camelCase(dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref), false)
     : undefined;
-  const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({...props, ...allOfSchema.properties}), {}) : {};
+  const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({ ...props, ...allOfSchema.properties }), {}) : {};
   const properties: Property[] = parseInterfaceProperties({
     ...schema.properties,
     ...allOfProps,
@@ -193,8 +230,8 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
     description: replaceNewLines(schema.description, '$1 * '),
     properties: properties,
     imports: properties
-      .filter(({isRef}) => isRef)
-      .map(({type}) => type || '')
+      .filter(({ isRef }) => isRef)
+      .map(({ type }) => type || '')
       .filter((type) => type !== name)
       .concat(extendInterface ? [extendInterface] : [])
       .sort()
@@ -238,41 +275,40 @@ function transformParameters(
   return Array.isArray(parameters)
     // todo: required params
     ? parameters.map((param) => {
-        const ref = param.$ref || (param.schema && param.schema.$ref) || '';
-        const derefName = ref ? dereferenceType(ref) : undefined;
-        const paramRef = derefName ? allParams[derefName] : undefined;
-        const name = paramRef ? paramRef.name : param.name;
-        const isArray = /^array$/i.test(param.type || '');
-        const typescriptType = toTypescriptType(isArray
-          ? determineArrayType(param)
-          : ref
-            ? dereferenceType(ref)
-            : param.type
-        );
+      const ref = param.$ref || (param.schema && param.schema.$ref) || '';
+      const derefName = ref ? dereferenceType(ref) : undefined;
+      const paramRef = derefName ? allParams[derefName] : undefined;
+      const name = paramRef ? paramRef.name : param.name;
+      const isArray = /^array$/i.test(param.type || '');
+      const typescriptType = toTypescriptType(isArray
+        ? determineArrayType(param)
+        : ref
+          ? dereferenceType(ref)
+          : param.type
+      );
 
-        return {
-          ...param,
-          ...determineParamType(paramRef ? paramRef.in : param.in),
+      return {
+        ...param,
+        ...determineParamType(paramRef ? paramRef.in : param.in),
 
-          description: replaceNewLines(param.description, ' '),
-          camelCaseName: camelCase(name),
-          importType: prefixImportedModels(typescriptType),
-          isArray,
-          isRequired: !!param.required,
-          name,
-          typescriptType,
-        };
-      }
+        description: replaceNewLines(param.description, ' '),
+        camelCaseName: camelCase(name),
+        importType: prefixImportedModels(typescriptType),
+        isArray,
+        isRequired: !!param.required,
+        name,
+        typescriptType,
+      };
+    }
     )
     : [];
 }
 
-function determineParamType(paramType: string | undefined):
-  { isBodyParameter?: boolean } |
-  { isFormParameter?: boolean } |
-  { isHeaderParameter?: boolean } |
-  { isPathParameter?: boolean } |
-  { isQueryParameter?: boolean } {
+function determineParamType(paramType: string | undefined): { isBodyParameter?: boolean } |
+{ isFormParameter?: boolean } |
+{ isHeaderParameter?: boolean } |
+{ isPathParameter?: boolean } |
+{ isQueryParameter?: boolean } {
 
   if (!paramType) {
     return {};
@@ -280,16 +316,16 @@ function determineParamType(paramType: string | undefined):
 
   switch (paramType) {
     case 'body':
-      return {isBodyParameter: true};
+      return { isBodyParameter: true };
     case 'formData':
       console.warn(`Form parameters are currently unsupported and will not be generated properly`);
-      return {isFormParameter: true};
+      return { isFormParameter: true };
     case 'header':
-      return {isHeaderParameter: true};
+      return { isHeaderParameter: true };
     case 'path':
-      return {isPathParameter: true};
+      return { isPathParameter: true };
     case 'query' || 'modelbinding':
-      return {isQueryParameter: true};
+      return { isQueryParameter: true };
     default:
       console.warn(`Unsupported parameter type  [ ${paramType} ]`);
       return {};

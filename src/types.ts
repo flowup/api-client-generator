@@ -20,6 +20,8 @@ export interface MustacheData {
   readonly domain: string;
   readonly methods: Method[];
   readonly definitions: Definition[];
+  readonly serviceName: string;
+  readonly fileName: string;
 }
 
 export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined' | 'any';
@@ -60,4 +62,27 @@ export interface Method {
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
   readonly response?: string;  // method return type
+  readonly responseType?: string; // method return type without prefix
+}
+
+/**
+ * Options for generator
+ */
+export interface GenOptions {
+  /**
+   * Path to the swagger file
+   */
+  sourceFile: string;
+  /**
+   * Path where generated files should be emitted
+   */
+  outputPath: string;
+  /**
+   * Generates actions and models only for the specified api
+   */
+  apiName?: string;
+  /**
+   * Skip creating index file with module export
+   */
+  skipModuleExport?: boolean;
 }

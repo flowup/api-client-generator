@@ -77,7 +77,7 @@ export function typeName(name: string = 'any', isArray: boolean = false): string
   return `${type}${isArray ? '[]' : ''}`;
 }
 
-export function fileName(name: string = '', type: 'model' | 'enum' = 'model'): string {
+export function fileName(name: string = '', type: 'model' | 'enum' | 'service' = 'model'): string {
   return `${dashCase(name)}.${type}`;
 }
 
@@ -85,7 +85,7 @@ export function prefixImportedModels(type: string = ''): string {
   return BASIC_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
 }
 
-export function determineDomain({schemes, host, basePath}: Swagger): string {
+export function determineDomain({ schemes, host, basePath }: Swagger): string {
 
   // if the host is defined then try and use a protocol from the swagger file
   // otherwise use the current protocol of loaded app

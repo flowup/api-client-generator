@@ -52,6 +52,8 @@ This command will generate API client described in swagger.json file to ./output
 
  - `s` -  path to the swagger file (yaml or json)
  - `o` -  path where the generated files should be emitted
+ - `n` -  generates actions and models only for the specified api
+ - `m` -  skip creating index file with module export
 
 # How to use generated client
 

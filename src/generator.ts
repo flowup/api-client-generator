@@ -4,21 +4,25 @@ import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
 import { parse as swaggerFile } from 'swagger-parser';
 import { promisify } from 'util';
-import { MustacheData } from './types';
+import { MustacheData, GenOptions } from './types';
 import { fileName } from './helper';
 import { createMustacheViewModel } from './parser';
 
-export async function generateAPIClient(swaggerFilePath: string, outputPath: string): Promise<void> {
+
+export async function generateAPIClient(options: GenOptions): Promise<void> {
+  const outputPath = options.outputPath;
   /* Create output folder if not already present */
   if (!existsSync(outputPath)) {
     await ensureDir(outputPath);
   }
 
-  const mustacheData = createMustacheViewModel(await swaggerFile(swaggerFilePath));
+  const mustacheData = createMustacheViewModel(await swaggerFile(options.sourceFile), options.apiName);
 
   await generateClient(mustacheData, outputPath);
   await generateModels(mustacheData, outputPath);
-  await generateModuleExportIndex(mustacheData, outputPath);
+  if (!options.skipModuleExport) {
+    await generateModuleExportIndex(mustacheData, outputPath);
+  }
 }
 
 async function generateClient(viewContext: MustacheData, outputPath: string): Promise<void> {
@@ -26,7 +30,7 @@ async function generateClient(viewContext: MustacheData, outputPath: string): Pr
   const clientTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-service.mustache`)).toString();
 
   const result = Mustache.render(clientTemplate, viewContext);
-  const outfile = join(outputPath, 'api-client.service.ts');
+  const outfile = join(outputPath, `${viewContext.fileName}.ts`);
 
   await promisify(writeFile)(outfile, result, 'utf-8');
 }

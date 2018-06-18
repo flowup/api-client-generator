@@ -54,6 +54,7 @@
     "gen-github": "rimraf ./tests/github/api && ts-node ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api",
     "gen-petstore": "rimraf ./tests/petstore/api && ts-node ./src/main.ts -s ./tests/petstore/swagger.yaml -o ./tests/petstore/api",
     "gen-sports": "rimraf ./tests/sports/api && ts-node ./src/main.ts -s ./tests/sports/swagger.yaml -o ./tests/sports/api",
+    "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -n DummySelector -m false",
     "release": "npm run build && standard-version --tag-prefix=''",
     "test": "ts-node ./src/tests.ts"
   },
