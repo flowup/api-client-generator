@@ -1,6 +1,7 @@
 import { Spec as Swagger } from 'swagger-schema-official';
 
-const BASIC_TS_TYPE_REGEX = /\b(string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
+export const BASIC_TS_TYPE_REGEX = /\b(string|number|integer|boolean)\b/;
+const BUILD_IN_TS_TYPE_REGEX = /\b(string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
 
 export function camelCase(text: string = '', lowerFirst: boolean = true): string {
   text = removeDuplicateWords(text);
@@ -72,7 +73,7 @@ export function toTypescriptType(type: string | undefined): string {
 }
 
 export function typeName(name: string = 'any', isArray: boolean = false): string {
-  const type = BASIC_TS_TYPE_REGEX.test(name) ? name : camelCase(name, false);
+  const type = BUILD_IN_TS_TYPE_REGEX.test(name) ? name : camelCase(name, false);
 
   return `${type}${isArray ? '[]' : ''}`;
 }
@@ -82,7 +83,7 @@ export function fileName(name: string = '', type: 'model' | 'enum' = 'model'): s
 }
 
 export function prefixImportedModels(type: string = ''): string {
-  return BASIC_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
+  return BUILD_IN_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
 }
 
 export function determineDomain({schemes, host, basePath}: Swagger): string {

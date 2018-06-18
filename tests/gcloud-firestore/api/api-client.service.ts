@@ -50,6 +50,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsBatchGet(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.BatchGetDocumentsRequest,
       database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
@@ -58,6 +71,45 @@ export class APIClient {
     const path = `/${args.database}/documents:batchGet`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.BatchGetDocumentsResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
@@ -66,6 +118,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsBeginTransaction(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.BeginTransactionRequest,
       database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
@@ -74,6 +139,45 @@ export class APIClient {
     const path = `/${args.database}/documents:beginTransaction`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.BeginTransactionResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
@@ -82,6 +186,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsCommit(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.CommitRequest,
       database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
@@ -90,6 +207,45 @@ export class APIClient {
     const path = `/${args.database}/documents:commit`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.CommitResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
@@ -98,6 +254,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsListen(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.ListenRequest,
       database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
@@ -106,6 +275,45 @@ export class APIClient {
     const path = `/${args.database}/documents:listen`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.ListenResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
@@ -114,6 +322,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsRollback(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.RollbackRequest,
       database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
     },
@@ -122,6 +343,45 @@ export class APIClient {
     const path = `/${args.database}/documents:rollback`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.Empty>('POST', path, options, JSON.stringify(args.body));
   }
 
@@ -130,6 +390,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsWrite(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.WriteRequest,
       database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`. This is only required in the first message.
     },
@@ -138,6 +411,45 @@ export class APIClient {
     const path = `/${args.database}/documents:write`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.WriteResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
@@ -146,6 +458,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesIndexesDelete(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       currentDocumentExists?: boolean,  // (optional) When set to `true`, the target document must exist. When set to `false`, the target document must not exist.
       currentDocumentUpdateTime?: string,  // (optional) When set, the target document must exist and have been last updated at that time.
       name: string,  // The index name. For example: `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
@@ -155,6 +480,45 @@ export class APIClient {
     const path = `/${args.name}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     if ('currentDocumentExists' in args) {
       options.params = options.params.set('currentDocument.exists', String(args.currentDocumentExists));
     }
@@ -169,6 +533,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesIndexesGet(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
       name: string,  // The name of the index. For example: `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
       readTime?: string,  // (optional) Reads the version of the document at the given time. This may not be older than 60 seconds.
@@ -179,6 +556,45 @@ export class APIClient {
     const path = `/${args.name}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     if ('maskFieldPaths' in args) {
       if (args.maskFieldPaths && args.maskFieldPaths.length) {
         options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
@@ -198,6 +614,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsPatch(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.Document,
       currentDocumentExists?: boolean,  // (optional) When set to `true`, the target document must exist. When set to `false`, the target document must not exist.
       currentDocumentUpdateTime?: string,  // (optional) When set, the target document must exist and have been last updated at that time.
@@ -210,6 +639,45 @@ export class APIClient {
     const path = `/${args.name}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     if ('currentDocumentExists' in args) {
       options.params = options.params.set('currentDocument.exists', String(args.currentDocumentExists));
     }
@@ -234,6 +702,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesIndexesList(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       filter?: string,
       pageSize?: number,  // (optional) The standard List page size.
       pageToken?: string,  // (optional) The standard List page token.
@@ -244,6 +725,45 @@ export class APIClient {
     const path = `/${args.parent}/indexes`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     if ('filter' in args) {
       options.params = options.params.set('filter', String(args.filter));
     }
@@ -275,6 +795,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesIndexesCreate(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.Index,
       parent: string,  // The name of the database this index will apply to. For example: `projects/{project_id}/databases/{database_id}`
     },
@@ -283,6 +816,45 @@ export class APIClient {
     const path = `/${args.parent}/indexes`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.Operation>('POST', path, options, JSON.stringify(args.body));
   }
 
@@ -291,6 +863,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsList(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       collectionId: string,  // The collection ID, relative to `parent`, to list. For example: `chatrooms` or `messages`.
       maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
       orderBy?: string,  // (optional) The order to sort results by. For example: `priority desc, name`.
@@ -306,6 +891,45 @@ export class APIClient {
     const path = `/${args.parent}/${args.collectionId}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     if ('maskFieldPaths' in args) {
       if (args.maskFieldPaths && args.maskFieldPaths.length) {
         options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
@@ -337,6 +961,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsCreateDocument(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.Document,
       collectionId: string,  // The collection ID, relative to `parent`, to list. For example: `chatrooms`.
       documentId?: string,  // (optional) The client-assigned document ID to use for this document.  Optional. If not specified, an ID will be assigned by the service.
@@ -348,6 +985,45 @@ export class APIClient {
     const path = `/${args.parent}/${args.collectionId}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     if ('documentId' in args) {
       options.params = options.params.set('documentId', String(args.documentId));
     }
@@ -364,6 +1040,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsListCollectionIds(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.ListCollectionIdsRequest,
       parent: string,  // The parent document. In the format: `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
     },
@@ -372,6 +1061,45 @@ export class APIClient {
     const path = `/${args.parent}:listCollectionIds`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.ListCollectionIdsResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
@@ -380,6 +1108,19 @@ export class APIClient {
    */
   firestoreProjectsDatabasesDocumentsRunQuery(
     args: {
+      $Xgafv?: models.$Xgafv,
+      accessToken?: string,
+      alt?: models.Alt,
+      bearerToken?: string,
+      callback?: string,
+      fields?: string,
+      key?: string,
+      oauthToken?: string,
+      pp?: boolean,
+      prettyPrint?: boolean,
+      quotaUser?: string,
+      uploadType?: string,
+      uploadProtocol?: string,
       body?: models.RunQueryRequest,
       parent: string,  // The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
     },
@@ -388,6 +1129,45 @@ export class APIClient {
     const path = `/${args.parent}:runQuery`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
+    if ('$Xgafv' in args) {
+      options.params = options.params.set('$.xgafv', String(args.$Xgafv));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('bearerToken' in args) {
+      options.params = options.params.set('bearer_token', String(args.bearerToken));
+    }
+    if ('callback' in args) {
+      options.params = options.params.set('callback', String(args.callback));
+    }
+    if ('fields' in args) {
+      options.params = options.params.set('fields', String(args.fields));
+    }
+    if ('key' in args) {
+      options.params = options.params.set('key', String(args.key));
+    }
+    if ('oauthToken' in args) {
+      options.params = options.params.set('oauth_token', String(args.oauthToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('quotaUser' in args) {
+      options.params = options.params.set('quotaUser', String(args.quotaUser));
+    }
+    if ('uploadType' in args) {
+      options.params = options.params.set('uploadType', String(args.uploadType));
+    }
+    if ('uploadProtocol' in args) {
+      options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
+    }
     return this.sendRequest<models.RunQueryResponse>('POST', path, options, JSON.stringify(args.body));
   }
 
