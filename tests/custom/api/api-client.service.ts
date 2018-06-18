@@ -79,10 +79,37 @@ export class APIClient {
     return this.sendRequest<any>('GET', path, options);
   }
 
-  patchPets(
+  getPetsId(
+    args: {
+      id: string,
+    },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
-    const path = `/pets`;
+    const path = `/pets/${args.id}`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<any>('GET', path, options);
+  }
+
+  deletePetsId(
+    args: {
+      id: string,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<any> {
+    const path = `/pets/${args.id}`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<any>('DELETE', path, options);
+  }
+
+  patchPetsId(
+    args: {
+      id: string,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<any> {
+    const path = `/pets/${args.id}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
     return this.sendRequest<any>('PATCH', path, options);
