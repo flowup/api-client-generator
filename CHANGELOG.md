@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/flowup/api-client-generator/compare/3.3.0...3.4.0) (2018-06-20)
+
+
+### Features
+
+* **api-client:** global parameters for paths ([3cf7219](https://github.com/flowup/api-client-generator/commit/3cf7219))
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/flowup/api-client-generator/compare/3.2.2...3.3.0) (2018-06-11)
 
