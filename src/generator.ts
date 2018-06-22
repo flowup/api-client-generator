@@ -2,7 +2,7 @@ import { existsSync, mkdir, readFile, writeFile } from 'fs';
 import { ensureDir } from 'fs-extra';
 import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
-import { parse as swaggerFile } from 'swagger-parser';
+import { parse as swaggerFile, validate } from 'swagger-parser';
 import { promisify } from 'util';
 import { MustacheData, GenOptions } from './types';
 import { fileName } from './helper';
@@ -11,18 +11,34 @@ import { createMustacheViewModel } from './parser';
 
 export async function generateAPIClient(options: GenOptions): Promise<void> {
   const outputPath = options.outputPath;
+  const swaggerFilePath = options.sourceFile;
   /* Create output folder if not already present */
   if (!existsSync(outputPath)) {
     await ensureDir(outputPath);
   }
 
-  const mustacheData = createMustacheViewModel(await swaggerFile(options.sourceFile), options.apiName);
+  validate(swaggerFilePath, {
+    allow: {
+      json: true,
+      yaml: true,
+      empty: false,
+      unknown: false,
+    },
+    validate: {
+      schema: true,
+      spec: true,
+    }
+  }).then(
+    async () => {
+      const mustacheData = createMustacheViewModel(await swaggerFile(swaggerFilePath), options.apiName);
 
-  await generateClient(mustacheData, outputPath);
-  await generateModels(mustacheData, outputPath);
-  if (!options.skipModuleExport) {
-    await generateModuleExportIndex(mustacheData, outputPath);
-  }
+      await generateClient(mustacheData, outputPath);
+      await generateModels(mustacheData, outputPath);
+      if (!options.skipModuleExport) {
+        await generateModuleExportIndex(mustacheData, outputPath);
+      }
+    }
+  ).catch((e) => console.error('Provided swagger file is invalid', e));
 }
 
 async function generateClient(viewContext: MustacheData, outputPath: string): Promise<void> {

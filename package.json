@@ -1,6 +1,6 @@
 {
   "name": "api-client-generator",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
   "homepage": "https://github.com/flowup/api-client-generator/blob/master/README.md",
   "main": "src/main.ts",
@@ -52,10 +52,8 @@
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
     "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
     "gen-github": "rimraf ./tests/github/api && ts-node ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api",
-    "gen-petstore": "rimraf ./tests/petstore/api && ts-node ./src/main.ts -s ./tests/petstore/swagger.yaml -o ./tests/petstore/api",
-    "gen-sports": "rimraf ./tests/sports/api && ts-node ./src/main.ts -s ./tests/sports/swagger.yaml -o ./tests/sports/api",
     "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -n DummySelector -m",
-    "release": "npm run build && standard-version --tag-prefix=''",
+    "release": "npm run test && npm run build && standard-version --tag-prefix=''",
     "test": "ts-node ./src/tests.ts"
   },
   "dependencies": {
@@ -66,8 +64,8 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.3",
-    "@types/mustache": "^0.8.30",
-    "@types/node": "^10.3.2",
+    "@types/mustache": "^0.8.31",
+    "@types/node": "^10.3.4",
     "@types/optimist": "0.0.29",
     "@types/rimraf": "^2.0.2",
     "@types/swagger-parser": "^4.0.2",
@@ -76,9 +74,9 @@
     "rimraf": "^2.5.2",
     "standard-version": "^4.4.0",
     "swagger-schema-official": "^2.0.0-bab6bed",
-    "ts-node": "^6.1.0",
+    "ts-node": "^6.1.2",
     "tslint": "^5.10.0",
-    "tslint-immutable": "^4.5.4",
-    "typescript": "^2.9.1"
+    "tslint-immutable": "^4.6.0",
+    "typescript": "^2.9.2"
   }
 }
