@@ -32,9 +32,9 @@ export interface Property {
   readonly camelCaseName?: string;
   readonly isArray?: boolean;
   readonly isRef?: boolean;
-  readonly 'in'?: In;
+  readonly 'in'?: In | string;
   readonly 'enum'?: (string | boolean | number | {})[];
-  readonly items?: Parameter;
+  readonly items?: Schema|Schema[];
   readonly name?: string;
   readonly description?: string;
   readonly $ref?: string;

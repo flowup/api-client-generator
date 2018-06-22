@@ -1,6 +1,14 @@
-import { BodyParameter, QueryParameter, Response, Schema, Spec as Swagger, Operation } from 'swagger-schema-official';
+import {
+  Operation,
+  Path,
+  Response,
+  Schema,
+  Spec as Swagger,
+  Parameter as SwaggerParameter
+} from 'swagger-schema-official';
 import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName } from './types';
 import {
+  BASIC_TS_TYPE_REGEX,
   camelCase,
   dereferenceType,
   determineDomain,
@@ -12,23 +20,28 @@ import {
 } from './helper';
 
 interface Parameters {
-  [parameterName: string]: BodyParameter | QueryParameter
+  [parameterName: string]: SwaggerParameter
 }
 
 interface ExtendedParameters {
   [parameterName: string]: ExtendedParameter
 }
 
-type ExtendedParameter = (BodyParameter | QueryParameter) & {
-  'enum': (string | boolean | number | {})[];
+type ExtendedParameter = (SwaggerParameter) & {
+  'enum': EnumType;
   schema: Schema;
   type: 'string' | 'integer';
   required: boolean;
 };
 
 interface Definitions {
-  [definitionsName: string]: Schema
+  [definitionsName: string]: Schema;
 }
+
+type EnumType = string[] | number[] | boolean[] | {}[];
+
+// needed because swagger spec param doesn't include ref and enum
+type ExtendedSwaggerParam = SwaggerParameter & { $ref?: string, 'enum'?: EnumType };
 
 export function createMustacheViewModel(swagger: Swagger, apiName?: string): MustacheData {
   const methods = parseMethods(swagger, apiName);
@@ -47,13 +60,12 @@ function parseMethods({ paths, security, parameters }: Swagger, apiName?: string
   const supportedMethods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT'];
 
   return [].concat.apply([], Object.entries(paths)
-    .map(([pathName, apiPath]) => Object.entries(apiPath)
-      .filter(([methodType, operation]) => { // tslint:disable-line:whitespace
+    .map(([pathName, pathDef]: [string, Path]) =>
+      Object.entries(pathDef).filter(([methodType, operation]) => { // tslint:disable-line:whitespace
         const op = (<Operation>operation);
         return supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
           (!apiName || (op.operationId && op.operationId.startsWith(apiName))); // if apiName is defined take only paths from this api
-      })
-      .map(([methodType, operation]) => {
+      }).map(([methodType, operation]: [string, Operation]) => {
         const responseType = determineResponseType(operation.responses);
         return {
           hasJsonResponse: true,
@@ -63,7 +75,10 @@ function parseMethods({ paths, security, parameters }: Swagger, apiName?: string
             : `${methodType}_${pathName.replace(/[{}]/g, '')}`
           ),
           methodType: methodType.toUpperCase() as MethodType,
-          parameters: transformParameters(operation.parameters, parameters || {}),
+          parameters: transformParameters(
+            [...(pathDef.parameters || []), ...(operation.parameters || [])],
+            parameters || {}
+          ),
           // turn path interpolation `{this}` into string template `${args.this}
           path: pathName.replace(
             /{(.*?)}/g,
@@ -269,39 +284,37 @@ function determineResponseType(responses: { [responseName: string]: Response }):
 }
 
 function transformParameters(
-  parameters: Parameters,
+  parameters: ExtendedSwaggerParam[],
   allParams: Parameters
 ): Parameter[] {
-  return Array.isArray(parameters)
-    // todo: required params
-    ? parameters.map((param) => {
-      const ref = param.$ref || (param.schema && param.schema.$ref) || '';
-      const derefName = ref ? dereferenceType(ref) : undefined;
-      const paramRef = derefName ? allParams[derefName] : undefined;
-      const name = paramRef ? paramRef.name : param.name;
-      const isArray = /^array$/i.test(param.type || '');
-      const typescriptType = toTypescriptType(isArray
-        ? determineArrayType(param)
-        : ref
-          ? dereferenceType(ref)
-          : param.type
-      );
+  return parameters.map((param: ExtendedSwaggerParam) => {
+    const ref = param.$ref || ('schema' in param && (param.schema && param.schema.$ref)) || '';
+    const derefName = ref ? dereferenceType(ref) : undefined;
+    const paramRef: Partial<SwaggerParameter> = derefName ? allParams[derefName] || {} : {};
+    const name = 'name' in paramRef ? paramRef.name : param.name;
+    const type = ('type' in param && param.type) || (paramRef && 'type' in paramRef && paramRef.type) || '';
+    const isArray = /^array$/i.test(type);
+    const typescriptType = toTypescriptType(
+      isArray
+        ? determineArrayType(param as Schema)
+        : (!ref || (paramRef && 'type' in paramRef && !paramRef.enum && paramRef.type && BASIC_TS_TYPE_REGEX.test(paramRef.type)))
+          ? type
+          : derefName
+    );
 
-      return {
-        ...param,
-        ...determineParamType(paramRef ? paramRef.in : param.in),
+    return {
+      ...param,
+      ...determineParamType('in' in paramRef ? paramRef.in : param.in),
 
-        description: replaceNewLines(param.description, ' '),
-        camelCaseName: camelCase(name),
-        importType: prefixImportedModels(typescriptType),
-        isArray,
-        isRequired: !!param.required,
-        name,
-        typescriptType,
-      };
-    }
-    )
-    : [];
+      description: replaceNewLines(param.description, ' '),
+      camelCaseName: camelCase(name),
+      importType: prefixImportedModels(typescriptType),
+      isArray,
+      isRequired: param.required,
+      name,
+      typescriptType,
+    };
+  });
 }
 
 function determineParamType(paramType: string | undefined): { isBodyParameter?: boolean } |

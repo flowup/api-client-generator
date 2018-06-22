@@ -61,7 +61,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/ItemModelList'
-  /pets:
+  /pets/{id}:
+    parameters:
+    -
+      in: path
+      name: id
+      type: string
+      required: true
+    get:
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            $ref: "#/definitions/Pet"
+    delete:
+      responses:
+        200:
+          description: OK
     patch:
 #      requestBody:
 #        content:
