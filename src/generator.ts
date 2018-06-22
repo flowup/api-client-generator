@@ -2,7 +2,7 @@ import { existsSync, mkdir, readFile, writeFile } from 'fs';
 import { ensureDir } from 'fs-extra';
 import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
-import { parse as swaggerFile } from 'swagger-parser';
+import { parse as swaggerFile, validate } from 'swagger-parser';
 import { promisify } from 'util';
 import { MustacheData } from './types';
 import { fileName } from './helper';
@@ -14,25 +14,26 @@ export async function generateAPIClient(swaggerFilePath: string, outputPath: str
     await ensureDir(outputPath);
   }
 
-  const mustacheData = createMustacheViewModel(await swaggerFile(
-    swaggerFilePath,
-    {
-      allow: {
-        json: true,
-        yaml: true,
-        empty: false,
-        unknown: false,
-      },
-      validate: {
-        schema: true,
-        spec: true,
-      }
-    }).catch((e) => console.error('Provided swagger file is invalid', e))
-  );
+  validate(swaggerFilePath, {
+    allow: {
+      json: true,
+      yaml: true,
+      empty: false,
+      unknown: false,
+    },
+    validate: {
+      schema: true,
+      spec: true,
+    }
+  }).then(
+    async () => {
+      const mustacheData = createMustacheViewModel(await swaggerFile(swaggerFilePath));
 
-  await generateClient(mustacheData, outputPath);
-  await generateModels(mustacheData, outputPath);
-  await generateModuleExportIndex(mustacheData, outputPath);
+      await generateClient(mustacheData, outputPath);
+      await generateModels(mustacheData, outputPath);
+      await generateModuleExportIndex(mustacheData, outputPath);
+    }
+  ).catch((e) => console.error('Provided swagger file is invalid', e));
 }
 
 async function generateClient(viewContext: MustacheData, outputPath: string): Promise<void> {
