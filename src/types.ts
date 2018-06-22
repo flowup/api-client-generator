@@ -61,3 +61,9 @@ export interface Method {
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
   readonly response?: string;  // method return type
 }
+
+export type AsyncProcedure = (...args: any[]) => Promise<void>; // tslint:disable-line no-any
+
+export interface CommitOptions {
+  addPath: string;
+}

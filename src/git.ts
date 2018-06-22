@@ -1,12 +1,7 @@
 import { sync as whichSync } from 'which';
 import { spawnSync } from 'child_process';
 import { version } from '../package.json';
-
-type AsyncProcedure = (...args: any[]) => Promise<void>; // tslint:disable-line no-any
-
-interface CommitOptions {
-  addPath: string;
-}
+import { AsyncProcedure, CommitOptions } from './types';
 
 const COMMIT_MESSAGE = `chore(api-client): generated using version ${version}`;
 const COMMIT_AUTHOR = 'api-client-generator <api-client-generator@flowup.cz>';
