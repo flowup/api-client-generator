@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.4.1"></a>
+## [3.4.1](https://github.com/flowup/api-client-generator/compare/3.4.0...3.4.1) (2018-06-22)
+
+
+### Bug Fixes
+
+* **generator:** swagger file validate against spec and schema ([59c3c1b](https://github.com/flowup/api-client-generator/commit/59c3c1b)), closes [#58](https://github.com/flowup/api-client-generator/issues/58)
+
+
+
 <a name="3.4.0"></a>
 # [3.4.0](https://github.com/flowup/api-client-generator/compare/3.3.0...3.4.0) (2018-06-20)
 
