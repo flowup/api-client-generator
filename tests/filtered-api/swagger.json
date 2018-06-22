@@ -9,7 +9,7 @@
 		"http"
 	],
 	"paths": {
-		"/api/betriebselector/{organizerTaskElementId}": {
+		"/api/dummyselector/{organizerTaskElementId}": {
 			"get": {
 				"tags": [
 					"DummySelector"
@@ -41,7 +41,7 @@
 				}
 			}
 		},
-		"/api/betriebselector/{organizerTaskElementId}/Settings": {
+		"/api/dummyselector/{organizerTaskElementId}/Settings": {
 			"get": {
 				"tags": [
 					"DummySelector"
