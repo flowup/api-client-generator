@@ -10,7 +10,7 @@ const optimist = opt
   .alias('s', 'source')
   .alias('o', 'output')
   .alias('n', 'apiName')
-  .alias('m', 'emitModule')
+  .alias('m', 'skipModule')
   .describe('s', 'Path to the swagger file')
   .describe('o', 'Path where generated files should be emitted')
   .describe('n', 'Generates actions and models only for the specified api')
@@ -33,7 +33,7 @@ const options: GenOptions = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,
   apiName: argv.apiName,
-  skipModuleExport: argv.emitModule === true || argv.emitModule === 'true'
+  skipModuleExport: argv.skipModule === true || argv.skipModule === 'true'
 };
 
 generateAPIClient(options)
