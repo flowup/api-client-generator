@@ -2,13 +2,13 @@
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
-import { APIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
+import { {{&serviceName}}, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
 
 {{#definitions.length}}
 export * from './models';
 {{/definitions.length}}
 
-export { APIClient } from './api-client.service';
+export { {{&serviceName}} } from './{{&fileName}}';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -27,27 +27,27 @@ export interface HttpOptions {
   withCredentials?: boolean;
 }
 
-export interface APIClientModuleConfig {
+export interface {{&serviceName}}ModuleConfig {
   domain?: string;
   httpOptions?: DefaultHttpOptions;
 }
 
 @NgModule({})
-export class APIClientModule {
+export class {{&serviceName}}Module {
   /**
-   * Use this method in your root module to provide the APIClientModule
+   * Use this method in your root module to provide the {{&serviceName}}Module
    *
    * If you are not providing
-   * @param { APIClientModuleConfig } config
+   * @param { {{&serviceName}}ModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: APIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: {{&serviceName}}ModuleConfig = {}): ModuleWithProviders {
     return {
-      ngModule: APIClientModule,
+      ngModule: {{&serviceName}}Module,
       providers: [
         ...(config.domain ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        APIClient
+        {{&serviceName}}
       ]
     };
   }

@@ -33,7 +33,7 @@ const options: GenOptions = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,
   apiName: argv.apiName,
-  skipModuleExport: argv.emitModule === 'true'
+  skipModuleExport: argv.emitModule === true || argv.emitModule === 'true'
 };
 
 generateAPIClient(options)

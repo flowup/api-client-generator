@@ -19,7 +19,7 @@ type APIHttpOptions = HttpOptions & {
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
-export class APIClient {
+export class DummySelectorService {
 
   readonly options: APIHttpOptions;
 
