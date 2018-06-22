@@ -64,8 +64,8 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.3",
-    "@types/mustache": "^0.8.30",
-    "@types/node": "^10.3.2",
+    "@types/mustache": "^0.8.31",
+    "@types/node": "^10.3.4",
     "@types/optimist": "0.0.29",
     "@types/rimraf": "^2.0.2",
     "@types/swagger-parser": "^4.0.2",
@@ -74,9 +74,9 @@
     "rimraf": "^2.5.2",
     "standard-version": "^4.4.0",
     "swagger-schema-official": "^2.0.0-bab6bed",
-    "ts-node": "^6.1.0",
+    "ts-node": "^6.1.2",
     "tslint": "^5.10.0",
-    "tslint-immutable": "^4.5.4",
-    "typescript": "^2.9.1"
+    "tslint-immutable": "^4.6.0",
+    "typescript": "^2.9.2"
   }
 }
