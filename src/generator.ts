@@ -14,7 +14,21 @@ export async function generateAPIClient(swaggerFilePath: string, outputPath: str
     await ensureDir(outputPath);
   }
 
-  const mustacheData = createMustacheViewModel(await swaggerFile(swaggerFilePath));
+  const mustacheData = createMustacheViewModel(await swaggerFile(
+    swaggerFilePath,
+    {
+      allow: {
+        json: true,
+        yaml: true,
+        empty: false,
+        unknown: false,
+      },
+      validate: {
+        schema: true,
+        spec: true,
+      }
+    }).catch((e) => console.error('Provided swagger file is invalid', e))
+  );
 
   await generateClient(mustacheData, outputPath);
   await generateModels(mustacheData, outputPath);
