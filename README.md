@@ -50,8 +50,16 @@ This command will generate API client described in swagger.json file to ./output
 
 # Options
 
- - `s` -  path to the swagger file (yaml or json)
- - `o` -  path where the generated files should be emitted
+| Option           | Description                                       |
+| ---------------- | ------------------------------------------------- |
+| `-h`/`--help`    | print help and exit                               |
+| `-s`/`--source`  | path to the swagger file (yaml or json)           |
+| `-o`/`--output`  | path where the generated files should be emitted  |
+| `-C`/`--commit`  | `git commit` generated changes **\***             |
+| `-v`/`--verbose` | supply stack traces with outputted error messages |
+
+**\*** The author of the commit will be `api-client-generator <api-client-generator@flowup.cz>`. 
+If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.
 
 # How to use generated client
 
@@ -138,6 +146,7 @@ Fix:
 # Problem reporting and contributions
 
 Please report any problems you have and issues you find so they can be resolved.
+If the generator terminates with an error message, please re-run it with the `-v` flag and post the outputted stack trace.
 
 Feel free to discuss desired improvements or functionality in issues. Afterwards the pull requests are very welcome.
 
