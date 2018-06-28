@@ -1,6 +1,18 @@
 pipeline:
-  build:
+  build-master:
     image: node
+    when:
+      event: push
+      branch: master
+    commands:
+      - npm ci
+      - npm run lint
+      - npm run test
+      - npm run build
+  build-pr:
+    image: node
+    when:
+      event: pr
     commands:
       - npm ci
       - npm run lint
