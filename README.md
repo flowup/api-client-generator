@@ -8,12 +8,13 @@
 [![GitHub stars](https://img.shields.io/github/stars/flowup/api-client-generator.svg?style=social&label=Star)](https://github.com/flowup/api-client-generator)
 [![tweet](https://user-images.githubusercontent.com/7274335/42030803-46cd231c-7ad4-11e8-992c-2a5b933383c9.png)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/api-client-generator)
 
-![Logo](https://raw.githubusercontent.com/flowup/api-client-generator/master/api-client-generator-logo.png)
 
 # API client generator
 Angular REST API client generator from Swagger YAML or JSON file with camel case settings
 
 Generated files are compatible with Angular 6 (should be compatible with 5 version too). RxJS imports are targeted for version 6.
+
+![Logo](https://raw.githubusercontent.com/flowup/api-client-generator/master/api-client-generator-logo.png)
 
 # Description
 This package generates a Angular TypeScript classes from a Swagger v2.0 specification file. The code is generated using Mustache templates.
