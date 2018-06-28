@@ -1,3 +1,7 @@
+declare module '*package.json' {
+  export const version: string;
+}
+
 declare module 'dir-compare' {
   export function compare(path1: string, path2: string, config: { [key: string]: string | boolean }): Promise<Result>;
 

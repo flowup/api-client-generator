@@ -47,7 +47,7 @@ export class DummySelectorService {
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorViewModel> {
-    const path = `/api/betriebselector/${args.organizerTaskElementId}`;
+    const path = `/api/dummyselector/${args.organizerTaskElementId}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
     return this.sendRequest<models.DummySelectorViewModel>('GET', path, options);
@@ -59,7 +59,7 @@ export class DummySelectorService {
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorSettings> {
-    const path = `/api/betriebselector/${args.organizerTaskElementId}/Settings`;
+    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
     return this.sendRequest<models.DummySelectorSettings>('GET', path, options);
@@ -72,7 +72,7 @@ export class DummySelectorService {
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
-    const path = `/api/betriebselector/${args.organizerTaskElementId}/Settings`;
+    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
     return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.betriebSelectorSettings));
@@ -84,7 +84,7 @@ export class DummySelectorService {
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
-    const path = `/api/betriebselector/${args.organizerTaskElementId}/Settings`;
+    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
     return this.sendRequest<any>('DELETE', path, options);

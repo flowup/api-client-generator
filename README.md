@@ -1,17 +1,20 @@
 [![npm](https://img.shields.io/npm/v/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
-[![npm](https://img.shields.io/npm/l/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
+[![license](https://user-images.githubusercontent.com/7274335/42030802-46abac1e-7ad4-11e8-971e-e8b549a922d0.png)](https://www.npmjs.com/package/api-client-generator)
 [![npm](https://img.shields.io/npm/dm/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
 
-[![Caretaker](https://img.shields.io/badge/caretaker-vmasek-blue.svg)](https://github.com/vmasek)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Caretaker](https://user-images.githubusercontent.com/7274335/42030799-466edd34-7ad4-11e8-9a47-37f12ac8d153.png)](https://github.com/vmasek)
+[![Conventional Commits](https://user-images.githubusercontent.com/7274335/42030800-4690ea1e-7ad4-11e8-9e37-6fe8b2cb3801.png)](https://conventionalcommits.org)
 
 [![GitHub stars](https://img.shields.io/github/stars/flowup/api-client-generator.svg?style=social&label=Star)](https://github.com/flowup/api-client-generator)
-[![Twitter URL](https://img.shields.io/twitter/url/http/flowup.cz.svg?style=social)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/api-client-generator)
+[![tweet](https://user-images.githubusercontent.com/7274335/42030803-46cd231c-7ad4-11e8-992c-2a5b933383c9.png)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/api-client-generator)
 
-# api-client-generator
+
+# API client generator
 Angular REST API client generator from Swagger YAML or JSON file with camel case settings
 
 Generated files are compatible with Angular 6 (should be compatible with 5 version too). RxJS imports are targeted for version 6.
+
+![Logo](https://raw.githubusercontent.com/flowup/api-client-generator/master/api-client-generator-logo.png)
 
 # Description
 This package generates a Angular TypeScript classes from a Swagger v2.0 specification file. The code is generated using Mustache templates.
@@ -50,10 +53,18 @@ This command will generate API client described in swagger.json file to ./output
 
 # Options
 
- - `s` -  path to the swagger file (yaml or json)
- - `o` -  path where the generated files should be emitted
- - `n` -  generates actions and models only for the specified api
- - `m` -  skip creating index file with module export
+| Option              | Description                                             |
+| ------------------- | ------------------------------------------------------- |
+| `-h`/`--help`       | print help and exit                                     |
+| `-s`/`--source`     | path to the swagger file (yaml or json)                 |
+| `-o`/`--output`     | path where the generated files should be emitted        |
+| `-C`/`--commit`     | `git commit` generated changes **\***                   |
+| `-v`/`--verbose`    | supply stack traces with outputted error messages       |
+| `-n`/`--apiName`    | generates actions and models only for the specified api |
+| `-m`/`--skipModule` | skip creating index file with module export             |
+
+**\*** The author of the commit will be `api-client-generator <api-client-generator@flowup.cz>`. 
+If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.
 
 # How to use generated client
 
@@ -140,6 +151,7 @@ Fix:
 # Problem reporting and contributions
 
 Please report any problems you have and issues you find so they can be resolved.
+If the generator terminates with an error message, please re-run it with the `-v` flag and post the outputted stack trace.
 
 Feel free to discuss desired improvements or functionality in issues. Afterwards the pull requests are very welcome.
 
