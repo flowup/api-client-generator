@@ -17,7 +17,7 @@ export async function generateAPIClient(options: GenOptions): Promise<void> {
     await ensureDir(outputPath);
   }
 
-  validate(swaggerFilePath, {
+  await validate(swaggerFilePath, {
     allow: {
       json: true,
       yaml: true,
