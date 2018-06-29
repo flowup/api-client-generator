@@ -24,7 +24,8 @@ const testReferences: TestReference[] = [
   new TestReference('esquare'),
   new TestReference('gcloud-firestore'),
   new TestReference('github'),
-  new TestReference('filtered-api', 'json', true, 'DummySelector,NonExistingTag,Project,Products')];
+  new TestReference('filtered-api', 'json', true, 'DummySelector,NonExistingTag,Project,Products'),
+  new TestReference('with-all-tags', 'json', false, 'all')];
 
 const compareOptions = { compareSize: true };
 const stateSymbols: { [key in State]: string } = {

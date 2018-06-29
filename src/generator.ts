@@ -5,7 +5,7 @@ import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { promisify } from 'util';
 import { MustacheData, GenOptions } from './types';
-import { fileName, logWarn, dashCase } from './helper';
+import { fileName, logWarn, dashCase, getAllSwaggerTags } from './helper';
 import { createMustacheViewModel } from './parser';
 
 
@@ -25,14 +25,19 @@ export async function generateAPIClient(options: GenOptions): Promise<void> {
     }
   }).then(
     async () => {
+      const swaggerDef = await swaggerFile(swaggerFilePath);
+      const allTags: string[] = getAllSwaggerTags(swaggerDef);
+
       let tags = options.splitPathTags;
       if (tags === undefined || tags.length === 0) {
         tags = [''];
+      } else if (tags && tags.length === 1 && tags[0] === 'all') {
+        tags = allTags;
       }
       const createSubFolder = tags.length > 1;
 
       await Promise.all(tags.map(async tag => {
-        const mustacheData = createMustacheViewModel(await swaggerFile(swaggerFilePath), tag);
+        const mustacheData = createMustacheViewModel(swaggerDef, tag);
 
         if (mustacheData.methods.length === 0) {
           logWarn(`No swagger paths with tag ${tag}`);

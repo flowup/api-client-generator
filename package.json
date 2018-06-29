@@ -53,6 +53,7 @@
     "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
     "gen-github": "rimraf ./tests/github/api && ts-node ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api",
     "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -t DummySelector,Project,NonExistingTag -m",
+    "gen-with-all-tags": "rimraf ./tests/with-all-tags/api && ts-node ./src/main.ts -s ./tests/with-all-tags/swagger.json -o ./tests/with-all-tags/api -t all",
     "release": "npm run test && npm run build && standard-version --tag-prefix=''",
     "test": "ts-node ./src/tests.ts"
   },

@@ -1,4 +1,4 @@
-import { Spec as Swagger } from 'swagger-schema-official';
+import { Spec as Swagger, Path, Operation } from 'swagger-schema-official';
 
 export const BASIC_TS_TYPE_REGEX = /\b(string|number|integer|boolean)\b/;
 const BUILD_IN_TS_TYPE_REGEX = /\b(string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
@@ -106,4 +106,14 @@ export function replaceNewLines(str: string = '', replaceValue: string = ''): st
 
 export function logWarn(str: string): void {
   console.warn('\x1b[33m%s\x1b[0m', str);
+}
+
+export function getAllSwaggerTags(swagger: Swagger): string[] {
+  const allTags: string[] = [];
+  Object.entries(swagger.paths)
+    .forEach(([, pathDef]: [string, Path]) =>
+      Object.entries(pathDef).forEach(([, operation]: [string, Operation]) =>
+        allTags.push(...(operation.tags ? operation.tags : [])))
+    );
+  return Array.from(new Set(allTags));
 }

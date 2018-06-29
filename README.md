@@ -53,15 +53,15 @@ This command will generate API client described in swagger.json file to ./output
 
 # Options
 
-| Option                 | Description                                                                                     |
-| ---------------------- | ----------------------------------------------------------------------------------------------- |
-| `-h`/`--help`          | print help and exit                                                                             |
-| `-s`/`--source`        | path to the swagger file (yaml or json)                                                         |
-| `-o`/`--output`        | path where the generated files should be emitted                                                |
-| `-C`/`--commit`        | `git commit` generated changes **\***                                                           |
-| `-v`/`--verbose`       | supply stack traces with outputted error messages                                               |
-| `-t`/`--splitPathTags` | generates services and models only for the specified tags. Use , as separator for multiple tags |
-| `-m`/`--skipModule`    | skip creating index file with module export                                                     |
+| Option                 | Description                                                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `-h`/`--help`          | print help and exit                                                                                                                  |
+| `-s`/`--source`        | path to the swagger file (yaml or json)                                                                                              |
+| `-o`/`--output`        | path where the generated files should be emitted                                                                                     |
+| `-C`/`--commit`        | `git commit` generated changes **\***                                                                                                |
+| `-v`/`--verbose`       | supply stack traces with outputted error messages                                                                                    |
+| `-t`/`--splitPathTags` | generates services and models only for the specified tags. Use , as separator for multiple tags. Use `all` to emit a service per tag |
+| `-m`/`--skipModule`    | skip creating index file with module export                                                                                          |
 
 **\*** The author of the commit will be `api-client-generator <api-client-generator@flowup.cz>`. 
 If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.
