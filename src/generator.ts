@@ -5,17 +5,12 @@ import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { promisify } from 'util';
 import { MustacheData, GenOptions } from './types';
-import { fileName } from './helper';
+import { fileName, logWarn, dashCase } from './helper';
 import { createMustacheViewModel } from './parser';
 
 
 export async function generateAPIClient(options: GenOptions): Promise<void> {
-  const outputPath = options.outputPath;
   const swaggerFilePath = options.sourceFile;
-  /* Create output folder if not already present */
-  if (!existsSync(outputPath)) {
-    await ensureDir(outputPath);
-  }
 
   await validate(swaggerFilePath, {
     allow: {
@@ -30,13 +25,30 @@ export async function generateAPIClient(options: GenOptions): Promise<void> {
     }
   }).then(
     async () => {
-      const mustacheData = createMustacheViewModel(await swaggerFile(swaggerFilePath), options.apiName);
-
-      await generateClient(mustacheData, outputPath);
-      await generateModels(mustacheData, outputPath);
-      if (!options.skipModuleExport) {
-        await generateModuleExportIndex(mustacheData, outputPath);
+      let tags = options.splitPathTags;
+      if (tags === undefined || tags.length === 0) {
+        tags = [''];
       }
+      const createSubFolder = tags.length > 1;
+
+      await Promise.all(tags.map(async tag => {
+        const mustacheData = createMustacheViewModel(await swaggerFile(swaggerFilePath), tag);
+
+        if (mustacheData.methods.length === 0) {
+          logWarn(`No swagger paths with tag ${tag}`);
+        } else {
+          const subFolder = createSubFolder ? dashCase(tag) : '';
+          const outputPath = join(options.outputPath, subFolder);
+          if (!existsSync(outputPath)) {
+            await ensureDir(outputPath);
+          }
+          await generateClient(mustacheData, outputPath);
+          await generateModels(mustacheData, outputPath);
+          if (!options.skipModuleExport) {
+            await generateModuleExportIndex(mustacheData, outputPath);
+          }
+        }
+      }));
     }
   ).catch((e) => console.error('Provided swagger file is invalid', e));
 }

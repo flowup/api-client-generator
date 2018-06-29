@@ -15,7 +15,7 @@ class TestReference {
     public name: string,
     public swaggerFileExt: string = 'yaml',
     public skipIndex: boolean = false,
-    public apiName?: string) {
+    public tags?: string) {
   }
 }
 
@@ -24,7 +24,7 @@ const testReferences: TestReference[] = [
   new TestReference('esquare'),
   new TestReference('gcloud-firestore'),
   new TestReference('github'),
-  new TestReference('filtered-api', 'json', true, 'DummySelector')];
+  new TestReference('filtered-api', 'json', true, 'DummySelector,NonExistingTag,Project,Products')];
 
 const compareOptions = { compareSize: true };
 const stateSymbols: { [key in State]: string } = {
@@ -53,7 +53,7 @@ async function runTests(): Promise<number> {
       sourceFile: `${refDir}/swagger.${reference.swaggerFileExt}`,
       outputPath: genDir,
       skipModuleExport: reference.skipIndex,
-      apiName: reference.apiName
+      splitPathTags: reference.tags ? reference.tags.split(',') : []
     })
       .catch((err: Error) => console.error(`Error has occurred while generating api client for ${reference.name}`, err));
 

@@ -34,7 +34,7 @@ export interface Property {
   readonly isRef?: boolean;
   readonly 'in'?: In | string;
   readonly 'enum'?: (string | boolean | number | {})[];
-  readonly items?: Schema|Schema[];
+  readonly items?: Schema | Schema[];
   readonly name?: string;
   readonly description?: string;
   readonly $ref?: string;
@@ -62,7 +62,12 @@ export interface Method {
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
   readonly response?: string;  // method return type
-  readonly responseType?: string; // method return type without prefix
+  readonly responseTypeName?: string; // method return type without prefix
+}
+
+export interface ResponseType {
+  readonly type: string;
+  readonly name?: string;
 }
 
 /**
@@ -80,7 +85,7 @@ export interface GenOptions {
   /**
    * Generates actions and models only for the specified api
    */
-  apiName?: string;
+  splitPathTags?: string[];
   /**
    * Skip creating index file with module export
    */

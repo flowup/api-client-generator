@@ -284,6 +284,32 @@
 					}
 				}
 			}
+		},
+		"/api/project/projecttypes": {
+			"get": {
+				"tags": [
+					"Project"
+				],
+				"operationId": "Project_GetProjectTypes",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ProjectTypeViewModel"
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"definitions": {
@@ -456,6 +482,18 @@
 				"Position": {
 					"format": "int32",
 					"type": "integer"
+				}
+			}
+		},
+		"ProjectTypeViewModel": {
+			"type": "object",
+			"properties": {
+				"TypeId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Category": {
+					"type": "string"
 				}
 			}
 		}

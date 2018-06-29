@@ -12,13 +12,13 @@ const optimist = opt
   .alias('o', 'output')
   .alias('C', 'commit')
   .alias('v', 'verbose')
-  .alias('n', 'apiName')
+  .alias('t', 'splitPathTags')
   .alias('m', 'skipModule')
   .describe('s', 'Path to the swagger file')
   .describe('o', 'Path where generated files should be emitted')
   .describe('C', 'Autocommit changes')
   .describe('v', 'Print error stack traces')
-  .describe('n', 'Generates actions and models only for the specified api')
+  .describe('t', 'Generates services and models only for the specified tags. Use , as separator for multiple tags')
   .describe('m', 'Skip creating index file with module export');
 
 const argv = optimist.argv;
@@ -36,7 +36,7 @@ if (typeof argv.source === 'undefined' && argv.source !== true) {
 const options: GenOptions = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,
-  apiName: argv.apiName,
+  splitPathTags: argv.splitPathTags ? argv.splitPathTags.split(',') : [],
   skipModuleExport: argv.skipModule === true || argv.skipModule === 'true'
 };
 

@@ -65,7 +65,7 @@ export function toTypescriptType(type: string | undefined): string {
   } else if (/^object$/i.test(type)) {
     return 'any';
   } else if (/^array$/i.test(type)) {
-    console.warn('Support for nested arrays is limited, using any[] as type');
+    logWarn('Support for nested arrays is limited, using any[] as type');
     return 'any[]';
   }
 
@@ -102,4 +102,8 @@ export function determineDomain({ schemes, host, basePath }: Swagger): string {
 
 export function replaceNewLines(str: string = '', replaceValue: string = ''): string {
   return str.replace(/(\r\n|\r|\n)/g, replaceValue);
+}
+
+export function logWarn(str: string): void {
+  console.warn('\x1b[33m%s\x1b[0m', str);
 }
