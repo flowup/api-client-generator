@@ -8,6 +8,6 @@ import {
  */
 export interface ListenRequest {
   addTarget: Target;  // A target to add to this stream.
-  labels: any;  // Labels associated with this target change.
+  labels: { [key: string]: string };  // Labels associated with this target change.
   removeTarget: number;  // The ID of a target to remove from this stream.
 }

@@ -14,7 +14,7 @@ import {
  */
 {{/description}}export interface {{&name}} {{#extend}}extends {{.}} {{/extend}}{
 {{#properties}}
-  {{&name}}: {{typescriptType}}{{#isArray}}[]{{/isArray}};{{#description}}  // {{&.}}{{/description}}
+  {{&name}}: {{#isDictionary}}{ [key: string]: {{typescriptType}} }{{/isDictionary}}{{^isDictionary}}{{typescriptType}}{{/isDictionary}}{{#isArray}}[]{{/isArray}};{{#description}}  // {{&.}}{{/description}}
 {{/properties}}
 }
 {{/isEnum}}

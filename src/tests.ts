@@ -2,7 +2,7 @@ import { compare, DiffSet, State } from 'dir-compare';
 import { existsSync, mkdir } from 'fs';
 import * as rimraf from 'rimraf';
 import { promisify } from 'util';
-import { generateAPIClient } from '../src/generator';
+import { generateAPIClient } from './generator';
 
 const enum Colors {
   Reset = '\x1b[0m',

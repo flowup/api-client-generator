@@ -110,9 +110,9 @@ export function logWarn(str: string): void {
 
 export function getAllSwaggerTags(swagger: Swagger): string[] {
   const allTags: string[] = [];
-  Object.entries(swagger.paths)
-    .forEach(([, pathDef]: [string, Path]) =>
-      Object.entries(pathDef).forEach(([, operation]: [string, Operation]) =>
+  Object.values(swagger.paths)
+    .forEach((pathDef: Path) =>
+      Object.values(pathDef).forEach((operation: Operation) =>
         allTags.push(...(operation.tags ? operation.tags : [])))
     );
   return Array.from(new Set(allTags));

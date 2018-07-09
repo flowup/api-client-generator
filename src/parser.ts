@@ -178,15 +178,19 @@ function parseInterfaceProperties(properties: { [propertyName: string]: Schema }
   return Object.entries<Schema>(properties).map(
     ([propName, propSchema]: [string, Schema]) => {
       const isArray = /^array$/i.test(propSchema.type || '');
+      const ref = propSchema.additionalProperties ? propSchema.additionalProperties.$ref : propSchema.$ref;
       const typescriptType = toTypescriptType(isArray
         ? determineArrayType(propSchema)
-        : propSchema.$ref
-          ? dereferenceType(propSchema.$ref)
-          : propSchema.type
+        : ref
+          ? dereferenceType(ref)
+          : propSchema.additionalProperties
+            ? propSchema.additionalProperties.type
+            : propSchema.type
       );
 
       return {
         isArray,
+        isDictionary: propSchema.additionalProperties,
         isRef: !!parseReference(propSchema),
         name: /^[A-Za-z_$][\w$]*$/.test(propName) ? propName : `'${propName}'`,
         description: replaceNewLines(propSchema.description),
@@ -206,6 +210,8 @@ function parseReference(schema: Schema): string {
     } else if (!Array.isArray(schema.items) && schema.items.items && '$ref' in schema.items.items && schema.items.items.$ref) {
       return schema.items.items.$ref;
     }
+  } else if (schema.additionalProperties && schema.additionalProperties.$ref) {
+    return schema.additionalProperties.$ref;
   }
 
   return '';
@@ -301,8 +307,8 @@ function transformParameters(
       isArray
         ? determineArrayType(param as Schema)
         : (!ref || (paramRef && 'type' in paramRef && !paramRef.enum && paramRef.type && BASIC_TS_TYPE_REGEX.test(paramRef.type)))
-          ? type
-          : derefName
+        ? type
+        : derefName
     );
 
     return {
