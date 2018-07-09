@@ -1,0 +1,501 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.6.0.1",
+		"title": "Web API"
+	},
+	"host": "localhost:49801",
+	"schemes": [
+		"http"
+	],
+	"paths": {
+		"/api/dummyselector/{organizerTaskElementId}": {
+			"get": {
+				"tags": [
+					"DummySelector"
+				],
+				"operationId": "DummySelector_Get",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "organizerTaskElementId",
+						"in": "path",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DummySelectorViewModel"
+						}
+					}
+				}
+			}
+		},
+		"/api/dummyselector/{organizerTaskElementId}/Settings": {
+			"get": {
+				"tags": [
+					"DummySelector"
+				],
+				"operationId": "DummySelector_GetSettings",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "organizerTaskElementId",
+						"in": "path",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DummySelectorSettings"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"DummySelector"
+				],
+				"operationId": "DummySelector_PutSettings",
+				"consumes": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml",
+					"application/x-www-form-urlencoded"
+				],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "organizerTaskElementId",
+						"in": "path",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "betriebSelectorSettings",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/DummySelectorSettings"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"DummySelector"
+				],
+				"operationId": "DummySelector_DeleteSettings",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "organizerTaskElementId",
+						"in": "path",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/api/dashboards/widgettypes": {
+			"get": {
+				"tags": [
+					"Dashboard"
+				],
+				"operationId": "Dashboard_GetWidgetTypes",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/WidgetTypeViewModel"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/dashboards/{dashboardId}": {
+			"get": {
+				"tags": [
+					"Dashboard"
+				],
+				"operationId": "Dashboard_Get",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json"
+				],
+				"parameters": [
+					{
+						"name": "dashboardId",
+						"in": "path",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DashboardViewModel"
+						}
+					}
+				}
+			}
+		},
+		"/api/dashboards/{dashboardId}/settings": {
+			"get": {
+				"tags": [
+					"Dashboard"
+				],
+				"operationId": "Dashboard_GetSettings",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "dashboardId",
+						"in": "path",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/RowModel"
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"Dashboard"
+				],
+				"operationId": "Dashboard_PutSettings",
+				"consumes": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml",
+					"application/x-www-form-urlencoded"
+				],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "dashboardId",
+						"in": "path",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "rows",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/RowModel"
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/api/project/projecttypes": {
+			"get": {
+				"tags": [
+					"Project"
+				],
+				"operationId": "Project_GetProjectTypes",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ProjectTypeViewModel"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"DummySelectorViewModel": {
+			"type": "object",
+			"properties": {
+				"SelectedDummyObjId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"DummyList": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/DummyViewModel"
+					}
+				}
+			}
+		},
+		"DummyViewModel": {
+			"type": "object",
+			"properties": {
+				"DummyObjId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"DummyNrTitel": {
+					"type": "string"
+				},
+				"UniqueId": {
+					"format": "uuid",
+					"type": "string",
+					"example": "00000000-0000-0000-0000-000000000000"
+				}
+			}
+		},
+		"DummySelectorSettings": {
+			"type": "object",
+			"properties": {
+				"OrganizerTaskElementId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"DummyObjId": {
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"WidgetTypeViewModel": {
+			"type": "object",
+			"properties": {
+				"Id": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Titel": {
+					"type": "string"
+				},
+				"Beschreibung": {
+					"type": "string"
+				},
+				"OrganizerTaskId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"ModulName": {
+					"type": "string"
+				},
+				"ModulNameExtern": {
+					"type": "string"
+				},
+				"Order": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"KeySystem": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					}
+				},
+				"RefSystem": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					}
+				},
+				"SysApplicationId": {
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"DashboardViewModel": {
+			"type": "object",
+			"properties": {}
+		},
+		"RowModel": {
+			"type": "object",
+			"properties": {
+				"UserId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Children": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ColumnModel"
+					}
+				},
+				"Id": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"ParentId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Position": {
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"ColumnModel": {
+			"type": "object",
+			"properties": {
+				"Width": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Children": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WidgetModel"
+					}
+				},
+				"Id": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"ParentId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Position": {
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"WidgetModel": {
+			"type": "object",
+			"properties": {
+				"TypeId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Settings": {
+					"type": "string"
+				},
+				"Id": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"ParentId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Position": {
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"ProjectTypeViewModel": {
+			"type": "object",
+			"properties": {
+				"TypeId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"Category": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

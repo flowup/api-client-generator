@@ -10,10 +10,25 @@ const enum Colors {
   Green = '\x1b[32m',
 }
 
-const testReferences = ['custom', 'esquare', 'gcloud-firestore', 'github'];
+class TestReference {
+  constructor(
+    public name: string,
+    public swaggerFileExt: string = 'yaml',
+    public skipIndex: boolean = false,
+    public tags?: string) {
+  }
+}
 
-const compareOptions = {compareSize: true};
-const stateSymbols: {[key in State]: string} = {
+const testReferences: TestReference[] = [
+  new TestReference('custom'),
+  new TestReference('esquare'),
+  new TestReference('gcloud-firestore'),
+  new TestReference('github'),
+  new TestReference('filtered-api', 'json', true, 'DummySelector,NonExistingTag,Project,Products'),
+  new TestReference('with-all-tags', 'json', false, 'all')];
+
+const compareOptions = { compareSize: true };
+const stateSymbols: { [key in State]: string } = {
   equal: '==',
   left: '->',
   right: '<-',
@@ -30,19 +45,24 @@ async function runTests(): Promise<number> {
   await promisify(mkdir)(testsOutDir);
 
   const testReturnValues = await Promise.all(testReferences.map(async (reference) => {
-    console.info(`Running test for ${reference}`);
+    console.info(`Running test for ${reference.name}`);
 
-    const refDir = `${__dirname}/../tests/${reference}`;
-    const genDir = `${testsOutDir}/${reference}`;
+    const refDir = `${__dirname}/../tests/${reference.name}`;
+    const genDir = `${testsOutDir}/${reference.name}`;
 
-    await generateAPIClient(`${refDir}/swagger.yaml`, genDir)
-      .catch((err: Error) => console.error(`Error has occurred while generating api client for ${reference}`, err));
+    await generateAPIClient({
+      sourceFile: `${refDir}/swagger.${reference.swaggerFileExt}`,
+      outputPath: genDir,
+      skipModuleExport: reference.skipIndex,
+      splitPathTags: reference.tags ? reference.tags.split(',') : []
+    })
+      .catch((err: Error) => console.error(`Error has occurred while generating api client for ${reference.name}`, err));
 
-    const {same, equal, distinct, differences, left, right, diffSet} = await compare(`${refDir}/api`, genDir, compareOptions);
+    const { same, equal, distinct, differences, left, right, diffSet } = await compare(`${refDir}/api`, genDir, compareOptions);
 
     if (!same) {
-      console.info(Colors.Red, `Test for ${reference} has failed\n`, Colors.Reset);
-      console.group(`Stats for ${reference}`);
+      console.info(Colors.Red, `Test for ${reference.name} has failed\n`, Colors.Reset);
+      console.group(`Stats for ${reference.name}`);
       console.info(`equal: ${equal}`);
       console.info(`distinct: ${distinct}`);
       console.info(`left: ${left}`);
@@ -50,7 +70,7 @@ async function runTests(): Promise<number> {
       console.info(`differences: ${differences}\n`);
 
       console.info('[ reference dir ]         [ test dir ]');
-      diffSet.forEach(({name1, name2, state, type1, type2}: DiffSet) => {
+      diffSet.forEach(({ name1, name2, state, type1, type2 }: DiffSet) => {
         if (stateSymbols[state] !== stateSymbols.equal) {
           console.info(`(${type1}) ${name1}  ${stateSymbols[state]}  ${name2} (${type2})`);
         }
@@ -63,7 +83,7 @@ async function runTests(): Promise<number> {
 
       return 1;
     } else {
-      console.info(Colors.Green, `Test for ${reference} has successfully passed\n\n`, Colors.Reset);
+      console.info(Colors.Green, `Test for ${reference.name} has successfully passed\n\n`, Colors.Reset);
       await promisify(rimraf)(genDir);
       return 0;
     }

@@ -1,4 +1,4 @@
-import { Spec as Swagger } from 'swagger-schema-official';
+import { Spec as Swagger, Path, Operation } from 'swagger-schema-official';
 
 export const BASIC_TS_TYPE_REGEX = /\b(string|number|integer|boolean)\b/;
 const BUILD_IN_TS_TYPE_REGEX = /\b(string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
@@ -65,7 +65,7 @@ export function toTypescriptType(type: string | undefined): string {
   } else if (/^object$/i.test(type)) {
     return 'any';
   } else if (/^array$/i.test(type)) {
-    console.warn('Support for nested arrays is limited, using any[] as type');
+    logWarn('Support for nested arrays is limited, using any[] as type');
     return 'any[]';
   }
 
@@ -78,7 +78,7 @@ export function typeName(name: string = 'any', isArray: boolean = false): string
   return `${type}${isArray ? '[]' : ''}`;
 }
 
-export function fileName(name: string = '', type: 'model' | 'enum' = 'model'): string {
+export function fileName(name: string = '', type: 'model' | 'enum' | 'service' = 'model'): string {
   return `${dashCase(name)}.${type}`;
 }
 
@@ -86,7 +86,7 @@ export function prefixImportedModels(type: string = ''): string {
   return BUILD_IN_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
 }
 
-export function determineDomain({schemes, host, basePath}: Swagger): string {
+export function determineDomain({ schemes, host, basePath }: Swagger): string {
 
   // if the host is defined then try and use a protocol from the swagger file
   // otherwise use the current protocol of loaded app
@@ -102,4 +102,18 @@ export function determineDomain({schemes, host, basePath}: Swagger): string {
 
 export function replaceNewLines(str: string = '', replaceValue: string = ''): string {
   return str.replace(/(\r\n|\r|\n)/g, replaceValue);
+}
+
+export function logWarn(str: string): void {
+  console.warn('\x1b[33m%s\x1b[0m', str);
+}
+
+export function getAllSwaggerTags(swagger: Swagger): string[] {
+  const allTags: string[] = [];
+  Object.entries(swagger.paths)
+    .forEach(([, pathDef]: [string, Path]) =>
+      Object.entries(pathDef).forEach(([, operation]: [string, Operation]) =>
+        allTags.push(...(operation.tags ? operation.tags : [])))
+    );
+  return Array.from(new Set(allTags));
 }

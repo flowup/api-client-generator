@@ -5,9 +5,7 @@ import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { DefaultHttpOptions, HttpOptions } from './';
 
-{{#definitions.length}}
 import * as models from './models';
-{{/definitions.length}}
 
 export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
 export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
@@ -21,11 +19,11 @@ type APIHttpOptions = HttpOptions & {
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
-export class {{&serviceName}} {
+export class DashboardService {
 
   readonly options: APIHttpOptions;
 
-  private readonly domain: string = `{{&domain}}`;
+  private readonly domain: string = `http://localhost:49801`;
 
   constructor(private readonly http: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain: string,
@@ -43,54 +41,52 @@ export class {{&serviceName}} {
     };
   }
 
-{{#methods}}
-  {{#description}}
-  /**
-   * {{&.}}
-   */
-{{/description}}  {{&methodName}}(
-  {{#parameters.length}}
-    args: {
-      {{#parameters}}
-      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{importType}}{{#isArray}}[]{{/isArray}},{{#description}}  //{{^isRequired}} (optional){{/isRequired}} {{&.}}{{/description}}
-      {{/parameters}}
-    },
-  {{/parameters.length}}
+  getWidgetTypes(
     requestHttpOptions?: HttpOptions
-  ): Observable<{{&response}}> {
-    const path = `{{&path}}`;
+  ): Observable<models.WidgetTypeViewModel[]> {
+    const path = `/api/dashboards/widgettypes`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    {{#parameters}}
-      {{#isQueryParameter}}
-    if ('{{&camelCaseName}}' in args) {
-          {{#isArray}}
-      if (args.{{&camelCaseName}} && args.{{&camelCaseName}}.length) {
-        options.params = args.{{&camelCaseName}}.reduce<HttpParams>((acc, cur) => acc.append('{{&name}}', `${cur}`), options.params);
-      }
-          {{/isArray}}
-          {{^isArray}}
-      options.params = options.params.set('{{&name}}', String(args.{{&camelCaseName}}));
-          {{/isArray}}
-    }
-      {{/isQueryParameter}}
-      {{#isHeaderParameter}}
-    if ('{{&camelCaseName}}' in args) {
-          {{#isArray}}
-      if (args.{{&camelCaseName}} && args.{{&camelCaseName}}.length) {
-        options.headers = options.headers.set('{{&name}}', args.{{&camelCaseName}}.map(value => `${value}`));
-      }
-          {{/isArray}}
-          {{^isArray}}
-      options.headers = options.headers.set('{{&name}}', String(args.{{&camelCaseName}}));
-          {{/isArray}}
-    }
-      {{/isHeaderParameter}}
-    {{/parameters}}
-    return this.sendRequest<{{&response}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{#isFormParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isFormParameter}}{{/parameters}});
+    return this.sendRequest<models.WidgetTypeViewModel[]>('GET', path, options);
   }
 
-{{/methods}}
+  get(
+    args: {
+      dashboardId: number,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.DashboardViewModel> {
+    const path = `/api/dashboards/${args.dashboardId}`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<models.DashboardViewModel>('GET', path, options);
+  }
+
+  getSettings(
+    args: {
+      dashboardId: number,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.RowModel[]> {
+    const path = `/api/dashboards/${args.dashboardId}/settings`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<models.RowModel[]>('GET', path, options);
+  }
+
+  putSettings(
+    args: {
+      dashboardId: number,
+      rows: any,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<any> {
+    const path = `/api/dashboards/${args.dashboardId}/settings`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.rows));
+  }
+
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
     switch (method) {
       case 'DELETE':

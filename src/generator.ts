@@ -4,15 +4,13 @@ import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { promisify } from 'util';
-import { MustacheData } from './types';
-import { fileName } from './helper';
+import { MustacheData, GenOptions } from './types';
+import { fileName, logWarn, dashCase, getAllSwaggerTags } from './helper';
 import { createMustacheViewModel } from './parser';
 
-export async function generateAPIClient(swaggerFilePath: string, outputPath: string): Promise<void> {
-  /* Create output folder if not already present */
-  if (!existsSync(outputPath)) {
-    await ensureDir(outputPath);
-  }
+
+export async function generateAPIClient(options: GenOptions): Promise<void> {
+  const swaggerFilePath = options.sourceFile;
 
   await validate(swaggerFilePath, {
     allow: {
@@ -27,11 +25,35 @@ export async function generateAPIClient(swaggerFilePath: string, outputPath: str
     }
   }).then(
     async () => {
-      const mustacheData = createMustacheViewModel(await swaggerFile(swaggerFilePath));
+      const swaggerDef = await swaggerFile(swaggerFilePath);
+      const allTags: string[] = getAllSwaggerTags(swaggerDef);
 
-      await generateClient(mustacheData, outputPath);
-      await generateModels(mustacheData, outputPath);
-      await generateModuleExportIndex(mustacheData, outputPath);
+      let tags = options.splitPathTags;
+      if (tags === undefined || tags.length === 0) {
+        tags = [''];
+      } else if (tags && tags.length === 1 && tags[0] === 'all') {
+        tags = allTags;
+      }
+      const createSubFolder = tags.length > 1;
+
+      await Promise.all(tags.map(async tag => {
+        const mustacheData = createMustacheViewModel(swaggerDef, tag);
+
+        if (mustacheData.methods.length === 0) {
+          logWarn(`No swagger paths with tag ${tag}`);
+        } else {
+          const subFolder = createSubFolder ? dashCase(tag) : '';
+          const outputPath = join(options.outputPath, subFolder);
+          if (!existsSync(outputPath)) {
+            await ensureDir(outputPath);
+          }
+          await generateClient(mustacheData, outputPath);
+          await generateModels(mustacheData, outputPath);
+          if (!options.skipModuleExport) {
+            await generateModuleExportIndex(mustacheData, outputPath);
+          }
+        }
+      }));
     }
   ).catch((e) => console.error('Provided swagger file is invalid', e));
 }
@@ -41,7 +63,7 @@ async function generateClient(viewContext: MustacheData, outputPath: string): Pr
   const clientTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-service.mustache`)).toString();
 
   const result = Mustache.render(clientTemplate, viewContext);
-  const outfile = join(outputPath, 'api-client.service.ts');
+  const outfile = join(outputPath, `${viewContext.fileName}.ts`);
 
   await promisify(writeFile)(outfile, result, 'utf-8');
 }

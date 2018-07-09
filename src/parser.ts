@@ -6,7 +6,7 @@ import {
   Spec as Swagger,
   Parameter as SwaggerParameter
 } from 'swagger-schema-official';
-import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName } from './types';
+import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName, ResponseType } from './types';
 import {
   BASIC_TS_TYPE_REGEX,
   camelCase,
@@ -17,6 +17,7 @@ import {
   replaceNewLines,
   toTypescriptType,
   typeName,
+  logWarn,
 } from './helper';
 
 interface Parameters {
@@ -43,28 +44,35 @@ type EnumType = string[] | number[] | boolean[] | {}[];
 // needed because swagger spec param doesn't include ref and enum
 type ExtendedSwaggerParam = SwaggerParameter & { $ref?: string, 'enum'?: EnumType };
 
-export function createMustacheViewModel(swagger: Swagger): MustacheData {
+export function createMustacheViewModel(swagger: Swagger, swaggerTag?: string): MustacheData {
+  const methods = parseMethods(swagger, swaggerTag);
   return {
     isSecure: !!swagger.securityDefinitions,
     swagger: swagger,
     domain: determineDomain(swagger),
-    methods: parseMethods(swagger),
-    definitions: parseDefinitions(swagger.definitions, swagger.parameters)
+    methods: methods,
+    definitions: parseDefinitions(swagger.definitions, swagger.parameters, swaggerTag ? methods : undefined),
+    serviceName: swaggerTag ? `${swaggerTag}Service` : 'APIClient',
+    fileName: fileName(swaggerTag ? swaggerTag : 'api-client', 'service')
   };
 }
 
-function parseMethods({paths, security, parameters}: Swagger): Method[] {
+function parseMethods({ paths, security, parameters }: Swagger, swaggerTag?: string): Method[] {
   const supportedMethods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT'];
 
   return [].concat.apply([], Object.entries(paths)
     .map(([pathName, pathDef]: [string, Path]) =>
-      Object.entries(pathDef).filter(([methodType,]) => // tslint:disable-line:whitespace
-        supportedMethods.includes(methodType.toUpperCase())  // skip unsupported methods
-      ).map(([methodType, operation]: [string, Operation]) => ({
+      Object.entries(pathDef).filter(([methodType, operation]) => { // tslint:disable-line:whitespace
+        const op = (<Operation>operation);
+        return supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
+          (!swaggerTag || (op.tags && op.tags.includes(swaggerTag))); // if tag is defined take only paths including this tag
+      }).map(([methodType, operation]: [string, Operation]) => {
+        const responseType = determineResponseType(operation.responses);
+        return {
           hasJsonResponse: true,
           isSecure: security !== undefined || operation.security !== undefined,
           methodName: camelCase(operation.operationId
-            ? operation.operationId
+            ? (!swaggerTag ? operation.operationId : operation.operationId.replace(`${swaggerTag}_`, ''))
             : `${methodType}_${pathName.replace(/[{}]/g, '')}`
           ),
           methodType: methodType.toUpperCase() as MethodType,
@@ -76,9 +84,11 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
           path: pathName.replace(
             /{(.*?)}/g,
             (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
-          response: prefixImportedModels(determineResponseType(operation.responses)),
+          responseTypeName: responseType.name,
+          response: prefixImportedModels(responseType.type),
           description: replaceNewLines(operation.description, '$1   * '),
-        })
+        };
+      }
       )
     ));
 }
@@ -86,8 +96,9 @@ function parseMethods({paths, security, parameters}: Swagger): Method[] {
 function parseDefinitions(
   definitions: Definitions = {},
   parameters: Parameters = {},
+  methods?: Method[]
 ): Definition[] {
-  return [
+  const allDefs = [
     ...Object.entries(definitions)
       .map(([key, definition]) => defineEnumOrInterface(key, definition)),
 
@@ -96,6 +107,32 @@ function parseDefinitions(
     ).filter(([, definition]) => (definition.enum && definition.enum.length !== 0) || definition.schema)
       .map(([key, definition]) => defineEnumOrInterface(key, definition)),
   ];
+
+  if (methods) {
+    const usedDefs: Definition[] = [];
+    const filterByName = (name?: string) => {
+      const filtered = allDefs.filter(d => d.name === name);
+
+      const childs: Definition[] = [];
+      filtered.forEach(d => d.properties.forEach(p => {
+        if (p.typescriptType && p.isRef) {
+          childs.push(...filterByName(p.typescriptType));
+        }
+      }));
+      filtered.push(...childs);
+      return filtered;
+    };
+    methods.forEach(method => {
+      usedDefs.push(...filterByName(method.responseTypeName));
+      method.parameters.forEach(param => {
+        usedDefs.push(...filterByName(param.typescriptType));
+      });
+    });
+
+    return Array.from(new Set(usedDefs));
+  } else {
+    return allDefs;
+  }
 }
 
 function defineEnumOrInterface(key: string, definition: Schema | ExtendedParameter): Definition {
@@ -104,17 +141,18 @@ function defineEnumOrInterface(key: string, definition: Schema | ExtendedParamet
     : defineInterface(('schema' in definition ? definition.schema : definition) || {}, key);
 }
 
-function defineEnum(enumSchema: (string | boolean | number | {})[] = [],
-                    definitionKey: string,
-                    isNumeric: boolean = false,
-                    enumDesc: string = '',
+function defineEnum(
+  enumSchema: (string | boolean | number | {})[] = [],
+  definitionKey: string,
+  isNumeric: boolean = false,
+  enumDesc: string = '',
 ): Definition {
   const splitDesc = enumDesc.split('\n');
   const descKeys: { [key: string]: string } | null = splitDesc.length > 1
     ? splitDesc.reduce<{ [key: string]: string }>(
       (acc, cur) => {
         const captured = /(\d) (\w+)/.exec(cur); // parse the `- 42 UltimateAnswer` description syntax
-        return captured ? {...acc, [captured[1]]: captured[2]} : acc;
+        return captured ? { ...acc, [captured[1]]: captured[2] } : acc;
       },
       {}
     )
@@ -175,7 +213,7 @@ function parseReference(schema: Schema): string {
 
 function determineArrayType(property: Schema = {}): string {
   if (Array.isArray(property.items)) {
-    console.warn('Arrays with type diversity are currently not supported');
+    logWarn('Arrays with type diversity are currently not supported');
     return 'any';
   }
 
@@ -197,7 +235,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   const extendInterface: string | undefined = schema.allOf
     ? camelCase(dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref), false)
     : undefined;
-  const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({...props, ...allOfSchema.properties}), {}) : {};
+  const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({ ...props, ...allOfSchema.properties }), {}) : {};
   const properties: Property[] = parseInterfaceProperties({
     ...schema.properties,
     ...allOfProps,
@@ -208,8 +246,8 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
     description: replaceNewLines(schema.description, '$1 * '),
     properties: properties,
     imports: properties
-      .filter(({isRef}) => isRef)
-      .map(({type}) => type || '')
+      .filter(({ isRef }) => isRef)
+      .map(({ type }) => type || '')
       .filter((type) => type !== name)
       .concat(extendInterface ? [extendInterface] : [])
       .sort()
@@ -221,7 +259,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   };
 }
 
-function determineResponseType(responses: { [responseName: string]: Response }): string {
+function determineResponseType(responses: { [responseName: string]: Response }): ResponseType {
   if (responses['200'] !== undefined) { // TODO: check non-200 response codes
     const responseSchema = responses['200'].schema;
 
@@ -230,20 +268,22 @@ function determineResponseType(responses: { [responseName: string]: Response }):
         const items = responseSchema.items;
         if (!Array.isArray(items)) {
           if (items && items.$ref) {
-            return typeName(dereferenceType(items.$ref), true);
+            const name = dereferenceType(items.$ref);
+            return { name: name, type: typeName(name, true) };
           } else if (items) {
-            return typeName(items.type, true);
+            return { name: items.type, type: typeName(items.type, true) };
           }
         } else {
-          console.warn('Arrays with type diversity are currently not supported, `any[]` will be used instead');
+          logWarn('Arrays with type diversity are currently not supported, `any[]` will be used instead');
         }
       }
     } else if (responseSchema && responseSchema.$ref) {
-      return typeName(dereferenceType(responseSchema.$ref));
+      const name = dereferenceType(responseSchema.$ref);
+      return { name: name, type: typeName(name) };
     }
   }
 
-  return 'any';
+  return { name: 'any', type: 'any' };
 }
 
 function transformParameters(
@@ -261,8 +301,8 @@ function transformParameters(
       isArray
         ? determineArrayType(param as Schema)
         : (!ref || (paramRef && 'type' in paramRef && !paramRef.enum && paramRef.type && BASIC_TS_TYPE_REGEX.test(paramRef.type)))
-        ? type
-        : derefName
+          ? type
+          : derefName
     );
 
     return {
@@ -280,12 +320,11 @@ function transformParameters(
   });
 }
 
-function determineParamType(paramType: string | undefined):
-  { isBodyParameter?: boolean } |
-  { isFormParameter?: boolean } |
-  { isHeaderParameter?: boolean } |
-  { isPathParameter?: boolean } |
-  { isQueryParameter?: boolean } {
+function determineParamType(paramType: string | undefined): { isBodyParameter?: boolean } |
+{ isFormParameter?: boolean } |
+{ isHeaderParameter?: boolean } |
+{ isPathParameter?: boolean } |
+{ isQueryParameter?: boolean } {
 
   if (!paramType) {
     return {};
@@ -293,18 +332,18 @@ function determineParamType(paramType: string | undefined):
 
   switch (paramType) {
     case 'body':
-      return {isBodyParameter: true};
+      return { isBodyParameter: true };
     case 'formData':
-      console.warn(`Form parameters are currently unsupported and will not be generated properly`);
-      return {isFormParameter: true};
+      logWarn(`Form parameters are currently unsupported and will not be generated properly`);
+      return { isFormParameter: true };
     case 'header':
-      return {isHeaderParameter: true};
+      return { isHeaderParameter: true };
     case 'path':
-      return {isPathParameter: true};
+      return { isPathParameter: true };
     case 'query' || 'modelbinding':
-      return {isQueryParameter: true};
+      return { isQueryParameter: true };
     default:
-      console.warn(`Unsupported parameter type  [ ${paramType} ]`);
+      logWarn(`Unsupported parameter type  [ ${paramType} ]`);
       return {};
   }
 }

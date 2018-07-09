@@ -20,6 +20,8 @@ export interface MustacheData {
   readonly domain: string;
   readonly methods: Method[];
   readonly definitions: Definition[];
+  readonly serviceName: string;
+  readonly fileName: string;
 }
 
 export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined' | 'any';
@@ -32,7 +34,7 @@ export interface Property {
   readonly isRef?: boolean;
   readonly 'in'?: In | string;
   readonly 'enum'?: (string | boolean | number | {})[];
-  readonly items?: Schema|Schema[];
+  readonly items?: Schema | Schema[];
   readonly name?: string;
   readonly description?: string;
   readonly $ref?: string;
@@ -60,6 +62,34 @@ export interface Method {
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
   readonly response?: string;  // method return type
+  readonly responseTypeName?: string; // method return type without prefix
+}
+
+export interface ResponseType {
+  readonly type: string;
+  readonly name?: string;
+}
+
+/**
+ * Options for generator
+ */
+export interface GenOptions {
+  /**
+   * Path to the swagger file
+   */
+  sourceFile: string;
+  /**
+   * Path where generated files should be emitted
+   */
+  outputPath: string;
+  /**
+   * Generates actions and models only for the specified api
+   */
+  splitPathTags?: string[];
+  /**
+   * Skip creating index file with module export
+   */
+  skipModuleExport?: boolean;
 }
 
 export type AsyncProcedure = (...args: any[]) => Promise<void>; // tslint:disable-line no-any

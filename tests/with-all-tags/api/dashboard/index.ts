@@ -2,13 +2,11 @@
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
-import { {{&serviceName}}, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
+import { DashboardService, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
 
-{{#definitions.length}}
 export * from './models';
-{{/definitions.length}}
 
-export { {{&serviceName}} } from './{{&fileName}}';
+export { DashboardService } from './dashboard.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -27,27 +25,27 @@ export interface HttpOptions {
   withCredentials?: boolean;
 }
 
-export interface {{&serviceName}}ModuleConfig {
+export interface DashboardServiceModuleConfig {
   domain?: string;
   httpOptions?: DefaultHttpOptions;
 }
 
 @NgModule({})
-export class {{&serviceName}}Module {
+export class DashboardServiceModule {
   /**
-   * Use this method in your root module to provide the {{&serviceName}}Module
+   * Use this method in your root module to provide the DashboardServiceModule
    *
    * If you are not providing
-   * @param { {{&serviceName}}ModuleConfig } config
+   * @param { DashboardServiceModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: {{&serviceName}}ModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: DashboardServiceModuleConfig = {}): ModuleWithProviders {
     return {
-      ngModule: {{&serviceName}}Module,
+      ngModule: DashboardServiceModule,
       providers: [
         ...(config.domain ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        {{&serviceName}}
+        DashboardService
       ]
     };
   }
