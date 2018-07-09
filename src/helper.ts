@@ -86,7 +86,7 @@ export function prefixImportedModels(type: string = ''): string {
   return BUILD_IN_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
 }
 
-export function determineDomain({ schemes, host, basePath }: Swagger): string {
+export function determineDomain({schemes, host, basePath}: Swagger): string {
 
   // if the host is defined then try and use a protocol from the swagger file
   // otherwise use the current protocol of loaded app

@@ -27,7 +27,8 @@ const testReferences: TestReference[] = [
   new TestReference('filtered-api', 'json', true, 'DummySelector,NonExistingTag,Project,Products'),
   new TestReference('with-all-tags', 'json', false, 'all')];
 
-const compareOptions = { compareSize: true };
+const compareOptions = {compareSize: true};
+
 const stateSymbols: { [key in State]: string } = {
   equal: '==',
   left: '->',
@@ -58,7 +59,7 @@ async function runTests(): Promise<number> {
     })
       .catch((err: Error) => console.error(`Error has occurred while generating api client for ${reference.name}`, err));
 
-    const { same, equal, distinct, differences, left, right, diffSet } = await compare(`${refDir}/api`, genDir, compareOptions);
+    const {same, equal, distinct, differences, left, right, diffSet} = await compare(`${refDir}/api`, genDir, compareOptions);
 
     if (!same) {
       console.info(Colors.Red, `Test for ${reference.name} has failed\n`, Colors.Reset);
@@ -70,7 +71,7 @@ async function runTests(): Promise<number> {
       console.info(`differences: ${differences}\n`);
 
       console.info('[ reference dir ]         [ test dir ]');
-      diffSet.forEach(({ name1, name2, state, type1, type2 }: DiffSet) => {
+      diffSet.forEach(({name1, name2, state, type1, type2}: DiffSet) => {
         if (stateSymbols[state] !== stateSymbols.equal) {
           console.info(`(${type1}) ${name1}  ${stateSymbols[state]}  ${name2} (${type2})`);
         }

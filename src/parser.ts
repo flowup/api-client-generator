@@ -57,7 +57,7 @@ export function createMustacheViewModel(swagger: Swagger, swaggerTag?: string): 
   };
 }
 
-function parseMethods({ paths, security, parameters }: Swagger, swaggerTag?: string): Method[] {
+function parseMethods({paths, security, parameters}: Swagger, swaggerTag?: string): Method[] {
   const supportedMethods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT'];
 
   return [].concat.apply([], Object.entries(paths)
@@ -67,28 +67,28 @@ function parseMethods({ paths, security, parameters }: Swagger, swaggerTag?: str
         return supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
           (!swaggerTag || (op.tags && op.tags.includes(swaggerTag))); // if tag is defined take only paths including this tag
       }).map(([methodType, operation]: [string, Operation]) => {
-        const responseType = determineResponseType(operation.responses);
-        return {
-          hasJsonResponse: true,
-          isSecure: security !== undefined || operation.security !== undefined,
-          methodName: camelCase(operation.operationId
-            ? (!swaggerTag ? operation.operationId : operation.operationId.replace(`${swaggerTag}_`, ''))
-            : `${methodType}_${pathName.replace(/[{}]/g, '')}`
-          ),
-          methodType: methodType.toUpperCase() as MethodType,
-          parameters: transformParameters(
-            [...(pathDef.parameters || []), ...(operation.parameters || [])],
-            parameters || {}
-          ),
-          // turn path interpolation `{this}` into string template `${args.this}
-          path: pathName.replace(
-            /{(.*?)}/g,
-            (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
-          responseTypeName: responseType.name,
-          response: prefixImportedModels(responseType.type),
-          description: replaceNewLines(operation.description, '$1   * '),
-        };
-      }
+          const responseType = determineResponseType(operation.responses);
+          return {
+            hasJsonResponse: true,
+            isSecure: security !== undefined || operation.security !== undefined,
+            methodName: camelCase(operation.operationId
+              ? (!swaggerTag ? operation.operationId : operation.operationId.replace(`${swaggerTag}_`, ''))
+              : `${methodType}_${pathName.replace(/[{}]/g, '')}`
+            ),
+            methodType: methodType.toUpperCase() as MethodType,
+            parameters: transformParameters(
+              [...(pathDef.parameters || []), ...(operation.parameters || [])],
+              parameters || {}
+            ),
+            // turn path interpolation `{this}` into string template `${args.this}
+            path: pathName.replace(
+              /{(.*?)}/g,
+              (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
+            responseTypeName: responseType.name,
+            response: prefixImportedModels(responseType.type),
+            description: replaceNewLines(operation.description, '$1   * '),
+          };
+        }
       )
     ));
 }
@@ -113,13 +113,13 @@ function parseDefinitions(
     const filterByName = (name?: string) => {
       const filtered = allDefs.filter(d => d.name === name);
 
-      const childs: Definition[] = [];
+      const children: Definition[] = [];
       filtered.forEach(d => d.properties.forEach(p => {
         if (p.typescriptType && p.isRef) {
-          childs.push(...filterByName(p.typescriptType));
+          children.push(...filterByName(p.typescriptType));
         }
       }));
-      filtered.push(...childs);
+      filtered.push(...children);
       return filtered;
     };
     methods.forEach(method => {
@@ -152,7 +152,7 @@ function defineEnum(
     ? splitDesc.reduce<{ [key: string]: string }>(
       (acc, cur) => {
         const captured = /(\d) (\w+)/.exec(cur); // parse the `- 42 UltimateAnswer` description syntax
-        return captured ? { ...acc, [captured[1]]: captured[2] } : acc;
+        return captured ? {...acc, [captured[1]]: captured[2]} : acc;
       },
       {}
     )
@@ -235,7 +235,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   const extendInterface: string | undefined = schema.allOf
     ? camelCase(dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref), false)
     : undefined;
-  const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({ ...props, ...allOfSchema.properties }), {}) : {};
+  const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({...props, ...allOfSchema.properties}), {}) : {};
   const properties: Property[] = parseInterfaceProperties({
     ...schema.properties,
     ...allOfProps,
@@ -246,8 +246,8 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
     description: replaceNewLines(schema.description, '$1 * '),
     properties: properties,
     imports: properties
-      .filter(({ isRef }) => isRef)
-      .map(({ type }) => type || '')
+      .filter(({isRef}) => isRef)
+      .map(({type}) => type || '')
       .filter((type) => type !== name)
       .concat(extendInterface ? [extendInterface] : [])
       .sort()
@@ -269,9 +269,9 @@ function determineResponseType(responses: { [responseName: string]: Response }):
         if (!Array.isArray(items)) {
           if (items && items.$ref) {
             const name = dereferenceType(items.$ref);
-            return { name: name, type: typeName(name, true) };
+            return {name: name, type: typeName(name, true)};
           } else if (items) {
-            return { name: items.type, type: typeName(items.type, true) };
+            return {name: items.type, type: typeName(items.type, true)};
           }
         } else {
           logWarn('Arrays with type diversity are currently not supported, `any[]` will be used instead');
@@ -279,11 +279,11 @@ function determineResponseType(responses: { [responseName: string]: Response }):
       }
     } else if (responseSchema && responseSchema.$ref) {
       const name = dereferenceType(responseSchema.$ref);
-      return { name: name, type: typeName(name) };
+      return {name: name, type: typeName(name)};
     }
   }
 
-  return { name: 'any', type: 'any' };
+  return {name: 'any', type: 'any'};
 }
 
 function transformParameters(
@@ -321,10 +321,10 @@ function transformParameters(
 }
 
 function determineParamType(paramType: string | undefined): { isBodyParameter?: boolean } |
-{ isFormParameter?: boolean } |
-{ isHeaderParameter?: boolean } |
-{ isPathParameter?: boolean } |
-{ isQueryParameter?: boolean } {
+  { isFormParameter?: boolean } |
+  { isHeaderParameter?: boolean } |
+  { isPathParameter?: boolean } |
+  { isQueryParameter?: boolean } {
 
   if (!paramType) {
     return {};
@@ -332,16 +332,16 @@ function determineParamType(paramType: string | undefined): { isBodyParameter?: 
 
   switch (paramType) {
     case 'body':
-      return { isBodyParameter: true };
+      return {isBodyParameter: true};
     case 'formData':
       logWarn(`Form parameters are currently unsupported and will not be generated properly`);
-      return { isFormParameter: true };
+      return {isFormParameter: true};
     case 'header':
-      return { isHeaderParameter: true };
+      return {isHeaderParameter: true};
     case 'path':
-      return { isPathParameter: true };
+      return {isPathParameter: true};
     case 'query' || 'modelbinding':
-      return { isQueryParameter: true };
+      return {isQueryParameter: true};
     default:
       logWarn(`Unsupported parameter type  [ ${paramType} ]`);
       return {};

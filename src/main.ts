@@ -19,7 +19,7 @@ const optimist = opt
   .describe('C', 'Autocommit changes')
   .describe('v', 'Print error stack traces')
   .describe('t', 'Generates services and models only for the specified tags.'
-    + ' Use , as separator for multiple tags. Use `all` to emit a service per tag')
+    + ' Use `,` (comma) as the separator for multiple tags. Use `all` to emit a service per tag')
   .describe('m', 'Skip creating index file with module export');
 
 const argv = optimist.argv;
@@ -43,7 +43,7 @@ const options: GenOptions = {
 
 
 const generate: typeof generateAPIClient = argv.commit ?
-  commitAfter(generateAPIClient, { addPath: options.outputPath }) :
+  commitAfter(generateAPIClient, {addPath: options.outputPath}) :
   generateAPIClient;
 
 generate(options)
