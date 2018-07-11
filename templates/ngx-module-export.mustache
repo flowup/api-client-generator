@@ -8,7 +8,8 @@ import { {{&serviceName}}, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.ser
 export * from './models';
 {{/definitions.length}}
 
-export { {{&serviceName}} } from './{{&fileName}}';
+export { {{&serviceName}} } from './{{&serviceFileName}}';
+export { {{&interfaceName}} } from './{{&interfaceFileName}}';
 
 /**
  * provided options, headers and params will be used as default for each request
