@@ -130,6 +130,7 @@ output
  │   │  ...
  │   ├─ another.model.ts
  │   └─ index.ts
+ ├─ api-client.interface.ts
  ├─ api-client.service.ts
  └─ index.ts
 ```

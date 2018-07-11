@@ -53,7 +53,9 @@ export function createMustacheViewModel(swagger: Swagger, swaggerTag?: string): 
     methods: methods,
     definitions: parseDefinitions(swagger.definitions, swagger.parameters, swaggerTag ? methods : undefined),
     serviceName: swaggerTag ? `${swaggerTag}Service` : 'APIClient',
-    fileName: fileName(swaggerTag ? swaggerTag : 'api-client', 'service')
+    serviceFileName: fileName(swaggerTag ? swaggerTag : 'api-client', 'service'),
+    interfaceName: swaggerTag ? `${swaggerTag}Interface` : 'APIClientInterface',
+    interfaceFileName: fileName(swaggerTag ? swaggerTag : 'api-client', 'interface'),
   };
 }
 

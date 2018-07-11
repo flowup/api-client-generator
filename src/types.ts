@@ -21,12 +21,15 @@ export interface MustacheData {
   readonly methods: Method[];
   readonly definitions: Definition[];
   readonly serviceName: string;
-  readonly fileName: string;
+  readonly serviceFileName: string;
+  readonly interfaceName: string;
+  readonly interfaceFileName: string;
 }
 
 export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined' | 'any';
 export type In = 'body' | 'path' | 'query' | 'modelbinding' | 'header' | 'formData';
 export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+export type FileInfix = 'model' | 'enum' | 'service' | 'interface';
 
 export interface Property {
   readonly camelCaseName?: string;

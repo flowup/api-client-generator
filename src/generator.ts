@@ -47,8 +47,11 @@ export async function generateAPIClient(options: GenOptions): Promise<void> {
           if (!existsSync(outputPath)) {
             await ensureDir(outputPath);
           }
-          await generateClient(mustacheData, outputPath);
-          await generateModels(mustacheData, outputPath);
+          await Promise.all([
+            generateClient(mustacheData, outputPath),
+            generateClientInterface(mustacheData, outputPath),
+            generateModels(mustacheData, outputPath),
+          ]);
           if (!options.skipModuleExport) {
             await generateModuleExportIndex(mustacheData, outputPath);
           }
@@ -63,7 +66,15 @@ async function generateClient(viewContext: MustacheData, outputPath: string): Pr
   const clientTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-service.mustache`)).toString();
 
   const result = Mustache.render(clientTemplate, viewContext);
-  const outfile = join(outputPath, `${viewContext.fileName}.ts`);
+  const outfile = join(outputPath, `${viewContext.serviceFileName}.ts`);
+
+  await promisify(writeFile)(outfile, result, 'utf-8');
+}
+
+async function generateClientInterface(viewContext: MustacheData, outputPath: string): Promise<void> {
+  const template = (await promisify(readFile)(`${__dirname}/../templates/ngx-service-interface.mustache`)).toString();
+  const result = Mustache.render(template, viewContext);
+  const outfile = join(outputPath, `${viewContext.interfaceFileName}.ts`);
 
   await promisify(writeFile)(outfile, result, 'utf-8');
 }

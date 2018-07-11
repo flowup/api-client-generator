@@ -1,4 +1,5 @@
 import { Spec as Swagger, Path, Operation } from 'swagger-schema-official';
+import { FileInfix } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(string|number|integer|boolean)\b/;
 const BUILD_IN_TS_TYPE_REGEX = /\b(string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
@@ -78,7 +79,7 @@ export function typeName(name: string = 'any', isArray: boolean = false): string
   return `${type}${isArray ? '[]' : ''}`;
 }
 
-export function fileName(name: string = '', type: 'model' | 'enum' | 'service' = 'model'): string {
+export function fileName(name: string = '', type: FileInfix = 'model'): string {
   return `${dashCase(name)}.${type}`;
 }
 

@@ -3,7 +3,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from './';
+import { DefaultHttpOptions, HttpOptions, ProjectInterface } from './';
 
 import * as models from './models';
 
@@ -19,7 +19,7 @@ type APIHttpOptions = HttpOptions & {
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
-export class ProjectService {
+export class ProjectService implements ProjectInterface {
 
   readonly options: APIHttpOptions;
 

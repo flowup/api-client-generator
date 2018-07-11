@@ -7,6 +7,7 @@ import { DashboardService, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.ser
 export * from './models';
 
 export { DashboardService } from './dashboard.service';
+export { DashboardInterface } from './dashboard.interface';
 
 /**
  * provided options, headers and params will be used as default for each request
