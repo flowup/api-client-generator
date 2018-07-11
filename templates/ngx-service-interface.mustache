@@ -1,0 +1,26 @@
+/* tslint:disable */
+
+import { Observable } from 'rxjs';
+import { HttpOptions } from './';
+import * as models from './models';
+
+export interface {{&interfaceName}} {
+
+{{#methods}}
+  {{#description}}
+  /**
+   * {{&.}}
+   */
+{{/description}}  {{&methodName}}(
+  {{#parameters.length}}
+    args: {
+    {{#parameters}}
+      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{importType}}{{#isArray}}[]{{/isArray}},{{#description}}  //{{^isRequired}} (optional){{/isRequired}} {{&.}}{{/description}}
+    {{/parameters}}
+    },
+  {{/parameters.length}}
+    requestHttpOptions?: HttpOptions
+  ): Observable<{{&response}}>;
+
+{{/methods}}
+}

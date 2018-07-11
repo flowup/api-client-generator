@@ -7,6 +7,7 @@ import { APIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
 export * from './models';
 
 export { APIClient } from './api-client.service';
+export { APIClientInterface } from './api-client.interface';
 
 /**
  * provided options, headers and params will be used as default for each request

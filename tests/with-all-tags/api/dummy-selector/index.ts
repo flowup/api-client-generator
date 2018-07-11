@@ -7,6 +7,7 @@ import { DummySelectorService, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client
 export * from './models';
 
 export { DummySelectorService } from './dummy-selector.service';
+export { DummySelectorInterface } from './dummy-selector.interface';
 
 /**
  * provided options, headers and params will be used as default for each request

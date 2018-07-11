@@ -7,6 +7,7 @@ import { ProjectService, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.servi
 export * from './models';
 
 export { ProjectService } from './project.service';
+export { ProjectInterface } from './project.interface';
 
 /**
  * provided options, headers and params will be used as default for each request
