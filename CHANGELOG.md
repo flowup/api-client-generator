@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/flowup/api-client-generator/compare/3.4.1...3.5.0) (2018-07-12)
+
+
+### Bug Fixes
+
+* **generator:** validate swagger file before parse ([cafa99f](https://github.com/flowup/api-client-generator/commit/cafa99f)), closes [#58](https://github.com/flowup/api-client-generator/issues/58)
+
+
+### Features
+
+* **api-client:** interface generated for service mocking purposes ([f10c9b3](https://github.com/flowup/api-client-generator/commit/f10c9b3))
+* **autocommit:** implemented ([a9d5fd0](https://github.com/flowup/api-client-generator/commit/a9d5fd0))
+* **api-client:** option to generate separate clients based on the path tags ([20addd1](https://github.com/flowup/api-client-generator/commit/20addd1))
+
+
 <a name="3.4.1"></a>
 ## [3.4.1](https://github.com/flowup/api-client-generator/compare/3.4.0...3.4.1) (2018-06-22)
 
