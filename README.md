@@ -21,11 +21,25 @@ This package generates a Angular TypeScript classes from a Swagger v2.0 specific
 
 The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular (introduced in version 4.3).
 
+### Motivation
+
+This tool provides an easy and sustainable solution for making the classic REST API feel like you wish it has felt in TypeScript.
+
+It starts by having the same data models at front-end and back-end, then continues with API client interface in form of service build on Angular HTTP client. Everything is typed and described in the way developer don't even need to study the API endpoints.
+
+All you need to set it up is an up to date swagger file and Angular project.
+
+##### How is this relevant for you?
+
+A lot of developers is struggling with how to properly use the REST API in their apps. In Angular, we have a great opportunity which is HTTP Client supporting types. It is a great experience when you can work on a project where your models and data service are pre-generated and you can focus on state management, UI and business logic.
+
 # Compatibility
 
 - **Angular 6** (should also work with 5 and 4.3+)
 - **RxJS 6** (Observable imports)
   - in case of rxjs <6 update or rewrite the rxjs import to match older version
+
+See the [Changelog](https://github.com/flowup/api-client-generator/blob/master/CHANGELOG.md) to keep up with the features and changes.
 
 # Installation
 
