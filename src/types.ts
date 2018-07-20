@@ -95,8 +95,4 @@ export interface GenOptions {
   skipModuleExport?: boolean;
 }
 
-export type AsyncProcedure = (...args: any[]) => Promise<void>; // tslint:disable-line no-any
-
-export interface CommitOptions {
-  addPath: string;
-}
+export type ClientGenerator = (...args: any[]) => Promise<string[]>; // tslint:disable-line no-any
