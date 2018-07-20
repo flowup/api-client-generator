@@ -43,7 +43,7 @@ const options: GenOptions = {
 
 
 const generate: typeof generateAPIClient = argv.commit ?
-  commitAfter(generateAPIClient, {addPath: options.outputPath}) :
+  commitAfter(generateAPIClient) :
   generateAPIClient;
 
 generate(options)
