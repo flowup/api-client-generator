@@ -12,12 +12,13 @@
 # API client generator
 Angular REST API client generator from Swagger YAML or JSON file with camel case settings
 
-Generated files are compatible with Angular 6 (should be compatible with 5 version too). RxJS imports are targeted for version 6.
+Generated files are compatible with Angular 6 (should be compatible with 5 version too). 
+RxJS imports are targeted for version 6+.
 
 ![Logo](https://raw.githubusercontent.com/flowup/api-client-generator/master/api-client-generator-logo.png)
 
 # Description
-This package generates a Angular TypeScript classes from a Swagger v2.0 specification file. The code is generated using Mustache templates.
+This package generates an Angular TypeScript class from a Swagger v2.0 specification file. The code is generated using Mustache templates.
 
 The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular (introduced in version 4.3).
 
@@ -37,7 +38,7 @@ A lot of developers is struggling with how to properly use the REST API in their
 
 - **Angular 6** (should also work with 5 and 4.3+)
 - **RxJS 6** (Observable imports)
-  - in case of rxjs <6 update or rewrite the rxjs import to match older version
+  - in case of rxjs <6 please update or rewrite the rxjs import to match the older version
 
 See the [Changelog](https://github.com/flowup/api-client-generator/blob/master/CHANGELOG.md) to keep up with the features and changes.
 
@@ -47,7 +48,7 @@ See the [Changelog](https://github.com/flowup/api-client-generator/blob/master/C
 
 `[sudo] npm install -g api-client-generator`
 
-This command will generate API client described in swagger.json file to ./output folder
+This command will generate API client described in the swagger.json file to the./output folder
 
 `api-client-generator -s ./path/to/swagger.json -o ./output`
 
@@ -70,13 +71,13 @@ This command will generate API client described in swagger.json file to ./output
 | Option                 | Description                                                                                                     |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------|
 | `-h`/`--help`          | print help and exit                                                                                             |
-| `-s`/`--source`        | path to the swagger file (yaml or json)                                                                         |
+| `-s`/`--source`        | path to the swagger file (YAML or JSON)                                                                         |
 | `-o`/`--output`        | path where the generated files should be emitted                                                                |
 | `-C`/`--commit`        | `git commit` generated changes \*                                                                               |
 | `-v`/`--verbose`       | supply stack traces with outputted error messages                                                               |
 | `-t`/`--splitPathTags` | generate services and models only for the specified tags. Use `,` as the separator for multiple tags            |
 |                        | use `all` to emit all as a service per tag                                                                      |
-| `-m`/`--skipModule`    | skip creating index file with module export                                                                     |
+| `-m`/`--skipModule`    | skip creating the index file with module export                                                                     |
 
 <small>\* The author of the commit will be `api-client-generator <api-client-generator@flowup.cz>`.
 If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.*</small>
@@ -86,8 +87,8 @@ If there are any staged changes in your repository, the generator will halt pre-
 1. import the `APIClientModule` in your `app.module.ts` (main module)
 - domain and configuration should be passed to module imports using `.forRoot` method
 - options and domain are optional
-- when domain is not passed, host property form swagger file is used as default
-  - if host property is not defined `window.href` with current port is used instead
+- when a domain is not passed, host property form swagger file is used as a default
+  - if host property is not defined `window.href` with a current port is used instead
 
 ```typescript
 @NgModule({
@@ -134,7 +135,7 @@ export class MyComponent {
 
 # Generated structure
 
-- if you are interested on how will the generated client with models look like, take a look in a `example/` folder
+- if you are interested in how will the generated client with models look like, take a look in an `example/` folder
 
 ```
 output
@@ -165,10 +166,10 @@ Fix:
 
 # Problem reporting and contributions
 
-Please report any problems you have and issues you find so they can be resolved.
+Please report any problems you have any issues you find so they can be resolved.
 If the generator terminates with an error message, please re-run it with the `-v` flag and post the outputted stack trace.
 
-Feel free to discuss desired improvements or functionality in issues. Afterwards the pull requests are very welcome.
+Feel free to discuss desired improvements or functionality in issues. Afterwards, the pull requests are very welcome.
 
 -------
 
