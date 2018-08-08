@@ -1,8 +1,8 @@
 import { Spec as Swagger, Path, Operation } from 'swagger-schema-official';
 import { FileInfix } from './types';
 
-export const BASIC_TS_TYPE_REGEX = /\b(string|number|integer|boolean)\b/;
-const BUILD_IN_TS_TYPE_REGEX = /\b(string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
+export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|boolean)\b/;
+const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
 
 export function camelCase(text: string = '', lowerFirst: boolean = true): string {
   text = removeDuplicateWords(text);

@@ -45,6 +45,6 @@ export interface APIClientInterface {
 
   getCustomers(
     requestHttpOptions?: HttpOptions
-  ): Observable<Customer[] | null>;
+  ): Observable<models.Customer[] | null>;
 
 }
