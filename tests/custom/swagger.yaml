@@ -92,6 +92,16 @@ paths:
       responses:
         '200':
           description: Updated
+  /customers:
+    get:
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            x-nullable: true
+            items:
+              $ref: "#/definitions/customer"
 definitions:
   ItemList:
     description: List of items,
