@@ -117,11 +117,11 @@ export class APIClient implements APIClientInterface {
 
   getCustomers(
     requestHttpOptions?: HttpOptions
-  ): Observable<Customer[] | null> {
+  ): Observable<models.Customer[] | null> {
     const path = `/customers`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<Customer[] | null>('GET', path, options);
+    return this.sendRequest<models.Customer[] | null>('GET', path, options);
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
