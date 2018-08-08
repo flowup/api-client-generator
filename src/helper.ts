@@ -118,3 +118,12 @@ export function getAllSwaggerTags(swagger: Swagger): string[] {
     );
   return Array.from(new Set(allTags));
 }
+
+/**
+ * Aggregates an array of promises of arrays to a single promise of a flattened array.
+ * @param promises An array of promises that resolve to arrays of values.
+ * @returns A promise to an array of single values.
+ */
+export async function flattenAll<T>(promises: Promise<T[]>[]): Promise<T[]> {
+  return Array.prototype.concat(...await Promise.all(promises));
+}

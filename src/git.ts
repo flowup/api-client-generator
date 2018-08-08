@@ -2,19 +2,18 @@ import { sync as whichSync } from 'which';
 import { spawnSync } from 'child_process';
 import { cwd } from 'process';
 import { version } from '../package.json';
-import { AsyncProcedure, CommitOptions } from './types';
+import { ClientGenerator } from './types';
 
 const COMMIT_MESSAGE = `chore(api-client): generated using version ${version}`;
 const COMMIT_AUTHOR = 'api-client-generator <api-client-generator@flowup.cz>';
 
 /**
- * Decorates an async procedure with an add&commit (with automatic message and author) performed in the CWD.
- * @param procedure The async procedure to decorate.
- * @param addPath The path to add before committing.
+ * Decorates the client generator with an add&commit (with automatic message and author) performed in the CWD.
+ * @param generator The client generation function.
  * @returns Decorated `procedure`.
  * @throws A descriptive Error if there are any staged changes in the current repo or if any of the necessary Git commands fail.
  */
-export function commitAfter(procedure: AsyncProcedure, {addPath}: CommitOptions): AsyncProcedure {
+export function commitAfter(generator: ClientGenerator): ClientGenerator {
   return async (...args: any[]) => { // tslint:disable-line no-any
     if (whichSync('git', {nothrow: true}) == null) {
       throw new Error('"git" command not found on your system');
@@ -24,9 +23,10 @@ export function commitAfter(procedure: AsyncProcedure, {addPath}: CommitOptions)
       throw new Error('There are staged changes in your repository -- please commit, reset or stash them and re-run the generator');
     }
 
-    await procedure(...args);
-    addFiles(addPath);
+    const filePaths = await generator(...args);
+    addFiles(filePaths);
     commitChanges();
+    return filePaths;
   };
 }
 
@@ -45,15 +45,17 @@ function stagedChanges(): boolean {
 }
 
 /**
- * Performs `git add` of a given path.
- * @param addPath The path to stage.
+ * Performs `git add` of given files.
+ * @param addPaths Paths to the files to stage.
  * @throws A descriptive Error if `git add` fails.
  */
-function addFiles(addPath: string): void {
-  const {status, stderr} = spawnSync('git', ['add', addPath]);
-  if (status !== 0) {
-    throw new Error(`Error performing "git add ${addPath}" in "${cwd()}":\n${stderr}`);
-  }
+function addFiles(addPaths: string[]): void {
+  addPaths.forEach(path => {
+    const {status, stderr} = spawnSync('git', ['add', path]);
+    if (status !== 0) {
+      throw new Error(`Error performing "git add ${path}" in "${cwd()}":\n${stderr}`);
+    }
+  });
 }
 
 /**
