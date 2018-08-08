@@ -27,7 +27,7 @@ export interface APIClientInterface {
       id: string,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<any[]>;
 
   deletePetsId(
     args: {
@@ -42,5 +42,9 @@ export interface APIClientInterface {
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any>;
+
+  getCustomers(
+    requestHttpOptions?: HttpOptions
+  ): Observable<Customer[] | null>;
 
 }

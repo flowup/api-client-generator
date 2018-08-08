@@ -268,27 +268,40 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
 }
 
 function determineResponseType(responses: { [responseName: string]: Response }): ResponseType {
-  if (responses['200'] !== undefined) { // TODO: check non-200 response codes
-    const responseSchema = responses['200'].schema;
+  const okResponse = responses['200'];
+  if (okResponse == null) { // TODO: check non-200 response codes
+    logWarn('200 response not specified; `any` will be used');
+    return {name: 'any', type: 'any'};
+  }
 
-    if (responseSchema && responseSchema.type) {
-      if (responseSchema.type === 'array') {
-        const items = responseSchema.items;
-        if (!Array.isArray(items)) {
-          if (items && items.$ref) {
-            const name = dereferenceType(items.$ref);
-            return {name: name, type: typeName(name, true)};
-          } else if (items) {
-            return {name: items.type, type: typeName(items.type, true)};
-          }
-        } else {
-          logWarn('Arrays with type diversity are currently not supported, `any[]` will be used instead');
-        }
-      }
-    } else if (responseSchema && responseSchema.$ref) {
-      const name = dereferenceType(responseSchema.$ref);
-      return {name: name, type: typeName(name)};
+  const {schema} = okResponse;
+  if (schema == null) {
+    logWarn('200 response schema not specified; `any` will be used');
+    return {name: 'any', type: 'any'};
+  }
+
+  const nullable = (schema as Schema & {'x-nullable'?: boolean})['x-nullable'] || false;
+  if (schema.type === 'array') {
+    const {items} = schema;
+    if (items == null) {
+      logWarn('`items` field not present; `any[]` will be used');
+      return {name: 'any', type: 'any[]'};
     }
+
+    if (Array.isArray(items)) {
+      logWarn('Arrays with type diversity are currently not supported; `any[]` will be used');
+      return {name: 'any', type: 'any[]'};
+    }
+
+    const name = items.$ref ? dereferenceType(items.$ref) : items.type;
+    const type = nullable ? `${typeName(name, true)} | null` : typeName(name, true);
+    return {name, type};
+  }
+
+  if (schema.$ref != null) {
+    const name = dereferenceType(schema.$ref);
+    const type = nullable ? `${typeName(name)} | null` : typeName(name);
+    return {name, type};
   }
 
   return {name: 'any', type: 'any'};
