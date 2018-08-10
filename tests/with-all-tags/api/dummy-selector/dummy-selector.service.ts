@@ -23,13 +23,13 @@ export class DummySelectorService implements DummySelectorInterface {
 
   readonly options: APIHttpOptions;
 
-  private readonly domain: string = `http://localhost:49801`;
+  readonly domain: string = `http://localhost:49801`;
 
   constructor(private readonly http: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options: DefaultHttpOptions) {
+              @Optional() @Inject(USE_DOMAIN) domain?: string,
+              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
 
-    if (domain) {
+    if (domain != null) {
       this.domain = domain;
     }
 

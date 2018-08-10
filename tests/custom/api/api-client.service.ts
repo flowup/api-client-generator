@@ -23,13 +23,13 @@ export class APIClient implements APIClientInterface {
 
   readonly options: APIHttpOptions;
 
-  private readonly domain: string = `//${window.location.hostname}${window.location.port ? ':'+window.location.port : ''}`;
+  readonly domain: string = `//${window.location.hostname}${window.location.port ? ':'+window.location.port : ''}`;
 
   constructor(private readonly http: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options: DefaultHttpOptions) {
+              @Optional() @Inject(USE_DOMAIN) domain?: string,
+              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
 
-    if (domain) {
+    if (domain != null) {
       this.domain = domain;
     }
 

@@ -23,13 +23,13 @@ export class APIClient implements APIClientInterface {
 
   readonly options: APIHttpOptions;
 
-  private readonly domain: string = `https://virtserver.swaggerhub.com/Esquare/EsquareAPI/1.0.0`;
+  readonly domain: string = `https://virtserver.swaggerhub.com/Esquare/EsquareAPI/1.0.0`;
 
   constructor(private readonly http: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options: DefaultHttpOptions) {
+              @Optional() @Inject(USE_DOMAIN) domain?: string,
+              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
 
-    if (domain) {
+    if (domain != null) {
       this.domain = domain;
     }
 

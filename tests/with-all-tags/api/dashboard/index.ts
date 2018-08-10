@@ -44,7 +44,7 @@ export class DashboardServiceModule {
     return {
       ngModule: DashboardServiceModule,
       providers: [
-        ...(config.domain ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
+        ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
         DashboardService
       ]
