@@ -46,16 +46,17 @@ type ExtendedSwaggerParam = SwaggerParameter & { $ref?: string, 'enum'?: EnumTyp
 
 export function createMustacheViewModel(swagger: Swagger, swaggerTag?: string): MustacheData {
   const methods = parseMethods(swagger, swaggerTag);
+  const camelSwaggerTag = camelCase(swaggerTag, false);
   return {
     isSecure: !!swagger.securityDefinitions,
     swagger: swagger,
     domain: determineDomain(swagger),
     methods: methods,
     definitions: parseDefinitions(swagger.definitions, swagger.parameters, swaggerTag ? methods : undefined),
-    serviceName: swaggerTag ? `${swaggerTag}Service` : 'APIClient',
-    serviceFileName: fileName(swaggerTag ? swaggerTag : 'api-client', 'service'),
-    interfaceName: swaggerTag ? `${swaggerTag}Interface` : 'APIClientInterface',
-    interfaceFileName: fileName(swaggerTag ? swaggerTag : 'api-client', 'interface'),
+    serviceName: camelSwaggerTag ? `${camelSwaggerTag}APIClient` : 'APIClient',
+    serviceFileName: fileName(camelSwaggerTag ? `${camelSwaggerTag}APIClient` : 'api-client', 'service'),
+    interfaceName: camelSwaggerTag ? `${camelSwaggerTag}APIClientInterface` : 'APIClientInterface',
+    interfaceFileName: fileName(camelSwaggerTag ? `${camelSwaggerTag}APIClient` : 'api-client', 'interface'),
   };
 }
 

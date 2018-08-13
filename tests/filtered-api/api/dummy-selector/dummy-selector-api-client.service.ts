@@ -3,12 +3,12 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions, ProjectInterface } from './';
+import { DefaultHttpOptions, HttpOptions, DummySelectorAPIClientInterface } from './';
 
 import * as models from './models';
 
-export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
-export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
+export const USE_DOMAIN = new InjectionToken<string>('DummySelectorAPIClient_USE_DOMAIN');
+export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('DummySelectorAPIClient_USE_HTTP_OPTIONS');
 
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
@@ -19,7 +19,7 @@ type APIHttpOptions = HttpOptions & {
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
-export class ProjectService implements ProjectInterface {
+export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
 
   readonly options: APIHttpOptions;
 
@@ -41,13 +41,53 @@ export class ProjectService implements ProjectInterface {
     };
   }
 
-  getProjectTypes(
+  get(
+    args: {
+      organizerTaskElementId: number,
+    },
     requestHttpOptions?: HttpOptions
-  ): Observable<models.ProjectTypeViewModel[]> {
-    const path = `/api/project/projecttypes`;
+  ): Observable<models.DummySelectorViewModel> {
+    const path = `/api/dummyselector/${args.organizerTaskElementId}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<models.ProjectTypeViewModel[]>('GET', path, options);
+    return this.sendRequest<models.DummySelectorViewModel>('GET', path, options);
+  }
+
+  getSettings(
+    args: {
+      organizerTaskElementId: number,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.DummySelectorSettings> {
+    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<models.DummySelectorSettings>('GET', path, options);
+  }
+
+  putSettings(
+    args: {
+      organizerTaskElementId: number,
+      betriebSelectorSettings: models.DummySelectorSettings,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<any> {
+    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.betriebSelectorSettings));
+  }
+
+  deleteSettings(
+    args: {
+      organizerTaskElementId: number,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<any> {
+    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<any>('DELETE', path, options);
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {

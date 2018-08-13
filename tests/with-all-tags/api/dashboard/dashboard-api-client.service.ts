@@ -3,12 +3,12 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions, DummySelectorInterface } from './';
+import { DefaultHttpOptions, HttpOptions, DashboardAPIClientInterface } from './';
 
 import * as models from './models';
 
-export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
-export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
+export const USE_DOMAIN = new InjectionToken<string>('DashboardAPIClient_USE_DOMAIN');
+export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('DashboardAPIClient_USE_HTTP_OPTIONS');
 
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
@@ -19,7 +19,7 @@ type APIHttpOptions = HttpOptions & {
  * Created with https://github.com/flowup/api-client-generator
  */
 @Injectable()
-export class DummySelectorService implements DummySelectorInterface {
+export class DashboardAPIClient implements DashboardAPIClientInterface {
 
   readonly options: APIHttpOptions;
 
@@ -41,53 +41,50 @@ export class DummySelectorService implements DummySelectorInterface {
     };
   }
 
-  get(
-    args: {
-      organizerTaskElementId: number,
-    },
+  getWidgetTypes(
     requestHttpOptions?: HttpOptions
-  ): Observable<models.DummySelectorViewModel> {
-    const path = `/api/dummyselector/${args.organizerTaskElementId}`;
+  ): Observable<models.WidgetTypeViewModel[]> {
+    const path = `/api/dashboards/widgettypes`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<models.DummySelectorViewModel>('GET', path, options);
+    return this.sendRequest<models.WidgetTypeViewModel[]>('GET', path, options);
+  }
+
+  get(
+    args: {
+      dashboardId: number,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.DashboardViewModel> {
+    const path = `/api/dashboards/${args.dashboardId}`;
+    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+
+    return this.sendRequest<models.DashboardViewModel>('GET', path, options);
   }
 
   getSettings(
     args: {
-      organizerTaskElementId: number,
+      dashboardId: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<models.DummySelectorSettings> {
-    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
+  ): Observable<models.RowModel[]> {
+    const path = `/api/dashboards/${args.dashboardId}/settings`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<models.DummySelectorSettings>('GET', path, options);
+    return this.sendRequest<models.RowModel[]>('GET', path, options);
   }
 
   putSettings(
     args: {
-      organizerTaskElementId: number,
-      betriebSelectorSettings: models.DummySelectorSettings,
+      dashboardId: number,
+      rows: any,
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
-    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
+    const path = `/api/dashboards/${args.dashboardId}/settings`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.betriebSelectorSettings));
-  }
-
-  deleteSettings(
-    args: {
-      organizerTaskElementId: number,
-    },
-    requestHttpOptions?: HttpOptions
-  ): Observable<any> {
-    const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
-
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.rows));
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {

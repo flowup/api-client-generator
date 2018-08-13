@@ -9,8 +9,8 @@ import { DefaultHttpOptions, HttpOptions, {{&interfaceName}} } from './';
 import * as models from './models';
 {{/definitions.length}}
 
-export const USE_DOMAIN = new InjectionToken<string>('USE_DOMAIN');
-export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('USE_HTTP_OPTIONS');
+export const USE_DOMAIN = new InjectionToken<string>('{{&serviceName}}_USE_DOMAIN');
+export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('{{&serviceName}}_USE_HTTP_OPTIONS');
 
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;

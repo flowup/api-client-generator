@@ -2,12 +2,12 @@
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
-import { DummySelectorService, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
+import { DummySelectorAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './dummy-selector-api-client.service';
 
 export * from './models';
 
-export { DummySelectorService } from './dummy-selector.service';
-export { DummySelectorInterface } from './dummy-selector.interface';
+export { DummySelectorAPIClient } from './dummy-selector-api-client.service';
+export { DummySelectorAPIClientInterface } from './dummy-selector-api-client.interface';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,27 +26,27 @@ export interface HttpOptions {
   withCredentials?: boolean;
 }
 
-export interface DummySelectorServiceModuleConfig {
+export interface DummySelectorAPIClientModuleConfig {
   domain?: string;
   httpOptions?: DefaultHttpOptions;
 }
 
 @NgModule({})
-export class DummySelectorServiceModule {
+export class DummySelectorAPIClientModule {
   /**
-   * Use this method in your root module to provide the DummySelectorServiceModule
+   * Use this method in your root module to provide the DummySelectorAPIClientModule
    *
    * If you are not providing
-   * @param { DummySelectorServiceModuleConfig } config
+   * @param { DummySelectorAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: DummySelectorServiceModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: DummySelectorAPIClientModuleConfig = {}): ModuleWithProviders {
     return {
-      ngModule: DummySelectorServiceModule,
+      ngModule: DummySelectorAPIClientModule,
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        DummySelectorService
+        DummySelectorAPIClient
       ]
     };
   }

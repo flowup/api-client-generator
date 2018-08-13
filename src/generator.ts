@@ -42,16 +42,19 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
   return flattenAll(
     usedTags.map(async tag => {
       const mustacheData = createMustacheViewModel(swaggerDef, tag);
+
       if (mustacheData.methods.length === 0) {
         logWarn(`No swagger paths with tag ${tag}`);
         return [];
       }
 
-      const subfolder = usedTags.length > 1 ? dashCase(tag) : '';
-      const outputPath = join(options.outputPath, subfolder);
+      const subFolder = usedTags.length > 1 ? dashCase(tag) : '';
+      const outputPath = join(options.outputPath, subFolder);
+
       if (!existsSync(outputPath)) {
         await ensureDir(outputPath);
       }
+
       return flattenAll([
         generateClient(mustacheData, outputPath),
         generateClientInterface(mustacheData, outputPath),

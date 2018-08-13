@@ -2,12 +2,12 @@
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
-import { ProjectService, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
+import { ProjectAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './project-api-client.service';
 
 export * from './models';
 
-export { ProjectService } from './project.service';
-export { ProjectInterface } from './project.interface';
+export { ProjectAPIClient } from './project-api-client.service';
+export { ProjectAPIClientInterface } from './project-api-client.interface';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,27 +26,27 @@ export interface HttpOptions {
   withCredentials?: boolean;
 }
 
-export interface ProjectServiceModuleConfig {
+export interface ProjectAPIClientModuleConfig {
   domain?: string;
   httpOptions?: DefaultHttpOptions;
 }
 
 @NgModule({})
-export class ProjectServiceModule {
+export class ProjectAPIClientModule {
   /**
-   * Use this method in your root module to provide the ProjectServiceModule
+   * Use this method in your root module to provide the ProjectAPIClientModule
    *
    * If you are not providing
-   * @param { ProjectServiceModuleConfig } config
+   * @param { ProjectAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: ProjectServiceModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: ProjectAPIClientModuleConfig = {}): ModuleWithProviders {
     return {
-      ngModule: ProjectServiceModule,
+      ngModule: ProjectAPIClientModule,
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        ProjectService
+        ProjectAPIClient
       ]
     };
   }

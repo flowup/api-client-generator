@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpOptions } from './';
 import * as models from './models';
 
-export interface DummySelectorInterface {
+export interface DummySelectorAPIClientInterface {
 
   get(
     args: {
