@@ -55,7 +55,7 @@
     "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node --files ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -t DummySelector,Project,NonExistingTag -m",
     "gen-with-all-tags": "rimraf ./tests/with-all-tags/api && ts-node --files ./src/main.ts -s ./tests/with-all-tags/swagger.json -o ./tests/with-all-tags/api -t all",
     "release": "npm run test && npm run build && standard-version --tag-prefix=''",
-    "test": "ts-node --files ./src/tests.ts",
+    "tests": "ts-node --files=tsconfig.json node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "postinstall": "cd tests/test-angular-project && npm i"
   },
   "dependencies": {
@@ -67,6 +67,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.4",
+    "@types/jasmine": "^2.8.8",
     "@types/mustache": "^0.8.31",
     "@types/node": "^10.5.2",
     "@types/optimist": "0.0.29",
@@ -75,6 +76,7 @@
     "@types/swagger-schema-official": "^2.0.10",
     "@types/which": "^1.3.1",
     "dir-compare": "^1.4.0",
+    "jasmine": "^3.2.0",
     "rimraf": "^2.5.2",
     "standard-version": "^4.4.0",
     "swagger-schema-official": "^2.0.0-bab6bed",
