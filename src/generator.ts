@@ -9,6 +9,7 @@ import { fileName, logWarn, dashCase, getAllSwaggerTags, flattenAll } from './he
 import { createMustacheViewModel } from './parser';
 
 const ALL_TAGS_OPTION = 'all';
+export const MODEL_DIR_NAME = 'models';
 
 export async function generateAPIClient(options: GenOptions): Promise<string[]> {
   const swaggerFilePath = options.sourceFile;
@@ -84,7 +85,7 @@ async function generateClientInterface(viewContext: MustacheData, outputPath: st
 }
 
 async function generateModels(viewContext: MustacheData, outputPath: string): Promise<string[]> {
-  const outputDir = join(outputPath, 'models');
+  const outputDir = join(outputPath, MODEL_DIR_NAME);
   const outIndexFile = join(outputDir, '/index.ts');
 
   const modelTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-model.mustache`)).toString();
@@ -98,14 +99,17 @@ async function generateModels(viewContext: MustacheData, outputPath: string): Pr
   await promisify(writeFile)(outIndexFile, Mustache.render(modelExportTemplate, viewContext), 'utf-8');
 
   // generate API models
-  return Promise.all(viewContext.definitions.map(async (definition) => {
-    const result = Mustache.render(modelTemplate, definition);
-    const outfile = join(outputDir, `${fileName(definition.name, definition.isEnum ? 'enum' : 'model')}.ts`);
+  return Promise.all([
+    outIndexFile,
+    ...viewContext.definitions.map(async (definition) => {
+      const result = Mustache.render(modelTemplate, definition);
+      const outfile = join(outputDir, `${fileName(definition.name, definition.isEnum ? 'enum' : 'model')}.ts`);
 
-    await ensureDir(dirname(outfile));
-    await promisify(writeFile)(outfile, result, 'utf-8');
-    return outfile;
-  }));
+      await ensureDir(dirname(outfile));
+      await promisify(writeFile)(outfile, result, 'utf-8');
+      return outfile;
+    })
+  ]);
 }
 
 async function generateModuleExportIndex(viewContext: MustacheData, outputPath: string): Promise<string[]> {

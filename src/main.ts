@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
-import { generateAPIClient } from './generator';
+import { generateAPIClient, MODEL_DIR_NAME } from './generator';
 import * as opt from 'optimist';
 import { GenOptions } from './types';
 import { commitAfter } from './git';
+import { readdirSync } from 'fs';
+import { join } from 'path';
+import { logWarn } from './helper';
 
 const optimist = opt
   .usage('Usage: api-client-generator -s path/to/swagger.[json|yaml]')
@@ -47,7 +50,16 @@ const generate: typeof generateAPIClient = argv.commit ?
   generateAPIClient;
 
 generate(options)
-  .then(() => console.info('Angular API client generated successfully'))
+  .then(newFiles => {
+    console.info('Angular API client generated successfully');
+
+    const legacyFiles = readdirSync(join(argv.output, MODEL_DIR_NAME))
+      .map(file => join(argv.output, MODEL_DIR_NAME, file))
+      .filter(file => !newFiles.includes(file));
+    if (legacyFiles.length > 0) {
+      logWarn(`\nLegacy models discovered:\n${legacyFiles.join('\n')}`);
+    }
+  })
   .catch((error: Error) => console.error(
     ...argv.verbose ?
       ['Error encountered during generating:', error] :
