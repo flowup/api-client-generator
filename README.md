@@ -4,6 +4,7 @@
 
 [![Caretaker](https://user-images.githubusercontent.com/7274335/42030799-466edd34-7ad4-11e8-9a47-37f12ac8d153.png)](https://github.com/vmasek)
 [![Conventional Commits](https://user-images.githubusercontent.com/7274335/42030800-4690ea1e-7ad4-11e8-9e37-6fe8b2cb3801.png)](https://conventionalcommits.org)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/api-client-gen)
 
 [![GitHub stars](https://img.shields.io/github/stars/flowup/api-client-generator.svg?style=social&label=Star)](https://github.com/flowup/api-client-generator)
 [![tweet](https://user-images.githubusercontent.com/7274335/42030803-46cd231c-7ad4-11e8-992c-2a5b933383c9.png)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/api-client-generator)
@@ -170,6 +171,20 @@ Please report any problems you have any issues you find so they can be resolved.
 If the generator terminates with an error message, please re-run it with the `-v` flag and post the outputted stack trace.
 
 Feel free to discuss desired improvements or functionality in issues. Afterwards, the pull requests are very welcome.
+
+## Development
+
+If you are interested in contributing please follow these steps:
+
+1. [Create the issue](https://github.com/flowup/api-client-generator/issues/new) and discuss the problem
+2. Fork the repo
+3. Add your feature/fix
+    - follow the code style
+    - check for the lint errors
+    - in case of questions visit [gitter](https://gitter.im/api-client-gen) to chat with contributors
+4. Run the tests `npm run tests`
+5. Open the PR to [upstream master](https://github.com/flowup/api-client-generator/compare)
+    - mention the issue/bug/feature it solves/closes
 
 -------
 
