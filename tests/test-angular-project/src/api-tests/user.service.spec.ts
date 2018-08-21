@@ -1,6 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
-import { APIClient, APIClientModule, User } from '../api';
+import { User, UserAPIClient, UserAPIClientModule, } from '../api-all-tags/user';
 import { DUMMY_DOMAIN } from './tests-constants';
 
 describe('UserService', () => {
@@ -8,21 +8,21 @@ describe('UserService', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        APIClientModule.forRoot({
+        UserAPIClientModule.forRoot({
           domain: DUMMY_DOMAIN,
         })
       ],
     });
   });
 
-  it('should be initialized', inject([APIClient], (apiClient: APIClient) => {
-    expect(apiClient).toBeTruthy();
-    expect(apiClient.domain).toBe(DUMMY_DOMAIN);
+  it('should be initialized', inject([UserAPIClient], (userApi: UserAPIClient) => {
+    expect(userApi).toBeTruthy();
+    expect(userApi.domain).toBe(DUMMY_DOMAIN);
   }));
 
   it('should register user', inject(
-    [APIClient, HttpTestingController],
-    (api: APIClient, backend: HttpTestingController) => {
+    [UserAPIClient, HttpTestingController],
+    (userApi: UserAPIClient, backend: HttpTestingController) => {
       const user: User = {
         email: 'user@email.com',
         firstName: 'Userface',
@@ -34,7 +34,7 @@ describe('UserService', () => {
         userStatus: 1,
       };
 
-      api.createUser({body: user}).subscribe(data => {
+      userApi.createUser({body: user}).subscribe(data => {
         console.info('data', data);
         expect(data).toBe('register was successful');
       });

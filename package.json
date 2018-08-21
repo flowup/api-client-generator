@@ -55,7 +55,12 @@
     "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node --files ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -t DummySelector,Project,NonExistingTag -m",
     "gen-with-all-tags": "rimraf ./tests/with-all-tags/api && ts-node --files ./src/main.ts -s ./tests/with-all-tags/swagger.json -o ./tests/with-all-tags/api -t all",
     "release": "npm run test && npm run build && standard-version --tag-prefix=''",
-    "tests": "ts-node --files=tsconfig.json node_modules/jasmine/bin/jasmine --config=jasmine.json",
+    "test": "ts-node --files=tsconfig.json node_modules/jasmine/bin/jasmine --config=jasmine.json",
+    "intg-tests:gen-all-tags": "rimraf tests/test-angular-project/src/api-all-tags && npm run gen -- src/main.ts -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-all-tags -t all",
+    "intg-tests:gen-no-tag": "rimraf tests/test-angular-project/src/api-no-tags && npm run gen -- src/main.ts -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-no-tags",
+    "intg-tests:clear-gen": "rimraf tests/test-angular-project/src/api-no-tags && rimraf tests/test-angular-project/src/api-all-tags",
+    "intg-tests": "npm run intg-tests:gen-all-tags && npm run intg-tests:gen-no-tag && cd tests/test-angular-project && npm run test && cd ../.. && npm run intg-tests:clear-gen",
+    "tests": "npm run test && npm run intg-tests",
     "postinstall": "cd tests/test-angular-project && npm i"
   },
   "dependencies": {

@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
-import { APIClient, APIClientModule } from '../api';
+import { APIClient, APIClientModule } from '../api-no-tags';
 
 describe('APIClientModule', () => {
   beforeEach(() => {
