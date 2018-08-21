@@ -2,7 +2,7 @@ node_modules/
 output*/
 src/*
 tests/
-.drone.yml
+cloudbuild.yml
 .gitignore
 .idea
 CODE_OF_CONDUCT.md

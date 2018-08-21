@@ -1,0 +1,8 @@
+steps:
+- id: build
+  name: gcr.io/cloud-builders/npm:current
+  entrypoint: '/bin/bash'
+  args:
+  - '-c'
+  - 'npm run ci:install && npm run lint && npm run tests && npm run build'
+  waitFor: ['-']
