@@ -1,6 +1,6 @@
 steps:
 - id: build
-  name: gcr.io/cloud-builders/npm:current
+  name: gcr.io/flowcloud-153422/npm-chrome:current
   entrypoint: '/bin/bash'
   args:
   - '-c'
