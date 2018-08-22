@@ -15,9 +15,9 @@ describe('UserService', () => {
     });
   });
 
-  it('should be initialized', inject([UserAPIClient], (userApi: UserAPIClient) => {
-    expect(userApi).toBeTruthy();
-    expect(userApi.domain).toBe(DUMMY_DOMAIN);
+  it('should be initialized', inject([UserAPIClient], async (userApi: UserAPIClient) => {
+    await expect(userApi).toBeTruthy();
+    await expect(userApi.domain).toBe(DUMMY_DOMAIN);
   }));
 
   it('should register user', inject(
@@ -34,9 +34,9 @@ describe('UserService', () => {
         userStatus: 1,
       };
 
-      userApi.createUser({body: user}).subscribe(data => {
+      userApi.createUser({body: user}).subscribe(async data => {
         console.info('data', data);
-        expect(data).toBe('register was successful');
+        await expect(data).toBe('register was successful');
       });
 
       backend
