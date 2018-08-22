@@ -178,12 +178,13 @@ If you are interested in contributing please follow these steps:
 
 1. [Create the issue](https://github.com/flowup/api-client-generator/issues/new) and discuss the problem
 2. Fork the repo
-3. Add your feature/fix
+3. Run `npm run dev:install` instead of `npm install` to install all (even test) dependencies
+4. Add your feature/fix
     - follow the code style
     - check for the lint errors
     - in case of questions visit [gitter](https://gitter.im/api-client-gen) to chat with contributors
-4. Run the tests `npm run tests`
-5. Open the PR to [upstream master](https://github.com/flowup/api-client-generator/compare)
+5. Run the tests `npm run tests`
+6. Open the PR to [upstream master](https://github.com/flowup/api-client-generator/compare)
     - mention the issue/bug/feature it solves/closes
 
 -------

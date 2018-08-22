@@ -61,8 +61,7 @@
     "intg-tests:clear-gen": "rimraf tests/test-angular-project/src/api-no-tags && rimraf tests/test-angular-project/src/api-all-tags",
     "intg-tests": "npm run intg-tests:gen-all-tags && npm run intg-tests:gen-no-tag && cd tests/test-angular-project && npm run test && cd ../.. && npm run intg-tests:clear-gen",
     "tests": "npm run test && npm run intg-tests",
-    "ci:install": "npm ci --silent && cd tests/test-angular-project && npm ci --silent",
-    "postinstall": "cd tests/test-angular-project && npm i"
+    "dev:install": "npm ci --silent && cd tests/test-angular-project && npm ci --silent"
   },
   "dependencies": {
     "fs-extra": "^6.0.1",
