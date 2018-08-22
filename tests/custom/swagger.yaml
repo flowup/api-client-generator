@@ -74,12 +74,13 @@ paths:
           description: OK
           schema:
             type: array
-            $ref: "#/definitions/Pet"
+            items:
+              $ref: "#/definitions/Pet"
     delete:
       responses:
         200:
           description: OK
-    patch:
+#    patch:
 #      requestBody:
 #        content:
 #          application/json:
@@ -89,9 +90,9 @@ paths:
 #                - $ref: '#/definitions/Dog'
 #              discriminator:
 #                propertyName: pet_type
-      responses:
-        '200':
-          description: Updated
+#      responses:
+#        '200':
+#          description: Updated
   /customers:
     get:
       responses:

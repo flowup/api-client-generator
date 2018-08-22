@@ -27,16 +27,9 @@ export interface APIClientInterface {
       id: string,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any[]>;
+  ): Observable<models.Pet[]>;
 
   deletePetsId(
-    args: {
-      id: string,
-    },
-    requestHttpOptions?: HttpOptions
-  ): Observable<any>;
-
-  patchPetsId(
     args: {
       id: string,
     },

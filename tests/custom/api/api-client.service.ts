@@ -84,11 +84,11 @@ export class APIClient implements APIClientInterface {
       id: string,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any[]> {
+  ): Observable<models.Pet[]> {
     const path = `/pets/${args.id}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any[]>('GET', path, options);
+    return this.sendRequest<models.Pet[]>('GET', path, options);
   }
 
   deletePetsId(
@@ -101,18 +101,6 @@ export class APIClient implements APIClientInterface {
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
     return this.sendRequest<any>('DELETE', path, options);
-  }
-
-  patchPetsId(
-    args: {
-      id: string,
-    },
-    requestHttpOptions?: HttpOptions
-  ): Observable<any> {
-    const path = `/pets/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
-
-    return this.sendRequest<any>('PATCH', path, options);
   }
 
   getCustomers(
