@@ -159,9 +159,7 @@ paths:
       tags:
       - "pet"
       summary: "Updates a pet in the store with form data"
-      operationId: "updatePetWithForm"
-      consumes:
-      - "application/x-www-form-urlencoded"
+      operationId: "updatePetWithQuery"
       produces:
       - "application/json"
       parameters:
