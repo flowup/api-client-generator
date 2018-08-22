@@ -112,27 +112,34 @@ function parseDefinitions(
   ];
 
   if (methods) {
-    const usedDefs: Definition[] = [];
-    const filterByName = (name?: string) => {
-      const filtered = allDefs.filter(d => d.name === name);
-
-      const children: Definition[] = [];
-      filtered.forEach(d => d.properties.forEach(p => {
-        if (p.typescriptType && p.isRef) {
-          children.push(...filterByName(p.typescriptType));
-        }
-      }));
-      filtered.push(...children);
-      return filtered;
+    const filterByName = (name: string): Definition[] => {
+      const namedDefs = allDefs.filter(def => def.name === name);
+      return namedDefs
+        .reduce<Definition[]>(
+          (acc, def) => [
+            ...acc,
+            ...def.properties
+              .filter(prop => prop.typescriptType && prop.isRef)
+              .reduce<Definition[]>((a, prop) => [...a, ...filterByName(prop.typescriptType!)], [])
+          ],
+          namedDefs
+        );
     };
-    methods.forEach(method => {
-      usedDefs.push(...filterByName(method.responseTypeName));
-      method.parameters.forEach(param => {
-        usedDefs.push(...filterByName(param.typescriptType));
-      });
-    });
 
-    return Array.from(new Set(usedDefs));
+    return Array.from(new Set(
+      methods.reduce<Definition[]>(
+        (acc, method) => [
+          ...acc,
+          ...method.parameters.reduce(
+            (a, param) => [
+              ...a,
+              ...filterByName(camelCase(param.typescriptType, false)),
+            ],
+            filterByName(camelCase(method.responseTypeName, false))
+          )
+        ],
+        []
+      )));
   } else {
     return allDefs;
   }
@@ -281,7 +288,7 @@ function determineResponseType(responses: { [responseName: string]: Response }):
     return {name: 'any', type: 'any'};
   }
 
-  const nullable = (schema as Schema & {'x-nullable'?: boolean})['x-nullable'] || false;
+  const nullable = (schema as Schema & { 'x-nullable'?: boolean })['x-nullable'] || false;
   if (schema.type === 'array') {
     const {items} = schema;
     if (items == null) {
