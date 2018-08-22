@@ -1,6 +1,6 @@
 {
   "name": "api-client-generator",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settigs",
   "homepage": "https://github.com/flowup/api-client-generator/blob/master/README.md",
   "main": "src/main.ts",
@@ -54,7 +54,7 @@
     "gen-github": "rimraf ./tests/github/api && ts-node --files ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api",
     "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node --files ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -t DummySelector,Project,NonExistingTag -m",
     "gen-with-all-tags": "rimraf ./tests/with-all-tags/api && ts-node --files ./src/main.ts -s ./tests/with-all-tags/swagger.json -o ./tests/with-all-tags/api -t all",
-    "release": "npm run test && npm run build && standard-version --tag-prefix=''",
+    "release": "npm run tests && npm run build && standard-version --tag-prefix=''",
     "test": "ts-node --files=tsconfig.json node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "intg-tests:gen-all-tags": "rimraf tests/test-angular-project/src/api-all-tags && npm run gen -- src/main.ts -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-all-tags -t all",
     "intg-tests:gen-no-tag": "rimraf tests/test-angular-project/src/api-no-tags && npm run gen -- src/main.ts -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-no-tags",

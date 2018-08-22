@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.6.0"></a>
+# [3.6.0](https://github.com/flowup/api-client-generator/compare/3.5.0...3.6.0) (2018-08-22)
+
+
+### Bug Fixes
+
+* **api-client:** empty string as valid domain URL ([c99265e](https://github.com/flowup/api-client-generator/commit/c99265e))
+* **api-client:** tag services names and module injection tokens ([6624de2](https://github.com/flowup/api-client-generator/commit/6624de2))
+* **parser:** type prefixing fixed for nullables ([7aee02b](https://github.com/flowup/api-client-generator/commit/7aee02b))
+
+
+### Features
+
+* **git:** generated files added separately instead of whole path ([1a00bbd](https://github.com/flowup/api-client-generator/commit/1a00bbd))
+* **main:** warning logged on legacy model discovery ([ad66cf7](https://github.com/flowup/api-client-generator/commit/ad66cf7))
+* **parser:** x-nullable response flag supported ([d73924c](https://github.com/flowup/api-client-generator/commit/d73924c))
+
+
+
 <a name="3.5.0"></a>
 # [3.5.0](https://github.com/flowup/api-client-generator/compare/3.4.1...3.5.0) (2018-07-12)
 
