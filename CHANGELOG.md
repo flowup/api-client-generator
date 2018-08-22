@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.6.1"></a>
+## [3.6.1](https://github.com/flowup/api-client-generator/compare/3.6.0...3.6.1) (2018-08-22)
+
+
+### Bug Fixes
+
+* post install dependencies ([b511914](https://github.com/flowup/api-client-generator/commit/b511914))
+
+
+
 <a name="3.6.0"></a>
 # [3.6.0](https://github.com/flowup/api-client-generator/compare/3.5.0...3.6.0) (2018-08-22)
 
