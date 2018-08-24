@@ -5,7 +5,7 @@ import {
   DocumentRemove,
   ExistenceFilter,
   TargetChange,
-} from './..';
+} from '.';
 
 /**
  * The response for Firestore.Listen.

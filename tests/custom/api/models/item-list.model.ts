@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Data,
-} from './..';
+} from '.';
 
 /**
  * List of items,

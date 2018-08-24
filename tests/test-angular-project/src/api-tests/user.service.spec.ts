@@ -1,6 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
-import { User, UserAPIClient, UserAPIClientModule, } from '../api-all-tags/user';
+import { User } from '../api-all-tags/models';
+import { UserAPIClient, UserAPIClientModule, } from '../api-all-tags/services/user';
 import { DUMMY_DOMAIN } from './tests-constants';
 
 describe('UserService', () => {

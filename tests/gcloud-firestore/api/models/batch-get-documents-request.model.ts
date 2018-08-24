@@ -2,7 +2,7 @@
 import {
   DocumentMask,
   TransactionOptions,
-} from './..';
+} from '.';
 
 /**
  * The request for Firestore.BatchGetDocuments.

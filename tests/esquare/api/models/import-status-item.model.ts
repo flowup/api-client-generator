@@ -2,7 +2,7 @@
 import {
   Criticality,
   ImportStatusDetailsItem,
-} from './..';
+} from '.';
 
 export interface ImportStatusItem {
   criticality: Criticality;

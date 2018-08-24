@@ -2,7 +2,7 @@
 import {
   ImportType,
   Status,
-} from './..';
+} from '.';
 
 export interface ImportHistoryItem {
   datetime: string;

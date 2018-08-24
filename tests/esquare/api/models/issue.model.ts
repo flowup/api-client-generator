@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   IssueAlertType,
-} from './..';
+} from '.';
 
 export interface Issue {
   alert: IssueAlertType;

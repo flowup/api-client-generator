@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   ReportTemplate,
-} from './..';
+} from '.';
 
 export interface ReportTemplateGroup {
   imports: ReportTemplate[];

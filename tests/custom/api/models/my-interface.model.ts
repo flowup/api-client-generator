@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Data,
-} from './..';
+} from '.';
 
 export interface MyInterface {
   myId: string;

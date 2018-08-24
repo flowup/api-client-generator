@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   ImportStatsGroup,
-} from './..';
+} from '.';
 
 export interface SchoolImportStats {
   stats: ImportStatsGroup;

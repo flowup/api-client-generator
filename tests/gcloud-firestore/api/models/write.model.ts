@@ -4,7 +4,7 @@ import {
   DocumentMask,
   DocumentTransform,
   Precondition,
-} from './..';
+} from '.';
 
 /**
  * A write on a document.

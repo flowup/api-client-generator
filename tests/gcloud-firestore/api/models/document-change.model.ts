@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Document,
-} from './..';
+} from '.';
 
 /**
  * A Document has changed.

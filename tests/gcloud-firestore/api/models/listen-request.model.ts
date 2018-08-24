@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Target,
-} from './..';
+} from '.';
 
 /**
  * A request for Firestore.Listen

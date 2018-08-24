@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   FieldTransform,
-} from './..';
+} from '.';
 
 /**
  * A transformation of a document.

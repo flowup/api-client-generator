@@ -3,7 +3,7 @@ import {
   CompositeFilter,
   FieldFilter,
   UnaryFilter,
-} from './..';
+} from '.';
 
 /**
  * A filter.

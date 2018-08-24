@@ -3,7 +3,7 @@ import {
   ArrayValue,
   LatLng,
   MapValue,
-} from './..';
+} from '.';
 
 /**
  * A message that can hold any of the supported value types.

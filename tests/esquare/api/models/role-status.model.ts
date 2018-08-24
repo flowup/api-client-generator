@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   UserStatus,
-} from './..';
+} from '.';
 
 export interface RoleStatus extends UserStatus {
 }

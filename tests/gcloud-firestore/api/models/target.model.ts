@@ -2,7 +2,7 @@
 import {
   DocumentsTarget,
   QueryTarget,
-} from './..';
+} from '.';
 
 /**
  * A specification of a set of documents to listen to.

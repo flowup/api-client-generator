@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Write,
-} from './..';
+} from '.';
 
 /**
  * The request for Firestore.Commit.

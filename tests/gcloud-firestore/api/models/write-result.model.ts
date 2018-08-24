@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Value,
-} from './..';
+} from '.';
 
 /**
  * The result of applying a write.

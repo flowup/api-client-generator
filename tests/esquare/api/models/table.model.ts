@@ -2,7 +2,7 @@
 import {
   Column,
   TableCell,
-} from './..';
+} from '.';
 
 export interface Table {
   tableData: TableCell[][];

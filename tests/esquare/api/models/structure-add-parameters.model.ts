@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   StructureForm,
-} from './..';
+} from '.';
 
 export interface StructureAddParameters extends StructureForm {
   parentId: number;

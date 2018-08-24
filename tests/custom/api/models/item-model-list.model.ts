@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   DataModel,
-} from './..';
+} from '.';
 
 /**
  * List of Item models

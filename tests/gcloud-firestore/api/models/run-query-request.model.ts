@@ -2,7 +2,7 @@
 import {
   StructuredQuery,
   TransactionOptions,
-} from './..';
+} from '.';
 
 /**
  * The request for Firestore.RunQuery.

@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Pet,
-} from './..';
+} from '.';
 
 export interface Mouse extends Pet {
   color: string;

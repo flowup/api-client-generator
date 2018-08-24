@@ -2,7 +2,7 @@
 import {
   Criticality,
   Frequency,
-} from './..';
+} from '.';
 
 export interface NotificationEditable {
   description: string;

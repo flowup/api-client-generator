@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   StructuredQuery,
-} from './..';
+} from '.';
 
 /**
  * A target specified by a query.

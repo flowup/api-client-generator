@@ -2,7 +2,7 @@
 import {
   ReadOnly,
   ReadWrite,
-} from './..';
+} from '.';
 
 /**
  * Options for creating a new transaction.

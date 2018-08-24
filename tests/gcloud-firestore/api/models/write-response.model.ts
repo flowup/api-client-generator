@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   WriteResult,
-} from './..';
+} from '.';
 
 /**
  * The response for Firestore.Write.

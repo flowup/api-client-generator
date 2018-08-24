@@ -2,7 +2,7 @@
 import {
   FieldReference,
   Value,
-} from './..';
+} from '.';
 
 /**
  * A filter on a specific field.

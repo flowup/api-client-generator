@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Value,
-} from './..';
+} from '.';
 
 /**
  * A position in a query result set.

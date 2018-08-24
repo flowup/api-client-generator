@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Filter,
-} from './..';
+} from '.';
 
 /**
  * A filter that merges multiple other filters using the given operator.

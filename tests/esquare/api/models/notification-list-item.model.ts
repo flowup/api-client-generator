@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Criticality,
-} from './..';
+} from '.';
 
 export interface NotificationListItem {
   date: string;

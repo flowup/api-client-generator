@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Status,
-} from './..';
+} from '.';
 
 export interface ReportTemplate {
   id: number;

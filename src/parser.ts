@@ -50,6 +50,7 @@ export function createMustacheViewModel(swagger: Swagger, swaggerTag?: string): 
   return {
     isSecure: !!swagger.securityDefinitions,
     swagger: swagger,
+    swaggerTag,
     domain: determineDomain(swagger),
     methods: methods,
     definitions: parseDefinitions(swagger.definitions, swagger.parameters, swaggerTag ? methods : undefined),
@@ -276,15 +277,16 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
 }
 
 function determineResponseType(responses: { [responseName: string]: Response }): ResponseType {
-  const okResponse = responses['200'];
+  const okResponse = responses['200'] || responses['201'];
+
   if (okResponse == null) { // TODO: check non-200 response codes
-    logWarn('200 response not specified; `any` will be used');
+    logWarn('200 or 201 response not specified; `any` will be used');
     return {name: 'any', type: 'any'};
   }
 
   const {schema} = okResponse;
   if (schema == null) {
-    logWarn('200 response schema not specified; `any` will be used');
+    logWarn('200 or 201 response schema not specified; `any` will be used');
     return {name: 'any', type: 'any'};
   }
 

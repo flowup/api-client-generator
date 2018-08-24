@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Table,
-} from './..';
+} from '.';
 
 export interface PagedTable extends Table {
   totalRows: number;

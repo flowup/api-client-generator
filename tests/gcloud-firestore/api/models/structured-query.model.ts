@@ -5,7 +5,7 @@ import {
   Filter,
   Order,
   Projection,
-} from './..';
+} from '.';
 
 /**
  * A Firestore query.

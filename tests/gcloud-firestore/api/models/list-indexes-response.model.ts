@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Index,
-} from './..';
+} from '.';
 
 /**
  * The response for FirestoreAdmin.ListIndexes.

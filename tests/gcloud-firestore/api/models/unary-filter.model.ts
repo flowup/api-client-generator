@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   FieldReference,
-} from './..';
+} from '.';
 
 /**
  * A filter with a single operand.

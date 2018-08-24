@@ -2,7 +2,7 @@
 import {
   Column,
   ValidatedTableCell,
-} from './..';
+} from '.';
 
 export interface ValidatedTable {
   tableData: ValidatedTableCell[][];

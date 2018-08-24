@@ -2,7 +2,7 @@
 import {
   Mouse,
   Pet,
-} from './..';
+} from '.';
 
 export interface Cat extends Pet {
   age: number;

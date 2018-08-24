@@ -2,7 +2,7 @@
 import {
   Model,
   Right,
-} from './..';
+} from '.';
 
 export interface Customer extends Model {
   address: string;

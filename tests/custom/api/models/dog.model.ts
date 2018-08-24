@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Pet,
-} from './..';
+} from '.';
 
 export interface Dog extends Pet {
   bark: boolean;

@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   FieldReference,
-} from './..';
+} from '.';
 
 /**
  * An order on a field.

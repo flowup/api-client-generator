@@ -2,7 +2,7 @@
 import {
   Criticality,
   Status,
-} from './..';
+} from '.';
 
 export interface ReportListItem {
   criticality: Criticality;

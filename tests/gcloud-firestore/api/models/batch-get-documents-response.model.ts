@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Document,
-} from './..';
+} from '.';
 
 /**
  * The streamed response for Firestore.BatchGetDocuments.

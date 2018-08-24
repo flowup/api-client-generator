@@ -1,4 +1,4 @@
-import { existsSync, mkdir, readFile, writeFile } from 'fs';
+import { createWriteStream, exists, existsSync, mkdir, readFile, writeFile, WriteStream } from 'fs';
 import { ensureDir } from 'fs-extra';
 import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
@@ -34,11 +34,28 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
   const swaggerDef = await swaggerFile(swaggerFilePath);
   const allTags = getAllSwaggerTags(swaggerDef);
   const specifiedTags = options.splitPathTags || [];
-  const usedTags: (string | undefined)[] = specifiedTags.length === 0 ?
-    [undefined] :
-    specifiedTags[0] === ALL_TAGS_OPTION ?
-      allTags :
-      specifiedTags;
+  const usedTags: (string | undefined)[] = specifiedTags.length === 0
+    ? [undefined]
+    : specifiedTags[0] === ALL_TAGS_OPTION
+      ? allTags
+      : specifiedTags;
+
+  const modelsOutputDir = join(options.outputPath, MODEL_DIR_NAME);
+
+  const modelTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-model.mustache`)).toString();
+  const modelExportTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-models-export.mustache`)).toString();
+
+  if (!(await promisify(exists)(options.outputPath))) {
+    await promisify(mkdir)(options.outputPath);
+  }
+
+  if (!(await promisify(exists)(modelsOutputDir))) {
+    await promisify(mkdir)(modelsOutputDir);
+  }
+
+  await promisify(writeFile)(`${options.outputPath}/models/index.ts`, '/* tslint:disable */\n\n', 'utf-8');
+  const modelsIndexFileStream = createWriteStream(`${options.outputPath}/models/index.ts`, {flags: 'a'});
+
 
   return flattenAll(
     usedTags.map(async tag => {
@@ -49,20 +66,20 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
         return [];
       }
 
-      const subFolder = usedTags.length > 1 ? dashCase(tag) : '';
-      const outputPath = join(options.outputPath, subFolder);
+      const subFolder = usedTags && usedTags[0] ? `services/${dashCase(tag)}` : '';
+      const clientOutputPath = join(options.outputPath, subFolder);
 
-      if (!existsSync(outputPath)) {
-        await ensureDir(outputPath);
+      if (!existsSync(clientOutputPath)) {
+        await ensureDir(clientOutputPath);
       }
 
       return flattenAll([
-        generateClient(mustacheData, outputPath),
-        generateClientInterface(mustacheData, outputPath),
-        generateModels(mustacheData, outputPath),
-        ...!options.skipModuleExport ?
-          [generateModuleExportIndex(mustacheData, outputPath)] :
-          [],
+        generateClient(mustacheData, clientOutputPath),
+        generateClientInterface(mustacheData, clientOutputPath),
+        generateModels(mustacheData, modelsOutputDir, modelsIndexFileStream, modelTemplate, modelExportTemplate),
+        ...!options.skipModuleExport
+          ? [generateModuleExportIndex(mustacheData, clientOutputPath)]
+          : [],
       ]);
     })
   );
@@ -87,23 +104,18 @@ async function generateClientInterface(viewContext: MustacheData, outputPath: st
   return [outfile];
 }
 
-async function generateModels(viewContext: MustacheData, outputPath: string): Promise<string[]> {
-  const outputDir = join(outputPath, MODEL_DIR_NAME);
-  const outIndexFile = join(outputDir, '/index.ts');
-
-  const modelTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-model.mustache`)).toString();
-  const modelExportTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-models-export.mustache`)).toString();
-
-  if (!existsSync(outputDir)) {
-    await promisify(mkdir)(outputDir);
-  }
-
-  // generate model export index here
-  await promisify(writeFile)(outIndexFile, Mustache.render(modelExportTemplate, viewContext), 'utf-8');
+async function generateModels(
+  viewContext: MustacheData,
+  outputDir: string,
+  exportIndexStream: WriteStream,
+  modelTemplate: string,
+  modelExportTemplate: string,
+): Promise<string[]> {
+  // write the model exports to export index stream
+  exportIndexStream.write(Mustache.render(modelExportTemplate, viewContext));
 
   // generate API models
   return Promise.all([
-    outIndexFile,
     ...viewContext.definitions.map(async (definition) => {
       const result = Mustache.render(modelTemplate, definition);
       const outfile = join(outputDir, `${fileName(definition.name, definition.isEnum ? 'enum' : 'model')}.ts`);

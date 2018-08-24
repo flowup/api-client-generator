@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   TransactionOptions,
-} from './..';
+} from '.';
 
 /**
  * The request for Firestore.BeginTransaction.

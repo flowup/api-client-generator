@@ -95,7 +95,7 @@ describe('Diff compare', () => {
   });
 
   it('should check with [ GitHub ] reference', async () => {
-    const reference = new TestReference('github');
+    const reference = new TestReference('github', 'yaml', false, 'all');
     expect(await compareWithReference(reference)).toBeNull();
   });
 

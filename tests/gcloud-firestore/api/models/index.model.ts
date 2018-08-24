@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   IndexField,
-} from './..';
+} from '.';
 
 /**
  * An index definition.

@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Status,
-} from './..';
+} from '.';
 
 /**
  * Targets being watched have changed.

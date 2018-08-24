@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   FieldReference,
-} from './..';
+} from '.';
 
 /**
  * The projection of document's fields to return.

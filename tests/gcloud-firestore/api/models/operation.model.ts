@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   Status,
-} from './..';
+} from '.';
 
 /**
  * This resource represents a long-running operation that is the result of a

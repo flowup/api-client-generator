@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { DefaultHttpOptions, HttpOptions, {{&interfaceName}} } from './';
 
 {{#definitions.length}}
-import * as models from './models';
+import * as models from '.{{#swaggerTag}}./..{{/swaggerTag}}/models';
 {{/definitions.length}}
 
 export const USE_DOMAIN = new InjectionToken<string>('{{&serviceName}}_USE_DOMAIN');

@@ -2,7 +2,7 @@
 import {
   ReportListItem,
   ReportTemplateGroup,
-} from './..';
+} from '.';
 
 export interface ReportItem extends ReportListItem {
   description: string;

@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   RoleStatus,
-} from './..';
+} from '.';
 
 export interface RoleDetailsItem {
   id: number;

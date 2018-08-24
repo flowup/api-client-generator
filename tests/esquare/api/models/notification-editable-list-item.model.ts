@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
   NotificationEditable,
-} from './..';
+} from '.';
 
 export interface NotificationEditableListItem extends NotificationEditable {
   enabled: boolean;

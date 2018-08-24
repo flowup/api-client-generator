@@ -2,7 +2,7 @@
 import {
   ImportStatsGroup,
   SchoolImportStats,
-} from './..';
+} from '.';
 
 export interface TotalImportStats {
   bySchools: SchoolImportStats[];

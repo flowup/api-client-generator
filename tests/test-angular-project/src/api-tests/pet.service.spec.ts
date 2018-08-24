@@ -1,6 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
-import { PetAPIClient, PetAPIClientModule } from '../api-all-tags/pet';
+import { PetAPIClient, PetAPIClientModule } from '../api-all-tags/services/pet';
 import { DUMMY_DOMAIN } from './tests-constants';
 
 describe('PetService', () => {
