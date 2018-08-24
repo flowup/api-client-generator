@@ -9,7 +9,7 @@ import {
 import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName, ResponseType } from './types';
 import {
   BASIC_TS_TYPE_REGEX,
-  camelCase,
+  toCamelCase,
   dereferenceType,
   determineDomain,
   fileName,
@@ -46,7 +46,7 @@ type ExtendedSwaggerParam = SwaggerParameter & { $ref?: string, 'enum'?: EnumTyp
 
 export function createMustacheViewModel(swagger: Swagger, swaggerTag?: string): MustacheData {
   const methods = parseMethods(swagger, swaggerTag);
-  const camelSwaggerTag = camelCase(swaggerTag, false);
+  const camelSwaggerTag = toCamelCase(swaggerTag, false);
   return {
     isSecure: !!swagger.securityDefinitions,
     swagger: swagger,
@@ -75,7 +75,7 @@ function parseMethods({paths, security, parameters}: Swagger, swaggerTag?: strin
           return {
             hasJsonResponse: true,
             isSecure: security !== undefined || operation.security !== undefined,
-            methodName: camelCase(operation.operationId
+            methodName: toCamelCase(operation.operationId
               ? (!swaggerTag ? operation.operationId : operation.operationId.replace(`${swaggerTag}_`, ''))
               : `${methodType}_${pathName.replace(/[{}]/g, '')}`
             ),
@@ -87,7 +87,7 @@ function parseMethods({paths, security, parameters}: Swagger, swaggerTag?: strin
             // turn path interpolation `{this}` into string template `${args.this}
             path: pathName.replace(
               /{(.*?)}/g,
-              (_: string, ...args: string[]): string => `\${args.${camelCase(args[0])}}`),
+              (_: string, ...args: string[]): string => `\${args.${toCamelCase(args[0])}}`),
             responseTypeName: responseType.name,
             response: prefixImportedModels(responseType.type),
             description: replaceNewLines(operation.description, '$1   * '),
@@ -134,9 +134,9 @@ function parseDefinitions(
           ...method.parameters.reduce(
             (a, param) => [
               ...a,
-              ...filterByName(camelCase(param.typescriptType, false)),
+              ...filterByName(toCamelCase(param.typescriptType, false)),
             ],
-            filterByName(camelCase(method.responseTypeName, false))
+            filterByName(toCamelCase(method.responseTypeName, false))
           )
         ],
         []
@@ -250,7 +250,7 @@ function determineArrayType(property: Schema = {}): string {
 function defineInterface(schema: Schema, definitionKey: string): Definition {
   const name = typeName(definitionKey);
   const extendInterface: string | undefined = schema.allOf
-    ? camelCase(dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref), false)
+    ? toCamelCase(dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref), false)
     : undefined;
   const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({...props, ...allOfSchema.properties}), {}) : {};
   const properties: Property[] = parseInterfaceProperties({
@@ -341,7 +341,7 @@ function transformParameters(
       ...determineParamType('in' in paramRef ? paramRef.in : param.in),
 
       description: replaceNewLines(param.description, ' '),
-      camelCaseName: camelCase(name),
+      camelCaseName: toCamelCase(name),
       importType: prefixImportedModels(typescriptType),
       isArray,
       isRequired: param.required,
