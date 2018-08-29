@@ -168,7 +168,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
   /**
    * This is the user's organization dashboard. You must be authenticated as the user to view this.
    */
-  getUsersUsernameEventsOrgsOrg(
+  getUsersUsernameEventsOrg(
     args: {
       username: string,  // Name of user.
       org: string,

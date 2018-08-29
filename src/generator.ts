@@ -1,11 +1,11 @@
-import { createWriteStream, exists, existsSync, mkdir, readFile, writeFile, WriteStream } from 'fs';
+import { existsSync, mkdir, readFile, writeFile } from 'fs';
 import { ensureDir } from 'fs-extra';
 import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { promisify } from 'util';
-import { MustacheData, GenOptions } from './types';
-import { fileName, logWarn, dashCase, getAllSwaggerTags, flattenAll } from './helper';
+import { MustacheData, GenOptions, Definition } from './types';
+import { fileName, logWarn, dashCase, getAllSwaggerTags, flattenAll, compareStringByKey } from './helper';
 import { createMustacheViewModel } from './parser';
 
 const ALL_TAGS_OPTION = 'all';
@@ -40,48 +40,39 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
       ? allTags
       : specifiedTags;
 
-  const modelsOutputDir = join(options.outputPath, MODEL_DIR_NAME);
+  const apiTagsData = usedTags.map(tag => createMustacheViewModel(swaggerDef, tag));
 
-  const modelTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-model.mustache`)).toString();
-  const modelExportTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-models-export.mustache`)).toString();
+  // sort the definitions by name and removes duplicates
+  const allDefinitions = apiTagsData.map(({definitions}) => definitions).reduce<Definition[]>(
+    (acc, definitions) => [...acc, ...definitions], []
+  )
+    .sort(compareStringByKey('name'))
+    .filter(({name}, index, self) => index > 0 ? name !== self[index - 1].name : true);
 
-  if (!(await promisify(exists)(options.outputPath))) {
-    await promisify(mkdir)(options.outputPath);
-  }
+  return flattenAll([
+      ...apiTagsData.map(async apiTagData => {
+        if (apiTagData.methods.length === 0) {
+          logWarn(`No swagger paths with tag ${apiTagData.swaggerTag}`);
+          return [];
+        }
 
-  if (!(await promisify(exists)(modelsOutputDir))) {
-    await promisify(mkdir)(modelsOutputDir);
-  }
+        const subFolder = usedTags && usedTags[0] ? `services/${dashCase(apiTagData.swaggerTag)}` : '';
+        const clientOutputPath = join(options.outputPath, subFolder);
 
-  await promisify(writeFile)(`${options.outputPath}/models/index.ts`, '/* tslint:disable */\n\n', 'utf-8');
-  const modelsIndexFileStream = createWriteStream(`${options.outputPath}/models/index.ts`, {flags: 'a'});
+        if (!existsSync(clientOutputPath)) {
+          await ensureDir(clientOutputPath);
+        }
 
-
-  return flattenAll(
-    usedTags.map(async tag => {
-      const mustacheData = createMustacheViewModel(swaggerDef, tag);
-
-      if (mustacheData.methods.length === 0) {
-        logWarn(`No swagger paths with tag ${tag}`);
-        return [];
-      }
-
-      const subFolder = usedTags && usedTags[0] ? `services/${dashCase(tag)}` : '';
-      const clientOutputPath = join(options.outputPath, subFolder);
-
-      if (!existsSync(clientOutputPath)) {
-        await ensureDir(clientOutputPath);
-      }
-
-      return flattenAll([
-        generateClient(mustacheData, clientOutputPath),
-        generateClientInterface(mustacheData, clientOutputPath),
-        generateModels(mustacheData, modelsOutputDir, modelsIndexFileStream, modelTemplate, modelExportTemplate),
-        ...!options.skipModuleExport
-          ? [generateModuleExportIndex(mustacheData, clientOutputPath)]
-          : [],
-      ]);
-    })
+        return flattenAll([
+          generateClient(apiTagData, clientOutputPath),
+          generateClientInterface(apiTagData, clientOutputPath),
+          ...!options.skipModuleExport
+            ? [generateModuleExportIndex(apiTagData, clientOutputPath)]
+            : [],
+        ]);
+      }),
+      generateModels(allDefinitions, options.outputPath),
+    ]
   );
 }
 
@@ -105,25 +96,33 @@ async function generateClientInterface(viewContext: MustacheData, outputPath: st
 }
 
 async function generateModels(
-  viewContext: MustacheData,
-  outputDir: string,
-  exportIndexStream: WriteStream,
-  modelTemplate: string,
-  modelExportTemplate: string,
+  definitions: Definition[],
+  outputPath: string,
 ): Promise<string[]> {
-  // write the model exports to export index stream
-  exportIndexStream.write(Mustache.render(modelExportTemplate, viewContext));
+  const outputDir = join(outputPath, MODEL_DIR_NAME);
+  const outIndexFile = join(outputDir, '/index.ts');
+
+  const modelTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-model.mustache`)).toString();
+  const modelExportTemplate = (await promisify(readFile)(`${__dirname}/../templates/ngx-models-export.mustache`)).toString();
+
+  if (!existsSync(outputDir)) {
+    await promisify(mkdir)(outputDir);
+  }
+
+  // generate model export index for all the generated models
+  await promisify(writeFile)(outIndexFile, Mustache.render(modelExportTemplate, {definitions}), 'utf-8');
 
   // generate API models
   return Promise.all([
-    ...viewContext.definitions.map(async (definition) => {
+    ...definitions.map(async (definition) => {
       const result = Mustache.render(modelTemplate, definition);
       const outfile = join(outputDir, `${fileName(definition.name, definition.isEnum ? 'enum' : 'model')}.ts`);
 
       await ensureDir(dirname(outfile));
       await promisify(writeFile)(outfile, result, 'utf-8');
       return outfile;
-    })
+    }),
+    outIndexFile,
   ]);
 }
 

@@ -6,7 +6,16 @@ import {
   Spec as Swagger,
   Parameter as SwaggerParameter
 } from 'swagger-schema-official';
-import { Definition, Method, MethodType, MustacheData, Parameter, Property, Render, RenderFileName, ResponseType } from './types';
+import {
+  Definition,
+  Method, MethodType,
+  MustacheData,
+  Parameter,
+  Property,
+  Render,
+  RenderFileName,
+  ResponseType
+} from './types';
 import {
   BASIC_TS_TYPE_REGEX,
   toCamelCase,
@@ -18,6 +27,7 @@ import {
   toTypescriptType,
   typeName,
   logWarn,
+  compareStringByKey,
 } from './helper';
 
 interface Parameters {
@@ -127,20 +137,19 @@ function parseDefinitions(
         );
     };
 
-    return Array.from(new Set(
-      methods.reduce<Definition[]>(
-        (acc, method) => [
-          ...acc,
-          ...method.parameters.reduce(
-            (a, param) => [
-              ...a,
-              ...filterByName(toCamelCase(param.typescriptType, false)),
-            ],
-            filterByName(toCamelCase(method.responseTypeName, false))
-          )
-        ],
-        []
-      )));
+    return methods.reduce<Definition[]>(
+      (acc, method) => [
+        ...acc,
+        ...method.parameters.reduce(
+          (a, param) => [
+            ...a,
+            ...filterByName(toCamelCase(param.typescriptType, false)),
+          ],
+          filterByName(toCamelCase(method.responseTypeName, false))
+        )
+      ],
+      []
+    );
   } else {
     return allDefs;
   }
@@ -209,7 +218,7 @@ function parseInterfaceProperties(properties: { [propertyName: string]: Schema }
         typescriptType,
       };
     }
-  ).sort((a, b) => a.name && b.name ? a.name.localeCompare(b.name) : -1);
+  ).sort(compareStringByKey('name'));
 }
 
 function parseReference(schema: Schema): string {

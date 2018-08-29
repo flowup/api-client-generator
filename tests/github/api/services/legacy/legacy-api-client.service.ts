@@ -141,7 +141,7 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
   /**
    * This API call is added for compatibility reasons only.
    */
-  getLegacyUserEmailEmail(
+  getLegacyUserEmail(
     args: {
       email: string,  // The email address
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 

@@ -2508,7 +2508,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
   /**
    * Delete a comment.
    */
-  deleteReposOwnerRepoIssuesCommentsCommentId(
+  deleteReposOwnerRepoIssuesCommentId(
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
@@ -2549,7 +2549,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
   /**
    * Get a single comment.
    */
-  getReposOwnerRepoIssuesCommentsCommentId(
+  getReposOwnerRepoIssuesCommentId(
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
@@ -2590,7 +2590,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
   /**
    * Edit a comment.
    */
-  patchReposOwnerRepoIssuesCommentsCommentId(
+  patchReposOwnerRepoIssuesCommentId(
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
@@ -2672,7 +2672,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
   /**
    * Get a single event.
    */
-  getReposOwnerRepoIssuesEventsEventId(
+  getReposOwnerRepoIssuesEventId(
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
@@ -4087,7 +4087,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
   /**
    * Delete a comment.
    */
-  deleteReposOwnerRepoPullsCommentsCommentId(
+  deleteReposOwnerRepoPullsCommentId(
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
@@ -4128,7 +4128,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
   /**
    * Get a single comment.
    */
-  getReposOwnerRepoPullsCommentsCommentId(
+  getReposOwnerRepoPullsCommentId(
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
@@ -4169,7 +4169,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
   /**
    * Edit a comment.
    */
-  patchReposOwnerRepoPullsCommentsCommentId(
+  patchReposOwnerRepoPullsCommentId(
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.

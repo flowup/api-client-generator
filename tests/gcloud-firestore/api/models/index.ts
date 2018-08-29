@@ -1,5 +1,7 @@
 /* tslint:disable */
 
+export { $Xgafv } from './$-xgafv.enum';
+export { Alt } from './alt.enum';
 export { ArrayValue } from './array-value.model';
 export { BatchGetDocumentsRequest } from './batch-get-documents-request.model';
 export { BatchGetDocumentsResponse } from './batch-get-documents-response.model';
@@ -15,8 +17,8 @@ export { DocumentChange } from './document-change.model';
 export { DocumentDelete } from './document-delete.model';
 export { DocumentMask } from './document-mask.model';
 export { DocumentRemove } from './document-remove.model';
-export { DocumentTransform } from './document-transform.model';
 export { DocumentsTarget } from './documents-target.model';
+export { DocumentTransform } from './document-transform.model';
 export { Empty } from './empty.model';
 export { ExistenceFilter } from './existence-filter.model';
 export { FieldFilter } from './field-filter.model';
@@ -29,9 +31,9 @@ export { LatLng } from './lat-lng.model';
 export { ListCollectionIdsRequest } from './list-collection-ids-request.model';
 export { ListCollectionIdsResponse } from './list-collection-ids-response.model';
 export { ListDocumentsResponse } from './list-documents-response.model';
-export { ListIndexesResponse } from './list-indexes-response.model';
 export { ListenRequest } from './listen-request.model';
 export { ListenResponse } from './listen-response.model';
+export { ListIndexesResponse } from './list-indexes-response.model';
 export { MapValue } from './map-value.model';
 export { Operation } from './operation.model';
 export { Order } from './order.model';
@@ -54,5 +56,3 @@ export { Write } from './write.model';
 export { WriteRequest } from './write-request.model';
 export { WriteResponse } from './write-response.model';
 export { WriteResult } from './write-result.model';
-export { $Xgafv } from './$-xgafv.enum';
-export { Alt } from './alt.enum';
