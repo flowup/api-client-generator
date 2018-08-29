@@ -43,7 +43,7 @@ export function dereferenceType(refString: string | undefined): string {
 /**
  * Removes duplicate words from type name
  *
- * example: shipmentShipmentAddress --> shipmentAddress
+ * example: shipmentShipmentAddress --> ShipmentAddress
  *
  * note: minimum is 3 letters otherwise words are not striped
  *
@@ -51,7 +51,7 @@ export function dereferenceType(refString: string | undefined): string {
  * @returns {string}
  */
 export function removeDuplicateWords(text: string): string {
-  return text.replace(/^(.{3,})(?=\1)/ig, '');
+  return text.replace(/(.{3,})(?=\1)/ig, '');
 }
 
 export function toTypescriptType(type: string | undefined): string {
@@ -126,4 +126,9 @@ export function getAllSwaggerTags(swagger: Swagger): string[] {
  */
 export async function flattenAll<T>(promises: Promise<T[]>[]): Promise<T[]> {
   return Array.prototype.concat(...await Promise.all(promises));
+}
+
+
+export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
+  return (a, b) => a[key] && b[key] ? (<any>a[key] as string).localeCompare(<any>b[key] as string) : -1;
 }
