@@ -16,10 +16,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 * **tags:** models import path had changed as services now share the models folder
 
-Signed-off-by: Vojtech Mašek <vojtech.masek@flowup.cz>
-
-
-
 <a name="3.6.2"></a>
 ## [3.6.2](https://github.com/flowup/api-client-generator/compare/3.6.1...3.6.2) (2018-08-22)
 
