@@ -20,7 +20,6 @@ import {
   BASIC_TS_TYPE_REGEX,
   toCamelCase,
   dereferenceType,
-  determineDomain,
   fileName,
   prefixImportedModels,
   replaceNewLines,
@@ -69,6 +68,20 @@ export function createMustacheViewModel(swagger: Swagger, swaggerTag?: string): 
     interfaceName: camelSwaggerTag ? `${camelSwaggerTag}APIClientInterface` : 'APIClientInterface',
     interfaceFileName: fileName(camelSwaggerTag ? `${camelSwaggerTag}APIClient` : 'api-client', 'interface'),
   };
+}
+
+export function determineDomain({schemes, host, basePath}: Swagger): string {
+
+  // if the host is defined then try and use a protocol from the swagger file
+  // otherwise use the current protocol of loaded app
+  const protocol = host && schemes && schemes.length > 0 ? `${schemes[0]}://` : '//';
+
+  // if no host exists in the swagger file use a window location relative path
+  const domain = host
+    ? host // tslint:disable-next-line:no-invalid-template-strings
+    : '${window.location.hostname}${window.location.port ? \':\'+window.location.port : \'\'}';
+  const base = ('/' === basePath || !basePath ? '' : basePath);
+  return `${protocol}${domain}${base}`;
 }
 
 function parseMethods({paths, security, parameters}: Swagger, swaggerTag?: string): Method[] {
@@ -218,7 +231,7 @@ function parseInterfaceProperties(properties: { [propertyName: string]: Schema }
         typescriptType,
       };
     }
-  ).sort(compareStringByKey('name'));
+  ).sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
 }
 
 function parseReference(schema: Schema): string {
@@ -276,7 +289,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
       .map(({type}) => type || '')
       .filter((type) => type !== name)
       .concat(extendInterface ? [extendInterface] : [])
-      .sort()
+      .sort() // tslint:disable-line:no-array-mutation
       // filter duplicate imports
       .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),
     isEnum: false,

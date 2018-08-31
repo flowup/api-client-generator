@@ -1,4 +1,3 @@
-import { Spec as Swagger, Path, Operation } from 'swagger-schema-official';
 import { FileInfix } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|boolean)\b/;
@@ -87,36 +86,12 @@ export function prefixImportedModels(type: string = ''): string {
   return BUILD_IN_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
 }
 
-export function determineDomain({schemes, host, basePath}: Swagger): string {
-
-  // if the host is defined then try and use a protocol from the swagger file
-  // otherwise use the current protocol of loaded app
-  const protocol = host && schemes && schemes.length > 0 ? `${schemes[0]}://` : '//';
-
-  // if no host exists in the swagger file use a window location relative path
-  const domain = host
-    ? host // tslint:disable-next-line:no-invalid-template-strings
-    : '${window.location.hostname}${window.location.port ? \':\'+window.location.port : \'\'}';
-  const base = ('/' === basePath || !basePath ? '' : basePath);
-  return `${protocol}${domain}${base}`;
-}
-
 export function replaceNewLines(str: string = '', replaceValue: string = ''): string {
   return str.replace(/(\r\n|\r|\n)/g, replaceValue);
 }
 
 export function logWarn(str: string): void {
   console.warn('\x1b[33m%s\x1b[0m', str);
-}
-
-export function getAllSwaggerTags(swagger: Swagger): string[] {
-  const allTags: string[] = [];
-  Object.values(swagger.paths)
-    .forEach((pathDef: Path) =>
-      Object.values(pathDef).forEach((operation: Operation) =>
-        allTags.push(...(operation.tags ? operation.tags : [])))
-    );
-  return Array.from(new Set(allTags));
 }
 
 /**
@@ -127,7 +102,6 @@ export function getAllSwaggerTags(swagger: Swagger): string[] {
 export async function flattenAll<T>(promises: Promise<T[]>[]): Promise<T[]> {
   return Array.prototype.concat(...await Promise.all(promises));
 }
-
 
 export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
   return (a, b) => a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`) : -1;

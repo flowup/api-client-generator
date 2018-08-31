@@ -3,9 +3,10 @@ import { ensureDir } from 'fs-extra';
 import * as Mustache from 'mustache';
 import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
+import { Operation, Path, Spec as Swagger } from 'swagger-schema-official';
 import { promisify } from 'util';
 import { MustacheData, GenOptions, Definition } from './types';
-import { fileName, logWarn, dashCase, getAllSwaggerTags, flattenAll, compareStringByKey } from './helper';
+import { fileName, logWarn, dashCase, flattenAll, compareStringByKey } from './helper';
 import { createMustacheViewModel } from './parser';
 
 const ALL_TAGS_OPTION = 'all';
@@ -31,8 +32,8 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
     throw new Error(`Provided swagger file "${swaggerFilePath}" is invalid`);
   }
 
-  const swaggerDef = await swaggerFile(swaggerFilePath);
-  const allTags = getAllSwaggerTags(swaggerDef);
+  const swaggerDef: Swagger = await swaggerFile(swaggerFilePath);
+  const allTags = getAllSwaggerTags(swaggerDef.paths);
   const specifiedTags = options.splitPathTags || [];
   const usedTags: (string | undefined)[] = specifiedTags.length === 0
     ? [undefined]
@@ -46,7 +47,7 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
   const allDefinitions = apiTagsData.map(({definitions}) => definitions).reduce<Definition[]>(
     (acc, definitions) => [...acc, ...definitions], []
   )
-    .sort(compareStringByKey('name'))
+    .sort(compareStringByKey('name')) // tslint:disable-line:no-array-mutation
     .filter(({name}, index, self) => index > 0 ? name !== self[index - 1].name : true);
 
   return flattenAll([
@@ -133,4 +134,15 @@ async function generateModuleExportIndex(viewContext: MustacheData, outputPath: 
 
   await promisify(writeFile)(outfile, result, 'utf-8');
   return [outfile];
+}
+
+export function getAllSwaggerTags(paths: { [pathName: string]: Path }): string[] {
+  const allTags = Object.values(paths).map((pathDef) =>
+    // get tags from all the paths and flatten with reduce
+    Object.values(pathDef)
+      .map(({tags}: Operation) => tags || [])
+      .reduce<string[]>((acc, tags) => [...acc, ...tags], [])
+  ).reduce<string[]>((acc, tags) => [...acc, ...tags], []); // array of tags fatten with reduce
+
+  return Array.from(new Set(allTags));
 }
