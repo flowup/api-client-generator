@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/flowup/api-client-generator/compare/3.6.2...4.0.0) (2018-08-31)
+
+
+### Features
+
+* **models:** model export index sorted and filtered for duplicates ([ca325d3](https://github.com/flowup/api-client-generator/commit/ca325d3))
+* **tags:** clients generated to folder services when tag option used ([e7d3a08](https://github.com/flowup/api-client-generator/commit/e7d3a08))
+
+
+### BREAKING CHANGES
+
+* **tags:** models import path had changed as services now share the models folder
+
+Signed-off-by: Vojtech Mašek <vojtech.masek@flowup.cz>
+
+
+
 <a name="3.6.2"></a>
 ## [3.6.2](https://github.com/flowup/api-client-generator/compare/3.6.1...3.6.2) (2018-08-22)
 
