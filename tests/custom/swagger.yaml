@@ -242,6 +242,8 @@ definitions:
         type: "integer"
       deleted:
         type: "integer"
+      recursivePointer:
+        $ref: '#/definitions/model'
   customer:
     type: "object"
     allOf:

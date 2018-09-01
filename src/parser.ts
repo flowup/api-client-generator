@@ -136,15 +136,20 @@ function parseDefinitions(
   ];
 
   if (methods) {
-    const filterByName = (name: string): Definition[] => {
-      const namedDefs = allDefs.filter(def => def.name === name);
+    const filterByName = (defName: string, parentDefs: Definition[] = []): Definition[] => {
+      const namedDefs = allDefs.filter(({name}) => name === defName);
       return namedDefs
         .reduce<Definition[]>(
           (acc, def) => [
             ...acc,
             ...def.properties
               .filter(prop => prop.typescriptType && prop.isRef)
-              .reduce<Definition[]>((a, prop) => [...a, ...filterByName(prop.typescriptType!)], [])
+              .reduce<Definition[]>(
+                (a, prop) => parentDefs.some(({name}) => name === prop.typescriptType)
+                  ? a // do not parse if type def is already in parsed definitions
+                  : [...a, ...filterByName(prop.typescriptType!, namedDefs)],
+                []
+              )
           ],
           namedDefs
         );
@@ -163,9 +168,9 @@ function parseDefinitions(
       ],
       []
     );
-  } else {
-    return allDefs;
   }
+
+  return allDefs;
 }
 
 function defineEnumOrInterface(key: string, definition: Schema | ExtendedParameter): Definition {
