@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/flowup/api-client-generator/compare/4.0.0...4.0.1) (2018-09-01)
+
+
+### Bug Fixes
+
+* **models:** recursive model definitions filter ([c80631f](https://github.com/flowup/api-client-generator/commit/c80631f))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/flowup/api-client-generator/compare/3.6.2...4.0.0) (2018-08-31)
 
