@@ -29,7 +29,7 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
       }
     });
   } catch (error) {
-    throw new Error(`Provided swagger file "${swaggerFilePath}" is invalid`);
+    throw new Error(`Provided swagger file "${swaggerFilePath}" is invalid: ${error}`);
   }
 
   const swaggerDef: Swagger = await swaggerFile(swaggerFilePath);
