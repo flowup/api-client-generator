@@ -4,7 +4,8 @@ import {
   Response,
   Schema,
   Spec as Swagger,
-  Parameter as SwaggerParameter
+  Parameter as SwaggerParameter,
+  Reference,
 } from 'swagger-schema-official';
 import {
   Definition,
@@ -50,8 +51,7 @@ interface Definitions {
 
 type EnumType = string[] | number[] | boolean[] | {}[];
 
-// needed because swagger spec param doesn't include ref and enum
-type ExtendedSwaggerParam = SwaggerParameter & { $ref?: string, 'enum'?: EnumType };
+type ExtendedSwaggerParam = Parameter | Reference;
 
 export function createMustacheViewModel(swagger: Swagger, swaggerTag?: string): MustacheData {
   const methods = parseMethods(swagger, swaggerTag);
@@ -87,14 +87,14 @@ export function determineDomain({schemes, host, basePath}: Swagger): string {
 function parseMethods({paths, security, parameters}: Swagger, swaggerTag?: string): Method[] {
   const supportedMethods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT'];
 
-  return [].concat.apply([], Object.entries(paths)
+  return ([] as Method[]).concat(...Object.entries(paths)
     .map(([pathName, pathDef]: [string, Path]) =>
       Object.entries(pathDef).filter(([methodType, operation]) => { // tslint:disable-line:whitespace
         const op = (<Operation>operation);
         return supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
           (!swaggerTag || (op.tags && op.tags.includes(swaggerTag))); // if tag is defined take only paths including this tag
       }).map(([methodType, operation]: [string, Operation]) => {
-          const responseType = determineResponseType(operation.responses);
+          const responseType = determineResponseType((operation as any).responses);
           return {
             hasJsonResponse: true,
             isSecure: security !== undefined || operation.security !== undefined,
@@ -352,20 +352,19 @@ function transformParameters(
     const ref = param.$ref || ('schema' in param && (param.schema && param.schema.$ref)) || '';
     const derefName = ref ? dereferenceType(ref) : undefined;
     const paramRef: Partial<SwaggerParameter> = derefName ? allParams[derefName] || {} : {};
-    const name = 'name' in paramRef ? paramRef.name : param.name;
+    const name = 'name' in paramRef ? paramRef.name : (param as Parameter).name;
     const type = ('type' in param && param.type) || (paramRef && 'type' in paramRef && paramRef.type) || '';
     const isArray = /^array$/i.test(type);
-    const typescriptType = toTypescriptType(
-      isArray
-        ? determineArrayType(param as Schema)
-        : (!ref || (paramRef && 'type' in paramRef && !paramRef.enum && paramRef.type && BASIC_TS_TYPE_REGEX.test(paramRef.type)))
+    const typescriptType = toTypescriptType(isArray
+      ? determineArrayType(param as Schema)
+      : (!ref || (paramRef && 'type' in paramRef && !paramRef.enum && paramRef.type && BASIC_TS_TYPE_REGEX.test(paramRef.type)))
         ? type
         : derefName
     );
 
     return {
       ...param,
-      ...determineParamType('in' in paramRef ? paramRef.in : param.in),
+      ...determineParamType('in' in paramRef ? paramRef.in : (param as Parameter).in),
 
       description: replaceNewLines(param.description, ' '),
       camelCaseName: toCamelCase(name),
