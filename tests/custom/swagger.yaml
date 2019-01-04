@@ -263,6 +263,7 @@ definitions:
       - "VIEW_ALL"
       - "VIEW_MY"
       - "VIEW_EDIT"
+      - "READ WRITE"
       - "CONTROL"
   possition:
     type: integer

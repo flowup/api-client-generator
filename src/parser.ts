@@ -199,9 +199,11 @@ function defineEnum(
   return {
     name: typeName(definitionKey),
     properties: enumSchema && enumSchema.map((val) => ({
-      name: isNumeric
-        ? descKeys ? descKeys[val.toString()] : val.toString()
-        : val.toString(),
+      name: (
+        isNumeric
+          ? descKeys ? descKeys[val.toString()] : val.toString()
+          : val.toString()
+      ).replace(/[\W\s]+/, '_'),
       value: val.toString(),
     })),
     description: replaceNewLines(enumDesc, '$1 * '),
