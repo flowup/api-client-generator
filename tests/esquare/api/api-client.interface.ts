@@ -74,11 +74,11 @@ export interface APIClientInterface {
    */
   getReportsList(
     args: {
-      status?: models.Status,
+      status?: models.Status,  // (optional) - 1 Pending - 2 InProgress - 3 Complete 
       pageSize: number,
       page: number,  // page number
       orderBy: string,  // id | title | subtitle | criticality | status | issues | deadline
-      order?: models.Order,
+      order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any>;
@@ -104,7 +104,7 @@ export interface APIClientInterface {
       pageSize: number,
       page: number,  // page number
       orderBy?: number,  // (optional) column id
-      order?: models.Order,
+      order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any>;
@@ -252,7 +252,7 @@ export interface APIClientInterface {
    */
   geImportStats(
     args: {
-      period?: models.Period,
+      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.TotalImportStats>;
@@ -263,12 +263,12 @@ export interface APIClientInterface {
    */
   getIssuesList(
     args: {
-      period?: models.Period,
-      status?: models.IssueStatus,
+      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
+      status?: models.IssueStatus,  // (optional) - 1 Pending - 2 Resolved 
       pageSize: number,
       page: number,  // page number
       orderBy: string,  // name | school | dueDate | alert
-      order?: models.Order,
+      order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any>;
@@ -279,24 +279,24 @@ export interface APIClientInterface {
    */
   getStatusesList(
     args: {
-      period?: models.Period,
-      status?: models.ImportStatus,
+      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
+      status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
       pageSize: number,
       page: number,  // page number
       orderBy: string,  // name | issues | dueDate | progress
-      order?: models.Order,
+      order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any>;
 
   getUsersList(
     args: {
-      period?: models.Period,
-      status?: models.ImportStatus,
+      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
+      status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
       pageSize: number,
       page: number,  // page number
       orderBy: string,  // name | issues | dueDate | progress
-      order?: models.Order,
+      order?: models.Order,  // (optional) - asc - desc 
       assignedToRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9yal)
       unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
     },
@@ -405,7 +405,7 @@ export interface APIClientInterface {
       pageSize: number,
       page: number,  // page number
       orderBy: string,  // name | description | priority | date
-      order?: models.Order,
+      order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any>;
@@ -437,7 +437,7 @@ export interface APIClientInterface {
       pageSize: number,
       page: number,  // page number
       orderBy: string,  // name | description | priority | date
-      order?: models.Order,
+      order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
   ): Observable<any>;
