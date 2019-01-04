@@ -366,11 +366,11 @@ function transformParameters(
       ...param,
       ...determineParamType('in' in paramRef ? paramRef.in : (param as Parameter).in),
 
-      description: replaceNewLines(param.description, ' '),
+      description: replaceNewLines((param as Parameter).description || paramRef.description, ' '),
       camelCaseName: toCamelCase(name),
       importType: prefixImportedModels(typescriptType),
       isArray,
-      isRequired: param.required,
+      isRequired: (param as Parameter).isRequired || (param as Parameter).required || paramRef.required,
       name,
       typescriptType,
     };
