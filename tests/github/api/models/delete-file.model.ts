@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface DeleteFile {
-  commit: any;
+  commit: { [key: string]: any };
   content: string;
 }

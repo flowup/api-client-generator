@@ -10,6 +10,6 @@ export interface Asset {
   size: number;
   state: string;
   updated_at: string;
-  uploader: any;
+  uploader: { [key: string]: any };
   url: string;
 }

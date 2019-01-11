@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 export interface Release {
-  assets: any[];
+  assets: { [key: string]: any }[];
   assets_url: string;
-  author: any;
+  author: { [key: string]: any };
   body: string;
   created_at: string;
   draft: boolean;

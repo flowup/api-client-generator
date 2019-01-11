@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface SearchIssues {
-  items: any[];
+  items: { [key: string]: any }[];
   total_count: number;
 }

@@ -129,7 +129,7 @@
     "no-misused-new": true,
     "no-namespace": true,
     "no-array-mutation": true,
-    "no-object-mutation": [true, {"ignore-prefix": "this."}],
+    "no-object-mutation": true,
     "no-parameter-reassignment": false,
     "no-reference": true,
     "no-require-imports": true,
@@ -139,9 +139,6 @@
     "no-switch-case-fall-through": true,
     "no-this-assignment": true,
     "no-trailing-whitespace": true,
-    "no-unnecessary-class": [
-      "allow-empty-class"
-    ],
     "no-unnecessary-initializer": true,
     "no-unnecessary-type-assertion": true,
     "no-unsafe-finally": true,

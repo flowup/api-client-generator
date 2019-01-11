@@ -1,13 +1,13 @@
 /* tslint:disable */
 
 export interface MergesSuccessful {
-  author: any;
+  author: { [key: string]: any };
   comments_url: string;
-  commit: any;
-  committer: any;
+  commit: { [key: string]: any };
+  committer: { [key: string]: any };
   merged: boolean;
   message: string;
-  parents: any[];
+  parents: { [key: string]: any }[];
   sha: string;
   url: string;
 }

@@ -1,3 +1,4 @@
+import { Reference } from 'swagger-schema-official';
 import { FileInfix } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|boolean)\b/;
@@ -63,7 +64,7 @@ export function toTypescriptType(type: string | undefined): string {
   } else if (/^string|boolean$/i.test(type)) {
     return type.toLocaleLowerCase();
   } else if (/^object$/i.test(type)) {
-    return 'any';
+    return '{ [key: string]: any }';
   } else if (/^array$/i.test(type)) {
     logWarn('Support for nested arrays is limited, using any[] as type');
     return 'any[]';
@@ -105,4 +106,8 @@ export async function flattenAll<T>(promises: Promise<T[]>[]): Promise<T[]> {
 
 export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
   return (a, b) => a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`) : -1;
+}
+
+export function isReference(param: any | Reference): param is Reference { // tslint:disable-line no-any
+  return !!(param as Reference).$ref;
 }
