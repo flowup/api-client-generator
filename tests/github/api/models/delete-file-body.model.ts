@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface DeleteFileBody {
-  committer: any;
+  committer: { [key: string]: any };
   message: string;
   sha: string;
 }

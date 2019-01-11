@@ -21,13 +21,13 @@ export interface Repo {
   name: string;
   open_issues: number;
   open_issues_count: number;
-  organization: any;
-  owner: any;
-  parent: any;  // Is present when the repo is a fork. Parent is the repo this repo was forked from.
+  organization: { [key: string]: any };
+  owner: { [key: string]: any };
+  parent: { [key: string]: any };  // Is present when the repo is a fork. Parent is the repo this repo was forked from.
   private: boolean;
   pushed_at: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
   size: number;
-  source: any;  // Is present when the repo is a fork. Source is the ultimate source for the network.
+  source: { [key: string]: any };  // Is present when the repo is a fork. Source is the ultimate source for the network.
   ssh_url: string;
   svn_url: string;
   updated_at: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ

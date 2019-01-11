@@ -1,5 +1,5 @@
 /* tslint:disable */
 
 export interface SearchUsersByKeyword {
-  users: any[];
+  users: { [key: string]: any }[];
 }

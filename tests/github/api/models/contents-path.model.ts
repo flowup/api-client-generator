@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface ContentsPath {
-  _links: any;
+  _links: { [key: string]: any };
   content: string;
   encoding: string;
   git_url: string;

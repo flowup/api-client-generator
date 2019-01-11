@@ -2,6 +2,6 @@
 
 export interface Deployment {
   description: string;
-  payload: any;
+  payload: { [key: string]: any };
   ref: string;
 }

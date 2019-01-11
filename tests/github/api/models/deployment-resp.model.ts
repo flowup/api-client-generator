@@ -2,7 +2,7 @@
 
 export interface DeploymentResp {
   created_at: string;
-  creator: any;
+  creator: { [key: string]: any };
   description: string;
   id: number;
   payload: string;

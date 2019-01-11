@@ -1,5 +1,5 @@
 /* tslint:disable */
 
 export interface SearchRepositoriesByKeyword {
-  repositories: any[];
+  repositories: { [key: string]: any }[];
 }

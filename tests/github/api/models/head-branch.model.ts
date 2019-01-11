@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface HeadBranch {
-  object: any;
+  object: { [key: string]: any };
   ref: string;
   url: string;
 }

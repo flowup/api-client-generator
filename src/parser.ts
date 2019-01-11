@@ -28,6 +28,7 @@ import {
   typeName,
   logWarn,
   compareStringByKey,
+  isReference,
 } from './helper';
 
 interface Parameters {
@@ -84,17 +85,24 @@ export function determineDomain({schemes, host, basePath}: Swagger): string {
   return `${protocol}${domain}${base}`;
 }
 
-function parseMethods({paths, security, parameters}: Swagger, swaggerTag?: string): Method[] {
+function parseMethods({paths, security, parameters, responses = {}}: Swagger, swaggerTag?: string): Method[] {
   const supportedMethods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT'];
 
   return ([] as Method[]).concat(...Object.entries(paths)
     .map(([pathName, pathDef]: [string, Path]) =>
-      Object.entries(pathDef).filter(([methodType, operation]) => { // tslint:disable-line:whitespace
+      Object.entries(pathDef).filter(([methodType, operation]) => {
         const op = (<Operation>operation);
         return supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
           (!swaggerTag || (op.tags && op.tags.includes(swaggerTag))); // if tag is defined take only paths including this tag
       }).map(([methodType, operation]: [string, Operation]) => {
-          const responseType = determineResponseType((operation as any).responses);
+          const okResponse: Response | Reference = operation.responses['200'] || operation.responses['201'];
+
+          const responseType = determineResponseType(
+            okResponse && isReference(okResponse)
+              ? responses[dereferenceType(okResponse.$ref)]
+              : okResponse
+          );
+
           return {
             hasJsonResponse: true,
             isSecure: security !== undefined || operation.security !== undefined,
@@ -305,15 +313,13 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   };
 }
 
-function determineResponseType(responses: { [responseName: string]: Response }): ResponseType {
-  const okResponse = responses['200'] || responses['201'];
-
-  if (okResponse == null) { // TODO: check non-200 response codes
+function determineResponseType(response: Response): ResponseType {
+  if (response == null) { // TODO: check non-200 response codes
     logWarn('200 or 201 response not specified; `any` will be used');
     return {name: 'any', type: 'any'};
   }
 
-  const {schema} = okResponse;
+  const {schema} = response;
   if (schema == null) {
     logWarn('200 or 201 response schema not specified; `any` will be used');
     return {name: 'any', type: 'any'};
