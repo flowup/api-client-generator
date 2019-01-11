@@ -4,5 +4,5 @@ import {
 } from '.';
 
 export interface StructureAddParameters extends StructureForm {
-  parentId: number;
+  parentId?: number;
 }

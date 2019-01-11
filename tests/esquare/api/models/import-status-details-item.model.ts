@@ -4,10 +4,10 @@ import {
 } from '.';
 
 export interface ImportStatusDetailsItem {
-  id: number;
-  issues: number;
-  progress: number;
-  status: Status;
-  subtitle: string;
-  title: string;
+  id?: number;
+  issues?: number;
+  progress?: number;
+  status?: Status;
+  subtitle?: string;
+  title?: string;
 }

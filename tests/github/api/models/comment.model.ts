@@ -1,5 +1,5 @@
 /* tslint:disable */
 
 export interface Comment {
-  body: string;
+  body?: string;
 }

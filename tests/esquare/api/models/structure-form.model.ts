@@ -1,8 +1,8 @@
 /* tslint:disable */
 
 export interface StructureForm {
-  address: string;
+  address?: string;
   code: string;
-  description: string;
+  description?: string;
   name: string;
 }

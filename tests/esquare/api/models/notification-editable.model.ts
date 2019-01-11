@@ -5,10 +5,10 @@ import {
 } from '.';
 
 export interface NotificationEditable {
-  description: string;
-  frequency: Frequency;
-  moduleId: number;
-  name: string;
-  priority: Criticality;
-  triggerId: number;
+  description?: string;
+  frequency?: Frequency;
+  moduleId?: number;
+  name?: string;
+  priority?: Criticality;
+  triggerId?: number;
 }

@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface AssetPatch {
-  label: string;
+  label?: string;
   name: string;
 }

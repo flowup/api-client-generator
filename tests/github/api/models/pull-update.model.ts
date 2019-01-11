@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface PullUpdate {
-  body: string;
-  state: string;
-  title: string;
+  body?: string;
+  state?: string;
+  title?: string;
 }

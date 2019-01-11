@@ -5,7 +5,7 @@ import {
 } from '.';
 
 export interface ReportItem extends ReportListItem {
-  description: string;
-  groups: ReportTemplateGroup[];
-  progress: number;
+  description?: string;
+  groups?: ReportTemplateGroup[];
+  progress?: number;
 }

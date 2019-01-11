@@ -5,6 +5,6 @@ import {
 } from '.';
 
 export interface Table {
-  tableData: TableCell[][];
-  tableHead: Column[];
+  tableData?: TableCell[][];
+  tableHead?: Column[];
 }

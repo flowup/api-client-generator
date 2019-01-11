@@ -5,10 +5,10 @@ import {
 } from '.';
 
 export interface ImportHistoryItem {
-  datetime: string;
-  details: string;
-  filename: string;
-  status: Status;
-  type: ImportType;
-  user: string;
+  datetime?: string;
+  details?: string;
+  filename?: string;
+  status?: Status;
+  type?: ImportType;
+  user?: string;
 }

@@ -5,6 +5,6 @@ import {
 } from '.';
 
 export interface TotalImportStats {
-  bySchools: SchoolImportStats[];
-  total: ImportStatsGroup;
+  bySchools?: SchoolImportStats[];
+  total?: ImportStatsGroup;
 }

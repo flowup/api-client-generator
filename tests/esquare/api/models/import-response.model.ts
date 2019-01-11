@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface ImportResponse {
-  skipperRows: number;
-  status: boolean;
+  skipperRows?: number;
+  status?: boolean;
 }

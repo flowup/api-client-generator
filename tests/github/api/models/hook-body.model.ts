@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface HookBody {
-  active: boolean;
-  add_events: string[];
+  active?: boolean;
+  add_events?: string[];
 }

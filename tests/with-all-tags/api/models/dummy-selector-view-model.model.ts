@@ -4,6 +4,6 @@ import {
 } from '.';
 
 export interface DummySelectorViewModel {
-  DummyList: DummyViewModel[];
-  SelectedDummyObjId: number;
+  DummyList?: DummyViewModel[];
+  SelectedDummyObjId?: number;
 }

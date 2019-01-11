@@ -4,5 +4,5 @@ import {
 } from '.';
 
 export interface Mouse extends Pet {
-  color: string;
+  color?: string;
 }

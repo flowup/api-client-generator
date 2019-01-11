@@ -5,7 +5,7 @@ import {
 } from '.';
 
 export interface Customer extends Model {
-  address: string;
-  name: string;
-  right: Right;
+  address?: string;
+  name?: string;
+  right?: Right;
 }

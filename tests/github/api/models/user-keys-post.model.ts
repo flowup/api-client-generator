@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface UserKeysPost {
-  key: string;
-  title: string;
+  key?: string;
+  title?: string;
 }

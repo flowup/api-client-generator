@@ -5,7 +5,7 @@ import {
 } from '.';
 
 export interface Cat extends Pet {
-  age: number;
-  eaten: Mouse[];
-  hunts: boolean;
+  age?: number;
+  eaten?: Mouse[];
+  hunts?: boolean;
 }

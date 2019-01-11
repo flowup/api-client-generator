@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface RefsBody {
-  ref: string;
-  sha: string;
+  ref?: string;
+  sha?: string;
 }

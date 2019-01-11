@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface ImportStats {
-  late: number;  // 0-100
-  onTime: number;  // 0-100
+  late?: number;  // 0-100
+  onTime?: number;  // 0-100
 }

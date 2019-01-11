@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface NotificationTrigger {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }

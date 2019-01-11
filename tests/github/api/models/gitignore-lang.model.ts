@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface GitignoreLang {
-  name: string;
-  source: string;
+  name?: string;
+  source?: string;
 }

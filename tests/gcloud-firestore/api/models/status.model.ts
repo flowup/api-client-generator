@@ -83,7 +83,7 @@
  * reasons.
  */
 export interface Status {
-  code: number;  // The status code, which should be an enum value of google.rpc.Code.
-  details: { [key: string]: any }[];  // A list of messages that carry the error details.  There is a common set ofmessage types for APIs to use.
-  message: string;  // A developer-facing error message, which should be in English. Anyuser-facing error message should be localized and sent in thegoogle.rpc.Status.details field, or localized by the client.
+  code?: number;  // The status code, which should be an enum value of google.rpc.Code.
+  details?: { [key: string]: any }[];  // A list of messages that carry the error details.  There is a common set ofmessage types for APIs to use.
+  message?: string;  // A developer-facing error message, which should be in English. Anyuser-facing error message should be localized and sent in thegoogle.rpc.Status.details field, or localized by the client.
 }

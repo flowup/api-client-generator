@@ -4,6 +4,6 @@ import {
 } from '.';
 
 export interface Structure extends StructureForm {
-  id: number;
-  parentId: number;
+  id?: number;
+  parentId?: number;
 }

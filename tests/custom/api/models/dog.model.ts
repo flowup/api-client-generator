@@ -4,6 +4,6 @@ import {
 } from '.';
 
 export interface Dog extends Pet {
-  bark: boolean;
-  breed: string;
+  bark?: boolean;
+  breed?: string;
 }

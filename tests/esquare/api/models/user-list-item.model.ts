@@ -4,9 +4,9 @@ import {
 } from '.';
 
 export interface UserListItem {
-  entityIds: number[];
-  id: number;
-  name: string;
-  roleId: number;
-  status: UserStatus;
+  entityIds?: number[];
+  id?: number;
+  name?: string;
+  roleId?: number;
+  status?: UserStatus;
 }

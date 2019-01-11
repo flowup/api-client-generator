@@ -4,9 +4,9 @@ import {
 } from '.';
 
 export interface ColumnModel {
-  Children: WidgetModel[];
-  Id: number;
-  ParentId: number;
-  Position: number;
-  Width: number;
+  Children?: WidgetModel[];
+  Id?: number;
+  ParentId?: number;
+  Position?: number;
+  Width?: number;
 }

@@ -4,9 +4,9 @@ import {
 } from '.';
 
 export interface NotificationListItem {
-  date: string;
-  description: string;
-  id: number;
-  name: string;
-  priority: Criticality;
+  date?: string;
+  description?: string;
+  id?: number;
+  name?: string;
+  priority?: Criticality;
 }

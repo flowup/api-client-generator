@@ -4,6 +4,6 @@ import {
 } from '.';
 
 export interface ImportStatsGroup {
-  imported: ImportStats[];
-  pending: ImportStats[];
+  imported?: ImportStats[];
+  pending?: ImportStats[];
 }

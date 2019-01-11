@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface Meta {
-  git: string[];
-  hooks: string[];
+  git?: string[];
+  hooks?: string[];
 }

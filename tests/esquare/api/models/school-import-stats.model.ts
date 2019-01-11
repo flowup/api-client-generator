@@ -4,6 +4,6 @@ import {
 } from '.';
 
 export interface SchoolImportStats {
-  stats: ImportStatsGroup;
-  title: string;  // School name
+  stats?: ImportStatsGroup;
+  title?: string;  // School name
 }

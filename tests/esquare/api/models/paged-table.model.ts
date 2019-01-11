@@ -4,5 +4,5 @@ import {
 } from '.';
 
 export interface PagedTable extends Table {
-  totalRows: number;
+  totalRows?: number;
 }

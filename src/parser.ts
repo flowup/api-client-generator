@@ -222,7 +222,10 @@ function defineEnum(
   };
 }
 
-function parseInterfaceProperties(properties: { [propertyName: string]: Schema } = {}): Property[] {
+function parseInterfaceProperties(
+  properties: { [propertyName: string]: Schema } = {},
+  requiredProps: string[] = [],
+): Property[] {
   return Object.entries<Schema>(properties).map(
     ([propName, propSchema]: [string, Schema]) => {
       const isArray = /^array$/i.test(propSchema.type || '');
@@ -240,6 +243,7 @@ function parseInterfaceProperties(properties: { [propertyName: string]: Schema }
         isArray,
         isDictionary: propSchema.additionalProperties,
         isRef: !!parseReference(propSchema),
+        isRequired: requiredProps.includes(propName),
         name: /^[A-Za-z_$][\w$]*$/.test(propName) ? propName : `'${propName}'`,
         description: replaceNewLines(propSchema.description),
         type: typescriptType.replace('[]', ''),
@@ -290,10 +294,13 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
     ? toCamelCase(dereferenceType((schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref), false)
     : undefined;
   const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({...props, ...allOfSchema.properties}), {}) : {};
-  const properties: Property[] = parseInterfaceProperties({
-    ...schema.properties,
-    ...allOfProps,
-  } as { [propertyName: string]: Schema });
+  const properties: Property[] = parseInterfaceProperties(
+    {
+      ...schema.properties,
+      ...allOfProps,
+    } as { [propertyName: string]: Schema },
+    schema.required,
+  );
 
   return {
     name: name,

@@ -5,6 +5,6 @@ import {
 } from '.';
 
 export interface ValidatedTable {
-  tableData: ValidatedTableCell[][];
-  tableHead: Column[];
+  tableData?: ValidatedTableCell[][];
+  tableHead?: Column[];
 }

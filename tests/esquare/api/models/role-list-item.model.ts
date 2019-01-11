@@ -4,8 +4,8 @@ import {
 } from '.';
 
 export interface RoleListItem {
-  id: number;
-  name: string;
-  privileges: string;
-  status: RoleStatus;
+  id?: number;
+  name?: string;
+  privileges?: string;
+  status?: RoleStatus;
 }

@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface PatchGist {
-  description: string;
-  files: any;
+  description?: string;
+  files?: any;
 }

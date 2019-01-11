@@ -4,6 +4,6 @@ import {
 } from '.';
 
 export interface NotificationEditableListItem extends NotificationEditable {
-  enabled: boolean;
-  id: number;
+  enabled?: boolean;
+  id?: number;
 }

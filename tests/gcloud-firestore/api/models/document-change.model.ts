@@ -13,7 +13,7 @@ import {
  * change, if multiple targets are affected.
  */
 export interface DocumentChange {
-  document: Document;  // The new state of the Document.If `mask` is set, contains only fields that were updated or added.
-  removedTargetIds: number[];  // A set of target IDs for targets that no longer match this document.
-  targetIds: number[];  // A set of target IDs of targets that match this document.
+  document?: Document;  // The new state of the Document.If `mask` is set, contains only fields that were updated or added.
+  removedTargetIds?: number[];  // A set of target IDs for targets that no longer match this document.
+  targetIds?: number[];  // A set of target IDs of targets that match this document.
 }

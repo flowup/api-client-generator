@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface Label {
-  color: string;
-  name: string;
-  url: string;
+  color?: string;
+  name?: string;
+  url?: string;
 }

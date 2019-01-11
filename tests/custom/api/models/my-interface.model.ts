@@ -4,7 +4,7 @@ import {
 } from '.';
 
 export interface MyInterface {
-  myId: string;
-  myMap: { [key: string]: Data };
-  myName: string;
+  myId?: string;
+  myMap?: { [key: string]: Data };
+  myName?: string;
 }

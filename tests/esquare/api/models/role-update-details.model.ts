@@ -4,9 +4,9 @@ import {
 } from '.';
 
 export interface RoleUpdateDetails {
-  privilegesToAssing: number[];
-  privilegesToUnassing: number[];
-  status: RoleStatus;
-  usersToAssing: number[];
-  usersToUnassing: number[];
+  privilegesToAssing?: number[];
+  privilegesToUnassing?: number[];
+  status?: RoleStatus;
+  usersToAssing?: number[];
+  usersToUnassing?: number[];
 }
