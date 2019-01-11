@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/flowup/api-client-generator/compare/4.0.1...4.1.0) (2019-01-11)
+
+
+### Bug Fixes
+
+* **api-client:** method parameters description and required flag ([8e02cc1](https://github.com/flowup/api-client-generator/commit/8e02cc1))
+* **enum:** substitution of disallowed characters in key string ([7214f2b](https://github.com/flowup/api-client-generator/commit/7214f2b)), closes [#74](https://github.com/flowup/api-client-generator/issues/74)
+* **generator:** Expose error from spec validation ([ebb74c7](https://github.com/flowup/api-client-generator/commit/ebb74c7))
+* **license:** redundant lt/gt characters removed ([3b5f8d9](https://github.com/flowup/api-client-generator/commit/3b5f8d9))
+
+
+### Features
+
+* **model:** objects generated as key value maps ([b775b44](https://github.com/flowup/api-client-generator/commit/b775b44))
+
+
+
 <a name="4.0.1"></a>
 ## [4.0.1](https://github.com/flowup/api-client-generator/compare/4.0.0...4.0.1) (2018-09-01)
 
