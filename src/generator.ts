@@ -41,7 +41,7 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
       ? allTags
       : specifiedTags;
 
-  const apiTagsData = usedTags.map(tag => createMustacheViewModel(swaggerDef, tag));
+  const apiTagsData = usedTags.map(tag => createMustacheViewModel(swaggerDef, tag, options.skipUnsupported));
 
   // sort the definitions by name and removes duplicates
   const allDefinitions = apiTagsData.map(({definitions}) => definitions).reduce<Definition[]>(

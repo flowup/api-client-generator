@@ -17,13 +17,15 @@ const optimist = opt
   .alias('v', 'verbose')
   .alias('t', 'splitPathTags')
   .alias('m', 'skipModule')
+  .alias('u', 'skipUnsupported')
   .describe('s', 'Path to the swagger file')
   .describe('o', 'Path where generated files should be emitted')
   .describe('C', 'Autocommit changes')
   .describe('v', 'Print error stack traces')
   .describe('t', 'Generates services and models only for the specified tags.'
     + ' Use `,` (comma) as the separator for multiple tags. Use `all` to emit a service per tag')
-  .describe('m', 'Skip creating index file with module export');
+  .describe('m', 'Skip creating index file with module export')
+  .describe('u', 'Skip generating unsupported "consumes" APIs');
 
 const argv = optimist.argv;
 
@@ -41,7 +43,8 @@ const options: GenOptions = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,
   splitPathTags: argv.splitPathTags ? argv.splitPathTags.split(',') : [],
-  skipModuleExport: argv.skipModule === true || argv.skipModule === 'true'
+  skipModuleExport: argv.skipModule === true || argv.skipModule === 'true',
+  skipUnsupported: argv.skipUnsupported === true || argv.skipUnsupported === 'true'
 };
 
 
