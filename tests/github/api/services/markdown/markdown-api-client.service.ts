@@ -56,7 +56,7 @@ export class MarkdownAPIClient implements MarkdownAPIClientInterface {
       body: models.Markdown,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/markdown`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -81,7 +81,7 @@ export class MarkdownAPIClient implements MarkdownAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<void>('POST', path, options, JSON.stringify(args.body));
   }
 
   /**
@@ -97,7 +97,7 @@ export class MarkdownAPIClient implements MarkdownAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/markdown/raw`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -122,7 +122,7 @@ export class MarkdownAPIClient implements MarkdownAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('POST', path, options);
+    return this.sendRequest<void>('POST', path, options);
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {

@@ -174,14 +174,14 @@ export class APIClient implements APIClientInterface {
       structureId: number,  // structure id to delete
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/structure/${args.structureId}`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
@@ -484,14 +484,14 @@ export class APIClient implements APIClientInterface {
       id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/report/wizard/${args.id}/cancelImport`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('POST', path, options);
+    return this.sendRequest<void>('POST', path, options);
   }
 
   /**
@@ -505,14 +505,14 @@ export class APIClient implements APIClientInterface {
       file: File,  // file to upload
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/report/wizard/${args.id}/override`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.description), JSON.stringify(args.file));
+    return this.sendRequest<void>('POST', path, options, JSON.stringify(args.description), JSON.stringify(args.file));
   }
 
   /**
@@ -730,14 +730,14 @@ export class APIClient implements APIClientInterface {
       id: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/users/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
@@ -823,14 +823,14 @@ export class APIClient implements APIClientInterface {
       id: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/users/roles/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
@@ -854,14 +854,14 @@ export class APIClient implements APIClientInterface {
       body?: any,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/notifications/markAsViewed`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
+    return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
   }
 
   /**
@@ -971,14 +971,14 @@ export class APIClient implements APIClientInterface {
       id: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/notifications/enable/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('PUT', path, options);
+    return this.sendRequest<void>('PUT', path, options);
   }
 
   disableNotification(
@@ -986,14 +986,14 @@ export class APIClient implements APIClientInterface {
       id: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/notifications/disable/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('PUT', path, options);
+    return this.sendRequest<void>('PUT', path, options);
   }
 
   getNotification(
@@ -1017,14 +1017,14 @@ export class APIClient implements APIClientInterface {
       body?: models.NotificationEditable,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/notifications/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
+    return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
   }
 
   createNotification(

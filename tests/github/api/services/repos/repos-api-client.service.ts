@@ -1348,7 +1348,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       body: models.DeploymentStatusesCreate,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1373,7 +1373,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<void>('POST', path, options, JSON.stringify(args.body));
   }
 
   /**

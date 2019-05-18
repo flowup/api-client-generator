@@ -332,8 +332,7 @@ function determineResponseType(response: Response): {
   const {schema} = response;
 
   if (schema == null) {
-    logWarn('200 or 201 response schema not specified; `any` will be used');
-    return {name: 'any', type: 'any'};
+    return {name: 'void', type: 'void'};
   }
 
   const nullable = (schema as Schema & { 'x-nullable'?: boolean })['x-nullable'] || false;

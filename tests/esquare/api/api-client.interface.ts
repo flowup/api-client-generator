@@ -66,7 +66,7 @@ export interface APIClientInterface {
       structureId: number,  // structure id to delete
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * [Screenshot from design](http://prntscr.com/hy4z8d)
@@ -231,7 +231,7 @@ export interface APIClientInterface {
       id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * [Screenshot from design](http://prntscr.com/hy5bi6)
@@ -244,7 +244,7 @@ export interface APIClientInterface {
       file: File,  // file to upload
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * [Screenshot from design](http://prntscr.com/i4052r)
@@ -334,7 +334,7 @@ export interface APIClientInterface {
       id: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * [Screenshot from design](http://prntscr.com/i93q0s)
@@ -379,7 +379,7 @@ export interface APIClientInterface {
       id: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * [Screenshot from design](http://prntscr.com/iba7xr)
@@ -394,7 +394,7 @@ export interface APIClientInterface {
       body?: any,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * [Screenshot from design](http://prntscr.com/iba8tq)
@@ -447,14 +447,14 @@ export interface APIClientInterface {
       id: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   disableNotification(
     args: {
       id: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   getNotification(
     args: {
@@ -469,7 +469,7 @@ export interface APIClientInterface {
       body?: models.NotificationEditable,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   createNotification(
     args: {

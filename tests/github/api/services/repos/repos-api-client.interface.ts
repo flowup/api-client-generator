@@ -560,7 +560,7 @@ export interface ReposAPIClientInterface {
       body: models.DeploymentStatusesCreate,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Deprecated. List downloads for a repository.

@@ -34,7 +34,7 @@ export interface APIClientInterface {
       id: string,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   getCustomers(
     requestHttpOptions?: HttpOptions

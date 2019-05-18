@@ -106,14 +106,14 @@ export class APIClient implements APIClientInterface {
       id: string,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/pets/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   getCustomers(

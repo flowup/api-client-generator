@@ -20,7 +20,7 @@ export interface MarkdownAPIClientInterface {
       body: models.Markdown,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Render a Markdown document in raw mode
@@ -35,6 +35,6 @@ export interface MarkdownAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
 }
