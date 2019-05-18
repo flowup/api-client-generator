@@ -49,6 +49,7 @@ export class RepositoriesAPIClient implements RepositoriesAPIClientInterface {
    * Note: Pagination is powered exclusively by the since parameter. is the
    * Link header to get the URL for the next page of repositories.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getRepositories(
     args: {

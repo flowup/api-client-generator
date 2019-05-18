@@ -8,6 +8,7 @@ export interface SearchAPIClientInterface {
 
   /**
    * Search code.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getSearchCode(
     args: {
@@ -26,6 +27,7 @@ export interface SearchAPIClientInterface {
 
   /**
    * Find issues by state and keyword. (This method returns up to 100 results per page.)
+   * Response generated for [ 200 ] HTTP response code.
    */
   getSearchIssues(
     args: {
@@ -44,6 +46,7 @@ export interface SearchAPIClientInterface {
 
   /**
    * Search repositories.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getSearchRepositories(
     args: {
@@ -62,6 +65,7 @@ export interface SearchAPIClientInterface {
 
   /**
    * Search users.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getSearchUsers(
     args: {

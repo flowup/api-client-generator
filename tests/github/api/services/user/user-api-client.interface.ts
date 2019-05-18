@@ -8,6 +8,7 @@ export interface UserAPIClientInterface {
 
   /**
    * Get the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUser(
     args: {
@@ -23,6 +24,7 @@ export interface UserAPIClientInterface {
 
   /**
    * Update the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchUser(
     args: {
@@ -41,6 +43,7 @@ export interface UserAPIClientInterface {
    * Delete email address(es).
    * You can include a single email address or an array of addresses.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserEmails(
     args: {
@@ -53,7 +56,7 @@ export interface UserAPIClientInterface {
       body: models.UserEmails,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List email addresses for a user.
@@ -63,6 +66,7 @@ export interface UserAPIClientInterface {
    * Until API v3 is finalized, use the application/vnd.github.v3 media type to
    * get other response format.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserEmails(
     args: {
@@ -80,6 +84,7 @@ export interface UserAPIClientInterface {
    * Add email address(es).
    * You can post a single email address or an array of addresses.
    * 
+   * Response generated for [ missing ] HTTP response code.
    */
   postUserEmails(
     args: {
@@ -92,10 +97,11 @@ export interface UserAPIClientInterface {
       body: models.EmailsPost,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List the authenticated user's followers
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserFollowers(
     args: {
@@ -111,6 +117,7 @@ export interface UserAPIClientInterface {
 
   /**
    * List who the authenticated user is following.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserFollowing(
     args: {
@@ -129,6 +136,7 @@ export interface UserAPIClientInterface {
    * Unfollowing a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserFollowingUsername(
     args: {
@@ -141,10 +149,11 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Check if you are following a user.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getUserFollowingUsername(
     args: {
@@ -157,13 +166,14 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Follow a user.
    * Following a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   putUserFollowingUsername(
     args: {
@@ -176,13 +186,14 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List issues.
    * List all issues across owned and member repositories for the authenticated
    * user.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserIssues(
     args: {
@@ -207,6 +218,7 @@ export interface UserAPIClientInterface {
    * Lists the current user's keys. Management of public keys via the API requires
    * that you are authenticated through basic auth, or OAuth with the 'user', 'write:public_key' scopes.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeys(
     args: {
@@ -222,6 +234,7 @@ export interface UserAPIClientInterface {
 
   /**
    * Create a public key.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postUserKeys(
     args: {
@@ -238,6 +251,7 @@ export interface UserAPIClientInterface {
 
   /**
    * Delete a public key. Removes a public key. Requires that you are authenticated via Basic Auth or via OAuth with at least admin:public_key scope.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserKeysKeyId(
     args: {
@@ -250,10 +264,11 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Get a single public key.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeysKeyId(
     args: {
@@ -270,6 +285,7 @@ export interface UserAPIClientInterface {
 
   /**
    * List public and private organizations for the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserOrgs(
     args: {
@@ -288,6 +304,7 @@ export interface UserAPIClientInterface {
    * repositories owned by organizations which the user can access. You can lis
    * user organizations and list organization repositories separately.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserRepos(
     args: {
@@ -306,6 +323,7 @@ export interface UserAPIClientInterface {
    * Create a new repository for the authenticated user. OAuth users must supply
    * repo scope.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postUserRepos(
     args: {
@@ -322,6 +340,7 @@ export interface UserAPIClientInterface {
 
   /**
    * List repositories being starred by the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserStarred(
     args: {
@@ -339,6 +358,7 @@ export interface UserAPIClientInterface {
 
   /**
    * Unstar a repository
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserStarredOwnerRepo(
     args: {
@@ -352,10 +372,11 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Check if you are starring a repository.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getUserStarredOwnerRepo(
     args: {
@@ -369,10 +390,11 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Star a repository.
+   * Response generated for [ 204 ] HTTP response code.
    */
   putUserStarredOwnerRepo(
     args: {
@@ -386,10 +408,11 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List repositories being watched by the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserSubscriptions(
     args: {
@@ -405,6 +428,7 @@ export interface UserAPIClientInterface {
 
   /**
    * Stop watching a repository
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserSubscriptionsOwnerRepo(
     args: {
@@ -418,10 +442,11 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Check if you are watching a repository.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getUserSubscriptionsOwnerRepo(
     args: {
@@ -435,10 +460,11 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Watch a repository.
+   * Response generated for [ 204 ] HTTP response code.
    */
   putUserSubscriptionsOwnerRepo(
     args: {
@@ -452,10 +478,11 @@ export interface UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires user or repo scope when authenticating via OAuth.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserTeams(
     args: {

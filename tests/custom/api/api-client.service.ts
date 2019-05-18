@@ -42,6 +42,9 @@ export class APIClient implements APIClientInterface {
     };
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getItems(
     args: {
       pageSize: number,
@@ -64,6 +67,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.ItemList>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getItemModels(
     args: {
       pageSize: number,
@@ -86,6 +92,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getPetsId(
     args: {
       id: string,
@@ -101,6 +110,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.Pet[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   deletePetsId(
     args: {
       id: string,
@@ -116,6 +128,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<void>('DELETE', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getCustomers(
     requestHttpOptions?: HttpOptions
   ): Observable<models.Customer[] | null> {

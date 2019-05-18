@@ -44,6 +44,7 @@ export class MetaAPIClient implements MetaAPIClientInterface {
 
   /**
    * This gives some information about GitHub.com, the service.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getMeta(
     args: {

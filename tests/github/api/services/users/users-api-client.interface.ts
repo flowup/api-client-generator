@@ -12,6 +12,7 @@ export interface UsersAPIClientInterface {
    * Note: Pagination is powered exclusively by the since parameter. Use the Link
    * header to get the URL for the next page of users.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUsers(
     args: {
@@ -28,6 +29,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * Get a single user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsername(
     args: {
@@ -44,6 +46,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
+   * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameEvents(
     args: {
@@ -56,10 +59,11 @@ export interface UsersAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * This is the user's organization dashboard. You must be authenticated as the user to view this.
+   * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameEventsOrg(
     args: {
@@ -73,10 +77,11 @@ export interface UsersAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List a user's followers
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameFollowers(
     args: {
@@ -93,6 +98,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * Check if one user follows another.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getUsersUsernameFollowingTargetUser(
     args: {
@@ -106,10 +112,11 @@ export interface UsersAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List a users gists.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameGists(
     args: {
@@ -129,6 +136,7 @@ export interface UsersAPIClientInterface {
    * List public keys for a user.
    * Lists the verified public keys for a user. This is accessible by anyone.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameKeys(
     args: {
@@ -145,6 +153,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * List all public organizations for a user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameOrgs(
     args: {
@@ -161,6 +170,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * These are events that you'll only see public events.
+   * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameReceivedEvents(
     args: {
@@ -173,10 +183,11 @@ export interface UsersAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List public events that a user has received
+   * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameReceivedEventsPublic(
     args: {
@@ -189,10 +200,11 @@ export interface UsersAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List public repositories for the specified user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameRepos(
     args: {
@@ -210,6 +222,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * List repositories being starred by a user.
+   * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameStarred(
     args: {
@@ -222,10 +235,11 @@ export interface UsersAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List repositories being watched by a user.
+   * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameSubscriptions(
     args: {
@@ -238,6 +252,6 @@ export interface UsersAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
 }

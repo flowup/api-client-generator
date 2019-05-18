@@ -12,6 +12,7 @@ export interface FeedsAPIClientInterface {
    * 
    *  lists all the feeds available to the authenticating user.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getFeeds(
     args: {

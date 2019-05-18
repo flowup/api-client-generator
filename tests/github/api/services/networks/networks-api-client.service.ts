@@ -44,6 +44,7 @@ export class NetworksAPIClient implements NetworksAPIClientInterface {
 
   /**
    * List public events for a network of repositories.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNetworksOwnerRepoEvents(
     args: {

@@ -44,6 +44,7 @@ export class MarkdownAPIClient implements MarkdownAPIClientInterface {
 
   /**
    * Render an arbitrary Markdown document
+   * Response generated for [ 200 ] HTTP response code.
    */
   postMarkdown(
     args: {
@@ -86,6 +87,7 @@ export class MarkdownAPIClient implements MarkdownAPIClientInterface {
 
   /**
    * Render a Markdown document in raw mode
+   * Response generated for [ 200 ] HTTP response code.
    */
   postMarkdownRaw(
     args: {

@@ -94,7 +94,12 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
         return supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
           (!swaggerTag || (op.tags && op.tags.includes(swaggerTag))); // if tag is defined take only paths including this tag
       }).map(([methodType, operation]: [string, Operation]) => {
-          const okResponse: Response | Reference = operation.responses['200'] || operation.responses['201'];
+          // select the lowest success (code 20x) response
+          const successResponseCode =
+            Object.keys(operation.responses).sort().filter(code => code.startsWith('2'))[0]
+            || 'missing';
+
+          const okResponse: Response | Reference = operation.responses[successResponseCode];
 
           const responseType = determineResponseType(
             okResponse && isReference(okResponse)
@@ -120,7 +125,8 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
               (_: string, ...args: string[]): string => `\${args.${toCamelCase(args[0])}}`),
             responseTypeName: responseType.name,
             response: prefixImportedModels(responseType.type),
-            description: replaceNewLines(operation.description, '$1   * '),
+            // tslint:disable-next-line:max-line-length
+            description: `${replaceNewLines(operation.description, '$1   * ')}${operation.description ? '\n   * ' : ''}Response generated for [ ${successResponseCode} ] HTTP response code.`,
             .../^(File|Blob)\b/i.test(responseType.name) && {requestResponseType: 'blob' as 'blob'},
           };
         }
@@ -324,9 +330,8 @@ function determineResponseType(response: Response): {
   readonly type: string;
   readonly name: string;
 } {
-  if (response == null) { // TODO: check non-200 response codes
-    logWarn('200 or 201 response not specified; `any` will be used');
-    return {name: 'any', type: 'any'};
+  if (response == null ) {
+    return {name: 'void', type: 'void'};
   }
 
   const {schema} = response;

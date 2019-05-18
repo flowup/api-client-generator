@@ -46,6 +46,7 @@ export class RateLimitAPIClient implements RateLimitAPIClientInterface {
    * Get your current rate limit status
    * Note: Accessing this endpoint does not count against your rate limit.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getRateLimit(
     args: {

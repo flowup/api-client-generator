@@ -42,6 +42,9 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     };
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   get(
     args: {
       organizerTaskElementId: number,
@@ -57,6 +60,9 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     return this.sendRequest<models.DummySelectorViewModel>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSettings(
     args: {
       organizerTaskElementId: number,
@@ -72,6 +78,9 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     return this.sendRequest<models.DummySelectorSettings>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putSettings(
     args: {
       organizerTaskElementId: number,
@@ -88,6 +97,9 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     return this.sendRequest<Object>('PUT', path, options, JSON.stringify(args.betriebSelectorSettings));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   deleteSettings(
     args: {
       organizerTaskElementId: number,

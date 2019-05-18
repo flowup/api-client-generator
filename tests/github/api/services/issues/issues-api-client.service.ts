@@ -46,6 +46,7 @@ export class IssuesAPIClient implements IssuesAPIClientInterface {
    * List issues.
    * List all issues across all the authenticated user's visible repositories.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getIssues(
     args: {

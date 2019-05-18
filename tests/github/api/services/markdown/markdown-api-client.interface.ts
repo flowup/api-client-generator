@@ -8,6 +8,7 @@ export interface MarkdownAPIClientInterface {
 
   /**
    * Render an arbitrary Markdown document
+   * Response generated for [ 200 ] HTTP response code.
    */
   postMarkdown(
     args: {
@@ -24,6 +25,7 @@ export interface MarkdownAPIClientInterface {
 
   /**
    * Render a Markdown document in raw mode
+   * Response generated for [ 200 ] HTTP response code.
    */
   postMarkdownRaw(
     args: {

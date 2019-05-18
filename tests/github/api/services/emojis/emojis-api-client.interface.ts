@@ -8,6 +8,7 @@ export interface EmojisAPIClientInterface {
 
   /**
    * Lists all the emojis available to use on GitHub.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getEmojis(
     args: {

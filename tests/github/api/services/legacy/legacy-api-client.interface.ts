@@ -8,6 +8,7 @@ export interface LegacyAPIClientInterface {
 
   /**
    * Find issues by state and keyword.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getLegacyIssuesSearchOwnerRepositoryStateKeyword(
     args: {
@@ -27,6 +28,7 @@ export interface LegacyAPIClientInterface {
 
   /**
    * Find repositories by keyword. Note, this legacy method does not follow the v3 pagination pattern. This method returns up to 100 results per page and pages can be fetched using the start_page parameter.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getLegacyReposSearchKeyword(
     args: {
@@ -47,6 +49,7 @@ export interface LegacyAPIClientInterface {
 
   /**
    * This API call is added for compatibility reasons only.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getLegacyUserEmail(
     args: {
@@ -63,6 +66,7 @@ export interface LegacyAPIClientInterface {
 
   /**
    * Find users by keyword.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getLegacyUserSearchKeyword(
     args: {

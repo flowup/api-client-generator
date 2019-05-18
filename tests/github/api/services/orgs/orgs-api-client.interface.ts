@@ -8,6 +8,7 @@ export interface OrgsAPIClientInterface {
 
   /**
    * Get an Organization.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrg(
     args: {
@@ -24,6 +25,7 @@ export interface OrgsAPIClientInterface {
 
   /**
    * Edit an Organization.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchOrgsOrg(
     args: {
@@ -41,6 +43,7 @@ export interface OrgsAPIClientInterface {
 
   /**
    * List public events for an organization.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgEvents(
     args: {
@@ -59,6 +62,7 @@ export interface OrgsAPIClientInterface {
    * List issues.
    * List all issues for a given organization for the authenticated user.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgIssues(
     args: {
@@ -87,6 +91,7 @@ export interface OrgsAPIClientInterface {
    * will be returned. If the requester is not an owner of the organization the
    * query will be redirected to the public members list.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgMembers(
     args: {
@@ -106,6 +111,7 @@ export interface OrgsAPIClientInterface {
    * Removing a user from this list will remove them from all teams and they
    * will no longer have any access to the organization's repositories.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteOrgsOrgMembersUsername(
     args: {
@@ -119,10 +125,11 @@ export interface OrgsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Check if a user is, publicly or privately, a member of the organization.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getOrgsOrgMembersUsername(
     args: {
@@ -136,13 +143,14 @@ export interface OrgsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Public members list.
    * Members of an organization can choose to have their membership publicized
    * or not.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgPublicMembers(
     args: {
@@ -159,6 +167,7 @@ export interface OrgsAPIClientInterface {
 
   /**
    * Conceal a user's membership.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteOrgsOrgPublicMembersUsername(
     args: {
@@ -172,10 +181,11 @@ export interface OrgsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Check public membership.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getOrgsOrgPublicMembersUsername(
     args: {
@@ -189,10 +199,11 @@ export interface OrgsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Publicize a user's membership.
+   * Response generated for [ 204 ] HTTP response code.
    */
   putOrgsOrgPublicMembersUsername(
     args: {
@@ -206,10 +217,11 @@ export interface OrgsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * List repositories for the specified org.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgRepos(
     args: {
@@ -229,6 +241,7 @@ export interface OrgsAPIClientInterface {
    * Create a new repository for the authenticated user. OAuth users must supply
    * repo scope.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postOrgsOrgRepos(
     args: {
@@ -246,6 +259,7 @@ export interface OrgsAPIClientInterface {
 
   /**
    * List teams.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgTeams(
     args: {
@@ -264,6 +278,7 @@ export interface OrgsAPIClientInterface {
    * Create team.
    * In order to create a team, the authenticated user must be an owner of organization.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postOrgsOrgTeams(
     args: {

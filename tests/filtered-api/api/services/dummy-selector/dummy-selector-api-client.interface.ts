@@ -6,6 +6,9 @@ import * as models from '../../models';
 
 export interface DummySelectorAPIClientInterface {
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   get(
     args: {
       organizerTaskElementId: number,
@@ -13,6 +16,9 @@ export interface DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorViewModel>;
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSettings(
     args: {
       organizerTaskElementId: number,
@@ -20,6 +26,9 @@ export interface DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorSettings>;
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putSettings(
     args: {
       organizerTaskElementId: number,
@@ -28,6 +37,9 @@ export interface DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<Object>;
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   deleteSettings(
     args: {
       organizerTaskElementId: number,

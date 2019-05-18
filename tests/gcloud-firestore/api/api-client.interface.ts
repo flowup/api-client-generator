@@ -12,6 +12,7 @@ export interface APIClientInterface {
    * 
    * Documents returned by this method are not guaranteed to be returned in the
    * same order that they were requested.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsBatchGet(
     args: {
@@ -36,6 +37,7 @@ export interface APIClientInterface {
 
   /**
    * Starts a new transaction.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsBeginTransaction(
     args: {
@@ -60,6 +62,7 @@ export interface APIClientInterface {
 
   /**
    * Commits a transaction, while optionally updating documents.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsCommit(
     args: {
@@ -84,6 +87,7 @@ export interface APIClientInterface {
 
   /**
    * Listens to changes.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsListen(
     args: {
@@ -108,6 +112,7 @@ export interface APIClientInterface {
 
   /**
    * Rolls back a transaction.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsRollback(
     args: {
@@ -132,6 +137,7 @@ export interface APIClientInterface {
 
   /**
    * Streams batches of document updates and deletes, in order.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsWrite(
     args: {
@@ -156,6 +162,7 @@ export interface APIClientInterface {
 
   /**
    * Deletes an index.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesIndexesDelete(
     args: {
@@ -181,6 +188,7 @@ export interface APIClientInterface {
 
   /**
    * Gets an index.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesIndexesGet(
     args: {
@@ -207,6 +215,7 @@ export interface APIClientInterface {
 
   /**
    * Updates or inserts a document.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsPatch(
     args: {
@@ -235,6 +244,7 @@ export interface APIClientInterface {
 
   /**
    * Lists the indexes that match the specified filters.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesIndexesList(
     args: {
@@ -275,6 +285,7 @@ export interface APIClientInterface {
    * 
    * 
    * Indexes with a single field cannot be created.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesIndexesCreate(
     args: {
@@ -299,6 +310,7 @@ export interface APIClientInterface {
 
   /**
    * Lists documents.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsList(
     args: {
@@ -330,6 +342,7 @@ export interface APIClientInterface {
 
   /**
    * Creates a new document.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsCreateDocument(
     args: {
@@ -357,6 +370,7 @@ export interface APIClientInterface {
 
   /**
    * Lists all the collection IDs underneath a document.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsListCollectionIds(
     args: {
@@ -381,6 +395,7 @@ export interface APIClientInterface {
 
   /**
    * Runs a query.
+   * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsRunQuery(
     args: {

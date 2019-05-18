@@ -6,6 +6,9 @@ import * as models from '../../models';
 
 export interface ProjectAPIClientInterface {
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getProjectTypes(
     requestHttpOptions?: HttpOptions
   ): Observable<models.ProjectTypeViewModel[]>;

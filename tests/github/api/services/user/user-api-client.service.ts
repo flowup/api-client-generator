@@ -44,6 +44,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * Get the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUser(
     args: {
@@ -85,6 +86,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * Update the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchUser(
     args: {
@@ -129,6 +131,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Delete email address(es).
    * You can include a single email address or an array of addresses.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserEmails(
     args: {
@@ -141,7 +144,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       body: models.UserEmails,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/emails`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -166,7 +169,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options, JSON.stringify(args.body));
+    return this.sendRequest<void>('DELETE', path, options, JSON.stringify(args.body));
   }
 
   /**
@@ -177,6 +180,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Until API v3 is finalized, use the application/vnd.github.v3 media type to
    * get other response format.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserEmails(
     args: {
@@ -220,6 +224,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Add email address(es).
    * You can post a single email address or an array of addresses.
    * 
+   * Response generated for [ missing ] HTTP response code.
    */
   postUserEmails(
     args: {
@@ -232,7 +237,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       body: models.EmailsPost,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/emails`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -257,11 +262,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<void>('POST', path, options, JSON.stringify(args.body));
   }
 
   /**
    * List the authenticated user's followers
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserFollowers(
     args: {
@@ -303,6 +309,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * List who the authenticated user is following.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserFollowing(
     args: {
@@ -347,6 +354,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Unfollowing a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserFollowingUsername(
     args: {
@@ -359,7 +367,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/following/${args.username}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -384,11 +392,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Check if you are following a user.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getUserFollowingUsername(
     args: {
@@ -401,7 +410,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/following/${args.username}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -426,7 +435,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<void>('GET', path, options);
   }
 
   /**
@@ -434,6 +443,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Following a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   putUserFollowingUsername(
     args: {
@@ -446,7 +456,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/following/${args.username}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -471,7 +481,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('PUT', path, options);
+    return this.sendRequest<void>('PUT', path, options);
   }
 
   /**
@@ -479,6 +489,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * List all issues across owned and member repositories for the authenticated
    * user.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserIssues(
     args: {
@@ -547,6 +558,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Lists the current user's keys. Management of public keys via the API requires
    * that you are authenticated through basic auth, or OAuth with the 'user', 'write:public_key' scopes.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeys(
     args: {
@@ -588,6 +600,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * Create a public key.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postUserKeys(
     args: {
@@ -630,6 +643,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * Delete a public key. Removes a public key. Requires that you are authenticated via Basic Auth or via OAuth with at least admin:public_key scope.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserKeysKeyId(
     args: {
@@ -642,7 +656,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/keys/${args.keyId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -667,11 +681,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a single public key.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeysKeyId(
     args: {
@@ -714,6 +729,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * List public and private organizations for the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserOrgs(
     args: {
@@ -758,6 +774,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * repositories owned by organizations which the user can access. You can lis
    * user organizations and list organization repositories separately.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserRepos(
     args: {
@@ -805,6 +822,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Create a new repository for the authenticated user. OAuth users must supply
    * repo scope.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postUserRepos(
     args: {
@@ -847,6 +865,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * List repositories being starred by the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserStarred(
     args: {
@@ -896,6 +915,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * Unstar a repository
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserStarredOwnerRepo(
     args: {
@@ -909,7 +929,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -934,11 +954,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Check if you are starring a repository.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getUserStarredOwnerRepo(
     args: {
@@ -952,7 +973,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -977,11 +998,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<void>('GET', path, options);
   }
 
   /**
    * Star a repository.
+   * Response generated for [ 204 ] HTTP response code.
    */
   putUserStarredOwnerRepo(
     args: {
@@ -995,7 +1017,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1020,11 +1042,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('PUT', path, options);
+    return this.sendRequest<void>('PUT', path, options);
   }
 
   /**
    * List repositories being watched by the authenticated user.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserSubscriptions(
     args: {
@@ -1066,6 +1089,7 @@ export class UserAPIClient implements UserAPIClientInterface {
 
   /**
    * Stop watching a repository
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserSubscriptionsOwnerRepo(
     args: {
@@ -1079,7 +1103,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1104,11 +1128,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Check if you are watching a repository.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getUserSubscriptionsOwnerRepo(
     args: {
@@ -1122,7 +1147,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1147,11 +1172,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<void>('GET', path, options);
   }
 
   /**
    * Watch a repository.
+   * Response generated for [ 204 ] HTTP response code.
    */
   putUserSubscriptionsOwnerRepo(
     args: {
@@ -1165,7 +1191,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1190,11 +1216,12 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('PUT', path, options);
+    return this.sendRequest<void>('PUT', path, options);
   }
 
   /**
    * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires user or repo scope when authenticating via OAuth.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getUserTeams(
     args: {

@@ -10,6 +10,7 @@ export interface NotificationsAPIClientInterface {
    * List your notifications.
    * List all notifications for the current user, grouped by repository.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNotifications(
     args: {
@@ -30,6 +31,7 @@ export interface NotificationsAPIClientInterface {
    * Mark as read.
    * Marking a notification as "read" removes it from the default view on GitHub.com.
    * 
+   * Response generated for [ 205 ] HTTP response code.
    */
   putNotifications(
     args: {
@@ -42,10 +44,11 @@ export interface NotificationsAPIClientInterface {
       body: models.NotificationMarkRead,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * View a single thread.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsThreadsId(
     args: {
@@ -62,6 +65,7 @@ export interface NotificationsAPIClientInterface {
 
   /**
    * Mark a thread as read
+   * Response generated for [ 205 ] HTTP response code.
    */
   patchNotificationsThreadsId(
     args: {
@@ -74,10 +78,11 @@ export interface NotificationsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Delete a Thread Subscription.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteNotificationsThreadsIdSubscription(
     args: {
@@ -90,10 +95,11 @@ export interface NotificationsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Get a Thread Subscription.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsThreadsIdSubscription(
     args: {
@@ -114,6 +120,7 @@ export interface NotificationsAPIClientInterface {
    * is unnecessary if the user is already subscribed to the repository. Ignoring
    * a thread will mute all future notifications (until you comment or get @mentioned).
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   putNotificationsThreadsIdSubscription(
     args: {

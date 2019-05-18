@@ -10,6 +10,7 @@ export interface GistsAPIClientInterface {
    * List the authenticated user's gists or if called anonymously, this will
    * return all public gists.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getGists(
     args: {
@@ -26,6 +27,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * Create a gist.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postGists(
     args: {
@@ -42,6 +44,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * List all public gists.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getGistsPublic(
     args: {
@@ -58,6 +61,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * List the authenticated user's starred gists.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getGistsStarred(
     args: {
@@ -74,6 +78,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * Delete a gist.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsId(
     args: {
@@ -86,10 +91,11 @@ export interface GistsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Get a single gist.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getGistsId(
     args: {
@@ -106,6 +112,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * Edit a gist.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchGistsId(
     args: {
@@ -123,6 +130,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * List comments on a gist.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getGistsIdComments(
     args: {
@@ -139,6 +147,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * Create a commen
+   * Response generated for [ 201 ] HTTP response code.
    */
   postGistsIdComments(
     args: {
@@ -156,6 +165,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * Delete a comment.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsIdCommentsCommentId(
     args: {
@@ -169,10 +179,11 @@ export interface GistsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Get a single comment.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getGistsIdCommentsCommentId(
     args: {
@@ -190,6 +201,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * Edit a comment.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchGistsIdCommentsCommentId(
     args: {
@@ -208,6 +220,7 @@ export interface GistsAPIClientInterface {
 
   /**
    * Fork a gist.
+   * Response generated for [ 204 ] HTTP response code.
    */
   postGistsIdForks(
     args: {
@@ -220,10 +233,11 @@ export interface GistsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Unstar a gist.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsIdStar(
     args: {
@@ -236,10 +250,11 @@ export interface GistsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Check if a gist is starred.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getGistsIdStar(
     args: {
@@ -252,10 +267,11 @@ export interface GistsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
   /**
    * Star a gist.
+   * Response generated for [ 204 ] HTTP response code.
    */
   putGistsIdStar(
     args: {
@@ -268,6 +284,6 @@ export interface GistsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<void>;
 
 }

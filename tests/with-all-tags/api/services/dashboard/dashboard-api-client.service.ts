@@ -42,6 +42,9 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
     };
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getWidgetTypes(
     requestHttpOptions?: HttpOptions
   ): Observable<models.WidgetTypeViewModel[]> {
@@ -54,6 +57,9 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
     return this.sendRequest<models.WidgetTypeViewModel[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   get(
     args: {
       dashboardId: number,
@@ -69,6 +75,9 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
     return this.sendRequest<models.DashboardViewModel>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSettings(
     args: {
       dashboardId: number,
@@ -84,6 +93,9 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
     return this.sendRequest<models.RowModel[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putSettings(
     args: {
       dashboardId: number,

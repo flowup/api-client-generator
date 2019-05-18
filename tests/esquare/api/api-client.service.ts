@@ -42,6 +42,9 @@ export class APIClient implements APIClientInterface {
     };
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   auth(
     args: {
       body: models.AuthForm,  // Structure entity object that needs to be added
@@ -57,6 +60,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   authRef(
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
@@ -69,6 +75,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('POST', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   passwordRestoreRequest(
     args: {
       body: models.RestoreForm,  // Structure entity object that needs to be added
@@ -84,6 +93,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   passwordRestoreEmailRequest(
     args: {
       body: models.RestoreRequestForm,  // Structure entity object that needs to be added
@@ -99,6 +111,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   passwordRestoreCheckRestoreGuid(
     args: {
       restoreGuid: string,  // RestoreGuid for check
@@ -114,6 +129,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.restoreGuid));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getAclList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.AclItem[]> {
@@ -126,6 +144,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.AclItem[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getStructureEntitiesList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure[]> {
@@ -138,6 +159,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.Structure[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   addStructureEntity(
     args: {
       body: models.StructureAddParameters,  // Structure entity object that needs to be added
@@ -153,6 +177,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.Structure>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   updateStructureEntity(
     args: {
       structureId: number,  // structure id to update
@@ -169,6 +196,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.Structure>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   deleteStructureEntity(
     args: {
       structureId: number,  // structure id to delete
@@ -187,6 +217,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy4z8d)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReportsList(
     args: {
@@ -225,6 +256,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hywkd5)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReportDetails(
     args: {
@@ -244,6 +276,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/i3z8zb)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReportPreview(
     args: {
@@ -279,6 +312,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/i3ym4j)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getImportHistory(
     args: {
@@ -298,6 +332,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy521p)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   uploadFile(
     args: {
@@ -318,6 +353,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy52hi)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   listTemplateColumns(
     args: {
@@ -337,6 +373,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy52zr)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   listReportColumns(
     args: {
@@ -356,6 +393,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy53jt)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   saveColumnsMapping(
     args: {
@@ -376,6 +414,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy5fct)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getValidationTable(
     args: {
@@ -395,6 +434,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy55ga)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportedFile(
     args: {
@@ -419,6 +459,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy57nj)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   importConfirmation(
     args: {
@@ -438,6 +479,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy5a54)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportOriginalFile(
     args: {
@@ -458,6 +500,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy5ae7)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportSkippedFile(
     args: {
@@ -478,6 +521,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy5aqq)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   cancelImport(
     args: {
@@ -497,6 +541,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/hy5bi6)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   overrideImport(
     args: {
@@ -518,6 +563,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/i4052r)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   geImportStats(
     args: {
@@ -540,6 +586,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/i40s18)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getIssuesList(
     args: {
@@ -582,6 +629,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/i4byyx)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getStatusesList(
     args: {
@@ -621,6 +669,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getUsersList(
     args: {
       period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
@@ -667,6 +718,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   createUser(
     args: {
       body: models.UserDetails,  // User entity object that needs to be added
@@ -682,6 +736,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.UserDetails>('POST', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getAclStructure(
     requestHttpOptions?: HttpOptions
   ): Observable<models.Acl[]> {
@@ -694,6 +751,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.Acl[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getUserDetails(
     args: {
       id: number,
@@ -709,6 +769,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.UserDetails[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   updateUser(
     args: {
       id: number,
@@ -725,6 +788,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.UserDetails>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   deleteUser(
     args: {
       id: number,
@@ -743,6 +809,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/i93q0s)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getRolesList(
     requestHttpOptions?: HttpOptions
@@ -756,6 +823,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.RoleListItem[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   createRole(
     args: {
       body: any,  // Role entity object that needs to be added
@@ -774,6 +844,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/i947a3)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getList(
     requestHttpOptions?: HttpOptions
@@ -787,6 +858,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.PrivilegeTreeItem[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getRoleDetails(
     args: {
       id: number,
@@ -802,6 +876,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.RoleDetailsItem[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   updateRole(
     args: {
       id: number,
@@ -818,6 +895,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.RoleDetailsItem>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   deleteRole(
     args: {
       id: number,
@@ -836,6 +916,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/iba7xr)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNewNotificationsList(
     requestHttpOptions?: HttpOptions
@@ -849,6 +930,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.NotificationListItem[]>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   markViewedNotifications(
     args: {
       body?: any,
@@ -867,6 +951,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/iba8tq)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsList(
     args: {
@@ -902,6 +987,7 @@ export class APIClient implements APIClientInterface {
    * [Screenshot from design](http://prntscr.com/ibac47) |
    * [Screenshot from design](http://prntscr.com/ibacgu)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getModulesList(
     requestHttpOptions?: HttpOptions
@@ -918,6 +1004,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/ibad9m)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getTriggersList(
     requestHttpOptions?: HttpOptions
@@ -934,6 +1021,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/iba8tq)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getModuleNotificationsList(
     args: {
@@ -966,6 +1054,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<Object>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   enableNotification(
     args: {
       id: number,
@@ -981,6 +1072,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<void>('PUT', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   disableNotification(
     args: {
       id: number,
@@ -996,6 +1090,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<void>('PUT', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getNotification(
     args: {
       id: number,
@@ -1011,6 +1108,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.NotificationEditableListItem>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   updateNotification(
     args: {
       id: number,
@@ -1027,6 +1127,9 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   createNotification(
     args: {
       body?: models.NotificationEditable,
@@ -1045,6 +1148,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/ijzt2b)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getPassVerificationPolicies(
     requestHttpOptions?: HttpOptions
@@ -1061,6 +1165,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/ijzt2b)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   udatePassVerificationPolicies(
     args: {
@@ -1080,6 +1185,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/ijzuv3)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getPassCreationPolicies(
     requestHttpOptions?: HttpOptions
@@ -1096,6 +1202,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/ijzuv3)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   udatePassCreationPolicies(
     args: {
@@ -1115,6 +1222,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/ijzvo3)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getOtherSecuritySettings(
     requestHttpOptions?: HttpOptions
@@ -1131,6 +1239,7 @@ export class APIClient implements APIClientInterface {
   /**
    * [Screenshot from design](http://prntscr.com/ijzvo3)
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   udateOtherSecuritySettings(
     args: {

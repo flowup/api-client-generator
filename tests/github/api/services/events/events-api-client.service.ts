@@ -44,6 +44,7 @@ export class EventsAPIClient implements EventsAPIClientInterface {
 
   /**
    * List public events.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getEvents(
     args: {

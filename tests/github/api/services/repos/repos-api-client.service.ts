@@ -47,6 +47,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Deleting a repository requires admin access. If OAuth is used, the delete_repo
    * scope is required.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepo(
     args: {
@@ -60,7 +61,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -85,11 +86,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepo(
     args: {
@@ -133,6 +135,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Edit repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepo(
     args: {
@@ -180,6 +183,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * This call lists all the available assignees (owner + collaborators) to which
    * issues may be assigned.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoAssignees(
     args: {
@@ -225,6 +229,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Check assignee.
    * You may also check to see if a particular user is an assignee for a repository.
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoAssigneesAssignee(
     args: {
@@ -239,7 +244,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/assignees/${args.assignee}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -264,11 +269,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<void>('GET', path, options);
   }
 
   /**
    * Get list of branches
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoBranches(
     args: {
@@ -312,6 +318,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get Branch
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoBranchesBranch(
     args: {
@@ -361,6 +368,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * collaborators. Otherwise, only users with access to the repository are
    * returned in the collaborators list.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCollaborators(
     args: {
@@ -404,6 +412,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Remove collaborator.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoCollaboratorsUser(
     args: {
@@ -418,7 +427,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -443,11 +452,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Check if user is a collaborator
+   * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoCollaboratorsUser(
     args: {
@@ -462,7 +472,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -487,11 +497,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<void>('GET', path, options);
   }
 
   /**
    * Add collaborator.
+   * Response generated for [ 204 ] HTTP response code.
    */
   putReposOwnerRepoCollaboratorsUser(
     args: {
@@ -506,7 +517,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -531,13 +542,14 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('PUT', path, options);
+    return this.sendRequest<void>('PUT', path, options);
   }
 
   /**
    * List commit comments for a repository.
    * Comments are ordered by ascending ID.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoComments(
     args: {
@@ -581,6 +593,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a commit comment
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoCommentsCommentId(
     args: {
@@ -595,7 +608,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -620,11 +633,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a single commit comment.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommentsCommentId(
     args: {
@@ -669,6 +683,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Update a commit comment.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoCommentsCommentId(
     args: {
@@ -714,6 +729,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List commits on a repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommits(
     args: {
@@ -781,6 +797,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * To access this endpoint during the preview period, you must provide a custom media type in the Accept header:
    * application/vnd.github.she-hulk-preview+json
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsRefStatus(
     args: {
@@ -825,6 +842,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get a single commit.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsShaCode(
     args: {
@@ -869,6 +887,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List comments for a single commitList comments for a single commit.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsShaCodeComments(
     args: {
@@ -913,6 +932,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a commit comment.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoCommitsShaCodeComments(
     args: {
@@ -958,6 +978,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Compare two commits
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCompareBaseIdHeadId(
     args: {
@@ -1005,6 +1026,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Delete a file.
    * This method deletes a file in a repository.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   deleteReposOwnerRepoContentsPath(
     args: {
@@ -1056,6 +1078,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Note: This API supports files up to 1 megabyte in size.
    * Here can be many outcomes. For details see "http://developer.github.com/v3/repos/contents/"
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoContentsPath(
     args: {
@@ -1108,6 +1131,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a file.
+   * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoContentsPath(
     args: {
@@ -1153,6 +1177,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get list of contributors.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoContributors(
     args: {
@@ -1200,6 +1225,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Users with pull access can view deployments for a repository
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDeployments(
     args: {
@@ -1243,6 +1269,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Users with push access can create a deployment for a given ref
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoDeployments(
     args: {
@@ -1287,6 +1314,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Users with pull access can view deployment statuses for a deployment
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDeploymentsIdStatuses(
     args: {
@@ -1333,6 +1361,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Create a Deployment Status
    * Users with push access can create deployment statuses for a given deployment:
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoDeploymentsIdStatuses(
     args: {
@@ -1378,6 +1407,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Deprecated. List downloads for a repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDownloads(
     args: {
@@ -1421,6 +1451,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Deprecated. Delete a download.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoDownloadsDownloadId(
     args: {
@@ -1435,7 +1466,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1460,11 +1491,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Deprecated. Get a single download.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDownloadsDownloadId(
     args: {
@@ -1509,6 +1541,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get list of repository events.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoEvents(
     args: {
@@ -1552,6 +1585,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List forks.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoForks(
     args: {
@@ -1603,6 +1637,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * a short period before accessing the git objects. If this takes longer than 5
    * minutes, be sure to contact Support.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoForks(
     args: {
@@ -1647,6 +1682,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a Blob.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitBlobs(
     args: {
@@ -1696,6 +1732,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * base64. If your data cannot be losslessly sent as a UTF-8 string, you can
    * base64 encode it.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitBlobsShaCode(
     args: {
@@ -1741,6 +1778,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a Commit.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitCommits(
     args: {
@@ -1785,6 +1823,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get a Commit.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitCommitsShaCode(
     args: {
@@ -1829,6 +1868,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get all References
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitRefs(
     args: {
@@ -1872,6 +1912,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a Reference
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitRefs(
     args: {
@@ -1919,6 +1960,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a 
    * Example: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoGitRefsRef(
     args: {
@@ -1933,7 +1975,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1958,11 +2000,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a Reference
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitRefsRef(
     args: {
@@ -2007,6 +2050,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Update a Reference
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoGitRefsRef(
     args: {
@@ -2058,6 +2102,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * reference. If you want to create a lightweight tag, you only have to create
    * the tag reference - this call would be unnecessary.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTags(
     args: {
@@ -2102,6 +2147,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get a Tag.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitTagsShaCode(
     args: {
@@ -2150,6 +2196,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * a nested path modifying that tree are specified, it will overwrite the
    * contents of that tree with the new path contents and write a new tree out.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTrees(
     args: {
@@ -2194,6 +2241,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get a Tree.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitTreesShaCode(
     args: {
@@ -2242,6 +2290,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get list of hooks.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoHooks(
     args: {
@@ -2285,6 +2334,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a hook.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoHooks(
     args: {
@@ -2329,6 +2379,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a hook.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoHooksHookId(
     args: {
@@ -2343,7 +2394,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -2368,11 +2419,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get single hook.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoHooksHookId(
     args: {
@@ -2417,6 +2469,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Edit a hook.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoHooksHookId(
     args: {
@@ -2468,6 +2521,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * be generated.
    * Note: Previously /repos/:owner/:repo/hooks/:id/tes
    * 
+   * Response generated for [ 204 ] HTTP response code.
    */
   postReposOwnerRepoHooksHookIdTests(
     args: {
@@ -2482,7 +2536,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}/tests`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -2507,11 +2561,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('POST', path, options);
+    return this.sendRequest<void>('POST', path, options);
   }
 
   /**
    * List issues for a repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssues(
     args: {
@@ -2581,6 +2636,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Create an issue.
    * Any user with pull access to a repository can create an issue.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssues(
     args: {
@@ -2625,6 +2681,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List comments in a repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesComments(
     args: {
@@ -2680,6 +2737,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a comment.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesCommentId(
     args: {
@@ -2694,7 +2752,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -2719,11 +2777,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a single comment.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesCommentId(
     args: {
@@ -2768,6 +2827,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Edit a comment.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoIssuesCommentId(
     args: {
@@ -2813,6 +2873,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List issue events for a repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesEvents(
     args: {
@@ -2856,6 +2917,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get a single event.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesEventId(
     args: {
@@ -2900,6 +2962,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get a single issue
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumber(
     args: {
@@ -2946,6 +3009,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Edit an issue.
    * Issue owners and users with push access can edit an issue.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoIssuesNumber(
     args: {
@@ -2991,6 +3055,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List comments on an issue.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberComments(
     args: {
@@ -3035,6 +3100,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a comment.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssuesNumberComments(
     args: {
@@ -3080,6 +3146,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List events for an issue.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberEvents(
     args: {
@@ -3124,6 +3191,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Remove all labels from an issue.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesNumberLabels(
     args: {
@@ -3138,7 +3206,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -3163,11 +3231,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * List labels on an issue.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberLabels(
     args: {
@@ -3212,6 +3281,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Add labels to an issue.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssuesNumberLabels(
     args: {
@@ -3259,6 +3329,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Replace all labels for an issue.
    * Sending an empty array ([]) will remove all Labels from the Issue.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   putReposOwnerRepoIssuesNumberLabels(
     args: {
@@ -3304,6 +3375,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Remove a label from an issue.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesNumberLabelsName(
     args: {
@@ -3319,7 +3391,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels/${args.name}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -3344,11 +3416,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get list of keys.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoKeys(
     args: {
@@ -3392,6 +3465,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a key.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoKeys(
     args: {
@@ -3436,6 +3510,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a key.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoKeysKeyId(
     args: {
@@ -3450,7 +3525,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -3475,11 +3550,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a key
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoKeysKeyId(
     args: {
@@ -3524,6 +3600,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List all labels for this repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLabels(
     args: {
@@ -3567,6 +3644,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a label.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoLabels(
     args: {
@@ -3611,6 +3689,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a label.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoLabelsName(
     args: {
@@ -3625,7 +3704,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -3650,11 +3729,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a single label.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLabelsName(
     args: {
@@ -3699,6 +3779,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Update a label.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoLabelsName(
     args: {
@@ -3747,6 +3828,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * List languages for the specified repository. The value on the right of a
    * language is the number of bytes of code written in that language.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLanguages(
     args: {
@@ -3790,6 +3872,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Perform a merge.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoMerges(
     args: {
@@ -3834,6 +3917,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List milestones for a repository.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestones(
     args: {
@@ -3889,6 +3973,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a milestone.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoMilestones(
     args: {
@@ -3933,6 +4018,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a milestone.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoMilestonesNumber(
     args: {
@@ -3947,7 +4033,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -3972,11 +4058,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a single milestone.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestonesNumber(
     args: {
@@ -4021,6 +4108,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Update a milestone.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoMilestonesNumber(
     args: {
@@ -4066,6 +4154,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get labels for every issue in a milestone.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestonesNumberLabels(
     args: {
@@ -4112,6 +4201,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * List your notifications in a repository
    * List all notifications for the current user.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoNotifications(
     args: {
@@ -4170,6 +4260,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Marking all notifications in a repository as "read" removes them from the
    * default view on GitHub.com.
    * 
+   * Response generated for [ 205 ] HTTP response code.
    */
   putReposOwnerRepoNotifications(
     args: {
@@ -4184,7 +4275,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       body: models.NotificationMarkRead,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -4209,11 +4300,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
+    return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
   }
 
   /**
    * List pull requests.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPulls(
     args: {
@@ -4269,6 +4361,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a pull request.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoPulls(
     args: {
@@ -4315,6 +4408,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * List comments in a repository.
    * By default, Review Comments are ordered by ascending ID.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsComments(
     args: {
@@ -4370,6 +4464,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a comment.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoPullsCommentId(
     args: {
@@ -4384,7 +4479,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -4409,11 +4504,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a single comment.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsCommentId(
     args: {
@@ -4458,6 +4554,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Edit a comment.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoPullsCommentId(
     args: {
@@ -4503,6 +4600,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get a single pull request.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumber(
     args: {
@@ -4547,6 +4645,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Update a pull request.
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoPullsNumber(
     args: {
@@ -4592,6 +4691,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List comments on a pull request.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberComments(
     args: {
@@ -4658,6 +4758,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * 
    *            Required number - Comment id to reply to.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoPullsNumberComments(
     args: {
@@ -4703,6 +4804,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List commits on a pull request.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberCommits(
     args: {
@@ -4747,6 +4849,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List pull requests files.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberFiles(
     args: {
@@ -4791,6 +4894,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get if a pull request has been merged.
+   * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberMerge(
     args: {
@@ -4805,7 +4909,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -4830,11 +4934,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<void>('GET', path, options);
   }
 
   /**
    * Merge a pull request (Merge Button's)
+   * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoPullsNumberMerge(
     args: {
@@ -4882,6 +4987,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Get the README.
    * This method returns the preferred README for a repository.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReadme(
     args: {
@@ -4929,6 +5035,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Users with push access to the repository will receive all releases (i.e., published releases and draft releases). Users with pull access will receive published releases only
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleases(
     args: {
@@ -4974,6 +5081,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Create a release
    * Users with push access to the repository can create a release.
    * 
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoReleases(
     args: {
@@ -5018,6 +5126,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a release asset
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoReleasesAssetsId(
     args: {
@@ -5032,7 +5141,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -5057,11 +5166,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a single release asset
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesAssetsId(
     args: {
@@ -5108,6 +5218,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Edit a release asset
    * Users with push access to the repository can edit a release asset.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoReleasesAssetsId(
     args: {
@@ -5153,6 +5264,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Users with push access to the repository can delete a release.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoReleasesId(
     args: {
@@ -5167,7 +5279,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -5192,11 +5304,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a single release
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesId(
     args: {
@@ -5241,6 +5354,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Users with push access to the repository can edit a release
+   * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoReleasesId(
     args: {
@@ -5286,6 +5400,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List assets for a release
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesIdAssets(
     args: {
@@ -5330,6 +5445,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List Stargazers.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStargazers(
     args: {
@@ -5376,6 +5492,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Returns a weekly aggregate of the number of additions and deletions pushed
    * to a repository.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCodeFrequency(
     args: {
@@ -5422,6 +5539,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Returns the last year of commit activity grouped by week. The days array
    * is a group of commits per day, starting on Sunday.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCommitActivity(
     args: {
@@ -5465,6 +5583,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get contributors list with additions, deletions, and commit counts.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsContributors(
     args: {
@@ -5508,6 +5627,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get the weekly commit count for the repo owner and everyone else.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsParticipation(
     args: {
@@ -5561,6 +5681,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * the 2.00pm hour on Tuesdays. All times are based on the time zone of
    * individual commits.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsPunchCard(
     args: {
@@ -5604,6 +5725,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List Statuses for a specific Ref.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatusesRef(
     args: {
@@ -5648,6 +5770,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Create a Status.
+   * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoStatusesRef(
     args: {
@@ -5693,6 +5816,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List watchers.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoSubscribers(
     args: {
@@ -5736,6 +5860,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Delete a Repository Subscription.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoSubscription(
     args: {
@@ -5749,7 +5874,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -5774,11 +5899,12 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a Repository Subscription.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoSubscription(
     args: {
@@ -5822,6 +5948,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Set a Repository Subscription
+   * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoSubscription(
     args: {
@@ -5866,6 +5993,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get list of tags.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoTags(
     args: {
@@ -5909,6 +6037,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * Get list of teams
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoTeams(
     args: {
@@ -5952,6 +6081,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
 
   /**
    * List Stargazers. New implementation.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoWatchers(
     args: {
@@ -6001,6 +6131,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * to make a second GET request.
    * Note: For private repositories, these links are temporary and expire quickly.
    * 
+   * Response generated for [ missing ] HTTP response code.
    */
   getReposOwnerRepoArchiveFormatPath(
     args: {
@@ -6016,7 +6147,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/${args.archiveFormat}/${args.path}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -6041,7 +6172,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<void>('GET', path, options);
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {

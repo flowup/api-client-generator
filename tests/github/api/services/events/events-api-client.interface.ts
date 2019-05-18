@@ -8,6 +8,7 @@ export interface EventsAPIClientInterface {
 
   /**
    * List public events.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getEvents(
     args: {

@@ -46,6 +46,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * List your notifications.
    * List all notifications for the current user, grouped by repository.
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNotifications(
     args: {
@@ -101,6 +102,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * Mark as read.
    * Marking a notification as "read" removes it from the default view on GitHub.com.
    * 
+   * Response generated for [ 205 ] HTTP response code.
    */
   putNotifications(
     args: {
@@ -113,7 +115,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
       body: models.NotificationMarkRead,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/notifications`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -138,11 +140,12 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.body));
+    return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
   }
 
   /**
    * View a single thread.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsThreadsId(
     args: {
@@ -185,6 +188,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
 
   /**
    * Mark a thread as read
+   * Response generated for [ 205 ] HTTP response code.
    */
   patchNotificationsThreadsId(
     args: {
@@ -197,7 +201,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/notifications/threads/${args.id}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -222,11 +226,12 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('PATCH', path, options);
+    return this.sendRequest<void>('PATCH', path, options);
   }
 
   /**
    * Delete a Thread Subscription.
+   * Response generated for [ 204 ] HTTP response code.
    */
   deleteNotificationsThreadsIdSubscription(
     args: {
@@ -239,7 +244,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<void> {
     const path = `/notifications/threads/${args.id}/subscription`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -264,11 +269,12 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<any>('DELETE', path, options);
+    return this.sendRequest<void>('DELETE', path, options);
   }
 
   /**
    * Get a Thread Subscription.
+   * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsThreadsIdSubscription(
     args: {
@@ -315,6 +321,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * is unnecessary if the user is already subscribed to the repository. Ignoring
    * a thread will mute all future notifications (until you comment or get @mentioned).
    * 
+   * Response generated for [ 200 ] HTTP response code.
    */
   putNotificationsThreadsIdSubscription(
     args: {
