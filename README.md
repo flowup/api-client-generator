@@ -6,9 +6,11 @@
 [![Conventional Commits](https://user-images.githubusercontent.com/7274335/42030800-4690ea1e-7ad4-11e8-9e37-6fe8b2cb3801.png)](https://conventionalcommits.org)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/api-client-gen)
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/flowup/api-client-generator.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/flowup/api-client-generator/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/flowup/api-client-generator.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/flowup/api-client-generator/context:javascript)
+
 [![GitHub stars](https://img.shields.io/github/stars/flowup/api-client-generator.svg?style=social&label=Star)](https://github.com/flowup/api-client-generator)
 [![tweet](https://user-images.githubusercontent.com/7274335/42030803-46cd231c-7ad4-11e8-992c-2a5b933383c9.png)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/api-client-generator)
-
 
 # API client generator
 Angular REST API client generator from Swagger YAML or JSON file with camel case settings
