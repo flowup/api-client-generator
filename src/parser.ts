@@ -121,6 +121,7 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
             responseTypeName: responseType.name,
             response: prefixImportedModels(responseType.type),
             description: replaceNewLines(operation.description, '$1   * '),
+            .../^(File|Blob)\b/i.test(responseType.name) && {requestResponseType: 'blob' as 'blob'},
           };
         }
       )
@@ -321,7 +322,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
 
 function determineResponseType(response: Response): {
   readonly type: string;
-  readonly name?: string;
+  readonly name: string;
 } {
   if (response == null) { // TODO: check non-200 response codes
     logWarn('200 or 201 response not specified; `any` will be used');
@@ -352,7 +353,7 @@ function determineResponseType(response: Response): {
 
     const name = items.$ref ? dereferenceType(items.$ref) : items.type;
     const type = nullable ? `${typeName(name, true)} | null` : typeName(name, true);
-    return {name, type};
+    return {name: name || 'any', type};
   }
 
   if (schema.$ref != null) {

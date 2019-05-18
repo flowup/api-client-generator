@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('LegacyAPIClient
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -60,7 +61,10 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchIssuesByKeyword> {
     const path = `/legacy/issues/search/${args.owner}/${args.repository}/${args.state}/${args.keyword}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -103,7 +107,10 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchRepositoriesByKeyword> {
     const path = `/legacy/repos/search/${args.keyword}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
@@ -154,7 +161,10 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchUserByEmail> {
     const path = `/legacy/user/email/${args.email}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -196,7 +206,10 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchUsersByKeyword> {
     const path = `/legacy/user/search/${args.keyword}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));

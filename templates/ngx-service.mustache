@@ -15,6 +15,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('{{&serviceName}
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -59,7 +60,11 @@ export class {{&serviceName}} implements {{&interfaceName}} {
     requestHttpOptions?: HttpOptions
   ): Observable<{{&response}}> {
     const path = `{{&path}}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,{{#requestResponseType}}
+      responseType: 'blob',{{/requestResponseType}}
+    };
 
     {{#parameters}}
       {{#isQueryParameter}}

@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('DashboardAPICli
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -45,7 +46,10 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.WidgetTypeViewModel[]> {
     const path = `/api/dashboards/widgettypes`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<models.WidgetTypeViewModel[]>('GET', path, options);
   }
@@ -57,7 +61,10 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DashboardViewModel> {
     const path = `/api/dashboards/${args.dashboardId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<models.DashboardViewModel>('GET', path, options);
   }
@@ -69,7 +76,10 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RowModel[]> {
     const path = `/api/dashboards/${args.dashboardId}/settings`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<models.RowModel[]>('GET', path, options);
   }
@@ -82,7 +92,10 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     const path = `/api/dashboards/${args.dashboardId}/settings`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<Object>('PUT', path, options, JSON.stringify(args.rows));
   }

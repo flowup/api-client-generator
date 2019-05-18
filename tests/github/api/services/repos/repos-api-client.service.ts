@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('ReposAPIClient_
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -61,7 +62,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -101,7 +105,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -142,7 +149,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -185,7 +195,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Assignees> {
     const path = `/repos/${args.owner}/${args.repo}/assignees`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -228,7 +241,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/assignees/${args.assignee}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -268,7 +284,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Branches> {
     const path = `/repos/${args.owner}/${args.repo}/branches`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -309,7 +328,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Branch> {
     const path = `/repos/${args.owner}/${args.repo}/branches/${args.branch}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -354,7 +376,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -395,7 +420,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -436,7 +464,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -477,7 +508,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -519,7 +553,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -560,7 +597,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -601,7 +641,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -643,7 +686,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -688,7 +734,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commits> {
     const path = `/repos/${args.owner}/${args.repo}/commits`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -748,7 +797,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RefStatus> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.ref}/status`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -789,7 +841,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commit> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -830,7 +885,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoComments> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -872,7 +930,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -914,7 +975,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CompareCommits> {
     const path = `/repos/${args.owner}/${args.repo}/compare/${args.baseId}...${args.headId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -958,7 +1022,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeleteFile> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1007,7 +1074,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContentsPath> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('queryPath' in args) {
       options.params = options.params.set('queryPath', String(args.queryPath));
@@ -1055,7 +1125,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CreateFile> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1096,7 +1169,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Contributors> {
     const path = `/repos/${args.owner}/${args.repo}/contributors`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('anon' in args) {
       options.params = options.params.set('anon', String(args.anon));
@@ -1139,7 +1215,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoDeployments> {
     const path = `/repos/${args.owner}/${args.repo}/deployments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1180,7 +1259,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeploymentResp> {
     const path = `/repos/${args.owner}/${args.repo}/deployments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1221,7 +1303,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeploymentStatuses> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1265,7 +1350,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1305,7 +1393,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Downloads> {
     const path = `/repos/${args.owner}/${args.repo}/downloads`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1346,7 +1437,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1387,7 +1481,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Downloads> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1427,7 +1524,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/events`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1468,7 +1568,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Forks> {
     const path = `/repos/${args.owner}/${args.repo}/forks`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('sort' in args) {
       options.params = options.params.set('sort', String(args.sort));
@@ -1516,7 +1619,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Fork> {
     const path = `/repos/${args.owner}/${args.repo}/forks`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1557,7 +1663,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blobs> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1603,7 +1712,11 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<Blob> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs/${args.shaCode}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+      responseType: 'blob',
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1644,7 +1757,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.GitCommit> {
     const path = `/repos/${args.owner}/${args.repo}/git/commits`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1685,7 +1801,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoCommit> {
     const path = `/repos/${args.owner}/${args.repo}/git/commits/${args.shaCode}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1725,7 +1844,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Refs> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1766,7 +1888,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1810,7 +1935,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1851,7 +1979,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1893,7 +2024,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1940,7 +2074,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tags> {
     const path = `/repos/${args.owner}/${args.repo}/git/tags`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -1981,7 +2118,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tag> {
     const path = `/repos/${args.owner}/${args.repo}/git/tags/${args.shaCode}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2026,7 +2166,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Trees> {
     const path = `/repos/${args.owner}/${args.repo}/git/trees`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2068,7 +2211,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tree> {
     const path = `/repos/${args.owner}/${args.repo}/git/trees/${args.shaCode}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('recursive' in args) {
       options.params = options.params.set('recursive', String(args.recursive));
@@ -2111,7 +2257,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2152,7 +2301,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2193,7 +2345,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2234,7 +2389,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2276,7 +2434,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2323,7 +2484,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}/tests`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2369,7 +2533,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     const path = `/repos/${args.owner}/${args.repo}/issues`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('filter' in args) {
       options.params = options.params.set('filter', String(args.filter));
@@ -2430,7 +2597,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     const path = `/repos/${args.owner}/${args.repo}/issues`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2473,7 +2643,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('direction' in args) {
       options.params = options.params.set('direction', String(args.direction));
@@ -2523,7 +2696,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2564,7 +2740,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2606,7 +2785,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2646,7 +2828,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/issues/events`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2687,7 +2872,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Event> {
     const path = `/repos/${args.owner}/${args.repo}/issues/events/${args.eventId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2728,7 +2916,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2772,7 +2963,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2813,7 +3007,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2855,7 +3052,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2896,7 +3096,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/events`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2937,7 +3140,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -2978,7 +3184,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3020,7 +3229,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3064,7 +3276,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3106,7 +3321,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels/${args.name}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3146,7 +3364,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Keys> {
     const path = `/repos/${args.owner}/${args.repo}/keys`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3187,7 +3408,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     const path = `/repos/${args.owner}/${args.repo}/keys`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3228,7 +3452,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3269,7 +3496,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3309,7 +3539,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/labels`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3350,7 +3583,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/labels`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3391,7 +3627,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3432,7 +3671,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3474,7 +3716,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3517,7 +3762,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Languages> {
     const path = `/repos/${args.owner}/${args.repo}/languages`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3558,7 +3806,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.MergesSuccessful> {
     const path = `/repos/${args.owner}/${args.repo}/merges`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3601,7 +3852,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('state' in args) {
       options.params = options.params.set('state', String(args.state));
@@ -3651,7 +3905,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3692,7 +3949,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3733,7 +3993,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3775,7 +4038,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3816,7 +4082,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}/labels`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3861,7 +4130,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('all' in args) {
       options.params = options.params.set('all', String(args.all));
@@ -3914,7 +4186,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -3957,7 +4232,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     const path = `/repos/${args.owner}/${args.repo}/pulls`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('state' in args) {
       options.params = options.params.set('state', String(args.state));
@@ -4007,7 +4285,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     const path = `/repos/${args.owner}/${args.repo}/pulls`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4052,7 +4333,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('direction' in args) {
       options.params = options.params.set('direction', String(args.direction));
@@ -4102,7 +4386,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4143,7 +4430,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4185,7 +4475,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4226,7 +4519,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullRequest> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4268,7 +4564,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4309,7 +4608,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4373,7 +4675,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4414,7 +4719,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commits> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/commits`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4455,7 +4763,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/files`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4496,7 +4807,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4538,7 +4852,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Merge> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4581,7 +4898,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContentsPath> {
     const path = `/repos/${args.owner}/${args.repo}/readme`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('ref' in args) {
       options.params = options.params.set('ref', String(args.ref));
@@ -4624,7 +4944,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Releases> {
     const path = `/repos/${args.owner}/${args.repo}/releases`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4667,7 +4990,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     const path = `/repos/${args.owner}/${args.repo}/releases`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4708,7 +5034,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4749,7 +5078,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Asset> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4793,7 +5125,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Asset> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4834,7 +5169,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4875,7 +5213,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4917,7 +5258,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4958,7 +5302,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Assets> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}/assets`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -4998,7 +5345,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/stargazers`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5041,7 +5391,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/code_frequency`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5084,7 +5437,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitActivityStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/commit_activity`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5124,7 +5480,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContributorsStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/contributors`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5164,7 +5523,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ParticipationStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/participation`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5214,7 +5576,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/punch_card`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5255,7 +5620,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Ref> {
     const path = `/repos/${args.owner}/${args.repo}/statuses/${args.ref}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5297,7 +5665,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Ref> {
     const path = `/repos/${args.owner}/${args.repo}/statuses/${args.ref}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5337,7 +5708,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/subscribers`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5377,7 +5751,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5417,7 +5794,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscribition> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5458,7 +5838,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscribition> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5498,7 +5881,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tags> {
     const path = `/repos/${args.owner}/${args.repo}/tags`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5538,7 +5924,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Teams> {
     const path = `/repos/${args.owner}/${args.repo}/teams`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5578,7 +5967,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/watchers`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -5626,7 +6018,10 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/repos/${args.owner}/${args.repo}/${args.archiveFormat}/${args.path}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));

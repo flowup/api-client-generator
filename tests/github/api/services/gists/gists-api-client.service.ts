@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('GistsAPIClient_
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -59,7 +60,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -101,7 +105,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     const path = `/gists`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -140,7 +147,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists/public`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -182,7 +192,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists/starred`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('since' in args) {
       options.params = options.params.set('since', String(args.since));
@@ -224,7 +237,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -263,7 +279,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     const path = `/gists/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -303,7 +322,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     const path = `/gists/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -342,7 +364,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comments> {
     const path = `/gists/${args.id}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -382,7 +407,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     const path = `/gists/${args.id}/comments`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -422,7 +450,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -462,7 +493,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -503,7 +537,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -542,7 +579,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/forks`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -581,7 +621,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/star`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -620,7 +663,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/star`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -659,7 +705,10 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/gists/${args.id}/star`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));

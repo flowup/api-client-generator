@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('APIClient_USE_H
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -69,7 +70,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.BatchGetDocumentsResponse> {
     const path = `/${args.database}/documents:batchGet`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -137,7 +141,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.BeginTransactionResponse> {
     const path = `/${args.database}/documents:beginTransaction`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -205,7 +212,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitResponse> {
     const path = `/${args.database}/documents:commit`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -273,7 +283,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListenResponse> {
     const path = `/${args.database}/documents:listen`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -341,7 +354,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Empty> {
     const path = `/${args.database}/documents:rollback`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -409,7 +425,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.WriteResponse> {
     const path = `/${args.database}/documents:write`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -478,7 +497,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Empty> {
     const path = `/${args.name}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -554,7 +576,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Index> {
     const path = `/${args.name}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -637,7 +662,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Document> {
     const path = `/${args.name}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -723,7 +751,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListIndexesResponse> {
     const path = `/${args.parent}/indexes`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -814,7 +845,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Operation> {
     const path = `/${args.parent}/indexes`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -889,7 +923,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListDocumentsResponse> {
     const path = `/${args.parent}/${args.collectionId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -983,7 +1020,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Document> {
     const path = `/${args.parent}/${args.collectionId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -1059,7 +1099,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListCollectionIdsResponse> {
     const path = `/${args.parent}:listCollectionIds`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));
@@ -1127,7 +1170,10 @@ export class APIClient implements APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RunQueryResponse> {
     const path = `/${args.parent}:runQuery`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('$Xgafv' in args) {
       options.params = options.params.set('$.xgafv', String(args.$Xgafv));

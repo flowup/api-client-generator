@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('ProjectAPIClien
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -45,7 +46,10 @@ export class ProjectAPIClient implements ProjectAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ProjectTypeViewModel[]> {
     const path = `/api/project/projecttypes`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<models.ProjectTypeViewModel[]>('GET', path, options);
   }

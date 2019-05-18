@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('DummySelectorAP
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -48,7 +49,10 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorViewModel> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<models.DummySelectorViewModel>('GET', path, options);
   }
@@ -60,7 +64,10 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorSettings> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<models.DummySelectorSettings>('GET', path, options);
   }
@@ -73,7 +80,10 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<Object>('PUT', path, options, JSON.stringify(args.betriebSelectorSettings));
   }
@@ -85,7 +95,10 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     return this.sendRequest<Object>('DELETE', path, options);
   }

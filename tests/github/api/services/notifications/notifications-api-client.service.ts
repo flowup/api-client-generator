@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('NotificationsAP
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -61,7 +62,10 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/notifications`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('all' in args) {
       options.params = options.params.set('all', String(args.all));
@@ -111,7 +115,10 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -150,7 +157,10 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/notifications/threads/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -189,7 +199,10 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/threads/${args.id}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -228,7 +241,10 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -267,7 +283,10 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscription> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -311,7 +330,10 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscription> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));

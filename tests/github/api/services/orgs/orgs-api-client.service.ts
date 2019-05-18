@@ -13,6 +13,7 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('OrgsAPIClient_U
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
+  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 /**
@@ -57,7 +58,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Organization> {
     const path = `/orgs/${args.org}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -97,7 +101,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Organization> {
     const path = `/orgs/${args.org}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -136,7 +143,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/orgs/${args.org}/events`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -183,7 +193,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     const path = `/orgs/${args.org}/issues`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('filter' in args) {
       options.params = options.params.set('filter', String(args.filter));
@@ -246,7 +259,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/orgs/${args.org}/members`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -289,7 +305,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/members/${args.username}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -329,7 +348,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/members/${args.username}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -371,7 +393,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/orgs/${args.org}/public_members`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -411,7 +436,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -451,7 +479,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -491,7 +522,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<any> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -531,7 +565,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     const path = `/orgs/${args.org}/repos`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('type' in args) {
       options.params = options.params.set('type', String(args.type));
@@ -576,7 +613,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     const path = `/orgs/${args.org}/repos`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -615,7 +655,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Teams> {
     const path = `/orgs/${args.org}/teams`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
@@ -657,7 +700,10 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Team> {
     const path = `/orgs/${args.org}/teams`;
-    const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
 
     if ('xGitHubMediaType' in args) {
       options.headers = options.headers.set('X-GitHub-Media-Type', String(args.xGitHubMediaType));
