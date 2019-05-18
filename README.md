@@ -39,9 +39,9 @@ A lot of developers is struggling with how to properly use the REST API in their
 
 # Compatibility
 
-- **Angular 6** (should also work with 5 and 4.3+)
+- **Angular 6+** (it should also work with 5 and 4.3+)
 - **RxJS 6** (Observable imports)
-  - in case of rxjs <6 please update or rewrite the rxjs import to match the older version
+  - in case of rxjs <6 please update or rewrite the rxjs imports to match the older version
 
 See the [Changelog](https://github.com/flowup/api-client-generator/blob/master/CHANGELOG.md) to keep up with the features and changes.
 
@@ -80,7 +80,7 @@ This command will generate API client described in the swagger.json file to the.
 | `-v`/`--verbose`       | supply stack traces with outputted error messages                                                               |
 | `-t`/`--splitPathTags` | generate services and models only for the specified tags. Use `,` as the separator for multiple tags            |
 |                        | use `all` to emit all as a service per tag                                                                      |
-| `-m`/`--skipModule`    | skip creating the index file with module export                                                                     |
+| `-m`/`--skipModule`    | skip creating the index file with module export                                                                 |
 
 <small>\* The author of the commit will be `api-client-generator <api-client-generator@flowup.cz>`.
 If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.*</small>
