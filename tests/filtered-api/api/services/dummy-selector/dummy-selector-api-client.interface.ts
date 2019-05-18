@@ -26,13 +26,13 @@ export interface DummySelectorAPIClientInterface {
       betriebSelectorSettings: models.DummySelectorSettings,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   deleteSettings(
     args: {
       organizerTaskElementId: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
 }

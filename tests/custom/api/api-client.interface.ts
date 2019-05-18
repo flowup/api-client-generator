@@ -20,7 +20,7 @@ export interface APIClientInterface {
       page: number,  // page number
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   getPetsId(
     args: {

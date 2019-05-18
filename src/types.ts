@@ -70,11 +70,6 @@ export interface Method {
   readonly responseTypeName?: string; // method return type without prefix
 }
 
-export interface ResponseType {
-  readonly type: string;
-  readonly name?: string;
-}
-
 /**
  * Options for generator
  */

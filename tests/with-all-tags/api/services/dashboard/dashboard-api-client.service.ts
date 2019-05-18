@@ -80,11 +80,11 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
       rows: any,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/api/dashboards/${args.dashboardId}/settings`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('PUT', path, options, JSON.stringify(args.rows));
+    return this.sendRequest<Object>('PUT', path, options, JSON.stringify(args.rows));
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {

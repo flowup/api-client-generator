@@ -15,7 +15,6 @@ import {
   Property,
   Render,
   RenderFileName,
-  ResponseType
 } from './types';
 import {
   BASIC_TS_TYPE_REGEX,
@@ -320,21 +319,27 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   };
 }
 
-function determineResponseType(response: Response): ResponseType {
+function determineResponseType(response: Response): {
+  readonly type: string;
+  readonly name?: string;
+} {
   if (response == null) { // TODO: check non-200 response codes
     logWarn('200 or 201 response not specified; `any` will be used');
     return {name: 'any', type: 'any'};
   }
 
   const {schema} = response;
+
   if (schema == null) {
     logWarn('200 or 201 response schema not specified; `any` will be used');
     return {name: 'any', type: 'any'};
   }
 
   const nullable = (schema as Schema & { 'x-nullable'?: boolean })['x-nullable'] || false;
+
   if (schema.type === 'array') {
     const {items} = schema;
+
     if (items == null) {
       logWarn('`items` field not present; `any[]` will be used');
       return {name: 'any', type: 'any[]'};
@@ -354,6 +359,11 @@ function determineResponseType(response: Response): ResponseType {
     const name = dereferenceType(schema.$ref);
     const type = nullable ? `${typeName(name)} | null` : typeName(name);
     return {name, type};
+  }
+
+  if (schema.type != null) {
+    const type = nullable ? `${typeName(schema.type)} | null` : typeName(schema.type);
+    return {name: type, type};
   }
 
   return {name: 'any', type: 'any'};

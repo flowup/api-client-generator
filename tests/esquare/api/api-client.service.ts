@@ -46,20 +46,20 @@ export class APIClient implements APIClientInterface {
       body: models.AuthForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/auth`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
   }
 
   authRef(
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/auth/refresh`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('POST', path, options);
+    return this.sendRequest<Object>('POST', path, options);
   }
 
   passwordRestoreRequest(
@@ -67,11 +67,11 @@ export class APIClient implements APIClientInterface {
       body: models.RestoreForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/restore`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
   }
 
   passwordRestoreEmailRequest(
@@ -79,11 +79,11 @@ export class APIClient implements APIClientInterface {
       body: models.RestoreRequestForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/restore/request`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
   }
 
   passwordRestoreCheckRestoreGuid(
@@ -91,11 +91,11 @@ export class APIClient implements APIClientInterface {
       restoreGuid: string,  // RestoreGuid for check
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/restore/checkGuid`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.restoreGuid));
+    return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.restoreGuid));
   }
 
   getAclList(
@@ -166,7 +166,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/report`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
@@ -185,7 +185,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<Object>('GET', path, options);
   }
 
   /**
@@ -217,7 +217,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/report/preview/${args.templateId}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
@@ -233,7 +233,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<Object>('GET', path, options);
   }
 
   /**
@@ -262,11 +262,11 @@ export class APIClient implements APIClientInterface {
       file: File,  // file to upload
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<number> {
     const path = `/report/wizard/uploadfile/${args.templateId}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.file));
+    return this.sendRequest<number>('POST', path, options, JSON.stringify(args.file));
   }
 
   /**
@@ -344,14 +344,14 @@ export class APIClient implements APIClientInterface {
       all?: boolean,  // (optional) Indicator of downloading data(all or errors only)
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<File> {
     const path = `/report/wizard/${args.id}/downloadImported`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
     if ('all' in args) {
       options.params = options.params.set('all', String(args.all));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<File>('GET', path, options);
   }
 
   /**
@@ -379,11 +379,11 @@ export class APIClient implements APIClientInterface {
       id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<File> {
     const path = `/report/wizard/${args.id}/downloadOriginal`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<File>('GET', path, options);
   }
 
   /**
@@ -395,11 +395,11 @@ export class APIClient implements APIClientInterface {
       id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<File> {
     const path = `/report/wizard/${args.id}/downloadSkipped`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<File>('GET', path, options);
   }
 
   /**
@@ -469,7 +469,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/report/ministry/issues`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
@@ -491,7 +491,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<Object>('GET', path, options);
   }
 
   /**
@@ -508,7 +508,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/report/ministry/statuses`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
@@ -530,7 +530,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<Object>('GET', path, options);
   }
 
   getUsersList(
@@ -545,7 +545,7 @@ export class APIClient implements APIClientInterface {
       unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/users`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
@@ -573,7 +573,7 @@ export class APIClient implements APIClientInterface {
     if ('unassignedFromRole' in args) {
       options.params = options.params.set('unassignedFromRole', String(args.unassignedFromRole));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<Object>('GET', path, options);
   }
 
   createUser(
@@ -746,7 +746,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/notifications/all`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
@@ -762,7 +762,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<Object>('GET', path, options);
   }
 
   /**
@@ -805,7 +805,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/notifications/modules/${args.moduleId}`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
@@ -821,7 +821,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<Object>('GET', path, options);
   }
 
   enableNotification(
@@ -878,11 +878,11 @@ export class APIClient implements APIClientInterface {
       body?: models.NotificationEditable,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<number> {
     const path = `/notifications`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
-    return this.sendRequest<any>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<number>('POST', path, options, JSON.stringify(args.body));
   }
 
   /**

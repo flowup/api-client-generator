@@ -2,7 +2,7 @@ import { Reference } from 'swagger-schema-official';
 import { FileInfix } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|boolean)\b/;
-const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/;
+const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|Object|Date|File|Blob)\b/i;
 
 export function toCamelCase(text: string = '', lowerFirst: boolean = true): string {
   text = removeDuplicateWords(text);
@@ -74,7 +74,11 @@ export function toTypescriptType(type: string | undefined): string {
 }
 
 export function typeName(name: string = 'any', isArray: boolean = false): string {
-  const type = BUILD_IN_TS_TYPE_REGEX.test(name) ? name : toCamelCase(name, false);
+  const type = BASIC_TS_TYPE_REGEX.test(name)
+    ? /\binteger\b/.test(name)
+      ? 'number'
+      : name
+    : toCamelCase(name, false);
 
   return `${type}${isArray ? '[]' : ''}`;
 }

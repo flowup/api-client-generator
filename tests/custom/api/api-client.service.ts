@@ -66,7 +66,7 @@ export class APIClient implements APIClientInterface {
       page: number,  // page number
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<Object> {
     const path = `/itemModels`;
     const options: APIHttpOptions = {...this.options, ...requestHttpOptions};
 
@@ -76,7 +76,7 @@ export class APIClient implements APIClientInterface {
     if ('page' in args) {
       options.params = options.params.set('page', String(args.page));
     }
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<Object>('GET', path, options);
   }
 
   getPetsId(

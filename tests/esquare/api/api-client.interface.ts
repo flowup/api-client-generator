@@ -11,32 +11,32 @@ export interface APIClientInterface {
       body: models.AuthForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   authRef(
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   passwordRestoreRequest(
     args: {
       body: models.RestoreForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   passwordRestoreEmailRequest(
     args: {
       body: models.RestoreRequestForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   passwordRestoreCheckRestoreGuid(
     args: {
       restoreGuid: string,  // RestoreGuid for check
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   getAclList(
     requestHttpOptions?: HttpOptions
@@ -81,7 +81,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   /**
    * [Screenshot from design](http://prntscr.com/hywkd5)
@@ -107,7 +107,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   /**
    * [Screenshot from design](http://prntscr.com/i3ym4j)
@@ -130,7 +130,7 @@ export interface APIClientInterface {
       file: File,  // file to upload
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<number>;
 
   /**
    * [Screenshot from design](http://prntscr.com/hy52hi)
@@ -187,7 +187,7 @@ export interface APIClientInterface {
       all?: boolean,  // (optional) Indicator of downloading data(all or errors only)
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<File>;
 
   /**
    * [Screenshot from design](http://prntscr.com/hy57nj)
@@ -209,7 +209,7 @@ export interface APIClientInterface {
       id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<File>;
 
   /**
    * [Screenshot from design](http://prntscr.com/hy5ae7)
@@ -220,7 +220,7 @@ export interface APIClientInterface {
       id: number,  // Id of current import
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<File>;
 
   /**
    * [Screenshot from design](http://prntscr.com/hy5aqq)
@@ -271,7 +271,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   /**
    * [Screenshot from design](http://prntscr.com/i4byyx)
@@ -287,7 +287,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   getUsersList(
     args: {
@@ -301,7 +301,7 @@ export interface APIClientInterface {
       unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   createUser(
     args: {
@@ -408,7 +408,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   /**
    * [Screenshot from design](http://prntscr.com/ibac47) |
@@ -440,7 +440,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<Object>;
 
   enableNotification(
     args: {
@@ -476,7 +476,7 @@ export interface APIClientInterface {
       body?: models.NotificationEditable,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<number>;
 
   /**
    * [Screenshot from design](http://prntscr.com/ijzt2b)
