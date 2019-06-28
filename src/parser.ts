@@ -43,6 +43,7 @@ type ExtendedParameter = (SwaggerParameter) & {
   schema: Schema;
   type: 'string' | 'integer';
   required: boolean;
+  'x-enumNames'?: string[];
 };
 
 interface Definitions {
@@ -189,7 +190,13 @@ function parseDefinitions(
 
 function defineEnumOrInterface(key: string, definition: Schema | ExtendedParameter): Definition {
   return definition.enum && definition.enum.length !== 0
-    ? defineEnum(definition.enum, key, definition.type === 'integer', definition.description)
+    ? defineEnum(
+      definition.enum,
+      key,
+      definition.type === 'integer',
+      definition.description,
+      (definition as ExtendedParameter)['x-enumNames'],
+    )
     : defineInterface(('schema' in definition ? definition.schema : definition) || {}, key);
 }
 
@@ -198,6 +205,7 @@ function defineEnum(
   definitionKey: string,
   isNumeric: boolean = false,
   enumDesc: string = '',
+  xEnumNames: string[] = [],
 ): Definition {
   const splitDesc = enumDesc.split('\n');
   const descKeys: { [key: string]: string } | null = splitDesc.length > 1
@@ -212,10 +220,10 @@ function defineEnum(
 
   return {
     name: typeName(definitionKey),
-    properties: enumSchema && enumSchema.map((val) => ({
+    properties: enumSchema && enumSchema.map((val, index) => ({
       name: (
         isNumeric
-          ? descKeys ? descKeys[val.toString()] : val.toString()
+          ? descKeys ? descKeys[val.toString()] : xEnumNames[index] || `${val}`
           : val.toString()
       ).replace(/[\W\s]+/, '_'),
       value: val.toString(),

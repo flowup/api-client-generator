@@ -1,4 +1,7 @@
 /* tslint:disable */
+import {
+  StatusSeverity,
+} from '.';
 
 export interface WidgetTypeViewModel {
   Beschreibung?: string;
@@ -9,6 +12,7 @@ export interface WidgetTypeViewModel {
   Order?: number;
   OrganizerTaskId?: number;
   RefSystem?: { [key: string]: string };
+  Severity?: StatusSeverity;
   SysApplicationId?: number;
   Titel?: string;
 }

@@ -164,8 +164,25 @@ StaticInjectorError(AppModule)[APIClient -> HttpClient]:
     NullInjectorError: No provider for HttpClient!
 ```
 
-Fix:
+**Fix:**
  - add `HttpClientModule` to your root module (see NgModule imports in [usage](https://github.com/flowup/api-client-generator#how-to-use-generated-client))
+
+### Numeric Enums keys generated as plane number
+
+If some of your numeric enums look like this, the problem might be that in the swagger file you are not describing the keys properly.
+
+```
+export enum MyEnum {
+  0 = 0,
+  1 = 1,
+  2 = 2,
+}
+```
+
+**Fix**
+ We currently support two options:
+ - formatting description into array of `['1 Foo', '2 Bar']`
+ - using `'x-enumNames'` custom property that should be in format `['Foo', 'Bar']`
 
 # Problem reporting and contributions
 

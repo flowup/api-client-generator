@@ -358,12 +358,33 @@
 				}
 			}
 		},
+		"StatusSeverity": {
+			"type": "integer",
+			"description": "",
+			"x-enumNames": [
+				"Unknown",
+				"OK",
+				"Warning",
+				"Error",
+				"Critical"
+			],
+			"enum": [
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		},
 		"WidgetTypeViewModel": {
 			"type": "object",
 			"properties": {
 				"Id": {
 					"format": "int32",
 					"type": "integer"
+				},
+				"Severity": {
+					"$ref": "#/definitions/StatusSeverity"
 				},
 				"Titel": {
 					"type": "string"
