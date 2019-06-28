@@ -126,7 +126,10 @@ export class APIClient implements APIClientInterface {
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.restoreGuid));
+    const formData = new FormData();
+    formData.append('restoreGuid', args.restoreGuid);
+
+    return this.sendRequest<Object>('POST', path, options, formData);
   }
 
   /**
@@ -347,7 +350,10 @@ export class APIClient implements APIClientInterface {
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<number>('POST', path, options, JSON.stringify(args.file));
+    const formData = new FormData();
+    formData.append('file', args.file);
+
+    return this.sendRequest<number>('POST', path, options, formData);
   }
 
   /**
@@ -557,7 +563,11 @@ export class APIClient implements APIClientInterface {
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<void>('POST', path, options, JSON.stringify(args.description), JSON.stringify(args.file));
+    const formData = new FormData();
+    formData.append('description', args.description);
+    formData.append('file', args.file);
+
+    return this.sendRequest<void>('POST', path, options, formData);
   }
 
   /**

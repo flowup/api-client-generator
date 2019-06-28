@@ -108,7 +108,12 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
               : okResponse
           );
 
-          return {
+          const transformedParams = transformParameters(
+            [...(pathDef.parameters || []), ...(operation.parameters || [])],
+            parameters || {}
+          );
+
+        return {
             hasJsonResponse: true,
             isSecure: security !== undefined || operation.security !== undefined,
             methodName: toCamelCase(operation.operationId
@@ -116,10 +121,10 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
               : `${methodType}_${pathName.replace(/[{}]/g, '')}`
             ),
             methodType: methodType.toUpperCase() as MethodType,
-            parameters: transformParameters(
-              [...(pathDef.parameters || []), ...(operation.parameters || [])],
-              parameters || {}
-            ),
+            parameters: transformedParams,
+            formData: transformedParams
+              .filter(({name, isFormParameter}) => name && isFormParameter)
+              .map(({name, camelCaseName}) => ({name:  name!, camelCaseName: camelCaseName || name!})),
             // turn path interpolation `{this}` into string template `${args.this}
             path: pathName.replace(
               /{(.*?)}/g,

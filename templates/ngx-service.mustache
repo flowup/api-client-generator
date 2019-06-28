@@ -92,7 +92,14 @@ export class {{&serviceName}} implements {{&interfaceName}} {
     }
       {{/isHeaderParameter}}
     {{/parameters}}
-    return this.sendRequest<{{&response}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{#isFormParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isFormParameter}}{{/parameters}});
+    {{#formData.length}}
+    const formData = new FormData();
+    {{#formData}}
+    formData.append('{{&name}}', args.{{&camelCaseName}});
+    {{/formData}}
+
+    {{/formData.length}}
+    return this.sendRequest<{{&response}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{/parameters}}{{#formData.length}}, formData{{/formData.length}});
   }
 
 {{/methods}}
