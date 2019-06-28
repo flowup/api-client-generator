@@ -1,6 +1,37 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [4.3.0](https://github.com/flowup/api-client-generator/compare/4.2.0...4.3.0) (2019-06-28)
+
+
+### Bug Fixes
+
+* **api-client:** support for blob response type ([d14ef9d](https://github.com/flowup/api-client-generator/commit/d14ef9d)), closes [#77](https://github.com/flowup/api-client-generator/issues/77)
+* **methods:** recognizing return type if TS primitive or complex type ([8ee08e2](https://github.com/flowup/api-client-generator/commit/8ee08e2))
+
+
+### Build System
+
+* updated dependencies ([af07e3a](https://github.com/flowup/api-client-generator/commit/af07e3a))
+
+
+### Features
+
+* **api-client:** generating response for "lowest" of HTML success codes ([72a7b14](https://github.com/flowup/api-client-generator/commit/72a7b14))
+* **api-client:** void return type for methods with empty schema ([f1977eb](https://github.com/flowup/api-client-generator/commit/f1977eb))
+* **enums:** custom enum key names via custom x-enumNames property ([9cf1c8f](https://github.com/flowup/api-client-generator/commit/9cf1c8f))
+* **form-data:** send form parameters as multi part form data ([c18c296](https://github.com/flowup/api-client-generator/commit/c18c296)), closes [#78](https://github.com/flowup/api-client-generator/issues/78)
+
+
+### Tests
+
+* jest instead of jasmine ([0836c0b](https://github.com/flowup/api-client-generator/commit/0836c0b))
+* **angular-project:** jest instead of jasmine and karma ([2de02e7](https://github.com/flowup/api-client-generator/commit/2de02e7))
+* **angular-project:** removed jasmine and karma deps ([784b181](https://github.com/flowup/api-client-generator/commit/784b181))
+* **angular-project:** updated deps ([c4e8b97](https://github.com/flowup/api-client-generator/commit/c4e8b97))
+
+
 
 <a name="4.2.0"></a>
 # [4.2.0](https://github.com/flowup/api-client-generator/compare/4.1.1...4.2.0) (2019-01-11)
