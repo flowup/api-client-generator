@@ -97,7 +97,7 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
       }).map(([methodType, operation]: [string, Operation]) => {
           // select the lowest success (code 20x) response
           const successResponseCode =
-            Object.keys(operation.responses).sort().filter(code => code.startsWith('2'))[0]
+            Object.keys(operation.responses).slice().sort().filter(code => code.startsWith('2'))[0]
             || 'missing';
 
           const okResponse: Response | Reference = operation.responses[successResponseCode];
@@ -113,7 +113,7 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
             parameters || {}
           );
 
-        return {
+          return {
             hasJsonResponse: true,
             isSecure: security !== undefined || operation.security !== undefined,
             methodName: toCamelCase(operation.operationId

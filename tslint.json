@@ -128,7 +128,7 @@
     ],
     "no-misused-new": true,
     "no-namespace": true,
-    "no-array-mutation": true,
+    "no-array-mutation": [true, "ignore-new-array"],
     "no-object-mutation": true,
     "no-parameter-reassignment": false,
     "no-reference": true,
