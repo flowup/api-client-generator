@@ -183,6 +183,24 @@ definitions:
       imageUrl:
         type: string
         description: url to user avatar image
+      text:
+        title: TextInput
+        allOf:
+          - $ref: '#/definitions/ItemList'
+          - $ref: '#/definitions/Data'
+            description: The natural language text to be processed
+      testWithArray:
+        title: TextInput
+        allOf:
+          - type: array
+            items: { type: object, '$ref': '#/definitions/Pet' }
+          - $ref: '#/definitions/Data'
+            description: The natural language text to be processed
+      audioConfig:
+        title: InputAudioConfig
+        allOf:
+          - $ref: '#/definitions/Data'
+            description: Instructs the speech recognizer how to process the speech audio
   TestModel:
       type: object
       properties:

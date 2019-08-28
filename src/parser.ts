@@ -258,16 +258,24 @@ function parseInterfaceProperties(
             ? propSchema.additionalProperties.type
             : propSchema.type
       );
+      const isRef = !!parseReference(propSchema);
+      const allOfParsed = propSchema.allOf && propSchema.allOf.length
+        ? parseInterfaceProperties(propSchema.allOf.reduce<{[key: string]: Schema}>((acc, prop, i) => ({...acc, [i]: prop}), {}))
+          .map(prop => `${prop.typescriptType}${prop.isArray ? '[]' : ''}`)
+        : [];
+      const allOfImports = allOfParsed.map(prop => prop.replace('[]', ''));
+      const type = typescriptType.replace('[]', '');
 
       return {
         isArray,
         isDictionary: propSchema.additionalProperties,
-        isRef: !!parseReference(propSchema),
+        isRef,
         isRequired: requiredProps.includes(propName),
         name: /^[A-Za-z_$][\w$]*$/.test(propName) || propName === ADDITIONAL_PROPERTIES_KEY ? propName : `'${propName}'`,
         description: replaceNewLines(propSchema.description),
-        type: typescriptType.replace('[]', ''),
-        typescriptType,
+        type: type,
+        typescriptType: allOfParsed.length ? allOfParsed.join(' & ') : typescriptType,
+        imports: isRef ? [type, ...allOfImports] : allOfImports,
       };
     }
   ).sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
@@ -326,11 +334,11 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
     name,
     description: replaceNewLines(schema.description, '$1 * '),
     properties: properties,
-    imports: properties
-      .filter(({isRef}) => isRef)
-      .map(({type}) => type || '')
+    imports: properties.reduce(
+      (acc, {imports = []}) => [...acc, ...imports],
+      extendInterface ? [extendInterface] : []
+    )
       .filter((type) => type !== name)
-      .concat(extendInterface ? [extendInterface] : [])
       .sort() // tslint:disable-line:no-array-mutation
       // filter duplicate imports
       .filter((el, i, a) => (i === a.indexOf(el)) ? 1 : 0),

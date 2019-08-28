@@ -47,6 +47,7 @@ export interface Property {
   readonly typescriptType?: TypescriptBasicTypes | string;
   readonly importType?: string;
   readonly required?: boolean;
+  readonly imports?: string[];
 }
 
 export interface Parameter extends Property {
