@@ -435,7 +435,6 @@ function determineParamType(paramType: string | undefined): { isBodyParameter?: 
     case 'body':
       return {isBodyParameter: true};
     case 'formData':
-      logWarn(`Form parameters are currently unsupported and will not be generated properly`);
       return {isFormParameter: true};
     case 'header':
       return {isHeaderParameter: true};
