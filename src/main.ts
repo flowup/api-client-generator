@@ -40,7 +40,7 @@ if (typeof argv.source === 'undefined' && argv.source !== true) {
 const options: GenOptions = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,
-  splitPathTags: argv.splitPathTags ? argv.splitPathTags.split(',') : [],
+  splitPathTags: 'splitPathTags' in argv ? (argv.splitPathTags || 'all').split(',') : [],
   skipModuleExport: argv.skipModule === true || argv.skipModule === 'true'
 };
 
