@@ -103,6 +103,13 @@ paths:
             x-nullable: true
             items:
               $ref: "#/definitions/customer"
+  /dictionaries:
+    get:
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/Dictionary"
 definitions:
   ItemList:
     description: List of items,
@@ -275,3 +282,11 @@ definitions:
       - 1 First
       - 2 Second
       - 3 Third
+  Dictionary:
+    type: object
+    additionalProperties:
+      $ref: "#/definitions/DictionaryItem"
+  DictionaryItem:
+    type: object
+    additionalProperties:
+      type: number

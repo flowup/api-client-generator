@@ -28,6 +28,7 @@ import {
   logWarn,
   compareStringByKey,
   isReference,
+  ADDITIONAL_PROPERTIES_KEY,
 } from './helper';
 
 interface Parameters {
@@ -263,7 +264,7 @@ function parseInterfaceProperties(
         isDictionary: propSchema.additionalProperties,
         isRef: !!parseReference(propSchema),
         isRequired: requiredProps.includes(propName),
-        name: /^[A-Za-z_$][\w$]*$/.test(propName) ? propName : `'${propName}'`,
+        name: /^[A-Za-z_$][\w$]*$/.test(propName) || propName === ADDITIONAL_PROPERTIES_KEY ? propName : `'${propName}'`,
         description: replaceNewLines(propSchema.description),
         type: typescriptType.replace('[]', ''),
         typescriptType,
@@ -315,14 +316,14 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   const allOfProps: Schema = schema.allOf ? schema.allOf.reduce((props, allOfSchema) => ({...props, ...allOfSchema.properties}), {}) : {};
   const properties: Property[] = parseInterfaceProperties(
     {
-      ...schema.properties,
-      ...allOfProps,
+      ...schema.additionalProperties ? {[ADDITIONAL_PROPERTIES_KEY]: schema.additionalProperties} : schema.properties,
+      ...!schema.additionalProperties && allOfProps,
     } as { [propertyName: string]: Schema },
-    schema.required,
+    [...schema.required || [], ADDITIONAL_PROPERTIES_KEY],
   );
 
   return {
-    name: name,
+    name,
     description: replaceNewLines(schema.description, '$1 * '),
     properties: properties,
     imports: properties

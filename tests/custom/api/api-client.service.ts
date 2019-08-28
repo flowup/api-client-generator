@@ -143,6 +143,21 @@ export class APIClient implements APIClientInterface {
     return this.sendRequest<models.Customer[] | null>('GET', path, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getDictionaries(
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.Dictionary> {
+    const path = `/dictionaries`;
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
+
+    return this.sendRequest<models.Dictionary>('GET', path, options);
+  }
+
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
     switch (method) {
       case 'DELETE':

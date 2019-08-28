@@ -4,6 +4,8 @@ import { FileInfix } from './types';
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|boolean|void)\b/;
 const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|void|Object|Date|File|Blob)\b/i;
 
+export const ADDITIONAL_PROPERTIES_KEY = '[key: string]';
+
 export function toCamelCase(text: string = '', lowerFirst: boolean = true): string {
   text = removeDuplicateWords(text);
 
@@ -50,7 +52,7 @@ export function dereferenceType(refString: string | undefined): string {
  * @param {string} text
  * @returns {string}
  */
-export function removeDuplicateWords(text: string): string {
+export function removeDuplicateWords(text: string = ''): string {
   return text.replace(/(.{3,})(?=\1)/ig, '');
 }
 

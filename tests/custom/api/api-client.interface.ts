@@ -55,4 +55,11 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Customer[] | null>;
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getDictionaries(
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.Dictionary>;
+
 }
