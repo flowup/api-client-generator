@@ -45,21 +45,22 @@ A lot of developers is struggling with how to properly use the REST API in their
 
 See the [Changelog](https://github.com/flowup/api-client-generator/blob/master/CHANGELOG.md) to keep up with the features and changes.
 
-# Installation
+# Usage
 
-### Global usage:
 
-`[sudo] npm install -g api-client-generator`
+This command will generate API client described in the swagger.json file to the `./output` folder.
 
-This command will generate API client described in the swagger.json file to the./output folder
+`npx api-client-generator -s ./path/to/swagger.json -o ./output`
 
-`api-client-generator -s ./path/to/swagger.json -o ./output`
+This command will do the same but it will split **all of the tags to separate API services** and models folder will be shared. All will be generated to specified path and that is `./src/api` folder.
 
-### Local usage
+`npx api-client-generator -t all -s ./path/to/swagger.yaml -o ./src/api"`
+
+### Script in Package JSON
 
 `npm install api-client-generator --save-dev`
 
-- for quick usage create run script in your `package.json` scripts
+- for quick usage create run script in your `package.json` scripts.
 ```
 "scripts": {
   "generate-api-client": "api-client-generator -s ./swagger.yaml -o ./output-folder"
@@ -68,6 +69,8 @@ This command will generate API client described in the swagger.json file to the.
 - then just run
 
 `npm run generate-api-client`
+
+**NOTE**: if you want to skip the installation for project, you can use `npx` but be careful as you'll be using the latest version every time you run the script (We use SEMVER so it is safer to update over the time).
 
 # Options
 
