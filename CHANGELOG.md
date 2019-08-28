@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.0](https://github.com/flowup/api-client-generator/compare/4.3.0...4.4.0) (2019-08-28)
+
+
+### Bug Fixes
+
+* **cli:** option for tags now automatically uses "all" if tags are generated and no tag is provided ([e2cef2f](https://github.com/flowup/api-client-generator/commit/e2cef2f))
+
+
+### Features
+
+* **models:** additional properties supported ([535386c](https://github.com/flowup/api-client-generator/commit/535386c)), closes [#81](https://github.com/flowup/api-client-generator/issues/81)
+* **models:** embedded allOf properties supported ([a42aa4f](https://github.com/flowup/api-client-generator/commit/a42aa4f)), closes [#80](https://github.com/flowup/api-client-generator/issues/80)
+
+
+
 ## [4.3.0](https://github.com/flowup/api-client-generator/compare/4.2.0...4.3.0) (2019-06-28)
 
 
