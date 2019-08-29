@@ -4,7 +4,7 @@ export type RenderFileName = (text: string, render: Render) => string;
 export type Render = (text: string) => string;
 
 export interface Definition {
-  readonly name?: string;
+  readonly definitionName: string;
   readonly properties: Property[];
   readonly imports: string[];
   readonly extend?: string;

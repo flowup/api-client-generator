@@ -158,7 +158,7 @@ function parseDefinitions(
 
   if (methods) {
     const filterByName = (defName: string, parentDefs: Definition[] = []): Definition[] => {
-      const namedDefs = allDefs.filter(({name}) => name === defName);
+      const namedDefs = allDefs.filter(({definitionName}) => definitionName === defName);
       return namedDefs
         .reduce<Definition[]>(
           (acc, def) => [
@@ -166,7 +166,7 @@ function parseDefinitions(
             ...def.properties
               .filter(prop => prop.typescriptType && prop.isRef)
               .reduce<Definition[]>(
-                (a, prop) => parentDefs.some(({name}) => name === prop.typescriptType)
+                (a, prop) => parentDefs.some(({definitionName}) => definitionName === prop.typescriptType)
                   ? a // do not parse if type def is already in parsed definitions
                   : [...a, ...filterByName(prop.typescriptType!, namedDefs)],
                 []
@@ -225,7 +225,7 @@ function defineEnum(
     : null;
 
   return {
-    name: typeName(definitionKey),
+    definitionName: typeName(definitionKey),
     properties: enumSchema && enumSchema.map((val, index) => ({
       name: (
         isNumeric
@@ -331,7 +331,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   );
 
   return {
-    name,
+    definitionName: name,
     description: replaceNewLines(schema.description, '$1 * '),
     properties: properties,
     imports: properties.reduce(

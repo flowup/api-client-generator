@@ -12,7 +12,7 @@ import {
 /**
  * {{&.}}
  */
-{{/description}}export interface {{&name}} {{#extend}}extends {{.}} {{/extend}}{
+{{/description}}export interface {{&definitionName}} {{#extend}}extends {{.}} {{/extend}}{
 {{#properties}}
   {{&name}}{{^isRequired}}?{{/isRequired}}: {{#isDictionary}}{ [key: string]: {{&typescriptType}} }{{/isDictionary}}{{^isDictionary}}{{&typescriptType}}{{/isDictionary}}{{#isArray}}[]{{/isArray}};{{#description}}  // {{&.}}{{/description}}
 {{/properties}}
@@ -24,7 +24,7 @@ import {
 /**
  * {{&.}}
  */
-{{/description}}export enum {{&name}} {
+{{/description}}export enum {{&definitionName}} {
     {{#properties}}
   {{name}} = {{#isNumeric}}{{value}}{{/isNumeric}}{{^isNumeric}}"{{value}}"{{/isNumeric}},
     {{/properties}}

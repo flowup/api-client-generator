@@ -47,8 +47,8 @@ export async function generateAPIClient(options: GenOptions): Promise<string[]> 
   const allDefinitions = apiTagsData.map(({definitions}) => definitions).reduce<Definition[]>(
     (acc, definitions) => [...acc, ...definitions], []
   )
-    .sort(compareStringByKey('name')) // tslint:disable-line:no-array-mutation
-    .filter(({name}, index, self) => index > 0 ? name !== self[index - 1].name : true);
+    .sort(compareStringByKey('definitionName')) // tslint:disable-line:no-array-mutation
+    .filter(({definitionName}, index, self) => index > 0 ? definitionName !== self[index - 1].definitionName : true);
 
   return flattenAll([
       ...apiTagsData.map(async apiTagData => {
@@ -117,7 +117,7 @@ async function generateModels(
   return Promise.all([
     ...definitions.map(async (definition) => {
       const result = Mustache.render(modelTemplate, definition);
-      const outfile = join(outputDir, `${fileName(definition.name, definition.isEnum ? 'enum' : 'model')}.ts`);
+      const outfile = join(outputDir, `${fileName(definition.definitionName, definition.isEnum ? 'enum' : 'model')}.ts`);
 
       await ensureDir(dirname(outfile));
       await promisify(writeFile)(outfile, result, 'utf-8');
