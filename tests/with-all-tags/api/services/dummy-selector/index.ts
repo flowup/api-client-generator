@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { DummySelectorAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './dummy-selector-api-client.service';
+import { GuardedDummySelectorAPIClient } from './guarded-dummy-selector-api-client.service';
 
 export { DummySelectorAPIClient } from './dummy-selector-api-client.service';
 export { DummySelectorAPIClientInterface } from './dummy-selector-api-client.interface';
+export { GuardedDummySelectorAPIClient } from './guarded-dummy-selector-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface DummySelectorAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class DummySelectorAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        DummySelectorAPIClient
+        ...(config.guardResponses ? [{provide: DummySelectorAPIClient, useClass: GuardedDummySelectorAPIClient }] : [DummySelectorAPIClient]),
       ]
     };
   }

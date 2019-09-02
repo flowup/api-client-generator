@@ -131,6 +131,7 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
               /{(.*?)}/g,
               (_: string, ...args: string[]): string => `\${args.${toCamelCase(args[0])}}`),
             responseTypeName: responseType.name,
+            isVoid: responseType.name === 'void',
             response: prefixImportedModels(responseType.type),
             // tslint:disable-next-line:max-line-length
             description: `${replaceNewLines(operation.description, '$1   * ')}${operation.description ? '\n   * ' : ''}Response generated for [ ${successResponseCode} ] HTTP response code.`,
@@ -259,21 +260,46 @@ function parseInterfaceProperties(
             : propSchema.type
       );
       const isRef = !!parseReference(propSchema);
-      const allOfParsed = propSchema.allOf && propSchema.allOf.length
+      const propertyAllOf = propSchema.allOf && propSchema.allOf.length
         ? parseInterfaceProperties(propSchema.allOf.reduce<{[key: string]: Schema}>((acc, prop, i) => ({...acc, [i]: prop}), {}))
-          .map(prop => `${prop.typescriptType}${prop.isArray ? '[]' : ''}`)
         : [];
-      const allOfImports = allOfParsed.map(prop => prop.replace('[]', ''));
+      const allOfParsed = propertyAllOf.map(prop => `${prop.typescriptType}${prop.isArray ? '[]' : ''}`);
+      const allOfImports = propertyAllOf.map(prop => `${prop.typescriptType}`);
       const type = typescriptType.replace('[]', '');
+      const isPrimitiveType = BASIC_TS_TYPE_REGEX.test(type);
+      const name = /^[A-Za-z_$][\w$]*$/.test(propName) || propName === ADDITIONAL_PROPERTIES_KEY ? propName : `'${propName}'`;
+      const isRequired = requiredProps.includes(propName);
+
+      const guardFn = (fn: () => string, prop: Property = {}) => `
+      ${prop.hasOwnProperty('isRequired') || isRequired ? '' : `typeof arg.${name} === 'undefined' ||`}
+      ${prop.isArray || isArray
+        ? `(Array.isArray(arg.${name}) && arg.${name}.every(item => ${
+          prop.isPrimitiveType || isPrimitiveType
+            ? `typeof item === '${type}'`
+            : `is${prop.typescriptType || typescriptType}(item)`}))`
+        : `${prop.isPrimitiveType || isPrimitiveType
+            ? `typeof arg.${prop.name || name} === '${prop.type || type}'`
+            : fn()
+        }`
+      }
+      `;
+
+      const guard = `(${guardFn(() => propertyAllOf.length
+        ? `(${propertyAllOf.map(prop => guardFn(() => `is${prop.typescriptType}(arg.${name})`, prop))
+          .join(' && ')})`
+        : `is${typescriptType}(arg.${name})`
+    ).replace(/\s+/g, ' ')}) &&`;
 
       return {
         isArray,
         isDictionary: propSchema.additionalProperties,
         isRef,
-        isRequired: requiredProps.includes(propName),
-        name: /^[A-Za-z_$][\w$]*$/.test(propName) || propName === ADDITIONAL_PROPERTIES_KEY ? propName : `'${propName}'`,
+        isPrimitiveType,
+        isRequired,
+        name,
         description: replaceNewLines(propSchema.description),
         type: type,
+        guard,
         typescriptType: allOfParsed.length ? allOfParsed.join(' & ') : typescriptType,
         imports: isRef ? [type, ...allOfImports] : allOfImports,
       };
@@ -422,7 +448,7 @@ function transformParameters(
       camelCaseName: toCamelCase(name),
       importType: prefixImportedModels(typescriptType),
       isArray,
-      isRequired: (param as Parameter).isRequired || (param as Parameter).required || paramRef.required,
+      isRequired: (param as Parameter).isRequired || (param as {required: boolean}).required || paramRef.required,
       name,
       typescriptType,
     };

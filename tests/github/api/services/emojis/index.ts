@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { EmojisAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './emojis-api-client.service';
+import { GuardedEmojisAPIClient } from './guarded-emojis-api-client.service';
 
 export { EmojisAPIClient } from './emojis-api-client.service';
 export { EmojisAPIClientInterface } from './emojis-api-client.interface';
+export { GuardedEmojisAPIClient } from './guarded-emojis-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface EmojisAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class EmojisAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        EmojisAPIClient
+        ...(config.guardResponses ? [{provide: EmojisAPIClient, useClass: GuardedEmojisAPIClient }] : [EmojisAPIClient]),
       ]
     };
   }

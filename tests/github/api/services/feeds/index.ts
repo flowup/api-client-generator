@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { FeedsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './feeds-api-client.service';
+import { GuardedFeedsAPIClient } from './guarded-feeds-api-client.service';
 
 export { FeedsAPIClient } from './feeds-api-client.service';
 export { FeedsAPIClientInterface } from './feeds-api-client.interface';
+export { GuardedFeedsAPIClient } from './guarded-feeds-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface FeedsAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class FeedsAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        FeedsAPIClient
+        ...(config.guardResponses ? [{provide: FeedsAPIClient, useClass: GuardedFeedsAPIClient }] : [FeedsAPIClient]),
       ]
     };
   }

@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { GistsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './gists-api-client.service';
+import { GuardedGistsAPIClient } from './guarded-gists-api-client.service';
 
 export { GistsAPIClient } from './gists-api-client.service';
 export { GistsAPIClientInterface } from './gists-api-client.interface';
+export { GuardedGistsAPIClient } from './guarded-gists-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface GistsAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class GistsAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        GistsAPIClient
+        ...(config.guardResponses ? [{provide: GistsAPIClient, useClass: GuardedGistsAPIClient }] : [GistsAPIClient]),
       ]
     };
   }

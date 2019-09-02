@@ -448,3 +448,39 @@ definitions:
         - "sold"
     xml:
       name: "Pet"
+  Customer:
+    type: "object"
+    allOf:
+      - $ref: "#/definitions/User"
+    properties:
+      name:
+        type: "string"
+      address:
+        type: "string"
+      right:
+        $ref: "#/definitions/right"
+      position:
+        $ref: "#/definitions/position"
+    required:
+      - right
+      - position
+  right:
+    type: string
+    enum:
+      - MEMBER
+      - ADMIN
+      - "VIEW_ALL"
+      - "VIEW_MY"
+      - "VIEW_EDIT"
+      - "READ WRITE"
+      - "CONTROL"
+  position:
+    type: integer
+    enum:
+      - 1
+      - 2
+      - 3
+    description: |
+      - 1 First
+      - 2 Second
+      - 3 Third

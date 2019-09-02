@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { ReposAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './repos-api-client.service';
+import { GuardedReposAPIClient } from './guarded-repos-api-client.service';
 
 export { ReposAPIClient } from './repos-api-client.service';
 export { ReposAPIClientInterface } from './repos-api-client.interface';
+export { GuardedReposAPIClient } from './guarded-repos-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface ReposAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class ReposAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        ReposAPIClient
+        ...(config.guardResponses ? [{provide: ReposAPIClient, useClass: GuardedReposAPIClient }] : [ReposAPIClient]),
       ]
     };
   }

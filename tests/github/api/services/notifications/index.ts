@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { NotificationsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './notifications-api-client.service';
+import { GuardedNotificationsAPIClient } from './guarded-notifications-api-client.service';
 
 export { NotificationsAPIClient } from './notifications-api-client.service';
 export { NotificationsAPIClientInterface } from './notifications-api-client.interface';
+export { GuardedNotificationsAPIClient } from './guarded-notifications-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface NotificationsAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class NotificationsAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        NotificationsAPIClient
+        ...(config.guardResponses ? [{provide: NotificationsAPIClient, useClass: GuardedNotificationsAPIClient }] : [NotificationsAPIClient]),
       ]
     };
   }

@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { GitignoreAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './gitignore-api-client.service';
+import { GuardedGitignoreAPIClient } from './guarded-gitignore-api-client.service';
 
 export { GitignoreAPIClient } from './gitignore-api-client.service';
 export { GitignoreAPIClientInterface } from './gitignore-api-client.interface';
+export { GuardedGitignoreAPIClient } from './guarded-gitignore-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface GitignoreAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class GitignoreAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        GitignoreAPIClient
+        ...(config.guardResponses ? [{provide: GitignoreAPIClient, useClass: GuardedGitignoreAPIClient }] : [GitignoreAPIClient]),
       ]
     };
   }

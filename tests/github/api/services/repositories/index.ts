@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { RepositoriesAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './repositories-api-client.service';
+import { GuardedRepositoriesAPIClient } from './guarded-repositories-api-client.service';
 
 export { RepositoriesAPIClient } from './repositories-api-client.service';
 export { RepositoriesAPIClientInterface } from './repositories-api-client.interface';
+export { GuardedRepositoriesAPIClient } from './guarded-repositories-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface RepositoriesAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class RepositoriesAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        RepositoriesAPIClient
+        ...(config.guardResponses ? [{provide: RepositoriesAPIClient, useClass: GuardedRepositoriesAPIClient }] : [RepositoriesAPIClient]),
       ]
     };
   }

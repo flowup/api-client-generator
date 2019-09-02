@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { DashboardAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './dashboard-api-client.service';
+import { GuardedDashboardAPIClient } from './guarded-dashboard-api-client.service';
 
 export { DashboardAPIClient } from './dashboard-api-client.service';
 export { DashboardAPIClientInterface } from './dashboard-api-client.interface';
+export { GuardedDashboardAPIClient } from './guarded-dashboard-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface DashboardAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class DashboardAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        DashboardAPIClient
+        ...(config.guardResponses ? [{provide: DashboardAPIClient, useClass: GuardedDashboardAPIClient }] : [DashboardAPIClient]),
       ]
     };
   }

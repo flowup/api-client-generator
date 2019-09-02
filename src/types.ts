@@ -36,6 +36,7 @@ export interface Property {
   readonly camelCaseName?: string;
   readonly isArray?: boolean;
   readonly isRef?: boolean;
+  readonly isPrimitiveType?: boolean;
   readonly 'in'?: In | string;
   readonly 'enum'?: (string | boolean | number | {})[];
   readonly items?: Schema | Schema[];
@@ -46,7 +47,7 @@ export interface Property {
   readonly type?: string;
   readonly typescriptType?: TypescriptBasicTypes | string;
   readonly importType?: string;
-  readonly required?: boolean;
+  readonly isRequired?: boolean;
   readonly imports?: string[];
 }
 
@@ -56,7 +57,6 @@ export interface Parameter extends Property {
   readonly isHeaderParameter?: boolean;
   readonly isPathParameter?: boolean;
   readonly isQueryParameter?: boolean;
-  readonly isRequired?: boolean;
 }
 
 export interface Method {
@@ -67,10 +67,11 @@ export interface Method {
   readonly isSecure?: boolean;  // currently unused TODO
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
+  readonly isVoid: boolean;
   readonly response?: string;  // method return type
-  readonly responseTypeName?: string; // method return type without prefix
+  readonly responseTypeName: string; // method return type without prefix
   readonly requestResponseType?: 'blob'; // supported types of Angular's Http ResponseContentType
-  readonly formData?: {name: string, camelCaseName: string}[]; // list of parameter names which are form data params
+  readonly formData?: Pick<Parameter, 'name' | 'camelCaseName'>[]; // list of parameter names which are form data params
 }
 
 /**

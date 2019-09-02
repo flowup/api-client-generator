@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { SearchAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './search-api-client.service';
+import { GuardedSearchAPIClient } from './guarded-search-api-client.service';
 
 export { SearchAPIClient } from './search-api-client.service';
 export { SearchAPIClientInterface } from './search-api-client.interface';
+export { GuardedSearchAPIClient } from './guarded-search-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface SearchAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class SearchAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        SearchAPIClient
+        ...(config.guardResponses ? [{provide: SearchAPIClient, useClass: GuardedSearchAPIClient }] : [SearchAPIClient]),
       ]
     };
   }

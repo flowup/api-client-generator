@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { MetaAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './meta-api-client.service';
+import { GuardedMetaAPIClient } from './guarded-meta-api-client.service';
 
 export { MetaAPIClient } from './meta-api-client.service';
 export { MetaAPIClientInterface } from './meta-api-client.interface';
+export { GuardedMetaAPIClient } from './guarded-meta-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface MetaAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class MetaAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        MetaAPIClient
+        ...(config.guardResponses ? [{provide: MetaAPIClient, useClass: GuardedMetaAPIClient }] : [MetaAPIClient]),
       ]
     };
   }

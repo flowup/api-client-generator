@@ -1,0 +1,42 @@
+/* tslint:disable */
+{{^isEnum}}
+import {
+  {{&definitionName}},
+} from '../models';
+{{#imports.length}}
+import {
+{{#imports}}
+  is{{.}},
+{{/imports}}
+} from '.';
+{{/imports.length}}
+
+export function is{{&definitionName}}(arg: any): arg is {{&definitionName}} {
+  return (
+    arg != null &&
+    typeof arg === 'object' &&
+{{#properties}}
+  // {{&name}}{{^isRequired}}?{{/isRequired}}: {{#isDictionary}}{ [key: string]: {{&typescriptType}} }{{/isDictionary}}{{^isDictionary}}{{&typescriptType}}{{/isDictionary}}{{#isArray}}[]{{/isArray}}
+    {{&guard}}
+{{/properties}}
+{{#extend}}
+  // extends {{&.}}
+    is{{&.}}(arg) &&
+{{/extend}}
+
+    true
+  );
+}
+
+{{/isEnum}}
+{{#isEnum}}
+  import {
+  {{&definitionName}},
+  } from '../models';
+
+export function is{{&definitionName}}(arg: any): arg is {{&definitionName}} {
+  return false
+  {{#properties}} || arg === {{&definitionName}}.{{name}}
+  {{/properties}};
+}
+{{/isEnum}}

@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { IssuesAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './issues-api-client.service';
+import { GuardedIssuesAPIClient } from './guarded-issues-api-client.service';
 
 export { IssuesAPIClient } from './issues-api-client.service';
 export { IssuesAPIClientInterface } from './issues-api-client.interface';
+export { GuardedIssuesAPIClient } from './guarded-issues-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface IssuesAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class IssuesAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        IssuesAPIClient
+        ...(config.guardResponses ? [{provide: IssuesAPIClient, useClass: GuardedIssuesAPIClient }] : [IssuesAPIClient]),
       ]
     };
   }

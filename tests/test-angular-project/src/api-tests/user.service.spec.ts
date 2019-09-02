@@ -11,6 +11,7 @@ describe('UserService', () => {
         HttpClientTestingModule,
         UserAPIClientModule.forRoot({
           domain: DUMMY_DOMAIN,
+          guardResponses: true,
         })
       ],
     });
@@ -36,7 +37,6 @@ describe('UserService', () => {
       };
 
       userApi.createUser({body: user}).subscribe(async data => {
-        console.info('data', data);
         await expect(data).toBe('register was successful');
       });
 

@@ -3,9 +3,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { UsersAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './users-api-client.service';
+import { GuardedUsersAPIClient } from './guarded-users-api-client.service';
 
 export { UsersAPIClient } from './users-api-client.service';
 export { UsersAPIClientInterface } from './users-api-client.interface';
+export { GuardedUsersAPIClient } from './guarded-users-api-client.service';
 
 /**
  * provided options, headers and params will be used as default for each request
@@ -26,6 +28,7 @@ export interface HttpOptions {
 
 export interface UsersAPIClientModuleConfig {
   domain?: string;
+  guardResponses?: boolean; // validate responses with type guards
   httpOptions?: DefaultHttpOptions;
 }
 
@@ -44,7 +47,7 @@ export class UsersAPIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
-        UsersAPIClient
+        ...(config.guardResponses ? [{provide: UsersAPIClient, useClass: GuardedUsersAPIClient }] : [UsersAPIClient]),
       ]
     };
   }
