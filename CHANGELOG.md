@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/flowup/api-client-generator/compare/4.4.0...4.5.0) (2019-11-04)
+
+
+### Features
+
+* **generator:** type guards for each data model ([8cbdbbe](https://github.com/flowup/api-client-generator/commit/8cbdbbe))
+
 ## [4.4.0](https://github.com/flowup/api-client-generator/compare/4.3.0...4.4.0) (2019-08-28)
 
 
