@@ -250,12 +250,14 @@ function parseInterfaceProperties(
   return Object.entries<Schema>(properties).map(
     ([propName, propSchema]: [string, Schema]) => {
       const isArray = /^array$/i.test(propSchema.type || '');
-      const ref = propSchema.additionalProperties ? propSchema.additionalProperties.$ref : propSchema.$ref;
+      const ref = propSchema.additionalProperties && typeof propSchema.additionalProperties !== 'boolean'
+        ? propSchema.additionalProperties.$ref
+        : propSchema.$ref;
       const typescriptType = toTypescriptType(isArray
         ? determineArrayType(propSchema)
         : ref
           ? dereferenceType(ref)
-          : propSchema.additionalProperties
+          : propSchema.additionalProperties && typeof propSchema.additionalProperties !== 'boolean'
             ? propSchema.additionalProperties.type
             : propSchema.type
       );
@@ -316,7 +318,7 @@ function parseReference(schema: Schema): string {
     } else if (!Array.isArray(schema.items) && schema.items.items && '$ref' in schema.items.items && schema.items.items.$ref) {
       return schema.items.items.$ref;
     }
-  } else if (schema.additionalProperties && schema.additionalProperties.$ref) {
+  } else if (schema.additionalProperties && typeof schema.additionalProperties !== 'boolean' && schema.additionalProperties.$ref) {
     return schema.additionalProperties.$ref;
   }
 
