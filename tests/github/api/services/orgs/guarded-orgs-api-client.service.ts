@@ -35,7 +35,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Organization> {
     return super.getOrgsOrg(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isorganization(res) || console.error(`TypeGuard for response 'organization' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isOrganization(res) || console.error(`TypeGuard for response 'Organization' caught inconsistency.`, res)));
   }
 
   patchOrgsOrg(
@@ -52,7 +52,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Organization> {
     return super.patchOrgsOrg(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isorganization(res) || console.error(`TypeGuard for response 'organization' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isOrganization(res) || console.error(`TypeGuard for response 'Organization' caught inconsistency.`, res)));
   }
 
   getOrgsOrgEvents(
@@ -68,7 +68,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     return super.getOrgsOrgEvents(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isevents(res) || console.error(`TypeGuard for response 'events' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isEvents(res) || console.error(`TypeGuard for response 'Events' caught inconsistency.`, res)));
   }
 
   getOrgsOrgIssues(
@@ -90,7 +90,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     return super.getOrgsOrgIssues(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isissues(res) || console.error(`TypeGuard for response 'issues' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isIssues(res) || console.error(`TypeGuard for response 'Issues' caught inconsistency.`, res)));
   }
 
   getOrgsOrgMembers(
@@ -106,7 +106,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getOrgsOrgMembers(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isusers(res) || console.error(`TypeGuard for response 'users' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
   }
 
   getOrgsOrgPublicMembers(
@@ -122,7 +122,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getOrgsOrgPublicMembers(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isusers(res) || console.error(`TypeGuard for response 'users' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
   }
 
   getOrgsOrgRepos(
@@ -139,7 +139,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.getOrgsOrgRepos(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isrepos(res) || console.error(`TypeGuard for response 'repos' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isRepos(res) || console.error(`TypeGuard for response 'Repos' caught inconsistency.`, res)));
   }
 
   postOrgsOrgRepos(
@@ -156,7 +156,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.postOrgsOrgRepos(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isrepos(res) || console.error(`TypeGuard for response 'repos' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isRepos(res) || console.error(`TypeGuard for response 'Repos' caught inconsistency.`, res)));
   }
 
   getOrgsOrgTeams(
@@ -172,7 +172,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Teams> {
     return super.getOrgsOrgTeams(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isteams(res) || console.error(`TypeGuard for response 'teams' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isTeams(res) || console.error(`TypeGuard for response 'Teams' caught inconsistency.`, res)));
   }
 
   postOrgsOrgTeams(
@@ -189,7 +189,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Team> {
     return super.postOrgsOrgTeams(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isteam(res) || console.error(`TypeGuard for response 'team' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isTeam(res) || console.error(`TypeGuard for response 'Team' caught inconsistency.`, res)));
   }
 
 }

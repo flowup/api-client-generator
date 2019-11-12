@@ -35,7 +35,7 @@ export class GuardedRepositoriesAPIClient extends RepositoriesAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repositories> {
     return super.getRepositories(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isrepositories(res) || console.error(`TypeGuard for response 'repositories' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isRepositories(res) || console.error(`TypeGuard for response 'Repositories' caught inconsistency.`, res)));
   }
 
 }

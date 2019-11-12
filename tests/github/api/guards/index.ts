@@ -122,7 +122,6 @@ export { isUserKeysKeyId } from './user-keys-key-id.model.guard';
 export { isUserKeysPost } from './user-keys-post.model.guard';
 export { isUsers } from './users.model.guard';
 export { isUserUpdate } from './user-update.model.guard';
-export { isUserUserIdSubscribitions } from './user-user-id-subscribitions.model.guard';
 
 
 /* pre-prepared guards for build in complex types */
