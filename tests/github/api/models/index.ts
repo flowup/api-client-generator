@@ -122,4 +122,3 @@ export { UserKeysKeyId } from './user-keys-key-id.model';
 export { UserKeysPost } from './user-keys-post.model';
 export { Users } from './users.model';
 export { UserUpdate } from './user-update.model';
-export { UserUserIdSubscribitions } from './user-user-id-subscribitions.model';

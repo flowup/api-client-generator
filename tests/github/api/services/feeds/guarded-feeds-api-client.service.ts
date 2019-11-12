@@ -34,7 +34,7 @@ export class GuardedFeedsAPIClient extends FeedsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Feeds> {
     return super.getFeeds(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isfeeds(res) || console.error(`TypeGuard for response 'feeds' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isFeeds(res) || console.error(`TypeGuard for response 'Feeds' caught inconsistency.`, res)));
   }
 
 }

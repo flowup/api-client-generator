@@ -34,7 +34,7 @@ export class GuardedMetaAPIClient extends MetaAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Meta> {
     return super.getMeta(args, requestHttpOptions)
-      .pipe(tap((res) => guards.ismeta(res) || console.error(`TypeGuard for response 'meta' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isMeta(res) || console.error(`TypeGuard for response 'Meta' caught inconsistency.`, res)));
   }
 
 }

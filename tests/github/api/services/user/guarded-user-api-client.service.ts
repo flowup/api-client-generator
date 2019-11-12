@@ -34,7 +34,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.User> {
     return super.getUser(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isuser(res) || console.error(`TypeGuard for response 'user' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUser(res) || console.error(`TypeGuard for response 'User' caught inconsistency.`, res)));
   }
 
   patchUser(
@@ -50,7 +50,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.User> {
     return super.patchUser(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isuser(res) || console.error(`TypeGuard for response 'user' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUser(res) || console.error(`TypeGuard for response 'User' caught inconsistency.`, res)));
   }
 
   getUserEmails(
@@ -65,7 +65,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserEmails> {
     return super.getUserEmails(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isuser-emails(res) || console.error(`TypeGuard for response 'user-emails' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUserEmails(res) || console.error(`TypeGuard for response 'UserEmails' caught inconsistency.`, res)));
   }
 
   getUserFollowers(
@@ -80,7 +80,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getUserFollowers(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isusers(res) || console.error(`TypeGuard for response 'users' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
   }
 
   getUserFollowing(
@@ -95,7 +95,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getUserFollowing(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isusers(res) || console.error(`TypeGuard for response 'users' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
   }
 
   getUserIssues(
@@ -116,7 +116,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     return super.getUserIssues(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isissues(res) || console.error(`TypeGuard for response 'issues' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isIssues(res) || console.error(`TypeGuard for response 'Issues' caught inconsistency.`, res)));
   }
 
   getUserKeys(
@@ -131,7 +131,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getUserKeys(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isgitignore(res) || console.error(`TypeGuard for response 'gitignore' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isGitignore(res) || console.error(`TypeGuard for response 'Gitignore' caught inconsistency.`, res)));
   }
 
   postUserKeys(
@@ -147,7 +147,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     return super.postUserKeys(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isuser-keys-keyId(res) || console.error(`TypeGuard for response 'user-keys-keyId' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUserKeysKeyId(res) || console.error(`TypeGuard for response 'UserKeysKeyId' caught inconsistency.`, res)));
   }
 
   getUserKeysKeyId(
@@ -163,7 +163,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     return super.getUserKeysKeyId(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isuser-keys-keyId(res) || console.error(`TypeGuard for response 'user-keys-keyId' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUserKeysKeyId(res) || console.error(`TypeGuard for response 'UserKeysKeyId' caught inconsistency.`, res)));
   }
 
   getUserOrgs(
@@ -178,7 +178,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getUserOrgs(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isgitignore(res) || console.error(`TypeGuard for response 'gitignore' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isGitignore(res) || console.error(`TypeGuard for response 'Gitignore' caught inconsistency.`, res)));
   }
 
   getUserRepos(
@@ -194,7 +194,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.getUserRepos(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isrepos(res) || console.error(`TypeGuard for response 'repos' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isRepos(res) || console.error(`TypeGuard for response 'Repos' caught inconsistency.`, res)));
   }
 
   postUserRepos(
@@ -210,7 +210,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.postUserRepos(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isrepos(res) || console.error(`TypeGuard for response 'repos' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isRepos(res) || console.error(`TypeGuard for response 'Repos' caught inconsistency.`, res)));
   }
 
   getUserStarred(
@@ -227,7 +227,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getUserStarred(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isgitignore(res) || console.error(`TypeGuard for response 'gitignore' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isGitignore(res) || console.error(`TypeGuard for response 'Gitignore' caught inconsistency.`, res)));
   }
 
   getUserSubscriptions(
@@ -242,7 +242,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserUserIdSubscribitions> {
     return super.getUserSubscriptions(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isuser-userId-subscribitions(res) || console.error(`TypeGuard for response 'user-userId-subscribitions' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isUserUserIdSubscribitions(res) || console.error(`TypeGuard for response 'UserUserIdSubscribitions' caught inconsistency.`, res)));
   }
 
   getUserTeams(
@@ -257,7 +257,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamsList> {
     return super.getUserTeams(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isteams-list(res) || console.error(`TypeGuard for response 'teams-list' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isTeamsList(res) || console.error(`TypeGuard for response 'TeamsList' caught inconsistency.`, res)));
   }
 
 }

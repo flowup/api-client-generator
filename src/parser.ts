@@ -130,7 +130,7 @@ function parseMethods({paths, security, parameters, responses = {}}: Swagger, sw
             path: pathName.replace(
               /{(.*?)}/g,
               (_: string, ...args: string[]): string => `\${args.${toCamelCase(args[0])}}`),
-            responseTypeName: responseType.name,
+            responseTypeName: typeName(responseType.name),
             isVoid: responseType.name === 'void',
             response: prefixImportedModels(responseType.type),
             // tslint:disable-next-line:max-line-length

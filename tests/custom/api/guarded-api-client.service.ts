@@ -58,7 +58,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Customer[] | null> {
     return super.getCustomers(requestHttpOptions)
-      .pipe(tap((res) => guards.iscustomer(res) || console.error(`TypeGuard for response 'customer' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isCustomer(res) || console.error(`TypeGuard for response 'Customer' caught inconsistency.`, res)));
   }
 
   getDictionaries(

@@ -36,7 +36,7 @@ export class GuardedNetworksAPIClient extends NetworksAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     return super.getNetworksOwnerRepoEvents(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isevents(res) || console.error(`TypeGuard for response 'events' caught inconsistency.`, res)));
+      .pipe(tap((res) => guards.isEvents(res) || console.error(`TypeGuard for response 'Events' caught inconsistency.`, res)));
   }
 
 }
