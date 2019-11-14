@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.5.1](https://github.com/flowup/api-client-generator/compare/4.5.0...4.5.1) (2019-11-14)
+
+
+### Bug Fixes
+
+* **type-guards:** guards name definition and usage inconsistency ([5e00535](https://github.com/flowup/api-client-generator/commit/5e00535))
+
 ## [4.5.0](https://github.com/flowup/api-client-generator/compare/4.4.0...4.5.0) (2019-11-04)
 
 
