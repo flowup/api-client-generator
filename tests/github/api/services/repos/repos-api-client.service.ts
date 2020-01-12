@@ -1591,7 +1591,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
-      sort?: string,
+      sort?: 'newes' | 'oldes' | 'watchers',
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
@@ -2572,11 +2572,11 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
-      filter: string,  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: string,
+      filter: 'assigned' | 'created' | 'mentioned' | 'subscribed' | 'all',  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
+      state: 'open' | 'closed',
       labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: string,
-      direction: string,
+      sort: 'created' | 'updated' | 'comments',
+      direction: 'asc' | 'desc',
       since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
@@ -2688,7 +2688,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
       direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: string,
+      sort?: 'created' | 'updated',
       since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
@@ -3923,9 +3923,9 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
-      state?: string,  // (optional) String to filter by state.
+      state?: 'open' | 'closed',  // (optional) String to filter by state.
       direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: string,
+      sort?: 'due_date' | 'completeness',
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,
@@ -4311,7 +4311,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
-      state?: string,  // (optional) String to filter by state.
+      state?: 'open' | 'closed',  // (optional) String to filter by state.
       head?: string,  // (optional) Filter pulls by head user and branch name in the format of 'user:ref-name'. Example: github:new-script-format. 
       base?: string,  // (optional) Filter pulls by base branch name. Example - gh-pages.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
@@ -4415,7 +4415,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
       direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: string,
+      sort?: 'created' | 'updated',
       since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
@@ -6137,7 +6137,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     args: {
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
-      archiveFormat: string,
+      archiveFormat: 'tarball' | 'zipball',
       path: string,  // Valid Git reference, defaults to 'master'.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.

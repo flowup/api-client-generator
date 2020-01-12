@@ -122,7 +122,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient {
   getUsersUsernameRepos(
     args: {
       username: string,  // Name of user.
-      type?: string,
+      type?: 'all' | 'public' | 'private' | 'forks' | 'sources' | 'member',
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
       xRateLimitLimit?: number,

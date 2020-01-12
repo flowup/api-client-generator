@@ -577,18 +577,24 @@ function transformParameters(
       (paramRef && 'type' in paramRef && paramRef.type) ||
       '';
     const isArray = /^array$/i.test(type);
-    const typescriptType = toTypescriptType(
-      isArray
-        ? determineArrayType(param as Schema)
-        : !ref ||
-          (paramRef &&
-            'type' in paramRef &&
-            !paramRef.enum &&
-            paramRef.type &&
-            BASIC_TS_TYPE_REGEX.test(paramRef.type))
-        ? type
-        : derefName,
-    );
+    const typescriptType =
+      'enum' in param
+        ? (param.type === 'string'
+            ? (param.enum || []).map(str => `'${str}'`)
+            : param.enum || []
+          ).join(' | ')
+        : toTypescriptType(
+            isArray
+              ? determineArrayType(param as Schema)
+              : !ref ||
+                (paramRef &&
+                  'type' in paramRef &&
+                  !paramRef.enum &&
+                  paramRef.type &&
+                  BASIC_TS_TYPE_REGEX.test(paramRef.type))
+              ? type
+              : derefName,
+          );
 
     return {
       ...param,
@@ -601,7 +607,8 @@ function transformParameters(
         ' ',
       ),
       camelCaseName: toCamelCase(name),
-      importType: prefixImportedModels(typescriptType),
+      importType:
+        'enum' in param ? typescriptType : prefixImportedModels(typescriptType),
       isArray,
       isRequired:
         (param as Parameter).isRequired ||

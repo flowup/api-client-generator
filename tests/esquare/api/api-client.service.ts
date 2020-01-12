@@ -227,7 +227,7 @@ export class APIClient implements APIClientInterface {
       status?: models.Status,  // (optional) - 1 Pending - 2 InProgress - 3 Complete 
       pageSize: number,
       page: number,  // page number
-      orderBy: string,  // id | title | subtitle | criticality | status | issues | deadline
+      orderBy: 'id' | 'title' | 'subtitle' | 'criticality' | 'status' | 'issues' | 'deadline',  // id | title | subtitle | criticality | status | issues | deadline
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
@@ -604,7 +604,7 @@ export class APIClient implements APIClientInterface {
       status?: models.IssueStatus,  // (optional) - 1 Pending - 2 Resolved 
       pageSize: number,
       page: number,  // page number
-      orderBy: string,  // name | school | dueDate | alert
+      orderBy: 'name' | 'school' | 'dueDate' | 'alert',  // name | school | dueDate | alert
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
@@ -647,7 +647,7 @@ export class APIClient implements APIClientInterface {
       status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
       pageSize: number,
       page: number,  // page number
-      orderBy: string,  // name | issues | dueDate | progress
+      orderBy: 'name' | 'issues' | 'dueDate' | 'progress',  // name | issues | dueDate | progress
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
@@ -688,7 +688,7 @@ export class APIClient implements APIClientInterface {
       status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
       pageSize: number,
       page: number,  // page number
-      orderBy: string,  // name | issues | dueDate | progress
+      orderBy: 'name' | 'issues' | 'dueDate' | 'progress',  // name | issues | dueDate | progress
       order?: models.Order,  // (optional) - asc - desc 
       assignedToRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9yal)
       unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
@@ -967,7 +967,7 @@ export class APIClient implements APIClientInterface {
     args: {
       pageSize: number,
       page: number,  // page number
-      orderBy: string,  // name | description | priority | date
+      orderBy: 'name' | 'description' | 'priority' | 'date',  // name | description | priority | date
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
@@ -1038,7 +1038,7 @@ export class APIClient implements APIClientInterface {
       moduleId: number,
       pageSize: number,
       page: number,  // page number
-      orderBy: string,  // name | description | priority | date
+      orderBy: 'name' | 'description' | 'priority' | 'date',  // name | description | priority | date
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions

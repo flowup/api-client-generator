@@ -15,7 +15,7 @@ export interface {{&interfaceName}} {
   {{#parameters.length}}
     args: {
     {{#parameters}}
-      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{importType}}{{#isArray}}[]{{/isArray}},{{#description}}  //{{^isRequired}} (optional){{/isRequired}} {{&.}}{{/description}}
+      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{&importType}}{{#isArray}}[]{{/isArray}},{{#description}}  //{{^isRequired}} (optional){{/isRequired}} {{&.}}{{/description}}
     {{/parameters}}
     },
   {{/parameters.length}}
