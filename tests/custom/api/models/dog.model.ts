@@ -5,5 +5,5 @@ import {
 
 export interface Dog extends Pet {
   bark?: boolean;
-  breed?: string;
+  breed?: 'Dingo' | 'Husky' | 'Retriever' | 'Shepherd';
 }

@@ -9,8 +9,8 @@ export function isEditTeam(arg: any): arg is EditTeam {
     typeof arg === 'object' &&
   // name: string
     ( typeof arg.name === 'string' ) &&
-  // permission?: any
-    ( typeof arg.permission === 'undefined' || isany(arg.permission) ) &&
+  // permission?: 'pull' | 'push' | 'admin'
+    ( typeof arg.permission === 'undefined' || ['pull', 'push', 'admin'].includes(arg.permission) ) &&
 
     true
   );

@@ -9,8 +9,8 @@ export function isFieldTransform(arg: any): arg is FieldTransform {
     typeof arg === 'object' &&
   // fieldPath?: string
     ( typeof arg.fieldPath === 'undefined' || typeof arg.fieldPath === 'string' ) &&
-  // setToServerValue?: string
-    ( typeof arg.setToServerValue === 'undefined' || typeof arg.setToServerValue === 'string' ) &&
+  // setToServerValue?: 'SERVER_VALUE_UNSPECIFIED' | 'REQUEST_TIME'
+    ( typeof arg.setToServerValue === 'undefined' || ['SERVER_VALUE_UNSPECIFIED', 'REQUEST_TIME'].includes(arg.setToServerValue) ) &&
 
     true
   );

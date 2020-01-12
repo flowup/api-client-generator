@@ -12,8 +12,8 @@ export function isDog(arg: any): arg is Dog {
     typeof arg === 'object' &&
   // bark?: boolean
     ( typeof arg.bark === 'undefined' || typeof arg.bark === 'boolean' ) &&
-  // breed?: string
-    ( typeof arg.breed === 'undefined' || typeof arg.breed === 'string' ) &&
+  // breed?: 'Dingo' | 'Husky' | 'Retriever' | 'Shepherd'
+    ( typeof arg.breed === 'undefined' || ['Dingo', 'Husky', 'Retriever', 'Shepherd'].includes(arg.breed) ) &&
   // extends Pet
     isPet(arg) &&
 

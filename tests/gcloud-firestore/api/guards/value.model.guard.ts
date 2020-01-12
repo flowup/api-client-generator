@@ -26,8 +26,8 @@ export function isValue(arg: any): arg is Value {
     ( typeof arg.integerValue === 'undefined' || typeof arg.integerValue === 'string' ) &&
   // mapValue?: MapValue
     ( typeof arg.mapValue === 'undefined' || isMapValue(arg.mapValue) ) &&
-  // nullValue?: string
-    ( typeof arg.nullValue === 'undefined' || typeof arg.nullValue === 'string' ) &&
+  // nullValue?: 'NULL_VALUE'
+    ( typeof arg.nullValue === 'undefined' || is'NULL_VALUE'(arg.nullValue) ) &&
   // referenceValue?: string
     ( typeof arg.referenceValue === 'undefined' || typeof arg.referenceValue === 'string' ) &&
   // stringValue?: string

@@ -16,8 +16,8 @@ export function isIndex(arg: any): arg is Index {
     ( typeof arg.fields === 'undefined' || (Array.isArray(arg.fields) && arg.fields.every(item => isIndexField(item))) ) &&
   // name?: string
     ( typeof arg.name === 'undefined' || typeof arg.name === 'string' ) &&
-  // state?: string
-    ( typeof arg.state === 'undefined' || typeof arg.state === 'string' ) &&
+  // state?: 'STATE_UNSPECIFIED' | 'CREATING' | 'READY' | 'ERROR'
+    ( typeof arg.state === 'undefined' || ['STATE_UNSPECIFIED', 'CREATING', 'READY', 'ERROR'].includes(arg.state) ) &&
 
     true
   );

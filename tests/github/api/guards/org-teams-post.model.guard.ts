@@ -9,8 +9,8 @@ export function isOrgTeamsPost(arg: any): arg is OrgTeamsPost {
     typeof arg === 'object' &&
   // name: string
     ( typeof arg.name === 'string' ) &&
-  // permission?: any
-    ( typeof arg.permission === 'undefined' || isany(arg.permission) ) &&
+  // permission?: 'pull' | 'push' | 'admin'
+    ( typeof arg.permission === 'undefined' || ['pull', 'push', 'admin'].includes(arg.permission) ) &&
   // repo_names?: string[]
     ( typeof arg.repo_names === 'undefined' || (Array.isArray(arg.repo_names) && arg.repo_names.every(item => typeof item === 'string')) ) &&
 

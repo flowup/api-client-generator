@@ -9,8 +9,8 @@ export function isIndexField(arg: any): arg is IndexField {
     typeof arg === 'object' &&
   // fieldPath?: string
     ( typeof arg.fieldPath === 'undefined' || typeof arg.fieldPath === 'string' ) &&
-  // mode?: string
-    ( typeof arg.mode === 'undefined' || typeof arg.mode === 'string' ) &&
+  // mode?: 'MODE_UNSPECIFIED' | 'ASCENDING' | 'DESCENDING'
+    ( typeof arg.mode === 'undefined' || ['MODE_UNSPECIFIED', 'ASCENDING', 'DESCENDING'].includes(arg.mode) ) &&
 
     true
   );

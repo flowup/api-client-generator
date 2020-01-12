@@ -21,8 +21,8 @@ export function isMilestone(arg: any): arg is Milestone {
     ( typeof arg.number === 'undefined' || typeof arg.number === 'number' ) &&
   // open_issues?: number
     ( typeof arg.open_issues === 'undefined' || typeof arg.open_issues === 'number' ) &&
-  // state?: any
-    ( typeof arg.state === 'undefined' || isany(arg.state) ) &&
+  // state?: 'open' | 'closed'
+    ( typeof arg.state === 'undefined' || ['open', 'closed'].includes(arg.state) ) &&
   // title?: string
     ( typeof arg.title === 'undefined' || typeof arg.title === 'string' ) &&
   // url?: string

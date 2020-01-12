@@ -326,16 +326,22 @@ function parseInterfaceProperties(
         typeof propSchema.additionalProperties !== 'boolean'
           ? propSchema.additionalProperties.$ref
           : propSchema.$ref;
-      const typescriptType = toTypescriptType(
-        isArray
-          ? determineArrayType(propSchema)
-          : ref
-          ? dereferenceType(ref)
-          : propSchema.additionalProperties &&
-            typeof propSchema.additionalProperties !== 'boolean'
-          ? propSchema.additionalProperties.type
-          : propSchema.type,
-      );
+      const typescriptType =
+        'enum' in propSchema
+          ? (propSchema.type === 'number'
+              ? propSchema.enum || []
+              : (propSchema.enum || []).map(str => `'${str}'`)
+            ).join(' | ')
+          : toTypescriptType(
+              isArray
+                ? determineArrayType(propSchema)
+                : ref
+                ? dereferenceType(ref)
+                : propSchema.additionalProperties &&
+                  typeof propSchema.additionalProperties !== 'boolean'
+                ? propSchema.additionalProperties.type
+                : propSchema.type,
+            );
       const isRef = !!parseReference(propSchema);
       const propertyAllOf =
         propSchema.allOf && propSchema.allOf.length
@@ -387,6 +393,11 @@ function parseInterfaceProperties(
                 guardFn(() => `is${prop.typescriptType}(arg.${name})`, prop),
               )
               .join(' && ')})`
+          : / \| /.test(typescriptType)
+          ? `[${(typescriptType || '').replace(
+              / \| /g,
+              ', ',
+            )}].includes(arg.${name})`
           : `is${typescriptType}(arg.${name})`,
       ).replace(/\s+/g, ' ')}) &&`;
 
@@ -579,9 +590,9 @@ function transformParameters(
     const isArray = /^array$/i.test(type);
     const typescriptType =
       'enum' in param
-        ? (param.type === 'string'
-            ? (param.enum || []).map(str => `'${str}'`)
-            : param.enum || []
+        ? (param.type === 'number'
+            ? param.enum || []
+            : (param.enum || []).map(str => `'${str}'`)
           ).join(' | ')
         : toTypescriptType(
             isArray
