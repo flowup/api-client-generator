@@ -14,13 +14,16 @@ const COMMIT_AUTHOR = 'api-client-generator <api-client-generator@flowup.cz>';
  * @throws A descriptive Error if there are any staged changes in the current repo or if any of the necessary Git commands fail.
  */
 export function commitAfter(generator: ClientGenerator): ClientGenerator {
-  return async (...args: any[]) => { // tslint:disable-line no-any
-    if (whichSync('git', {nothrow: true}) == null) {
+  // tslint:disable-next-line no-any
+  return async (...args: any[]) => {
+    if (whichSync('git', { nothrow: true }) == null) {
       throw new Error('"git" command not found on your system');
     }
 
     if (stagedChanges()) {
-      throw new Error('There are staged changes in your repository -- please commit, reset or stash them and re-run the generator');
+      throw new Error(
+        'There are staged changes in your repository -- please commit, reset or stash them and re-run the generator',
+      );
     }
 
     const filePaths = await generator(...args);
@@ -36,7 +39,11 @@ export function commitAfter(generator: ClientGenerator): ClientGenerator {
  * @throws A descriptive Error if `git status` fails.
  */
 function stagedChanges(): boolean {
-  const {status, stdout, stderr} = spawnSync('git', ['status', '--porcelain'], {encoding: 'utf8'});
+  const { status, stdout, stderr } = spawnSync(
+    'git',
+    ['status', '--porcelain'],
+    { encoding: 'utf8' },
+  );
   if (status !== 0) {
     throw new Error(`Error performing "git status" in "${cwd()}":\n${stderr}`);
   }
@@ -51,9 +58,11 @@ function stagedChanges(): boolean {
  */
 function addFiles(addPaths: string[]): void {
   addPaths.forEach(path => {
-    const {status, stderr} = spawnSync('git', ['add', path]);
+    const { status, stderr } = spawnSync('git', ['add', path]);
     if (status !== 0) {
-      throw new Error(`Error performing "git add ${path}" in "${cwd()}":\n${stderr}`);
+      throw new Error(
+        `Error performing "git add ${path}" in "${cwd()}":\n${stderr}`,
+      );
     }
   });
 }
@@ -63,8 +72,16 @@ function addFiles(addPaths: string[]): void {
  * @throws A descriptive Error if `git commit` fails.
  */
 function commitChanges(): void {
-  const commitArgs = ['--allow-empty', '--author', COMMIT_AUTHOR, '-m', COMMIT_MESSAGE];
-  const {status, stderr} = spawnSync('git', ['commit', ...commitArgs], {encoding: 'utf8'});
+  const commitArgs = [
+    '--allow-empty',
+    '--author',
+    COMMIT_AUTHOR,
+    '-m',
+    COMMIT_MESSAGE,
+  ];
+  const { status, stderr } = spawnSync('git', ['commit', ...commitArgs], {
+    encoding: 'utf8',
+  });
   if (status !== 0) {
     throw new Error(`Error performing "git commit" in "${cwd()}":\n${stderr}`);
   }

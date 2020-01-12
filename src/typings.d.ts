@@ -3,7 +3,11 @@ declare module '*package.json' {
 }
 
 declare module 'dir-compare' {
-  export function compare(path1: string, path2: string, config: { [key: string]: string | boolean }): Promise<Result>;
+  export function compare(
+    path1: string,
+    path2: string,
+    config: { [key: string]: string | boolean },
+  ): Promise<Result>;
 
   export type State = 'equal' | 'left' | 'right' | 'distinct';
 
@@ -39,7 +43,7 @@ declare module 'dir-compare' {
     leftDirs: number; // of directories only in path1
     rightDirs: number; // of directories only in path2
     differencesDirs: number; // total different directories (distinctDirs+leftDirs+rightDirs)
-    same: boolean  // true if directories are identical
+    same: boolean; // true if directories are identical
     diffSet: DiffSet[];
   }
 }

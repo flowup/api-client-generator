@@ -27,8 +27,19 @@ export interface MustacheData {
   readonly interfaceFileName: string;
 }
 
-export type TypescriptBasicTypes = 'string' | 'number' | 'boolean' | 'undefined' | 'any';
-export type In = 'body' | 'path' | 'query' | 'modelbinding' | 'header' | 'formData';
+export type TypescriptBasicTypes =
+  | 'string'
+  | 'number'
+  | 'boolean'
+  | 'undefined'
+  | 'any';
+export type In =
+  | 'body'
+  | 'path'
+  | 'query'
+  | 'modelbinding'
+  | 'header'
+  | 'formData';
 export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 export type FileInfix = 'model' | 'enum' | 'service' | 'interface';
 
@@ -37,8 +48,8 @@ export interface Property {
   readonly isArray?: boolean;
   readonly isRef?: boolean;
   readonly isPrimitiveType?: boolean;
-  readonly 'in'?: In | string;
-  readonly 'enum'?: (string | boolean | number | {})[];
+  readonly in?: In | string;
+  readonly enum?: (string | boolean | number | {})[];
   readonly items?: Schema | Schema[];
   readonly name?: string;
   readonly description?: string;
@@ -60,15 +71,15 @@ export interface Parameter extends Property {
 }
 
 export interface Method {
-  readonly path?: string;  // path appended to base in method
-  readonly methodName?: string;  // mane of the generated method
-  readonly methodType?: MethodType;  // type of the http method
+  readonly path?: string; // path appended to base in method
+  readonly methodName?: string; // mane of the generated method
+  readonly methodType?: MethodType; // type of the http method
   readonly description?: string;
-  readonly isSecure?: boolean;  // currently unused TODO
+  readonly isSecure?: boolean; // unused TODO
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
   readonly isVoid: boolean;
-  readonly response?: string;  // method return type
+  readonly response?: string; // method return type
   readonly responseTypeName: string; // method return type without prefix
   readonly requestResponseType?: 'blob'; // supported types of Angular's Http ResponseContentType
   readonly formData?: Pick<Parameter, 'name' | 'camelCaseName'>[]; // list of parameter names which are form data params
@@ -87,7 +98,7 @@ export interface GenOptions {
    */
   outputPath: string;
   /**
-   * Generates actions and models only for the specified api
+   * Generate actions and models only for the specified api
    */
   splitPathTags?: string[];
   /**

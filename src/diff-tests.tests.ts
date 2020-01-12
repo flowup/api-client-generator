@@ -14,8 +14,8 @@ class TestReference {
     public readonly name: string,
     public readonly swaggerFileExt: string = 'yaml',
     public readonly skipIndex: boolean = false,
-    public readonly tags?: string) {
-  }
+    public readonly tags?: string,
+  ) {}
 }
 
 const COMPARE_OPTIONS = {
@@ -29,14 +29,20 @@ const stateSymbols: { [key in State]: string } = {
   distinct: '!=',
 };
 
-async function compareWithReference(reference: TestReference): Promise<string|null> {
+async function compareWithReference(
+  reference: TestReference,
+): Promise<string | null> {
   await generateAPIClient({
     sourceFile: `${reference.refDir}/swagger.${reference.swaggerFileExt}`,
     outputPath: reference.genDir,
     skipModuleExport: reference.skipIndex,
-    splitPathTags: reference.tags ? reference.tags.split(',') : []
-  })
-    .catch((err: Error) => console.error(`Error has occurred while generating api client for ${reference.name}`, err));
+    splitPathTags: reference.tags ? reference.tags.split(',') : [],
+  }).catch((err: Error) =>
+    console.error(
+      `Error has occurred while generating api client for ${reference.name}`,
+      err,
+    ),
+  );
 
   const {
     same,
@@ -46,7 +52,11 @@ async function compareWithReference(reference: TestReference): Promise<string|nu
     left,
     right,
     diffSet,
-  } = await compare(`${reference.refDir}/api`, reference.genDir, COMPARE_OPTIONS);
+  } = await compare(
+    `${reference.refDir}/api`,
+    reference.genDir,
+    COMPARE_OPTIONS,
+  );
 
   if (!same) {
     let result = ' Output should be the same, but there are differences.\n\n';
@@ -57,7 +67,7 @@ async function compareWithReference(reference: TestReference): Promise<string|nu
     result += `right: ${right}\n`;
     result += '[ reference dir ]               [ test dir ]\n';
 
-    diffSet.forEach(({name1, name2, state, type1, type2}: DiffSet) => {
+    diffSet.forEach(({ name1, name2, state, type1, type2 }: DiffSet) => {
       if (stateSymbols[state] !== stateSymbols.equal) {
         result += `(${type1}) ${name1}  ${stateSymbols[state]}  ${name2} (${type2})\n`;
       }
@@ -100,7 +110,12 @@ describe('Diff compare', () => {
   });
 
   it('should check with [ filtered API ] reference', async () => {
-    const reference = new TestReference('filtered-api', 'json', true, 'DummySelector,NonExistingTag,Project,Products');
+    const reference = new TestReference(
+      'filtered-api',
+      'json',
+      true,
+      'DummySelector,NonExistingTag,Project,Products',
+    );
     expect(await compareWithReference(reference)).toBeNull();
   });
 

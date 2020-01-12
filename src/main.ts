@@ -21,8 +21,11 @@ const optimist = opt
   .describe('o', 'Path where generated files should be emitted')
   .describe('C', 'Autocommit changes')
   .describe('v', 'Print error stack traces')
-  .describe('t', 'Generates services and models only for the specified tags.'
-    + ' Use `,` (comma) as the separator for multiple tags. Use `all` to emit a service per tag')
+  .describe(
+    't',
+    'Generates services and models only for the specified tags.' +
+      ' Use `,` (comma) as the separator for multiple tags. Use `all` to emit a service per tag',
+  )
   .describe('m', 'Skip creating index file with module export');
 
 const argv = optimist.argv;
@@ -40,14 +43,14 @@ if (typeof argv.source === 'undefined' && argv.source !== true) {
 const options: GenOptions = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,
-  splitPathTags: 'splitPathTags' in argv ? (argv.splitPathTags || 'all').split(',') : [],
-  skipModuleExport: argv.skipModule === true || argv.skipModule === 'true'
+  splitPathTags:
+    'splitPathTags' in argv ? (argv.splitPathTags || 'all').split(',') : [],
+  skipModuleExport: argv.skipModule === true || argv.skipModule === 'true',
 };
 
-
-const generate: typeof generateAPIClient = argv.commit ?
-  commitAfter(generateAPIClient) :
-  generateAPIClient;
+const generate: typeof generateAPIClient = argv.commit
+  ? commitAfter(generateAPIClient)
+  : generateAPIClient;
 
 generate(options)
   .then(newFiles => {
@@ -60,8 +63,10 @@ generate(options)
       logWarn(`\nLegacy models discovered:\n${legacyFiles.join('\n')}`);
     }
   })
-  .catch((error: Error) => console.error(
-    ...argv.verbose ?
-      ['Error encountered during generating:', error] :
-      [error.message]
-  ));
+  .catch((error: Error) =>
+    console.error(
+      ...(argv.verbose
+        ? ['Error encountered during generating:', error]
+        : [error.message]),
+    ),
+  );

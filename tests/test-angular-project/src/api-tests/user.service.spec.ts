@@ -1,7 +1,13 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 import { User } from '../api-all-tags/models';
-import { UserAPIClient, UserAPIClientModule, } from '../api-all-tags/services/user';
+import {
+  UserAPIClient,
+  UserAPIClientModule,
+} from '../api-all-tags/services/user';
 import { DUMMY_DOMAIN } from './tests-constants';
 
 describe('UserService', () => {
@@ -12,15 +18,18 @@ describe('UserService', () => {
         UserAPIClientModule.forRoot({
           domain: DUMMY_DOMAIN,
           guardResponses: true,
-        })
+        }),
       ],
     });
   });
 
-  it('should be initialized', inject([UserAPIClient], async (userApi: UserAPIClient) => {
-    await expect(userApi).toBeTruthy();
-    await expect(userApi.domain).toBe(DUMMY_DOMAIN);
-  }));
+  it('should be initialized', inject(
+    [UserAPIClient],
+    async (userApi: UserAPIClient) => {
+      await expect(userApi).toBeTruthy();
+      await expect(userApi.domain).toBe(DUMMY_DOMAIN);
+    },
+  ));
 
   it('should register user', inject(
     [UserAPIClient, HttpTestingController],
@@ -36,16 +45,16 @@ describe('UserService', () => {
         userStatus: 1,
       };
 
-      userApi.createUser({body: user}).subscribe(async data => {
+      userApi.createUser({ body: user }).subscribe(async data => {
         await expect(data).toBe('register was successful');
       });
 
       backend
         .expectOne({
           method: 'POST',
-          url: '/user'
+          url: '/user',
         })
         .flush('register was successful');
-    }
+    },
   ));
 });

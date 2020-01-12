@@ -54,6 +54,7 @@
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node --files ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
     "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node --files ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
     "gen-github": "rimraf ./tests/github/api && ts-node --files ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api -t all",
+    "gen-pet-store": "rimraf ./tests/pet-store/api && ts-node --files ./src/main.ts --verbose -s ./tests/pet-store/swagger.yaml -o ./tests/pet-store/api",
     "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node --files ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -t DummySelector,Project,NonExistingTag -m",
     "gen-with-all-tags": "rimraf ./tests/with-all-tags/api && ts-node --files ./src/main.ts -s ./tests/with-all-tags/swagger.json -o ./tests/with-all-tags/api -t all",
     "release": "npm run tests && npm run build && standard-version --tag-prefix=''",
@@ -63,6 +64,7 @@
     "intg-tests:clear-gen": "rimraf tests/test-angular-project/src/api-no-tags && rimraf tests/test-angular-project/src/api-all-tags",
     "intg-tests": "npm run intg-tests:gen-all-tags && npm run intg-tests:gen-no-tag && cd tests/test-angular-project && npm run test && cd ../.. && npm run intg-tests:clear-gen",
     "tests": "npm run test && npm run intg-tests",
+    "prettier": "prettier --write \"**/*.{js,json,yaml,css,scss,md,ts,html,component.html}\"",
     "dev:install": "npm ci --silent && cd tests/test-angular-project && npm ci --silent"
   },
   "dependencies": {
@@ -83,9 +85,12 @@
     "@types/swagger-schema-official": "^2.0.19",
     "@types/which": "^1.3.2",
     "dir-compare": "^1.8.0",
+    "husky": "^3.1.0",
     "jest": "^24.9.0",
     "jest-preset-typescript": "^1.2.0",
     "jest-sonar-reporter": "^2.0.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
     "rimraf": "^3.0.0",
     "standard-version": "^7.0.0",
     "swagger-schema-official": "^2.0.0-bab6bed",
@@ -94,6 +99,12 @@
     "tslint": "^5.20.0",
     "tslint-immutable": "^6.0.1",
     "typescript": "^3.6.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "npm run lint"
+    }
   },
   "jest": {
     "preset": "jest-preset-typescript",

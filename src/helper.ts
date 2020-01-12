@@ -6,27 +6,36 @@ const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined
 
 export const ADDITIONAL_PROPERTIES_KEY = '[key: string]';
 
-export function toCamelCase(text: string = '', lowerFirst: boolean = true): string {
+export function toCamelCase(
+  text: string = '',
+  lowerFirst: boolean = true,
+): string {
   text = removeDuplicateWords(text);
 
   if (/^[A-Z0-9]+$/.test(text) || text === '') {
     return text;
   }
 
-  const camelText = text.split(/[-._\/\\+*]/)
+  const camelText = text
+    .split(/[-._\/\\+*]/)
     .filter(word => !!word) // skip empty words
-    .map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join('');
+    .map(word => `${word[0].toUpperCase()}${word.substring(1)}`)
+    .join('');
 
   return lowerFirst
     ? /^([A-Z]+(?=[A-Z]))/.test(camelText)
-      ? camelText.replace(/^([A-Z]+(?=[A-Z]))/, (firstWord) => firstWord.toLowerCase())
+      ? camelText.replace(/^([A-Z]+(?=[A-Z]))/, firstWord =>
+          firstWord.toLowerCase(),
+        )
       : `${camelText[0].toLowerCase()}${camelText.substring(1)}`
     : camelText;
 }
 
 export function dashCase(text: string = ''): string {
-  text = text.replace(/([A-Z]+)(?![^A-Z])/g, (g) => `-${g.toLowerCase()}`); // transform abbreviations (for example: ID, HTTP, ...)
-  return text.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace(/^-/, '');
+  text = text.replace(/([A-Z]+)(?![^A-Z])/g, g => `-${g.toLowerCase()}`); // transform abbreviations (for example: ID, HTTP, ...)
+  return text
+    .replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
+    .replace(/^-/, '');
 }
 
 /**
@@ -53,7 +62,7 @@ export function dereferenceType(refString: string | undefined): string {
  * @returns {string}
  */
 export function removeDuplicateWords(text: string = ''): string {
-  return text.replace(/(.{3,})(?=\1)/ig, '');
+  return text.replace(/(.{3,})(?=\1)/gi, '');
 }
 
 export function toTypescriptType(type: string | undefined): string {
@@ -75,7 +84,10 @@ export function toTypescriptType(type: string | undefined): string {
   return typeName(type);
 }
 
-export function typeName(name: string = 'any', isArray: boolean = false): string {
+export function typeName(
+  name: string = 'any',
+  isArray: boolean = false,
+): string {
   const type = BASIC_TS_TYPE_REGEX.test(name)
     ? /\binteger\b/.test(name)
       ? 'number'
@@ -93,7 +105,10 @@ export function prefixImportedModels(type: string = ''): string {
   return BUILD_IN_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
 }
 
-export function replaceNewLines(str: string = '', replaceValue: string = ''): string {
+export function replaceNewLines(
+  str: string = '',
+  replaceValue: string = '',
+): string {
   return str.replace(/(\r\n|\r|\n)/g, replaceValue);
 }
 
@@ -107,13 +122,15 @@ export function logWarn(str: string): void {
  * @returns A promise to an array of single values.
  */
 export async function flattenAll<T>(promises: Promise<T[]>[]): Promise<T[]> {
-  return Array.prototype.concat(...await Promise.all(promises));
+  return Array.prototype.concat(...(await Promise.all(promises)));
 }
 
 export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
-  return (a, b) => a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`) : -1;
+  return (a, b) =>
+    a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`) : -1;
 }
 
-export function isReference(param: any | Reference): param is Reference { // tslint:disable-line no-any
+// tslint:disable-next-line no-any
+export function isReference(param: any | Reference): param is Reference {
   return !!(param as Reference).$ref;
 }

@@ -3,6 +3,7 @@
 [![npm](https://img.shields.io/npm/dm/api-client-generator.svg)](https://www.npmjs.com/package/api-client-generator)
 
 [![Caretaker](https://user-images.githubusercontent.com/7274335/42030799-466edd34-7ad4-11e8-9a47-37f12ac8d153.png)](https://github.com/vmasek)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Conventional Commits](https://user-images.githubusercontent.com/7274335/42030800-4690ea1e-7ad4-11e8-9e37-6fe8b2cb3801.png)](https://conventionalcommits.org)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/api-client-gen)
 
@@ -13,14 +14,16 @@
 [![tweet](https://user-images.githubusercontent.com/7274335/42030803-46cd231c-7ad4-11e8-992c-2a5b933383c9.png)](https://twitter.com/intent/tweet?text=Tool%20that%20lets%20you%20generate%20API%20client%20from%20a%20swagger%20file&hashtags=angular,swagger,api,angular5&url=https://github.com/flowup/api-client-generator)
 
 # API client generator
+
 Angular REST API client generator from Swagger YAML or JSON file with camel case settings
 
-Generated files are compatible with Angular 6 (should be compatible with 5 version too). 
+Generated files are compatible with Angular 6 (should be compatible with 5 version too).
 RxJS imports are targeted for version 6+.
 
 ![Logo](https://raw.githubusercontent.com/flowup/api-client-generator/master/api-client-generator-logo.png)
 
 # Description
+
 This package generates an Angular TypeScript class from a Swagger v2.0 specification file. The code is generated using Mustache templates.
 
 The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular (introduced in version 4.3).
@@ -47,7 +50,6 @@ See the [Changelog](https://github.com/flowup/api-client-generator/blob/master/C
 
 # Usage
 
-
 This command will generate API client described in the swagger.json file to the `./output` folder.
 
 `npx api-client-generator -s ./path/to/swagger.json -o ./output`
@@ -61,11 +63,13 @@ This command will do the same but it will split **all of the tags to separate AP
 `npm install api-client-generator --save-dev`
 
 - for quick usage create run script in your `package.json` scripts.
+
 ```
 "scripts": {
   "generate-api-client": "api-client-generator -s ./swagger.yaml -o ./output-folder"
 },
 ```
+
 - then just run
 
 `npm run generate-api-client`
@@ -74,23 +78,25 @@ This command will do the same but it will split **all of the tags to separate AP
 
 # Options
 
-| Option                 | Description                                                                                                     |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------|
-| `-h`/`--help`          | print help and exit                                                                                             |
-| `-s`/`--source`        | path to the swagger file (YAML or JSON)                                                                         |
-| `-o`/`--output`        | path where the generated files should be emitted                                                                |
-| `-C`/`--commit`        | `git commit` generated changes \*                                                                               |
-| `-v`/`--verbose`       | supply stack traces with outputted error messages                                                               |
-| `-t`/`--splitPathTags` | generate services and models only for the specified tags. Use `,` as the separator for multiple tags            |
-|                        | use `all` to emit all as a service per tag                                                                      |
-| `-m`/`--skipModule`    | skip creating the index file with module export                                                                 |
+| Option                    | Description                                                                                          |
+| ------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `-h`/`--help`             | print help and exit                                                                                  |
+| `-s`/`--source`           | path to the swagger file (YAML or JSON)                                                              |
+| `-o`/`--output`           | path where the generated files should be emitted                                                     |
+| `-C`/`--commit`           | `git commit` generated changes \*                                                                    |
+| `-v`/`--verbose`          | supply stack traces with outputted error messages                                                    |
+| `-t`/`--splitPathTags`    | generate services and models only for the specified tags. Use `,` as the separator for multiple tags |
+|                           | use `all` to emit all as a service per tag                                                           |
+| `-m`/`--skipModule`       | skip creating the index file with module export                                                      |
+| `-p`/`--noPrettierIgnore` | omit prettier ignore comment in the header of each file                                              |
 
 <small>\* The author of the commit will be `api-client-generator <api-client-generator@flowup.cz>`.
-If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.*</small>
+If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.\*</small>
 
 # How to use generated client
 
 1. import the `APIClientModule` in your `app.module.ts` (main module)
+
 - domain and configuration should be passed to module imports using `.forRoot` method
 - options and domain are optional
 - when a domain is not passed, host property form swagger file is used as a default
@@ -103,9 +109,12 @@ If there are any staged changes in your repository, the generator will halt pre-
     APIClientModule.forRoot({
       domain: 'https://api.url', // or use value defined in environment `environment.apiUrl`
       httpOptions: {
-        headers: {myCustomHeader: 'this will appear in every request as one of the headers'},
-        params: {someParam: 'customParam'},
-      }
+        headers: {
+          myCustomHeader:
+            'this will appear in every request as one of the headers',
+        },
+        params: { someParam: 'customParam' },
+      },
     }),
     /* ... other imports */
     HttpClientModule, // <<= this is very important import
@@ -113,8 +122,7 @@ If there are any staged changes in your repository, the generator will halt pre-
   ],
   /* ... other stuff */
 })
-export class AppModule {
-}
+export class AppModule {}
 ```
 
 2. use `APIClient` service in your components/services/...
@@ -132,9 +140,7 @@ export class MyComponent {
   users: User[] = [];
 
   constructor(private readonly api: APIClient) {
-    this.api.getUsers().subscribe(
-      users => this.users = users
-    );
+    this.api.getUsers().subscribe(users => (this.users = users));
   }
 }
 ```
@@ -161,14 +167,16 @@ output
 ### HttpClient not provided
 
 This or very similar error means that you forgot to import `HttpClientModule` in your root module
+
 ```
-StaticInjectorError(AppModule)[APIClient -> HttpClient]: 
-  StaticInjectorError(Platform: core)[APIClient -> HttpClient]: 
+StaticInjectorError(AppModule)[APIClient -> HttpClient]:
+  StaticInjectorError(Platform: core)[APIClient -> HttpClient]:
     NullInjectorError: No provider for HttpClient!
 ```
 
 **Fix:**
- - add `HttpClientModule` to your root module (see NgModule imports in [usage](https://github.com/flowup/api-client-generator#how-to-use-generated-client))
+
+- add `HttpClientModule` to your root module (see NgModule imports in [usage](https://github.com/flowup/api-client-generator#how-to-use-generated-client))
 
 ### Numeric Enums keys generated as plane number
 
@@ -183,9 +191,10 @@ export enum MyEnum {
 ```
 
 **Fix**
- We currently support two options:
- - formatting description into array of `['1 Foo', '2 Bar']`
- - using `'x-enumNames'` custom property that should be in format `['Foo', 'Bar']`
+We currently support two options:
+
+- formatting description into array of `['1 Foo', '2 Bar']`
+- using `'x-enumNames'` custom property that should be in format `['Foo', 'Bar']`
 
 # Problem reporting and contributions
 
@@ -202,16 +211,14 @@ If you are interested in contributing please follow these steps:
 2. Fork the repo
 3. Run `npm run dev:install` instead of `npm install` to install all (even test) dependencies
 4. Add your feature/fix
-    - follow the code style
-    - check for the lint errors
-    - in case of questions visit [gitter](https://gitter.im/api-client-gen) to chat with contributors
+   - follow the code style
+   - check for the lint errors
+   - in case of questions visit [gitter](https://gitter.im/api-client-gen) to chat with contributors
 5. Run the tests `npm run tests`
 6. Open the PR to [upstream master](https://github.com/flowup/api-client-generator/compare)
-    - mention the issue/bug/feature it solves/closes
+   - mention the issue/bug/feature it solves/closes
 
--------
-
-.
+---
 
 .
 
@@ -219,6 +226,8 @@ If you are interested in contributing please follow these steps:
 
 .
 
-<small>*Inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen)*</small>
+.
 
-<small>*Generator based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator)*</small>
+<small>_Inspired by [swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen)_</small>
+
+<small>_Generator based on [angular4-swagger-client-generator](https://github.com/lotjomik/angular4-swagger-client-generator)_</small>

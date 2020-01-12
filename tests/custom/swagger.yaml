@@ -2,29 +2,29 @@ swagger: '2.0'
 info:
   description: |
     Custom use cases test
-  version: "1.0.0"
+  version: '1.0.0'
   title: Custom use cases test
 schemes:
- - https
+  - https
 paths:
   /items:
     get:
       summary: Get items list
       operationId: getItems
       parameters:
-      - name: pageSize
-        in: query
-        required: true
-        type: integer
-        format: int32
-      - name: page
-        in: query
-        description: page number
-        required: true
-        type: integer
-        format: int32
+        - name: pageSize
+          in: query
+          required: true
+          type: integer
+          format: int32
+        - name: page
+          in: query
+          description: page number
+          required: true
+          type: integer
+          format: int32
       produces:
-      - application/json
+        - application/json
       responses:
         200:
           description: successful operation
@@ -35,20 +35,20 @@ paths:
       summary: Get item models list
       operationId: getItemModels
       parameters:
-      - name: pageSize
-        in: query
-        required: true
-        type: integer
-        format: int32
-      - name: page
-        in: query
-        description: page number
-        required: true
-        type: integer
-        format: int32
+        - name: pageSize
+          in: query
+          required: true
+          type: integer
+          format: int32
+        - name: page
+          in: query
+          description: page number
+          required: true
+          type: integer
+          format: int32
       produces:
-      - application/json
-      - application/xml
+        - application/json
+        - application/xml
       responses:
         200:
           description: successful operation
@@ -63,11 +63,10 @@ paths:
                   $ref: '#/definitions/ItemModelList'
   /pets/{id}:
     parameters:
-    -
-      in: path
-      name: id
-      type: string
-      required: true
+      - in: path
+        name: id
+        type: string
+        required: true
     get:
       responses:
         200:
@@ -75,24 +74,24 @@ paths:
           schema:
             type: array
             items:
-              $ref: "#/definitions/Pet"
+              $ref: '#/definitions/Pet'
     delete:
       responses:
         200:
           description: OK
-#    patch:
-#      requestBody:
-#        content:
-#          application/json:
-#            schema:
-#              oneOf:
-#                - $ref: '#/definitions/Cat'
-#                - $ref: '#/definitions/Dog'
-#              discriminator:
-#                propertyName: pet_type
-#      responses:
-#        '200':
-#          description: Updated
+  #    patch:
+  #      requestBody:
+  #        content:
+  #          application/json:
+  #            schema:
+  #              oneOf:
+  #                - $ref: '#/definitions/Cat'
+  #                - $ref: '#/definitions/Dog'
+  #              discriminator:
+  #                propertyName: pet_type
+  #      responses:
+  #        '200':
+  #          description: Updated
   /customers:
     get:
       responses:
@@ -102,14 +101,14 @@ paths:
             type: array
             x-nullable: true
             items:
-              $ref: "#/definitions/customer"
+              $ref: '#/definitions/customer'
   /dictionaries:
     get:
       responses:
         200:
           description: OK
           schema:
-            $ref: "#/definitions/Dictionary"
+            $ref: '#/definitions/Dictionary'
 definitions:
   ItemList:
     description: List of items,
@@ -121,7 +120,7 @@ definitions:
         description: List of controllers in the system (this can be empty)
         type: array
         items:
-          $ref: "#/definitions/Data"
+          $ref: '#/definitions/Data'
   ItemModelList:
     description: List of Item models
     required:
@@ -132,7 +131,7 @@ definitions:
         description: The list of available ItemModels and their configurations
         type: array
         items:
-          $ref: "#/definitions/DataModel"
+          $ref: '#/definitions/DataModel'
   myInterface:
     type: object
     properties:
@@ -143,7 +142,7 @@ definitions:
       myMap:
         type: object
         additionalProperties:
-          $ref: "#/definitions/Data"
+          $ref: '#/definitions/Data'
   Data:
     type: object
     properties:
@@ -202,19 +201,19 @@ definitions:
           - $ref: '#/definitions/Data'
             description: Instructs the speech recognizer how to process the speech audio
   TestModel:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: sum of everything there is converted to bananas
-        42test:
-          type: string
-        some-key:
-          type: string
-        anotherKey@:
-          type: string
-        yet@notherKey:
-          type: string
+    type: object
+    properties:
+      count:
+        type: integer
+        description: sum of everything there is converted to bananas
+      42test:
+        type: string
+      some-key:
+        type: string
+      anotherKey@:
+        type: string
+      yet@notherKey:
+        type: string
   Pet:
     type: object
     required:
@@ -257,39 +256,39 @@ definitions:
       - $ref: '#/definitions/Pet'
       - type: object
   model:
-    type: "object"
+    type: 'object'
     properties:
       id:
-        type: "string"
+        type: 'string'
       created:
-        type: "integer"
+        type: 'integer'
       updated:
-        type: "integer"
+        type: 'integer'
       deleted:
-        type: "integer"
+        type: 'integer'
       recursivePointer:
         $ref: '#/definitions/model'
   customer:
-    type: "object"
+    type: 'object'
     allOf:
-    - $ref: "#/definitions/model"
+      - $ref: '#/definitions/model'
     properties:
       name:
-        type: "string"
+        type: 'string'
       address:
-        type: "string"
+        type: 'string'
       right:
-        $ref: "#/definitions/right"
+        $ref: '#/definitions/right'
   right:
     type: string
     enum:
       - MEMBER
       - ADMIN
-      - "VIEW_ALL"
-      - "VIEW_MY"
-      - "VIEW_EDIT"
-      - "READ WRITE"
-      - "CONTROL"
+      - 'VIEW_ALL'
+      - 'VIEW_MY'
+      - 'VIEW_EDIT'
+      - 'READ WRITE'
+      - 'CONTROL'
   possition:
     type: integer
     enum:
@@ -303,7 +302,7 @@ definitions:
   Dictionary:
     type: object
     additionalProperties:
-      $ref: "#/definitions/DictionaryItem"
+      $ref: '#/definitions/DictionaryItem'
   DictionaryItem:
     type: object
     additionalProperties:
