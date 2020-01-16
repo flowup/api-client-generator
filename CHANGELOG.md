@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/flowup/api-client-generator/compare/4.5.1...4.6.0) (2020-01-16)
+
+
+### Bug Fixes
+
+* **guard:** circular dependencies ([eae41be](https://github.com/flowup/api-client-generator/commit/eae41be))
+* **guards:** object guard comparing typeof 'object' ([ffc8560](https://github.com/flowup/api-client-generator/commit/ffc8560))
+
+
+### Features
+
+* **method-params:** union types determined for enum like union strings and numbers ([324a95a](https://github.com/flowup/api-client-generator/commit/324a95a))
+* **models:** union types for properties of enum like union strings and numbers ([0023555](https://github.com/flowup/api-client-generator/commit/0023555))
+
 ### [4.5.1](https://github.com/flowup/api-client-generator/compare/4.5.0...4.5.1) (2019-11-14)
 
 
