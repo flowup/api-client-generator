@@ -3,6 +3,7 @@ package-lock.json
 dist
 templates
 *.log
+*.xml
 CHANGELOG.md
 .prettierignore
 tests/custom/api

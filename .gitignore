@@ -5,7 +5,7 @@ node_modules
 obj
 temp
 npm-debug.log
-test-report.xml
+**/test-report.xml
 output*/
 ref*/
 dist/
