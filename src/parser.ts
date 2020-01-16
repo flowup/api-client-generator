@@ -514,6 +514,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   );
 
   const helpersGuardImports = Array.prototype.concat
+    // tslint:disable-next-line:no-array-mutation
     .apply(
       [],
       properties.map(
