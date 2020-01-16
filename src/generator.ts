@@ -198,15 +198,23 @@ async function generateModelGuards(
 ): Promise<string[]> {
   const outputDir = join(outputPath, MODEL_GUARDS_DIR_NAME);
   const outIndexFile = join(outputDir, '/index.ts');
+  const outHelpersFile = join(outputDir, '/build-in.guards.ts');
 
   const modelGuardTemplate = (
     await promisify(readFile)(
       `${__dirname}/../templates/ngx-model-guard.mustache`,
     )
   ).toString();
+
   const modelGuardsExportTemplate = (
     await promisify(readFile)(
       `${__dirname}/../templates/ngx-model-guards-export.mustache`,
+    )
+  ).toString();
+
+  const modelGuardsHelpersTemplate = (
+    await promisify(readFile)(
+      `${__dirname}/../templates/ngx-model-guards-helpers.mustache`,
     )
   ).toString();
 
@@ -221,16 +229,20 @@ async function generateModelGuards(
     'utf-8',
   );
 
+  // generate model guards pre prepared helper guards (for string, number, File, Blob, ...)
+  await promisify(writeFile)(
+    outHelpersFile,
+    Mustache.render(modelGuardsHelpersTemplate, {}),
+    'utf-8',
+  );
+
   // generate API models
   return Promise.all([
     ...definitions.map(async definition => {
       const result = Mustache.render(modelGuardTemplate, definition);
       const outfile = join(
         outputDir,
-        `${fileName(
-          definition.definitionName,
-          definition.isEnum ? 'enum' : 'model',
-        )}.guard.ts`,
+        `${fileName(definition.definitionName, 'guard')}.ts`,
       );
 
       await ensureDir(dirname(outfile));

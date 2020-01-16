@@ -7,11 +7,13 @@ export interface Definition {
   readonly definitionName: string;
   readonly properties: Property[];
   readonly imports: string[];
+  readonly guardImports?: string[];
   readonly extend?: string;
   readonly description?: string;
   readonly isEnum?: boolean;
   readonly isNumeric?: boolean; // used for determining if string or numeric enum should be generated
-  renderFileName?(): RenderFileName; // generate dash-case file names to templates
+  renderFileName(): RenderFileName; // generate dash-case file names to templates
+  renderFileNameGuard(): RenderFileName; // generate dash-case file names to templates
 }
 
 export interface MustacheData {
@@ -41,7 +43,7 @@ export type In =
   | 'header'
   | 'formData';
 export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-export type FileInfix = 'model' | 'enum' | 'service' | 'interface';
+export type FileInfix = 'model' | 'enum' | 'service' | 'interface' | 'guard';
 
 export interface Property {
   readonly camelCaseName?: string;
@@ -56,6 +58,7 @@ export interface Property {
   readonly $ref?: string;
   readonly schema?: Schema;
   readonly type?: string;
+  readonly guard?: string;
   readonly typescriptType?: TypescriptBasicTypes | string;
   readonly importType?: string;
   readonly isRequired?: boolean;
@@ -107,4 +110,5 @@ export interface GenOptions {
   skipModuleExport?: boolean;
 }
 
-export type ClientGenerator = (...args: any[]) => Promise<string[]>; // tslint:disable-line no-any
+// tslint:disable-next-line no-any
+export type ClientGenerator = (...args: any[]) => Promise<string[]>;

@@ -2,7 +2,8 @@ import { Reference } from 'swagger-schema-official';
 import { FileInfix } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|boolean|void)\b/;
-const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|void|Object|Date|File|Blob)\b/i;
+const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|void|Object|File|Blob)\b/i;
+export const BUILD_GUARD_HELPERS_REGEX = /is(string|number|integer|boolean|any|Object|File|Blob)\(/gm;
 
 export const ADDITIONAL_PROPERTIES_KEY = '[key: string]';
 

@@ -30,6 +30,7 @@ import {
   compareStringByKey,
   isReference,
   ADDITIONAL_PROPERTIES_KEY,
+  BUILD_GUARD_HELPERS_REGEX,
 } from './helper';
 
 interface Parameters {
@@ -311,6 +312,10 @@ function defineEnum(
       text: string,
       render: Render,
     ): string => fileName(render(text), 'enum'),
+    renderFileNameGuard: (): RenderFileName => (
+      text: string,
+      render: Render,
+    ): string => fileName(render(text), 'guard'),
   };
 }
 
@@ -494,25 +499,52 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
     [...(schema.required || []), ADDITIONAL_PROPERTIES_KEY],
   );
 
+  const modelImports = properties
+    .reduce(
+      (acc, { imports = [] }) => [...acc, ...imports],
+      extendInterface ? [extendInterface] : [],
+    )
+    .filter(type => type !== name)
+    .sort() // tslint:disable-line:no-array-mutation
+    // filter duplicate imports
+    .filter((el, i, a) => (i === a.indexOf(el) ? 1 : 0));
+
+  const modelGuardImports = modelImports.map(
+    el => `import { is${el} } from './${fileName(el, 'guard')}';`,
+  );
+
+  const helpersGuardImports = Array.prototype.concat
+    .apply(
+      [],
+      properties.map(
+        ({ guard = '' }) => guard.match(BUILD_GUARD_HELPERS_REGEX) || [],
+      ),
+    )
+    .sort()
+    .filter((guardHelper, index, self) =>
+      index > 0 ? guardHelper !== self[index - 1] : true,
+    )
+    .map(
+      guardHelper =>
+        `import { ${guardHelper.slice(0, -1)} } from './build-in.guards';`,
+    );
+
   return {
     definitionName: name,
     description: replaceNewLines(schema.description, '$1 * '),
     properties: properties,
-    imports: properties
-      .reduce(
-        (acc, { imports = [] }) => [...acc, ...imports],
-        extendInterface ? [extendInterface] : [],
-      )
-      .filter(type => type !== name)
-      .sort() // tslint:disable-line:no-array-mutation
-      // filter duplicate imports
-      .filter((el, i, a) => (i === a.indexOf(el) ? 1 : 0)),
+    imports: modelImports,
+    guardImports: [...modelGuardImports, ...helpersGuardImports],
     isEnum: false,
     extend: extendInterface,
     renderFileName: (): RenderFileName => (
       text: string,
       render: Render,
     ): string => fileName(render(text), 'model'),
+    renderFileNameGuard: (): RenderFileName => (
+      text: string,
+      render: Render,
+    ): string => fileName(render(text), 'guard'),
   };
 }
 

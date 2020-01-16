@@ -3,13 +3,9 @@
 import {
   {{&definitionName}},
 } from '../models';
-{{#imports.length}}
-import {
-{{#imports}}
-  is{{.}},
-{{/imports}}
-} from '.';
-{{/imports.length}}
+{{#guardImports}}
+{{&.}}
+{{/guardImports}}
 
 export function is{{&definitionName}}(arg: any): arg is {{&definitionName}} {
   return (
