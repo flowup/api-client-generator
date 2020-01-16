@@ -380,7 +380,11 @@ function parseInterfaceProperties(
             }))`
           : `${
               prop.isPrimitiveType || isPrimitiveType
-                ? `typeof arg.${prop.name || name} === '${prop.type || type}'`
+                ? `typeof arg.${prop.name || name} === '${
+                    (prop.type || type) === '{ [key: string]: any }'
+                      ? 'object'
+                      : prop.type || type
+                  }'`
                 : fn()
             }`
       }
