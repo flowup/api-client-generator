@@ -747,7 +747,7 @@ export function isTable(arg: any): arg is models.Table {
   arg != null &&
   typeof arg === 'object' &&
     // tableData?: TableCell[][]
-    ( typeof arg.tableData === 'undefined' || (Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => isTableCell[](item))) ) &&
+    ( typeof arg.tableData === 'undefined' || (Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => (Array.isArray(item) && item.every((itemItem: unknown) => isTableCell(itemItem))))) ) &&
     // tableHead?: Column[]
     ( typeof arg.tableHead === 'undefined' || (Array.isArray(arg.tableHead) && arg.tableHead.every((item: unknown) => isColumn(item))) ) &&
 
@@ -849,7 +849,7 @@ export function isValidatedTable(arg: any): arg is models.ValidatedTable {
   arg != null &&
   typeof arg === 'object' &&
     // tableData?: ValidatedTableCell[][]
-    ( typeof arg.tableData === 'undefined' || (Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => isValidatedTableCell[](item))) ) &&
+    ( typeof arg.tableData === 'undefined' || (Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => (Array.isArray(item) && item.every((itemItem: unknown) => isValidatedTableCell(itemItem))))) ) &&
     // tableHead?: Column[]
     ( typeof arg.tableHead === 'undefined' || (Array.isArray(arg.tableHead) && arg.tableHead.every((item: unknown) => isColumn(item))) ) &&
 

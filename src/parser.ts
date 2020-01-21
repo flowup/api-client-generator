@@ -381,6 +381,12 @@ function parseInterfaceProperties(
             )}.every((item: unknown) => ${
               prop.isPrimitiveType || isPrimitiveType
                 ? `typeof item === '${type}'`
+                : (prop.typescriptType || typescriptType).endsWith('[]') // checks if item is nested array type
+                ? `(Array.isArray(item) && item.every((itemItem: unknown) => ${(prop.isPrimitiveType ||
+                  isPrimitiveType
+                    ? `typeof itemItem === '${type}'`
+                    : `is${prop.typescriptType || typescriptType}(itemItem)`
+                  ).replace('[]', '')}))`
                 : `is${prop.typescriptType || typescriptType}(item)`
             }))`
           : name === ADDITIONAL_PROPERTIES_KEY
