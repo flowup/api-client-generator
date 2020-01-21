@@ -52,7 +52,7 @@ export function isDummySelectorViewModel(arg: any): arg is models.DummySelectorV
   arg != null &&
   typeof arg === 'object' &&
     // DummyList?: DummyViewModel[]
-    ( typeof arg.DummyList === 'undefined' || (Array.isArray(arg.DummyList) && arg.DummyList.every(item => isDummyViewModel(item))) ) &&
+    ( typeof arg.DummyList === 'undefined' || (Array.isArray(arg.DummyList) && arg.DummyList.every((item: unknown) => isDummyViewModel(item))) ) &&
     // SelectedDummyObjId?: number
     ( typeof arg.SelectedDummyObjId === 'undefined' || typeof arg.SelectedDummyObjId === 'number' ) &&
 

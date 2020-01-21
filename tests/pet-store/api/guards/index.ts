@@ -94,11 +94,11 @@ export function isPet(arg: any): arg is models.Pet {
     // name: string
     ( typeof arg.name === 'string' ) &&
     // photoUrls: string[]
-    ( (Array.isArray(arg.photoUrls) && arg.photoUrls.every(item => typeof item === 'string')) ) &&
+    ( (Array.isArray(arg.photoUrls) && arg.photoUrls.every((item: unknown) => typeof item === 'string')) ) &&
     // status?: 'available' | 'pending' | 'sold'
     ( typeof arg.status === 'undefined' || ['available', 'pending', 'sold'].includes(arg.status) ) &&
     // tags?: Tag[]
-    ( typeof arg.tags === 'undefined' || (Array.isArray(arg.tags) && arg.tags.every(item => isTag(item))) ) &&
+    ( typeof arg.tags === 'undefined' || (Array.isArray(arg.tags) && arg.tags.every((item: unknown) => isTag(item))) ) &&
 
   true
   );

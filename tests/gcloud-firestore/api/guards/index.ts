@@ -62,7 +62,7 @@ export function isArrayValue(arg: any): arg is models.ArrayValue {
   arg != null &&
   typeof arg === 'object' &&
     // values?: Value[]
-    ( typeof arg.values === 'undefined' || (Array.isArray(arg.values) && arg.values.every(item => isValue(item))) ) &&
+    ( typeof arg.values === 'undefined' || (Array.isArray(arg.values) && arg.values.every((item: unknown) => isValue(item))) ) &&
 
   true
   );
@@ -73,7 +73,7 @@ export function isBatchGetDocumentsRequest(arg: any): arg is models.BatchGetDocu
   arg != null &&
   typeof arg === 'object' &&
     // documents?: string[]
-    ( typeof arg.documents === 'undefined' || (Array.isArray(arg.documents) && arg.documents.every(item => typeof item === 'string')) ) &&
+    ( typeof arg.documents === 'undefined' || (Array.isArray(arg.documents) && arg.documents.every((item: unknown) => typeof item === 'string')) ) &&
     // mask?: DocumentMask
     ( typeof arg.mask === 'undefined' || isDocumentMask(arg.mask) ) &&
     // newTransaction?: TransactionOptions
@@ -146,7 +146,7 @@ export function isCommitRequest(arg: any): arg is models.CommitRequest {
     // transaction?: string
     ( typeof arg.transaction === 'undefined' || typeof arg.transaction === 'string' ) &&
     // writes?: Write[]
-    ( typeof arg.writes === 'undefined' || (Array.isArray(arg.writes) && arg.writes.every(item => isWrite(item))) ) &&
+    ( typeof arg.writes === 'undefined' || (Array.isArray(arg.writes) && arg.writes.every((item: unknown) => isWrite(item))) ) &&
 
   true
   );
@@ -159,7 +159,7 @@ export function isCommitResponse(arg: any): arg is models.CommitResponse {
     // commitTime?: string
     ( typeof arg.commitTime === 'undefined' || typeof arg.commitTime === 'string' ) &&
     // writeResults?: WriteResult[]
-    ( typeof arg.writeResults === 'undefined' || (Array.isArray(arg.writeResults) && arg.writeResults.every(item => isWriteResult(item))) ) &&
+    ( typeof arg.writeResults === 'undefined' || (Array.isArray(arg.writeResults) && arg.writeResults.every((item: unknown) => isWriteResult(item))) ) &&
 
   true
   );
@@ -170,7 +170,7 @@ export function isCompositeFilter(arg: any): arg is models.CompositeFilter {
   arg != null &&
   typeof arg === 'object' &&
     // filters?: Filter[]
-    ( typeof arg.filters === 'undefined' || (Array.isArray(arg.filters) && arg.filters.every(item => isFilter(item))) ) &&
+    ( typeof arg.filters === 'undefined' || (Array.isArray(arg.filters) && arg.filters.every((item: unknown) => isFilter(item))) ) &&
     // op?: 'OPERATOR_UNSPECIFIED' | 'AND'
     ( typeof arg.op === 'undefined' || ['OPERATOR_UNSPECIFIED', 'AND'].includes(arg.op) ) &&
 
@@ -185,7 +185,7 @@ export function isCursor(arg: any): arg is models.Cursor {
     // before?: boolean
     ( typeof arg.before === 'undefined' || typeof arg.before === 'boolean' ) &&
     // values?: Value[]
-    ( typeof arg.values === 'undefined' || (Array.isArray(arg.values) && arg.values.every(item => isValue(item))) ) &&
+    ( typeof arg.values === 'undefined' || (Array.isArray(arg.values) && arg.values.every((item: unknown) => isValue(item))) ) &&
 
   true
   );
@@ -215,9 +215,9 @@ export function isDocumentChange(arg: any): arg is models.DocumentChange {
     // document?: Document
     ( typeof arg.document === 'undefined' || isDocument(arg.document) ) &&
     // removedTargetIds?: number[]
-    ( typeof arg.removedTargetIds === 'undefined' || (Array.isArray(arg.removedTargetIds) && arg.removedTargetIds.every(item => typeof item === 'number')) ) &&
+    ( typeof arg.removedTargetIds === 'undefined' || (Array.isArray(arg.removedTargetIds) && arg.removedTargetIds.every((item: unknown) => typeof item === 'number')) ) &&
     // targetIds?: number[]
-    ( typeof arg.targetIds === 'undefined' || (Array.isArray(arg.targetIds) && arg.targetIds.every(item => typeof item === 'number')) ) &&
+    ( typeof arg.targetIds === 'undefined' || (Array.isArray(arg.targetIds) && arg.targetIds.every((item: unknown) => typeof item === 'number')) ) &&
 
   true
   );
@@ -232,7 +232,7 @@ export function isDocumentDelete(arg: any): arg is models.DocumentDelete {
     // readTime?: string
     ( typeof arg.readTime === 'undefined' || typeof arg.readTime === 'string' ) &&
     // removedTargetIds?: number[]
-    ( typeof arg.removedTargetIds === 'undefined' || (Array.isArray(arg.removedTargetIds) && arg.removedTargetIds.every(item => typeof item === 'number')) ) &&
+    ( typeof arg.removedTargetIds === 'undefined' || (Array.isArray(arg.removedTargetIds) && arg.removedTargetIds.every((item: unknown) => typeof item === 'number')) ) &&
 
   true
   );
@@ -243,7 +243,7 @@ export function isDocumentMask(arg: any): arg is models.DocumentMask {
   arg != null &&
   typeof arg === 'object' &&
     // fieldPaths?: string[]
-    ( typeof arg.fieldPaths === 'undefined' || (Array.isArray(arg.fieldPaths) && arg.fieldPaths.every(item => typeof item === 'string')) ) &&
+    ( typeof arg.fieldPaths === 'undefined' || (Array.isArray(arg.fieldPaths) && arg.fieldPaths.every((item: unknown) => typeof item === 'string')) ) &&
 
   true
   );
@@ -258,7 +258,7 @@ export function isDocumentRemove(arg: any): arg is models.DocumentRemove {
     // readTime?: string
     ( typeof arg.readTime === 'undefined' || typeof arg.readTime === 'string' ) &&
     // removedTargetIds?: number[]
-    ( typeof arg.removedTargetIds === 'undefined' || (Array.isArray(arg.removedTargetIds) && arg.removedTargetIds.every(item => typeof item === 'number')) ) &&
+    ( typeof arg.removedTargetIds === 'undefined' || (Array.isArray(arg.removedTargetIds) && arg.removedTargetIds.every((item: unknown) => typeof item === 'number')) ) &&
 
   true
   );
@@ -269,7 +269,7 @@ export function isDocumentsTarget(arg: any): arg is models.DocumentsTarget {
   arg != null &&
   typeof arg === 'object' &&
     // documents?: string[]
-    ( typeof arg.documents === 'undefined' || (Array.isArray(arg.documents) && arg.documents.every(item => typeof item === 'string')) ) &&
+    ( typeof arg.documents === 'undefined' || (Array.isArray(arg.documents) && arg.documents.every((item: unknown) => typeof item === 'string')) ) &&
 
   true
   );
@@ -282,7 +282,7 @@ export function isDocumentTransform(arg: any): arg is models.DocumentTransform {
     // document?: string
     ( typeof arg.document === 'undefined' || typeof arg.document === 'string' ) &&
     // fieldTransforms?: FieldTransform[]
-    ( typeof arg.fieldTransforms === 'undefined' || (Array.isArray(arg.fieldTransforms) && arg.fieldTransforms.every(item => isFieldTransform(item))) ) &&
+    ( typeof arg.fieldTransforms === 'undefined' || (Array.isArray(arg.fieldTransforms) && arg.fieldTransforms.every((item: unknown) => isFieldTransform(item))) ) &&
 
   true
   );
@@ -371,7 +371,7 @@ export function isIndex(arg: any): arg is models.Index {
     // collectionId?: string
     ( typeof arg.collectionId === 'undefined' || typeof arg.collectionId === 'string' ) &&
     // fields?: IndexField[]
-    ( typeof arg.fields === 'undefined' || (Array.isArray(arg.fields) && arg.fields.every(item => isIndexField(item))) ) &&
+    ( typeof arg.fields === 'undefined' || (Array.isArray(arg.fields) && arg.fields.every((item: unknown) => isIndexField(item))) ) &&
     // name?: string
     ( typeof arg.name === 'undefined' || typeof arg.name === 'string' ) &&
     // state?: 'STATE_UNSPECIFIED' | 'CREATING' | 'READY' | 'ERROR'
@@ -425,7 +425,7 @@ export function isListCollectionIdsResponse(arg: any): arg is models.ListCollect
   arg != null &&
   typeof arg === 'object' &&
     // collectionIds?: string[]
-    ( typeof arg.collectionIds === 'undefined' || (Array.isArray(arg.collectionIds) && arg.collectionIds.every(item => typeof item === 'string')) ) &&
+    ( typeof arg.collectionIds === 'undefined' || (Array.isArray(arg.collectionIds) && arg.collectionIds.every((item: unknown) => typeof item === 'string')) ) &&
     // nextPageToken?: string
     ( typeof arg.nextPageToken === 'undefined' || typeof arg.nextPageToken === 'string' ) &&
 
@@ -438,7 +438,7 @@ export function isListDocumentsResponse(arg: any): arg is models.ListDocumentsRe
   arg != null &&
   typeof arg === 'object' &&
     // documents?: Document[]
-    ( typeof arg.documents === 'undefined' || (Array.isArray(arg.documents) && arg.documents.every(item => isDocument(item))) ) &&
+    ( typeof arg.documents === 'undefined' || (Array.isArray(arg.documents) && arg.documents.every((item: unknown) => isDocument(item))) ) &&
     // nextPageToken?: string
     ( typeof arg.nextPageToken === 'undefined' || typeof arg.nextPageToken === 'string' ) &&
 
@@ -485,7 +485,7 @@ export function isListIndexesResponse(arg: any): arg is models.ListIndexesRespon
   arg != null &&
   typeof arg === 'object' &&
     // indexes?: Index[]
-    ( typeof arg.indexes === 'undefined' || (Array.isArray(arg.indexes) && arg.indexes.every(item => isIndex(item))) ) &&
+    ( typeof arg.indexes === 'undefined' || (Array.isArray(arg.indexes) && arg.indexes.every((item: unknown) => isIndex(item))) ) &&
     // nextPageToken?: string
     ( typeof arg.nextPageToken === 'undefined' || typeof arg.nextPageToken === 'string' ) &&
 
@@ -554,7 +554,7 @@ export function isProjection(arg: any): arg is models.Projection {
   arg != null &&
   typeof arg === 'object' &&
     // fields?: FieldReference[]
-    ( typeof arg.fields === 'undefined' || (Array.isArray(arg.fields) && arg.fields.every(item => isFieldReference(item))) ) &&
+    ( typeof arg.fields === 'undefined' || (Array.isArray(arg.fields) && arg.fields.every((item: unknown) => isFieldReference(item))) ) &&
 
   true
   );
@@ -647,7 +647,7 @@ export function isStatus(arg: any): arg is models.Status {
     // code?: number
     ( typeof arg.code === 'undefined' || typeof arg.code === 'number' ) &&
     // details?: { [key: string]: any }[]
-    ( typeof arg.details === 'undefined' || (Array.isArray(arg.details) && arg.details.every(item => typeof item === '{ [key: string]: any }')) ) &&
+    ( typeof arg.details === 'undefined' || (Array.isArray(arg.details) && arg.details.every((item: unknown) => typeof item === '{ [key: string]: any }')) ) &&
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
 
@@ -662,13 +662,13 @@ export function isStructuredQuery(arg: any): arg is models.StructuredQuery {
     // endAt?: Cursor
     ( typeof arg.endAt === 'undefined' || isCursor(arg.endAt) ) &&
     // from?: CollectionSelector[]
-    ( typeof arg.from === 'undefined' || (Array.isArray(arg.from) && arg.from.every(item => isCollectionSelector(item))) ) &&
+    ( typeof arg.from === 'undefined' || (Array.isArray(arg.from) && arg.from.every((item: unknown) => isCollectionSelector(item))) ) &&
     // limit?: number
     ( typeof arg.limit === 'undefined' || typeof arg.limit === 'number' ) &&
     // offset?: number
     ( typeof arg.offset === 'undefined' || typeof arg.offset === 'number' ) &&
     // orderBy?: Order[]
-    ( typeof arg.orderBy === 'undefined' || (Array.isArray(arg.orderBy) && arg.orderBy.every(item => isOrder(item))) ) &&
+    ( typeof arg.orderBy === 'undefined' || (Array.isArray(arg.orderBy) && arg.orderBy.every((item: unknown) => isOrder(item))) ) &&
     // select?: Projection
     ( typeof arg.select === 'undefined' || isProjection(arg.select) ) &&
     // startAt?: Cursor
@@ -714,7 +714,7 @@ export function isTargetChange(arg: any): arg is models.TargetChange {
     // targetChangeType?: 'NO_CHANGE' | 'ADD' | 'REMOVE' | 'CURRENT' | 'RESET'
     ( typeof arg.targetChangeType === 'undefined' || ['NO_CHANGE', 'ADD', 'REMOVE', 'CURRENT', 'RESET'].includes(arg.targetChangeType) ) &&
     // targetIds?: number[]
-    ( typeof arg.targetIds === 'undefined' || (Array.isArray(arg.targetIds) && arg.targetIds.every(item => typeof item === 'number')) ) &&
+    ( typeof arg.targetIds === 'undefined' || (Array.isArray(arg.targetIds) && arg.targetIds.every((item: unknown) => typeof item === 'number')) ) &&
 
   true
   );
@@ -807,7 +807,7 @@ export function isWriteRequest(arg: any): arg is models.WriteRequest {
     // streamToken?: string
     ( typeof arg.streamToken === 'undefined' || typeof arg.streamToken === 'string' ) &&
     // writes?: Write[]
-    ( typeof arg.writes === 'undefined' || (Array.isArray(arg.writes) && arg.writes.every(item => isWrite(item))) ) &&
+    ( typeof arg.writes === 'undefined' || (Array.isArray(arg.writes) && arg.writes.every((item: unknown) => isWrite(item))) ) &&
 
   true
   );
@@ -824,7 +824,7 @@ export function isWriteResponse(arg: any): arg is models.WriteResponse {
     // streamToken?: string
     ( typeof arg.streamToken === 'undefined' || typeof arg.streamToken === 'string' ) &&
     // writeResults?: WriteResult[]
-    ( typeof arg.writeResults === 'undefined' || (Array.isArray(arg.writeResults) && arg.writeResults.every(item => isWriteResult(item))) ) &&
+    ( typeof arg.writeResults === 'undefined' || (Array.isArray(arg.writeResults) && arg.writeResults.every((item: unknown) => isWriteResult(item))) ) &&
 
   true
   );
@@ -835,7 +835,7 @@ export function isWriteResult(arg: any): arg is models.WriteResult {
   arg != null &&
   typeof arg === 'object' &&
     // transformResults?: Value[]
-    ( typeof arg.transformResults === 'undefined' || (Array.isArray(arg.transformResults) && arg.transformResults.every(item => isValue(item))) ) &&
+    ( typeof arg.transformResults === 'undefined' || (Array.isArray(arg.transformResults) && arg.transformResults.every((item: unknown) => isValue(item))) ) &&
     // updateTime?: string
     ( typeof arg.updateTime === 'undefined' || typeof arg.updateTime === 'string' ) &&
 

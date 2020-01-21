@@ -373,7 +373,7 @@ function parseInterfaceProperties(
       }
       ${
         prop.isArray || isArray
-          ? `(Array.isArray(arg.${name}) && arg.${name}.every(item => ${
+          ? `(Array.isArray(arg.${name}) && arg.${name}.every((item: unknown) => ${
               prop.isPrimitiveType || isPrimitiveType
                 ? `typeof item === '${type}'`
                 : `is${prop.typescriptType || typescriptType}(item)`

@@ -41,7 +41,7 @@ export function isCat(arg: any): arg is models.Cat {
     // age?: number
     ( typeof arg.age === 'undefined' || typeof arg.age === 'number' ) &&
     // eaten?: Mouse[]
-    ( typeof arg.eaten === 'undefined' || (Array.isArray(arg.eaten) && arg.eaten.every(item => isMouse(item))) ) &&
+    ( typeof arg.eaten === 'undefined' || (Array.isArray(arg.eaten) && arg.eaten.every((item: unknown) => isMouse(item))) ) &&
     // hunts?: boolean
     ( typeof arg.hunts === 'undefined' || typeof arg.hunts === 'boolean' ) &&
     // extends Pet
@@ -96,7 +96,7 @@ export function isDataModel(arg: any): arg is models.DataModel {
     // audioConfig?: Data
     ( typeof arg.audioConfig === 'undefined' || ( isData(arg.audioConfig) ) ) &&
     // entities?: number[]
-    ( typeof arg.entities === 'undefined' || (Array.isArray(arg.entities) && arg.entities.every(item => typeof item === 'number')) ) &&
+    ( typeof arg.entities === 'undefined' || (Array.isArray(arg.entities) && arg.entities.every((item: unknown) => typeof item === 'number')) ) &&
     // id?: number
     ( typeof arg.id === 'undefined' || typeof arg.id === 'number' ) &&
     // imageData?: string
@@ -106,7 +106,7 @@ export function isDataModel(arg: any): arg is models.DataModel {
     // roleId?: number
     ( typeof arg.roleId === 'undefined' || typeof arg.roleId === 'number' ) &&
     // testWithArray?: Pet[] & Data
-    ( typeof arg.testWithArray === 'undefined' || ( (Array.isArray(arg.testWithArray) && arg.testWithArray.every(item => isPet(item))) && isData(arg.testWithArray) ) ) &&
+    ( typeof arg.testWithArray === 'undefined' || ( (Array.isArray(arg.testWithArray) && arg.testWithArray.every((item: unknown) => isPet(item))) && isData(arg.testWithArray) ) ) &&
     // text?: ItemList & Data
     ( typeof arg.text === 'undefined' || ( isItemList(arg.text) && isData(arg.text) ) ) &&
 
@@ -156,7 +156,7 @@ export function isItemList(arg: any): arg is models.ItemList {
   arg != null &&
   typeof arg === 'object' &&
     // data: Data[]
-    ( (Array.isArray(arg.data) && arg.data.every(item => isData(item))) ) &&
+    ( (Array.isArray(arg.data) && arg.data.every((item: unknown) => isData(item))) ) &&
 
   true
   );
@@ -167,7 +167,7 @@ export function isItemModelList(arg: any): arg is models.ItemModelList {
   arg != null &&
   typeof arg === 'object' &&
     // data: DataModel[]
-    ( (Array.isArray(arg.data) && arg.data.every(item => isDataModel(item))) ) &&
+    ( (Array.isArray(arg.data) && arg.data.every((item: unknown) => isDataModel(item))) ) &&
 
   true
   );

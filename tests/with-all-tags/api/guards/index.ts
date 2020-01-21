@@ -39,7 +39,7 @@ export function isColumnModel(arg: any): arg is models.ColumnModel {
   arg != null &&
   typeof arg === 'object' &&
     // Children?: WidgetModel[]
-    ( typeof arg.Children === 'undefined' || (Array.isArray(arg.Children) && arg.Children.every(item => isWidgetModel(item))) ) &&
+    ( typeof arg.Children === 'undefined' || (Array.isArray(arg.Children) && arg.Children.every((item: unknown) => isWidgetModel(item))) ) &&
     // Id?: number
     ( typeof arg.Id === 'undefined' || typeof arg.Id === 'number' ) &&
     // ParentId?: number
@@ -80,7 +80,7 @@ export function isDummySelectorViewModel(arg: any): arg is models.DummySelectorV
   arg != null &&
   typeof arg === 'object' &&
     // DummyList?: DummyViewModel[]
-    ( typeof arg.DummyList === 'undefined' || (Array.isArray(arg.DummyList) && arg.DummyList.every(item => isDummyViewModel(item))) ) &&
+    ( typeof arg.DummyList === 'undefined' || (Array.isArray(arg.DummyList) && arg.DummyList.every((item: unknown) => isDummyViewModel(item))) ) &&
     // SelectedDummyObjId?: number
     ( typeof arg.SelectedDummyObjId === 'undefined' || typeof arg.SelectedDummyObjId === 'number' ) &&
 
@@ -121,7 +121,7 @@ export function isRowModel(arg: any): arg is models.RowModel {
   arg != null &&
   typeof arg === 'object' &&
     // Children?: ColumnModel[]
-    ( typeof arg.Children === 'undefined' || (Array.isArray(arg.Children) && arg.Children.every(item => isColumnModel(item))) ) &&
+    ( typeof arg.Children === 'undefined' || (Array.isArray(arg.Children) && arg.Children.every((item: unknown) => isColumnModel(item))) ) &&
     // Id?: number
     ( typeof arg.Id === 'undefined' || typeof arg.Id === 'number' ) &&
     // ParentId?: number
