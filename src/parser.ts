@@ -378,6 +378,12 @@ function parseInterfaceProperties(
                 ? `typeof item === '${type}'`
                 : `is${prop.typescriptType || typescriptType}(item)`
             }))`
+          : name === ADDITIONAL_PROPERTIES_KEY
+          ? `Object.values(arg).every((item: unknown) => ${
+              isPrimitiveType
+                ? `typeof item === '${type}'`
+                : `is${typescriptType}(item)`
+            })`
           : `${
               prop.isPrimitiveType || isPrimitiveType
                 ? `typeof arg.${prop.name || name} === '${

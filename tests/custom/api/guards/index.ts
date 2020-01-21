@@ -119,7 +119,7 @@ export function isDictionary(arg: any): arg is models.Dictionary {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: DictionaryItem
-    ( isDictionaryItem(arg.[key: string]) ) &&
+    ( Object.values(arg).every((item: unknown) => isDictionaryItem(item)) ) &&
 
   true
   );
@@ -130,7 +130,7 @@ export function isDictionaryItem(arg: any): arg is models.DictionaryItem {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: number
-    ( typeof arg.[key: string] === 'number' ) &&
+    ( Object.values(arg).every((item: unknown) => typeof item === 'number') ) &&
 
   true
   );
