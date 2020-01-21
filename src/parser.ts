@@ -365,15 +365,20 @@ function parseInterfaceProperties(
           : `'${propName}'`;
       const isRequired = requiredProps.includes(propName);
 
+      const accessProp = (arg: string): string =>
+        arg.startsWith("'") ? `arg[${arg}]` : `arg.${arg}`;
+
       const guardFn = (fn: () => string, prop: Property = {}) => `
       ${
         prop.hasOwnProperty('isRequired') || isRequired
           ? ''
-          : `typeof arg.${name} === 'undefined' ||`
+          : `typeof ${accessProp(name)} === 'undefined' ||`
       }
       ${
         prop.isArray || isArray
-          ? `(Array.isArray(arg.${name}) && arg.${name}.every((item: unknown) => ${
+          ? `(Array.isArray(${accessProp(name)}) && ${accessProp(
+              name,
+            )}.every((item: unknown) => ${
               prop.isPrimitiveType || isPrimitiveType
                 ? `typeof item === '${type}'`
                 : `is${prop.typescriptType || typescriptType}(item)`
@@ -386,7 +391,7 @@ function parseInterfaceProperties(
             })`
           : `${
               prop.isPrimitiveType || isPrimitiveType
-                ? `typeof arg.${prop.name || name} === '${
+                ? `typeof ${accessProp(prop.name || name)} === '${
                     (prop.type || type) === '{ [key: string]: any }'
                       ? 'object'
                       : prop.type || type
@@ -400,15 +405,18 @@ function parseInterfaceProperties(
         propertyAllOf.length
           ? `(${propertyAllOf
               .map(prop =>
-                guardFn(() => `is${prop.typescriptType}(arg.${name})`, prop),
+                guardFn(
+                  () => `is${prop.typescriptType}(${accessProp(name)})`,
+                  prop,
+                ),
               )
               .join(' && ')})`
           : / \| /.test(typescriptType)
           ? `[${(typescriptType || '').replace(
               / \| /g,
               ', ',
-            )}].includes(arg.${name})`
-          : `is${typescriptType}(arg.${name})`,
+            )}].includes(${accessProp(name)})`
+          : `is${typescriptType}(${accessProp(name)})`,
       ).replace(/\s+/g, ' ')}) &&`;
 
       return {
