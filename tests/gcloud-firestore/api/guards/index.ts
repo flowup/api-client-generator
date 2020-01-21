@@ -647,7 +647,7 @@ export function isStatus(arg: any): arg is models.Status {
     // code?: number
     ( typeof arg.code === 'undefined' || typeof arg.code === 'number' ) &&
     // details?: { [key: string]: any }[]
-    ( typeof arg.details === 'undefined' || (Array.isArray(arg.details) && arg.details.every((item: unknown) => typeof item === '{ [key: string]: any }')) ) &&
+    ( typeof arg.details === 'undefined' || (Array.isArray(arg.details) && arg.details.every((item: unknown) => typeof item === 'object')) ) &&
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
 
