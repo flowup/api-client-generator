@@ -118,6 +118,7 @@ export { isTree } from './tree.guard';
 export { isTrees } from './trees.guard';
 export { isUser } from './user.guard';
 export { isUserEmails } from './user-emails.guard';
+export { isUserIdSubscribitions } from './user-id-subscribitions.guard';
 export { isUserKeysKeyId } from './user-keys-key-id.guard';
 export { isUserKeysPost } from './user-keys-post.guard';
 export { isUsers } from './users.guard';

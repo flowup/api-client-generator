@@ -118,6 +118,7 @@ export { Tree } from './tree.model';
 export { Trees } from './trees.model';
 export { User } from './user.model';
 export { UserEmails } from './user-emails.model';
+export { UserIdSubscribitions } from './user-id-subscribitions.model';
 export { UserKeysKeyId } from './user-keys-key-id.model';
 export { UserKeysPost } from './user-keys-post.model';
 export { Users } from './users.model';

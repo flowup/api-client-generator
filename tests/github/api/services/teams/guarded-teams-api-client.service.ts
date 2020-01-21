@@ -27,7 +27,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -43,7 +43,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -60,7 +60,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -77,7 +77,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
       username: string,  // Name of a member.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -94,7 +94,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
       username: string,  // Name of a member.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -110,7 +110,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,

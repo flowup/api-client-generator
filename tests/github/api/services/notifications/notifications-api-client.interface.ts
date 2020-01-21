@@ -19,7 +19,7 @@ export interface NotificationsAPIClientInterface {
       since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -37,7 +37,7 @@ export interface NotificationsAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -55,7 +55,7 @@ export interface NotificationsAPIClientInterface {
       id: number,  // Id of thread.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -72,7 +72,7 @@ export interface NotificationsAPIClientInterface {
       id: number,  // Id of thread.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -89,7 +89,7 @@ export interface NotificationsAPIClientInterface {
       id: number,  // Id of thread.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -106,7 +106,7 @@ export interface NotificationsAPIClientInterface {
       id: number,  // Id of thread.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -127,7 +127,7 @@ export interface NotificationsAPIClientInterface {
       id: number,  // Id of thread.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,

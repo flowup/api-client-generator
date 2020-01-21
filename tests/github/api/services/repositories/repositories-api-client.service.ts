@@ -56,7 +56,7 @@ export class RepositoriesAPIClient implements RepositoriesAPIClientInterface {
       since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -78,8 +78,8 @@ export class RepositoriesAPIClient implements RepositoriesAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));

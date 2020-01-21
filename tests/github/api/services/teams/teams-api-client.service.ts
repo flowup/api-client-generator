@@ -54,7 +54,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -73,8 +73,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -97,7 +97,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -116,8 +116,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -143,7 +143,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -163,8 +163,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -190,7 +190,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -209,8 +209,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -242,7 +242,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       username: string,  // Name of a member.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -261,8 +261,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -292,7 +292,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       username: string,  // Name of a member.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -311,8 +311,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -343,7 +343,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       username: string,  // Name of a member.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -362,8 +362,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -389,7 +389,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       username: string,  // Name of a member.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -408,8 +408,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -435,7 +435,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       username: string,  // Name of a member.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -454,8 +454,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -487,7 +487,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       username: string,  // Name of a member.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -506,8 +506,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -530,7 +530,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       teamId: number,  // Id of team.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -549,8 +549,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -575,7 +575,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       repo: string,  // Name of a repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -594,8 +594,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -620,7 +620,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       repo: string,  // Name of a repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -639,8 +639,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -665,7 +665,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
       repo: string,  // Name of a repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -684,8 +684,8 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));

@@ -17,7 +17,7 @@ export interface SearchAPIClientInterface {
       sort?: 'indexed',  // (optional) Can only be 'indexed', which indicates how recently a file has been indexed by the GitHub search infrastructure. If not provided, results are sorted by best match. 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -36,7 +36,7 @@ export interface SearchAPIClientInterface {
       sort?: 'updated' | 'created' | 'comments',  // (optional) The sort field. Can be comments, created, or updated. Default: results are sorted by best match.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -55,7 +55,7 @@ export interface SearchAPIClientInterface {
       sort?: 'stars' | 'forks' | 'updated',  // (optional) If not provided, results are sorted by best match.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -74,7 +74,7 @@ export interface SearchAPIClientInterface {
       sort?: 'followers' | 'repositories' | 'joined',  // (optional) If not provided, results are sorted by best match.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,

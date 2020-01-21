@@ -11,8 +11,6 @@ export function toCamelCase(
   text: string = '',
   lowerFirst: boolean = true,
 ): string {
-  text = removeDuplicateWords(text);
-
   if (/^[A-Z0-9]+$/.test(text) || text === '') {
     return text;
   }
@@ -23,13 +21,15 @@ export function toCamelCase(
     .map(word => `${word[0].toUpperCase()}${word.substring(1)}`)
     .join('');
 
-  return lowerFirst
-    ? /^([A-Z]+(?=[A-Z]))/.test(camelText)
-      ? camelText.replace(/^([A-Z]+(?=[A-Z]))/, firstWord =>
-          firstWord.toLowerCase(),
-        )
-      : `${camelText[0].toLowerCase()}${camelText.substring(1)}`
-    : camelText;
+  return removeDuplicateWords(
+    lowerFirst
+      ? /^([A-Z]+(?=[A-Z]))/.test(camelText)
+        ? camelText.replace(/^([A-Z]+(?=[A-Z]))/, firstWord =>
+            firstWord.toLowerCase(),
+          )
+        : `${camelText[0].toLowerCase()}${camelText.substring(1)}`
+      : camelText,
+  );
 }
 
 export function dashCase(text: string = ''): string {
@@ -63,7 +63,13 @@ export function dereferenceType(refString: string | undefined): string {
  * @returns {string}
  */
 export function removeDuplicateWords(text: string = ''): string {
-  return text.replace(/(.{3,})(?=\1)/gi, '');
+  const next = text.replace(/(.{3,})(?=\1)/gi, '');
+
+  if (next !== text) {
+    removeDuplicateWords(next);
+  }
+
+  return next;
 }
 
 export function toTypescriptType(type: string | undefined): string {
@@ -103,7 +109,7 @@ export function fileName(name: string = '', type: FileInfix = 'model'): string {
 }
 
 export function prefixImportedModels(type: string = ''): string {
-  return BUILD_IN_TS_TYPE_REGEX.test(type) ? type : `models.${type}`;
+  return BUILD_IN_TS_TYPE_REGEX.test(type) ? type : `models.${typeName(type)}`;
 }
 
 export function replaceNewLines(

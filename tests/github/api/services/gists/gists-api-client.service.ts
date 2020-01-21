@@ -53,7 +53,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -75,8 +75,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -98,7 +98,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -118,8 +118,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -142,7 +142,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -164,8 +164,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -188,7 +188,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -210,8 +210,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -234,7 +234,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -253,8 +253,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -277,7 +277,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -296,8 +296,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -320,7 +320,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -340,8 +340,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -364,7 +364,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -383,8 +383,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -407,7 +407,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -427,8 +427,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -452,7 +452,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       commentId: number,  // Id of comment.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -471,8 +471,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -496,7 +496,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       commentId: number,  // Id of comment.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -515,8 +515,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -540,7 +540,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       commentId: number,  // Id of comment.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -560,8 +560,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -584,7 +584,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -603,8 +603,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -627,7 +627,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -646,8 +646,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -670,7 +670,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -689,8 +689,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -713,7 +713,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
       id: number,  // Id of gist.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -732,8 +732,8 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));

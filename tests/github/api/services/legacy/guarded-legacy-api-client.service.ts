@@ -30,7 +30,7 @@ export class GuardedLegacyAPIClient extends LegacyAPIClient {
       repository: string,
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -50,7 +50,7 @@ export class GuardedLegacyAPIClient extends LegacyAPIClient {
       sort?: 'updated' | 'stars' | 'forks',  // (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -66,7 +66,7 @@ export class GuardedLegacyAPIClient extends LegacyAPIClient {
       email: string,  // The email address
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -85,7 +85,7 @@ export class GuardedLegacyAPIClient extends LegacyAPIClient {
       sort?: 'updated' | 'stars' | 'forks',  // (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,

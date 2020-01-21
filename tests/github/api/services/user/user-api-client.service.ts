@@ -50,7 +50,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -69,8 +69,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -92,7 +92,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -112,8 +112,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -137,7 +137,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -157,8 +157,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -186,7 +186,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -205,8 +205,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -230,7 +230,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -250,8 +250,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -273,7 +273,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -292,8 +292,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -315,7 +315,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -334,8 +334,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -361,7 +361,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       username: string,  // Name of user.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -380,8 +380,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -404,7 +404,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       username: string,  // Name of user.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -423,8 +423,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -450,7 +450,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       username: string,  // Name of user.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -469,8 +469,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -501,7 +501,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -538,8 +538,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -564,7 +564,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -583,8 +583,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -606,7 +606,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -626,8 +626,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -650,7 +650,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       keyId: number,  // ID of key.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -669,8 +669,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -693,7 +693,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       keyId: number,  // ID of key.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -712,8 +712,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -735,7 +735,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -754,8 +754,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -781,7 +781,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       type?: 'all' | 'public' | 'private' | 'forks' | 'sources' | 'member',
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -803,8 +803,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -828,7 +828,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -848,8 +848,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -873,7 +873,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       sort?: 'created' | 'updated',
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -898,8 +898,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -923,7 +923,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       repo: string,  // Name of a repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -942,8 +942,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -967,7 +967,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       repo: string,  // Name of a repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -986,8 +986,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -1011,7 +1011,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       repo: string,  // Name of a repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -1030,8 +1030,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -1053,13 +1053,13 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<models.UserUserIdSubscribitions> {
+  ): Observable<models.UserIdSubscribitions> {
     const path = `/user/subscriptions`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1072,8 +1072,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -1084,7 +1084,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.UserUserIdSubscribitions>('GET', path, options);
+    return this.sendRequest<models.UserIdSubscribitions>('GET', path, options);
   }
 
   /**
@@ -1097,7 +1097,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       repo: string,  // Name of repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -1116,8 +1116,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -1141,7 +1141,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       repo: string,  // Name of repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -1160,8 +1160,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -1185,7 +1185,7 @@ export class UserAPIClient implements UserAPIClientInterface {
       repo: string,  // Name of repository.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -1204,8 +1204,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));
@@ -1227,7 +1227,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     args: {
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimitLimit?: number,
+      xRateLimit?: number,
       xRateLimitRemaining?: number,
       xRateLimitReset?: number,
       xGitHubRequestId?: number,
@@ -1246,8 +1246,8 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    if ('xRateLimitLimit' in args) {
-      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimitLimit));
+    if ('xRateLimit' in args) {
+      options.headers = options.headers.set('X-RateLimit-Limit', String(args.xRateLimit));
     }
     if ('xRateLimitRemaining' in args) {
       options.headers = options.headers.set('X-RateLimit-Remaining', String(args.xRateLimitRemaining));

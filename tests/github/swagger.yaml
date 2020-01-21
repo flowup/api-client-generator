@@ -18322,7 +18322,7 @@ definitions:
     items: {}
     type: array
   user-userId-subscribitions:
-    items:
+    items: # TODO: support this it is an array of that "object", at least properties should be mentioned probably
       properties:
         clone_url:
           type: string
