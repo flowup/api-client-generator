@@ -7,13 +7,11 @@ export interface Definition {
   readonly definitionName: string;
   readonly properties: Property[];
   readonly imports: string[];
-  readonly guardImports?: string[];
   readonly extend?: string;
   readonly description?: string;
   readonly isEnum?: boolean;
   readonly isNumeric?: boolean; // used for determining if string or numeric enum should be generated
   renderFileName(): RenderFileName; // generate dash-case file names to templates
-  renderFileNameGuard(): RenderFileName; // generate dash-case file names to templates
 }
 
 export interface MustacheData {
@@ -43,7 +41,7 @@ export type In =
   | 'header'
   | 'formData';
 export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-export type FileInfix = 'model' | 'enum' | 'service' | 'interface' | 'guard';
+export type FileInfix = 'model' | 'enum' | 'service' | 'interface';
 
 export interface Property {
   readonly camelCaseName?: string;

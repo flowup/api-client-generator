@@ -198,13 +198,6 @@ async function generateModelGuards(
 ): Promise<string[]> {
   const outputDir = join(outputPath, MODEL_GUARDS_DIR_NAME);
   const outIndexFile = join(outputDir, '/index.ts');
-  const outHelpersFile = join(outputDir, '/build-in.guards.ts');
-
-  const modelGuardTemplate = (
-    await promisify(readFile)(
-      `${__dirname}/../templates/ngx-model-guard.mustache`,
-    )
-  ).toString();
 
   const modelGuardsExportTemplate = (
     await promisify(readFile)(
@@ -212,45 +205,19 @@ async function generateModelGuards(
     )
   ).toString();
 
-  const modelGuardsHelpersTemplate = (
-    await promisify(readFile)(
-      `${__dirname}/../templates/ngx-model-guards-helpers.mustache`,
-    )
-  ).toString();
-
   if (!existsSync(outputDir)) {
     await promisify(mkdir)(outputDir);
   }
 
-  // generate model guards export index for all the generated models
+  // generate model guards export index with all the generated guards
   await promisify(writeFile)(
     outIndexFile,
     Mustache.render(modelGuardsExportTemplate, { definitions }),
     'utf-8',
   );
 
-  // generate model guards pre prepared helper guards (for string, number, File, Blob, ...)
-  await promisify(writeFile)(
-    outHelpersFile,
-    Mustache.render(modelGuardsHelpersTemplate, {}),
-    'utf-8',
-  );
-
   // generate API models
-  return Promise.all([
-    ...definitions.map(async definition => {
-      const result = Mustache.render(modelGuardTemplate, definition);
-      const outfile = join(
-        outputDir,
-        `${fileName(definition.definitionName, 'guard')}.ts`,
-      );
-
-      await ensureDir(dirname(outfile));
-      await promisify(writeFile)(outfile, result, 'utf-8');
-      return outfile;
-    }),
-    outIndexFile,
-  ]);
+  return [outIndexFile];
 }
 
 async function generateModuleExportIndex(
