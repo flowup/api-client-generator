@@ -765,7 +765,7 @@ export function isValue(arg: any): arg is models.Value {
     // mapValue?: MapValue
     ( typeof arg.mapValue === 'undefined' || isMapValue(arg.mapValue) ) &&
     // nullValue?: 'NULL_VALUE'
-    ( typeof arg.nullValue === 'undefined' || is'NULL_VALUE'(arg.nullValue) ) &&
+    ( typeof arg.nullValue === 'undefined' || ['NULL_VALUE'].includes(arg.nullValue) ) &&
     // referenceValue?: string
     ( typeof arg.referenceValue === 'undefined' || typeof arg.referenceValue === 'string' ) &&
     // stringValue?: string

@@ -417,7 +417,7 @@ function parseInterfaceProperties(
                 ),
               )
               .join(' && ')})`
-          : / \| /.test(typescriptType)
+          : 'enum' in propSchema
           ? `[${(typescriptType || '').replace(
               / \| /g,
               ', ',
