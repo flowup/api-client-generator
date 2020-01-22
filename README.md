@@ -70,6 +70,16 @@ This command will do the same but it will split **all of the tags to separate AP
 },
 ```
 
+**Recommended:**
+
+- use a "tag" (`-t all`) option to generate all (or list of specific) services separately
+
+```
+"scripts": {
+  "generate-api-client": "api-client-generator -s ./swagger.yaml -o ./output-folder -t all"
+},
+```
+
 - then just run
 
 `npm run generate-api-client`
@@ -78,17 +88,16 @@ This command will do the same but it will split **all of the tags to separate AP
 
 # Options
 
-| Option                    | Description                                                                                          |
-| ------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `-h`/`--help`             | print help and exit                                                                                  |
-| `-s`/`--source`           | path to the swagger file (YAML or JSON)                                                              |
-| `-o`/`--output`           | path where the generated files should be emitted                                                     |
-| `-C`/`--commit`           | `git commit` generated changes \*                                                                    |
-| `-v`/`--verbose`          | supply stack traces with outputted error messages                                                    |
-| `-t`/`--splitPathTags`    | generate services and models only for the specified tags. Use `,` as the separator for multiple tags |
-|                           | use `all` to emit all as a service per tag                                                           |
-| `-m`/`--skipModule`       | skip creating the index file with module export                                                      |
-| `-p`/`--noPrettierIgnore` | omit prettier ignore comment in the header of each file                                              |
+| Option                 | Description                                                                                          |
+| ---------------------- | ---------------------------------------------------------------------------------------------------- |
+| `-h`/`--help`          | print help and exit                                                                                  |
+| `-s`/`--source`        | path to the swagger file (YAML or JSON)                                                              |
+| `-o`/`--output`        | path where the generated files should be emitted                                                     |
+| `-C`/`--commit`        | `git commit` generated changes \*                                                                    |
+| `-v`/`--verbose`       | supply stack traces with outputted error messages                                                    |
+| `-t`/`--splitPathTags` | generate services and models only for the specified tags. Use `,` as the separator for multiple tags |
+|                        | use `all` to emit all as a service per tag                                                           |
+| `-m`/`--skipModule`    | skip creating the index file with module export                                                      |
 
 <small>\* The author of the commit will be `api-client-generator <api-client-generator@flowup.cz>`.
 If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.\*</small>
