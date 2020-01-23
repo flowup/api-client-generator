@@ -838,7 +838,7 @@ export class APIClient implements APIClientInterface {
    */
   createRole(
     args: {
-      body: any,  // Role entity object that needs to be added
+      body: object,  // Role entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {

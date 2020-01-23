@@ -619,6 +619,8 @@ function transformParameters(
             ? param.enum || []
             : (param.enum || []).map(str => `'${str}'`)
           ).join(' | ')
+        : 'schema' in param && param.schema && param.schema.properties
+        ? 'object'
         : toTypescriptType(
             isArray
               ? determineArrayType(param as Schema)

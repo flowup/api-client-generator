@@ -349,7 +349,7 @@ export class GuardedAPIClient extends APIClient {
 
   createRole(
     args: {
-      body: any,  // Role entity object that needs to be added
+      body: object,  // Role entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
