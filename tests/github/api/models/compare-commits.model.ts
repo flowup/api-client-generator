@@ -2,11 +2,11 @@
 
 export interface CompareCommits {
   ahead_by?: number;
-  base_commit?: { [key: string]: any };
+  base_commit?: object;
   behind_by?: number;
-  commits?: { [key: string]: any }[];
+  commits?: object[];
   diff_url?: string;
-  files?: { [key: string]: any }[];
+  files?: object[];
   html_url?: string;
   patch_url?: string;
   permalink_url?: string;

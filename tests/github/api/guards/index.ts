@@ -20,7 +20,7 @@ export function isboolean(arg: any): arg is boolean {
   return typeof arg === 'boolean';
 }
 
-export function isObject(arg: any): arg is any {
+export function isobject(arg: any): arg is any {
   return typeof arg === 'object';
 }
 
@@ -56,7 +56,7 @@ export function isAsset(arg: any): arg is models.Asset {
     ( typeof arg.state === 'undefined' || typeof arg.state === 'string' ) &&
     // updated_at?: string
     ( typeof arg.updated_at === 'undefined' || typeof arg.updated_at === 'string' ) &&
-    // uploader?: { [key: string]: any }
+    // uploader?: object
     ( typeof arg.uploader === 'undefined' || typeof arg.uploader === 'object' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
@@ -128,9 +128,9 @@ export function isBranch(arg: any): arg is models.Branch {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // _links?: { [key: string]: any }
+    // _links?: object
     ( typeof arg._links === 'undefined' || typeof arg._links === 'object' ) &&
-    // commit?: { [key: string]: any }
+    // commit?: object
     ( typeof arg.commit === 'undefined' || typeof arg.commit === 'object' ) &&
     // name?: string
     ( typeof arg.name === 'undefined' || typeof arg.name === 'string' ) &&
@@ -192,19 +192,19 @@ export function isCommit(arg: any): arg is models.Commit {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // author?: { [key: string]: any }
+    // author?: object
     ( typeof arg.author === 'undefined' || typeof arg.author === 'object' ) &&
-    // commit?: { [key: string]: any }
+    // commit?: object
     ( typeof arg.commit === 'undefined' || typeof arg.commit === 'object' ) &&
-    // committer?: { [key: string]: any }
+    // committer?: object
     ( typeof arg.committer === 'undefined' || typeof arg.committer === 'object' ) &&
-    // files?: { [key: string]: any }[]
+    // files?: object[]
     ( typeof arg.files === 'undefined' || (Array.isArray(arg.files) && arg.files.every((item: unknown) => typeof item === 'object')) ) &&
-    // parents?: { [key: string]: any }[]
+    // parents?: object[]
     ( typeof arg.parents === 'undefined' || (Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object')) ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
-    // stats?: { [key: string]: any }
+    // stats?: object
     ( typeof arg.stats === 'undefined' || typeof arg.stats === 'object' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
@@ -267,7 +267,7 @@ export function isCommitComments(arg: any): arg is models.CommitComments {
     ( typeof arg.updated_at === 'undefined' || typeof arg.updated_at === 'string' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
-    // user?: { [key: string]: any }
+    // user?: object
     ( typeof arg.user === 'undefined' || typeof arg.user === 'object' ) &&
 
   true
@@ -289,15 +289,15 @@ export function isCompareCommits(arg: any): arg is models.CompareCommits {
   typeof arg === 'object' &&
     // ahead_by?: number
     ( typeof arg.ahead_by === 'undefined' || typeof arg.ahead_by === 'number' ) &&
-    // base_commit?: { [key: string]: any }
+    // base_commit?: object
     ( typeof arg.base_commit === 'undefined' || typeof arg.base_commit === 'object' ) &&
     // behind_by?: number
     ( typeof arg.behind_by === 'undefined' || typeof arg.behind_by === 'number' ) &&
-    // commits?: { [key: string]: any }[]
+    // commits?: object[]
     ( typeof arg.commits === 'undefined' || (Array.isArray(arg.commits) && arg.commits.every((item: unknown) => typeof item === 'object')) ) &&
     // diff_url?: string
     ( typeof arg.diff_url === 'undefined' || typeof arg.diff_url === 'string' ) &&
-    // files?: { [key: string]: any }[]
+    // files?: object[]
     ( typeof arg.files === 'undefined' || (Array.isArray(arg.files) && arg.files.every((item: unknown) => typeof item === 'object')) ) &&
     // html_url?: string
     ( typeof arg.html_url === 'undefined' || typeof arg.html_url === 'string' ) &&
@@ -320,7 +320,7 @@ export function isContentsPath(arg: any): arg is models.ContentsPath {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // _links?: { [key: string]: any }
+    // _links?: object
     ( typeof arg._links === 'undefined' || typeof arg._links === 'object' ) &&
     // content?: string
     ( typeof arg.content === 'undefined' || typeof arg.content === 'string' ) &&
@@ -369,9 +369,9 @@ export function isCreateFile(arg: any): arg is models.CreateFile {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // commit?: { [key: string]: any }
+    // commit?: object
     ( typeof arg.commit === 'undefined' || typeof arg.commit === 'object' ) &&
-    // content?: { [key: string]: any }
+    // content?: object
     ( typeof arg.content === 'undefined' || typeof arg.content === 'object' ) &&
 
   true
@@ -382,7 +382,7 @@ export function isCreateFileBody(arg: any): arg is models.CreateFileBody {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // committer?: { [key: string]: any }
+    // committer?: object
     ( typeof arg.committer === 'undefined' || typeof arg.committer === 'object' ) &&
     // content?: string
     ( typeof arg.content === 'undefined' || typeof arg.content === 'string' ) &&
@@ -397,7 +397,7 @@ export function isDeleteFile(arg: any): arg is models.DeleteFile {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // commit?: { [key: string]: any }
+    // commit?: object
     ( typeof arg.commit === 'undefined' || typeof arg.commit === 'object' ) &&
     // content?: string
     ( typeof arg.content === 'undefined' || typeof arg.content === 'string' ) &&
@@ -410,7 +410,7 @@ export function isDeleteFileBody(arg: any): arg is models.DeleteFileBody {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // committer?: { [key: string]: any }
+    // committer?: object
     ( typeof arg.committer === 'undefined' || typeof arg.committer === 'object' ) &&
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
@@ -427,7 +427,7 @@ export function isDeployment(arg: any): arg is models.Deployment {
   typeof arg === 'object' &&
     // description?: string
     ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
-    // payload?: { [key: string]: any }
+    // payload?: object
     ( typeof arg.payload === 'undefined' || typeof arg.payload === 'object' ) &&
     // ref?: string
     ( typeof arg.ref === 'undefined' || typeof arg.ref === 'string' ) &&
@@ -442,7 +442,7 @@ export function isDeploymentResp(arg: any): arg is models.DeploymentResp {
   typeof arg === 'object' &&
     // created_at?: string
     ( typeof arg.created_at === 'undefined' || typeof arg.created_at === 'string' ) &&
-    // creator?: { [key: string]: any }
+    // creator?: object
     ( typeof arg.creator === 'undefined' || typeof arg.creator === 'object' ) &&
     // description?: string
     ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
@@ -561,7 +561,7 @@ export function isEvent(arg: any): arg is models.Event {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // actor?: { [key: string]: any }
+    // actor?: object
     ( typeof arg.actor === 'undefined' || typeof arg.actor === 'object' ) &&
     // commit_id?: string
     ( typeof arg.commit_id === 'undefined' || typeof arg.commit_id === 'string' ) &&
@@ -569,7 +569,7 @@ export function isEvent(arg: any): arg is models.Event {
     ( typeof arg.created_at === 'undefined' || typeof arg.created_at === 'string' ) &&
     // event?: string
     ( typeof arg.event === 'undefined' || typeof arg.event === 'string' ) &&
-    // issue?: { [key: string]: any }
+    // issue?: object
     ( typeof arg.issue === 'undefined' || typeof arg.issue === 'object' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
@@ -582,19 +582,19 @@ export function isEvents(arg: any): arg is models.Events {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // actor?: { [key: string]: any }
+    // actor?: object
     ( typeof arg.actor === 'undefined' || typeof arg.actor === 'object' ) &&
-    // created_at?: { [key: string]: any }
+    // created_at?: object
     ( typeof arg.created_at === 'undefined' || typeof arg.created_at === 'object' ) &&
     // id?: number
     ( typeof arg.id === 'undefined' || typeof arg.id === 'number' ) &&
-    // org?: { [key: string]: any }
+    // org?: object
     ( typeof arg.org === 'undefined' || typeof arg.org === 'object' ) &&
-    // payload?: { [key: string]: any }
+    // payload?: object
     ( typeof arg.payload === 'undefined' || typeof arg.payload === 'object' ) &&
     // public?: boolean
     ( typeof arg.public === 'undefined' || typeof arg.public === 'boolean' ) &&
-    // repo?: { [key: string]: any }
+    // repo?: object
     ( typeof arg.repo === 'undefined' || typeof arg.repo === 'object' ) &&
     // type?: string
     ( typeof arg.type === 'undefined' || typeof arg.type === 'string' ) &&
@@ -664,7 +664,7 @@ export function isFork(arg: any): arg is models.Fork {
     ( typeof arg.open_issues === 'undefined' || typeof arg.open_issues === 'number' ) &&
     // open_issues_count?: number
     ( typeof arg.open_issues_count === 'undefined' || typeof arg.open_issues_count === 'number' ) &&
-    // owner?: { [key: string]: any }
+    // owner?: object
     ( typeof arg.owner === 'undefined' || typeof arg.owner === 'object' ) &&
     // private?: boolean
     ( typeof arg.private === 'undefined' || typeof arg.private === 'boolean' ) &&
@@ -721,15 +721,15 @@ export function isGist(arg: any): arg is models.Gist {
     ( typeof arg.created_at === 'undefined' || typeof arg.created_at === 'string' ) &&
     // description?: string
     ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
-    // files?: { [key: string]: any }
+    // files?: object
     ( typeof arg.files === 'undefined' || typeof arg.files === 'object' ) &&
-    // forks?: { [key: string]: any }[]
+    // forks?: object[]
     ( typeof arg.forks === 'undefined' || (Array.isArray(arg.forks) && arg.forks.every((item: unknown) => typeof item === 'object')) ) &&
     // git_pull_url?: string
     ( typeof arg.git_pull_url === 'undefined' || typeof arg.git_pull_url === 'string' ) &&
     // git_push_url?: string
     ( typeof arg.git_push_url === 'undefined' || typeof arg.git_push_url === 'string' ) &&
-    // history?: { [key: string]: any }[]
+    // history?: object[]
     ( typeof arg.history === 'undefined' || (Array.isArray(arg.history) && arg.history.every((item: unknown) => typeof item === 'object')) ) &&
     // html_url?: string
     ( typeof arg.html_url === 'undefined' || typeof arg.html_url === 'string' ) &&
@@ -739,7 +739,7 @@ export function isGist(arg: any): arg is models.Gist {
     ( typeof arg.public === 'undefined' || typeof arg.public === 'boolean' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
-    // user?: { [key: string]: any }
+    // user?: object
     ( typeof arg.user === 'undefined' || typeof arg.user === 'object' ) &&
 
   true
@@ -759,7 +759,7 @@ export function isGitCommit(arg: any): arg is models.GitCommit {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // author?: { [key: string]: any }
+    // author?: object
     ( typeof arg.author === 'undefined' || typeof arg.author === 'object' ) &&
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
@@ -811,7 +811,7 @@ export function isHeadBranch(arg: any): arg is models.HeadBranch {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // object?: { [key: string]: any }
+    // object?: object
     ( typeof arg.object === 'undefined' || typeof arg.object === 'object' ) &&
     // ref?: string
     ( typeof arg.ref === 'undefined' || typeof arg.ref === 'string' ) &&
@@ -888,7 +888,7 @@ export function isIssuesComment(arg: any): arg is models.IssuesComment {
     ( typeof arg.updated_at === 'undefined' || typeof arg.updated_at === 'string' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
-    // user?: { [key: string]: any }
+    // user?: object
     ( typeof arg.user === 'undefined' || typeof arg.user === 'object' ) &&
 
   true
@@ -1008,19 +1008,19 @@ export function isMergesSuccessful(arg: any): arg is models.MergesSuccessful {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // author?: { [key: string]: any }
+    // author?: object
     ( typeof arg.author === 'undefined' || typeof arg.author === 'object' ) &&
     // comments_url?: string
     ( typeof arg.comments_url === 'undefined' || typeof arg.comments_url === 'string' ) &&
-    // commit?: { [key: string]: any }
+    // commit?: object
     ( typeof arg.commit === 'undefined' || typeof arg.commit === 'object' ) &&
-    // committer?: { [key: string]: any }
+    // committer?: object
     ( typeof arg.committer === 'undefined' || typeof arg.committer === 'object' ) &&
     // merged?: boolean
     ( typeof arg.merged === 'undefined' || typeof arg.merged === 'boolean' ) &&
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
-    // parents?: { [key: string]: any }[]
+    // parents?: object[]
     ( typeof arg.parents === 'undefined' || (Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object')) ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
@@ -1052,7 +1052,7 @@ export function isMilestone(arg: any): arg is models.Milestone {
     ( typeof arg.closed_issues === 'undefined' || typeof arg.closed_issues === 'number' ) &&
     // created_at?: string
     ( typeof arg.created_at === 'undefined' || typeof arg.created_at === 'string' ) &&
-    // creator?: { [key: string]: any }
+    // creator?: object
     ( typeof arg.creator === 'undefined' || typeof arg.creator === 'object' ) &&
     // description?: string
     ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
@@ -1111,9 +1111,9 @@ export function isNotifications(arg: any): arg is models.Notifications {
     ( typeof arg.last_read_at === 'undefined' || typeof arg.last_read_at === 'string' ) &&
     // reason?: string
     ( typeof arg.reason === 'undefined' || typeof arg.reason === 'string' ) &&
-    // repository?: { [key: string]: any }
+    // repository?: object
     ( typeof arg.repository === 'undefined' || typeof arg.repository === 'object' ) &&
-    // subject?: { [key: string]: any }
+    // subject?: object
     ( typeof arg.subject === 'undefined' || typeof arg.subject === 'object' ) &&
     // unread?: boolean
     ( typeof arg.unread === 'undefined' || typeof arg.unread === 'boolean' ) &&
@@ -1233,7 +1233,7 @@ export function isPostGist(arg: any): arg is models.PostGist {
   typeof arg === 'object' &&
     // description?: string
     ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
-    // files?: { [key: string]: any }
+    // files?: object
     ( typeof arg.files === 'undefined' || typeof arg.files === 'object' ) &&
     // public?: boolean
     ( typeof arg.public === 'undefined' || typeof arg.public === 'boolean' ) &&
@@ -1275,11 +1275,11 @@ export function isPullRequest(arg: any): arg is models.PullRequest {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // _links?: { [key: string]: any }
+    // _links?: object
     ( typeof arg._links === 'undefined' || typeof arg._links === 'object' ) &&
     // additions?: number
     ( typeof arg.additions === 'undefined' || typeof arg.additions === 'number' ) &&
-    // base?: { [key: string]: any }
+    // base?: object
     ( typeof arg.base === 'undefined' || typeof arg.base === 'object' ) &&
     // body?: string
     ( typeof arg.body === 'undefined' || typeof arg.body === 'string' ) &&
@@ -1297,7 +1297,7 @@ export function isPullRequest(arg: any): arg is models.PullRequest {
     ( typeof arg.deletions === 'undefined' || typeof arg.deletions === 'number' ) &&
     // diff_url?: string
     ( typeof arg.diff_url === 'undefined' || typeof arg.diff_url === 'string' ) &&
-    // head?: { [key: string]: any }
+    // head?: object
     ( typeof arg.head === 'undefined' || typeof arg.head === 'object' ) &&
     // html_url?: string
     ( typeof arg.html_url === 'undefined' || typeof arg.html_url === 'string' ) &&
@@ -1311,7 +1311,7 @@ export function isPullRequest(arg: any): arg is models.PullRequest {
     ( typeof arg.merged === 'undefined' || typeof arg.merged === 'boolean' ) &&
     // merged_at?: string
     ( typeof arg.merged_at === 'undefined' || typeof arg.merged_at === 'string' ) &&
-    // merged_by?: { [key: string]: any }
+    // merged_by?: object
     ( typeof arg.merged_by === 'undefined' || typeof arg.merged_by === 'object' ) &&
     // number?: number
     ( typeof arg.number === 'undefined' || typeof arg.number === 'number' ) &&
@@ -1325,7 +1325,7 @@ export function isPullRequest(arg: any): arg is models.PullRequest {
     ( typeof arg.updated_at === 'undefined' || typeof arg.updated_at === 'string' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
-    // user?: { [key: string]: any }
+    // user?: object
     ( typeof arg.user === 'undefined' || typeof arg.user === 'object' ) &&
 
   true
@@ -1345,7 +1345,7 @@ export function isPullsComment(arg: any): arg is models.PullsComment {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // _links?: { [key: string]: any }
+    // _links?: object
     ( typeof arg._links === 'undefined' || typeof arg._links === 'object' ) &&
     // body?: string
     ( typeof arg.body === 'undefined' || typeof arg.body === 'string' ) &&
@@ -1363,7 +1363,7 @@ export function isPullsComment(arg: any): arg is models.PullsComment {
     ( typeof arg.updated_at === 'undefined' || typeof arg.updated_at === 'string' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
-    // user?: { [key: string]: any }
+    // user?: object
     ( typeof arg.user === 'undefined' || typeof arg.user === 'object' ) &&
 
   true
@@ -1427,7 +1427,7 @@ export function isPutSubscription(arg: any): arg is models.PutSubscription {
     ( typeof arg.created_at === 'undefined' || typeof arg.created_at === 'string' ) &&
     // ignored?: boolean
     ( typeof arg.ignored === 'undefined' || typeof arg.ignored === 'boolean' ) &&
-    // reason?: { [key: string]: any }
+    // reason?: object
     ( typeof arg.reason === 'undefined' || typeof arg.reason === 'object' ) &&
     // subscribed?: boolean
     ( typeof arg.subscribed === 'undefined' || typeof arg.subscribed === 'boolean' ) &&
@@ -1495,11 +1495,11 @@ export function isRelease(arg: any): arg is models.Release {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // assets?: { [key: string]: any }[]
+    // assets?: object[]
     ( typeof arg.assets === 'undefined' || (Array.isArray(arg.assets) && arg.assets.every((item: unknown) => typeof item === 'object')) ) &&
     // assets_url?: string
     ( typeof arg.assets_url === 'undefined' || typeof arg.assets_url === 'string' ) &&
-    // author?: { [key: string]: any }
+    // author?: object
     ( typeof arg.author === 'undefined' || typeof arg.author === 'object' ) &&
     // body?: string
     ( typeof arg.body === 'undefined' || typeof arg.body === 'string' ) &&
@@ -1608,11 +1608,11 @@ export function isRepo(arg: any): arg is models.Repo {
     ( typeof arg.open_issues === 'undefined' || typeof arg.open_issues === 'number' ) &&
     // open_issues_count?: number
     ( typeof arg.open_issues_count === 'undefined' || typeof arg.open_issues_count === 'number' ) &&
-    // organization?: { [key: string]: any }
+    // organization?: object
     ( typeof arg.organization === 'undefined' || typeof arg.organization === 'object' ) &&
-    // owner?: { [key: string]: any }
+    // owner?: object
     ( typeof arg.owner === 'undefined' || typeof arg.owner === 'object' ) &&
-    // parent?: { [key: string]: any }
+    // parent?: object
     ( typeof arg.parent === 'undefined' || typeof arg.parent === 'object' ) &&
     // private?: boolean
     ( typeof arg.private === 'undefined' || typeof arg.private === 'boolean' ) &&
@@ -1620,7 +1620,7 @@ export function isRepo(arg: any): arg is models.Repo {
     ( typeof arg.pushed_at === 'undefined' || typeof arg.pushed_at === 'string' ) &&
     // size?: number
     ( typeof arg.size === 'undefined' || typeof arg.size === 'number' ) &&
-    // source?: { [key: string]: any }
+    // source?: object
     ( typeof arg.source === 'undefined' || typeof arg.source === 'object' ) &&
     // ssh_url?: string
     ( typeof arg.ssh_url === 'undefined' || typeof arg.ssh_url === 'string' ) &&
@@ -1652,17 +1652,17 @@ export function isRepoCommit(arg: any): arg is models.RepoCommit {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // author?: { [key: string]: any }
+    // author?: object
     ( typeof arg.author === 'undefined' || typeof arg.author === 'object' ) &&
-    // committer?: { [key: string]: any }
+    // committer?: object
     ( typeof arg.committer === 'undefined' || typeof arg.committer === 'object' ) &&
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
-    // parents?: { [key: string]: any }[]
+    // parents?: object[]
     ( typeof arg.parents === 'undefined' || (Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object')) ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
-    // tree?: { [key: string]: any }
+    // tree?: object
     ( typeof arg.tree === 'undefined' || typeof arg.tree === 'object' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
@@ -1675,7 +1675,7 @@ export function isRepoCommitBody(arg: any): arg is models.RepoCommitBody {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // author?: { [key: string]: any }
+    // author?: object
     ( typeof arg.author === 'undefined' || typeof arg.author === 'object' ) &&
     // message: string
     ( typeof arg.message === 'string' ) &&
@@ -1742,7 +1742,7 @@ export function isSearchCode(arg: any): arg is models.SearchCode {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // items?: { [key: string]: any }[]
+    // items?: object[]
     ( typeof arg.items === 'undefined' || (Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object')) ) &&
     // total_count?: number
     ( typeof arg.total_count === 'undefined' || typeof arg.total_count === 'number' ) &&
@@ -1755,7 +1755,7 @@ export function isSearchIssues(arg: any): arg is models.SearchIssues {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // items?: { [key: string]: any }[]
+    // items?: object[]
     ( typeof arg.items === 'undefined' || (Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object')) ) &&
     // total_count?: number
     ( typeof arg.total_count === 'undefined' || typeof arg.total_count === 'number' ) &&
@@ -1768,7 +1768,7 @@ export function isSearchIssuesByKeyword(arg: any): arg is models.SearchIssuesByK
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // issues?: { [key: string]: any }[]
+    // issues?: object[]
     ( typeof arg.issues === 'undefined' || (Array.isArray(arg.issues) && arg.issues.every((item: unknown) => typeof item === 'object')) ) &&
 
   true
@@ -1779,7 +1779,7 @@ export function isSearchRepositories(arg: any): arg is models.SearchRepositories
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // items?: { [key: string]: any }[]
+    // items?: object[]
     ( typeof arg.items === 'undefined' || (Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object')) ) &&
     // total_count?: number
     ( typeof arg.total_count === 'undefined' || typeof arg.total_count === 'number' ) &&
@@ -1792,7 +1792,7 @@ export function isSearchRepositoriesByKeyword(arg: any): arg is models.SearchRep
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // repositories?: { [key: string]: any }[]
+    // repositories?: object[]
     ( typeof arg.repositories === 'undefined' || (Array.isArray(arg.repositories) && arg.repositories.every((item: unknown) => typeof item === 'object')) ) &&
 
   true
@@ -1803,7 +1803,7 @@ export function isSearchUserByEmail(arg: any): arg is models.SearchUserByEmail {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // user?: { [key: string]: any }
+    // user?: object
     ( typeof arg.user === 'undefined' || typeof arg.user === 'object' ) &&
 
   true
@@ -1814,7 +1814,7 @@ export function isSearchUsers(arg: any): arg is models.SearchUsers {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // items?: { [key: string]: any }[]
+    // items?: object[]
     ( typeof arg.items === 'undefined' || (Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object')) ) &&
     // total_count?: number
     ( typeof arg.total_count === 'undefined' || typeof arg.total_count === 'number' ) &&
@@ -1827,7 +1827,7 @@ export function isSearchUsersByKeyword(arg: any): arg is models.SearchUsersByKey
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // users?: { [key: string]: any }[]
+    // users?: object[]
     ( typeof arg.users === 'undefined' || (Array.isArray(arg.users) && arg.users.every((item: unknown) => typeof item === 'object')) ) &&
 
   true
@@ -1895,13 +1895,13 @@ export function isTag(arg: any): arg is models.Tag {
   typeof arg === 'object' &&
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
-    // object?: { [key: string]: any }
+    // object?: object
     ( typeof arg.object === 'undefined' || typeof arg.object === 'object' ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
     // tag?: string
     ( typeof arg.tag === 'undefined' || typeof arg.tag === 'string' ) &&
-    // tagger?: { [key: string]: any }
+    // tagger?: object
     ( typeof arg.tagger === 'undefined' || typeof arg.tagger === 'object' ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
@@ -1920,7 +1920,7 @@ export function isTags(arg: any): arg is models.Tags {
     ( typeof arg.object === 'string' ) &&
     // tag: string
     ( typeof arg.tag === 'string' ) &&
-    // tagger: { [key: string]: any }
+    // tagger: object
     ( typeof arg.tagger === 'object' ) &&
     // type: string
     ( typeof arg.type === 'string' ) &&
@@ -1996,7 +1996,7 @@ export function isTree(arg: any): arg is models.Tree {
   typeof arg === 'object' &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
-    // tree?: { [key: string]: any }[]
+    // tree?: object[]
     ( typeof arg.tree === 'undefined' || (Array.isArray(arg.tree) && arg.tree.every((item: unknown) => typeof item === 'object')) ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
@@ -2013,7 +2013,7 @@ export function isTrees(arg: any): arg is models.Trees {
     ( typeof arg.base_tree === 'undefined' || typeof arg.base_tree === 'string' ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
-    // tree?: { [key: string]: any }[]
+    // tree?: object[]
     ( typeof arg.tree === 'undefined' || (Array.isArray(arg.tree) && arg.tree.every((item: unknown) => typeof item === 'object')) ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
@@ -2062,7 +2062,7 @@ export function isUser(arg: any): arg is models.User {
     ( typeof arg.name === 'undefined' || typeof arg.name === 'string' ) &&
     // owned_private_repos?: number
     ( typeof arg.owned_private_repos === 'undefined' || typeof arg.owned_private_repos === 'number' ) &&
-    // plan?: { [key: string]: any }
+    // plan?: object
     ( typeof arg.plan === 'undefined' || typeof arg.plan === 'object' ) &&
     // private_gists?: number
     ( typeof arg.private_gists === 'undefined' || typeof arg.private_gists === 'number' ) &&

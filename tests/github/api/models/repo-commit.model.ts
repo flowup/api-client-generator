@@ -1,11 +1,11 @@
 /* tslint:disable */
 
 export interface RepoCommit {
-  author?: { [key: string]: any };
-  committer?: { [key: string]: any };
+  author?: object;
+  committer?: object;
   message?: string;
-  parents?: { [key: string]: any }[];
+  parents?: object[];
   sha?: string;
-  tree?: { [key: string]: any };
+  tree?: object;
   url?: string;
 }

@@ -55,9 +55,9 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
       rows: any,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     return super.putSettings(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
 }

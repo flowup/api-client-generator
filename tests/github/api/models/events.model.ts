@@ -1,12 +1,12 @@
 /* tslint:disable */
 
 export interface Events {
-  actor?: { [key: string]: any };
-  created_at?: { [key: string]: any };
+  actor?: object;
+  created_at?: object;
   id?: number;
-  org?: { [key: string]: any };
-  payload?: { [key: string]: any };
+  org?: object;
+  payload?: object;
   public?: boolean;
-  repo?: { [key: string]: any };
+  repo?: object;
   type?: string;
 }

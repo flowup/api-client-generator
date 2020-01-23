@@ -2,6 +2,6 @@
 
 export interface Tree {
   sha?: string;
-  tree?: { [key: string]: any }[];
+  tree?: object[];
   url?: string;
 }

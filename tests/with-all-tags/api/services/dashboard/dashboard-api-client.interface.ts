@@ -42,6 +42,6 @@ export interface DashboardAPIClientInterface {
       rows: any,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
 }

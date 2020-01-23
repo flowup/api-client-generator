@@ -1,7 +1,7 @@
 import { Reference } from 'swagger-schema-official';
 import { FileInfix } from './types';
 
-export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|boolean|void)\b/;
+export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|bigint|boolean|object|void)\b/;
 const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|void|Object|File|Blob)\b/i;
 
 export const ADDITIONAL_PROPERTIES_KEY = '[key: string]';
@@ -81,7 +81,7 @@ export function toTypescriptType(type: string | undefined): string {
   } else if (/^string|boolean$/i.test(type)) {
     return type.toLocaleLowerCase();
   } else if (/^object$/i.test(type)) {
-    return '{ [key: string]: any }';
+    return 'object';
   } else if (/^array$/i.test(type)) {
     logWarn('Support for nested arrays is limited, using any[] as type');
     return 'any[]';

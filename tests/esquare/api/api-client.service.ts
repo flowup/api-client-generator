@@ -50,14 +50,14 @@ export class APIClient implements APIClientInterface {
       body: models.AuthForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/auth`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<object>('POST', path, options, JSON.stringify(args.body));
   }
 
   /**
@@ -65,14 +65,14 @@ export class APIClient implements APIClientInterface {
    */
   authRef(
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/auth/refresh`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('POST', path, options);
+    return this.sendRequest<object>('POST', path, options);
   }
 
   /**
@@ -83,14 +83,14 @@ export class APIClient implements APIClientInterface {
       body: models.RestoreForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/restore`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<object>('POST', path, options, JSON.stringify(args.body));
   }
 
   /**
@@ -101,14 +101,14 @@ export class APIClient implements APIClientInterface {
       body: models.RestoreRequestForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/restore/request`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('POST', path, options, JSON.stringify(args.body));
+    return this.sendRequest<object>('POST', path, options, JSON.stringify(args.body));
   }
 
   /**
@@ -119,7 +119,7 @@ export class APIClient implements APIClientInterface {
       restoreGuid: string,  // RestoreGuid for check
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/restore/checkGuid`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -129,7 +129,7 @@ export class APIClient implements APIClientInterface {
     const formData = new FormData();
     formData.append('restoreGuid', args.restoreGuid);
 
-    return this.sendRequest<Object>('POST', path, options, formData);
+    return this.sendRequest<object>('POST', path, options, formData);
   }
 
   /**
@@ -231,7 +231,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/report`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -253,7 +253,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**
@@ -290,7 +290,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/report/preview/${args.templateId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -309,7 +309,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**
@@ -608,7 +608,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/report/ministry/issues`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -633,7 +633,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**
@@ -651,7 +651,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/report/ministry/statuses`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -676,7 +676,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**
@@ -694,7 +694,7 @@ export class APIClient implements APIClientInterface {
       unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/users`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -725,7 +725,7 @@ export class APIClient implements APIClientInterface {
     if ('unassignedFromRole' in args) {
       options.params = options.params.set('unassignedFromRole', String(args.unassignedFromRole));
     }
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**
@@ -971,7 +971,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/notifications/all`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -990,7 +990,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**
@@ -1042,7 +1042,7 @@ export class APIClient implements APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/notifications/modules/${args.moduleId}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -1061,7 +1061,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**

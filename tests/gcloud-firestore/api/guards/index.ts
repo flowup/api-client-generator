@@ -20,7 +20,7 @@ export function isboolean(arg: any): arg is boolean {
   return typeof arg === 'boolean';
 }
 
-export function isObject(arg: any): arg is any {
+export function isobject(arg: any): arg is any {
   return typeof arg === 'object';
 }
 
@@ -638,7 +638,7 @@ export function isStatus(arg: any): arg is models.Status {
   typeof arg === 'object' &&
     // code?: number
     ( typeof arg.code === 'undefined' || typeof arg.code === 'number' ) &&
-    // details?: { [key: string]: any }[]
+    // details?: object[]
     ( typeof arg.details === 'undefined' || (Array.isArray(arg.details) && arg.details.every((item: unknown) => typeof item === 'object')) ) &&
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&

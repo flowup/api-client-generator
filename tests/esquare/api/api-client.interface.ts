@@ -14,14 +14,14 @@ export interface APIClientInterface {
       body: models.AuthForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   authRef(
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -31,7 +31,7 @@ export interface APIClientInterface {
       body: models.RestoreForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -41,7 +41,7 @@ export interface APIClientInterface {
       body: models.RestoreRequestForm,  // Structure entity object that needs to be added
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -51,7 +51,7 @@ export interface APIClientInterface {
       restoreGuid: string,  // RestoreGuid for check
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -112,7 +112,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * [Screenshot from design](http://prntscr.com/hywkd5)
@@ -140,7 +140,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * [Screenshot from design](http://prntscr.com/i3ym4j)
@@ -318,7 +318,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * [Screenshot from design](http://prntscr.com/i4byyx)
@@ -335,7 +335,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -352,7 +352,7 @@ export interface APIClientInterface {
       unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -493,7 +493,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * [Screenshot from design](http://prntscr.com/ibac47) |
@@ -528,7 +528,7 @@ export interface APIClientInterface {
       order?: models.Order,  // (optional) - asc - desc 
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.

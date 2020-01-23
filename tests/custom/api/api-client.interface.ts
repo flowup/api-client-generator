@@ -26,7 +26,7 @@ export interface APIClientInterface {
       page: number,  // page number
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -77,7 +77,7 @@ export interface APIClientInterface {
    */
   getRandomObject(
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.

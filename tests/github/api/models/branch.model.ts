@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface Branch {
-  _links?: { [key: string]: any };
-  commit?: { [key: string]: any };
+  _links?: object;
+  commit?: object;
   name?: string;
 }

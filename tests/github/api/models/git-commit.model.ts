@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface GitCommit {
-  author?: { [key: string]: any };
+  author?: object;
   message?: string;
   parents?: string;
   tree?: string;

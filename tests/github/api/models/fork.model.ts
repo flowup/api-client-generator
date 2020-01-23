@@ -18,7 +18,7 @@ export interface Fork {
   name?: string;
   open_issues?: number;
   open_issues_count?: number;
-  owner?: { [key: string]: any };
+  owner?: object;
   private?: boolean;
   pushed_at?: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
   size?: number;

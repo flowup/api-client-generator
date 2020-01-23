@@ -2,9 +2,9 @@
 
 export interface Tag {
   message?: string;
-  object?: { [key: string]: any };
+  object?: object;
   sha?: string;
   tag?: string;
-  tagger?: { [key: string]: any };
+  tagger?: object;
   url?: string;
 }

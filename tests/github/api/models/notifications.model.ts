@@ -4,8 +4,8 @@ export interface Notifications {
   id?: number;
   last_read_at?: string;
   reason?: string;
-  repository?: { [key: string]: any };
-  subject?: { [key: string]: any };
+  repository?: object;
+  subject?: object;
   unread?: boolean;
   updated_at?: string;
   url?: string;

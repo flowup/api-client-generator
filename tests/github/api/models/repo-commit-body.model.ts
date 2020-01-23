@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface RepoCommitBody {
-  author?: { [key: string]: any };
+  author?: object;
   message: string;
   parents: string[];
   tree: string;

@@ -19,7 +19,7 @@ export interface User {
   login?: string;
   name?: string;
   owned_private_repos?: number;
-  plan?: { [key: string]: any };
+  plan?: object;
   private_gists?: number;
   public_gists?: number;
   public_repos?: number;

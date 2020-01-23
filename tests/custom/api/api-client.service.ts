@@ -76,7 +76,7 @@ export class APIClient implements APIClientInterface {
       page: number,  // page number
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/itemModels`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -89,7 +89,7 @@ export class APIClient implements APIClientInterface {
     if ('page' in args) {
       options.params = options.params.set('page', String(args.page));
     }
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**
@@ -182,14 +182,14 @@ export class APIClient implements APIClientInterface {
    */
   getRandomObject(
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/randomObject`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**

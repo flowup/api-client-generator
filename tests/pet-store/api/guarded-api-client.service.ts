@@ -66,9 +66,9 @@ export class GuardedAPIClient extends APIClient {
 
   getInventory(
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     return super.getInventory(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   getOrderById(

@@ -39,9 +39,9 @@ export class GuardedAPIClient extends APIClient {
       page: number,  // page number
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     return super.getItemModels(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   getPetsId(
@@ -80,9 +80,9 @@ export class GuardedAPIClient extends APIClient {
 
   getRandomObject(
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     return super.getRandomObject(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   getRandomModel(

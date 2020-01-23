@@ -35,7 +35,7 @@ export interface DummySelectorAPIClientInterface {
       betriebSelectorSettings: models.DummySelectorSettings,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -45,6 +45,6 @@ export interface DummySelectorAPIClientInterface {
       organizerTaskElementId: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object>;
+  ): Observable<object>;
 
 }

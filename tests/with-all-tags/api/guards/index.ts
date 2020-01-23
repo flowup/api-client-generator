@@ -20,7 +20,7 @@ export function isboolean(arg: any): arg is boolean {
   return typeof arg === 'boolean';
 }
 
-export function isObject(arg: any): arg is any {
+export function isobject(arg: any): arg is any {
   return typeof arg === 'object';
 }
 

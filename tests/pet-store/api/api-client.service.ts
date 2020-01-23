@@ -221,14 +221,14 @@ export class APIClient implements APIClientInterface {
    */
   getInventory(
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/store/inventory`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**

@@ -2,6 +2,6 @@
 
 export interface PostGist {
   description?: string;
-  files?: { [key: string]: any };
+  files?: object;
   public?: boolean;
 }

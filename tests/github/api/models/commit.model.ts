@@ -1,12 +1,12 @@
 /* tslint:disable */
 
 export interface Commit {
-  author?: { [key: string]: any };
-  commit?: { [key: string]: any };
-  committer?: { [key: string]: any };
-  files?: { [key: string]: any }[];
-  parents?: { [key: string]: any }[];
+  author?: object;
+  commit?: object;
+  committer?: object;
+  files?: object[];
+  parents?: object[];
   sha?: string;
-  stats?: { [key: string]: any };
+  stats?: object;
   url?: string;
 }

@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface CreateFileBody {
-  committer?: { [key: string]: any };
+  committer?: object;
   content?: string;
   message?: string;
 }

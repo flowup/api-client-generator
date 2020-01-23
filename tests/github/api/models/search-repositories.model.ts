@@ -1,6 +1,6 @@
 /* tslint:disable */
 
 export interface SearchRepositories {
-  items?: { [key: string]: any }[];
+  items?: object[];
   total_count?: number;
 }

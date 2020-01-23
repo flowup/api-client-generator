@@ -87,14 +87,14 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
       betriebSelectorSettings: models.DummySelectorSettings,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('PUT', path, options, JSON.stringify(args.betriebSelectorSettings));
+    return this.sendRequest<object>('PUT', path, options, JSON.stringify(args.betriebSelectorSettings));
   }
 
   /**
@@ -105,14 +105,14 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
       organizerTaskElementId: number,
     },
     requestHttpOptions?: HttpOptions
-  ): Observable<Object> {
+  ): Observable<object> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<Object>('DELETE', path, options);
+    return this.sendRequest<object>('DELETE', path, options);
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
