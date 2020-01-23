@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 export interface Feeds {
-  _links?: any;
+  _links?: object;
   current_user_actor_url?: string;
   current_user_organization_url?: string;
   current_user_public?: string;

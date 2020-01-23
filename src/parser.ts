@@ -332,6 +332,8 @@ function parseInterfaceProperties(
               ? propSchema.enum || []
               : (propSchema.enum || []).map(str => `'${str}'`)
             ).join(' | ')
+          : propSchema.properties
+          ? 'object'
           : toTypescriptType(
               isArray
                 ? determineArrayType(propSchema)

@@ -607,8 +607,8 @@ export function isFeeds(arg: any): arg is models.Feeds {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // _links?: any
-    ( typeof arg._links === 'undefined' || isany(arg._links) ) &&
+    // _links?: object
+    ( typeof arg._links === 'undefined' || typeof arg._links === 'object' ) &&
     // current_user_actor_url?: string
     ( typeof arg.current_user_actor_url === 'undefined' || typeof arg.current_user_actor_url === 'string' ) &&
     // current_user_organization_url?: string
@@ -1201,8 +1201,8 @@ export function isPatchGist(arg: any): arg is models.PatchGist {
   typeof arg === 'object' &&
     // description?: string
     ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
-    // files?: any
-    ( typeof arg.files === 'undefined' || isany(arg.files) ) &&
+    // files?: object
+    ( typeof arg.files === 'undefined' || typeof arg.files === 'object' ) &&
 
   true
   );
@@ -1444,8 +1444,8 @@ export function isRateLimit(arg: any): arg is models.RateLimit {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // rate?: any
-    ( typeof arg.rate === 'undefined' || isany(arg.rate) ) &&
+    // rate?: object
+    ( typeof arg.rate === 'undefined' || typeof arg.rate === 'object' ) &&
 
   true
   );

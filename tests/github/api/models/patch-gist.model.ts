@@ -2,5 +2,5 @@
 
 export interface PatchGist {
   description?: string;
-  files?: any;
+  files?: object;
 }
