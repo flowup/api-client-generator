@@ -54,13 +54,9 @@ export function is{{&definitionName}}(arg: any): arg is models.{{&definitionName
   }
 
 {{/isEnum}}{{#isEnum}}
-  import {
-  {{&definitionName}},
-  } from '../models';
-
-  export function is{{&definitionName}}(arg: any): arg is {{&definitionName}} {
+export function is{{&definitionName}}(arg: any): arg is models.{{&definitionName}} {
   return false
-  {{#properties}} || arg === {{&definitionName}}.{{name}}
+  {{#properties}} || arg === models.{{&definitionName}}.{{name}}
   {{/properties}};
   }
 

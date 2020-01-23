@@ -231,31 +231,23 @@ export function isPet(arg: any): arg is models.Pet {
   );
   }
 
-  import {
-  Possition,
-  } from '../models';
-
-  export function isPossition(arg: any): arg is Possition {
+export function isPossition(arg: any): arg is models.Possition {
   return false
-   || arg === Possition.First
-   || arg === Possition.Second
-   || arg === Possition.Third
+   || arg === models.Possition.First
+   || arg === models.Possition.Second
+   || arg === models.Possition.Third
   ;
   }
 
-  import {
-  Right,
-  } from '../models';
-
-  export function isRight(arg: any): arg is Right {
+export function isRight(arg: any): arg is models.Right {
   return false
-   || arg === Right.MEMBER
-   || arg === Right.ADMIN
-   || arg === Right.VIEW_ALL
-   || arg === Right.VIEW_MY
-   || arg === Right.VIEW_EDIT
-   || arg === Right.READ_WRITE
-   || arg === Right.CONTROL
+   || arg === models.Right.MEMBER
+   || arg === models.Right.ADMIN
+   || arg === models.Right.VIEW_ALL
+   || arg === models.Right.VIEW_MY
+   || arg === models.Right.VIEW_EDIT
+   || arg === models.Right.READ_WRITE
+   || arg === models.Right.CONTROL
   ;
   }
 

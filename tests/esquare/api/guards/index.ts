@@ -103,27 +103,19 @@ export function isColumnMapping(arg: any): arg is models.ColumnMapping {
   );
   }
 
-  import {
-  Criticality,
-  } from '../models';
-
-  export function isCriticality(arg: any): arg is Criticality {
+export function isCriticality(arg: any): arg is models.Criticality {
   return false
-   || arg === Criticality.Low
-   || arg === Criticality.Medium
-   || arg === Criticality.High
+   || arg === models.Criticality.Low
+   || arg === models.Criticality.Medium
+   || arg === models.Criticality.High
   ;
   }
 
-  import {
-  Frequency,
-  } from '../models';
-
-  export function isFrequency(arg: any): arg is Frequency {
+export function isFrequency(arg: any): arg is models.Frequency {
   return false
-   || arg === Frequency.Daily
-   || arg === Frequency.Weekly
-   || arg === Frequency.Yearly
+   || arg === models.Frequency.Daily
+   || arg === models.Frequency.Weekly
+   || arg === models.Frequency.Yearly
   ;
   }
 
@@ -187,14 +179,10 @@ export function isImportStatsGroup(arg: any): arg is models.ImportStatsGroup {
   );
   }
 
-  import {
-  ImportStatus,
-  } from '../models';
-
-  export function isImportStatus(arg: any): arg is ImportStatus {
+export function isImportStatus(arg: any): arg is models.ImportStatus {
   return false
-   || arg === ImportStatus.Live
-   || arg === ImportStatus.PastDeadline
+   || arg === models.ImportStatus.Live
+   || arg === models.ImportStatus.PastDeadline
   ;
   }
 
@@ -242,14 +230,10 @@ export function isImportStatusItem(arg: any): arg is models.ImportStatusItem {
   );
   }
 
-  import {
-  ImportType,
-  } from '../models';
-
-  export function isImportType(arg: any): arg is ImportType {
+export function isImportType(arg: any): arg is models.ImportType {
   return false
-   || arg === ImportType.ThirdParty
-   || arg === ImportType.File
+   || arg === models.ImportType.ThirdParty
+   || arg === models.ImportType.File
   ;
   }
 
@@ -278,25 +262,17 @@ export function isIssue(arg: any): arg is models.Issue {
   );
   }
 
-  import {
-  IssueAlertType,
-  } from '../models';
-
-  export function isIssueAlertType(arg: any): arg is IssueAlertType {
+export function isIssueAlertType(arg: any): arg is models.IssueAlertType {
   return false
-   || arg === IssueAlertType.Validation
-   || arg === IssueAlertType.Data
+   || arg === models.IssueAlertType.Validation
+   || arg === models.IssueAlertType.Data
   ;
   }
 
-  import {
-  IssueStatus,
-  } from '../models';
-
-  export function isIssueStatus(arg: any): arg is IssueStatus {
+export function isIssueStatus(arg: any): arg is models.IssueStatus {
   return false
-   || arg === IssueStatus.Pending
-   || arg === IssueStatus.Resolved
+   || arg === models.IssueStatus.Pending
+   || arg === models.IssueStatus.Resolved
   ;
   }
 
@@ -383,14 +359,10 @@ export function isNotificationTrigger(arg: any): arg is models.NotificationTrigg
   );
   }
 
-  import {
-  Order,
-  } from '../models';
-
-  export function isOrder(arg: any): arg is Order {
+export function isOrder(arg: any): arg is models.Order {
   return false
-   || arg === Order.asc
-   || arg === Order.desc
+   || arg === models.Order.asc
+   || arg === models.Order.desc
   ;
   }
 
@@ -475,15 +447,11 @@ export function isPasswordVerificationPolicies(arg: any): arg is models.Password
   );
   }
 
-  import {
-  Period,
-  } from '../models';
-
-  export function isPeriod(arg: any): arg is Period {
+export function isPeriod(arg: any): arg is models.Period {
   return false
-   || arg === Period.Year
-   || arg === Period.Month
-   || arg === Period.Week
+   || arg === models.Period.Year
+   || arg === models.Period.Month
+   || arg === models.Period.Week
   ;
   }
 
@@ -685,15 +653,11 @@ export function isSchoolImportStats(arg: any): arg is models.SchoolImportStats {
   );
   }
 
-  import {
-  Status,
-  } from '../models';
-
-  export function isStatus(arg: any): arg is Status {
+export function isStatus(arg: any): arg is models.Status {
   return false
-   || arg === Status.Pending
-   || arg === Status.InProgress
-   || arg === Status.Complete
+   || arg === models.Status.Pending
+   || arg === models.Status.InProgress
+   || arg === models.Status.Complete
   ;
   }
 
@@ -833,14 +797,10 @@ export function isUserListItem(arg: any): arg is models.UserListItem {
   );
   }
 
-  import {
-  UserStatus,
-  } from '../models';
-
-  export function isUserStatus(arg: any): arg is UserStatus {
+export function isUserStatus(arg: any): arg is models.UserStatus {
   return false
-   || arg === UserStatus.Active
-   || arg === UserStatus.Blocked
+   || arg === models.UserStatus.Active
+   || arg === models.UserStatus.Blocked
   ;
   }
 

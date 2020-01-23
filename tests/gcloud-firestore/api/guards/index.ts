@@ -34,26 +34,18 @@ return arg != null && typeof arg.lastModified === 'number' && typeof arg.name ==
 
 /* generated type guards */
 
-  import {
-  $Xgafv,
-  } from '../models';
-
-  export function is$Xgafv(arg: any): arg is $Xgafv {
+export function is$Xgafv(arg: any): arg is models.$Xgafv {
   return false
-   || arg === $Xgafv.V1
-   || arg === $Xgafv.V2
+   || arg === models.$Xgafv.V1
+   || arg === models.$Xgafv.V2
   ;
   }
 
-  import {
-  Alt,
-  } from '../models';
-
-  export function isAlt(arg: any): arg is Alt {
+export function isAlt(arg: any): arg is models.Alt {
   return false
-   || arg === Alt.json
-   || arg === Alt.media
-   || arg === Alt.proto
+   || arg === models.Alt.json
+   || arg === models.Alt.media
+   || arg === models.Alt.proto
   ;
   }
 

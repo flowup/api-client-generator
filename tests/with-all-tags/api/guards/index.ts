@@ -135,17 +135,13 @@ export function isRowModel(arg: any): arg is models.RowModel {
   );
   }
 
-  import {
-  StatusSeverity,
-  } from '../models';
-
-  export function isStatusSeverity(arg: any): arg is StatusSeverity {
+export function isStatusSeverity(arg: any): arg is models.StatusSeverity {
   return false
-   || arg === StatusSeverity.Unknown
-   || arg === StatusSeverity.OK
-   || arg === StatusSeverity.Warning
-   || arg === StatusSeverity.Error
-   || arg === StatusSeverity.Critical
+   || arg === models.StatusSeverity.Unknown
+   || arg === models.StatusSeverity.OK
+   || arg === models.StatusSeverity.Warning
+   || arg === models.StatusSeverity.Error
+   || arg === models.StatusSeverity.Critical
   ;
   }
 
