@@ -132,7 +132,7 @@ paths:
     get:
       responses:
         200:
-          description: This returns any
+          description: This returns object
           schema:
             properties:
               key:

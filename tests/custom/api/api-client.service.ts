@@ -197,14 +197,14 @@ export class APIClient implements APIClientInterface {
    */
   getRandomModel(
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<object> {
     const path = `/randomModel`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<any>('GET', path, options);
+    return this.sendRequest<object>('GET', path, options);
   }
 
   /**

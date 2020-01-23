@@ -84,7 +84,7 @@ export interface APIClientInterface {
    */
   getRandomModel(
     requestHttpOptions?: HttpOptions
-  ): Observable<any>;
+  ): Observable<object>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.

@@ -87,9 +87,9 @@ export class GuardedAPIClient extends APIClient {
 
   getRandomModel(
     requestHttpOptions?: HttpOptions
-  ): Observable<any> {
+  ): Observable<object> {
     return super.getRandomModel(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isAny(res) || console.error(`TypeGuard for response 'Any' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   getRandomString(

@@ -591,6 +591,11 @@ function determineResponseType(
     return { name: type, type };
   }
 
+  if (schema.properties) {
+    const type = nullable ? 'object | null' : 'object';
+    return { name: type, type };
+  }
+
   return { name: 'any', type: 'any' };
 }
 
