@@ -84,7 +84,7 @@ This command will do the same but it will split **all of the tags to separate AP
 
 `npm run generate-api-client`
 
-**NOTE**: if you want to skip the installation for project, you can use `npx` but be careful as you'll be using the latest version every time you run the script (We use SEMVER so it is safer to update over the time).
+**NOTE**: if you want to skip the installation for project, you can use `npx` but be careful as you'll be using the latest version every time you run the script (We use [SEMVER](https://semver.org/) so it is safer to update over the time).
 
 # Options
 
