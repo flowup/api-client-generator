@@ -68,7 +68,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getInventory(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   getOrderById(
@@ -109,7 +109,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<string> {
     return super.loginUser(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isstring(res) || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => typeof res === 'string' || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
   }
 
 }

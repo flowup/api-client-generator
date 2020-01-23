@@ -50,7 +50,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.putSettings(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   deleteSettings(
@@ -60,7 +60,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.deleteSettings(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
 }

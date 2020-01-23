@@ -148,6 +148,8 @@ function parseMethods(
             parameters || {},
           );
 
+          const responseTypeName = typeName(responseType.name);
+
           return {
             hasJsonResponse: true,
             isSecure:
@@ -173,7 +175,10 @@ function parseMethods(
               (_: string, ...args: string[]): string =>
                 `\${args.${toCamelCase(args[0])}}`,
             ),
-            responseTypeName: typeName(responseType.name),
+            responseTypeName,
+            responseGuard: BASIC_TS_TYPE_REGEX.test(responseTypeName)
+              ? `typeof res === '${responseTypeName}'`
+              : `guards.is${responseTypeName}(res)`,
             isVoid: responseType.name === 'void',
             response: prefixImportedModels(responseType.type),
             // tslint:disable-next-line:max-line-length

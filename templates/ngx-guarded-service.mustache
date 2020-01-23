@@ -35,8 +35,8 @@ export class Guarded{{&serviceName}} extends {{&serviceName}} {
   {{/parameters.length}}
     requestHttpOptions?: HttpOptions
   ): Observable<{{&response}}> {
-    return super.{{&methodName}}({{#parameters.length}}args, {{/parameters.length}}requestHttpOptions)
-      .pipe(tap((res: any) => guards.is{{&responseTypeName}}(res) || console.error(`TypeGuard for response '{{&responseTypeName}}' caught inconsistency.`, res)));
+    return super.{{&methodName}}({{#parameters.length}}args, {{/parameters.length}}requestHttpOptions){{#responseGuard}}
+      .pipe(tap((res: any) => {{&responseGuard}} || console.error(`TypeGuard for response '{{&responseTypeName}}' caught inconsistency.`, res))){{/responseGuard}};
   }
 
 {{/isVoid}}{{/methods}}

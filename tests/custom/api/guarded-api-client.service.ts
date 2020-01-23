@@ -41,7 +41,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getItemModels(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   getPetsId(
@@ -82,21 +82,21 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getRandomObject(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   getRandomModel(
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getRandomModel(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isobject(res) || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
   getRandomString(
     requestHttpOptions?: HttpOptions
   ): Observable<string> {
     return super.getRandomString(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isstring(res) || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => typeof res === 'string' || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
   }
 
 }
