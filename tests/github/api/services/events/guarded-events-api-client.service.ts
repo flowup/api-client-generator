@@ -34,7 +34,7 @@ export class GuardedEventsAPIClient extends EventsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     return super.getEvents(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isEvents(res) || console.error(`TypeGuard for response 'Events' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'Events' caught inconsistency.`, res)));
   }
 
 }

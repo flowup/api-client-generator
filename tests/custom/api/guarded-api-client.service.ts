@@ -30,7 +30,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ItemList> {
     return super.getItems(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isItemList(res) || console.error(`TypeGuard for response 'ItemList' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isItemList(res) || console.error(`TypeGuard for response 'ItemList' caught inconsistency.`, res)));
   }
 
   getItemModels(
@@ -41,7 +41,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getItemModels(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getPetsId(
@@ -51,21 +51,21 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.getPetsId(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isPet(res) || console.error(`TypeGuard for response 'Pet' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPet(res) || console.error(`TypeGuard for response 'Pet' caught inconsistency.`, res)));
   }
 
   getCustomers(
     requestHttpOptions?: HttpOptions
   ): Observable<models.Customer[] | null> {
     return super.getCustomers(requestHttpOptions)
-      .pipe(tap((res) => guards.isCustomer(res) || console.error(`TypeGuard for response 'Customer' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCustomer(res) || console.error(`TypeGuard for response 'Customer' caught inconsistency.`, res)));
   }
 
   getDictionaries(
     requestHttpOptions?: HttpOptions
   ): Observable<models.Dictionary> {
     return super.getDictionaries(requestHttpOptions)
-      .pipe(tap((res) => guards.isDictionary(res) || console.error(`TypeGuard for response 'Dictionary' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDictionary(res) || console.error(`TypeGuard for response 'Dictionary' caught inconsistency.`, res)));
   }
 
 }

@@ -26,7 +26,7 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.WidgetTypeViewModel[]> {
     return super.getWidgetTypes(requestHttpOptions)
-      .pipe(tap((res) => guards.isWidgetTypeViewModel(res) || console.error(`TypeGuard for response 'WidgetTypeViewModel' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isWidgetTypeViewModel(res) || console.error(`TypeGuard for response 'WidgetTypeViewModel' caught inconsistency.`, res)));
   }
 
   get(
@@ -36,7 +36,7 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DashboardViewModel> {
     return super.get(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isDashboardViewModel(res) || console.error(`TypeGuard for response 'DashboardViewModel' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDashboardViewModel(res) || console.error(`TypeGuard for response 'DashboardViewModel' caught inconsistency.`, res)));
   }
 
   getSettings(
@@ -46,7 +46,7 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RowModel[]> {
     return super.getSettings(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isRowModel(res) || console.error(`TypeGuard for response 'RowModel' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRowModel(res) || console.error(`TypeGuard for response 'RowModel' caught inconsistency.`, res)));
   }
 
   putSettings(
@@ -57,7 +57,7 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.putSettings(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
 }

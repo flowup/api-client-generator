@@ -29,7 +29,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet> {
     return super.getPetById(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isPet(res) || console.error(`TypeGuard for response 'Pet' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPet(res) || console.error(`TypeGuard for response 'Pet' caught inconsistency.`, res)));
   }
 
   uploadFile(
@@ -41,7 +41,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ApiResponse> {
     return super.uploadFile(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isApiResponse(res) || console.error(`TypeGuard for response 'ApiResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isApiResponse(res) || console.error(`TypeGuard for response 'ApiResponse' caught inconsistency.`, res)));
   }
 
   findPetsByStatus(
@@ -51,7 +51,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.findPetsByStatus(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isPet(res) || console.error(`TypeGuard for response 'Pet' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPet(res) || console.error(`TypeGuard for response 'Pet' caught inconsistency.`, res)));
   }
 
   findPetsByTags(
@@ -61,14 +61,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.findPetsByTags(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isPet(res) || console.error(`TypeGuard for response 'Pet' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPet(res) || console.error(`TypeGuard for response 'Pet' caught inconsistency.`, res)));
   }
 
   getInventory(
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getInventory(requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getOrderById(
@@ -78,7 +78,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Order> {
     return super.getOrderById(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isOrder(res) || console.error(`TypeGuard for response 'Order' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isOrder(res) || console.error(`TypeGuard for response 'Order' caught inconsistency.`, res)));
   }
 
   placeOrder(
@@ -88,7 +88,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Order> {
     return super.placeOrder(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isOrder(res) || console.error(`TypeGuard for response 'Order' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isOrder(res) || console.error(`TypeGuard for response 'Order' caught inconsistency.`, res)));
   }
 
   getUserByName(
@@ -98,7 +98,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.User> {
     return super.getUserByName(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isUser(res) || console.error(`TypeGuard for response 'User' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUser(res) || console.error(`TypeGuard for response 'User' caught inconsistency.`, res)));
   }
 
   loginUser(
@@ -109,7 +109,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<string> {
     return super.loginUser(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isstring(res) || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isstring(res) || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
   }
 
 }

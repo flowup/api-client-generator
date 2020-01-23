@@ -34,7 +34,7 @@ export class GuardedEmojisAPIClient extends EmojisAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Emojis> {
     return super.getEmojis(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isEmojis(res) || console.error(`TypeGuard for response 'Emojis' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isEmojis(res) || console.error(`TypeGuard for response 'Emojis' caught inconsistency.`, res)));
   }
 
 }

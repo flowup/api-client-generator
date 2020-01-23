@@ -29,7 +29,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorViewModel> {
     return super.get(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isDummySelectorViewModel(res) || console.error(`TypeGuard for response 'DummySelectorViewModel' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDummySelectorViewModel(res) || console.error(`TypeGuard for response 'DummySelectorViewModel' caught inconsistency.`, res)));
   }
 
   getSettings(
@@ -39,7 +39,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorSettings> {
     return super.getSettings(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isDummySelectorSettings(res) || console.error(`TypeGuard for response 'DummySelectorSettings' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDummySelectorSettings(res) || console.error(`TypeGuard for response 'DummySelectorSettings' caught inconsistency.`, res)));
   }
 
   putSettings(
@@ -50,7 +50,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.putSettings(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   deleteSettings(
@@ -60,7 +60,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.deleteSettings(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
 }

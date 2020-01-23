@@ -35,7 +35,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     return super.getGists(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isGists(res) || console.error(`TypeGuard for response 'Gists' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGists(res) || console.error(`TypeGuard for response 'Gists' caught inconsistency.`, res)));
   }
 
   postGists(
@@ -51,7 +51,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     return super.postGists(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isGist(res) || console.error(`TypeGuard for response 'Gist' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGist(res) || console.error(`TypeGuard for response 'Gist' caught inconsistency.`, res)));
   }
 
   getGistsPublic(
@@ -67,7 +67,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     return super.getGistsPublic(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isGists(res) || console.error(`TypeGuard for response 'Gists' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGists(res) || console.error(`TypeGuard for response 'Gists' caught inconsistency.`, res)));
   }
 
   getGistsStarred(
@@ -83,7 +83,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     return super.getGistsStarred(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isGists(res) || console.error(`TypeGuard for response 'Gists' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGists(res) || console.error(`TypeGuard for response 'Gists' caught inconsistency.`, res)));
   }
 
   getGistsId(
@@ -99,7 +99,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     return super.getGistsId(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isGist(res) || console.error(`TypeGuard for response 'Gist' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGist(res) || console.error(`TypeGuard for response 'Gist' caught inconsistency.`, res)));
   }
 
   patchGistsId(
@@ -116,7 +116,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     return super.patchGistsId(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isGist(res) || console.error(`TypeGuard for response 'Gist' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGist(res) || console.error(`TypeGuard for response 'Gist' caught inconsistency.`, res)));
   }
 
   getGistsIdComments(
@@ -132,7 +132,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comments> {
     return super.getGistsIdComments(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isComments(res) || console.error(`TypeGuard for response 'Comments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isComments(res) || console.error(`TypeGuard for response 'Comments' caught inconsistency.`, res)));
   }
 
   postGistsIdComments(
@@ -149,7 +149,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     return super.postGistsIdComments(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isComment(res) || console.error(`TypeGuard for response 'Comment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isComment(res) || console.error(`TypeGuard for response 'Comment' caught inconsistency.`, res)));
   }
 
   getGistsIdCommentsCommentId(
@@ -166,7 +166,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     return super.getGistsIdCommentsCommentId(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isComment(res) || console.error(`TypeGuard for response 'Comment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isComment(res) || console.error(`TypeGuard for response 'Comment' caught inconsistency.`, res)));
   }
 
   patchGistsIdCommentsCommentId(
@@ -184,7 +184,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     return super.patchGistsIdCommentsCommentId(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isComment(res) || console.error(`TypeGuard for response 'Comment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isComment(res) || console.error(`TypeGuard for response 'Comment' caught inconsistency.`, res)));
   }
 
 }

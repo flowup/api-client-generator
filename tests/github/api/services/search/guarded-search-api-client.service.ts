@@ -37,7 +37,7 @@ export class GuardedSearchAPIClient extends SearchAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchCode> {
     return super.getSearchCode(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isSearchCode(res) || console.error(`TypeGuard for response 'SearchCode' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSearchCode(res) || console.error(`TypeGuard for response 'SearchCode' caught inconsistency.`, res)));
   }
 
   getSearchIssues(
@@ -55,7 +55,7 @@ export class GuardedSearchAPIClient extends SearchAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchIssues> {
     return super.getSearchIssues(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isSearchIssues(res) || console.error(`TypeGuard for response 'SearchIssues' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSearchIssues(res) || console.error(`TypeGuard for response 'SearchIssues' caught inconsistency.`, res)));
   }
 
   getSearchRepositories(
@@ -73,7 +73,7 @@ export class GuardedSearchAPIClient extends SearchAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchRepositories> {
     return super.getSearchRepositories(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isSearchRepositories(res) || console.error(`TypeGuard for response 'SearchRepositories' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSearchRepositories(res) || console.error(`TypeGuard for response 'SearchRepositories' caught inconsistency.`, res)));
   }
 
   getSearchUsers(
@@ -91,7 +91,7 @@ export class GuardedSearchAPIClient extends SearchAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchUsers> {
     return super.getSearchUsers(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isSearchUsers(res) || console.error(`TypeGuard for response 'SearchUsers' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSearchUsers(res) || console.error(`TypeGuard for response 'SearchUsers' caught inconsistency.`, res)));
   }
 
 }

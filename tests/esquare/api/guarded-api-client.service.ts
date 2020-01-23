@@ -29,14 +29,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.auth(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   authRef(
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.authRef(requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   passwordRestoreRequest(
@@ -46,7 +46,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.passwordRestoreRequest(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   passwordRestoreEmailRequest(
@@ -56,7 +56,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.passwordRestoreEmailRequest(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   passwordRestoreCheckRestoreGuid(
@@ -66,21 +66,21 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.passwordRestoreCheckRestoreGuid(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getAclList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.AclItem[]> {
     return super.getAclList(requestHttpOptions)
-      .pipe(tap((res) => guards.isAclItem(res) || console.error(`TypeGuard for response 'AclItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isAclItem(res) || console.error(`TypeGuard for response 'AclItem' caught inconsistency.`, res)));
   }
 
   getStructureEntitiesList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure[]> {
     return super.getStructureEntitiesList(requestHttpOptions)
-      .pipe(tap((res) => guards.isStructure(res) || console.error(`TypeGuard for response 'Structure' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isStructure(res) || console.error(`TypeGuard for response 'Structure' caught inconsistency.`, res)));
   }
 
   addStructureEntity(
@@ -90,7 +90,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure> {
     return super.addStructureEntity(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isStructure(res) || console.error(`TypeGuard for response 'Structure' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isStructure(res) || console.error(`TypeGuard for response 'Structure' caught inconsistency.`, res)));
   }
 
   updateStructureEntity(
@@ -101,7 +101,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure> {
     return super.updateStructureEntity(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isStructure(res) || console.error(`TypeGuard for response 'Structure' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isStructure(res) || console.error(`TypeGuard for response 'Structure' caught inconsistency.`, res)));
   }
 
   getReportsList(
@@ -115,7 +115,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getReportsList(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getReportDetails(
@@ -125,7 +125,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ReportItem[]> {
     return super.getReportDetails(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isReportItem(res) || console.error(`TypeGuard for response 'ReportItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isReportItem(res) || console.error(`TypeGuard for response 'ReportItem' caught inconsistency.`, res)));
   }
 
   getReportPreview(
@@ -139,7 +139,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getReportPreview(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getImportHistory(
@@ -149,7 +149,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportHistoryItem[]> {
     return super.getImportHistory(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isImportHistoryItem(res) || console.error(`TypeGuard for response 'ImportHistoryItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isImportHistoryItem(res) || console.error(`TypeGuard for response 'ImportHistoryItem' caught inconsistency.`, res)));
   }
 
   uploadFile(
@@ -160,7 +160,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<number> {
     return super.uploadFile(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isnumber(res) || console.error(`TypeGuard for response 'number' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isnumber(res) || console.error(`TypeGuard for response 'number' caught inconsistency.`, res)));
   }
 
   listTemplateColumns(
@@ -170,7 +170,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]> {
     return super.listTemplateColumns(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isColumn(res) || console.error(`TypeGuard for response 'Column' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isColumn(res) || console.error(`TypeGuard for response 'Column' caught inconsistency.`, res)));
   }
 
   listReportColumns(
@@ -180,7 +180,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]> {
     return super.listReportColumns(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isColumn(res) || console.error(`TypeGuard for response 'Column' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isColumn(res) || console.error(`TypeGuard for response 'Column' caught inconsistency.`, res)));
   }
 
   saveColumnsMapping(
@@ -191,7 +191,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Table> {
     return super.saveColumnsMapping(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isTable(res) || console.error(`TypeGuard for response 'Table' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTable(res) || console.error(`TypeGuard for response 'Table' caught inconsistency.`, res)));
   }
 
   getValidationTable(
@@ -201,7 +201,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ValidatedTable> {
     return super.getValidationTable(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isValidatedTable(res) || console.error(`TypeGuard for response 'ValidatedTable' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isValidatedTable(res) || console.error(`TypeGuard for response 'ValidatedTable' caught inconsistency.`, res)));
   }
 
   downloadImportedFile(
@@ -212,7 +212,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.downloadImportedFile(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isFile(res) || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isFile(res) || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
   importConfirmation(
@@ -222,7 +222,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportResponse> {
     return super.importConfirmation(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isImportResponse(res) || console.error(`TypeGuard for response 'ImportResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isImportResponse(res) || console.error(`TypeGuard for response 'ImportResponse' caught inconsistency.`, res)));
   }
 
   downloadImportOriginalFile(
@@ -232,7 +232,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.downloadImportOriginalFile(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isFile(res) || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isFile(res) || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
   downloadImportSkippedFile(
@@ -242,7 +242,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.downloadImportSkippedFile(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isFile(res) || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isFile(res) || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
   geImportStats(
@@ -252,7 +252,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.TotalImportStats> {
     return super.geImportStats(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isTotalImportStats(res) || console.error(`TypeGuard for response 'TotalImportStats' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTotalImportStats(res) || console.error(`TypeGuard for response 'TotalImportStats' caught inconsistency.`, res)));
   }
 
   getIssuesList(
@@ -267,7 +267,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getIssuesList(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getStatusesList(
@@ -282,7 +282,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getStatusesList(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getUsersList(
@@ -299,7 +299,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getUsersList(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   createUser(
@@ -309,14 +309,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails> {
     return super.createUser(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isUserDetails(res) || console.error(`TypeGuard for response 'UserDetails' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUserDetails(res) || console.error(`TypeGuard for response 'UserDetails' caught inconsistency.`, res)));
   }
 
   getAclStructure(
     requestHttpOptions?: HttpOptions
   ): Observable<models.Acl[]> {
     return super.getAclStructure(requestHttpOptions)
-      .pipe(tap((res) => guards.isAcl(res) || console.error(`TypeGuard for response 'Acl' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isAcl(res) || console.error(`TypeGuard for response 'Acl' caught inconsistency.`, res)));
   }
 
   getUserDetails(
@@ -326,7 +326,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails[]> {
     return super.getUserDetails(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isUserDetails(res) || console.error(`TypeGuard for response 'UserDetails' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUserDetails(res) || console.error(`TypeGuard for response 'UserDetails' caught inconsistency.`, res)));
   }
 
   updateUser(
@@ -337,14 +337,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails> {
     return super.updateUser(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isUserDetails(res) || console.error(`TypeGuard for response 'UserDetails' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUserDetails(res) || console.error(`TypeGuard for response 'UserDetails' caught inconsistency.`, res)));
   }
 
   getRolesList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleListItem[]> {
     return super.getRolesList(requestHttpOptions)
-      .pipe(tap((res) => guards.isRoleListItem(res) || console.error(`TypeGuard for response 'RoleListItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRoleListItem(res) || console.error(`TypeGuard for response 'RoleListItem' caught inconsistency.`, res)));
   }
 
   createRole(
@@ -354,14 +354,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
     return super.createRole(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isRoleDetailsItem(res) || console.error(`TypeGuard for response 'RoleDetailsItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRoleDetailsItem(res) || console.error(`TypeGuard for response 'RoleDetailsItem' caught inconsistency.`, res)));
   }
 
   getList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.PrivilegeTreeItem[]> {
     return super.getList(requestHttpOptions)
-      .pipe(tap((res) => guards.isPrivilegeTreeItem(res) || console.error(`TypeGuard for response 'PrivilegeTreeItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPrivilegeTreeItem(res) || console.error(`TypeGuard for response 'PrivilegeTreeItem' caught inconsistency.`, res)));
   }
 
   getRoleDetails(
@@ -371,7 +371,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem[]> {
     return super.getRoleDetails(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isRoleDetailsItem(res) || console.error(`TypeGuard for response 'RoleDetailsItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRoleDetailsItem(res) || console.error(`TypeGuard for response 'RoleDetailsItem' caught inconsistency.`, res)));
   }
 
   updateRole(
@@ -382,14 +382,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
     return super.updateRole(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isRoleDetailsItem(res) || console.error(`TypeGuard for response 'RoleDetailsItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRoleDetailsItem(res) || console.error(`TypeGuard for response 'RoleDetailsItem' caught inconsistency.`, res)));
   }
 
   getNewNotificationsList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationListItem[]> {
     return super.getNewNotificationsList(requestHttpOptions)
-      .pipe(tap((res) => guards.isNotificationListItem(res) || console.error(`TypeGuard for response 'NotificationListItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isNotificationListItem(res) || console.error(`TypeGuard for response 'NotificationListItem' caught inconsistency.`, res)));
   }
 
   getNotificationsList(
@@ -402,21 +402,21 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getNotificationsList(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getModulesList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationModule[]> {
     return super.getModulesList(requestHttpOptions)
-      .pipe(tap((res) => guards.isNotificationModule(res) || console.error(`TypeGuard for response 'NotificationModule' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isNotificationModule(res) || console.error(`TypeGuard for response 'NotificationModule' caught inconsistency.`, res)));
   }
 
   getTriggersList(
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationTrigger[]> {
     return super.getTriggersList(requestHttpOptions)
-      .pipe(tap((res) => guards.isNotificationTrigger(res) || console.error(`TypeGuard for response 'NotificationTrigger' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isNotificationTrigger(res) || console.error(`TypeGuard for response 'NotificationTrigger' caught inconsistency.`, res)));
   }
 
   getModuleNotificationsList(
@@ -430,7 +430,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<Object> {
     return super.getModuleNotificationsList(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
   }
 
   getNotification(
@@ -440,7 +440,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationEditableListItem> {
     return super.getNotification(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isNotificationEditableListItem(res) || console.error(`TypeGuard for response 'NotificationEditableListItem' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isNotificationEditableListItem(res) || console.error(`TypeGuard for response 'NotificationEditableListItem' caught inconsistency.`, res)));
   }
 
   createNotification(
@@ -450,14 +450,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<number> {
     return super.createNotification(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isnumber(res) || console.error(`TypeGuard for response 'number' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isnumber(res) || console.error(`TypeGuard for response 'number' caught inconsistency.`, res)));
   }
 
   getPassVerificationPolicies(
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordVerificationPolicies> {
     return super.getPassVerificationPolicies(requestHttpOptions)
-      .pipe(tap((res) => guards.isPasswordVerificationPolicies(res) || console.error(`TypeGuard for response 'PasswordVerificationPolicies' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPasswordVerificationPolicies(res) || console.error(`TypeGuard for response 'PasswordVerificationPolicies' caught inconsistency.`, res)));
   }
 
   udatePassVerificationPolicies(
@@ -467,14 +467,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordVerificationPolicies> {
     return super.udatePassVerificationPolicies(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isPasswordVerificationPolicies(res) || console.error(`TypeGuard for response 'PasswordVerificationPolicies' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPasswordVerificationPolicies(res) || console.error(`TypeGuard for response 'PasswordVerificationPolicies' caught inconsistency.`, res)));
   }
 
   getPassCreationPolicies(
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordCreationPolicies> {
     return super.getPassCreationPolicies(requestHttpOptions)
-      .pipe(tap((res) => guards.isPasswordCreationPolicies(res) || console.error(`TypeGuard for response 'PasswordCreationPolicies' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPasswordCreationPolicies(res) || console.error(`TypeGuard for response 'PasswordCreationPolicies' caught inconsistency.`, res)));
   }
 
   udatePassCreationPolicies(
@@ -484,14 +484,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordCreationPolicies> {
     return super.udatePassCreationPolicies(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isPasswordCreationPolicies(res) || console.error(`TypeGuard for response 'PasswordCreationPolicies' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPasswordCreationPolicies(res) || console.error(`TypeGuard for response 'PasswordCreationPolicies' caught inconsistency.`, res)));
   }
 
   getOtherSecuritySettings(
     requestHttpOptions?: HttpOptions
   ): Observable<models.OtherSecuritySettings> {
     return super.getOtherSecuritySettings(requestHttpOptions)
-      .pipe(tap((res) => guards.isOtherSecuritySettings(res) || console.error(`TypeGuard for response 'OtherSecuritySettings' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isOtherSecuritySettings(res) || console.error(`TypeGuard for response 'OtherSecuritySettings' caught inconsistency.`, res)));
   }
 
   udateOtherSecuritySettings(
@@ -501,7 +501,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.OtherSecuritySettings> {
     return super.udateOtherSecuritySettings(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isOtherSecuritySettings(res) || console.error(`TypeGuard for response 'OtherSecuritySettings' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isOtherSecuritySettings(res) || console.error(`TypeGuard for response 'OtherSecuritySettings' caught inconsistency.`, res)));
   }
 
 }

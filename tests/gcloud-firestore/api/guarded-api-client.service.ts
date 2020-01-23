@@ -43,7 +43,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.BatchGetDocumentsResponse> {
     return super.firestoreProjectsDatabasesDocumentsBatchGet(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isBatchGetDocumentsResponse(res) || console.error(`TypeGuard for response 'BatchGetDocumentsResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isBatchGetDocumentsResponse(res) || console.error(`TypeGuard for response 'BatchGetDocumentsResponse' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsBeginTransaction(
@@ -67,7 +67,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.BeginTransactionResponse> {
     return super.firestoreProjectsDatabasesDocumentsBeginTransaction(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isBeginTransactionResponse(res) || console.error(`TypeGuard for response 'BeginTransactionResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isBeginTransactionResponse(res) || console.error(`TypeGuard for response 'BeginTransactionResponse' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsCommit(
@@ -91,7 +91,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitResponse> {
     return super.firestoreProjectsDatabasesDocumentsCommit(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isCommitResponse(res) || console.error(`TypeGuard for response 'CommitResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCommitResponse(res) || console.error(`TypeGuard for response 'CommitResponse' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsListen(
@@ -115,7 +115,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListenResponse> {
     return super.firestoreProjectsDatabasesDocumentsListen(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isListenResponse(res) || console.error(`TypeGuard for response 'ListenResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isListenResponse(res) || console.error(`TypeGuard for response 'ListenResponse' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsRollback(
@@ -139,7 +139,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Empty> {
     return super.firestoreProjectsDatabasesDocumentsRollback(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isEmpty(res) || console.error(`TypeGuard for response 'Empty' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isEmpty(res) || console.error(`TypeGuard for response 'Empty' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsWrite(
@@ -163,7 +163,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.WriteResponse> {
     return super.firestoreProjectsDatabasesDocumentsWrite(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isWriteResponse(res) || console.error(`TypeGuard for response 'WriteResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isWriteResponse(res) || console.error(`TypeGuard for response 'WriteResponse' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesIndexesDelete(
@@ -188,7 +188,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Empty> {
     return super.firestoreProjectsDatabasesIndexesDelete(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isEmpty(res) || console.error(`TypeGuard for response 'Empty' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isEmpty(res) || console.error(`TypeGuard for response 'Empty' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesIndexesGet(
@@ -214,7 +214,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Index> {
     return super.firestoreProjectsDatabasesIndexesGet(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isIndex(res) || console.error(`TypeGuard for response 'Index' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIndex(res) || console.error(`TypeGuard for response 'Index' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsPatch(
@@ -242,7 +242,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Document> {
     return super.firestoreProjectsDatabasesDocumentsPatch(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isDocument(res) || console.error(`TypeGuard for response 'Document' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDocument(res) || console.error(`TypeGuard for response 'Document' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesIndexesList(
@@ -268,7 +268,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListIndexesResponse> {
     return super.firestoreProjectsDatabasesIndexesList(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isListIndexesResponse(res) || console.error(`TypeGuard for response 'ListIndexesResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isListIndexesResponse(res) || console.error(`TypeGuard for response 'ListIndexesResponse' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesIndexesCreate(
@@ -292,7 +292,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Operation> {
     return super.firestoreProjectsDatabasesIndexesCreate(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isOperation(res) || console.error(`TypeGuard for response 'Operation' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isOperation(res) || console.error(`TypeGuard for response 'Operation' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsList(
@@ -323,7 +323,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListDocumentsResponse> {
     return super.firestoreProjectsDatabasesDocumentsList(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isListDocumentsResponse(res) || console.error(`TypeGuard for response 'ListDocumentsResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isListDocumentsResponse(res) || console.error(`TypeGuard for response 'ListDocumentsResponse' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsCreateDocument(
@@ -350,7 +350,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Document> {
     return super.firestoreProjectsDatabasesDocumentsCreateDocument(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isDocument(res) || console.error(`TypeGuard for response 'Document' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDocument(res) || console.error(`TypeGuard for response 'Document' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsListCollectionIds(
@@ -374,7 +374,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListCollectionIdsResponse> {
     return super.firestoreProjectsDatabasesDocumentsListCollectionIds(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isListCollectionIdsResponse(res) || console.error(`TypeGuard for response 'ListCollectionIdsResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isListCollectionIdsResponse(res) || console.error(`TypeGuard for response 'ListCollectionIdsResponse' caught inconsistency.`, res)));
   }
 
   firestoreProjectsDatabasesDocumentsRunQuery(
@@ -398,7 +398,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RunQueryResponse> {
     return super.firestoreProjectsDatabasesDocumentsRunQuery(args, requestHttpOptions)
-      .pipe(tap((res) => guards.isRunQueryResponse(res) || console.error(`TypeGuard for response 'RunQueryResponse' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRunQueryResponse(res) || console.error(`TypeGuard for response 'RunQueryResponse' caught inconsistency.`, res)));
   }
 
 }
