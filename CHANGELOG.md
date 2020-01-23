@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.6.1](https://github.com/flowup/api-client-generator/compare/4.6.0...4.6.1) (2020-01-23)
+
+
+### Bug Fixes
+
+* **generator:** toCamelCase method removes duplicate words ([abe073d](https://github.com/flowup/api-client-generator/commit/abe073d))
+* **guards:** array item typed as unknown for the guard iteration ([da654f7](https://github.com/flowup/api-client-generator/commit/da654f7))
+* **guards:** circular dependency ([ecd1080](https://github.com/flowup/api-client-generator/commit/ecd1080))
+* **guards:** escaped property names accessed via brackets ([1dbfe3a](https://github.com/flowup/api-client-generator/commit/1dbfe3a))
+* **guards:** guarded service response type as explicit any ([785f022](https://github.com/flowup/api-client-generator/commit/785f022))
+* **guards:** nested array types ([89da76c](https://github.com/flowup/api-client-generator/commit/89da76c))
+* **guards:** object array types ([30113fe](https://github.com/flowup/api-client-generator/commit/30113fe))
+* **guards:** objects with index signature as additional properties ([a6ef06c](https://github.com/flowup/api-client-generator/commit/a6ef06c))
+* **guards:** union type string or enum with one value only ([ec040c4](https://github.com/flowup/api-client-generator/commit/ec040c4))
+
 ## [4.6.0](https://github.com/flowup/api-client-generator/compare/4.5.1...4.6.0) (2020-01-16)
 
 
