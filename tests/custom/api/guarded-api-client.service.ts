@@ -68,4 +68,35 @@ export class GuardedAPIClient extends APIClient {
       .pipe(tap((res: any) => guards.isDictionary(res) || console.error(`TypeGuard for response 'Dictionary' caught inconsistency.`, res)));
   }
 
+  getFileId(
+    args: {
+      id: string,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<File> {
+    return super.getFileId(args, requestHttpOptions)
+      .pipe(tap((res: any) => guards.isFile(res) || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
+  }
+
+  getRandomObject(
+    requestHttpOptions?: HttpOptions
+  ): Observable<Object> {
+    return super.getRandomObject(requestHttpOptions)
+      .pipe(tap((res: any) => guards.isObject(res) || console.error(`TypeGuard for response 'Object' caught inconsistency.`, res)));
+  }
+
+  getRandomModel(
+    requestHttpOptions?: HttpOptions
+  ): Observable<any> {
+    return super.getRandomModel(requestHttpOptions)
+      .pipe(tap((res: any) => guards.isAny(res) || console.error(`TypeGuard for response 'Any' caught inconsistency.`, res)));
+  }
+
+  getRandomString(
+    requestHttpOptions?: HttpOptions
+  ): Observable<string> {
+    return super.getRandomString(requestHttpOptions)
+      .pipe(tap((res: any) => guards.isstring(res) || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
+  }
+
 }

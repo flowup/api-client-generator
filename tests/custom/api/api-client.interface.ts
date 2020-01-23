@@ -62,4 +62,35 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Dictionary>;
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getFileId(
+    args: {
+      id: string,
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<File>;
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getRandomObject(
+    requestHttpOptions?: HttpOptions
+  ): Observable<Object>;
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getRandomModel(
+    requestHttpOptions?: HttpOptions
+  ): Observable<any>;
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getRandomString(
+    requestHttpOptions?: HttpOptions
+  ): Observable<string>;
+
 }

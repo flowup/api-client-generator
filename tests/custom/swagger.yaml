@@ -109,6 +109,41 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Dictionary'
+  /file/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        200:
+          description: Desired file
+          schema:
+            type: 'file'
+  /randomObject:
+    get:
+      responses:
+        200:
+          description: This returns Object
+          schema:
+            type: object
+  /randomModel:
+    get:
+      responses:
+        200:
+          description: This returns any
+          schema:
+            properties:
+              key:
+                type: string
+  /randomString:
+    get:
+      responses:
+        200:
+          description: This returns string
+          schema:
+            type: string
 definitions:
   ItemList:
     description: List of items,
