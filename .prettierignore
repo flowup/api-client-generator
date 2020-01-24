@@ -6,15 +6,5 @@ templates
 *.xml
 CHANGELOG.md
 .prettierignore
-tests/custom/api
-tests/esquare/api
-tests/filtered-api/api
-tests/gcloud-firestore/api
-tests/github/api
-tests/pet-store/api
-tests/with-all-tags/api
-tests/test-angular-project/src/api
-tests/test-angular-project/node_modules
-tests/test-angular-project/dist
-tests/test-angular-project/package-lock.json
+api
 tests/tests-output
