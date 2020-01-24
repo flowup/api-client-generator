@@ -12,6 +12,8 @@ export { ItemModelList } from './item-model-list.model';
 export { Model } from './model.model';
 export { Mouse } from './mouse.model';
 export { MyInterface } from './my-interface.model';
+export { PageData } from './page-data.model';
+export { PageDataRules } from './page-data-rules.model';
 export { Pet } from './pet.model';
 export { Possition } from './possition.enum';
 export { Right } from './right.enum';

@@ -922,7 +922,7 @@ export function isLanguages(arg: any): arg is models.Languages {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: number
-    ( Object.values(arg).every((item: unknown) => typeof item === 'number') ) &&
+    ( Object.values(arg).every((value: unknown) => typeof value === 'number') ) &&
 
   true
   );

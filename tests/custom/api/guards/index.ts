@@ -99,7 +99,7 @@ export function isDictionary(arg: any): arg is models.Dictionary {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: DictionaryItem
-    ( Object.values(arg).every((item: unknown) => isDictionaryItem(item)) ) &&
+    ( Object.values(arg).every((value: unknown) => isDictionaryItem(value)) ) &&
 
   true
   );
@@ -110,7 +110,7 @@ export function isDictionaryItem(arg: any): arg is models.DictionaryItem {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: number
-    ( Object.values(arg).every((item: unknown) => typeof item === 'number') ) &&
+    ( Object.values(arg).every((value: unknown) => typeof value === 'number') ) &&
 
   true
   );
@@ -195,6 +195,28 @@ export function isMyInterface(arg: any): arg is models.MyInterface {
     ( typeof arg.myMap === 'undefined' || isData(arg.myMap) ) &&
     // myName?: string
     ( typeof arg.myName === 'undefined' || typeof arg.myName === 'string' ) &&
+
+  true
+  );
+  }
+
+export function isPageData(arg: any): arg is models.PageData {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // appliedIf?: PageDataRules
+    ( typeof arg.appliedIf === 'undefined' || isPageDataRules(arg.appliedIf) ) &&
+
+  true
+  );
+  }
+
+export function isPageDataRules(arg: any): arg is models.PageDataRules {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // [key: string]: string[]
+    ( Object.values(arg).every((value: unknown) => (Array.isArray(value) && value.every((item: unknown) => typeof item === 'string'))) ) &&
 
   true
   );

@@ -90,8 +90,14 @@ export function toTypescriptType(type: string | undefined): string {
   return typeName(type);
 }
 
+const PARENT_PROP_PLACEHOLDER = '<-';
+
 export function accessProp(arg: string): string {
-  return arg.startsWith("'") ? `arg[${arg}]` : `arg.${arg}`;
+  return arg.startsWith(PARENT_PROP_PLACEHOLDER)
+    ? arg.replace(PARENT_PROP_PLACEHOLDER, '')
+    : arg.startsWith("'")
+    ? `arg[${arg}]`
+    : `arg.${arg}`;
 }
 
 function guardArray(prop: Property): string {
@@ -121,10 +127,15 @@ export function guardFn(fn: () => string, prop: Property): string {
       }
       ${
         prop.name === ADDITIONAL_PROPERTIES_KEY
-          ? `Object.values(arg).every((item: unknown) => ${
-              prop.isPrimitiveType
-                ? `typeof item === '${prop.type}'`
-                : `is${prop.typescriptType}(item)`
+          ? `Object.values(arg).every((value: unknown) => ${
+              prop.isArray
+                ? guardArray({
+                    ...prop,
+                    name: `${PARENT_PROP_PLACEHOLDER}value`,
+                  })
+                : prop.isPrimitiveType
+                ? `typeof value === '${prop.type}'`
+                : `is${prop.typescriptType}(value)`
             })`
           : prop.isArray
           ? guardArray(prop)

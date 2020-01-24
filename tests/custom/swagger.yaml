@@ -342,3 +342,15 @@ definitions:
     type: object
     additionalProperties:
       type: number
+
+  PageDataRules:
+    type: object
+    additionalProperties:
+      type: array
+      items:
+        type: string
+  PageData:
+    type: object
+    properties:
+      appliedIf:
+        $ref: '#/definitions/PageDataRules'
