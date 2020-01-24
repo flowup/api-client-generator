@@ -168,8 +168,8 @@ function parseMethods(
             formData: transformedParams
               .filter(({ name, isFormParameter }) => name && isFormParameter)
               .map(({ name, camelCaseName }) => ({
-                name: name!,
-                camelCaseName: camelCaseName || name!,
+                name: name,
+                camelCaseName: camelCaseName || name,
               })),
             // turn path interpolation `{this}` into string template `${args.this}
             path: pathName.replace(
