@@ -8,3 +8,4 @@ CHANGELOG.md
 .prettierignore
 api
 tests/tests-output
+tests/test-angular-project/api-*
