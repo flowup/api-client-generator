@@ -30,6 +30,8 @@ import {
   compareStringByKey,
   isReference,
   ADDITIONAL_PROPERTIES_KEY,
+  accessProp,
+  guardFn,
 } from './helper';
 
 interface Parameters {
@@ -325,7 +327,7 @@ function parseInterfaceProperties(
 ): Property[] {
   return Object.entries<Schema>(properties)
     .map(([propName, propSchema]: [string, Schema]) => {
-      const isArray = /^array$/i.test(propSchema.type || '');
+      const isArray = propSchema.type === 'array';
       const ref =
         propSchema.additionalProperties &&
         typeof propSchema.additionalProperties !== 'boolean'
@@ -364,86 +366,48 @@ function parseInterfaceProperties(
       );
       const allOfImports = propertyAllOf.map(prop => `${prop.typescriptType}`);
       const type = typescriptType.replace('[]', '');
-      const isPrimitiveType = BASIC_TS_TYPE_REGEX.test(type);
       const name =
         /^[A-Za-z_$][\w$]*$/.test(propName) ||
         propName === ADDITIONAL_PROPERTIES_KEY
           ? propName
           : `'${propName}'`;
-      const isRequired = requiredProps.includes(propName);
 
-      const accessProp = (arg: string): string =>
-        arg.startsWith("'") ? `arg[${arg}]` : `arg.${arg}`;
-
-      const guardFn = (fn: () => string, prop: Property = {}) => `
-      ${
-        prop.hasOwnProperty('isRequired') || isRequired
-          ? ''
-          : `typeof ${accessProp(name)} === 'undefined' ||`
-      }
-      ${
-        prop.isArray || isArray
-          ? `(Array.isArray(${accessProp(name)}) && ${accessProp(
-              name,
-            )}.every((item: unknown) => ${
-              prop.isPrimitiveType || isPrimitiveType
-                ? `typeof item === '${prop.type || type}'`
-                : (prop.typescriptType || typescriptType).endsWith('[]') // checks if item is nested array type
-                ? `(Array.isArray(item) && item.every((itemItem: unknown) => ${(prop.isPrimitiveType ||
-                  isPrimitiveType
-                    ? `typeof itemItem === '${prop.type || type}'`
-                    : `is${prop.typescriptType || typescriptType}(itemItem)`
-                  ).replace('[]', '')}))`
-                : `is${prop.typescriptType || typescriptType}(item)`
-            }))`
-          : name === ADDITIONAL_PROPERTIES_KEY
-          ? `Object.values(arg).every((item: unknown) => ${
-              isPrimitiveType
-                ? `typeof item === '${type}'`
-                : `is${typescriptType}(item)`
-            })`
-          : `${
-              prop.isPrimitiveType || isPrimitiveType
-                ? `typeof ${accessProp(prop.name || name)} === '${prop.type ||
-                    type}'`
-                : fn()
-            }`
-      }
-      `;
-
-      const guard = `(${guardFn(() =>
-        propertyAllOf.length
-          ? `(${propertyAllOf
-              .map(prop =>
-                guardFn(
-                  () => `is${prop.typescriptType}(${accessProp(name)})`,
-                  prop,
-                ),
-              )
-              .join(' && ')})`
-          : 'enum' in propSchema
-          ? `[${(typescriptType || '').replace(
-              / \| /g,
-              ', ',
-            )}].includes(${accessProp(name)})`
-          : `is${typescriptType}(${accessProp(name)})`,
-      ).replace(/\s+/g, ' ')}) &&`;
-
-      return {
+      const property: Property = {
         isArray,
-        isDictionary: propSchema.additionalProperties,
+        isDictionary: !!propSchema.additionalProperties,
         isRef,
-        isPrimitiveType,
-        isRequired,
+        isPrimitiveType: BASIC_TS_TYPE_REGEX.test(type),
+        isRequired: requiredProps.includes(propName),
         name,
         description: replaceNewLines(propSchema.description),
         type: type,
-        guard,
         typescriptType: allOfParsed.length
           ? allOfParsed.join(' & ')
           : typescriptType,
         imports: isRef ? [type, ...allOfImports] : allOfImports,
       };
+
+      const guard = `(${guardFn(
+        () =>
+          propertyAllOf.length
+            ? `(${propertyAllOf
+                .map(prop =>
+                  guardFn(
+                    () => `is${prop.typescriptType}(${accessProp(name)})`,
+                    { ...prop, name, isRequired: true },
+                  ),
+                )
+                .join(' && ')})`
+            : 'enum' in propSchema
+            ? `[${(typescriptType || '').replace(
+                / \| /g,
+                ', ',
+              )}].includes(${accessProp(name)})`
+            : `is${typescriptType}(${accessProp(name)})`,
+        property,
+      ).replace(/\s+/g, ' ')}) &&`;
+
+      return { ...property, guard };
     })
     .sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
 }
@@ -617,7 +581,8 @@ function transformParameters(
     const paramRef: Partial<SwaggerParameter> = derefName
       ? allParams[derefName] || {}
       : {};
-    const name = 'name' in paramRef ? paramRef.name : (param as Parameter).name;
+    const name =
+      'name' in paramRef ? paramRef.name || '' : (param as Parameter).name;
     const type =
       ('type' in param && param.type) ||
       (paramRef && 'type' in paramRef && paramRef.type) ||
@@ -660,7 +625,8 @@ function transformParameters(
       isArray,
       isRequired:
         (param as Parameter).isRequired ||
-        (param as { required: boolean }).required ||
+        // tslint:disable-next-line:no-any
+        (<any>param).required ||
         paramRef.required,
       name,
       typescriptType,

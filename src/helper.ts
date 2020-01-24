@@ -1,5 +1,5 @@
 import { Reference } from 'swagger-schema-official';
-import { FileInfix } from './types';
+import { FileInfix, Property } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|bigint|boolean|object|void)\b/;
 const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|void|Object|File|Blob)\b/i;
@@ -56,7 +56,7 @@ export function dereferenceType(refString: string | undefined): string {
  *
  * example: shipmentShipmentAddress --> ShipmentAddress
  *
- * note: minimum is 3 letters otherwise words are not striped
+ * note: minimum is 3 letters otherwise words are kept in place
  *
  * @param {string} text
  * @returns {string}
@@ -88,6 +88,53 @@ export function toTypescriptType(type: string | undefined): string {
   }
 
   return typeName(type);
+}
+
+export function accessProp(arg: string): string {
+  return arg.startsWith("'") ? `arg[${arg}]` : `arg.${arg}`;
+}
+
+function guardArray(prop: Property): string {
+  return `(Array.isArray(${accessProp(prop.name)}) && ${accessProp(
+    prop.name,
+  )}.every((item: unknown) => ${
+    prop.isPrimitiveType
+      ? `typeof item === '${prop.type}'`
+      : prop.typescriptType && prop.typescriptType.endsWith('[]') // checks if item is nested array type
+      ? `(Array.isArray(item) && item.every((itemItem: unknown) => ${(prop.isPrimitiveType
+          ? `typeof itemItem === '${prop.type}'`
+          : `is${prop.typescriptType}(itemItem)`
+        ).replace('[]', '')}))`
+      : `is${prop.typescriptType}(item)`
+  }))`;
+}
+
+// text?: ItemList & Data
+// ( typeof arg.text === 'undefined' || ( typeof arg['0'] === 'undefined' || isItemList(arg.text) && typeof arg['1'] === 'undefined' || isData(arg.text) ) ) &&
+
+export function guardFn(fn: () => string, prop: Property): string {
+  return `
+      ${
+        prop.isRequired
+          ? ''
+          : `typeof ${accessProp(prop.name)} === 'undefined' ||`
+      }
+      ${
+        prop.name === ADDITIONAL_PROPERTIES_KEY
+          ? `Object.values(arg).every((item: unknown) => ${
+              prop.isPrimitiveType
+                ? `typeof item === '${prop.type}'`
+                : `is${prop.typescriptType}(item)`
+            })`
+          : prop.isArray
+          ? guardArray(prop)
+          : `${
+              prop.isPrimitiveType
+                ? `typeof ${accessProp(prop.name)} === '${prop.type}'`
+                : fn()
+            }`
+      }
+      `;
 }
 
 export function typeName(

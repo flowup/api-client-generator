@@ -48,10 +48,11 @@ export interface Property {
   readonly isArray?: boolean;
   readonly isRef?: boolean;
   readonly isPrimitiveType?: boolean;
+  readonly isDictionary?: boolean;
   readonly in?: In | string;
   readonly enum?: (string | boolean | number | {})[];
   readonly items?: Schema | Schema[];
-  readonly name?: string;
+  readonly name: string;
   readonly description?: string;
   readonly $ref?: string;
   readonly schema?: Schema;
