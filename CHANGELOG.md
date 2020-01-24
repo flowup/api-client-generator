@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.6.2](https://github.com/flowup/api-client-generator/compare/4.6.1...4.6.2) (2020-01-24)
+
+
+### Bug Fixes
+
+* **generator:** object instad of `{ [key: string]: any }` ([0c29141](https://github.com/flowup/api-client-generator/commit/0c29141))
+* **guards:** array nested in `additionalProperties` ([4f23f92](https://github.com/flowup/api-client-generator/commit/4f23f92))
+* **guards:** method response basic type guards used instead of custom function for primitive types ([96ce207](https://github.com/flowup/api-client-generator/commit/96ce207))
+* **models:** object instead of any in case of nested properties ([e8b7667](https://github.com/flowup/api-client-generator/commit/e8b7667))
+* **service:** object instead of any in case of nested properties in method parameter ([4443ac3](https://github.com/flowup/api-client-generator/commit/4443ac3))
+* **service:** object instead of any in case of nested properties in response ([277ee3f](https://github.com/flowup/api-client-generator/commit/277ee3f))
+
 ### [4.6.1](https://github.com/flowup/api-client-generator/compare/4.6.0...4.6.1) (2020-01-23)
 
 
