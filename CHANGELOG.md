@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.6.3](https://github.com/flowup/api-client-generator/compare/4.6.2...4.6.3) (2020-06-24)
+
+
+### Bug Fixes
+
+* **parser:** filtering already existing parent definitions to overcome recursion ([e292567](https://github.com/flowup/api-client-generator/commit/e292567c05f81f9380f0c6998f8542e9a67051ec))
+
 ### [4.6.2](https://github.com/flowup/api-client-generator/compare/4.6.1...4.6.2) (2020-01-24)
 
 
