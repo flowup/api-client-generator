@@ -237,7 +237,13 @@ function parseDefinitions(
                     definitionName === prop.typescriptType,
                 )
                   ? a // do not parse if type def already exists in parsed definitions
-                  : [...a, ...filterByName(prop.typescriptType!, namedDefs)],
+                  : [
+                      ...a,
+                      ...filterByName(prop.typescriptType!, [
+                        ...parentDefs,
+                        ...namedDefs,
+                      ]),
+                    ],
               [],
             ),
         ],
