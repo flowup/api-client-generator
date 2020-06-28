@@ -41,7 +41,7 @@ export class MetaAPIClientModule {
    * @param { MetaAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: MetaAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: MetaAPIClientModuleConfig = {}): ModuleWithProviders<MetaAPIClientModule> {
     return {
       ngModule: MetaAPIClientModule,
       providers: [

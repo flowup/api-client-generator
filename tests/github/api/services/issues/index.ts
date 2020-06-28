@@ -41,7 +41,7 @@ export class IssuesAPIClientModule {
    * @param { IssuesAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: IssuesAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: IssuesAPIClientModuleConfig = {}): ModuleWithProviders<IssuesAPIClientModule> {
     return {
       ngModule: IssuesAPIClientModule,
       providers: [

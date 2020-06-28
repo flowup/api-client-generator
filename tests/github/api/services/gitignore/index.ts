@@ -41,7 +41,7 @@ export class GitignoreAPIClientModule {
    * @param { GitignoreAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: GitignoreAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: GitignoreAPIClientModuleConfig = {}): ModuleWithProviders<GitignoreAPIClientModule> {
     return {
       ngModule: GitignoreAPIClientModule,
       providers: [

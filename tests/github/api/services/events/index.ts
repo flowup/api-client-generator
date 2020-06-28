@@ -41,7 +41,7 @@ export class EventsAPIClientModule {
    * @param { EventsAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: EventsAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: EventsAPIClientModuleConfig = {}): ModuleWithProviders<EventsAPIClientModule> {
     return {
       ngModule: EventsAPIClientModule,
       providers: [

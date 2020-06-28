@@ -41,7 +41,7 @@ export class OrgsAPIClientModule {
    * @param { OrgsAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: OrgsAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: OrgsAPIClientModuleConfig = {}): ModuleWithProviders<OrgsAPIClientModule> {
     return {
       ngModule: OrgsAPIClientModule,
       providers: [

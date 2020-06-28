@@ -41,7 +41,7 @@ export class TeamsAPIClientModule {
    * @param { TeamsAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: TeamsAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: TeamsAPIClientModuleConfig = {}): ModuleWithProviders<TeamsAPIClientModule> {
     return {
       ngModule: TeamsAPIClientModule,
       providers: [

@@ -41,7 +41,7 @@ export class NotificationsAPIClientModule {
    * @param { NotificationsAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: NotificationsAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: NotificationsAPIClientModuleConfig = {}): ModuleWithProviders<NotificationsAPIClientModule> {
     return {
       ngModule: NotificationsAPIClientModule,
       providers: [

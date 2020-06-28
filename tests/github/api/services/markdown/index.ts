@@ -41,7 +41,7 @@ export class MarkdownAPIClientModule {
    * @param { MarkdownAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: MarkdownAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: MarkdownAPIClientModuleConfig = {}): ModuleWithProviders<MarkdownAPIClientModule> {
     return {
       ngModule: MarkdownAPIClientModule,
       providers: [

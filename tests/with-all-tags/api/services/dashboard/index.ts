@@ -41,7 +41,7 @@ export class DashboardAPIClientModule {
    * @param { DashboardAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: DashboardAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: DashboardAPIClientModuleConfig = {}): ModuleWithProviders<DashboardAPIClientModule> {
     return {
       ngModule: DashboardAPIClientModule,
       providers: [
