@@ -354,3 +354,181 @@ definitions:
     properties:
       appliedIf:
         $ref: '#/definitions/PageDataRules'
+  v1ContentModelArray:
+    type: object
+    properties:
+      meta:
+        $ref: '#/definitions/v1ContentModelMetaInfo'
+      itemSchema:
+        $ref: '#/definitions/v1ContentModelElement'
+        title: |-
+          Schema of a array item
+          Could be of any type
+  v1ContentModelBool:
+    type: object
+    properties:
+      meta:
+        $ref: '#/definitions/v1ContentModelMetaInfo'
+      default:
+        type: boolean
+        format: boolean
+        title: Default value for boolean
+  v1ContentModelDouble:
+    type: object
+    properties:
+      meta:
+        $ref: '#/definitions/v1ContentModelMetaInfo'
+      default:
+        type: number
+        format: double
+        title: Default value of the floating point number
+      minimum:
+        type: number
+        format: double
+        title: 'Minimum float value, defaults to negative infinity'
+      maximum:
+        type: number
+        format: double
+        title: 'Maximum float value, defaults to positive infinity'
+      enum:
+        type: array
+        items:
+          type: number
+          format: double
+        title: Array of possible values for the property
+  v1ContentModelElement:
+    type: object
+    properties:
+      meta:
+        $ref: '#/definitions/v1ContentModelMetaInfo'
+        title: Element meta information
+      object:
+        $ref: '#/definitions/v1ContentModelObject'
+      array:
+        $ref: '#/definitions/v1ContentModelArray'
+      int:
+        $ref: '#/definitions/v1ContentModelInteger'
+      double:
+        $ref: '#/definitions/v1ContentModelDouble'
+      string:
+        $ref: '#/definitions/v1ContentModelString'
+      bool:
+        $ref: '#/definitions/v1ContentModelBool'
+  v1ContentModelField:
+    type: object
+    properties:
+      meta:
+        $ref: '#/definitions/v1ContentModelMetaInfo'
+        title: Field meta information
+      key:
+        type: string
+        title: 'Field name, dictionary key'
+      object:
+        $ref: '#/definitions/v1ContentModelObject'
+      array:
+        $ref: '#/definitions/v1ContentModelArray'
+      int:
+        $ref: '#/definitions/v1ContentModelInteger'
+      double:
+        $ref: '#/definitions/v1ContentModelDouble'
+      string:
+        $ref: '#/definitions/v1ContentModelString'
+      bool:
+        $ref: '#/definitions/v1ContentModelBool'
+  v1ContentModelInteger:
+    type: object
+    properties:
+      meta:
+        $ref: '#/definitions/v1ContentModelMetaInfo'
+      default:
+        type: string
+        format: int64
+        title: Default value for integer property
+      minimum:
+        type: string
+        format: int64
+        title: 'Minimum integer value, defaults to negative infinity'
+      maximum:
+        type: string
+        format: int64
+        title: 'Maximum integer value, defaults to positive infinity'
+      enum:
+        type: array
+        items:
+          type: string
+          format: int64
+        title: Array of possible values for the property
+  v1ContentModelMetaInfo:
+    type: object
+    properties:
+      title:
+        type: string
+        title: Name or a short description of the object
+      description:
+        type: string
+        title: Descriptive text about the object
+      customId:
+        type: string
+        title: |-
+          Custom globally unique identifier
+          Unset by default but can be set and used as a reference to the element of the content model
+      comment:
+        type: string
+        title: Comment left by the content modeler
+  v1ContentModelObject:
+    type: object
+    properties:
+      meta:
+        $ref: '#/definitions/v1ContentModelMetaInfo'
+        title: Object meta information
+      fields:
+        type: array
+        items:
+          $ref: '#/definitions/v1ContentModelField'
+        title: List of object fields
+  v1ContentModelString:
+    type: object
+    properties:
+      meta:
+        $ref: '#/definitions/v1ContentModelMetaInfo'
+      default:
+        type: string
+        title: Default value for string
+      regex:
+        type: string
+        title: Regular expression that defines a language to which the value of this property must belong
+      enum:
+        type: array
+        items:
+          type: string
+        title: Array of possible values for the property
+  v1ContentModelVersion:
+    type: object
+    properties:
+      contentModelId:
+        type: string
+        title: Content model ID
+      contentModelVersionId:
+        type: string
+        title: Version ID
+      createdAt:
+        type: string
+        format: date-time
+        title: Creation timestamp
+      previousVersionId:
+        type: string
+        title: ID of the previous content model version
+      nextVersionId:
+        type: string
+        title: ID of the newer content model version
+      schema:
+        $ref: '#/definitions/v1ContentModelObject'
+        title: Top level object schema
+  v1ContentModelVersionList:
+    type: object
+    properties:
+      versions:
+        type: array
+        items:
+          $ref: '#/definitions/v1ContentModelVersion'
+        title: List of content model versions

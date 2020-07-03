@@ -272,4 +272,195 @@ export function isTestModel(arg: any): arg is models.TestModel {
   );
   }
 
+export function isV1ContentModelArray(arg: any): arg is models.V1ContentModelArray {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // itemSchema?: V1ContentModelElement
+    ( typeof arg.itemSchema === 'undefined' || isV1ContentModelElement(arg.itemSchema) ) &&
+    // meta?: V1ContentModelMetaInfo
+    ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelBool(arg: any): arg is models.V1ContentModelBool {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // default?: boolean
+    ( typeof arg.default === 'undefined' || typeof arg.default === 'boolean' ) &&
+    // meta?: V1ContentModelMetaInfo
+    ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelDouble(arg: any): arg is models.V1ContentModelDouble {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // default?: number
+    ( typeof arg.default === 'undefined' || typeof arg.default === 'number' ) &&
+    // enum?: number[]
+    ( typeof arg.enum === 'undefined' || (Array.isArray(arg.enum) && arg.enum.every((item: unknown) => typeof item === 'number')) ) &&
+    // maximum?: number
+    ( typeof arg.maximum === 'undefined' || typeof arg.maximum === 'number' ) &&
+    // meta?: V1ContentModelMetaInfo
+    ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
+    // minimum?: number
+    ( typeof arg.minimum === 'undefined' || typeof arg.minimum === 'number' ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelElement(arg: any): arg is models.V1ContentModelElement {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // array?: V1ContentModelArray
+    ( typeof arg.array === 'undefined' || isV1ContentModelArray(arg.array) ) &&
+    // bool?: V1ContentModelBool
+    ( typeof arg.bool === 'undefined' || isV1ContentModelBool(arg.bool) ) &&
+    // double?: V1ContentModelDouble
+    ( typeof arg.double === 'undefined' || isV1ContentModelDouble(arg.double) ) &&
+    // int?: V1ContentModelInteger
+    ( typeof arg.int === 'undefined' || isV1ContentModelInteger(arg.int) ) &&
+    // meta?: V1ContentModelMetaInfo
+    ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
+    // object?: V1ContentModelObject
+    ( typeof arg.object === 'undefined' || isV1ContentModelObject(arg.object) ) &&
+    // string?: V1ContentModelString
+    ( typeof arg.string === 'undefined' || isV1ContentModelString(arg.string) ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelField(arg: any): arg is models.V1ContentModelField {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // array?: V1ContentModelArray
+    ( typeof arg.array === 'undefined' || isV1ContentModelArray(arg.array) ) &&
+    // bool?: V1ContentModelBool
+    ( typeof arg.bool === 'undefined' || isV1ContentModelBool(arg.bool) ) &&
+    // double?: V1ContentModelDouble
+    ( typeof arg.double === 'undefined' || isV1ContentModelDouble(arg.double) ) &&
+    // int?: V1ContentModelInteger
+    ( typeof arg.int === 'undefined' || isV1ContentModelInteger(arg.int) ) &&
+    // key?: string
+    ( typeof arg.key === 'undefined' || typeof arg.key === 'string' ) &&
+    // meta?: V1ContentModelMetaInfo
+    ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
+    // object?: V1ContentModelObject
+    ( typeof arg.object === 'undefined' || isV1ContentModelObject(arg.object) ) &&
+    // string?: V1ContentModelString
+    ( typeof arg.string === 'undefined' || isV1ContentModelString(arg.string) ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelInteger(arg: any): arg is models.V1ContentModelInteger {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // default?: string
+    ( typeof arg.default === 'undefined' || typeof arg.default === 'string' ) &&
+    // enum?: string[]
+    ( typeof arg.enum === 'undefined' || (Array.isArray(arg.enum) && arg.enum.every((item: unknown) => typeof item === 'string')) ) &&
+    // maximum?: string
+    ( typeof arg.maximum === 'undefined' || typeof arg.maximum === 'string' ) &&
+    // meta?: V1ContentModelMetaInfo
+    ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
+    // minimum?: string
+    ( typeof arg.minimum === 'undefined' || typeof arg.minimum === 'string' ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelMetaInfo(arg: any): arg is models.V1ContentModelMetaInfo {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // comment?: string
+    ( typeof arg.comment === 'undefined' || typeof arg.comment === 'string' ) &&
+    // customId?: string
+    ( typeof arg.customId === 'undefined' || typeof arg.customId === 'string' ) &&
+    // description?: string
+    ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
+    // title?: string
+    ( typeof arg.title === 'undefined' || typeof arg.title === 'string' ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelObject(arg: any): arg is models.V1ContentModelObject {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // fields?: V1ContentModelField[]
+    ( typeof arg.fields === 'undefined' || (Array.isArray(arg.fields) && arg.fields.every((item: unknown) => isV1ContentModelField(item))) ) &&
+    // meta?: V1ContentModelMetaInfo
+    ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelString(arg: any): arg is models.V1ContentModelString {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // default?: string
+    ( typeof arg.default === 'undefined' || typeof arg.default === 'string' ) &&
+    // enum?: string[]
+    ( typeof arg.enum === 'undefined' || (Array.isArray(arg.enum) && arg.enum.every((item: unknown) => typeof item === 'string')) ) &&
+    // meta?: V1ContentModelMetaInfo
+    ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
+    // regex?: string
+    ( typeof arg.regex === 'undefined' || typeof arg.regex === 'string' ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelVersion(arg: any): arg is models.V1ContentModelVersion {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // contentModelId?: string
+    ( typeof arg.contentModelId === 'undefined' || typeof arg.contentModelId === 'string' ) &&
+    // contentModelVersionId?: string
+    ( typeof arg.contentModelVersionId === 'undefined' || typeof arg.contentModelVersionId === 'string' ) &&
+    // createdAt?: string
+    ( typeof arg.createdAt === 'undefined' || typeof arg.createdAt === 'string' ) &&
+    // nextVersionId?: string
+    ( typeof arg.nextVersionId === 'undefined' || typeof arg.nextVersionId === 'string' ) &&
+    // previousVersionId?: string
+    ( typeof arg.previousVersionId === 'undefined' || typeof arg.previousVersionId === 'string' ) &&
+    // schema?: V1ContentModelObject
+    ( typeof arg.schema === 'undefined' || isV1ContentModelObject(arg.schema) ) &&
+
+  true
+  );
+  }
+
+export function isV1ContentModelVersionList(arg: any): arg is models.V1ContentModelVersionList {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // versions?: V1ContentModelVersion[]
+    ( typeof arg.versions === 'undefined' || (Array.isArray(arg.versions) && arg.versions.every((item: unknown) => isV1ContentModelVersion(item))) ) &&
+
+  true
+  );
+  }
+
 

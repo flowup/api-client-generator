@@ -1,4 +1,4 @@
-import { removeDuplicateWords, toCamelCase } from './helper';
+import { removeDuplicateWords, toCamelCase, toTypescriptType } from './helper';
 
 describe('[helpers] to camelCase', () => {
   it('should convert dash to camelCase', () => {
@@ -32,5 +32,29 @@ describe('[helpers] remove duplicate words', () => {
     // It shouldn't remove duplicates with less than 4 letters
     expect(removeDuplicateWords('idWololoID')).toEqual('idWololoID');
     expect(removeDuplicateWords('UrlichUrl')).toEqual('UrlichUrl');
+  });
+});
+
+describe('[helpers] determine TS type', () => {
+  it('should detect build-in types', () => {
+    expect(toTypescriptType('integer')).toEqual('number');
+    expect(toTypescriptType('Integer')).toEqual('number');
+    expect(toTypescriptType('double')).toEqual('number');
+    expect(toTypescriptType('number')).toEqual('number');
+
+    expect(toTypescriptType('string')).toEqual('string');
+    expect(toTypescriptType('boolean')).toEqual('boolean');
+    expect(toTypescriptType('Boolean')).toEqual('boolean');
+    expect(toTypescriptType('object')).toEqual('object');
+    expect(toTypescriptType('Object')).toEqual('object');
+    expect(toTypescriptType('array')).toEqual('any[]');
+    expect(toTypescriptType('Array')).toEqual('any[]');
+  });
+
+  it('should NOT replace type by build-in types', () => {
+    expect(toTypescriptType('modelInteger')).toEqual('ModelInteger');
+    expect(toTypescriptType('MyString')).toEqual('MyString');
+    expect(toTypescriptType('stringValue')).toEqual('StringValue');
+    expect(toTypescriptType('Bool')).toEqual('Bool');
   });
 });

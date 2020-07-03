@@ -452,7 +452,7 @@ function determineArrayType(property: Schema = {}): string {
   if (property.items && property.items.$ref) {
     return typeName(dereferenceType(property.items.$ref));
   } else if (property.items && property.items.type) {
-    if (/^array$/i.test(property.items.type || '')) {
+    if (/^(array)$/i.test(property.items.type || '')) {
       return `${determineArrayType(property.items)}[]`;
     }
 
@@ -593,7 +593,7 @@ function transformParameters(
       ('type' in param && param.type) ||
       (paramRef && 'type' in paramRef && paramRef.type) ||
       '';
-    const isArray = /^array$/i.test(type);
+    const isArray = /^(array)$/i.test(type);
     const typescriptType =
       'enum' in param
         ? (param.type === 'number'

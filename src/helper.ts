@@ -76,13 +76,13 @@ export function toTypescriptType(type: string | undefined): string {
     return 'any';
   }
 
-  if (/^number|integer|double$/i.test(type)) {
+  if (/^(number|integer|double)$/i.test(type)) {
     return 'number';
-  } else if (/^string|boolean$/i.test(type)) {
+  } else if (/^(string|boolean)$/i.test(type)) {
     return type.toLocaleLowerCase();
-  } else if (/^object$/i.test(type)) {
+  } else if (/^(object)$/i.test(type)) {
     return 'object';
-  } else if (/^array$/i.test(type)) {
+  } else if (/^(array)$/i.test(type)) {
     logWarn('Support for nested arrays is limited, using any[] as type');
     return 'any[]';
   }
