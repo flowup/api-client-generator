@@ -41,7 +41,7 @@ export class NetworksAPIClientModule {
    * @param { NetworksAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: NetworksAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: NetworksAPIClientModuleConfig = {}): ModuleWithProviders<NetworksAPIClientModule> {
     return {
       ngModule: NetworksAPIClientModule,
       providers: [

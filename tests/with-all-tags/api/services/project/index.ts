@@ -41,7 +41,7 @@ export class ProjectAPIClientModule {
    * @param { ProjectAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: ProjectAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: ProjectAPIClientModuleConfig = {}): ModuleWithProviders<ProjectAPIClientModule> {
     return {
       ngModule: ProjectAPIClientModule,
       providers: [

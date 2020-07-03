@@ -41,7 +41,7 @@ export class EmojisAPIClientModule {
    * @param { EmojisAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: EmojisAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: EmojisAPIClientModuleConfig = {}): ModuleWithProviders<EmojisAPIClientModule> {
     return {
       ngModule: EmojisAPIClientModule,
       providers: [

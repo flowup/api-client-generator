@@ -41,7 +41,7 @@ export class LegacyAPIClientModule {
    * @param { LegacyAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: LegacyAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: LegacyAPIClientModuleConfig = {}): ModuleWithProviders<LegacyAPIClientModule> {
     return {
       ngModule: LegacyAPIClientModule,
       providers: [

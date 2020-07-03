@@ -41,7 +41,7 @@ export class DummySelectorAPIClientModule {
    * @param { DummySelectorAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: DummySelectorAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: DummySelectorAPIClientModuleConfig = {}): ModuleWithProviders<DummySelectorAPIClientModule> {
     return {
       ngModule: DummySelectorAPIClientModule,
       providers: [

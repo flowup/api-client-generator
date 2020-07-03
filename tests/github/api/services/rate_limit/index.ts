@@ -41,7 +41,7 @@ export class RateLimitAPIClientModule {
    * @param { RateLimitAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: RateLimitAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: RateLimitAPIClientModuleConfig = {}): ModuleWithProviders<RateLimitAPIClientModule> {
     return {
       ngModule: RateLimitAPIClientModule,
       providers: [

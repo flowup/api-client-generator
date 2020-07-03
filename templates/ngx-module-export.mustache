@@ -41,7 +41,7 @@ export class {{&serviceName}}Module {
    * @param { {{&serviceName}}ModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: {{&serviceName}}ModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: {{&serviceName}}ModuleConfig = {}): ModuleWithProviders<{{&serviceName}}Module> {
     return {
       ngModule: {{&serviceName}}Module,
       providers: [
