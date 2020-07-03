@@ -41,7 +41,7 @@ export class GistsAPIClientModule {
    * @param { GistsAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: GistsAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: GistsAPIClientModuleConfig = {}): ModuleWithProviders<GistsAPIClientModule> {
     return {
       ngModule: GistsAPIClientModule,
       providers: [

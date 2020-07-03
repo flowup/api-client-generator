@@ -41,7 +41,7 @@ export class SearchAPIClientModule {
    * @param { SearchAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: SearchAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: SearchAPIClientModuleConfig = {}): ModuleWithProviders<SearchAPIClientModule> {
     return {
       ngModule: SearchAPIClientModule,
       providers: [

@@ -41,7 +41,7 @@ export class FeedsAPIClientModule {
    * @param { FeedsAPIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: FeedsAPIClientModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: FeedsAPIClientModuleConfig = {}): ModuleWithProviders<FeedsAPIClientModule> {
     return {
       ngModule: FeedsAPIClientModule,
       providers: [
