@@ -17,9 +17,6 @@
 
 Angular REST API client generator from Swagger YAML or JSON file with camel case settings
 
-Generated files are compatible with Angular 6 (should be compatible with 5 version too).
-RxJS imports are targeted for version 6+.
-
 ![Logo](https://raw.githubusercontent.com/flowup/api-client-generator/master/api-client-generator-logo.png)
 
 # Description
@@ -42,9 +39,16 @@ A lot of developers is struggling with how to properly use the REST API in their
 
 # Compatibility
 
-- **Angular 6+** (it should also work with 5 and 4.3+)
-- **RxJS 6** (Observable imports)
+This generator focuses on supporting latest Angular/RxJS versions.
+
+- **Angular 9+**
+- **RxJS 6+** (Observable imports)
+
   - in case of rxjs <6 please update or rewrite the rxjs imports to match the older version
+
+## Older versions
+
+If you need compatibility for Angular 7 and less, It might require some additional steps. In case of problems try editing necessary imports manually or downgrading to older generator versions (4.6.0 and bellow), although it is not recommended as patches and fixes might not be present in older versions.
 
 See the [Changelog](https://github.com/flowup/api-client-generator/blob/master/CHANGELOG.md) to keep up with the features and changes.
 
@@ -54,7 +58,7 @@ This command will generate API client described in the swagger.json file to the 
 
 `npx api-client-generator -s ./path/to/swagger.json -o ./output`
 
-This command will do the same but it will split **all of the tags to separate API services** and models folder will be shared. All will be generated to specified path and that is `./src/api` folder.
+This command will do the same, but it will split **all of the tags to separate API services** and models folder will be shared. All will be generated to specified path and that is `./src/api` folder.
 
 `npx api-client-generator -t all -s ./path/to/swagger.yaml -o ./src/api"`
 
