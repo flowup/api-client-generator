@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://github.com/flowup/api-client-generator/compare/4.6.4...4.7.0) (2020-07-03)
+
+
+### Features
+
+* angular 10 module with providers compatibility ([7f69cc8](https://github.com/flowup/api-client-generator/commit/7f69cc837005838cb5256a6e7d44103bb91cf29c))
+
 ### [4.6.4](https://github.com/flowup/api-client-generator/compare/4.6.3...4.6.4) (2020-07-03)
 
 
