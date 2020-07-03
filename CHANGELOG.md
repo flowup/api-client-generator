@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.6.4](https://github.com/flowup/api-client-generator/compare/4.6.3...4.6.4) (2020-07-03)
+
+
+### Bug Fixes
+
+* **parser:** reference model name contains build-in type ([4593fae](https://github.com/flowup/api-client-generator/commit/4593fae5bd768147bee888e4a5ae5e6561835b92))
+
 ### [4.6.3](https://github.com/flowup/api-client-generator/compare/4.6.2...4.6.3) (2020-06-24)
 
 
