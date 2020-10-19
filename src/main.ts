@@ -63,10 +63,11 @@ generate(options)
       logWarn(`\nLegacy models discovered:\n${legacyFiles.join('\n')}`);
     }
   })
-  .catch((error: Error) =>
+  .catch((error: Error) => {
     console.error(
       ...(argv.verbose
         ? ['Error encountered during generating:', error]
         : [error.message]),
-    ),
-  );
+    );
+    throw error;
+  });
