@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.7.1](https://github.com/flowup/api-client-generator/compare/4.7.0...4.7.1) (2020-10-19)
+
+
+### Bug Fixes
+
+* **cli:** rethrow errors in catch to see full trace stack in console ([943f7d2](https://github.com/flowup/api-client-generator/commit/943f7d2c68323ef581fed844697a790d66dd7555))
+* **enums:** x-enumNames specified integers and description with new lines ([6a98b82](https://github.com/flowup/api-client-generator/commit/6a98b8293d399482ea4703e887564643533d33e2))
+
 ## [4.7.0](https://github.com/flowup/api-client-generator/compare/4.6.4...4.7.0) (2020-07-03)
 
 
