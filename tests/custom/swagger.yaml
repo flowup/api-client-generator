@@ -79,6 +79,31 @@ paths:
       responses:
         200:
           description: OK
+  #  # an example of overriding parameter from RAWG API
+  #  '/games/{id}':
+  #    get:
+  #      description: ''
+  #      operationId: games_read
+  #      parameters:
+  #        - description: An ID or a slug identifying this Game.
+  #          in: path
+  #          name: id
+  #          required: true
+  #          type: string
+  #      responses:
+  #        '200':
+  #          description: ''
+  #          schema:
+  #            $ref: '#/definitions/Pet'
+  #      summary: Get details of the game.
+  #      tags:
+  #        - games
+  #    parameters:
+  #      - description: A unique integer value identifying this Game.
+  #        in: path
+  #        name: id
+  #        required: true
+  #        type: integer
   #    patch:
   #      requestBody:
   #        content:

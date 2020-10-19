@@ -309,8 +309,8 @@ function defineEnum(
       enumSchema &&
       enumSchema.map((val, index) => ({
         name: (isNumeric
-          ? descKeys
-            ? descKeys[val.toString()]
+          ? xEnumNames.length === 0 && descKeys
+            ? descKeys[val.toString()] || ''
             : xEnumNames[index] || `${val}`
           : val.toString()
         ).replace(/[\W\s]+/, '_'),
