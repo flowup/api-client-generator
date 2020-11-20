@@ -105,13 +105,14 @@ function guardArray(prop: Property): string {
     prop.name,
   )}.every((item: unknown) => ${
     prop.isPrimitiveType
-      ? `typeof item === '${prop.type}'`
+      ? `typeof item === '${prop.type}'` // basic types
       : prop.typescriptType && prop.typescriptType.endsWith('[]') // checks if item is nested array type
       ? `(Array.isArray(item) && item.every((itemItem: unknown) => ${(prop.isPrimitiveType
-          ? `typeof itemItem === '${prop.type}'`
-          : `is${prop.typescriptType}(itemItem)`
-        ).replace('[]', '')}))`
-      : `is${prop.typescriptType}(item)`
+          ? `typeof itemItem === '${prop.type}'` // basic types of nested array
+          : `is${prop.typescriptType}(itemItem)` // structured types of nested array
+        )
+          .replace('[]', '')}))`
+      : `is${prop.typescriptType}(item)` // structured types
   }))`;
 }
 
