@@ -116,6 +116,21 @@ function guardArray(prop: Property): string {
   }))`;
 }
 
+function guardDictionary(prop: Property): string {
+  return `Object.values(arg${
+    prop.isDictionary ? `.${prop.name}` : '' // difference between specific property of being dictionary or whole object
+  }).every((value: unknown) => ${
+    prop.isArray
+      ? guardArray({
+          ...prop,
+          name: `${PARENT_PROP_PLACEHOLDER}value`,
+        })
+      : prop.isPrimitiveType
+      ? `typeof value === '${prop.type}'`
+      : `is${prop.typescriptType}(value)`
+  })`;
+}
+
 export function guardFn(fn: () => string, prop: Property): string {
   return `
       ${
@@ -125,18 +140,7 @@ export function guardFn(fn: () => string, prop: Property): string {
       }
       ${
         prop.name === ADDITIONAL_PROPERTIES_KEY || prop.isDictionary
-          ? `Object.values(arg${
-              prop.isDictionary ? `.${prop.name}` : ''
-            }).every((value: unknown) => ${
-              prop.isArray
-                ? guardArray({
-                    ...prop,
-                    name: `${PARENT_PROP_PLACEHOLDER}value`,
-                  })
-                : prop.isPrimitiveType
-                ? `typeof value === '${prop.type}'`
-                : `is${prop.typescriptType}(value)`
-            })`
+          ? guardDictionary(prop)
           : prop.isArray
           ? guardArray(prop)
           : `${
