@@ -192,7 +192,7 @@ export function isMyInterface(arg: any): arg is models.MyInterface {
     // myId?: string
     ( typeof arg.myId === 'undefined' || typeof arg.myId === 'string' ) &&
     // myMap?: { [key: string]: Data }
-    ( typeof arg.myMap === 'undefined' || isData(arg.myMap) ) &&
+    ( typeof arg.myMap === 'undefined' || Object.values(arg.myMap).every((value: unknown) => isData(value)) ) &&
     // myName?: string
     ( typeof arg.myName === 'undefined' || typeof arg.myName === 'string' ) &&
 

@@ -170,7 +170,7 @@ export function isDocument(arg: any): arg is models.Document {
     // createTime?: string
     ( typeof arg.createTime === 'undefined' || typeof arg.createTime === 'string' ) &&
     // fields?: { [key: string]: Value }
-    ( typeof arg.fields === 'undefined' || isValue(arg.fields) ) &&
+    ( typeof arg.fields === 'undefined' || Object.values(arg.fields).every((value: unknown) => isValue(value)) ) &&
     // name?: string
     ( typeof arg.name === 'undefined' || typeof arg.name === 'string' ) &&
     // updateTime?: string
@@ -425,7 +425,7 @@ export function isListenRequest(arg: any): arg is models.ListenRequest {
     // addTarget?: Target
     ( typeof arg.addTarget === 'undefined' || isTarget(arg.addTarget) ) &&
     // labels?: { [key: string]: string }
-    ( typeof arg.labels === 'undefined' || typeof arg.labels === 'string' ) &&
+    ( typeof arg.labels === 'undefined' || Object.values(arg.labels).every((value: unknown) => typeof value === 'string') ) &&
     // removeTarget?: number
     ( typeof arg.removeTarget === 'undefined' || typeof arg.removeTarget === 'number' ) &&
 
@@ -470,7 +470,7 @@ export function isMapValue(arg: any): arg is models.MapValue {
   arg != null &&
   typeof arg === 'object' &&
     // fields?: { [key: string]: Value }
-    ( typeof arg.fields === 'undefined' || isValue(arg.fields) ) &&
+    ( typeof arg.fields === 'undefined' || Object.values(arg.fields).every((value: unknown) => isValue(value)) ) &&
 
   true
   );
@@ -485,11 +485,11 @@ export function isOperation(arg: any): arg is models.Operation {
     // error?: Status
     ( typeof arg.error === 'undefined' || isStatus(arg.error) ) &&
     // metadata?: { [key: string]: any }
-    ( typeof arg.metadata === 'undefined' || isany(arg.metadata) ) &&
+    ( typeof arg.metadata === 'undefined' || Object.values(arg.metadata).every((value: unknown) => isany(value)) ) &&
     // name?: string
     ( typeof arg.name === 'undefined' || typeof arg.name === 'string' ) &&
     // response?: { [key: string]: any }
-    ( typeof arg.response === 'undefined' || isany(arg.response) ) &&
+    ( typeof arg.response === 'undefined' || Object.values(arg.response).every((value: unknown) => isany(value)) ) &&
 
   true
   );
@@ -773,7 +773,7 @@ export function isWriteRequest(arg: any): arg is models.WriteRequest {
   arg != null &&
   typeof arg === 'object' &&
     // labels?: { [key: string]: string }
-    ( typeof arg.labels === 'undefined' || typeof arg.labels === 'string' ) &&
+    ( typeof arg.labels === 'undefined' || Object.values(arg.labels).every((value: unknown) => typeof value === 'string') ) &&
     // streamId?: string
     ( typeof arg.streamId === 'undefined' || typeof arg.streamId === 'string' ) &&
     // streamToken?: string

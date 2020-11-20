@@ -109,8 +109,8 @@ function guardArray(prop: Property): string {
       : prop.typescriptType && prop.typescriptType.endsWith('[]') // checks if item is nested array type
       ? `(Array.isArray(item) && item.every((itemItem: unknown) => ${(prop.isPrimitiveType
           ? `typeof itemItem === '${prop.type}'` // basic types of nested array
-          : `is${prop.typescriptType}(itemItem)` // structured types of nested array
-        )
+          : `is${prop.typescriptType}(itemItem)`
+        ) // structured types of nested array
           .replace('[]', '')}))`
       : `is${prop.typescriptType}(item)` // structured types
   }))`;
@@ -127,8 +127,10 @@ export function guardFn(fn: () => string, prop: Property): string {
           : `typeof ${accessProp(prop.name)} === 'undefined' ||`
       }
       ${
-        prop.name === ADDITIONAL_PROPERTIES_KEY
-          ? `Object.values(arg).every((value: unknown) => ${
+        prop.name === ADDITIONAL_PROPERTIES_KEY || prop.isDictionary
+          ? `Object.values(arg${
+              prop.isDictionary ? `.${prop.name}` : ''
+            }).every((value: unknown) => ${
               prop.isArray
                 ? guardArray({
                     ...prop,

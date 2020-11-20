@@ -153,7 +153,7 @@ export function isWidgetTypeViewModel(arg: any): arg is models.WidgetTypeViewMod
     // Id?: number
     ( typeof arg.Id === 'undefined' || typeof arg.Id === 'number' ) &&
     // KeySystem?: { [key: string]: string }
-    ( typeof arg.KeySystem === 'undefined' || typeof arg.KeySystem === 'string' ) &&
+    ( typeof arg.KeySystem === 'undefined' || Object.values(arg.KeySystem).every((value: unknown) => typeof value === 'string') ) &&
     // ModulName?: string
     ( typeof arg.ModulName === 'undefined' || typeof arg.ModulName === 'string' ) &&
     // ModulNameExtern?: string
@@ -163,7 +163,7 @@ export function isWidgetTypeViewModel(arg: any): arg is models.WidgetTypeViewMod
     // OrganizerTaskId?: number
     ( typeof arg.OrganizerTaskId === 'undefined' || typeof arg.OrganizerTaskId === 'number' ) &&
     // RefSystem?: { [key: string]: string }
-    ( typeof arg.RefSystem === 'undefined' || typeof arg.RefSystem === 'string' ) &&
+    ( typeof arg.RefSystem === 'undefined' || Object.values(arg.RefSystem).every((value: unknown) => typeof value === 'string') ) &&
     // Severity?: StatusSeverity
     ( typeof arg.Severity === 'undefined' || isStatusSeverity(arg.Severity) ) &&
     // SysApplicationId?: number
