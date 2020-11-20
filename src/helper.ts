@@ -117,18 +117,20 @@ function guardArray(prop: Property): string {
 }
 
 function guardDictionary(prop: Property): string {
-  return `Object.values(arg${
-    prop.isDictionary ? `.${prop.name}` : '' // difference between specific property of being dictionary or whole object
-  }).every((value: unknown) => ${
-    prop.isArray
-      ? guardArray({
-          ...prop,
-          name: `${PARENT_PROP_PLACEHOLDER}value`,
-        })
-      : prop.isPrimitiveType
-      ? `typeof value === '${prop.type}'`
-      : `is${prop.typescriptType}(value)`
-  })`;
+  return prop.typescriptType === 'any'
+    ? `typeof arg${prop.isDictionary ? `.${prop.name}` : ''} === 'object'` // skip complicated dictionary guard if properties are simply "any"
+    : `Object.values(arg${
+        prop.isDictionary ? `.${prop.name}` : '' // difference between specific property of being dictionary or whole object
+      }).every((value: unknown) => ${
+        prop.isArray
+          ? guardArray({
+              ...prop,
+              name: `${PARENT_PROP_PLACEHOLDER}value`,
+            })
+          : prop.isPrimitiveType
+          ? `typeof value === '${prop.type}'`
+          : `is${prop.typescriptType}(value)`
+      })`;
 }
 
 export function guardFn(fn: () => string, prop: Property): string {

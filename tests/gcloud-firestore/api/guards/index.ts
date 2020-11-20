@@ -485,11 +485,11 @@ export function isOperation(arg: any): arg is models.Operation {
     // error?: Status
     ( typeof arg.error === 'undefined' || isStatus(arg.error) ) &&
     // metadata?: { [key: string]: any }
-    ( typeof arg.metadata === 'undefined' || Object.values(arg.metadata).every((value: unknown) => isany(value)) ) &&
+    ( typeof arg.metadata === 'undefined' || typeof arg.metadata === 'object' ) &&
     // name?: string
     ( typeof arg.name === 'undefined' || typeof arg.name === 'string' ) &&
     // response?: { [key: string]: any }
-    ( typeof arg.response === 'undefined' || Object.values(arg.response).every((value: unknown) => isany(value)) ) &&
+    ( typeof arg.response === 'undefined' || typeof arg.response === 'object' ) &&
 
   true
   );
