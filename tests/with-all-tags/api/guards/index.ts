@@ -116,7 +116,7 @@ export function isRowModel(arg: any): arg is models.RowModel {
   }
 
 export function isStatusSeverity(arg: any): arg is models.StatusSeverity {
-  return false
+  return arg != null
    || arg === models.StatusSeverity.Unknown
    || arg === models.StatusSeverity.OK
    || arg === models.StatusSeverity.Warning

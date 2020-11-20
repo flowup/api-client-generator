@@ -6,7 +6,7 @@
  * - 3 Third
  * 
  */
-export enum Possition {
+export enum Position {
   First = 1,
   Second = 2,
   Third = 3,

@@ -84,7 +84,7 @@ export function isColumnMapping(arg: any): arg is models.ColumnMapping {
   }
 
 export function isCriticality(arg: any): arg is models.Criticality {
-  return false
+  return arg != null
    || arg === models.Criticality.Low
    || arg === models.Criticality.Medium
    || arg === models.Criticality.High
@@ -92,7 +92,7 @@ export function isCriticality(arg: any): arg is models.Criticality {
   }
 
 export function isFrequency(arg: any): arg is models.Frequency {
-  return false
+  return arg != null
    || arg === models.Frequency.Daily
    || arg === models.Frequency.Weekly
    || arg === models.Frequency.Yearly
@@ -160,7 +160,7 @@ export function isImportStatsGroup(arg: any): arg is models.ImportStatsGroup {
   }
 
 export function isImportStatus(arg: any): arg is models.ImportStatus {
-  return false
+  return arg != null
    || arg === models.ImportStatus.Live
    || arg === models.ImportStatus.PastDeadline
   ;
@@ -211,7 +211,7 @@ export function isImportStatusItem(arg: any): arg is models.ImportStatusItem {
   }
 
 export function isImportType(arg: any): arg is models.ImportType {
-  return false
+  return arg != null
    || arg === models.ImportType.ThirdParty
    || arg === models.ImportType.File
   ;
@@ -243,14 +243,14 @@ export function isIssue(arg: any): arg is models.Issue {
   }
 
 export function isIssueAlertType(arg: any): arg is models.IssueAlertType {
-  return false
+  return arg != null
    || arg === models.IssueAlertType.Validation
    || arg === models.IssueAlertType.Data
   ;
   }
 
 export function isIssueStatus(arg: any): arg is models.IssueStatus {
-  return false
+  return arg != null
    || arg === models.IssueStatus.Pending
    || arg === models.IssueStatus.Resolved
   ;
@@ -340,7 +340,7 @@ export function isNotificationTrigger(arg: any): arg is models.NotificationTrigg
   }
 
 export function isOrder(arg: any): arg is models.Order {
-  return false
+  return arg != null
    || arg === models.Order.asc
    || arg === models.Order.desc
   ;
@@ -428,7 +428,7 @@ export function isPasswordVerificationPolicies(arg: any): arg is models.Password
   }
 
 export function isPeriod(arg: any): arg is models.Period {
-  return false
+  return arg != null
    || arg === models.Period.Year
    || arg === models.Period.Month
    || arg === models.Period.Week
@@ -634,7 +634,7 @@ export function isSchoolImportStats(arg: any): arg is models.SchoolImportStats {
   }
 
 export function isStatus(arg: any): arg is models.Status {
-  return false
+  return arg != null
    || arg === models.Status.Pending
    || arg === models.Status.InProgress
    || arg === models.Status.Complete
@@ -778,7 +778,7 @@ export function isUserListItem(arg: any): arg is models.UserListItem {
   }
 
 export function isUserStatus(arg: any): arg is models.UserStatus {
-  return false
+  return arg != null
    || arg === models.UserStatus.Active
    || arg === models.UserStatus.Blocked
   ;

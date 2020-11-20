@@ -15,14 +15,14 @@ return arg != null && typeof arg.lastModified === 'number' && typeof arg.name ==
 /* generated type guards */
 
 export function is$Xgafv(arg: any): arg is models.$Xgafv {
-  return false
+  return arg != null
    || arg === models.$Xgafv.V1
    || arg === models.$Xgafv.V2
   ;
   }
 
 export function isAlt(arg: any): arg is models.Alt {
-  return false
+  return arg != null
    || arg === models.Alt.json
    || arg === models.Alt.media
    || arg === models.Alt.proto

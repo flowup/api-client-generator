@@ -15,7 +15,7 @@ export { MyInterface } from './my-interface.model';
 export { PageData } from './page-data.model';
 export { PageDataRules } from './page-data-rules.model';
 export { Pet } from './pet.model';
-export { Possition } from './possition.enum';
+export { Position } from './position.enum';
 export { Right } from './right.enum';
 export { TestModel } from './test-model.model';
 export { V1ContentModelArray } from './v1-content-model-array.model';

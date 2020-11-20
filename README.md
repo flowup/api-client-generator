@@ -35,7 +35,7 @@ All you need to set it up is an up to date swagger file and Angular project.
 
 ##### How is this relevant for you?
 
-A lot of developers is struggling with how to properly use the REST API in their apps. In Angular, we have a great opportunity which is HTTP Client supporting types. It is a great experience when you can work on a project where your models and data service are pre-generated and you can focus on state management, UI and business logic.
+A lot of developers is struggling with how to properly use the REST API in their apps. In Angular, we have a great opportunity which is HTTP Client supporting types. It is a great experience when you can work on a project where your models and data service are pre-generated, and you can focus on state management, UI and business logic.
 
 # Compatibility
 
@@ -164,6 +164,8 @@ export class MyComponent {
 
 ```
 output
+ ├─ guards
+ │   └─ index.ts
  ├─ models
  │   ├─ some.enum.ts
  │   ├─ some.model.ts
@@ -206,12 +208,12 @@ export enum MyEnum {
 **Fix**
 We currently support two options:
 
-- formatting description into array of `['1 Foo', '2 Bar']`
+- formatting description into an array of `['1 Foo', '2 Bar']`
 - using `'x-enumNames'` custom property that should be in format `['Foo', 'Bar']`
 
 # Problem reporting and contributions
 
-Please report any problems you have any issues you find so they can be resolved.
+Please report any problems you have any issues you find, so they can be resolved.
 If the generator terminates with an error message, please re-run it with the `-v` flag and post the outputted stack trace.
 
 Feel free to discuss desired improvements or functionality in issues. Afterwards, the pull requests are very welcome.

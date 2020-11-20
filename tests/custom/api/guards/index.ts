@@ -233,16 +233,16 @@ export function isPet(arg: any): arg is models.Pet {
   );
   }
 
-export function isPossition(arg: any): arg is models.Possition {
-  return false
-   || arg === models.Possition.First
-   || arg === models.Possition.Second
-   || arg === models.Possition.Third
+export function isPosition(arg: any): arg is models.Position {
+  return arg != null
+   || arg === models.Position.First
+   || arg === models.Position.Second
+   || arg === models.Position.Third
   ;
   }
 
 export function isRight(arg: any): arg is models.Right {
-  return false
+  return arg != null
    || arg === models.Right.MEMBER
    || arg === models.Right.ADMIN
    || arg === models.Right.VIEW_ALL
