@@ -1,6 +1,19 @@
 import { inject } from '@angular/core/testing';
-import { Customer, Pet, Position, Right } from '../api-no-tags/models';
-import { isCustomer, isPet, isTag } from '../api-no-tags/guards';
+import {
+  isCustomer,
+  isInterfaceWithDictionary,
+  isInterfaceWithSimpleDictionary,
+  isPet,
+  isTag,
+} from '../api-no-tags/guards';
+import {
+  Customer,
+  InterfaceWithDictionary,
+  InterfaceWithSimpleDictionary,
+  Pet,
+  Position,
+  Right,
+} from '../api-no-tags/models';
 
 describe('TypeGuards', () => {
   const validPet: Pet = {
@@ -64,4 +77,25 @@ describe('TypeGuards', () => {
     expect(isTag(42)).toBeFalsy();
     expect(isTag('foo')).toBeFalsy();
   }));
+
+  test('interface property is a dictionary with non primitive type', inject(
+    [],
+    () => {
+      const withDictionary = {
+        id: 'id',
+        customers: { xyz: validCustomer },
+      } as InterfaceWithDictionary;
+      expect(isInterfaceWithDictionary(withDictionary)).toBeTruthy();
+    },
+  ));
+
+  test('interface property is a dictionary with primitive type', inject(
+    [],
+    () => {
+      const withDictionary = {
+        foo: { xyz: 42, bar: 1337 },
+      } as InterfaceWithSimpleDictionary;
+      expect(isInterfaceWithSimpleDictionary(withDictionary)).toBeTruthy();
+    },
+  ));
 });

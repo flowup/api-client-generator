@@ -485,3 +485,23 @@ definitions:
       - 1 First
       - 2 Second
       - 3 Third
+  interfaceWithDictionary:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      customers:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Customer'
+  interfaceWithSimpleDictionary:
+    type: object
+    required:
+      - foo
+    properties:
+      foo:
+        type: object
+        additionalProperties:
+          type: number
