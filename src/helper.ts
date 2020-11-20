@@ -116,9 +116,6 @@ function guardArray(prop: Property): string {
   }))`;
 }
 
-// text?: ItemList & Data
-// ( typeof arg.text === 'undefined' || ( typeof arg['0'] === 'undefined' || isItemList(arg.text) && typeof arg['1'] === 'undefined' || isData(arg.text) ) ) &&
-
 export function guardFn(fn: () => string, prop: Property): string {
   return `
       ${
