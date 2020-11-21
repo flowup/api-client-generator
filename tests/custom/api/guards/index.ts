@@ -131,6 +131,74 @@ export function isDog(arg: any): arg is models.Dog {
   );
   }
 
+export function isInterfaceWithArrayOfDictionariesOfArrayOfRights(arg: any): arg is models.InterfaceWithArrayOfDictionariesOfArrayOfRights {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // foo?: { [key: string]: Right[] }[]
+    ( typeof arg.foo === 'undefined' || Object.values(arg.foo).every((value: unknown) => (Array.isArray(value) && value.every((item: unknown) => (Array.isArray(item) && item.every((itemItem: unknown) => isRight(itemItem)))))) ) &&
+
+  true
+  );
+  }
+
+export function isInterfaceWithArrayOfDictionariesOfNumbers(arg: any): arg is models.InterfaceWithArrayOfDictionariesOfNumbers {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // arrayOfDicsOfNumbers: { [key: string]: number }[]
+    ( Object.values(arg.arrayOfDicsOfNumbers).every((value: unknown) => (Array.isArray(value) && value.every((item: unknown) => typeof item === 'number'))) ) &&
+
+  true
+  );
+  }
+
+export function isInterfaceWithArrayOfDictionariesOfRights(arg: any): arg is models.InterfaceWithArrayOfDictionariesOfRights {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // foo?: { [key: string]: Right }[]
+    ( typeof arg.foo === 'undefined' || Object.values(arg.foo).every((value: unknown) => (Array.isArray(value) && value.every((item: unknown) => isRight(item)))) ) &&
+
+  true
+  );
+  }
+
+export function isInterfaceWithDictionary(arg: any): arg is models.InterfaceWithDictionary {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // customers?: { [key: string]: Customer }
+    ( typeof arg.customers === 'undefined' || Object.values(arg.customers).every((value: unknown) => isCustomer(value)) ) &&
+    // id: string
+    ( typeof arg.id === 'string' ) &&
+
+  true
+  );
+  }
+
+export function isInterfaceWithDictionaryOfArraysOfNumbers(arg: any): arg is models.InterfaceWithDictionaryOfArraysOfNumbers {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // dicOfNumberArrays: { [key: string]: number[] }
+    ( Object.values(arg.dicOfNumberArrays).every((value: unknown) => typeof value === 'number') ) &&
+
+  true
+  );
+  }
+
+export function isInterfaceWithSimpleDictionary(arg: any): arg is models.InterfaceWithSimpleDictionary {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // foo: { [key: string]: number }
+    ( Object.values(arg.foo).every((value: unknown) => typeof value === 'number') ) &&
+
+  true
+  );
+  }
+
 export function isItemList(arg: any): arg is models.ItemList {
   return (
   arg != null &&

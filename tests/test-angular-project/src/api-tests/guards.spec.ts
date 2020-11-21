@@ -1,6 +1,7 @@
 import { inject } from '@angular/core/testing';
 import {
   isCustomer,
+  isInterfaceWithArrayOfDictionariesOfArrayOfRights,
   isInterfaceWithDictionary,
   isInterfaceWithSimpleDictionary,
   isPet,
@@ -8,6 +9,7 @@ import {
 } from '../api-no-tags/guards';
 import {
   Customer,
+  InterfaceWithArrayOfDictionariesOfArrayOfRights,
   InterfaceWithDictionary,
   InterfaceWithSimpleDictionary,
   Pet,
@@ -96,6 +98,28 @@ describe('TypeGuards', () => {
         foo: { xyz: 42, bar: 1337 },
       } as InterfaceWithSimpleDictionary;
       expect(isInterfaceWithSimpleDictionary(withDictionary)).toBeTruthy();
+    },
+  ));
+
+  test('interface property is a dictionary array of non primitive arrays', inject(
+    [],
+    () => {
+      const withDictionary: InterfaceWithArrayOfDictionariesOfArrayOfRights = {
+        rightCollections: [
+          {
+            user: [Right.VIEW_MY],
+            admin: [Right.ADMIN, Right.VIEW_ALL, Right.VIEW_EDIT],
+          },
+          {
+            user: [Right.VIEW_MY],
+            admin: [Right.ADMIN, Right.VIEW_ALL],
+            editor: [Right.VIEW_EDIT],
+          },
+        ],
+      };
+      expect(
+        isInterfaceWithArrayOfDictionariesOfArrayOfRights(withDictionary),
+      ).toBeTruthy();
     },
   ));
 });

@@ -346,18 +346,26 @@ function parseInterfaceProperties(
               : (propSchema.enum || []).map(str => `'${str}'`)
             ).join(' | ')
           : propSchema.properties
-          ? 'object'
+          ? 'object' // TODO: check what this is for
           : toTypescriptType(
-              isArray
-                ? determineArrayType(propSchema)
+              isArray || (propSchema.additionalProperties as Schema)?.items // check for property is array or property is dictionary and the items are arrays
+                ? determineArrayType(propSchema, isArray)
                 : ref
                 ? dereferenceType(ref)
-                : propSchema.additionalProperties &&
-                  typeof propSchema.additionalProperties !== 'boolean'
+                : typeof propSchema.additionalProperties === 'object'
                 ? propSchema.additionalProperties.type
                 : propSchema.type,
-            );
-      const isRef = !!parseReference(propSchema);
+            ); /*.replace(/\[\]/, isArray ? '' : '[]')*/
+      // +
+      //   ((propSchema.additionalProperties as Schema)?.type === 'array' /*simple*/ ||
+      //   ((propSchema.items as Schema)?.additionalProperties as Schema)?.type === 'array' /* reference */
+      //     ? '[]'
+      //     : '')
+      const isRef = !!parseReference(
+        typeof (propSchema.items as Schema)?.additionalProperties === 'object'
+          ? ((propSchema.items as Schema).additionalProperties as Schema)
+          : propSchema,
+      );
       const propertyAllOf =
         propSchema.allOf && propSchema.allOf.length
           ? parseInterfaceProperties(
@@ -380,7 +388,10 @@ function parseInterfaceProperties(
 
       const property: Property = {
         isArray,
-        isDictionary: !!propSchema.additionalProperties,
+        isDictionary: !!(
+          propSchema.additionalProperties ||
+          (propSchema.items as Schema)?.additionalProperties
+        ),
         isRef,
         isPrimitiveType: BASIC_TS_TYPE_REGEX.test(type),
         isRequired: requiredProps.includes(propName),
@@ -413,7 +424,9 @@ function parseInterfaceProperties(
         property,
       ).replace(/\s+/g, ' ')}) &&`;
 
-      return { ...property, guard };
+      const wololo = { ...property, guard }; // FIXME: remove this const
+
+      return wololo;
     })
     .sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
 }
@@ -443,20 +456,27 @@ function parseReference(schema: Schema): string {
   return '';
 }
 
-function determineArrayType(property: Schema = {}): string {
+function determineArrayType(
+  property: Schema = {},
+  ignoreFirstArray: boolean = false,
+): string {
   if (Array.isArray(property.items)) {
     logWarn('Arrays with type diversity are currently not supported');
     return 'any';
   }
 
-  if (property.items && property.items.$ref) {
-    return typeName(dereferenceType(property.items.$ref));
-  } else if (property.items && property.items.type) {
-    if (/^(array)$/i.test(property.items.type || '')) {
-      return `${determineArrayType(property.items)}[]`;
-    }
+  if (property.$ref || property.items?.$ref) {
+    return typeName(dereferenceType(property.$ref || property.items?.$ref));
+  }
 
-    return typeName(property.items.type);
+  if (property.items) {
+    return `${determineArrayType(property.items as Schema)}${
+      ignoreFirstArray ? '' : '[]'
+    }`;
+  }
+
+  if (property.additionalProperties) {
+    return determineArrayType(property.additionalProperties as Schema);
   }
 
   return typeName(property.type);

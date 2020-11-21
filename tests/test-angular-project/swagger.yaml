@@ -493,6 +493,7 @@ definitions:
       id:
         type: string
       customers:
+        description: '{ [key: string]: Customer }'
         type: object
         additionalProperties:
           $ref: '#/definitions/Customer'
@@ -502,6 +503,17 @@ definitions:
       - foo
     properties:
       foo:
+        description: '{ [key: string]: number }'
         type: object
         additionalProperties:
           type: number
+  interfaceWithArrayOfDictionariesOfArrayOfRights:
+    type: object
+    properties:
+      rightCollections:
+        description: '{ [key: string]: Right[] }[]'
+        type: array
+        additionalProperties:
+          type: array
+          items:
+            $ref: '#/definitions/right'
