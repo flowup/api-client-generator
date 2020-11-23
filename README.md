@@ -88,6 +88,11 @@ This command will do the same, but it will split **all of the tags to separate A
 
 `npm run generate-api-client`
 
+In case you want to load it from a remove source run
+`curl https://raw.githubusercontent.com/flowup/api-client-generator/master/tests/custom/swagger.yaml -o swagger.yaml &&npm run generate -- -s swagger.yaml -o ./output`
+
+This will download and save the swagger.yaml, and later on use the file to generate API client.
+
 **NOTE**: if you want to skip the installation for project, you can use `npx` but be careful as you'll be using the latest version every time you run the script (We use [SEMVER](https://semver.org/) so it is safer to update over the time).
 
 # Options
