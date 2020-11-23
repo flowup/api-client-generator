@@ -334,11 +334,7 @@ function parseInterfaceProperties(
   return Object.entries<Schema>(properties)
     .map(([propName, propSchema]: [string, Schema]) => {
       const isArray = propSchema.type === 'array';
-      const ref =
-        propSchema.additionalProperties &&
-        typeof propSchema.additionalProperties !== 'boolean'
-          ? propSchema.additionalProperties.$ref
-          : propSchema.$ref;
+
       const typescriptType =
         'enum' in propSchema
           ? (propSchema.type === 'number'
@@ -347,20 +343,7 @@ function parseInterfaceProperties(
             ).join(' | ')
           : propSchema.properties
           ? 'object' // TODO: check what this is for
-          : toTypescriptType(
-              isArray || (propSchema.additionalProperties as Schema)?.items // check for property is array or property is dictionary and the items are arrays
-                ? determineArrayType(propSchema, isArray)
-                : ref
-                ? dereferenceType(ref)
-                : typeof propSchema.additionalProperties === 'object'
-                ? propSchema.additionalProperties.type
-                : propSchema.type,
-            ); /*.replace(/\[\]/, isArray ? '' : '[]')*/
-      // +
-      //   ((propSchema.additionalProperties as Schema)?.type === 'array' /*simple*/ ||
-      //   ((propSchema.items as Schema)?.additionalProperties as Schema)?.type === 'array' /* reference */
-      //     ? '[]'
-      //     : '')
+          : toTypescriptType(parseSchema(propSchema, isArray));
       const isRef = !!parseReference(
         typeof (propSchema.items as Schema)?.additionalProperties === 'object'
           ? ((propSchema.items as Schema).additionalProperties as Schema)
@@ -424,9 +407,7 @@ function parseInterfaceProperties(
         property,
       ).replace(/\s+/g, ' ')}) &&`;
 
-      const wololo = { ...property, guard }; // FIXME: remove this const
-
-      return wololo;
+      return { ...property, guard };
     })
     .sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
 }
@@ -456,27 +437,27 @@ function parseReference(schema: Schema): string {
   return '';
 }
 
-function determineArrayType(
+function parseSchema(
   property: Schema = {},
-  ignoreFirstArray: boolean = false,
+  ignoreFirstArray: boolean, // set to true if the schema you are passing is of array and you already set the array notation elsewhere (for example in template)
 ): string {
   if (Array.isArray(property.items)) {
     logWarn('Arrays with type diversity are currently not supported');
     return 'any';
   }
 
-  if (property.$ref || property.items?.$ref) {
-    return typeName(dereferenceType(property.$ref || property.items?.$ref));
+  if (property.$ref) {
+    return typeName(dereferenceType(property.$ref));
   }
 
   if (property.items) {
-    return `${determineArrayType(property.items as Schema)}${
+    return `${parseSchema(property.items as Schema, false)}${
       ignoreFirstArray ? '' : '[]'
     }`;
   }
 
   if (property.additionalProperties) {
-    return determineArrayType(property.additionalProperties as Schema);
+    return parseSchema(property.additionalProperties as Schema, false);
   }
 
   return typeName(property.type);
@@ -624,7 +605,7 @@ function transformParameters(
         ? 'object'
         : toTypescriptType(
             isArray
-              ? determineArrayType(param as Schema)
+              ? parseSchema(param as Schema, isArray)
               : !ref ||
                 (paramRef &&
                   'type' in paramRef &&
