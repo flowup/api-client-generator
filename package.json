@@ -25,6 +25,7 @@
   "keywords": [
     "swagger",
     "rest",
+    "angular11",
     "angular10",
     "angular9",
     "angular8",
@@ -53,6 +54,7 @@
     "lint": "tslint -p tsconfig.json -c tslint.json src/**/*.ts",
     "gen": "ts-node --files ./src/main.ts",
     "gen:all": "npm run gen-custom && npm run gen-esquare && npm run gen-gcloud-firestore && npm run gen-github && npm run gen-filtered-api && npm run gen-pet-store && npm run gen-with-all-tags",
+    "gen:all:parallel": "concurrently \"npm run gen-custom\" \"npm run gen-esquare\" \"npm run gen-gcloud-firestore\" \"npm run gen-github\" \"npm run gen-filtered-api\" \"npm run gen-pet-store\" \"npm run gen-with-all-tags\"",
     "gen-custom": "rimraf ./tests/custom/api && ts-node --files ./src/main.ts -s ./tests/custom/swagger.yaml -o ./tests/custom/api",
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node --files ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
     "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node --files ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
