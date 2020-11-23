@@ -2,7 +2,7 @@ import { Reference } from 'swagger-schema-official';
 import { FileInfix, Property } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|bigint|boolean|object|void)\b/;
-const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|boolean|null|undefined|any|void|Object|File|Blob)\b/i;
+const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|bigint|boolean|null|undefined|any|void|object|Object|File|Blob)\b/;
 
 export const ADDITIONAL_PROPERTIES_KEY = '[key: string]';
 
@@ -158,7 +158,7 @@ export function typeName(
   name: string = 'any',
   isArray: boolean = false,
 ): string {
-  const type = BASIC_TS_TYPE_REGEX.test(name)
+  const type = BUILD_IN_TS_TYPE_REGEX.test(name)
     ? /\binteger\b/.test(name)
       ? 'number'
       : name
