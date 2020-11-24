@@ -150,8 +150,6 @@ function parseMethods(
             parameters || {},
           );
 
-          const responseTypeName = typeName(responseType.name);
-
           return {
             hasJsonResponse: true,
             isSecure:
@@ -177,10 +175,9 @@ function parseMethods(
               (_: string, ...args: string[]): string =>
                 `\${args.${toCamelCase(args[0])}}`,
             ),
-            responseTypeName,
-            responseGuard: BASIC_TS_TYPE_REGEX.test(responseTypeName)
-              ? `typeof res === '${responseTypeName}'`
-              : `guards.is${responseTypeName}(res)`,
+            responseGuard: BASIC_TS_TYPE_REGEX.test(responseType.type)
+              ? `typeof res === '${responseType.type}'`
+              : `guards.is${responseType.type}(res)`, // TODO: this has to support more complex logic for arrays
             isVoid: responseType.name === 'void',
             response: prefixImportedModels(responseType.type),
             // tslint:disable-next-line:max-line-length
@@ -259,7 +256,18 @@ function parseDefinitions(
             ...a,
             ...filterByName(toCamelCase(param.typescriptType, false)),
           ],
-          filterByName(toCamelCase(method.responseTypeName, false)),
+          filterByName(
+            toCamelCase(
+              // FIXME: think of better solution to get rid of syntax from name
+              method.response
+                ?.replace('[]', '')
+                .replace('{ [key: string]: ', '')
+                .replace('}', '')
+                .replace('models.', '')
+                .trim(),
+              false,
+            ),
+          ),
         ),
       ],
       [],
@@ -342,7 +350,7 @@ function parseInterfaceProperties(
               : (propSchema.enum || []).map(str => `'${str}'`)
             ).join(' | ')
           : propSchema.properties
-          ? 'object' // TODO: check what this is for
+          ? 'object' // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
           : toTypescriptType(parseSchema(propSchema, isArray));
       const isRef = !!parseReference(
         typeof (propSchema.items as Schema)?.additionalProperties === 'object'

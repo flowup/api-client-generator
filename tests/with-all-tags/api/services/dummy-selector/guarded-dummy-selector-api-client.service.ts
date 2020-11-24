@@ -29,7 +29,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorViewModel> {
     return super.get(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isDummySelectorViewModel(res) || console.error(`TypeGuard for response 'DummySelectorViewModel' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDummySelectorViewModel(res) || console.error(`TypeGuard for response 'models.DummySelectorViewModel' caught inconsistency.`, res)));
   }
 
   getSettings(
@@ -39,7 +39,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorSettings> {
     return super.getSettings(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isDummySelectorSettings(res) || console.error(`TypeGuard for response 'DummySelectorSettings' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDummySelectorSettings(res) || console.error(`TypeGuard for response 'models.DummySelectorSettings' caught inconsistency.`, res)));
   }
 
   putSettings(

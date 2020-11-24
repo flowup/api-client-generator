@@ -82,7 +82,6 @@ export interface Method {
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
   readonly isVoid: boolean;
   readonly response?: string; // method return type
-  readonly responseTypeName: string; // method return type without prefix
   readonly requestResponseType?: 'blob'; // supported types of Angular's Http ResponseContentType
   readonly formData?: Pick<Parameter, 'name' | 'camelCaseName'>[]; // list of parameter names which are form data params
 }

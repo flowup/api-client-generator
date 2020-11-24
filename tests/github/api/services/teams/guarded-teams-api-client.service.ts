@@ -35,7 +35,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Team> {
     return super.getTeamsTeamId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTeam(res) || console.error(`TypeGuard for response 'Team' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTeam(res) || console.error(`TypeGuard for response 'models.Team' caught inconsistency.`, res)));
   }
 
   patchTeamsTeamId(
@@ -52,7 +52,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Team> {
     return super.patchTeamsTeamId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTeam(res) || console.error(`TypeGuard for response 'Team' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTeam(res) || console.error(`TypeGuard for response 'models.Team' caught inconsistency.`, res)));
   }
 
   getTeamsTeamIdMembers(
@@ -68,7 +68,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getTeamsTeamIdMembers(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
   getTeamsTeamIdMembershipsUsername(
@@ -85,7 +85,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamMembership> {
     return super.getTeamsTeamIdMembershipsUsername(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTeamMembership(res) || console.error(`TypeGuard for response 'TeamMembership' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTeamMembership(res) || console.error(`TypeGuard for response 'models.TeamMembership' caught inconsistency.`, res)));
   }
 
   putTeamsTeamIdMembershipsUsername(
@@ -102,7 +102,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamMembership> {
     return super.putTeamsTeamIdMembershipsUsername(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTeamMembership(res) || console.error(`TypeGuard for response 'TeamMembership' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTeamMembership(res) || console.error(`TypeGuard for response 'models.TeamMembership' caught inconsistency.`, res)));
   }
 
   getTeamsTeamIdRepos(
@@ -118,7 +118,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamRepos> {
     return super.getTeamsTeamIdRepos(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTeamRepos(res) || console.error(`TypeGuard for response 'TeamRepos' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTeamRepos(res) || console.error(`TypeGuard for response 'models.TeamRepos' caught inconsistency.`, res)));
   }
 
 }

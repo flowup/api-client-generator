@@ -38,7 +38,7 @@ export class GuardedLegacyAPIClient extends LegacyAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchIssuesByKeyword> {
     return super.getLegacyIssuesSearchOwnerRepositoryStateKeyword(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isSearchIssuesByKeyword(res) || console.error(`TypeGuard for response 'SearchIssuesByKeyword' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSearchIssuesByKeyword(res) || console.error(`TypeGuard for response 'models.SearchIssuesByKeyword' caught inconsistency.`, res)));
   }
 
   getLegacyReposSearchKeyword(
@@ -58,7 +58,7 @@ export class GuardedLegacyAPIClient extends LegacyAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchRepositoriesByKeyword> {
     return super.getLegacyReposSearchKeyword(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isSearchRepositoriesByKeyword(res) || console.error(`TypeGuard for response 'SearchRepositoriesByKeyword' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSearchRepositoriesByKeyword(res) || console.error(`TypeGuard for response 'models.SearchRepositoriesByKeyword' caught inconsistency.`, res)));
   }
 
   getLegacyUserEmail(
@@ -74,7 +74,7 @@ export class GuardedLegacyAPIClient extends LegacyAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchUserByEmail> {
     return super.getLegacyUserEmail(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isSearchUserByEmail(res) || console.error(`TypeGuard for response 'SearchUserByEmail' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSearchUserByEmail(res) || console.error(`TypeGuard for response 'models.SearchUserByEmail' caught inconsistency.`, res)));
   }
 
   getLegacyUserSearchKeyword(
@@ -93,7 +93,7 @@ export class GuardedLegacyAPIClient extends LegacyAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.SearchUsersByKeyword> {
     return super.getLegacyUserSearchKeyword(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isSearchUsersByKeyword(res) || console.error(`TypeGuard for response 'SearchUsersByKeyword' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSearchUsersByKeyword(res) || console.error(`TypeGuard for response 'models.SearchUsersByKeyword' caught inconsistency.`, res)));
   }
 
 }

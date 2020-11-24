@@ -36,7 +36,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     return super.getReposOwnerRepo(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'Repo' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'models.Repo' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepo(
@@ -54,7 +54,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     return super.patchReposOwnerRepo(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'Repo' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'models.Repo' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoAssignees(
@@ -71,7 +71,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Assignees> {
     return super.getReposOwnerRepoAssignees(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isAssignees(res) || console.error(`TypeGuard for response 'Assignees' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isAssignees(res) || console.error(`TypeGuard for response 'models.Assignees' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoBranches(
@@ -88,7 +88,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Branches> {
     return super.getReposOwnerRepoBranches(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isBranches(res) || console.error(`TypeGuard for response 'Branches' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isBranches(res) || console.error(`TypeGuard for response 'models.Branches' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoBranchesBranch(
@@ -106,7 +106,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Branch> {
     return super.getReposOwnerRepoBranchesBranch(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isBranch(res) || console.error(`TypeGuard for response 'Branch' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isBranch(res) || console.error(`TypeGuard for response 'models.Branch' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoCollaborators(
@@ -123,7 +123,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getReposOwnerRepoCollaborators(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoComments(
@@ -140,7 +140,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoComments> {
     return super.getReposOwnerRepoComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRepoComments(res) || console.error(`TypeGuard for response 'RepoComments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRepoComments(res) || console.error(`TypeGuard for response 'models.RepoComments' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoCommentsCommentId(
@@ -158,7 +158,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     return super.getReposOwnerRepoCommentsCommentId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'CommitComments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'models.CommitComments' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoCommentsCommentId(
@@ -177,7 +177,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     return super.patchReposOwnerRepoCommentsCommentId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'CommitComments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'models.CommitComments' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoCommits(
@@ -199,7 +199,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commits> {
     return super.getReposOwnerRepoCommits(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCommits(res) || console.error(`TypeGuard for response 'Commits' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCommits(res) || console.error(`TypeGuard for response 'models.Commits' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoCommitsRefStatus(
@@ -217,7 +217,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RefStatus> {
     return super.getReposOwnerRepoCommitsRefStatus(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRefStatus(res) || console.error(`TypeGuard for response 'RefStatus' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRefStatus(res) || console.error(`TypeGuard for response 'models.RefStatus' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoCommitsShaCode(
@@ -235,7 +235,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commit> {
     return super.getReposOwnerRepoCommitsShaCode(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCommit(res) || console.error(`TypeGuard for response 'Commit' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCommit(res) || console.error(`TypeGuard for response 'models.Commit' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoCommitsShaCodeComments(
@@ -253,7 +253,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoComments> {
     return super.getReposOwnerRepoCommitsShaCodeComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRepoComments(res) || console.error(`TypeGuard for response 'RepoComments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRepoComments(res) || console.error(`TypeGuard for response 'models.RepoComments' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoCommitsShaCodeComments(
@@ -272,7 +272,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     return super.postReposOwnerRepoCommitsShaCodeComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'CommitComments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'models.CommitComments' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoCompareBaseIdHeadId(
@@ -291,7 +291,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CompareCommits> {
     return super.getReposOwnerRepoCompareBaseIdHeadId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCompareCommits(res) || console.error(`TypeGuard for response 'CompareCommits' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCompareCommits(res) || console.error(`TypeGuard for response 'models.CompareCommits' caught inconsistency.`, res)));
   }
 
   deleteReposOwnerRepoContentsPath(
@@ -310,7 +310,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeleteFile> {
     return super.deleteReposOwnerRepoContentsPath(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isDeleteFile(res) || console.error(`TypeGuard for response 'DeleteFile' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDeleteFile(res) || console.error(`TypeGuard for response 'models.DeleteFile' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoContentsPath(
@@ -330,7 +330,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContentsPath> {
     return super.getReposOwnerRepoContentsPath(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isContentsPath(res) || console.error(`TypeGuard for response 'ContentsPath' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isContentsPath(res) || console.error(`TypeGuard for response 'models.ContentsPath' caught inconsistency.`, res)));
   }
 
   putReposOwnerRepoContentsPath(
@@ -349,7 +349,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CreateFile> {
     return super.putReposOwnerRepoContentsPath(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCreateFile(res) || console.error(`TypeGuard for response 'CreateFile' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCreateFile(res) || console.error(`TypeGuard for response 'models.CreateFile' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoContributors(
@@ -367,7 +367,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Contributors> {
     return super.getReposOwnerRepoContributors(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isContributors(res) || console.error(`TypeGuard for response 'Contributors' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isContributors(res) || console.error(`TypeGuard for response 'models.Contributors' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoDeployments(
@@ -384,7 +384,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoDeployments> {
     return super.getReposOwnerRepoDeployments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRepoDeployments(res) || console.error(`TypeGuard for response 'RepoDeployments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRepoDeployments(res) || console.error(`TypeGuard for response 'models.RepoDeployments' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoDeployments(
@@ -402,7 +402,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeploymentResp> {
     return super.postReposOwnerRepoDeployments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isDeploymentResp(res) || console.error(`TypeGuard for response 'DeploymentResp' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDeploymentResp(res) || console.error(`TypeGuard for response 'models.DeploymentResp' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoDeploymentsIdStatuses(
@@ -420,7 +420,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeploymentStatuses> {
     return super.getReposOwnerRepoDeploymentsIdStatuses(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isDeploymentStatuses(res) || console.error(`TypeGuard for response 'DeploymentStatuses' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDeploymentStatuses(res) || console.error(`TypeGuard for response 'models.DeploymentStatuses' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoDownloads(
@@ -437,7 +437,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Downloads> {
     return super.getReposOwnerRepoDownloads(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isDownloads(res) || console.error(`TypeGuard for response 'Downloads' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDownloads(res) || console.error(`TypeGuard for response 'models.Downloads' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoDownloadsDownloadId(
@@ -455,7 +455,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Downloads> {
     return super.getReposOwnerRepoDownloadsDownloadId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isDownloads(res) || console.error(`TypeGuard for response 'Downloads' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isDownloads(res) || console.error(`TypeGuard for response 'models.Downloads' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoEvents(
@@ -472,7 +472,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     return super.getReposOwnerRepoEvents(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'Events' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'models.Events' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoForks(
@@ -490,7 +490,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Forks> {
     return super.getReposOwnerRepoForks(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isForks(res) || console.error(`TypeGuard for response 'Forks' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isForks(res) || console.error(`TypeGuard for response 'models.Forks' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoForks(
@@ -508,7 +508,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Fork> {
     return super.postReposOwnerRepoForks(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isFork(res) || console.error(`TypeGuard for response 'Fork' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isFork(res) || console.error(`TypeGuard for response 'models.Fork' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoGitBlobs(
@@ -526,7 +526,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blobs> {
     return super.postReposOwnerRepoGitBlobs(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isBlobs(res) || console.error(`TypeGuard for response 'Blobs' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isBlobs(res) || console.error(`TypeGuard for response 'models.Blobs' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoGitBlobsShaCode(
@@ -562,7 +562,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.GitCommit> {
     return super.postReposOwnerRepoGitCommits(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isGitCommit(res) || console.error(`TypeGuard for response 'GitCommit' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGitCommit(res) || console.error(`TypeGuard for response 'models.GitCommit' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoGitCommitsShaCode(
@@ -580,7 +580,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoCommit> {
     return super.getReposOwnerRepoGitCommitsShaCode(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRepoCommit(res) || console.error(`TypeGuard for response 'RepoCommit' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRepoCommit(res) || console.error(`TypeGuard for response 'models.RepoCommit' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoGitRefs(
@@ -597,7 +597,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Refs> {
     return super.getReposOwnerRepoGitRefs(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRefs(res) || console.error(`TypeGuard for response 'Refs' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRefs(res) || console.error(`TypeGuard for response 'models.Refs' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoGitRefs(
@@ -615,7 +615,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     return super.postReposOwnerRepoGitRefs(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'HeadBranch' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'models.HeadBranch' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoGitRefsRef(
@@ -633,7 +633,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     return super.getReposOwnerRepoGitRefsRef(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'HeadBranch' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'models.HeadBranch' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoGitRefsRef(
@@ -652,7 +652,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     return super.patchReposOwnerRepoGitRefsRef(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'HeadBranch' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'models.HeadBranch' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoGitTags(
@@ -670,7 +670,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tags> {
     return super.postReposOwnerRepoGitTags(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTags(res) || console.error(`TypeGuard for response 'Tags' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTags(res) || console.error(`TypeGuard for response 'models.Tags' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoGitTagsShaCode(
@@ -688,7 +688,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tag> {
     return super.getReposOwnerRepoGitTagsShaCode(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTag(res) || console.error(`TypeGuard for response 'Tag' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTag(res) || console.error(`TypeGuard for response 'models.Tag' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoGitTrees(
@@ -706,7 +706,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Trees> {
     return super.postReposOwnerRepoGitTrees(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTrees(res) || console.error(`TypeGuard for response 'Trees' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTrees(res) || console.error(`TypeGuard for response 'models.Trees' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoGitTreesShaCode(
@@ -725,7 +725,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tree> {
     return super.getReposOwnerRepoGitTreesShaCode(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTree(res) || console.error(`TypeGuard for response 'Tree' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTree(res) || console.error(`TypeGuard for response 'models.Tree' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoHooks(
@@ -742,7 +742,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     return super.getReposOwnerRepoHooks(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'Hook' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'models.Hook' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoHooks(
@@ -760,7 +760,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     return super.postReposOwnerRepoHooks(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'Hook' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'models.Hook' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoHooksHookId(
@@ -778,7 +778,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     return super.getReposOwnerRepoHooksHookId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'Hook' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'models.Hook' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoHooksHookId(
@@ -797,7 +797,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     return super.patchReposOwnerRepoHooksHookId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'Hook' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'models.Hook' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssues(
@@ -820,7 +820,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     return super.getReposOwnerRepoIssues(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssues(res) || console.error(`TypeGuard for response 'Issues' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssues(res) || console.error(`TypeGuard for response 'models.Issues' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoIssues(
@@ -838,7 +838,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     return super.postReposOwnerRepoIssues(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'Issue' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'models.Issue' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssuesComments(
@@ -858,7 +858,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     return super.getReposOwnerRepoIssuesComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'IssuesComments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'models.IssuesComments' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssuesCommentId(
@@ -876,7 +876,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     return super.getReposOwnerRepoIssuesCommentId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'IssuesComment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'models.IssuesComment' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoIssuesCommentId(
@@ -895,7 +895,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     return super.patchReposOwnerRepoIssuesCommentId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'IssuesComment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'models.IssuesComment' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssuesEvents(
@@ -912,7 +912,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     return super.getReposOwnerRepoIssuesEvents(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'Events' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'models.Events' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssuesEventId(
@@ -930,7 +930,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Event> {
     return super.getReposOwnerRepoIssuesEventId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isEvent(res) || console.error(`TypeGuard for response 'Event' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isEvent(res) || console.error(`TypeGuard for response 'models.Event' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssuesNumber(
@@ -948,7 +948,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     return super.getReposOwnerRepoIssuesNumber(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'Issue' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'models.Issue' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoIssuesNumber(
@@ -967,7 +967,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     return super.patchReposOwnerRepoIssuesNumber(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'Issue' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'models.Issue' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssuesNumberComments(
@@ -985,7 +985,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     return super.getReposOwnerRepoIssuesNumberComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'IssuesComments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'models.IssuesComments' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoIssuesNumberComments(
@@ -1004,7 +1004,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     return super.postReposOwnerRepoIssuesNumberComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'IssuesComment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'models.IssuesComment' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssuesNumberEvents(
@@ -1022,7 +1022,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     return super.getReposOwnerRepoIssuesNumberEvents(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'Events' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'models.Events' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoIssuesNumberLabels(
@@ -1040,7 +1040,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     return super.getReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'Labels' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'models.Labels' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoIssuesNumberLabels(
@@ -1059,7 +1059,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     return super.postReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'Label' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
   putReposOwnerRepoIssuesNumberLabels(
@@ -1078,7 +1078,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     return super.putReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'Label' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoKeys(
@@ -1095,7 +1095,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Keys> {
     return super.getReposOwnerRepoKeys(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isKeys(res) || console.error(`TypeGuard for response 'Keys' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isKeys(res) || console.error(`TypeGuard for response 'models.Keys' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoKeys(
@@ -1113,7 +1113,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     return super.postReposOwnerRepoKeys(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isUserKeysKeyId(res) || console.error(`TypeGuard for response 'UserKeysKeyId' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUserKeysKeyId(res) || console.error(`TypeGuard for response 'models.UserKeysKeyId' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoKeysKeyId(
@@ -1131,7 +1131,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     return super.getReposOwnerRepoKeysKeyId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isUserKeysKeyId(res) || console.error(`TypeGuard for response 'UserKeysKeyId' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUserKeysKeyId(res) || console.error(`TypeGuard for response 'models.UserKeysKeyId' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoLabels(
@@ -1148,7 +1148,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     return super.getReposOwnerRepoLabels(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'Labels' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'models.Labels' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoLabels(
@@ -1166,7 +1166,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     return super.postReposOwnerRepoLabels(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'Label' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoLabelsName(
@@ -1184,7 +1184,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     return super.getReposOwnerRepoLabelsName(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'Label' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoLabelsName(
@@ -1203,7 +1203,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     return super.patchReposOwnerRepoLabelsName(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'Label' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoLanguages(
@@ -1220,7 +1220,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Languages> {
     return super.getReposOwnerRepoLanguages(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLanguages(res) || console.error(`TypeGuard for response 'Languages' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLanguages(res) || console.error(`TypeGuard for response 'models.Languages' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoMerges(
@@ -1238,7 +1238,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.MergesSuccessful> {
     return super.postReposOwnerRepoMerges(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isMergesSuccessful(res) || console.error(`TypeGuard for response 'MergesSuccessful' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isMergesSuccessful(res) || console.error(`TypeGuard for response 'models.MergesSuccessful' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoMilestones(
@@ -1258,7 +1258,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     return super.getReposOwnerRepoMilestones(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'Milestone' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'models.Milestone' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoMilestones(
@@ -1276,7 +1276,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     return super.postReposOwnerRepoMilestones(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'Milestone' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'models.Milestone' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoMilestonesNumber(
@@ -1294,7 +1294,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     return super.getReposOwnerRepoMilestonesNumber(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'Milestone' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'models.Milestone' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoMilestonesNumber(
@@ -1313,7 +1313,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     return super.patchReposOwnerRepoMilestonesNumber(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'Milestone' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'models.Milestone' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoMilestonesNumberLabels(
@@ -1331,7 +1331,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     return super.getReposOwnerRepoMilestonesNumberLabels(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'Labels' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'models.Labels' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoNotifications(
@@ -1351,7 +1351,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     return super.getReposOwnerRepoNotifications(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'Notifications' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'models.Notifications' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoPulls(
@@ -1371,7 +1371,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     return super.getReposOwnerRepoPulls(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'Pulls' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'models.Pulls' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoPulls(
@@ -1389,7 +1389,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     return super.postReposOwnerRepoPulls(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'Pulls' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'models.Pulls' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoPullsComments(
@@ -1409,7 +1409,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     return super.getReposOwnerRepoPullsComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'IssuesComments' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'models.IssuesComments' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoPullsCommentId(
@@ -1427,7 +1427,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     return super.getReposOwnerRepoPullsCommentId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'PullsComment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'models.PullsComment' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoPullsCommentId(
@@ -1446,7 +1446,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     return super.patchReposOwnerRepoPullsCommentId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'PullsComment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'models.PullsComment' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoPullsNumber(
@@ -1464,7 +1464,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullRequest> {
     return super.getReposOwnerRepoPullsNumber(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPullRequest(res) || console.error(`TypeGuard for response 'PullRequest' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPullRequest(res) || console.error(`TypeGuard for response 'models.PullRequest' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoPullsNumber(
@@ -1483,7 +1483,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     return super.patchReposOwnerRepoPullsNumber(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'Repo' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'models.Repo' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoPullsNumberComments(
@@ -1501,7 +1501,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     return super.getReposOwnerRepoPullsNumberComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'PullsComment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'models.PullsComment' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoPullsNumberComments(
@@ -1520,7 +1520,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     return super.postReposOwnerRepoPullsNumberComments(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'PullsComment' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'models.PullsComment' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoPullsNumberCommits(
@@ -1538,7 +1538,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commits> {
     return super.getReposOwnerRepoPullsNumberCommits(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCommits(res) || console.error(`TypeGuard for response 'Commits' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCommits(res) || console.error(`TypeGuard for response 'models.Commits' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoPullsNumberFiles(
@@ -1556,7 +1556,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     return super.getReposOwnerRepoPullsNumberFiles(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'Pulls' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'models.Pulls' caught inconsistency.`, res)));
   }
 
   putReposOwnerRepoPullsNumberMerge(
@@ -1575,7 +1575,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Merge> {
     return super.putReposOwnerRepoPullsNumberMerge(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isMerge(res) || console.error(`TypeGuard for response 'Merge' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isMerge(res) || console.error(`TypeGuard for response 'models.Merge' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoReadme(
@@ -1593,7 +1593,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContentsPath> {
     return super.getReposOwnerRepoReadme(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isContentsPath(res) || console.error(`TypeGuard for response 'ContentsPath' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isContentsPath(res) || console.error(`TypeGuard for response 'models.ContentsPath' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoReleases(
@@ -1610,7 +1610,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Releases> {
     return super.getReposOwnerRepoReleases(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isReleases(res) || console.error(`TypeGuard for response 'Releases' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isReleases(res) || console.error(`TypeGuard for response 'models.Releases' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoReleases(
@@ -1628,7 +1628,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     return super.postReposOwnerRepoReleases(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'Release' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'models.Release' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoReleasesAssetsId(
@@ -1646,7 +1646,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Asset> {
     return super.getReposOwnerRepoReleasesAssetsId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isAsset(res) || console.error(`TypeGuard for response 'Asset' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isAsset(res) || console.error(`TypeGuard for response 'models.Asset' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoReleasesAssetsId(
@@ -1665,7 +1665,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Asset> {
     return super.patchReposOwnerRepoReleasesAssetsId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isAsset(res) || console.error(`TypeGuard for response 'Asset' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isAsset(res) || console.error(`TypeGuard for response 'models.Asset' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoReleasesId(
@@ -1683,7 +1683,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     return super.getReposOwnerRepoReleasesId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'Release' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'models.Release' caught inconsistency.`, res)));
   }
 
   patchReposOwnerRepoReleasesId(
@@ -1702,7 +1702,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     return super.patchReposOwnerRepoReleasesId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'Release' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'models.Release' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoReleasesIdAssets(
@@ -1720,7 +1720,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Assets> {
     return super.getReposOwnerRepoReleasesIdAssets(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isAssets(res) || console.error(`TypeGuard for response 'Assets' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isAssets(res) || console.error(`TypeGuard for response 'models.Assets' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoStargazers(
@@ -1737,7 +1737,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getReposOwnerRepoStargazers(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoStatsCodeFrequency(
@@ -1754,7 +1754,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats> {
     return super.getReposOwnerRepoStatsCodeFrequency(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCodeFrequencyStats(res) || console.error(`TypeGuard for response 'CodeFrequencyStats' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCodeFrequencyStats(res) || console.error(`TypeGuard for response 'models.CodeFrequencyStats' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoStatsCommitActivity(
@@ -1771,7 +1771,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitActivityStats> {
     return super.getReposOwnerRepoStatsCommitActivity(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCommitActivityStats(res) || console.error(`TypeGuard for response 'CommitActivityStats' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCommitActivityStats(res) || console.error(`TypeGuard for response 'models.CommitActivityStats' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoStatsContributors(
@@ -1788,7 +1788,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContributorsStats> {
     return super.getReposOwnerRepoStatsContributors(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isContributorsStats(res) || console.error(`TypeGuard for response 'ContributorsStats' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isContributorsStats(res) || console.error(`TypeGuard for response 'models.ContributorsStats' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoStatsParticipation(
@@ -1805,7 +1805,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ParticipationStats> {
     return super.getReposOwnerRepoStatsParticipation(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isParticipationStats(res) || console.error(`TypeGuard for response 'ParticipationStats' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isParticipationStats(res) || console.error(`TypeGuard for response 'models.ParticipationStats' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoStatsPunchCard(
@@ -1822,7 +1822,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats> {
     return super.getReposOwnerRepoStatsPunchCard(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCodeFrequencyStats(res) || console.error(`TypeGuard for response 'CodeFrequencyStats' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isCodeFrequencyStats(res) || console.error(`TypeGuard for response 'models.CodeFrequencyStats' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoStatusesRef(
@@ -1840,7 +1840,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Ref> {
     return super.getReposOwnerRepoStatusesRef(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRef(res) || console.error(`TypeGuard for response 'Ref' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRef(res) || console.error(`TypeGuard for response 'models.Ref' caught inconsistency.`, res)));
   }
 
   postReposOwnerRepoStatusesRef(
@@ -1859,7 +1859,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Ref> {
     return super.postReposOwnerRepoStatusesRef(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRef(res) || console.error(`TypeGuard for response 'Ref' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRef(res) || console.error(`TypeGuard for response 'models.Ref' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoSubscribers(
@@ -1876,7 +1876,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getReposOwnerRepoSubscribers(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoSubscription(
@@ -1893,7 +1893,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscribition> {
     return super.getReposOwnerRepoSubscription(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isSubscribition(res) || console.error(`TypeGuard for response 'Subscribition' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSubscribition(res) || console.error(`TypeGuard for response 'models.Subscribition' caught inconsistency.`, res)));
   }
 
   putReposOwnerRepoSubscription(
@@ -1911,7 +1911,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscribition> {
     return super.putReposOwnerRepoSubscription(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isSubscribition(res) || console.error(`TypeGuard for response 'Subscribition' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSubscribition(res) || console.error(`TypeGuard for response 'models.Subscribition' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoTags(
@@ -1928,7 +1928,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tags> {
     return super.getReposOwnerRepoTags(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTags(res) || console.error(`TypeGuard for response 'Tags' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTags(res) || console.error(`TypeGuard for response 'models.Tags' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoTeams(
@@ -1945,7 +1945,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Teams> {
     return super.getReposOwnerRepoTeams(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isTeams(res) || console.error(`TypeGuard for response 'Teams' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isTeams(res) || console.error(`TypeGuard for response 'models.Teams' caught inconsistency.`, res)));
   }
 
   getReposOwnerRepoWatchers(
@@ -1962,7 +1962,7 @@ export class GuardedReposAPIClient extends ReposAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getReposOwnerRepoWatchers(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'Users' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
 }

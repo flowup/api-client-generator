@@ -40,7 +40,7 @@ export class GuardedIssuesAPIClient extends IssuesAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     return super.getIssues(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isIssues(res) || console.error(`TypeGuard for response 'Issues' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isIssues(res) || console.error(`TypeGuard for response 'models.Issues' caught inconsistency.`, res)));
   }
 
 }

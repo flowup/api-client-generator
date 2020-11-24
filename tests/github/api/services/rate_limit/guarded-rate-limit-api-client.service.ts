@@ -34,7 +34,7 @@ export class GuardedRateLimitAPIClient extends RateLimitAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RateLimit> {
     return super.getRateLimit(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRateLimit(res) || console.error(`TypeGuard for response 'RateLimit' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isRateLimit(res) || console.error(`TypeGuard for response 'models.RateLimit' caught inconsistency.`, res)));
   }
 
 }

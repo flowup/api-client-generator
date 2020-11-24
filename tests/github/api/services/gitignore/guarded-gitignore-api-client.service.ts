@@ -34,7 +34,7 @@ export class GuardedGitignoreAPIClient extends GitignoreAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getGitignoreTemplates(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isGitignore(res) || console.error(`TypeGuard for response 'Gitignore' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGitignore(res) || console.error(`TypeGuard for response 'models.Gitignore' caught inconsistency.`, res)));
   }
 
   getGitignoreTemplatesLanguage(
@@ -50,7 +50,7 @@ export class GuardedGitignoreAPIClient extends GitignoreAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.GitignoreLang> {
     return super.getGitignoreTemplatesLanguage(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isGitignoreLang(res) || console.error(`TypeGuard for response 'GitignoreLang' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isGitignoreLang(res) || console.error(`TypeGuard for response 'models.GitignoreLang' caught inconsistency.`, res)));
   }
 
 }

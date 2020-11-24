@@ -37,7 +37,7 @@ export class GuardedNotificationsAPIClient extends NotificationsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     return super.getNotifications(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'Notifications' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'models.Notifications' caught inconsistency.`, res)));
   }
 
   getNotificationsThreadsId(
@@ -53,7 +53,7 @@ export class GuardedNotificationsAPIClient extends NotificationsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     return super.getNotificationsThreadsId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'Notifications' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'models.Notifications' caught inconsistency.`, res)));
   }
 
   getNotificationsThreadsIdSubscription(
@@ -69,7 +69,7 @@ export class GuardedNotificationsAPIClient extends NotificationsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscription> {
     return super.getNotificationsThreadsIdSubscription(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isSubscription(res) || console.error(`TypeGuard for response 'Subscription' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSubscription(res) || console.error(`TypeGuard for response 'models.Subscription' caught inconsistency.`, res)));
   }
 
   putNotificationsThreadsIdSubscription(
@@ -86,7 +86,7 @@ export class GuardedNotificationsAPIClient extends NotificationsAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscription> {
     return super.putNotificationsThreadsIdSubscription(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isSubscription(res) || console.error(`TypeGuard for response 'Subscription' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => guards.isSubscription(res) || console.error(`TypeGuard for response 'models.Subscription' caught inconsistency.`, res)));
   }
 
 }
