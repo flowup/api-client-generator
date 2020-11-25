@@ -24,6 +24,7 @@
   },
   "keywords": [
     "swagger",
+    "open-api",
     "rest",
     "angular11",
     "angular10",
@@ -54,12 +55,11 @@
     "lint": "tslint -p tsconfig.json -c tslint.json src/**/*.ts",
     "gen": "ts-node --files ./src/main.ts",
     "gen:all": "npm run gen-custom && npm run gen-esquare && npm run gen-gcloud-firestore && npm run gen-github && npm run gen-filtered-api && npm run gen-pet-store && npm run gen-with-all-tags",
-    "gen:all:parallel": "concurrently \"npm run gen-custom\" \"npm run gen-esquare\" \"npm run gen-gcloud-firestore\" \"npm run gen-github\" \"npm run gen-filtered-api\" \"npm run gen-pet-store\" \"npm run gen-with-all-tags\"",
+    "gen:all:parallel": "concurrently --kill-others-on-fail \"npm:gen-*\"",
     "gen-custom": "rimraf ./tests/custom/api && ts-node --files ./src/main.ts -s ./tests/custom/swagger.yaml -o ./tests/custom/api",
     "gen-esquare": "rimraf ./tests/esquare/api && ts-node --files ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
     "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node --files ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
     "gen-github": "rimraf ./tests/github/api && ts-node --files ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api -t all",
-    "gen-headless": "rimraf ./tests/headless/api && ts-node --files ./src/main.ts -s ./tests/headless/swagger.json -o ./tests/headless/api -t all",
     "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node --files ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -t DummySelector,Project,NonExistingTag -m",
     "gen-pet-store": "rimraf ./tests/pet-store/api && ts-node --files ./src/main.ts --verbose -s ./tests/pet-store/swagger.yaml -o ./tests/pet-store/api",
     "gen-with-all-tags": "rimraf ./tests/with-all-tags/api && ts-node --files ./src/main.ts -s ./tests/with-all-tags/swagger.json -o ./tests/with-all-tags/api -t all",
@@ -74,14 +74,12 @@
     "dev:install": "npm ci --silent && cd tests/test-angular-project && npm ci --silent"
   },
   "dependencies": {
-    "fs-extra": "^9.0.1",
     "mustache": "^4.0.1",
     "optimist": "^0.6.1",
     "swagger-parser": "^6.0.5",
     "which": "^2.0.2"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.1",
     "@types/jest": "^26.0.0",
     "@types/mustache": "^4.0.1",
     "@types/node": "^14.0.13",
@@ -90,6 +88,7 @@
     "@types/swagger-parser": "^4.0.3",
     "@types/swagger-schema-official": "^2.0.21",
     "@types/which": "^1.3.2",
+    "concurrently": "^5.3.0",
     "dir-compare": "^2.3.0",
     "husky": "^4.2.5",
     "jest": "^26.1.0",
