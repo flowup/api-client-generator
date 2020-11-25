@@ -2,6 +2,6 @@
 
 export interface OrgTeamsPost {
   name: string;
-  permission?: 'pull' | 'push' | 'admin';
+  permission?: ('pull' | 'push' | 'admin');
   repo_names?: string[];
 }

@@ -133,14 +133,14 @@ export class APIClient implements APIClientInterface {
    */
   getCustomers(
     requestHttpOptions?: HttpOptions
-  ): Observable<models.Customer[] | null> {
+  ): Observable<(models.Customer[]) | null> {
     const path = `/customers`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<models.Customer[] | null>('GET', path, options);
+    return this.sendRequest<(models.Customer[]) | null>('GET', path, options);
   }
 
   /**
@@ -220,6 +220,127 @@ export class APIClient implements APIClientInterface {
     };
 
     return this.sendRequest<string>('GET', path, options);
+  }
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getDictionary(
+    requestHttpOptions?: HttpOptions
+  ): Observable<{ [key: string]: number }> {
+    const path = `/store/dictionary`;
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
+
+    return this.sendRequest<{ [key: string]: number }>('GET', path, options);
+  }
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getArrayOfDictionaries(
+    requestHttpOptions?: HttpOptions
+  ): Observable<{ [key: string]: number }[]> {
+    const path = `/store/arrayOfdictionaries`;
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
+
+    return this.sendRequest<{ [key: string]: number }[]>('GET', path, options);
+  }
+
+  /**
+   * Commits a transaction, while optionally updating documents.
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: {
+      wololo?: models.NumberEnumParam,  // (optional) - error format - 1 V1 - 2 V2 
+      alt?: models.StringEnumParam,  // (optional) Data format for response.
+      accessToken?: string,  // (optional) OAuth access token.
+      pp?: boolean,  // (optional) Pretty-print response.
+      prettyPrint?: boolean,  // (optional) should pretty print
+      body?: models.Data,
+      database: string,  // The database name. In the format `database:{{name}}`
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.Dictionary> {
+    const path = `/${args.database}/write`;
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
+
+    if ('wololo' in args) {
+      options.params = options.params.set('wololo', String(args.wololo));
+    }
+    if ('alt' in args) {
+      options.params = options.params.set('alt', String(args.alt));
+    }
+    if ('accessToken' in args) {
+      options.params = options.params.set('access_token', String(args.accessToken));
+    }
+    if ('pp' in args) {
+      options.params = options.params.set('pp', String(args.pp));
+    }
+    if ('prettyPrint' in args) {
+      options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    return this.sendRequest<models.Dictionary>('POST', path, options, JSON.stringify(args.body));
+  }
+
+  /**
+   * Create a custom Blob.
+   * Response generated for [ 201 ] HTTP response code.
+   */
+  postReposOwnerRepoGitBlobs(
+    args: {
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      accept?: string,  // (optional) Is used to set specified media type.
+      body: models.Blob,  // Custom blob (should be imported from models)
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.Blob[]> {
+    const path = `/repos/${args.owner}/${args.repo}/git/blobs`;
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+    };
+
+    if ('accept' in args) {
+      options.headers = options.headers.set('Accept', String(args.accept));
+    }
+    return this.sendRequest<models.Blob[]>('POST', path, options, JSON.stringify(args.body));
+  }
+
+  /**
+   * Get standard File
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getReposOwnerRepoGitBlobsShaCode(
+    args: {
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      shaCode: string,  // SHA-1 code.
+      accept?: string,  // (optional) Is used to set specified media type.
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<File> {
+    const path = `/repos/${args.owner}/${args.repo}/git/blobs/${args.shaCode}`;
+    const options: APIHttpOptions = {
+      ...this.options,
+      ...requestHttpOptions,
+      responseType: 'blob',
+    };
+
+    if ('accept' in args) {
+      options.headers = options.headers.set('Accept', String(args.accept));
+    }
+    return this.sendRequest<File>('GET', path, options);
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {

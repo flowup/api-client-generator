@@ -173,7 +173,7 @@ export class APIClient implements APIClientInterface {
    */
   findPetsByStatus(
     args: {
-      status: string[],  // Status values that need to be considered for filter
+      status: ('available' | 'pending' | 'sold')[],  // Status values that need to be considered for filter
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
@@ -221,14 +221,14 @@ export class APIClient implements APIClientInterface {
    */
   getInventory(
     requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+  ): Observable<{ [key: string]: number }> {
     const path = `/store/inventory`;
     const options: APIHttpOptions = {
       ...this.options,
       ...requestHttpOptions,
     };
 
-    return this.sendRequest<object>('GET', path, options);
+    return this.sendRequest<{ [key: string]: number }>('GET', path, options);
   }
 
   /**
@@ -408,7 +408,7 @@ export class APIClient implements APIClientInterface {
    */
   createUsersWithArrayInput(
     args: {
-      body: any,  // List of user object
+      body: models.User[],  // List of user object
     },
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
@@ -426,7 +426,7 @@ export class APIClient implements APIClientInterface {
    */
   createUsersWithListInput(
     args: {
-      body: any,  // List of user object
+      body: models.User[],  // List of user object
     },
     requestHttpOptions?: HttpOptions
   ): Observable<void> {

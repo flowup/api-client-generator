@@ -53,12 +53,12 @@ export class {{&serviceName}} implements {{&interfaceName}} {
   {{#parameters.length}}
     args: {
       {{#parameters}}
-      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{&importType}}{{#isArray}}[]{{/isArray}},{{#description}}  //{{^isRequired}} (optional){{/isRequired}} {{&.}}{{/description}}
+      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{&type}}{{#isArray}}[]{{/isArray}},{{#description}}  //{{^isRequired}} (optional){{/isRequired}} {{&.}}{{/description}}
       {{/parameters}}
     },
   {{/parameters.length}}
     requestHttpOptions?: HttpOptions
-  ): Observable<{{&response}}> {
+  ): Observable<{{&responseTypeSchema.type}}> {
     const path = `{{&path}}`;
     const options: APIHttpOptions = {
       ...this.options,
@@ -99,7 +99,7 @@ export class {{&serviceName}} implements {{&interfaceName}} {
     {{/formData}}
 
     {{/formData.length}}
-    return this.sendRequest<{{&response}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{/parameters}}{{#formData.length}}, formData{{/formData.length}});
+    return this.sendRequest<{{&responseTypeSchema.type}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{/parameters}}{{#formData.length}}, formData{{/formData.length}});
   }
 
 {{/methods}}

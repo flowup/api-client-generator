@@ -2,5 +2,5 @@
 
 export interface EditTeam {
   name: string;
-  permission?: 'pull' | 'push' | 'admin';
+  permission?: ('pull' | 'push' | 'admin');
 }

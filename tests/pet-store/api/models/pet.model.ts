@@ -9,6 +9,6 @@ export interface Pet {
   id?: number;
   name: string;
   photoUrls: string[];
-  status?: 'available' | 'pending' | 'sold';  // pet status in the store
+  status?: ('available' | 'pending' | 'sold');  // pet status in the store
   tags?: Tag[];
 }

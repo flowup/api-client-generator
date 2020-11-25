@@ -13,6 +13,7 @@ import {
   MethodType,
   MustacheData,
   Parameter,
+  ParsedSchema,
   Property,
   Render,
   RenderFileName,
@@ -105,7 +106,7 @@ export function determineDomain({ schemes, host, basePath }: Swagger): string {
 }
 
 function parseMethods(
-  { paths, security, parameters, responses = {} }: Swagger,
+  { paths, parameters, responses = {} }: Swagger,
   swaggerTag?: string,
 ): Method[] {
   const supportedMethods = [
@@ -139,8 +140,8 @@ function parseMethods(
           const okResponse: Response | Reference =
             operation.responses[successResponseCode];
 
-          const responseType = determineResponseType(
-            okResponse && isReference(okResponse)
+          const responseTypeSchema = determineResponseType(
+            okResponse && isReference(okResponse) // TODO: this can probably be refactored to `(okResponse as Reference)?.$ref` and isReference can be deleted
               ? responses[dereferenceType(okResponse.$ref)]
               : okResponse,
           );
@@ -152,8 +153,6 @@ function parseMethods(
 
           return {
             hasJsonResponse: true,
-            isSecure:
-              security !== undefined || operation.security !== undefined,
             methodName: toCamelCase(
               operation.operationId
                 ? !swaggerTag
@@ -209,7 +208,7 @@ function parseDefinitions(
       .filter(
         ([, definition]) =>
           (definition.enum && definition.enum.length !== 0) ||
-          definition.schema,
+          ('schema' in definition && definition.schema),
       )
       .map(([key, definition]) => defineEnumOrInterface(key, definition)),
   ];
@@ -290,7 +289,7 @@ function defineEnumOrInterface(
         (definition as ExtendedParameter)['x-enumNames'],
       )
     : defineInterface(
-        ('schema' in definition ? definition.schema : definition) || {},
+        'schema' in definition ? definition.schema! : (definition as Schema),
         key,
       );
 }
@@ -306,8 +305,8 @@ function defineEnum(
   const descKeys: { [key: string]: string } | null =
     splitDesc.length > 1
       ? splitDesc.reduce<{ [key: string]: string }>((acc, cur) => {
-          const captured = /(\d) (\w+)/.exec(cur); // parse the `- 42 UltimateAnswer` description syntax
-          return captured ? { ...acc, [captured[1]]: captured[2] } : acc;
+          const [, key, value] = /(\d) (\w+)/.exec(cur) || []; // parse the `- 42 UltimateAnswer` description syntax
+          return key ? { ...acc, [key]: value } : acc;
         }, {})
       : null;
 
@@ -341,58 +340,41 @@ function parseInterfaceProperties(
 ): Property[] {
   return Object.entries<Schema>(properties)
     .map(([propName, propSchema]: [string, Schema]) => {
-      const isArray = propSchema.type === 'array';
+      const parsedSchema = parseSchema(propSchema);
+      const propertyAllOf = propSchema.allOf?.length
+        ? parseInterfaceProperties(
+            propSchema.allOf.reduce<{ [key: string]: Schema }>(
+              (acc, prop, i) => ({ ...acc, [i]: prop }),
+              {},
+            ),
+          )
+        : [];
 
-      const typescriptType =
-        'enum' in propSchema
-          ? (propSchema.type === 'number'
-              ? propSchema.enum || []
-              : (propSchema.enum || []).map(str => `'${str}'`)
-            ).join(' | ')
-          : propSchema.properties
-          ? 'object' // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
-          : toTypescriptType(parseSchema(propSchema, isArray));
-      const isRef = !!parseReference(
-        typeof (propSchema.items as Schema)?.additionalProperties === 'object'
-          ? ((propSchema.items as Schema).additionalProperties as Schema)
-          : propSchema,
-      );
-      const propertyAllOf =
-        propSchema.allOf && propSchema.allOf.length
-          ? parseInterfaceProperties(
-              propSchema.allOf.reduce<{ [key: string]: Schema }>(
-                (acc, prop, i) => ({ ...acc, [i]: prop }),
-                {},
-              ),
-            )
-          : [];
-      const allOfParsed = propertyAllOf.map(
-        prop => `${prop.typescriptType}${prop.isArray ? '[]' : ''}`,
-      );
-      const allOfImports = propertyAllOf.map(prop => `${prop.typescriptType}`);
-      const type = typescriptType.replace('[]', '');
       const name =
         /^[A-Za-z_$][\w$]*$/.test(propName) ||
-        propName === ADDITIONAL_PROPERTIES_KEY
+        propName === ADDITIONAL_PROPERTIES_KEY // todo: check if this is needed here
           ? propName
           : `'${propName}'`;
 
       const property: Property = {
-        isArray,
-        isDictionary: !!(
-          propSchema.additionalProperties ||
-          (propSchema.items as Schema)?.additionalProperties
-        ),
-        isRef,
-        isPrimitiveType: BASIC_TS_TYPE_REGEX.test(type),
+        parsedSchema,
+        isPrimitiveType: BASIC_TS_TYPE_REGEX.test(parsedSchema.type), // TODO: check if this is needed with guards refactored
         isRequired: requiredProps.includes(propName),
         name,
         description: replaceNewLines(propSchema.description),
-        type: type,
-        typescriptType: allOfParsed.length
-          ? allOfParsed.join(' & ')
-          : typescriptType,
-        imports: isRef ? [type, ...allOfImports] : allOfImports,
+        type: propertyAllOf.length
+          ? propertyAllOf
+              .map(({ parsedSchema }) => parsedSchema?.type)
+              .filter((type): type is string => !!type)
+              .join(' & ')
+          : parsedSchema.type,
+        imports: propertyAllOf.reduce(
+          (imports, { parsedSchema }) => [
+            ...imports,
+            ...(parsedSchema?.imports || []),
+          ],
+          parsedSchema.imports,
+        ),
       };
 
       const guard = `(${guardFn(
@@ -420,55 +402,56 @@ function parseInterfaceProperties(
     .sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
 }
 
-function parseReference(schema: Schema): string {
-  if ('$ref' in schema && schema.$ref) {
-    return schema.$ref;
-  } else if (schema.type === 'array' && schema.items) {
-    if ('$ref' in schema.items && schema.items.$ref) {
-      return schema.items.$ref;
-    } else if (
-      !Array.isArray(schema.items) &&
-      schema.items.items &&
-      '$ref' in schema.items.items &&
-      schema.items.items.$ref
-    ) {
-      return schema.items.items.$ref;
-    }
-  } else if (
-    schema.additionalProperties &&
-    typeof schema.additionalProperties !== 'boolean' &&
-    schema.additionalProperties.$ref
-  ) {
-    return schema.additionalProperties.$ref;
-  }
-
-  return '';
-}
-
-function parseSchema(
-  property: Schema = {},
-  ignoreFirstArray: boolean, // set to true if the schema you are passing is of array and you already set the array notation elsewhere (for example in template)
-): string {
+function parseSchema(property: Schema = {}): ParsedSchema {
   if (Array.isArray(property.items)) {
     logWarn('Arrays with type diversity are currently not supported');
-    return 'any';
+    return { type: 'any', imports: [] };
+  }
+
+  if ('enum' in property) {
+    return {
+      type: `(${(property.type === 'number'
+        ? property.enum || []
+        : (property.enum || []).map(str => `'${str}'`)
+      ).join(' | ')})`,
+      imports: [],
+    };
+  }
+
+  if (property.properties) {
+    return { type: 'object', imports: [] }; // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
   }
 
   if (property.$ref) {
-    return typeName(dereferenceType(property.$ref));
+    const refType = typeName(dereferenceType(property.$ref));
+
+    return { type: refType, imports: [refType] };
   }
 
   if (property.items) {
-    return `${parseSchema(property.items as Schema, false)}${
-      ignoreFirstArray ? '' : '[]'
-    }`;
+    const parsedArraySchema = parseSchema(property.items as Schema);
+
+    return {
+      type: `${parsedArraySchema.type}[]`,
+      imports: parsedArraySchema.imports,
+    };
   }
 
   if (property.additionalProperties) {
-    return parseSchema(property.additionalProperties as Schema, false);
+    const parsedDictionarySchema = parseSchema(
+      property.additionalProperties as Schema,
+    );
+
+    return {
+      type: `{ ${ADDITIONAL_PROPERTIES_KEY}: ${parsedDictionarySchema.type} }`,
+      imports: parsedDictionarySchema.imports,
+    };
   }
 
-  return typeName(property.type);
+  return {
+    type: typeName(property.type),
+    imports: [],
+  };
 }
 
 function defineInterface(schema: Schema, definitionKey: string): Definition {
@@ -521,66 +504,32 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   };
 }
 
-function determineResponseType(
-  response: Response,
-): {
-  readonly type: string;
-  readonly name: string;
-} {
+function determineResponseType(response: Response): ParsedSchema {
   if (response == null) {
-    return { name: 'void', type: 'void' };
+    return { type: 'void', imports: [] };
   }
 
   const { schema } = response;
 
   if (schema == null) {
-    return { name: 'void', type: 'void' };
+    return { type: 'void', imports: [] };
   }
 
   const nullable =
     (schema as Schema & { 'x-nullable'?: boolean })['x-nullable'] || false;
+  // -->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->  TODO: tu skusit debugger na schemu co pripada k `getInventory` aby som zistil preco to tam da ten "object" ako "number" (uplne spravne je totiz { [key: string]: number } ale to tam zatial asi nedosiahneme
+  const responseSchema = parseSchema(schema);
 
-  if (schema.type === 'array') {
-    const { items } = schema;
+  const type = responseSchema.imports.reduce(
+    (prefixedType, tokenToPrefix) =>
+      prefixedType.split(tokenToPrefix).join(`models.${tokenToPrefix}`),
+    responseSchema.type,
+  );
 
-    if (items == null) {
-      logWarn('`items` field not present; `any[]` will be used');
-      return { name: 'any', type: 'any[]' };
-    }
-
-    if (Array.isArray(items)) {
-      logWarn(
-        'Arrays with type diversity are currently not supported; `any[]` will be used',
-      );
-      return { name: 'any', type: 'any[]' };
-    }
-
-    const name = items.$ref ? dereferenceType(items.$ref) : items.type;
-    const type = nullable
-      ? `${typeName(name, true)} | null`
-      : typeName(name, true);
-    return { name: name || 'any', type };
-  }
-
-  if (schema.$ref != null) {
-    const name = dereferenceType(schema.$ref);
-    const type = nullable ? `${typeName(name)} | null` : typeName(name);
-    return { name, type };
-  }
-
-  if (schema.type != null) {
-    const type = nullable
-      ? `${typeName(schema.type)} | null`
-      : typeName(schema.type);
-    return { name: type, type };
-  }
-
-  if (schema.properties) {
-    const type = nullable ? 'object | null' : 'object';
-    return { name: type, type };
-  }
-
-  return { name: 'any', type: 'any' };
+  return {
+    ...responseSchema,
+    type: nullable ? `(${type}) | null` : type,
+  };
 }
 
 function transformParameters(
@@ -597,32 +546,14 @@ function transformParameters(
       ? allParams[derefName] || {}
       : {};
     const name =
-      'name' in paramRef ? paramRef.name || '' : (param as Parameter).name;
-    const type =
-      ('type' in param && param.type) ||
-      (paramRef && 'type' in paramRef && paramRef.type) ||
-      '';
-    const isArray = /^(array)$/i.test(type);
-    const typescriptType =
-      'enum' in param
-        ? (param.type === 'number'
-            ? param.enum || []
-            : (param.enum || []).map(str => `'${str}'`)
-          ).join(' | ')
-        : 'schema' in param && param.schema && param.schema.properties
-        ? 'object'
-        : toTypescriptType(
-            isArray
-              ? parseSchema(param as Schema, isArray)
-              : !ref ||
-                (paramRef &&
-                  'type' in paramRef &&
-                  !paramRef.enum &&
-                  paramRef.type &&
-                  BASIC_TS_TYPE_REGEX.test(paramRef.type))
-              ? type
-              : derefName,
-          );
+      'name' in paramRef ? paramRef.name || '' : (param as Parameter).name; // TODO: simplify this
+    const parsedSchema = parseSchema(
+      ref && !('enum' in paramRef)
+        ? (paramRef as Schema)
+        : 'schema' in param
+        ? param.schema
+        : (param as Schema),
+    );
 
     return {
       ...param,
@@ -635,16 +566,15 @@ function transformParameters(
         ' ',
       ),
       camelCaseName: toCamelCase(name),
-      importType:
-        'enum' in param ? typescriptType : prefixImportedModels(typescriptType),
-      isArray,
+      importType: parsedSchema.imports.join('/* this was joined */,'), // todo: this can probably be deleted along with `importType` in type Parameter
       isRequired:
         (param as Parameter).isRequired ||
         // tslint:disable-next-line:no-any
         (<any>param).required ||
         paramRef.required,
       name,
-      typescriptType,
+      type: parsedSchema.type,
+      parsedSchema,
     };
   });
 }

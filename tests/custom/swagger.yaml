@@ -169,6 +169,119 @@ paths:
           description: This returns string
           schema:
             type: string
+  /store/dictionary:
+    get:
+      operationId: 'getDictionary'
+      produces:
+        - 'application/json'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: 'object'
+            additionalProperties:
+              type: 'integer'
+              format: 'int32'
+  /store/arrayOfdictionaries:
+    get:
+      operationId: 'getArrayOfDictionaries'
+      produces:
+        - 'application/json'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: 'array'
+            items:
+              type: 'object'
+              additionalProperties:
+                type: 'integer'
+                format: 'int32'
+  '/{database}/write':
+    parameters:
+      - $ref: '#/parameters/numberEnumParam'
+      - $ref: '#/parameters/stringEnumParam'
+      - $ref: '#/parameters/stringParam'
+      - $ref: '#/parameters/booleanParam'
+      - $ref: '#/parameters/numberParam'
+    post:
+      description: 'Commits a transaction, while optionally updating documents.'
+      operationId: firestore.projects.databases.documents.commit
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Data'
+        - description: |-
+            The database name. In the format `database:{{name}}`
+          in: path
+          name: database
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Dictionary'
+  '/repos/{owner}/{repo}/git/blobs':
+    post:
+      description: Create a custom Blob.
+      parameters:
+        - description: Name of repository owner.
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: Name of repository.
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: Is used to set specified media type.
+          in: header
+          name: Accept
+          type: string
+        - in: body
+          name: body
+          required: true
+          description: Custom blob (should be imported from models)
+          schema:
+            $ref: '#/definitions/blob'
+      responses:
+        '201':
+          description: Created
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/blob'
+  '/repos/{owner}/{repo}/git/blobs/{shaCode}':
+    get:
+      description: Get standard File
+      parameters:
+        - description: Name of repository owner.
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: Name of repository.
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: SHA-1 code.
+          in: path
+          name: shaCode
+          required: true
+          type: string
+        - description: Is used to set specified media type.
+          in: header
+          name: Accept
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: file
 definitions:
   ItemList:
     description: List of items,
@@ -399,7 +512,19 @@ definitions:
     type: object
     additionalProperties:
       type: number
-
+  blob:
+    type: object
+    properties:
+      content:
+        type: string
+      encoding:
+        enum:
+          - utf-8
+          - base64
+      sha:
+        type: string
+      size:
+        type: integer
   PageDataRules:
     type: object
     additionalProperties:
@@ -654,3 +779,42 @@ definitions:
         items:
           $ref: '#/definitions/v1ContentModelVersion'
         title: List of content model versions
+parameters:
+  numberEnumParam:
+    description: |
+      - error format
+      - 1 V1
+      - 2 V2
+    enum:
+      - 1
+      - 2
+    in: query
+    name: wololo
+    type: integer
+  stringEnumParam:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  stringParam:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  booleanParam:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  numberParam:
+    default: true
+    description: should pretty print
+    in: query
+    name: prettyPrint
+    type: boolean

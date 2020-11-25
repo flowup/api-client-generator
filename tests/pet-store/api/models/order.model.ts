@@ -6,5 +6,5 @@ export interface Order {
   petId?: number;
   quantity?: number;
   shipDate?: string;
-  status?: 'placed' | 'approved' | 'delivered';  // Order Status
+  status?: ('placed' | 'approved' | 'delivered');  // Order Status
 }

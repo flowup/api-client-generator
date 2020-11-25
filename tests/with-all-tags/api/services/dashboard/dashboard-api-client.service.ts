@@ -99,7 +99,7 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
   putSettings(
     args: {
       dashboardId: number,
-      rows: any,
+      rows: models.RowModel[],
     },
     requestHttpOptions?: HttpOptions
   ): Observable<object> {

@@ -2,7 +2,7 @@ import { Reference } from 'swagger-schema-official';
 import { FileInfix, Property } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|bigint|boolean|object|void)\b/;
-const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|bigint|boolean|null|undefined|any|void|object|Object|File|Blob)\b/;
+const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|bigint|boolean|null|undefined|any|void|object|Object|File)\b/; // TODO: integer can be renamed with "typeName" and "determineResponseType" refactor
 
 export const ADDITIONAL_PROPERTIES_KEY = '[key: string]';
 
@@ -171,10 +171,6 @@ export function fileName(name: string = '', type: FileInfix = 'model'): string {
   return `${dashCase(name)}.${type}`;
 }
 
-export function prefixImportedModels(type: string = ''): string {
-  return BUILD_IN_TS_TYPE_REGEX.test(type) ? type : `models.${typeName(type)}`;
-}
-
 export function replaceNewLines(
   str: string = '',
   replaceValue: string = '',
@@ -203,4 +199,10 @@ export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
 // tslint:disable-next-line no-any
 export function isReference(param: any | Reference): param is Reference {
   return !!(param as Reference).$ref;
+}
+
+export function importableType(type: string): string {
+  return type
+    ?.replace(/(\[\])|({\s?\[.+\]:\s?)|(\s?})|(models\.?)/g, '')
+    .trim();
 }

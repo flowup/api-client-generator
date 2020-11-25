@@ -58,7 +58,7 @@ export interface Property {
   readonly schema?: Schema;
   readonly type?: string;
   readonly guard?: string;
-  readonly typescriptType?: TypescriptBasicTypes | string;
+  readonly parsedSchema?: ParsedSchema;
   readonly importType?: string;
   readonly isRequired?: boolean;
   readonly imports?: string[];
@@ -77,11 +77,9 @@ export interface Method {
   readonly methodName?: string; // mane of the generated method
   readonly methodType?: MethodType; // type of the http method
   readonly description?: string;
-  readonly isSecure?: boolean; // unused TODO
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
-  readonly isVoid: boolean;
-  readonly response?: string; // method return type
+  readonly responseTypeSchema: ParsedSchema; // method return type schema
   readonly requestResponseType?: 'blob'; // supported types of Angular's Http ResponseContentType
   readonly formData?: Pick<Parameter, 'name' | 'camelCaseName'>[]; // list of parameter names which are form data params
 }
@@ -110,3 +108,9 @@ export interface GenOptions {
 
 // tslint:disable-next-line no-any
 export type ClientGenerator = (...args: any[]) => Promise<string[]>;
+
+export interface ParsedSchema {
+  type: string;
+  imports: string[];
+  guard?: string;
+}
