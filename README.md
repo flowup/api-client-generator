@@ -60,7 +60,7 @@ This command will generate API client described in the swagger.json file to the 
 
 This command will do the same, but it will split **all of the tags to separate API services** and models folder will be shared. All will be generated to specified path and that is `./src/api` folder.
 
-`npx api-client-generator -t all -s ./path/to/swagger.yaml -o ./src/api"`
+`npx api-client-generator -t all -s ./path/to/swagger.yaml -o ./src/api`
 
 ### Script in Package JSON
 
@@ -88,8 +88,17 @@ This command will do the same, but it will split **all of the tags to separate A
 
 `npm run generate-api-client`
 
-In case you want to load it from a remove source run
-`curl https://raw.githubusercontent.com/flowup/api-client-generator/master/tests/custom/swagger.yaml -o swagger.yaml &&npm run generate -- -s swagger.yaml -o ./output`
+In case you want to use swagger fie from a remote source, you can use curl (or simillar tool to fetch the file) and run the generator, as shown in the examples bellow.
+
+```bash
+curl https://raw.githubusercontent.com/flowup/api-client-generator/master/tests/custom/swagger.yaml -o swagger.yaml &&npm run generate-api-client
+```
+
+Or directly run via `npx`
+
+```bash
+curl https://raw.githubusercontent.com/flowup/api-client-generator/master/tests/custom/swagger.yaml -o swagger.yaml &&npx api-client-generator -t all -s ./path/to/swagger.yaml -o ./src/api
+```
 
 This will download and save the swagger.yaml, and later on use the file to generate API client.
 
