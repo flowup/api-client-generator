@@ -34,7 +34,7 @@ export function isAclItem(arg: any): arg is models.AclItem {
   arg != null &&
   typeof arg === 'object' &&
     // permissions?: string[]
-    ( typeof arg.permissions === 'undefined' || (Array.isArray(arg.permissions) && arg.permissions.every((item: unknown) => typeof item === 'string')) ) &&
+    ( typeof arg.permissions === 'undefined' || ( Array.isArray(arg.permissions) && arg.permissions.every((item: unknown) => typeof item === 'string') ) ) &&
     // role?: string
     ( typeof arg.role === 'undefined' || typeof arg.role === 'string' ) &&
 
@@ -47,9 +47,9 @@ export function isAuthForm(arg: any): arg is models.AuthForm {
   arg != null &&
   typeof arg === 'object' &&
     // email: string
-    ( typeof arg.email === 'string' ) &&
+    typeof arg.email === 'string' &&
     // password: string
-    ( typeof arg.password === 'string' ) &&
+    typeof arg.password === 'string' &&
     // rememberMe?: boolean
     ( typeof arg.rememberMe === 'undefined' || typeof arg.rememberMe === 'boolean' ) &&
 
@@ -151,9 +151,9 @@ export function isImportStatsGroup(arg: any): arg is models.ImportStatsGroup {
   arg != null &&
   typeof arg === 'object' &&
     // imported?: ImportStats[]
-    ( typeof arg.imported === 'undefined' || (Array.isArray(arg.imported) && arg.imported.every((item: unknown) => isImportStats(item))) ) &&
+    ( typeof arg.imported === 'undefined' || ( Array.isArray(arg.imported) && arg.imported.every((item: unknown) => isImportStats(item)) ) ) &&
     // pending?: ImportStats[]
-    ( typeof arg.pending === 'undefined' || (Array.isArray(arg.pending) && arg.pending.every((item: unknown) => isImportStats(item))) ) &&
+    ( typeof arg.pending === 'undefined' || ( Array.isArray(arg.pending) && arg.pending.every((item: unknown) => isImportStats(item)) ) ) &&
 
   true
   );
@@ -194,7 +194,7 @@ export function isImportStatusItem(arg: any): arg is models.ImportStatusItem {
     // criticality?: Criticality
     ( typeof arg.criticality === 'undefined' || isCriticality(arg.criticality) ) &&
     // details?: ImportStatusDetailsItem[]
-    ( typeof arg.details === 'undefined' || (Array.isArray(arg.details) && arg.details.every((item: unknown) => isImportStatusDetailsItem(item))) ) &&
+    ( typeof arg.details === 'undefined' || ( Array.isArray(arg.details) && arg.details.every((item: unknown) => isImportStatusDetailsItem(item)) ) ) &&
     // dueDate?: string
     ( typeof arg.dueDate === 'undefined' || typeof arg.dueDate === 'string' ) &&
     // id?: number
@@ -457,7 +457,7 @@ export function isReportItem(arg: any): arg is models.ReportItem {
     // description?: string
     ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
     // groups?: ReportTemplateGroup[]
-    ( typeof arg.groups === 'undefined' || (Array.isArray(arg.groups) && arg.groups.every((item: unknown) => isReportTemplateGroup(item))) ) &&
+    ( typeof arg.groups === 'undefined' || ( Array.isArray(arg.groups) && arg.groups.every((item: unknown) => isReportTemplateGroup(item)) ) ) &&
     // progress?: number
     ( typeof arg.progress === 'undefined' || typeof arg.progress === 'number' ) &&
     // extends ReportListItem
@@ -518,7 +518,7 @@ export function isReportTemplateGroup(arg: any): arg is models.ReportTemplateGro
   arg != null &&
   typeof arg === 'object' &&
     // imports?: ReportTemplate[]
-    ( typeof arg.imports === 'undefined' || (Array.isArray(arg.imports) && arg.imports.every((item: unknown) => isReportTemplate(item))) ) &&
+    ( typeof arg.imports === 'undefined' || ( Array.isArray(arg.imports) && arg.imports.every((item: unknown) => isReportTemplate(item)) ) ) &&
     // issues?: number
     ( typeof arg.issues === 'undefined' || typeof arg.issues === 'number' ) &&
     // title?: string
@@ -533,11 +533,11 @@ export function isRestoreForm(arg: any): arg is models.RestoreForm {
   arg != null &&
   typeof arg === 'object' &&
     // 'passwordСonfirm': string
-    ( typeof arg['passwordСonfirm'] === 'string' ) &&
+    typeof arg['passwordСonfirm'] === 'string' &&
     // guid?: string
     ( typeof arg.guid === 'undefined' || typeof arg.guid === 'string' ) &&
     // password: string
-    ( typeof arg.password === 'string' ) &&
+    typeof arg.password === 'string' &&
 
   true
   );
@@ -548,7 +548,7 @@ export function isRestoreRequestForm(arg: any): arg is models.RestoreRequestForm
   arg != null &&
   typeof arg === 'object' &&
     // email: string
-    ( typeof arg.email === 'string' ) &&
+    typeof arg.email === 'string' &&
 
   true
   );
@@ -563,11 +563,11 @@ export function isRoleDetailsItem(arg: any): arg is models.RoleDetailsItem {
     // name?: string
     ( typeof arg.name === 'undefined' || typeof arg.name === 'string' ) &&
     // privileges?: number[]
-    ( typeof arg.privileges === 'undefined' || (Array.isArray(arg.privileges) && arg.privileges.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.privileges === 'undefined' || ( Array.isArray(arg.privileges) && arg.privileges.every((item: unknown) => typeof item === 'number') ) ) &&
     // status?: RoleStatus
     ( typeof arg.status === 'undefined' || isRoleStatus(arg.status) ) &&
     // users?: number[]
-    ( typeof arg.users === 'undefined' || (Array.isArray(arg.users) && arg.users.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.users === 'undefined' || ( Array.isArray(arg.users) && arg.users.every((item: unknown) => typeof item === 'number') ) ) &&
 
   true
   );
@@ -606,15 +606,15 @@ export function isRoleUpdateDetails(arg: any): arg is models.RoleUpdateDetails {
   arg != null &&
   typeof arg === 'object' &&
     // privilegesToAssing?: number[]
-    ( typeof arg.privilegesToAssing === 'undefined' || (Array.isArray(arg.privilegesToAssing) && arg.privilegesToAssing.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.privilegesToAssing === 'undefined' || ( Array.isArray(arg.privilegesToAssing) && arg.privilegesToAssing.every((item: unknown) => typeof item === 'number') ) ) &&
     // privilegesToUnassing?: number[]
-    ( typeof arg.privilegesToUnassing === 'undefined' || (Array.isArray(arg.privilegesToUnassing) && arg.privilegesToUnassing.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.privilegesToUnassing === 'undefined' || ( Array.isArray(arg.privilegesToUnassing) && arg.privilegesToUnassing.every((item: unknown) => typeof item === 'number') ) ) &&
     // status?: RoleStatus
     ( typeof arg.status === 'undefined' || isRoleStatus(arg.status) ) &&
     // usersToAssing?: number[]
-    ( typeof arg.usersToAssing === 'undefined' || (Array.isArray(arg.usersToAssing) && arg.usersToAssing.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.usersToAssing === 'undefined' || ( Array.isArray(arg.usersToAssing) && arg.usersToAssing.every((item: unknown) => typeof item === 'number') ) ) &&
     // usersToUnassing?: number[]
-    ( typeof arg.usersToUnassing === 'undefined' || (Array.isArray(arg.usersToUnassing) && arg.usersToUnassing.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.usersToUnassing === 'undefined' || ( Array.isArray(arg.usersToUnassing) && arg.usersToUnassing.every((item: unknown) => typeof item === 'number') ) ) &&
 
   true
   );
@@ -676,11 +676,11 @@ export function isStructureForm(arg: any): arg is models.StructureForm {
     // address?: string
     ( typeof arg.address === 'undefined' || typeof arg.address === 'string' ) &&
     // code: string
-    ( typeof arg.code === 'string' ) &&
+    typeof arg.code === 'string' &&
     // description?: string
     ( typeof arg.description === 'undefined' || typeof arg.description === 'string' ) &&
     // name: string
-    ( typeof arg.name === 'string' ) &&
+    typeof arg.name === 'string' &&
 
   true
   );
@@ -691,9 +691,9 @@ export function isTable(arg: any): arg is models.Table {
   arg != null &&
   typeof arg === 'object' &&
     // tableData?: TableCell[][]
-    ( typeof arg.tableData === 'undefined' || (Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => (Array.isArray(item) && item.every((itemItem: unknown) => isTableCell(itemItem))))) ) &&
+    ( typeof arg.tableData === 'undefined' || ( Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => ( Array.isArray(item) && item.every((item: unknown) => isTableCell(item)) )) ) ) &&
     // tableHead?: Column[]
-    ( typeof arg.tableHead === 'undefined' || (Array.isArray(arg.tableHead) && arg.tableHead.every((item: unknown) => isColumn(item))) ) &&
+    ( typeof arg.tableHead === 'undefined' || ( Array.isArray(arg.tableHead) && arg.tableHead.every((item: unknown) => isColumn(item)) ) ) &&
 
   true
   );
@@ -717,7 +717,7 @@ export function isTotalImportStats(arg: any): arg is models.TotalImportStats {
   arg != null &&
   typeof arg === 'object' &&
     // bySchools?: SchoolImportStats[]
-    ( typeof arg.bySchools === 'undefined' || (Array.isArray(arg.bySchools) && arg.bySchools.every((item: unknown) => isSchoolImportStats(item))) ) &&
+    ( typeof arg.bySchools === 'undefined' || ( Array.isArray(arg.bySchools) && arg.bySchools.every((item: unknown) => isSchoolImportStats(item)) ) ) &&
     // total?: ImportStatsGroup
     ( typeof arg.total === 'undefined' || isImportStatsGroup(arg.total) ) &&
 
@@ -732,7 +732,7 @@ export function isUserDetails(arg: any): arg is models.UserDetails {
     // email?: string
     ( typeof arg.email === 'undefined' || typeof arg.email === 'string' ) &&
     // entities?: number[]
-    ( typeof arg.entities === 'undefined' || (Array.isArray(arg.entities) && arg.entities.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.entities === 'undefined' || ( Array.isArray(arg.entities) && arg.entities.every((item: unknown) => typeof item === 'number') ) ) &&
     // firstName?: string
     ( typeof arg.firstName === 'undefined' || typeof arg.firstName === 'string' ) &&
     // id?: number
@@ -763,7 +763,7 @@ export function isUserListItem(arg: any): arg is models.UserListItem {
   arg != null &&
   typeof arg === 'object' &&
     // entityIds?: number[]
-    ( typeof arg.entityIds === 'undefined' || (Array.isArray(arg.entityIds) && arg.entityIds.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.entityIds === 'undefined' || ( Array.isArray(arg.entityIds) && arg.entityIds.every((item: unknown) => typeof item === 'number') ) ) &&
     // id?: number
     ( typeof arg.id === 'undefined' || typeof arg.id === 'number' ) &&
     // name?: string
@@ -789,9 +789,9 @@ export function isValidatedTable(arg: any): arg is models.ValidatedTable {
   arg != null &&
   typeof arg === 'object' &&
     // tableData?: ValidatedTableCell[][]
-    ( typeof arg.tableData === 'undefined' || (Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => (Array.isArray(item) && item.every((itemItem: unknown) => isValidatedTableCell(itemItem))))) ) &&
+    ( typeof arg.tableData === 'undefined' || ( Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => ( Array.isArray(item) && item.every((item: unknown) => isValidatedTableCell(item)) )) ) ) &&
     // tableHead?: Column[]
-    ( typeof arg.tableHead === 'undefined' || (Array.isArray(arg.tableHead) && arg.tableHead.every((item: unknown) => isColumn(item))) ) &&
+    ( typeof arg.tableHead === 'undefined' || ( Array.isArray(arg.tableHead) && arg.tableHead.every((item: unknown) => isColumn(item)) ) ) &&
 
   true
   );

@@ -52,7 +52,7 @@ export function isAssetPatch(arg: any): arg is models.AssetPatch {
     // label?: string
     ( typeof arg.label === 'undefined' || typeof arg.label === 'string' ) &&
     // name: string
-    ( typeof arg.name === 'string' ) &&
+    typeof arg.name === 'string' &&
 
   true
   );
@@ -82,7 +82,7 @@ export function isBlob(arg: any): arg is models.Blob {
   typeof arg === 'object' &&
     // content?: string
     ( typeof arg.content === 'undefined' || typeof arg.content === 'string' ) &&
-    // encoding?: 'utf-8' | 'base64'
+    // encoding?: ('utf-8' | 'base64')
     ( typeof arg.encoding === 'undefined' || ['utf-8', 'base64'].includes(arg.encoding) ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
@@ -153,7 +153,7 @@ export function isCommentBody(arg: any): arg is models.CommentBody {
   arg != null &&
   typeof arg === 'object' &&
     // body: string
-    ( typeof arg.body === 'string' ) &&
+    typeof arg.body === 'string' &&
 
   true
   );
@@ -207,7 +207,7 @@ export function isCommitBody(arg: any): arg is models.CommitBody {
   arg != null &&
   typeof arg === 'object' &&
     // body: string
-    ( typeof arg.body === 'string' ) &&
+    typeof arg.body === 'string' &&
     // line?: string
     ( typeof arg.line === 'undefined' || typeof arg.line === 'string' ) &&
     // number?: string
@@ -217,7 +217,7 @@ export function isCommitBody(arg: any): arg is models.CommitBody {
     // position?: number
     ( typeof arg.position === 'undefined' || typeof arg.position === 'number' ) &&
     // sha: string
-    ( typeof arg.sha === 'string' ) &&
+    typeof arg.sha === 'string' &&
 
   true
   );
@@ -818,7 +818,7 @@ export function isHookBody(arg: any): arg is models.HookBody {
     // active?: boolean
     ( typeof arg.active === 'undefined' || typeof arg.active === 'boolean' ) &&
     // add_events?: string[]
-    ( typeof arg.add_events === 'undefined' || (Array.isArray(arg.add_events) && arg.add_events.every((item: unknown) => typeof item === 'string')) ) &&
+    ( typeof arg.add_events === 'undefined' || ( Array.isArray(arg.add_events) && arg.add_events.every((item: unknown) => typeof item === 'string') ) ) &&
 
   true
   );
@@ -833,7 +833,7 @@ export function isIssue(arg: any): arg is models.Issue {
     // body?: string
     ( typeof arg.body === 'undefined' || typeof arg.body === 'string' ) &&
     // labels?: string[]
-    ( typeof arg.labels === 'undefined' || (Array.isArray(arg.labels) && arg.labels.every((item: unknown) => typeof item === 'string')) ) &&
+    ( typeof arg.labels === 'undefined' || ( Array.isArray(arg.labels) && arg.labels.every((item: unknown) => typeof item === 'string') ) ) &&
     // milestone?: number
     ( typeof arg.milestone === 'undefined' || typeof arg.milestone === 'number' ) &&
     // title?: string
@@ -922,7 +922,7 @@ export function isLanguages(arg: any): arg is models.Languages {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: number
-    ( Object.values(arg).every((value: unknown) => typeof value === 'number') ) &&
+    Object.values(arg).every((value: unknown) => typeof value === 'number') &&
 
   true
   );
@@ -1016,9 +1016,9 @@ export function isMeta(arg: any): arg is models.Meta {
   arg != null &&
   typeof arg === 'object' &&
     // git?: string[]
-    ( typeof arg.git === 'undefined' || (Array.isArray(arg.git) && arg.git.every((item: unknown) => typeof item === 'string')) ) &&
+    ( typeof arg.git === 'undefined' || ( Array.isArray(arg.git) && arg.git.every((item: unknown) => typeof item === 'string') ) ) &&
     // hooks?: string[]
-    ( typeof arg.hooks === 'undefined' || (Array.isArray(arg.hooks) && arg.hooks.every((item: unknown) => typeof item === 'string')) ) &&
+    ( typeof arg.hooks === 'undefined' || ( Array.isArray(arg.hooks) && arg.hooks.every((item: unknown) => typeof item === 'string') ) ) &&
 
   true
   );
@@ -1042,7 +1042,7 @@ export function isMilestone(arg: any): arg is models.Milestone {
     ( typeof arg.number === 'undefined' || typeof arg.number === 'number' ) &&
     // open_issues?: number
     ( typeof arg.open_issues === 'undefined' || typeof arg.open_issues === 'number' ) &&
-    // state?: 'open' | 'closed'
+    // state?: ('open' | 'closed')
     ( typeof arg.state === 'undefined' || ['open', 'closed'].includes(arg.state) ) &&
     // title?: string
     ( typeof arg.title === 'undefined' || typeof arg.title === 'string' ) &&
@@ -1152,11 +1152,11 @@ export function isOrgTeamsPost(arg: any): arg is models.OrgTeamsPost {
   arg != null &&
   typeof arg === 'object' &&
     // name: string
-    ( typeof arg.name === 'string' ) &&
-    // permission?: 'pull' | 'push' | 'admin'
+    typeof arg.name === 'string' &&
+    // permission?: ('pull' | 'push' | 'admin')
     ( typeof arg.permission === 'undefined' || ['pull', 'push', 'admin'].includes(arg.permission) ) &&
     // repo_names?: string[]
-    ( typeof arg.repo_names === 'undefined' || (Array.isArray(arg.repo_names) && arg.repo_names.every((item: unknown) => typeof item === 'string')) ) &&
+    ( typeof arg.repo_names === 'undefined' || ( Array.isArray(arg.repo_names) && arg.repo_names.every((item: unknown) => typeof item === 'string') ) ) &&
 
   true
   );
@@ -1167,9 +1167,9 @@ export function isParticipationStats(arg: any): arg is models.ParticipationStats
   arg != null &&
   typeof arg === 'object' &&
     // all?: number[]
-    ( typeof arg.all === 'undefined' || (Array.isArray(arg.all) && arg.all.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.all === 'undefined' || ( Array.isArray(arg.all) && arg.all.every((item: unknown) => typeof item === 'number') ) ) &&
     // owner?: number[]
-    ( typeof arg.owner === 'undefined' || (Array.isArray(arg.owner) && arg.owner.every((item: unknown) => typeof item === 'number')) ) &&
+    ( typeof arg.owner === 'undefined' || ( Array.isArray(arg.owner) && arg.owner.every((item: unknown) => typeof item === 'number') ) ) &&
 
   true
   );
@@ -1241,7 +1241,7 @@ export function isPostRepo(arg: any): arg is models.PostRepo {
     // homepage?: string
     ( typeof arg.homepage === 'undefined' || typeof arg.homepage === 'string' ) &&
     // name: string
-    ( typeof arg.name === 'string' ) &&
+    typeof arg.name === 'string' &&
     // private?: boolean
     ( typeof arg.private === 'undefined' || typeof arg.private === 'boolean' ) &&
     // team_id?: number
@@ -1658,11 +1658,11 @@ export function isRepoCommitBody(arg: any): arg is models.RepoCommitBody {
     // author?: object
     ( typeof arg.author === 'undefined' || typeof arg.author === 'object' ) &&
     // message: string
-    ( typeof arg.message === 'string' ) &&
+    typeof arg.message === 'string' &&
     // parents: string[]
-    ( (Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'string')) ) &&
+    ( Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'string') ) &&
     // tree: string
-    ( typeof arg.tree === 'string' ) &&
+    typeof arg.tree === 'string' &&
 
   true
   );
@@ -1895,15 +1895,15 @@ export function isTags(arg: any): arg is models.Tags {
   arg != null &&
   typeof arg === 'object' &&
     // message: string
-    ( typeof arg.message === 'string' ) &&
+    typeof arg.message === 'string' &&
     // object: string
-    ( typeof arg.object === 'string' ) &&
+    typeof arg.object === 'string' &&
     // tag: string
-    ( typeof arg.tag === 'string' ) &&
+    typeof arg.tag === 'string' &&
     // tagger: object
     ( typeof arg.tagger === 'object' ) &&
     // type: string
-    ( typeof arg.type === 'string' ) &&
+    typeof arg.type === 'string' &&
 
   true
   );
