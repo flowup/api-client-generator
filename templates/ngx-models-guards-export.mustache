@@ -21,7 +21,7 @@ export function is{{&definitionName}}(arg: any): arg is models.{{&definitionName
   arg != null &&
   typeof arg === 'object' &&
   {{#properties}}
-    // {{&name}}{{^isRequired}}?{{/isRequired}}: {{#isDictionary}}{ [key: string]: {{&typescriptType}} }{{/isDictionary}}{{^isDictionary}}{{&typescriptType}}{{/isDictionary}}{{#isArray}}[]{{/isArray}}
+    // {{&name}}{{^isRequired}}?{{/isRequired}}: {{&type}}
     {{&guard}}
   {{/properties}}
   {{#extend}}
