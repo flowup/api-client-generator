@@ -100,11 +100,11 @@ export class GuardedUserAPIClient extends UserAPIClient {
 
   getUserIssues(
     args: {
-      filter: 'assigned' | 'created' | 'mentioned' | 'subscribed' | 'all',  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: 'open' | 'closed',
+      filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
+      state: ('open' | 'closed'),
       labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: 'created' | 'updated' | 'comments',
-      direction: 'asc' | 'desc',
+      sort: ('created' | 'updated' | 'comments'),
+      direction: ('asc' | 'desc'),
       since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
@@ -183,7 +183,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
 
   getUserRepos(
     args: {
-      type?: 'all' | 'public' | 'private' | 'forks' | 'sources' | 'member',
+      type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
       xRateLimit?: number,
@@ -216,7 +216,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   getUserStarred(
     args: {
       direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: 'created' | 'updated',
+      sort?: ('created' | 'updated'),
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
       xRateLimit?: number,

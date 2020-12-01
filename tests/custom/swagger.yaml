@@ -144,7 +144,9 @@ paths:
       responses:
         200:
           description: Desired file
+          'x-nullable': true,
           schema:
+            description: File | null
             type: 'file'
   /randomObject:
     get:
@@ -204,6 +206,15 @@ paths:
       - $ref: '#/parameters/stringParam'
       - $ref: '#/parameters/booleanParam'
       - $ref: '#/parameters/numberParam'
+      # - $ref: '#/parameters/modelParam' # todo: this results in duplicating 'body' which needs improvements
+      - name: simpleQueryParam
+        in: query
+        type: string
+      - name: simpleArrayQueryParam
+        in: query
+        type: array
+        items:
+          type: number
     post:
       description: 'Commits a transaction, while optionally updating documents.'
       operationId: firestore.projects.databases.documents.commit
@@ -258,6 +269,7 @@ paths:
     get:
       description: Get standard File
       parameters:
+        - $ref: '#/parameters/modelParam'
         - description: Name of repository owner.
           in: path
           name: owner
@@ -818,3 +830,27 @@ parameters:
     in: query
     name: prettyPrint
     type: boolean
+  modelParam:
+    in: body
+    name: body
+    schema:
+      type: object
+      properties:
+        status:
+          $ref: '#/definitions/model'
+        privilegesToAssing:
+          type: array
+          items:
+            type: number
+        privilegesToUnassing:
+          type: array
+          items:
+            type: number
+        usersToAssing:
+          type: array
+          items:
+            type: number
+        usersToUnassing:
+          type: array
+          items:
+            type: number

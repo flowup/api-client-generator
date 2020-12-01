@@ -51,14 +51,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.getPetsId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isPet[](res) || console.error(`TypeGuard for response 'models.Pet[]' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: unknown) => guards.isPet(item)) ) || console.error(`TypeGuard for response 'models.Pet[]' caught inconsistency.`, res)));
   }
 
   getCustomers(
     requestHttpOptions?: HttpOptions
-  ): Observable<models.Customer[] | null> {
+  ): Observable<(models.Customer[]) | null> {
     return super.getCustomers(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isCustomer[] | null(res) || console.error(`TypeGuard for response 'models.Customer[] | null' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => (res == null || ( Array.isArray(res) && res.every((item: unknown) => guards.isCustomer(item)) )) || console.error(`TypeGuard for response '(models.Customer[]) | null' caught inconsistency.`, res)));
   }
 
   getDictionaries(
@@ -75,7 +75,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.getFileId(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isFile(res) || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => res instanceof File || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
   getRandomObject(
@@ -97,6 +97,65 @@ export class GuardedAPIClient extends APIClient {
   ): Observable<string> {
     return super.getRandomString(requestHttpOptions)
       .pipe(tap((res: any) => typeof res === 'string' || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
+  }
+
+  getDictionary(
+    requestHttpOptions?: HttpOptions
+  ): Observable<{ [key: string]: number }> {
+    return super.getDictionary(requestHttpOptions)
+      .pipe(tap((res: any) => Object.values(res).every((value: unknown) => typeof value === 'number') || console.error(`TypeGuard for response '{ [key: string]: number }' caught inconsistency.`, res)));
+  }
+
+  getArrayOfDictionaries(
+    requestHttpOptions?: HttpOptions
+  ): Observable<{ [key: string]: number }[]> {
+    return super.getArrayOfDictionaries(requestHttpOptions)
+      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: unknown) => Object.values(item).every((value: unknown) => typeof value === 'number')) ) || console.error(`TypeGuard for response '{ [key: string]: number }[]' caught inconsistency.`, res)));
+  }
+
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: {
+      wololo?: models.NumberEnumParam,  // (optional) - error format - 1 V1 - 2 V2 
+      alt?: models.StringEnumParam,  // (optional) Data format for response.
+      accessToken?: string,  // (optional) OAuth access token.
+      pp?: boolean,  // (optional) Pretty-print response.
+      prettyPrint?: boolean,  // (optional) should pretty print
+      simpleQueryParam?: string,
+      simpleArrayQueryParam?: number[],
+      body?: models.Data,
+      database: string,  // The database name. In the format `database:{{name}}`
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.Dictionary> {
+    return super.firestoreProjectsDatabasesDocumentsCommit(args, requestHttpOptions)
+      .pipe(tap((res: any) => guards.isDictionary(res) || console.error(`TypeGuard for response 'models.Dictionary' caught inconsistency.`, res)));
+  }
+
+  postReposOwnerRepoGitBlobs(
+    args: {
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      accept?: string,  // (optional) Is used to set specified media type.
+      body: models.Blob,  // Custom blob (should be imported from models)
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<models.Blob[]> {
+    return super.postReposOwnerRepoGitBlobs(args, requestHttpOptions)
+      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: unknown) => guards.isBlob(item)) ) || console.error(`TypeGuard for response 'models.Blob[]' caught inconsistency.`, res)));
+  }
+
+  getReposOwnerRepoGitBlobsShaCode(
+    args: {
+      body?: models.ModelParam,
+      owner: string,  // Name of repository owner.
+      repo: string,  // Name of repository.
+      shaCode: string,  // SHA-1 code.
+      accept?: string,  // (optional) Is used to set specified media type.
+    },
+    requestHttpOptions?: HttpOptions
+  ): Observable<File> {
+    return super.getReposOwnerRepoGitBlobsShaCode(args, requestHttpOptions)
+      .pipe(tap((res: any) => res instanceof File || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
 }

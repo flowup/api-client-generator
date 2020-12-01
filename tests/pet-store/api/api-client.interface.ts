@@ -78,7 +78,7 @@ export interface APIClientInterface {
    */
   findPetsByStatus(
     args: {
-      status: string[],  // Status values that need to be considered for filter
+      status: ('available' | 'pending' | 'sold')[],  // Status values that need to be considered for filter
     },
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]>;
@@ -100,7 +100,7 @@ export interface APIClientInterface {
    */
   getInventory(
     requestHttpOptions?: HttpOptions
-  ): Observable<object>;
+  ): Observable<{ [key: string]: number }>;
 
   /**
    * For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
@@ -201,7 +201,7 @@ export interface APIClientInterface {
    */
   createUsersWithArrayInput(
     args: {
-      body: any,  // List of user object
+      body: models.User[],  // List of user object
     },
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
@@ -211,7 +211,7 @@ export interface APIClientInterface {
    */
   createUsersWithListInput(
     args: {
-      body: any,  // List of user object
+      body: models.User[],  // List of user object
     },
     requestHttpOptions?: HttpOptions
   ): Observable<void>;

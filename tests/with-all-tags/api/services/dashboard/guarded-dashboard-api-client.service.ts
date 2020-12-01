@@ -26,7 +26,7 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.WidgetTypeViewModel[]> {
     return super.getWidgetTypes(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isWidgetTypeViewModel[](res) || console.error(`TypeGuard for response 'models.WidgetTypeViewModel[]' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: unknown) => guards.isWidgetTypeViewModel(item)) ) || console.error(`TypeGuard for response 'models.WidgetTypeViewModel[]' caught inconsistency.`, res)));
   }
 
   get(
@@ -46,13 +46,13 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.RowModel[]> {
     return super.getSettings(args, requestHttpOptions)
-      .pipe(tap((res: any) => guards.isRowModel[](res) || console.error(`TypeGuard for response 'models.RowModel[]' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: unknown) => guards.isRowModel(item)) ) || console.error(`TypeGuard for response 'models.RowModel[]' caught inconsistency.`, res)));
   }
 
   putSettings(
     args: {
       dashboardId: number,
-      rows: any,
+      rows: models.RowModel[],
     },
     requestHttpOptions?: HttpOptions
   ): Observable<object> {

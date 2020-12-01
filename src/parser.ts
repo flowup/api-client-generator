@@ -14,6 +14,7 @@ import {
   MustacheData,
   Parameter,
   ParsedSchema,
+  ParseSchemaMetadata,
   Property,
   Render,
   RenderFileName,
@@ -23,16 +24,17 @@ import {
   toCamelCase,
   dereferenceType,
   fileName,
-  prefixImportedModels,
   replaceNewLines,
-  toTypescriptType,
   typeName,
   logWarn,
   compareStringByKey,
   isReference,
   ADDITIONAL_PROPERTIES_KEY,
+  importableType,
   accessProp,
-  guardFn,
+  guardOptional,
+  guardArray,
+  guardDictionary,
 } from './helper';
 
 interface Parameters {
@@ -44,10 +46,8 @@ interface ExtendedParameters {
 }
 
 type ExtendedParameter = SwaggerParameter & {
-  enum: EnumType;
-  schema: Schema;
-  type: 'string' | 'integer';
-  required: boolean;
+  enum?: EnumType;
+  type?: 'string' | 'integer';
   'x-enumNames'?: string[];
 };
 
@@ -174,16 +174,12 @@ function parseMethods(
               (_: string, ...args: string[]): string =>
                 `\${args.${toCamelCase(args[0])}}`,
             ),
-            responseGuard: BASIC_TS_TYPE_REGEX.test(responseType.type)
-              ? `typeof res === '${responseType.type}'`
-              : `guards.is${responseType.type}(res)`, // TODO: this has to support more complex logic for arrays
-            isVoid: responseType.name === 'void',
-            response: prefixImportedModels(responseType.type),
-            // tslint:disable-next-line:max-line-length
+            responseGuard: responseTypeSchema.guard?.('response'),
             description: `${replaceNewLines(operation.description, '$1   * ')}${
               operation.description ? '\n   * ' : ''
             }Response generated for [ ${successResponseCode} ] HTTP response code.`,
-            ...(/^(File|Blob)\b/i.test(responseType.name) && {
+            responseTypeSchema,
+            ...(responseTypeSchema.type === 'File' && {
               requestResponseType: 'blob' as 'blob',
             }),
           };
@@ -340,117 +336,197 @@ function parseInterfaceProperties(
 ): Property[] {
   return Object.entries<Schema>(properties)
     .map(([propName, propSchema]: [string, Schema]) => {
-      const parsedSchema = parseSchema(propSchema);
-      const propertyAllOf = propSchema.allOf?.length
-        ? parseInterfaceProperties(
-            propSchema.allOf.reduce<{ [key: string]: Schema }>(
-              (acc, prop, i) => ({ ...acc, [i]: prop }),
-              {},
-            ),
-          )
-        : [];
-
       const name =
         /^[A-Za-z_$][\w$]*$/.test(propName) ||
         propName === ADDITIONAL_PROPERTIES_KEY // todo: check if this is needed here
           ? propName
           : `'${propName}'`;
 
+      const propertyAllOf = propSchema.allOf?.length
+        ? propSchema.allOf.map(allOfItemSchema =>
+            parseSchema(allOfItemSchema, false, {
+              name: accessProp(name),
+              isRequired: true,
+            }),
+          )
+        : [];
+
+      const isRequired = requiredProps.includes(propName);
+
+      const parsedSchema = parseSchema(propSchema, false, {
+        name: name === ADDITIONAL_PROPERTIES_KEY ? 'value' : accessProp(name),
+        isRequired,
+      });
+
       const property: Property = {
         parsedSchema,
         isPrimitiveType: BASIC_TS_TYPE_REGEX.test(parsedSchema.type), // TODO: check if this is needed with guards refactored
-        isRequired: requiredProps.includes(propName),
+        isRequired,
         name,
         description: replaceNewLines(propSchema.description),
         type: propertyAllOf.length
           ? propertyAllOf
-              .map(({ parsedSchema }) => parsedSchema?.type)
+              .map(({ type }) => type)
               .filter((type): type is string => !!type)
               .join(' & ')
           : parsedSchema.type,
         imports: propertyAllOf.reduce(
-          (imports, { parsedSchema }) => [
-            ...imports,
-            ...(parsedSchema?.imports || []),
-          ],
+          (allImports, { imports }) => [...imports, ...allImports],
           parsedSchema.imports,
         ),
       };
 
-      const guard = `(${guardFn(
-        () =>
-          propertyAllOf.length
-            ? `(${propertyAllOf
-                .map(prop =>
-                  guardFn(
-                    () => `is${prop.typescriptType}(${accessProp(name)})`,
-                    { ...prop, name, isRequired: true },
-                  ),
-                )
-                .join(' && ')})`
-            : 'enum' in propSchema
-            ? `[${(typescriptType || '').replace(
-                / \| /g,
-                ', ',
-              )}].includes(${accessProp(name)})`
-            : `is${typescriptType}(${accessProp(name)})`,
-        property,
-      ).replace(/\s+/g, ' ')}) &&`;
+      const guard = propertyAllOf.length
+        ? guardOptional(
+            accessProp(name),
+            false,
+            () =>
+              `( ${propertyAllOf
+                .map(({ guard }) => guard?.('this can be anything'))
+                .filter((type): type is string => !!type)
+                .join(' && ')} )`,
+          )
+        : parsedSchema.guard?.('this can be anything') || ''; // todo: check the typing on the guards as the name probably should not be passed here (it does not seem to have any effect)
 
-      return { ...property, guard };
+      return {
+        ...property,
+        guard:
+          name === ADDITIONAL_PROPERTIES_KEY
+            ? guardDictionary('arg', () => guard)
+            : guard,
+      };
     })
     .sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
 }
 
-function parseSchema(property: Schema = {}): ParsedSchema {
+function parseSchema(
+  property: Schema,
+  skipGuards: boolean,
+  {
+    name,
+    isRequired,
+    prefixGuards,
+  }: ParseSchemaMetadata & { prefixGuards?: boolean },
+): ParsedSchema {
   if (Array.isArray(property.items)) {
     logWarn('Arrays with type diversity are currently not supported');
     return { type: 'any', imports: [] };
   }
 
   if ('enum' in property) {
-    return {
-      type: `(${(property.type === 'number'
+    const enumValues =
+      property.type === 'number'
         ? property.enum || []
-        : (property.enum || []).map(str => `'${str}'`)
-      ).join(' | ')})`,
+        : (property.enum || []).map(str => `'${str}'`);
+
+    return {
+      type: `(${enumValues.join(' | ')})`,
       imports: [],
+      guard: skipGuards
+        ? undefined
+        : () =>
+            guardOptional(
+              name,
+              isRequired,
+              (name: string) => `[${enumValues.join(', ')}].includes(${name})`,
+            ),
     };
   }
 
   if (property.properties) {
-    return { type: 'object', imports: [] }; // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
+    return {
+      type: 'object',
+      imports: [],
+      guard: () =>
+        guardOptional(
+          name,
+          isRequired,
+          (name: string) => `typeof ${name} === 'object'`,
+        ),
+    }; // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
   }
 
   if (property.$ref) {
     const refType = typeName(dereferenceType(property.$ref));
 
-    return { type: refType, imports: [refType] };
+    return {
+      type: refType,
+      imports: [refType],
+      guard: skipGuards
+        ? undefined
+        : () =>
+            guardOptional(
+              name,
+              isRequired,
+              (name: string) =>
+                `${prefixGuards ? 'guards.' : ''}is${refType}(${name})`,
+            ),
+    };
   }
 
   if (property.items) {
-    const parsedArraySchema = parseSchema(property.items as Schema);
+    const parsedArrayItemsSchema = parseSchema(
+      property.items as Schema,
+      skipGuards,
+      {
+        name: 'item',
+        isRequired: true,
+        prefixGuards,
+      },
+    );
 
     return {
-      type: `${parsedArraySchema.type}[]`,
-      imports: parsedArraySchema.imports,
+      type: `${parsedArrayItemsSchema.type}[]`,
+      imports: parsedArrayItemsSchema.imports,
+      guard:
+        skipGuards || !parsedArrayItemsSchema.guard
+          ? undefined
+          : () =>
+              guardOptional(name, isRequired, (name: string) =>
+                guardArray(name, parsedArrayItemsSchema.guard!),
+              ),
     };
   }
 
   if (property.additionalProperties) {
     const parsedDictionarySchema = parseSchema(
       property.additionalProperties as Schema,
+      skipGuards,
+      { name: 'value', isRequired: true, prefixGuards },
     );
 
+    const isJustObject = parsedDictionarySchema.type === 'any'; // skip complicated dictionary type and guard if simple object
+
     return {
-      type: `{ ${ADDITIONAL_PROPERTIES_KEY}: ${parsedDictionarySchema.type} }`,
+      type: isJustObject
+        ? 'object'
+        : `{ ${ADDITIONAL_PROPERTIES_KEY}: ${parsedDictionarySchema.type} }`,
       imports: parsedDictionarySchema.imports,
+      guard:
+        skipGuards || !parsedDictionarySchema.guard
+          ? undefined
+          : () =>
+              guardOptional(name, isRequired, (name: string) =>
+                isJustObject
+                  ? `typeof ${name} === 'object'`
+                  : guardDictionary(name, parsedDictionarySchema.guard!),
+              ),
     };
   }
 
+  const type = typeName(property.type);
+
   return {
-    type: typeName(property.type),
+    type,
     imports: [],
+    guard: skipGuards
+      ? undefined
+      : () =>
+          guardOptional(name, isRequired, (name: string) =>
+            type === 'File'
+              ? `${name} instanceof File`
+              : `typeof ${name} === '${type}'`,
+          ),
   };
 }
 
@@ -517,8 +593,11 @@ function determineResponseType(response: Response): ParsedSchema {
 
   const nullable =
     (schema as Schema & { 'x-nullable'?: boolean })['x-nullable'] || false;
-  // -->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->  TODO: tu skusit debugger na schemu co pripada k `getInventory` aby som zistil preco to tam da ten "object" ako "number" (uplne spravne je totiz { [key: string]: number } ale to tam zatial asi nedosiahneme
-  const responseSchema = parseSchema(schema);
+  const responseSchema = parseSchema(schema, false, {
+    name: 'res',
+    isRequired: true,
+    prefixGuards: true,
+  });
 
   const type = responseSchema.imports.reduce(
     (prefixedType, tokenToPrefix) =>
@@ -529,6 +608,10 @@ function determineResponseType(response: Response): ParsedSchema {
   return {
     ...responseSchema,
     type: nullable ? `(${type}) | null` : type,
+    guard: () =>
+      nullable
+        ? `(res == null || ${responseSchema.guard?.('')})`
+        : responseSchema.guard?.('') || '',
   };
 }
 
@@ -537,32 +620,36 @@ function transformParameters(
   allParams: Parameters,
 ): Parameter[] {
   return parameters.map((param: ExtendedSwaggerParam) => {
-    const ref =
-      param.$ref ||
-      ('schema' in param && param.schema && param.schema.$ref) ||
-      '';
+    const ref = param.$ref;
     const derefName = ref ? dereferenceType(ref) : undefined;
-    const paramRef: Partial<SwaggerParameter> = derefName
-      ? allParams[derefName] || {}
-      : {};
+    const paramRef: SwaggerParameter | undefined = derefName
+      ? allParams[derefName]
+      : undefined;
     const name =
-      'name' in paramRef ? paramRef.name || '' : (param as Parameter).name; // TODO: simplify this
-    const parsedSchema = parseSchema(
-      ref && !('enum' in paramRef)
-        ? (paramRef as Schema)
-        : 'schema' in param
-        ? param.schema
-        : (param as Schema),
-    );
+      paramRef && 'name' in paramRef
+        ? paramRef.name || ''
+        : (param as Parameter).name; // TODO: simplify this
+
+    const parsedSchema = determineResponseType({
+      description: '',
+      schema:
+        paramRef &&
+        !('enum' in paramRef) &&
+        !('schema' in paramRef && paramRef.schema?.type === 'object')
+          ? (paramRef as Schema)
+          : 'schema' in param
+          ? param.schema
+          : (param as Schema),
+    });
 
     return {
-      ...param,
+      ...param, // todo: check if this needs spreading
       ...determineParamType(
-        'in' in paramRef ? paramRef.in : (param as Parameter).in,
+        paramRef && 'in' in paramRef ? paramRef.in : (param as Parameter).in,
       ),
 
       description: replaceNewLines(
-        (param as Parameter).description || paramRef.description,
+        (param as Parameter).description || paramRef?.description,
         ' ',
       ),
       camelCaseName: toCamelCase(name),
@@ -571,7 +658,7 @@ function transformParameters(
         (param as Parameter).isRequired ||
         // tslint:disable-next-line:no-any
         (<any>param).required ||
-        paramRef.required,
+        paramRef?.required,
       name,
       type: parsedSchema.type,
       parsedSchema,

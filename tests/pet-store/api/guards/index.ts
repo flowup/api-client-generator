@@ -78,7 +78,7 @@ export function isPet(arg: any): arg is models.Pet {
     // status?: ('available' | 'pending' | 'sold')
     ( typeof arg.status === 'undefined' || ['available', 'pending', 'sold'].includes(arg.status) ) &&
     // tags?: Tag[]
-    ( typeof arg.tags === 'undefined' || (Array.isArray(arg.tags) && arg.tags.every((item: unknown) => isTag(item))) ) &&
+    ( typeof arg.tags === 'undefined' || ( Array.isArray(arg.tags) && arg.tags.every((item: unknown) => isTag(item)) ) ) &&
 
   true
   );

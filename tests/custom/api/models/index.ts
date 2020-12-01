@@ -17,6 +17,7 @@ export { InterfaceWithSimpleDictionary } from './interface-with-simple-dictionar
 export { ItemList } from './item-list.model';
 export { ItemModelList } from './item-model-list.model';
 export { Model } from './model.model';
+export { ModelParam } from './model-param.model';
 export { Mouse } from './mouse.model';
 export { MyInterface } from './my-interface.model';
 export { NumberEnumParam } from './number-enum-param.enum';

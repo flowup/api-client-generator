@@ -179,9 +179,9 @@ export function isCommit(arg: any): arg is models.Commit {
     // committer?: object
     ( typeof arg.committer === 'undefined' || typeof arg.committer === 'object' ) &&
     // files?: object[]
-    ( typeof arg.files === 'undefined' || (Array.isArray(arg.files) && arg.files.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.files === 'undefined' || ( Array.isArray(arg.files) && arg.files.every((item: unknown) => typeof item === 'object') ) ) &&
     // parents?: object[]
-    ( typeof arg.parents === 'undefined' || (Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.parents === 'undefined' || ( Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object') ) ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
     // stats?: object
@@ -274,11 +274,11 @@ export function isCompareCommits(arg: any): arg is models.CompareCommits {
     // behind_by?: number
     ( typeof arg.behind_by === 'undefined' || typeof arg.behind_by === 'number' ) &&
     // commits?: object[]
-    ( typeof arg.commits === 'undefined' || (Array.isArray(arg.commits) && arg.commits.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.commits === 'undefined' || ( Array.isArray(arg.commits) && arg.commits.every((item: unknown) => typeof item === 'object') ) ) &&
     // diff_url?: string
     ( typeof arg.diff_url === 'undefined' || typeof arg.diff_url === 'string' ) &&
     // files?: object[]
-    ( typeof arg.files === 'undefined' || (Array.isArray(arg.files) && arg.files.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.files === 'undefined' || ( Array.isArray(arg.files) && arg.files.every((item: unknown) => typeof item === 'object') ) ) &&
     // html_url?: string
     ( typeof arg.html_url === 'undefined' || typeof arg.html_url === 'string' ) &&
     // patch_url?: string
@@ -497,8 +497,8 @@ export function isEditTeam(arg: any): arg is models.EditTeam {
   arg != null &&
   typeof arg === 'object' &&
     // name: string
-    ( typeof arg.name === 'string' ) &&
-    // permission?: 'pull' | 'push' | 'admin'
+    typeof arg.name === 'string' &&
+    // permission?: ('pull' | 'push' | 'admin')
     ( typeof arg.permission === 'undefined' || ['pull', 'push', 'admin'].includes(arg.permission) ) &&
 
   true
@@ -704,13 +704,13 @@ export function isGist(arg: any): arg is models.Gist {
     // files?: object
     ( typeof arg.files === 'undefined' || typeof arg.files === 'object' ) &&
     // forks?: object[]
-    ( typeof arg.forks === 'undefined' || (Array.isArray(arg.forks) && arg.forks.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.forks === 'undefined' || ( Array.isArray(arg.forks) && arg.forks.every((item: unknown) => typeof item === 'object') ) ) &&
     // git_pull_url?: string
     ( typeof arg.git_pull_url === 'undefined' || typeof arg.git_pull_url === 'string' ) &&
     // git_push_url?: string
     ( typeof arg.git_push_url === 'undefined' || typeof arg.git_push_url === 'string' ) &&
     // history?: object[]
-    ( typeof arg.history === 'undefined' || (Array.isArray(arg.history) && arg.history.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.history === 'undefined' || ( Array.isArray(arg.history) && arg.history.every((item: unknown) => typeof item === 'object') ) ) &&
     // html_url?: string
     ( typeof arg.html_url === 'undefined' || typeof arg.html_url === 'string' ) &&
     // id?: string
@@ -1001,7 +1001,7 @@ export function isMergesSuccessful(arg: any): arg is models.MergesSuccessful {
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
     // parents?: object[]
-    ( typeof arg.parents === 'undefined' || (Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.parents === 'undefined' || ( Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object') ) ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
     // url?: string
@@ -1476,7 +1476,7 @@ export function isRelease(arg: any): arg is models.Release {
   arg != null &&
   typeof arg === 'object' &&
     // assets?: object[]
-    ( typeof arg.assets === 'undefined' || (Array.isArray(arg.assets) && arg.assets.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.assets === 'undefined' || ( Array.isArray(arg.assets) && arg.assets.every((item: unknown) => typeof item === 'object') ) ) &&
     // assets_url?: string
     ( typeof arg.assets_url === 'undefined' || typeof arg.assets_url === 'string' ) &&
     // author?: object
@@ -1639,7 +1639,7 @@ export function isRepoCommit(arg: any): arg is models.RepoCommit {
     // message?: string
     ( typeof arg.message === 'undefined' || typeof arg.message === 'string' ) &&
     // parents?: object[]
-    ( typeof arg.parents === 'undefined' || (Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.parents === 'undefined' || ( Array.isArray(arg.parents) && arg.parents.every((item: unknown) => typeof item === 'object') ) ) &&
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
     // tree?: object
@@ -1723,7 +1723,7 @@ export function isSearchCode(arg: any): arg is models.SearchCode {
   arg != null &&
   typeof arg === 'object' &&
     // items?: object[]
-    ( typeof arg.items === 'undefined' || (Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.items === 'undefined' || ( Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object') ) ) &&
     // total_count?: number
     ( typeof arg.total_count === 'undefined' || typeof arg.total_count === 'number' ) &&
 
@@ -1736,7 +1736,7 @@ export function isSearchIssues(arg: any): arg is models.SearchIssues {
   arg != null &&
   typeof arg === 'object' &&
     // items?: object[]
-    ( typeof arg.items === 'undefined' || (Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.items === 'undefined' || ( Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object') ) ) &&
     // total_count?: number
     ( typeof arg.total_count === 'undefined' || typeof arg.total_count === 'number' ) &&
 
@@ -1749,7 +1749,7 @@ export function isSearchIssuesByKeyword(arg: any): arg is models.SearchIssuesByK
   arg != null &&
   typeof arg === 'object' &&
     // issues?: object[]
-    ( typeof arg.issues === 'undefined' || (Array.isArray(arg.issues) && arg.issues.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.issues === 'undefined' || ( Array.isArray(arg.issues) && arg.issues.every((item: unknown) => typeof item === 'object') ) ) &&
 
   true
   );
@@ -1760,7 +1760,7 @@ export function isSearchRepositories(arg: any): arg is models.SearchRepositories
   arg != null &&
   typeof arg === 'object' &&
     // items?: object[]
-    ( typeof arg.items === 'undefined' || (Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.items === 'undefined' || ( Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object') ) ) &&
     // total_count?: number
     ( typeof arg.total_count === 'undefined' || typeof arg.total_count === 'number' ) &&
 
@@ -1773,7 +1773,7 @@ export function isSearchRepositoriesByKeyword(arg: any): arg is models.SearchRep
   arg != null &&
   typeof arg === 'object' &&
     // repositories?: object[]
-    ( typeof arg.repositories === 'undefined' || (Array.isArray(arg.repositories) && arg.repositories.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.repositories === 'undefined' || ( Array.isArray(arg.repositories) && arg.repositories.every((item: unknown) => typeof item === 'object') ) ) &&
 
   true
   );
@@ -1795,7 +1795,7 @@ export function isSearchUsers(arg: any): arg is models.SearchUsers {
   arg != null &&
   typeof arg === 'object' &&
     // items?: object[]
-    ( typeof arg.items === 'undefined' || (Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.items === 'undefined' || ( Array.isArray(arg.items) && arg.items.every((item: unknown) => typeof item === 'object') ) ) &&
     // total_count?: number
     ( typeof arg.total_count === 'undefined' || typeof arg.total_count === 'number' ) &&
 
@@ -1808,7 +1808,7 @@ export function isSearchUsersByKeyword(arg: any): arg is models.SearchUsersByKey
   arg != null &&
   typeof arg === 'object' &&
     // users?: object[]
-    ( typeof arg.users === 'undefined' || (Array.isArray(arg.users) && arg.users.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.users === 'undefined' || ( Array.isArray(arg.users) && arg.users.every((item: unknown) => typeof item === 'object') ) ) &&
 
   true
   );
@@ -1901,7 +1901,7 @@ export function isTags(arg: any): arg is models.Tags {
     // tag: string
     typeof arg.tag === 'string' &&
     // tagger: object
-    ( typeof arg.tagger === 'object' ) &&
+    typeof arg.tagger === 'object' &&
     // type: string
     typeof arg.type === 'string' &&
 
@@ -1977,7 +1977,7 @@ export function isTree(arg: any): arg is models.Tree {
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
     // tree?: object[]
-    ( typeof arg.tree === 'undefined' || (Array.isArray(arg.tree) && arg.tree.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.tree === 'undefined' || ( Array.isArray(arg.tree) && arg.tree.every((item: unknown) => typeof item === 'object') ) ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
 
@@ -1994,7 +1994,7 @@ export function isTrees(arg: any): arg is models.Trees {
     // sha?: string
     ( typeof arg.sha === 'undefined' || typeof arg.sha === 'string' ) &&
     // tree?: object[]
-    ( typeof arg.tree === 'undefined' || (Array.isArray(arg.tree) && arg.tree.every((item: unknown) => typeof item === 'object')) ) &&
+    ( typeof arg.tree === 'undefined' || ( Array.isArray(arg.tree) && arg.tree.every((item: unknown) => typeof item === 'object') ) ) &&
     // url?: string
     ( typeof arg.url === 'undefined' || typeof arg.url === 'string' ) &&
 

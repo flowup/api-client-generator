@@ -1,5 +1,5 @@
 import { Reference } from 'swagger-schema-official';
-import { FileInfix, Property } from './types';
+import { FileInfix } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|bigint|boolean|object|void)\b/;
 const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|bigint|boolean|null|undefined|any|void|object|Object|File)\b/; // TODO: integer can be renamed with "typeName" and "determineResponseType" refactor
@@ -14,21 +14,21 @@ export function toCamelCase(
     return text;
   }
 
-  const camelText = text
+  let camelText = text
     .split(/[-._\/\\+*]/)
     .filter(word => !!word) // skip empty words
     .map(word => `${word[0].toUpperCase()}${word.substring(1)}`)
     .join('');
 
-  return removeDuplicateWords(
-    lowerFirst
-      ? /^([A-Z]+(?=[A-Z]))/.test(camelText)
-        ? camelText.replace(/^([A-Z]+(?=[A-Z]))/, firstWord =>
-            firstWord.toLowerCase(),
-          )
-        : `${camelText[0].toLowerCase()}${camelText.substring(1)}`
-      : camelText,
-  );
+  if (lowerFirst) {
+    camelText = /^([A-Z]+(?=[A-Z]))/.test(camelText)
+      ? camelText.replace(/^([A-Z]+(?=[A-Z]))/, firstWord =>
+          firstWord.toLowerCase(),
+        )
+      : `${camelText[0].toLowerCase()}${camelText.substring(1)}`;
+  }
+
+  return removeDuplicateWords(camelText);
 }
 
 export function dashCase(text: string = ''): string {
@@ -71,100 +71,47 @@ export function removeDuplicateWords(text: string = ''): string {
   return next;
 }
 
-export function toTypescriptType(type: string | undefined): string {
-  if (!type) {
-    return 'any';
-  }
-
-  if (/^(number|integer|double)$/i.test(type)) {
-    return 'number';
-  } else if (/^(string|boolean)$/i.test(type)) {
-    return type.toLocaleLowerCase();
-  } else if (/^(object)$/i.test(type)) {
-    return 'object';
-  } else if (/^(array)$/i.test(type)) {
-    logWarn('Support for nested arrays is limited, using any[] as type');
-    return 'any[]';
-  }
-
-  return typeName(type);
-}
-
-const PARENT_PROP_PLACEHOLDER = '<-';
-
-export function accessProp(arg: string): string {
-  return arg.startsWith(PARENT_PROP_PLACEHOLDER)
-    ? arg.replace(PARENT_PROP_PLACEHOLDER, '')
-    : arg.startsWith("'")
-    ? `arg[${arg}]`
-    : `arg.${arg}`;
-}
-
-function guardArray(prop: Property): string {
-  return `(Array.isArray(${accessProp(prop.name)}) && ${accessProp(
-    prop.name,
-  )}.every((item: unknown) => ${
-    prop.isPrimitiveType
-      ? `typeof item === '${prop.type}'` // basic types
-      : prop.typescriptType && prop.typescriptType.endsWith('[]') // checks if item is nested array type
-      ? `(Array.isArray(item) && item.every((itemItem: unknown) => ${(prop.isPrimitiveType
-          ? `typeof itemItem === '${prop.type}'` // basic types of nested array
-          : `is${prop.typescriptType}(itemItem)`
-        ) // structured types of nested array
-          .replace('[]', '')}))`
-      : `is${prop.typescriptType}(item)` // structured types
-  }))`;
-}
-
-function guardDictionary(prop: Property): string {
-  return prop.typescriptType === 'any'
-    ? `typeof arg${prop.isDictionary ? `.${prop.name}` : ''} === 'object'` // skip complicated dictionary guard if properties are simply "any"
-    : `Object.values(arg${
-        prop.isDictionary ? `.${prop.name}` : '' // difference between specific property of being dictionary or whole object
-      }).every((value: unknown) => ${
-        prop.isArray
-          ? guardArray({
-              ...prop,
-              name: `${PARENT_PROP_PLACEHOLDER}value`,
-            })
-          : prop.isPrimitiveType
-          ? `typeof value === '${prop.type}'`
-          : `is${prop.typescriptType}(value)`
-      })`;
-}
-
-export function guardFn(fn: () => string, prop: Property): string {
-  return `
-      ${
-        prop.isRequired
-          ? ''
-          : `typeof ${accessProp(prop.name)} === 'undefined' ||`
-      }
-      ${
-        prop.name === ADDITIONAL_PROPERTIES_KEY || prop.isDictionary
-          ? guardDictionary(prop)
-          : prop.isArray
-          ? guardArray(prop)
-          : `${
-              prop.isPrimitiveType
-                ? `typeof ${accessProp(prop.name)} === '${prop.type}'`
-                : fn()
-            }`
-      }
-      `;
-}
-
 export function typeName(
   name: string = 'any',
   isArray: boolean = false,
 ): string {
   const type = BUILD_IN_TS_TYPE_REGEX.test(name)
     ? /\binteger\b/.test(name)
-      ? 'number'
+      ? 'number' // TODO: this can probably be removed as soon as determineResponseType is refactored (in most of the cases it needs to use "to TypescriptType" instead of "typeName")
       : name
     : toCamelCase(name, false);
 
   return `${type}${isArray ? '[]' : ''}`;
+}
+
+export function accessProp(name: string): string {
+  return name.startsWith("'") ? `arg[${name}]` : `arg.${name}`;
+}
+
+export function guardOptional(
+  name: string,
+  isRequired: boolean | undefined,
+  guard: (name: string) => string,
+): string {
+  return isRequired
+    ? guard(name)
+    : `( typeof ${name} === 'undefined' || ${guard(name)} )`;
+}
+
+export function guardDictionary(
+  name: string,
+  guard: (name: string) => string,
+): string {
+  return `Object.values(${name}).every((value: unknown) => ${guard('value')})`;
+}
+
+export function guardArray(
+  name: string,
+  guard: (name: string) => string,
+): string {
+  return `( Array.isArray(${name}) && ${name}.every((item: unknown) => ${guard(
+    'item',
+  )}) )`;
 }
 
 export function fileName(name: string = '', type: FileInfix = 'model'): string {

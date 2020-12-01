@@ -21,6 +21,15 @@ describe('[helpers] to camelCase', () => {
   });
 });
 
+describe('[helpers] determine types to import', () => {
+  it('should detect build-in types', () => {
+    expect(importableType('{ [key: string]: Right[] }[]')).toEqual('Right');
+    expect(importableType('Pet[]')).toEqual('Pet');
+    expect(importableType('Pet')).toEqual('Pet');
+    expect(importableType('number[]')).toEqual('number'); // fixme: this should probably be filtered out when we stop using isRef check
+  });
+});
+
 describe('[helpers] remove duplicate words', () => {
   it('should remove duplicates in sentence', () => {
     expect(removeDuplicateWords('modelmodel')).toEqual('model');
@@ -32,29 +41,5 @@ describe('[helpers] remove duplicate words', () => {
     // It shouldn't remove duplicates with less than 4 letters
     expect(removeDuplicateWords('idWololoID')).toEqual('idWololoID');
     expect(removeDuplicateWords('UrlichUrl')).toEqual('UrlichUrl');
-  });
-});
-
-describe('[helpers] determine TS type', () => {
-  it('should detect build-in types', () => {
-    expect(toTypescriptType('integer')).toEqual('number');
-    expect(toTypescriptType('Integer')).toEqual('number');
-    expect(toTypescriptType('double')).toEqual('number');
-    expect(toTypescriptType('number')).toEqual('number');
-
-    expect(toTypescriptType('string')).toEqual('string');
-    expect(toTypescriptType('boolean')).toEqual('boolean');
-    expect(toTypescriptType('Boolean')).toEqual('boolean');
-    expect(toTypescriptType('object')).toEqual('object');
-    expect(toTypescriptType('Object')).toEqual('object');
-    expect(toTypescriptType('array')).toEqual('any[]');
-    expect(toTypescriptType('Array')).toEqual('any[]');
-  });
-
-  it('should NOT replace type by build-in types', () => {
-    expect(toTypescriptType('modelInteger')).toEqual('ModelInteger');
-    expect(toTypescriptType('MyString')).toEqual('MyString');
-    expect(toTypescriptType('stringValue')).toEqual('StringValue');
-    expect(toTypescriptType('Bool')).toEqual('Bool');
   });
 });

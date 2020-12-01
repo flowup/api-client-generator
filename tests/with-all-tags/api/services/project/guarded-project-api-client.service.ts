@@ -26,7 +26,7 @@ export class GuardedProjectAPIClient extends ProjectAPIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.ProjectTypeViewModel[]> {
     return super.getProjectTypes(requestHttpOptions)
-      .pipe(tap((res: any) => guards.isProjectTypeViewModel[](res) || console.error(`TypeGuard for response 'models.ProjectTypeViewModel[]' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: unknown) => guards.isProjectTypeViewModel(item)) ) || console.error(`TypeGuard for response 'models.ProjectTypeViewModel[]' caught inconsistency.`, res)));
   }
 
 }

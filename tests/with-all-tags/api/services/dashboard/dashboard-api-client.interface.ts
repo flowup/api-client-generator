@@ -39,7 +39,7 @@ export interface DashboardAPIClientInterface {
   putSettings(
     args: {
       dashboardId: number,
-      rows: any,
+      rows: models.RowModel[],
     },
     requestHttpOptions?: HttpOptions
   ): Observable<object>;

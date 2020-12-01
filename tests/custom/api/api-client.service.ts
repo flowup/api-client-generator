@@ -263,6 +263,8 @@ export class APIClient implements APIClientInterface {
       accessToken?: string,  // (optional) OAuth access token.
       pp?: boolean,  // (optional) Pretty-print response.
       prettyPrint?: boolean,  // (optional) should pretty print
+      simpleQueryParam?: string,
+      simpleArrayQueryParam?: number[],
       body?: models.Data,
       database: string,  // The database name. In the format `database:{{name}}`
     },
@@ -288,6 +290,12 @@ export class APIClient implements APIClientInterface {
     }
     if ('prettyPrint' in args) {
       options.params = options.params.set('prettyPrint', String(args.prettyPrint));
+    }
+    if ('simpleQueryParam' in args) {
+      options.params = options.params.set('simpleQueryParam', String(args.simpleQueryParam));
+    }
+    if ('simpleArrayQueryParam' in args) {
+      options.params = options.params.set('simpleArrayQueryParam', String(args.simpleArrayQueryParam));
     }
     return this.sendRequest<models.Dictionary>('POST', path, options, JSON.stringify(args.body));
   }
@@ -323,6 +331,7 @@ export class APIClient implements APIClientInterface {
    */
   getReposOwnerRepoGitBlobsShaCode(
     args: {
+      body?: models.ModelParam,
       owner: string,  // Name of repository owner.
       repo: string,  // Name of repository.
       shaCode: string,  // SHA-1 code.
@@ -340,7 +349,7 @@ export class APIClient implements APIClientInterface {
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    return this.sendRequest<File>('GET', path, options);
+    return this.sendRequest<File>('GET', path, options, JSON.stringify(args.body));
   }
 
   private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {

@@ -13,7 +13,7 @@ export interface LegacyAPIClientInterface {
   getLegacyIssuesSearchOwnerRepositoryStateKeyword(
     args: {
       keyword: string,  // The search term.
-      state: 'open' | 'closed',  // Indicates the state of the issues to return. Can be either open or closed.
+      state: ('open' | 'closed'),  // Indicates the state of the issues to return. Can be either open or closed.
       owner: string,
       repository: string,
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
@@ -33,10 +33,10 @@ export interface LegacyAPIClientInterface {
   getLegacyReposSearchKeyword(
     args: {
       keyword: string,  // The search term
-      order?: 'desc' | 'asc',  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
+      order?: ('desc' | 'asc'),  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
       language?: string,  // (optional) Filter results by language
       startPage?: string,  // (optional) The page number to fetch
-      sort?: 'updated' | 'stars' | 'forks',  // (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match.
+      sort?: ('updated' | 'stars' | 'forks'),  // (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
       xRateLimit?: number,
@@ -71,9 +71,9 @@ export interface LegacyAPIClientInterface {
   getLegacyUserSearchKeyword(
     args: {
       keyword: string,  // The search term
-      order?: 'desc' | 'asc',  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
+      order?: ('desc' | 'asc'),  // (optional) The sort field. if sort param is provided. Can be either asc or desc.
       startPage?: string,  // (optional) The page number to fetch
-      sort?: 'updated' | 'stars' | 'forks',  // (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match.
+      sort?: ('updated' | 'stars' | 'forks'),  // (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match.
       xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
       accept?: string,  // (optional) Is used to set specified media type.
       xRateLimit?: number,

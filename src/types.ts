@@ -112,5 +112,7 @@ export type ClientGenerator = (...args: any[]) => Promise<string[]>;
 export interface ParsedSchema {
   type: string;
   imports: string[];
-  guard?: string;
+  guard?: (name: string) => string;
 }
+
+export type ParseSchemaMetadata = Pick<Property, 'name' | 'isRequired'>;
