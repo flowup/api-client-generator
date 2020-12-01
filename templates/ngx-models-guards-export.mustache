@@ -21,8 +21,8 @@ export function is{{&definitionName}}(arg: any): arg is models.{{&definitionName
   arg != null &&
   typeof arg === 'object' &&
   {{#properties}}
-    // {{&name}}{{^isRequired}}?{{/isRequired}}: {{&type}}
-    {{&guard}} &&
+    // {{&name}}{{^isRequired}}?{{/isRequired}}: {{&type}}{{#guard}}
+    {{&guard}} &&{{/guard}}
   {{/properties}}
   {{#extend}}
     // extends {{&.}}

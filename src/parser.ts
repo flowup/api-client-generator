@@ -522,11 +522,13 @@ function parseSchema(
     guard: skipGuards
       ? undefined
       : () =>
-          guardOptional(name, isRequired, (name: string) =>
-            type === 'File'
-              ? `${name} instanceof File`
-              : `typeof ${name} === '${type}'`,
-          ),
+          type === 'any'
+            ? ''
+            : guardOptional(name, isRequired, (name: string) =>
+                type === 'File'
+                  ? `${name} instanceof File`
+                  : `typeof ${name} === '${type}'`,
+              ),
   };
 }
 

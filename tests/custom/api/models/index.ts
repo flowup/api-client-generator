@@ -2,6 +2,7 @@
 
 export { Blob } from './blob.model';
 export { Cat } from './cat.model';
+export { CornerTestCasesModel } from './corner-test-cases-model.model';
 export { Customer } from './customer.model';
 export { Data } from './data.model';
 export { DataModel } from './data-model.model';

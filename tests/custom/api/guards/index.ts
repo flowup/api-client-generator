@@ -48,6 +48,16 @@ export function isCat(arg: any): arg is models.Cat {
   );
   }
 
+export function isCornerTestCasesModel(arg: any): arg is models.CornerTestCasesModel {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+    // metadata?: any
+
+  true
+  );
+  }
+
 export function isCustomer(arg: any): arg is models.Customer {
   return (
   arg != null &&

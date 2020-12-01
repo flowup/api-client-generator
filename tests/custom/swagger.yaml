@@ -791,6 +791,11 @@ definitions:
         items:
           $ref: '#/definitions/v1ContentModelVersion'
         title: List of content model versions
+  CornerTestCasesModel:
+    type: object
+    description: metadata prop should be empty (any)
+    properties:
+      metadata: {}
 parameters:
   numberEnumParam:
     description: |
