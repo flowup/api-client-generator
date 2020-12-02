@@ -108,21 +108,28 @@ export async function generateAPIClient(
       }
 
       return flattenAll([
-        generateClient(templates['service'], apiTagData, clientOutputPath),
-        generateClientInterface(
+        generateFile(
           templates['service'],
+          `${apiTagData.serviceFileName}.ts`,
           apiTagData,
           clientOutputPath,
         ),
-        generateGuardedClient(
-          templates['service'],
+        generateFile(
+          templates['interface'],
+          `${apiTagData.interfaceFileName}.ts`,
+          apiTagData,
+          clientOutputPath,
+        ),
+        generateFile(
+          templates['guardedService'],
+          `guarded-${apiTagData.serviceFileName}.ts`,
           apiTagData,
           clientOutputPath,
         ),
         ...(!options.skipModuleExport
           ? [
               generateModuleExportIndex(
-                templates['modelsExport'],
+                templates['moduleExport'],
                 apiTagData,
                 clientOutputPath,
               ),
@@ -144,39 +151,15 @@ export async function generateAPIClient(
   ]);
 }
 
-async function generateClient(
+async function generateFile(
   template: string,
+  fileName: string,
   viewContext: MustacheData,
   outputPath: string,
 ): Promise<string[]> {
   /* generate main API client class */
   const result = mustacheRender(template, viewContext);
-  const outfile = join(outputPath, `${viewContext.serviceFileName}.ts`);
-
-  await promisify(writeFile)(outfile, result, 'utf-8');
-  return [outfile];
-}
-
-async function generateGuardedClient(
-  template: string,
-  viewContext: MustacheData,
-  outputPath: string,
-): Promise<string[]> {
-  /* generate main API client class */
-  const result = mustacheRender(template, viewContext);
-  const outfile = join(outputPath, `guarded-${viewContext.serviceFileName}.ts`);
-
-  await promisify(writeFile)(outfile, result, 'utf-8');
-  return [outfile];
-}
-
-async function generateClientInterface(
-  template: string,
-  viewContext: MustacheData,
-  outputPath: string,
-): Promise<string[]> {
-  const result = mustacheRender(template, viewContext);
-  const outfile = join(outputPath, `${viewContext.interfaceFileName}.ts`);
+  const outfile = join(outputPath, fileName);
 
   await promisify(writeFile)(outfile, result, 'utf-8');
   return [outfile];
