@@ -79,8 +79,12 @@ export class APIClient implements APIClientInterface {
     };
 
     const formData = new FormData();
-    formData.append('name', args.name);
-    formData.append('status', args.status);
+    if (args.name != undefined) {
+      formData.append('name', args.name);
+    }
+    if (args.status != undefined) {
+      formData.append('status', args.status);
+    }
 
     return this.sendRequest<void>('POST', path, options, formData);
   }
@@ -125,8 +129,12 @@ export class APIClient implements APIClientInterface {
     };
 
     const formData = new FormData();
-    formData.append('additionalMetadata', args.additionalMetadata);
-    formData.append('file', args.file);
+    if (args.additionalMetadata != undefined) {
+      formData.append('additionalMetadata', args.additionalMetadata);
+    }
+    if (args.file != undefined) {
+      formData.append('file', args.file);
+    }
 
     return this.sendRequest<models.ApiResponse>('POST', path, options, formData);
   }

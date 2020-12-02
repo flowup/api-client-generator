@@ -95,7 +95,9 @@ export class {{&serviceName}} implements {{&interfaceName}} {
     {{#formData.length}}
     const formData = new FormData();
     {{#formData}}
-    formData.append('{{&name}}', args.{{&camelCaseName}});
+    if (args.{{&camelCaseName}} != undefined) {
+      formData.append('{{&name}}', args.{{&camelCaseName}});
+    }
     {{/formData}}
 
     {{/formData.length}}

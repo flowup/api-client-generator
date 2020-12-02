@@ -127,7 +127,9 @@ export class APIClient implements APIClientInterface {
     };
 
     const formData = new FormData();
-    formData.append('restoreGuid', args.restoreGuid);
+    if (args.restoreGuid != undefined) {
+      formData.append('restoreGuid', args.restoreGuid);
+    }
 
     return this.sendRequest<object>('POST', path, options, formData);
   }
@@ -351,7 +353,9 @@ export class APIClient implements APIClientInterface {
     };
 
     const formData = new FormData();
-    formData.append('file', args.file);
+    if (args.file != undefined) {
+      formData.append('file', args.file);
+    }
 
     return this.sendRequest<number>('POST', path, options, formData);
   }
@@ -564,8 +568,12 @@ export class APIClient implements APIClientInterface {
     };
 
     const formData = new FormData();
-    formData.append('description', args.description);
-    formData.append('file', args.file);
+    if (args.description != undefined) {
+      formData.append('description', args.description);
+    }
+    if (args.file != undefined) {
+      formData.append('file', args.file);
+    }
 
     return this.sendRequest<void>('POST', path, options, formData);
   }
