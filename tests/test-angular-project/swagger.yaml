@@ -513,7 +513,8 @@ definitions:
       rightCollections:
         description: '{ [key: string]: Right[] }[]'
         type: array
-        additionalProperties:
-          type: array
-          items:
-            $ref: '#/definitions/right'
+        items:
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/definitions/right'
