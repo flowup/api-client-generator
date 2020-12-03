@@ -88,6 +88,9 @@ export async function generateAPIClient(
     moduleExport: await loadTemplate(
       `${__dirname}/../templates/ngx-module-export.mustache`,
     ),
+    helperTypes: await loadTemplate(
+      `${__dirname}/../templates/ngx-helper-types.mustache`,
+    ),
   };
 
   return flattenAll([
@@ -137,6 +140,12 @@ export async function generateAPIClient(
           : []),
       ]);
     }),
+    generateFile(
+      templates['helperTypes'],
+      `types.ts`,
+      undefined,
+      options.outputPath,
+    ),
     generateModels(
       templates['model'],
       templates['modelsExport'],
@@ -154,12 +163,16 @@ export async function generateAPIClient(
 async function generateFile(
   template: string,
   fileName: string,
-  viewContext: MustacheData,
+  viewContext: MustacheData | undefined,
   outputPath: string,
 ): Promise<string[]> {
   /* generate main API client class */
   const result = mustacheRender(template, viewContext);
   const outfile = join(outputPath, fileName);
+
+  if (!(await promisify(exists)(outputPath))) {
+    await promisify(mkdir)(outputPath, { recursive: true });
+  }
 
   await promisify(writeFile)(outfile, result, 'utf-8');
   return [outfile];

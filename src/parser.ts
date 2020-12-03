@@ -64,7 +64,7 @@ export function createMustacheViewModel(
   swaggerTag?: string,
 ): MustacheData {
   const methods = parseMethods(swagger, swaggerTag);
-  const camelSwaggerTag = toCamelCase(swaggerTag, false);
+  const camelSwaggerTag = toCamelCase(swaggerTag, false) || '';
   return {
     isSecure: !!swagger.securityDefinitions,
     swagger: swagger,
@@ -76,18 +76,11 @@ export function createMustacheViewModel(
       swagger.parameters,
       swaggerTag ? methods : undefined,
     ),
-    serviceName: camelSwaggerTag ? `${camelSwaggerTag}APIClient` : 'APIClient',
-    serviceFileName: fileName(
-      camelSwaggerTag ? `${camelSwaggerTag}APIClient` : 'api-client',
-      'service',
-    ),
-    interfaceName: camelSwaggerTag
-      ? `${camelSwaggerTag}APIClientInterface`
-      : 'APIClientInterface',
-    interfaceFileName: fileName(
-      camelSwaggerTag ? `${camelSwaggerTag}APIClient` : 'api-client',
-      'interface',
-    ),
+    serviceTag: camelSwaggerTag,
+    serviceName: `${camelSwaggerTag}APIClient`,
+    serviceFileName: fileName(`${camelSwaggerTag}APIClient`, 'service'),
+    interfaceName: `${camelSwaggerTag}APIClientInterface`,
+    interfaceFileName: fileName(`${camelSwaggerTag}APIClient`, 'interface'),
   };
 }
 
@@ -100,7 +93,7 @@ export function determineDomain({ schemes, host, basePath }: Swagger): string {
   // if no host exists in the swagger file use a window location relative path
   const domain = host
     ? host // tslint:disable-next-line:no-invalid-template-strings
-    : "${window.location.hostname}${window.location.port ? ':'+window.location.port : ''}";
+    : "${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}";
   const base = '/' === basePath || !basePath ? '' : basePath;
   return `${protocol}${domain}${base}`;
 }

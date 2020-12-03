@@ -3,7 +3,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions, APIClientInterface } from './';
+import { APIClientInterface } from './';
+import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 
@@ -24,7 +25,7 @@ export class APIClient implements APIClientInterface {
 
   readonly options: APIHttpOptions;
 
-  readonly domain: string = `//${window.location.hostname}${window.location.port ? ':'+window.location.port : ''}`;
+  readonly domain: string = `//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`;
 
   constructor(private readonly http: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,

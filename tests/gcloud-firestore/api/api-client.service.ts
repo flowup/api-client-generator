@@ -3,7 +3,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions, APIClientInterface } from './';
+import { APIClientInterface } from './';
+import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 
@@ -629,9 +630,7 @@ export class APIClient implements APIClientInterface {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
     if ('maskFieldPaths' in args) {
-      if (args.maskFieldPaths && args.maskFieldPaths.length) {
-        options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
-      }
+      options.params = options.params.set('mask.fieldPaths', String(args.maskFieldPaths));
     }
     if ('readTime' in args) {
       options.params = options.params.set('readTime', String(args.readTime));
@@ -722,14 +721,10 @@ export class APIClient implements APIClientInterface {
       options.params = options.params.set('currentDocument.updateTime', String(args.currentDocumentUpdateTime));
     }
     if ('maskFieldPaths' in args) {
-      if (args.maskFieldPaths && args.maskFieldPaths.length) {
-        options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
-      }
+      options.params = options.params.set('mask.fieldPaths', String(args.maskFieldPaths));
     }
     if ('updateMaskFieldPaths' in args) {
-      if (args.updateMaskFieldPaths && args.updateMaskFieldPaths.length) {
-        options.params = args.updateMaskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('updateMask.fieldPaths', `${cur}`), options.params);
-      }
+      options.params = options.params.set('updateMask.fieldPaths', String(args.updateMaskFieldPaths));
     }
     return this.sendRequest<models.Document>('PATCH', path, options, JSON.stringify(args.body));
   }
@@ -980,9 +975,7 @@ export class APIClient implements APIClientInterface {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
     if ('maskFieldPaths' in args) {
-      if (args.maskFieldPaths && args.maskFieldPaths.length) {
-        options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
-      }
+      options.params = options.params.set('mask.fieldPaths', String(args.maskFieldPaths));
     }
     if ('orderBy' in args) {
       options.params = options.params.set('orderBy', String(args.orderBy));
@@ -1081,9 +1074,7 @@ export class APIClient implements APIClientInterface {
       options.params = options.params.set('documentId', String(args.documentId));
     }
     if ('maskFieldPaths' in args) {
-      if (args.maskFieldPaths && args.maskFieldPaths.length) {
-        options.params = args.maskFieldPaths.reduce<HttpParams>((acc, cur) => acc.append('mask.fieldPaths', `${cur}`), options.params);
-      }
+      options.params = options.params.set('mask.fieldPaths', String(args.maskFieldPaths));
     }
     return this.sendRequest<models.Document>('POST', path, options, JSON.stringify(args.body));
   }

@@ -3,7 +3,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions, APIClientInterface } from './';
+import { APIClientInterface } from './';
+import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 
@@ -192,9 +193,7 @@ export class APIClient implements APIClientInterface {
     };
 
     if ('status' in args) {
-      if (args.status && args.status.length) {
-        options.params = args.status.reduce<HttpParams>((acc, cur) => acc.append('status', `${cur}`), options.params);
-      }
+      options.params = options.params.set('status', String(args.status));
     }
     return this.sendRequest<models.Pet[]>('GET', path, options);
   }
@@ -216,9 +215,7 @@ export class APIClient implements APIClientInterface {
     };
 
     if ('tags' in args) {
-      if (args.tags && args.tags.length) {
-        options.params = args.tags.reduce<HttpParams>((acc, cur) => acc.append('tags', `${cur}`), options.params);
-      }
+      options.params = options.params.set('tags', String(args.tags));
     }
     return this.sendRequest<models.Pet[]>('GET', path, options);
   }

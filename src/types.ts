@@ -21,6 +21,7 @@ export interface MustacheData {
   readonly domain: string;
   readonly methods: Method[];
   readonly definitions: Definition[];
+  readonly serviceTag: string;
   readonly serviceName: string;
   readonly serviceFileName: string;
   readonly interfaceName: string;

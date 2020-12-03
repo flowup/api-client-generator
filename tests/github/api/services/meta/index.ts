@@ -1,7 +1,6 @@
 /* tslint:disable */
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { MetaAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './meta-api-client.service';
 import { GuardedMetaAPIClient } from './guarded-meta-api-client.service';
 
@@ -9,39 +8,16 @@ export { MetaAPIClient } from './meta-api-client.service';
 export { MetaAPIClientInterface } from './meta-api-client.interface';
 export { GuardedMetaAPIClient } from './guarded-meta-api-client.service';
 
-/**
- * provided options, headers and params will be used as default for each request
- */
-export interface DefaultHttpOptions {
-  headers?: {[key: string]: string};
-  params?: {[key: string]: string};
-  reportProgress?: boolean;
-  withCredentials?: boolean;
-}
-
-export interface HttpOptions {
-  headers?: HttpHeaders;
-  params?: HttpParams;
-  reportProgress?: boolean;
-  withCredentials?: boolean;
-}
-
-export interface MetaAPIClientModuleConfig {
-  domain?: string;
-  guardResponses?: boolean; // validate responses with type guards
-  httpOptions?: DefaultHttpOptions;
-}
-
 @NgModule({})
 export class MetaAPIClientModule {
   /**
    * Use this method in your root module to provide the MetaAPIClientModule
    *
    * If you are not providing
-   * @param { MetaAPIClientModuleConfig } config
+   * @param { APIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: MetaAPIClientModuleConfig = {}): ModuleWithProviders<MetaAPIClientModule> {
+  static forRoot(config: APIClientModuleConfig = {}): ModuleWithProviders<MetaAPIClientModule> {
     return {
       ngModule: MetaAPIClientModule,
       providers: [

@@ -1,7 +1,6 @@
 /* tslint:disable */
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { EmojisAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './emojis-api-client.service';
 import { GuardedEmojisAPIClient } from './guarded-emojis-api-client.service';
 
@@ -9,39 +8,16 @@ export { EmojisAPIClient } from './emojis-api-client.service';
 export { EmojisAPIClientInterface } from './emojis-api-client.interface';
 export { GuardedEmojisAPIClient } from './guarded-emojis-api-client.service';
 
-/**
- * provided options, headers and params will be used as default for each request
- */
-export interface DefaultHttpOptions {
-  headers?: {[key: string]: string};
-  params?: {[key: string]: string};
-  reportProgress?: boolean;
-  withCredentials?: boolean;
-}
-
-export interface HttpOptions {
-  headers?: HttpHeaders;
-  params?: HttpParams;
-  reportProgress?: boolean;
-  withCredentials?: boolean;
-}
-
-export interface EmojisAPIClientModuleConfig {
-  domain?: string;
-  guardResponses?: boolean; // validate responses with type guards
-  httpOptions?: DefaultHttpOptions;
-}
-
 @NgModule({})
 export class EmojisAPIClientModule {
   /**
    * Use this method in your root module to provide the EmojisAPIClientModule
    *
    * If you are not providing
-   * @param { EmojisAPIClientModuleConfig } config
+   * @param { APIClientModuleConfig } config
    * @returns { ModuleWithProviders }
    */
-  static forRoot(config: EmojisAPIClientModuleConfig = {}): ModuleWithProviders<EmojisAPIClientModule> {
+  static forRoot(config: APIClientModuleConfig = {}): ModuleWithProviders<EmojisAPIClientModule> {
     return {
       ngModule: EmojisAPIClientModule,
       providers: [
