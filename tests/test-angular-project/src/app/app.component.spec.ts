@@ -1,10 +1,11 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      imports: [AppModule],
     }).compileComponents();
   }));
 
@@ -27,5 +28,11 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain(
       'Welcome to test-angular-project!',
     );
+  }));
+
+  it(`should have list of pet store domains`, async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.domains).toEqual(['pet.domain', 'user.domain']);
   }));
 });
