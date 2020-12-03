@@ -1,4 +1,4 @@
-import { removeDuplicateWords, toCamelCase, toTypescriptType } from './helper';
+import { importableType, removeDuplicateWords, toCamelCase } from './helper';
 
 describe('[helpers] to camelCase', () => {
   it('should convert dash to camelCase', () => {
