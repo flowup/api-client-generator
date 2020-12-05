@@ -11,7 +11,7 @@ import {
   Definition,
   Method,
   MethodType,
-  MustacheData,
+  TemplateData,
   Parameter,
   ParsedSchema,
   ParseSchemaMetadata,
@@ -57,10 +57,10 @@ type EnumType = string[] | number[] | boolean[] | {}[];
 
 type ExtendedSwaggerParam = Parameter | Reference;
 
-export function createMustacheViewModel(
+export function createTemplateViewModel(
   swagger: Swagger,
   swaggerTag?: string,
-): MustacheData {
+): TemplateData {
   const methods = parseMethods(swagger, swaggerTag);
   const camelSwaggerTag = toCamelCase(swaggerTag, false) || '';
   return {

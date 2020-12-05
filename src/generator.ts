@@ -1,18 +1,18 @@
 import { exists, mkdir, readFile, writeFile } from 'fs';
-import { render as mustacheRender } from 'mustache';
+import { compile, registerHelper } from 'handlebars';
 import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { Operation, Path, Spec as Swagger } from 'swagger-schema-official';
 import { promisify } from 'util';
-import { MustacheData, GenOptions, Definition } from './types';
+import { TemplateData, GenOptions, Definition } from './types';
 import {
-  fileName,
   logWarn,
   dashCase,
   flattenAll,
   compareStringByKey,
+  toCamelCase,
 } from './helper';
-import { createMustacheViewModel } from './parser';
+import { createTemplateViewModel } from './parser';
 
 const ALL_TAGS_OPTION = 'all';
 export const MODEL_DIR_NAME = 'models';
@@ -53,7 +53,7 @@ export async function generateAPIClient(
       : specifiedTags;
 
   const apiTagsData = usedTags.map(tag =>
-    createMustacheViewModel(swaggerDef, tag),
+    createTemplateViewModel(swaggerDef, tag),
   );
 
   // sort the definitions by name and removes duplicates
@@ -65,33 +65,37 @@ export async function generateAPIClient(
       index > 0 ? definitionName !== self[index - 1].definitionName : true,
     );
 
-  const loadTemplate = async (fileName: string) =>
-    (await promisify(readFile)(fileName)).toString();
+  const compileTemplate = async (fileName: string) =>
+    compile((await promisify(readFile)(fileName)).toString());
 
-  const templates = {
-    model: await loadTemplate(`${__dirname}/../templates/ngx-model.mustache`),
-    modelsGuards: await loadTemplate(
-      `${__dirname}/../templates/ngx-models-guards-export.mustache`,
+  const compiledTemplates = {
+    model: await compileTemplate(
+      `${__dirname}/../templates/ngx-model.handlebars`,
     ),
-    modelsExport: await loadTemplate(
-      `${__dirname}/../templates/ngx-models-export.mustache`,
+    modelsGuards: await compileTemplate(
+      `${__dirname}/../templates/ngx-models-guards-export.handlebars`,
     ),
-    service: await loadTemplate(
-      `${__dirname}/../templates/ngx-service.mustache`,
+    modelsExport: await compileTemplate(
+      `${__dirname}/../templates/ngx-models-export.handlebars`,
     ),
-    interface: await loadTemplate(
-      `${__dirname}/../templates/ngx-service-interface.mustache`,
+    service: await compileTemplate(
+      `${__dirname}/../templates/ngx-service.handlebars`,
     ),
-    guardedService: await loadTemplate(
-      `${__dirname}/../templates/ngx-guarded-service.mustache`,
+    interface: await compileTemplate(
+      `${__dirname}/../templates/ngx-service-interface.handlebars`,
     ),
-    moduleExport: await loadTemplate(
-      `${__dirname}/../templates/ngx-module-export.mustache`,
+    guardedService: await compileTemplate(
+      `${__dirname}/../templates/ngx-guarded-service.handlebars`,
     ),
-    helperTypes: await loadTemplate(
-      `${__dirname}/../templates/ngx-helper-types.mustache`,
+    moduleExport: await compileTemplate(
+      `${__dirname}/../templates/ngx-module-export.handlebars`,
+    ),
+    helperTypes: await compileTemplate(
+      `${__dirname}/../templates/ngx-helper-types.handlebars`,
     ),
   };
+
+  registerHelper('camelCase', toCamelCase);
 
   return flattenAll([
     ...apiTagsData.map(async apiTagData => {
@@ -112,27 +116,28 @@ export async function generateAPIClient(
 
       return flattenAll([
         generateFile(
-          templates['service'],
+          compiledTemplates['service'],
           `${apiTagData.serviceFileName}.ts`,
           apiTagData,
           clientOutputPath,
         ),
         generateFile(
-          templates['interface'],
+          compiledTemplates['interface'],
           `${apiTagData.interfaceFileName}.ts`,
           apiTagData,
           clientOutputPath,
         ),
         generateFile(
-          templates['guardedService'],
+          compiledTemplates['guardedService'],
           `guarded-${apiTagData.serviceFileName}.ts`,
           apiTagData,
           clientOutputPath,
         ),
         ...(!options.skipModuleExport
           ? [
-              generateModuleExportIndex(
-                templates['moduleExport'],
+              generateFile(
+                compiledTemplates['moduleExport'],
+                `index.ts`,
                 apiTagData,
                 clientOutputPath,
               ),
@@ -141,33 +146,34 @@ export async function generateAPIClient(
       ]);
     }),
     generateFile(
-      templates['helperTypes'],
+      compiledTemplates['helperTypes'],
       `types.ts`,
       undefined,
       options.outputPath,
     ),
     generateModels(
-      templates['model'],
-      templates['modelsExport'],
+      compiledTemplates['model'],
+      compiledTemplates['modelsExport'],
       allDefinitions,
       options.outputPath,
     ),
-    generateModelGuards(
-      templates['modelsGuards'],
-      allDefinitions,
-      options.outputPath,
+    generateFile(
+      compiledTemplates['modelsGuards'],
+      `index.ts`,
+      { definitions: allDefinitions },
+      join(options.outputPath, MODEL_GUARDS_DIR_NAME),
     ),
   ]);
 }
 
-async function generateFile(
-  template: string,
+async function generateFile<T = TemplateData | undefined>(
+  compiledTemplate: HandlebarsTemplateDelegate<T>,
   fileName: string,
-  viewContext: MustacheData | undefined,
+  viewContext: T,
   outputPath: string,
 ): Promise<string[]> {
   /* generate main API client class */
-  const result = mustacheRender(template, viewContext);
+  const result = compiledTemplate(viewContext);
   const outfile = join(outputPath, fileName);
 
   if (!(await promisify(exists)(outputPath))) {
@@ -179,8 +185,10 @@ async function generateFile(
 }
 
 async function generateModels(
-  modelTemplate: string,
-  modelExportTemplate: string,
+  modelCompiledTemplate: HandlebarsTemplateDelegate<Definition>,
+  modelExportCompiledTemplate: HandlebarsTemplateDelegate<{
+    definitions: Definition[];
+  }>,
   definitions: Definition[],
   outputPath: string,
 ): Promise<string[]> {
@@ -194,21 +202,15 @@ async function generateModels(
   // generate model export index for all the generated models
   await promisify(writeFile)(
     outIndexFile,
-    mustacheRender(modelExportTemplate, { definitions }),
+    modelExportCompiledTemplate({ definitions }),
     'utf-8',
   );
 
   // generate API models
   return Promise.all([
     ...definitions.map(async definition => {
-      const result = mustacheRender(modelTemplate, definition);
-      const outfile = join(
-        outputDir,
-        `${fileName(
-          definition.definitionName,
-          definition.isEnum ? 'enum' : 'model',
-        )}.ts`,
-      );
+      const result = modelCompiledTemplate(definition);
+      const outfile = join(outputDir, `${definition.fileName}.ts`);
 
       const directoryName = dirname(outfile);
       if (!(await promisify(exists)(directoryName))) {
@@ -219,41 +221,6 @@ async function generateModels(
     }),
     outIndexFile,
   ]);
-}
-
-async function generateModelGuards(
-  template: string,
-  definitions: Definition[],
-  outputPath: string,
-): Promise<string[]> {
-  const outputDir = join(outputPath, MODEL_GUARDS_DIR_NAME);
-  const outIndexFile = join(outputDir, '/index.ts');
-
-  if (!(await promisify(exists)(outputDir))) {
-    await promisify(mkdir)(outputDir, { recursive: true });
-  }
-
-  // generate model guards export index with all the generated guards
-  await promisify(writeFile)(
-    outIndexFile,
-    mustacheRender(template, { definitions }),
-    'utf-8',
-  );
-
-  // generate API models
-  return [outIndexFile];
-}
-
-async function generateModuleExportIndex(
-  template: string,
-  viewContext: MustacheData,
-  outputPath: string,
-): Promise<string[]> {
-  const result = mustacheRender(template, viewContext);
-  const outfile = join(outputPath, '/index.ts');
-
-  await promisify(writeFile)(outfile, result, 'utf-8');
-  return [outfile];
 }
 
 export function getAllSwaggerTags(paths: {

@@ -21,7 +21,7 @@ Angular REST API client generator from Swagger YAML or JSON file with camel case
 
 # Description
 
-This package generates an Angular TypeScript class from a Swagger v2.0 specification file. The code is generated using Mustache templates.
+This package generates an Angular TypeScript class from a Swagger v2.0 specification file. The code is generated using combination of Handlebars templates and in-code template strings.
 
 The generated service class uses new [HttpClient](https://angular.io/guide/http) module of Angular (introduced in version 4.3).
 

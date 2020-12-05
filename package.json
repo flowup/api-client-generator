@@ -74,14 +74,13 @@
     "dev:install": "npm ci --silent && cd tests/test-angular-project && npm ci --silent"
   },
   "dependencies": {
-    "mustache": "^4.0.1",
+    "handlebars": "^4.7.6",
     "optimist": "^0.6.1",
     "swagger-parser": "^6.0.5",
     "which": "^2.0.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
-    "@types/mustache": "^4.0.1",
     "@types/node": "^14.0.13",
     "@types/optimist": "0.0.29",
     "@types/rimraf": "^3.0.0",

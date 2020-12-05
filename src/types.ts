@@ -11,7 +11,7 @@ export interface Definition {
   readonly fileName: string; // dash-case file name use for imports
 }
 
-export interface MustacheData {
+export interface TemplateData {
   readonly isSecure: boolean;
   readonly swagger: Swagger;
   readonly swaggerTag?: string;
