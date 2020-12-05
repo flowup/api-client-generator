@@ -68,7 +68,9 @@
     "intg-tests:gen-all-tags": "rimraf tests/test-angular-project/src/api-all-tags && npm run gen -- src/main.ts -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-all-tags -t all",
     "intg-tests:gen-no-tag": "rimraf tests/test-angular-project/src/api-no-tags && npm run gen -- src/main.ts -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-no-tags",
     "intg-tests:clear-gen": "rimraf tests/test-angular-project/src/api-no-tags && rimraf tests/test-angular-project/src/api-all-tags",
-    "intg-tests": "npm run intg-tests:gen-all-tags && npm run intg-tests:gen-no-tag && cd tests/test-angular-project && npm run test && cd ../.. && npm run intg-tests:clear-gen",
+    "intg-tests:run-tests": "cd tests/test-angular-project && npm run test",
+    "intg-tests:run-build": "cd tests/test-angular-project && npm run build",
+    "intg-tests": "concurrently --kill-others-on-fail \"npm:intg-tests:gen-*\" && concurrently --kill-others-on-fail \"npm:intg-tests:run-*\" && npm run intg-tests:clear-gen",
     "tests": "npm run test && npm run intg-tests",
     "prettier": "prettier --write \"**/*.{js,json,yaml,css,scss,md,ts,html,component.html}\"",
     "dev:install": "npm ci --silent && cd tests/test-angular-project && npm ci --silent"
