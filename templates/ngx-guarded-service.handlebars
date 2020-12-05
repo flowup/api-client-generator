@@ -7,10 +7,10 @@ import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from './';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, {{&serviceName}} } from './{{&serviceFileName}}';
 
-{{#definitions.length}}
-import * as models from '.{{#swaggerTag}}./..{{/swaggerTag}}/models';
-import * as guards from '.{{#swaggerTag}}./..{{/swaggerTag}}/guards';
-{{/definitions.length}}
+{{#if definitions.length}}
+import * as models from '.{{#if swaggerTag}}./..{{/if}}/models';
+import * as guards from '.{{#if swaggerTag}}./..{{/if}}/guards';
+{{/if}}
 
 /**
  * Created with https://github.com/flowup/api-client-generator

@@ -10,11 +10,11 @@ import {
 
 {{#if description}}
 /**
- * {{description}}
+ * {{&description}}
  */
 {{/if}}export interface {{&definitionName}} {{#extend}}extends {{.}} {{/extend}}{
 {{#properties}}
-  {{&name}}{{^isRequired}}?{{/isRequired}}: {{&type}};{{#if description}}  // {{description}}{{/if}}
+  {{&name}}{{^isRequired}}?{{/isRequired}}: {{&type}};{{#if description}}  // {{&description}}{{/if}}
 {{/properties}}
 }
 {{/isEnum}}

@@ -6,9 +6,9 @@ import { Observable, throwError } from 'rxjs';
 import { {{&interfaceName}} } from './';
 import { DefaultHttpOptions, HttpOptions } from '{{#if serviceTag}}../.{{/if}}./types';
 
-{{#definitions.length}}
-import * as models from '.{{#swaggerTag}}./..{{/swaggerTag}}/models';
-{{/definitions.length}}
+{{#if definitions.length}}
+import * as models from '.{{#if swaggerTag}}./..{{/if}}/models';
+{{/if}}
 
 export const USE_DOMAIN = new InjectionToken<string>('{{&serviceName}}_USE_DOMAIN');
 export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('{{&serviceName}}_USE_HTTP_OPTIONS');
