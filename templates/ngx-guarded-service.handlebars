@@ -25,19 +25,20 @@ export class Guarded{{&serviceName}} extends {{&serviceName}} {
   }
 
 {{#methods}}
-{{#responseGuard}}  {{&methodName}}(
-  {{#parameters.length}}
+{{#if responseGuard}}  {{&methodName}}(
+  {{#if parameters.length}}
     args: {
-    {{#parameters}}
-      {{&camelCaseName}}{{^isRequired}}?{{/isRequired}}: {{&type}},{{#description}}  //{{^isRequired}} (optional){{/isRequired}} {{&.}}{{/description}}
-    {{/parameters}}
+    {{#each parameters}}
+      {{camelCase name}}{{^isRequired}}?{{/isRequired}}: {{&type}},{{#if description}}  //{{#unless isRequired}} (optional){{/unless}} {{&description}}{{/if}}
+    {{/each}}
     },
-  {{/parameters.length}}
+  {{/if}}
     requestHttpOptions?: HttpOptions
   ): Observable<{{&responseTypeSchema.type}}> {
-    return super.{{&methodName}}({{#parameters.length}}args, {{/parameters.length}}requestHttpOptions){{#responseGuard}}
-      .pipe(tap((res: any) => {{&responseGuard}} || console.error(`TypeGuard for response '{{&responseTypeSchema.type}}' caught inconsistency.`, res))){{/responseGuard}};
+    return super.{{&methodName}}({{#if parameters.length}}args, {{/if}}requestHttpOptions){{#responseGuard}}
+      .pipe(tap((res: any) => {{&../responseGuard}} || console.error(`TypeGuard for response '{{&../responseTypeSchema.type}}' caught inconsistency.`, res))){{/responseGuard}};
   }
 
-{{/responseGuard}}{{/methods}}
+{{/if}}
+{{/methods}}
 }
