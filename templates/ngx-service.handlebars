@@ -3,7 +3,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { {{&interfaceName}} } from './';
+import { {{&interfaceName}} } from './{{&interfaceFileName}}';
 import { DefaultHttpOptions, HttpOptions } from '{{#if serviceTag}}../.{{/if}}./types';
 
 {{#if definitions.length}}

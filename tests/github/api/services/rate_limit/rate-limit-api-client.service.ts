@@ -3,7 +3,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { RateLimitAPIClientInterface } from './';
+import { RateLimitAPIClientInterface } from './rate-limit-api-client.interface';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
