@@ -1,0 +1,33 @@
+/* tslint:disable */
+
+import * as models from '../models';
+
+/* generated type guards */
+
+{{#definitions}}
+{{#if isEnum}}
+export function is{{&definitionName}}(arg: any): arg is models.{{&definitionName}} {
+  return arg != null
+  {{#properties}} || arg === models.{{&../definitionName}}.{{name}}
+  {{/properties}};
+  }
+
+{{else}}
+export function is{{&definitionName}}(arg: any): arg is models.{{&definitionName}} {
+  return (
+  arg != null &&
+  typeof arg === 'object' &&
+  {{#each properties}}
+    // {{&name}}{{^isRequired}}?{{/isRequired}}: {{&type}}{{#if guard}}
+    {{&guard}} &&{{/if}}
+  {{/each}}
+  {{#extend}}
+    // extends {{&.}}
+    is{{&.}}(arg) &&
+  {{/extend}}
+
+  true
+  );
+  }
+
+{{/if}}{{/definitions}}
