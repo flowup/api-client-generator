@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { IssuesAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './issues-api-client.service';
 import { GuardedIssuesAPIClient } from './guarded-issues-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { IssuesAPIClient } from './issues-api-client.service';
 export { IssuesAPIClientInterface } from './issues-api-client.interface';

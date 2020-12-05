@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SearchAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './search-api-client.service';
 import { GuardedSearchAPIClient } from './guarded-search-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { SearchAPIClient } from './search-api-client.service';
 export { SearchAPIClientInterface } from './search-api-client.interface';

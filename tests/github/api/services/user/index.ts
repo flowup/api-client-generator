@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { UserAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './user-api-client.service';
 import { GuardedUserAPIClient } from './guarded-user-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { UserAPIClient } from './user-api-client.service';
 export { UserAPIClientInterface } from './user-api-client.interface';

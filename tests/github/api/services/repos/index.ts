@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { ReposAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './repos-api-client.service';
 import { GuardedReposAPIClient } from './guarded-repos-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { ReposAPIClient } from './repos-api-client.service';
 export { ReposAPIClientInterface } from './repos-api-client.interface';

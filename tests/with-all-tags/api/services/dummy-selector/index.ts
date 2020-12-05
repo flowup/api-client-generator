@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { DummySelectorAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './dummy-selector-api-client.service';
 import { GuardedDummySelectorAPIClient } from './guarded-dummy-selector-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { DummySelectorAPIClient } from './dummy-selector-api-client.service';
 export { DummySelectorAPIClientInterface } from './dummy-selector-api-client.interface';

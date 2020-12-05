@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { EventsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './events-api-client.service';
 import { GuardedEventsAPIClient } from './guarded-events-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { EventsAPIClient } from './events-api-client.service';
 export { EventsAPIClientInterface } from './events-api-client.interface';

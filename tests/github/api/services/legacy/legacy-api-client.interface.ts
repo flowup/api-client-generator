@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 import { Observable } from 'rxjs';
-import { HttpOptions } from './';
+import { HttpOptions } from '../../types';
 import * as models from '../../models';
 
 export interface LegacyAPIClientInterface {

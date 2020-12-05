@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { EmojisAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './emojis-api-client.service';
 import { GuardedEmojisAPIClient } from './guarded-emojis-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { EmojisAPIClient } from './emojis-api-client.service';
 export { EmojisAPIClientInterface } from './emojis-api-client.interface';

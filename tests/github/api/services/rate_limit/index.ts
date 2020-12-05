@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RateLimitAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './rate-limit-api-client.service';
 import { GuardedRateLimitAPIClient } from './guarded-rate-limit-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { RateLimitAPIClient } from './rate-limit-api-client.service';
 export { RateLimitAPIClientInterface } from './rate-limit-api-client.interface';

@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { GitignoreAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './gitignore-api-client.service';
 import { GuardedGitignoreAPIClient } from './guarded-gitignore-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { GitignoreAPIClient } from './gitignore-api-client.service';
 export { GitignoreAPIClientInterface } from './gitignore-api-client.interface';

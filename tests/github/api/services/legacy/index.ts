@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { LegacyAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './legacy-api-client.service';
 import { GuardedLegacyAPIClient } from './guarded-legacy-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { LegacyAPIClient } from './legacy-api-client.service';
 export { LegacyAPIClientInterface } from './legacy-api-client.interface';

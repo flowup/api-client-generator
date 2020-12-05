@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { NotificationsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './notifications-api-client.service';
 import { GuardedNotificationsAPIClient } from './guarded-notifications-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { NotificationsAPIClient } from './notifications-api-client.service';
 export { NotificationsAPIClientInterface } from './notifications-api-client.interface';

@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { NetworksAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './networks-api-client.service';
 import { GuardedNetworksAPIClient } from './guarded-networks-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { NetworksAPIClient } from './networks-api-client.service';
 export { NetworksAPIClientInterface } from './networks-api-client.interface';

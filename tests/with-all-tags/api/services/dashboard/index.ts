@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { DashboardAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './dashboard-api-client.service';
 import { GuardedDashboardAPIClient } from './guarded-dashboard-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { DashboardAPIClient } from './dashboard-api-client.service';
 export { DashboardAPIClientInterface } from './dashboard-api-client.interface';

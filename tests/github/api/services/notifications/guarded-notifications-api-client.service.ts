@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from './';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, NotificationsAPIClient } from './notifications-api-client.service';
 
 import * as models from '../../models';

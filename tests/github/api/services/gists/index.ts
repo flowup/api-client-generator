@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { GistsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './gists-api-client.service';
 import { GuardedGistsAPIClient } from './guarded-gists-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { GistsAPIClient } from './gists-api-client.service';
 export { GistsAPIClientInterface } from './gists-api-client.interface';

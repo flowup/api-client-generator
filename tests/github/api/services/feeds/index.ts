@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FeedsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './feeds-api-client.service';
 import { GuardedFeedsAPIClient } from './guarded-feeds-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { FeedsAPIClient } from './feeds-api-client.service';
 export { FeedsAPIClientInterface } from './feeds-api-client.interface';

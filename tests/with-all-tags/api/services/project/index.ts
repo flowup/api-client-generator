@@ -3,6 +3,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { ProjectAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './project-api-client.service';
 import { GuardedProjectAPIClient } from './guarded-project-api-client.service';
+import { APIClientModuleConfig } from '../../types';
 
 export { ProjectAPIClient } from './project-api-client.service';
 export { ProjectAPIClientInterface } from './project-api-client.interface';
