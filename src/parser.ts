@@ -16,8 +16,6 @@ import {
   ParsedSchema,
   ParseSchemaMetadata,
   Property,
-  Render,
-  RenderFileName,
 } from './types';
 import {
   BASIC_TS_TYPE_REGEX,
@@ -299,8 +297,10 @@ function defineEnum(
         }, {})
       : null;
 
+  const definitionName = typeName(definitionKey);
+
   return {
-    definitionName: typeName(definitionKey),
+    definitionName,
     properties:
       enumSchema &&
       enumSchema.map((val, index) => ({
@@ -316,10 +316,7 @@ function defineEnum(
     isEnum: true,
     isNumeric,
     imports: [],
-    renderFileName: (): RenderFileName => (
-      text: string,
-      render: Render,
-    ): string => fileName(render(text), 'enum'),
+    fileName: fileName(definitionName, 'enum'),
   };
 }
 
@@ -568,10 +565,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
     imports: modelImports,
     isEnum: false,
     extend: extendInterface,
-    renderFileName: (): RenderFileName => (
-      text: string,
-      render: Render,
-    ): string => fileName(render(text), 'model'),
+    fileName: fileName(name, 'model'),
   };
 }
 

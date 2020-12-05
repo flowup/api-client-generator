@@ -1,8 +1,5 @@
 import { Schema, Spec as Swagger } from 'swagger-schema-official';
 
-export type RenderFileName = (text: string, render: Render) => string;
-export type Render = (text: string) => string;
-
 export interface Definition {
   readonly definitionName: string;
   readonly properties: Property[];
@@ -11,7 +8,7 @@ export interface Definition {
   readonly description?: string;
   readonly isEnum?: boolean;
   readonly isNumeric?: boolean; // used for determining if string or numeric enum should be generated
-  renderFileName(): RenderFileName; // generate dash-case file names to templates
+  readonly fileName: string; // dash-case file name use for imports
 }
 
 export interface MustacheData {
