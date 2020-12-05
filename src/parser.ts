@@ -64,7 +64,6 @@ export function createTemplateViewModel(
   const camelSwaggerTag = toCamelCase(swaggerTag, false) || '';
   return {
     isSecure: !!swagger.securityDefinitions,
-    swagger: swagger,
     swaggerTag,
     domain: determineDomain(swagger),
     methods: methods,

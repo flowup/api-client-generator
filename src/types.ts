@@ -1,4 +1,4 @@
-import { Schema, Spec as Swagger } from 'swagger-schema-official';
+import { Schema } from 'swagger-schema-official';
 
 export interface Definition {
   readonly definitionName: string;
@@ -13,7 +13,6 @@ export interface Definition {
 
 export interface TemplateData {
   readonly isSecure: boolean;
-  readonly swagger: Swagger;
   readonly swaggerTag?: string;
   readonly domain: string;
   readonly methods: Method[];
@@ -25,12 +24,6 @@ export interface TemplateData {
   readonly interfaceFileName: string;
 }
 
-export type TypescriptBasicTypes =
-  | 'string'
-  | 'number'
-  | 'boolean'
-  | 'undefined'
-  | 'any';
 export type In =
   | 'body'
   | 'path'
