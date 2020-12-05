@@ -1,4 +1,3 @@
-import { Reference } from 'swagger-schema-official';
 import { FileInfix } from './types';
 
 export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|bigint|boolean|object|void)\b/;
@@ -141,11 +140,6 @@ export async function flattenAll<T>(promises: Promise<T[]>[]): Promise<T[]> {
 export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
   return (a, b) =>
     a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`) : -1;
-}
-
-// tslint:disable-next-line no-any
-export function isReference(param: any | Reference): param is Reference {
-  return !!(param as Reference).$ref;
 }
 
 export function importableType(type: string): string {

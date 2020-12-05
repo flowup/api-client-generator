@@ -26,7 +26,6 @@ import {
   typeName,
   logWarn,
   compareStringByKey,
-  isReference,
   ADDITIONAL_PROPERTIES_KEY,
   importableType,
   accessProp,
@@ -128,11 +127,11 @@ function parseMethods(
               .sort()
               .filter(code => code.startsWith('2'))[0] || 'missing';
 
-          const okResponse: Response | Reference =
+          const okResponse: Response | Reference | undefined =
             operation.responses[successResponseCode];
 
           const responseTypeSchema = determineResponseType(
-            okResponse && isReference(okResponse) // TODO: this can probably be refactored to `(okResponse as Reference)?.$ref` and isReference can be deleted
+            okResponse && '$ref' in okResponse
               ? responses[dereferenceType(okResponse.$ref)]
               : okResponse,
           );
