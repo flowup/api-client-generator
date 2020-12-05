@@ -1,0 +1,32 @@
+/* tslint:disable */
+{{^isEnum}}
+{{#if imports.length}}
+import {
+{{#each imports}}
+  {{.}},
+{{/each}}
+} from '.';
+{{/if}}
+
+{{#if description}}
+/**
+ * {{description}}
+ */
+{{/if}}export interface {{&definitionName}} {{#extend}}extends {{.}} {{/extend}}{
+{{#properties}}
+  {{&name}}{{^isRequired}}?{{/isRequired}}: {{&type}};{{#if description}}  // {{description}}{{/if}}
+{{/properties}}
+}
+{{/isEnum}}
+{{#isEnum}}
+
+{{#if description}}
+/**
+ * {{description}}
+ */
+{{/if}}export enum {{&definitionName}} {
+    {{#properties}}
+  {{name}} = {{#if ../isNumeric}}{{value}}{{else}}"{{value}}"{{/if}},
+    {{/properties}}
+}
+{{/isEnum}}
