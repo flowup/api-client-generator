@@ -1,5 +1,5 @@
 import { exists, mkdir, readFile, writeFile } from 'fs';
-import { compile, registerHelper } from 'handlebars';
+import { compile, HelperOptions, registerHelper } from 'handlebars';
 import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { Operation, Path, Spec as Swagger } from 'swagger-schema-official';
@@ -81,9 +81,6 @@ export async function generateAPIClient(
     service: await compileTemplate(
       `${__dirname}/../templates/ngx-service.handlebars`,
     ),
-    interface: await compileTemplate(
-      `${__dirname}/../templates/ngx-service-interface.handlebars`,
-    ),
     guardedService: await compileTemplate(
       `${__dirname}/../templates/ngx-guarded-service.handlebars`,
     ),
@@ -96,6 +93,16 @@ export async function generateAPIClient(
   };
 
   registerHelper('camelCase', toCamelCase);
+  registerHelper('templateType', (
+    ...args: any[] /* fixme: with latest TS it should be [...string[], any] */
+  ) => {
+    const conditions: string[] = args.slice(0, -1);
+    const {
+      data: { root },
+    }: HelperOptions = args[args.length - 1];
+
+    return conditions.includes(root.templateType);
+  });
 
   return flattenAll([
     ...apiTagsData.map(async apiTagData => {
@@ -118,19 +125,19 @@ export async function generateAPIClient(
         generateFile(
           compiledTemplates['service'],
           `${apiTagData.serviceFileName}.ts`,
-          apiTagData,
+          { ...apiTagData, templateType: 'service' },
           clientOutputPath,
         ),
         generateFile(
-          compiledTemplates['interface'],
+          compiledTemplates['service'],
           `${apiTagData.interfaceFileName}.ts`,
-          apiTagData,
+          { ...apiTagData, templateType: 'interface' },
           clientOutputPath,
         ),
         generateFile(
           compiledTemplates['guardedService'],
           `guarded-${apiTagData.serviceFileName}.ts`,
-          apiTagData,
+          { ...apiTagData, templateType: 'guardedService' },
           clientOutputPath,
         ),
         ...(!options.skipModuleExport
