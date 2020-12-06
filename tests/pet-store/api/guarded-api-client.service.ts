@@ -57,7 +57,7 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.findPetsByStatus(args, requestHttpOptions)
-      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: unknown) => guards.isPet(item)) ) || console.error(`TypeGuard for response 'models.Pet[]' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isPet(item)) ) || console.error(`TypeGuard for response 'models.Pet[]' caught inconsistency.`, res)));
   }
 
   findPetsByTags(
@@ -67,14 +67,14 @@ export class GuardedAPIClient extends APIClient {
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.findPetsByTags(args, requestHttpOptions)
-      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: unknown) => guards.isPet(item)) ) || console.error(`TypeGuard for response 'models.Pet[]' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isPet(item)) ) || console.error(`TypeGuard for response 'models.Pet[]' caught inconsistency.`, res)));
   }
 
   getInventory(
     requestHttpOptions?: HttpOptions
   ): Observable<{ [key: string]: number }> {
     return super.getInventory(requestHttpOptions)
-      .pipe(tap((res: any) => Object.values(res).every((value: unknown) => typeof value === 'number') || console.error(`TypeGuard for response '{ [key: string]: number }' caught inconsistency.`, res)));
+      .pipe(tap((res: any) => Object.values(res).every((value: any) => typeof value === 'number') || console.error(`TypeGuard for response '{ [key: string]: number }' caught inconsistency.`, res)));
   }
 
   getOrderById(

@@ -100,14 +100,14 @@ export function guardDictionary(
   name: string,
   guard: (name: string) => string,
 ): string {
-  return `Object.values(${name}).every((value: unknown) => ${guard('value')})`;
+  return `Object.values(${name}).every((value: any) => ${guard('value')})`;
 }
 
 export function guardArray(
   name: string,
   guard: (name: string) => string,
 ): string {
-  return `( Array.isArray(${name}) && ${name}.every((item: unknown) => ${guard(
+  return `( Array.isArray(${name}) && ${name}.every((item: any) => ${guard(
     'item',
   )}) )`;
 }

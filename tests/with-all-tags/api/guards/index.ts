@@ -18,7 +18,7 @@ export function isColumnModel(arg: any): arg is models.ColumnModel {
   arg != null &&
   typeof arg === 'object' &&
     // Children?: WidgetModel[]
-    ( typeof arg.Children === 'undefined' || ( Array.isArray(arg.Children) && arg.Children.every((item: unknown) => isWidgetModel(item)) ) ) &&
+    ( typeof arg.Children === 'undefined' || ( Array.isArray(arg.Children) && arg.Children.every((item: any) => isWidgetModel(item)) ) ) &&
     // Id?: number
     ( typeof arg.Id === 'undefined' || typeof arg.Id === 'number' ) &&
     // ParentId?: number
@@ -59,7 +59,7 @@ export function isDummySelectorViewModel(arg: any): arg is models.DummySelectorV
   arg != null &&
   typeof arg === 'object' &&
     // DummyList?: DummyViewModel[]
-    ( typeof arg.DummyList === 'undefined' || ( Array.isArray(arg.DummyList) && arg.DummyList.every((item: unknown) => isDummyViewModel(item)) ) ) &&
+    ( typeof arg.DummyList === 'undefined' || ( Array.isArray(arg.DummyList) && arg.DummyList.every((item: any) => isDummyViewModel(item)) ) ) &&
     // SelectedDummyObjId?: number
     ( typeof arg.SelectedDummyObjId === 'undefined' || typeof arg.SelectedDummyObjId === 'number' ) &&
 
@@ -100,7 +100,7 @@ export function isRowModel(arg: any): arg is models.RowModel {
   arg != null &&
   typeof arg === 'object' &&
     // Children?: ColumnModel[]
-    ( typeof arg.Children === 'undefined' || ( Array.isArray(arg.Children) && arg.Children.every((item: unknown) => isColumnModel(item)) ) ) &&
+    ( typeof arg.Children === 'undefined' || ( Array.isArray(arg.Children) && arg.Children.every((item: any) => isColumnModel(item)) ) ) &&
     // Id?: number
     ( typeof arg.Id === 'undefined' || typeof arg.Id === 'number' ) &&
     // ParentId?: number
@@ -152,7 +152,7 @@ export function isWidgetTypeViewModel(arg: any): arg is models.WidgetTypeViewMod
     // Id?: number
     ( typeof arg.Id === 'undefined' || typeof arg.Id === 'number' ) &&
     // KeySystem?: { [key: string]: string }
-    ( typeof arg.KeySystem === 'undefined' || Object.values(arg.KeySystem).every((value: unknown) => typeof value === 'string') ) &&
+    ( typeof arg.KeySystem === 'undefined' || Object.values(arg.KeySystem).every((value: any) => typeof value === 'string') ) &&
     // ModulName?: string
     ( typeof arg.ModulName === 'undefined' || typeof arg.ModulName === 'string' ) &&
     // ModulNameExtern?: string
@@ -162,7 +162,7 @@ export function isWidgetTypeViewModel(arg: any): arg is models.WidgetTypeViewMod
     // OrganizerTaskId?: number
     ( typeof arg.OrganizerTaskId === 'undefined' || typeof arg.OrganizerTaskId === 'number' ) &&
     // RefSystem?: { [key: string]: string }
-    ( typeof arg.RefSystem === 'undefined' || Object.values(arg.RefSystem).every((value: unknown) => typeof value === 'string') ) &&
+    ( typeof arg.RefSystem === 'undefined' || Object.values(arg.RefSystem).every((value: any) => typeof value === 'string') ) &&
     // Severity?: StatusSeverity
     ( typeof arg.Severity === 'undefined' || isStatusSeverity(arg.Severity) ) &&
     // SysApplicationId?: number

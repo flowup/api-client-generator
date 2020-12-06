@@ -37,7 +37,7 @@ export function isCat(arg: any): arg is models.Cat {
     // age?: number
     ( typeof arg.age === 'undefined' || typeof arg.age === 'number' ) &&
     // eaten?: Mouse[]
-    ( typeof arg.eaten === 'undefined' || ( Array.isArray(arg.eaten) && arg.eaten.every((item: unknown) => isMouse(item)) ) ) &&
+    ( typeof arg.eaten === 'undefined' || ( Array.isArray(arg.eaten) && arg.eaten.every((item: any) => isMouse(item)) ) ) &&
     // hunts?: boolean
     ( typeof arg.hunts === 'undefined' || typeof arg.hunts === 'boolean' ) &&
     // extends Pet
@@ -102,9 +102,9 @@ export function isDataModel(arg: any): arg is models.DataModel {
     // audioConfig?: Data
     ( typeof arg.audioConfig === 'undefined' || ( isData(arg.audioConfig) ) ) &&
     // details?: object[]
-    ( typeof arg.details === 'undefined' || ( Array.isArray(arg.details) && arg.details.every((item: unknown) => typeof item === 'object') ) ) &&
+    ( typeof arg.details === 'undefined' || ( Array.isArray(arg.details) && arg.details.every((item: any) => typeof item === 'object') ) ) &&
     // entities?: number[]
-    ( typeof arg.entities === 'undefined' || ( Array.isArray(arg.entities) && arg.entities.every((item: unknown) => typeof item === 'number') ) ) &&
+    ( typeof arg.entities === 'undefined' || ( Array.isArray(arg.entities) && arg.entities.every((item: any) => typeof item === 'number') ) ) &&
     // id?: number
     ( typeof arg.id === 'undefined' || typeof arg.id === 'number' ) &&
     // imageData?: string
@@ -116,7 +116,7 @@ export function isDataModel(arg: any): arg is models.DataModel {
     // roleId?: number
     ( typeof arg.roleId === 'undefined' || typeof arg.roleId === 'number' ) &&
     // testWithArray?: Pet[] & Data
-    ( typeof arg.testWithArray === 'undefined' || ( ( Array.isArray(arg.testWithArray) && arg.testWithArray.every((item: unknown) => isPet(item)) ) && isData(arg.testWithArray) ) ) &&
+    ( typeof arg.testWithArray === 'undefined' || ( ( Array.isArray(arg.testWithArray) && arg.testWithArray.every((item: any) => isPet(item)) ) && isData(arg.testWithArray) ) ) &&
     // text?: ItemList & Data
     ( typeof arg.text === 'undefined' || ( isItemList(arg.text) && isData(arg.text) ) ) &&
 
@@ -129,7 +129,7 @@ export function isDictionary(arg: any): arg is models.Dictionary {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: DictionaryItem
-    Object.values(arg).every((value: unknown) => isDictionaryItem(value)) &&
+    Object.values(arg).every((value: any) => isDictionaryItem(value)) &&
 
   true
   );
@@ -140,7 +140,7 @@ export function isDictionaryItem(arg: any): arg is models.DictionaryItem {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: number
-    Object.values(arg).every((value: unknown) => typeof value === 'number') &&
+    Object.values(arg).every((value: any) => typeof value === 'number') &&
 
   true
   );
@@ -166,7 +166,7 @@ export function isInterfaceWithArrayOfDictionariesOfArrayOfRights(arg: any): arg
   arg != null &&
   typeof arg === 'object' &&
     // foo?: { [key: string]: Right[] }[]
-    ( typeof arg.foo === 'undefined' || ( Array.isArray(arg.foo) && arg.foo.every((item: unknown) => Object.values(item).every((value: unknown) => ( Array.isArray(value) && value.every((item: unknown) => isRight(item)) ))) ) ) &&
+    ( typeof arg.foo === 'undefined' || ( Array.isArray(arg.foo) && arg.foo.every((item: any) => Object.values(item).every((value: any) => ( Array.isArray(value) && value.every((item: any) => isRight(item)) ))) ) ) &&
 
   true
   );
@@ -177,7 +177,7 @@ export function isInterfaceWithArrayOfDictionariesOfNumbers(arg: any): arg is mo
   arg != null &&
   typeof arg === 'object' &&
     // arrayOfDicsOfNumbers: { [key: string]: number }[]
-    ( Array.isArray(arg.arrayOfDicsOfNumbers) && arg.arrayOfDicsOfNumbers.every((item: unknown) => Object.values(item).every((value: unknown) => typeof value === 'number')) ) &&
+    ( Array.isArray(arg.arrayOfDicsOfNumbers) && arg.arrayOfDicsOfNumbers.every((item: any) => Object.values(item).every((value: any) => typeof value === 'number')) ) &&
 
   true
   );
@@ -188,7 +188,7 @@ export function isInterfaceWithArrayOfDictionariesOfRights(arg: any): arg is mod
   arg != null &&
   typeof arg === 'object' &&
     // foo?: { [key: string]: Right }[]
-    ( typeof arg.foo === 'undefined' || ( Array.isArray(arg.foo) && arg.foo.every((item: unknown) => Object.values(item).every((value: unknown) => isRight(value))) ) ) &&
+    ( typeof arg.foo === 'undefined' || ( Array.isArray(arg.foo) && arg.foo.every((item: any) => Object.values(item).every((value: any) => isRight(value))) ) ) &&
 
   true
   );
@@ -199,7 +199,7 @@ export function isInterfaceWithDictionary(arg: any): arg is models.InterfaceWith
   arg != null &&
   typeof arg === 'object' &&
     // customers?: { [key: string]: Customer }
-    ( typeof arg.customers === 'undefined' || Object.values(arg.customers).every((value: unknown) => isCustomer(value)) ) &&
+    ( typeof arg.customers === 'undefined' || Object.values(arg.customers).every((value: any) => isCustomer(value)) ) &&
     // id: string
     typeof arg.id === 'string' &&
 
@@ -212,7 +212,7 @@ export function isInterfaceWithDictionaryOfArraysOfNumbers(arg: any): arg is mod
   arg != null &&
   typeof arg === 'object' &&
     // dicOfNumberArrays: { [key: string]: number[] }
-    Object.values(arg.dicOfNumberArrays).every((value: unknown) => ( Array.isArray(value) && value.every((item: unknown) => typeof item === 'number') )) &&
+    Object.values(arg.dicOfNumberArrays).every((value: any) => ( Array.isArray(value) && value.every((item: any) => typeof item === 'number') )) &&
 
   true
   );
@@ -223,7 +223,7 @@ export function isInterfaceWithSimpleDictionary(arg: any): arg is models.Interfa
   arg != null &&
   typeof arg === 'object' &&
     // foo: { [key: string]: number }
-    Object.values(arg.foo).every((value: unknown) => typeof value === 'number') &&
+    Object.values(arg.foo).every((value: any) => typeof value === 'number') &&
 
   true
   );
@@ -234,7 +234,7 @@ export function isItemList(arg: any): arg is models.ItemList {
   arg != null &&
   typeof arg === 'object' &&
     // data: Data[]
-    ( Array.isArray(arg.data) && arg.data.every((item: unknown) => isData(item)) ) &&
+    ( Array.isArray(arg.data) && arg.data.every((item: any) => isData(item)) ) &&
 
   true
   );
@@ -245,7 +245,7 @@ export function isItemModelList(arg: any): arg is models.ItemModelList {
   arg != null &&
   typeof arg === 'object' &&
     // data: DataModel[]
-    ( Array.isArray(arg.data) && arg.data.every((item: unknown) => isDataModel(item)) ) &&
+    ( Array.isArray(arg.data) && arg.data.every((item: any) => isDataModel(item)) ) &&
 
   true
   );
@@ -275,15 +275,15 @@ export function isModelParam(arg: any): arg is models.ModelParam {
   arg != null &&
   typeof arg === 'object' &&
     // privilegesToAssing?: number[]
-    ( typeof arg.privilegesToAssing === 'undefined' || ( Array.isArray(arg.privilegesToAssing) && arg.privilegesToAssing.every((item: unknown) => typeof item === 'number') ) ) &&
+    ( typeof arg.privilegesToAssing === 'undefined' || ( Array.isArray(arg.privilegesToAssing) && arg.privilegesToAssing.every((item: any) => typeof item === 'number') ) ) &&
     // privilegesToUnassing?: number[]
-    ( typeof arg.privilegesToUnassing === 'undefined' || ( Array.isArray(arg.privilegesToUnassing) && arg.privilegesToUnassing.every((item: unknown) => typeof item === 'number') ) ) &&
+    ( typeof arg.privilegesToUnassing === 'undefined' || ( Array.isArray(arg.privilegesToUnassing) && arg.privilegesToUnassing.every((item: any) => typeof item === 'number') ) ) &&
     // status?: Model
     ( typeof arg.status === 'undefined' || isModel(arg.status) ) &&
     // usersToAssing?: number[]
-    ( typeof arg.usersToAssing === 'undefined' || ( Array.isArray(arg.usersToAssing) && arg.usersToAssing.every((item: unknown) => typeof item === 'number') ) ) &&
+    ( typeof arg.usersToAssing === 'undefined' || ( Array.isArray(arg.usersToAssing) && arg.usersToAssing.every((item: any) => typeof item === 'number') ) ) &&
     // usersToUnassing?: number[]
-    ( typeof arg.usersToUnassing === 'undefined' || ( Array.isArray(arg.usersToUnassing) && arg.usersToUnassing.every((item: unknown) => typeof item === 'number') ) ) &&
+    ( typeof arg.usersToUnassing === 'undefined' || ( Array.isArray(arg.usersToUnassing) && arg.usersToUnassing.every((item: any) => typeof item === 'number') ) ) &&
 
   true
   );
@@ -309,7 +309,7 @@ export function isMyInterface(arg: any): arg is models.MyInterface {
     // myId?: string
     ( typeof arg.myId === 'undefined' || typeof arg.myId === 'string' ) &&
     // myMap?: { [key: string]: Data }
-    ( typeof arg.myMap === 'undefined' || Object.values(arg.myMap).every((value: unknown) => isData(value)) ) &&
+    ( typeof arg.myMap === 'undefined' || Object.values(arg.myMap).every((value: any) => isData(value)) ) &&
     // myName?: string
     ( typeof arg.myName === 'undefined' || typeof arg.myName === 'string' ) &&
 
@@ -340,7 +340,7 @@ export function isPageDataRules(arg: any): arg is models.PageDataRules {
   arg != null &&
   typeof arg === 'object' &&
     // [key: string]: string[]
-    Object.values(arg).every((value: unknown) => ( Array.isArray(value) && value.every((item: unknown) => typeof item === 'string') )) &&
+    Object.values(arg).every((value: any) => ( Array.isArray(value) && value.every((item: any) => typeof item === 'string') )) &&
 
   true
   );
@@ -390,11 +390,11 @@ export function isTable(arg: any): arg is models.Table {
   arg != null &&
   typeof arg === 'object' &&
     // someOtherData?: number[][]
-    ( typeof arg.someOtherData === 'undefined' || ( Array.isArray(arg.someOtherData) && arg.someOtherData.every((item: unknown) => ( Array.isArray(item) && item.every((item: unknown) => typeof item === 'number') )) ) ) &&
+    ( typeof arg.someOtherData === 'undefined' || ( Array.isArray(arg.someOtherData) && arg.someOtherData.every((item: any) => ( Array.isArray(item) && item.every((item: any) => typeof item === 'number') )) ) ) &&
     // tableData?: DataModel[][]
-    ( typeof arg.tableData === 'undefined' || ( Array.isArray(arg.tableData) && arg.tableData.every((item: unknown) => ( Array.isArray(item) && item.every((item: unknown) => isDataModel(item)) )) ) ) &&
+    ( typeof arg.tableData === 'undefined' || ( Array.isArray(arg.tableData) && arg.tableData.every((item: any) => ( Array.isArray(item) && item.every((item: any) => isDataModel(item)) )) ) ) &&
     // tableHead?: DataModel[]
-    ( typeof arg.tableHead === 'undefined' || ( Array.isArray(arg.tableHead) && arg.tableHead.every((item: unknown) => isDataModel(item)) ) ) &&
+    ( typeof arg.tableHead === 'undefined' || ( Array.isArray(arg.tableHead) && arg.tableHead.every((item: any) => isDataModel(item)) ) ) &&
 
   true
   );
@@ -452,7 +452,7 @@ export function isV1ContentModelDouble(arg: any): arg is models.V1ContentModelDo
     // default?: number
     ( typeof arg.default === 'undefined' || typeof arg.default === 'number' ) &&
     // enum?: number[]
-    ( typeof arg.enum === 'undefined' || ( Array.isArray(arg.enum) && arg.enum.every((item: unknown) => typeof item === 'number') ) ) &&
+    ( typeof arg.enum === 'undefined' || ( Array.isArray(arg.enum) && arg.enum.every((item: any) => typeof item === 'number') ) ) &&
     // maximum?: number
     ( typeof arg.maximum === 'undefined' || typeof arg.maximum === 'number' ) &&
     // meta?: V1ContentModelMetaInfo
@@ -519,7 +519,7 @@ export function isV1ContentModelInteger(arg: any): arg is models.V1ContentModelI
     // default?: string
     ( typeof arg.default === 'undefined' || typeof arg.default === 'string' ) &&
     // enum?: string[]
-    ( typeof arg.enum === 'undefined' || ( Array.isArray(arg.enum) && arg.enum.every((item: unknown) => typeof item === 'string') ) ) &&
+    ( typeof arg.enum === 'undefined' || ( Array.isArray(arg.enum) && arg.enum.every((item: any) => typeof item === 'string') ) ) &&
     // maximum?: string
     ( typeof arg.maximum === 'undefined' || typeof arg.maximum === 'string' ) &&
     // meta?: V1ContentModelMetaInfo
@@ -553,7 +553,7 @@ export function isV1ContentModelObject(arg: any): arg is models.V1ContentModelOb
   arg != null &&
   typeof arg === 'object' &&
     // fields?: V1ContentModelField[]
-    ( typeof arg.fields === 'undefined' || ( Array.isArray(arg.fields) && arg.fields.every((item: unknown) => isV1ContentModelField(item)) ) ) &&
+    ( typeof arg.fields === 'undefined' || ( Array.isArray(arg.fields) && arg.fields.every((item: any) => isV1ContentModelField(item)) ) ) &&
     // meta?: V1ContentModelMetaInfo
     ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
 
@@ -568,7 +568,7 @@ export function isV1ContentModelString(arg: any): arg is models.V1ContentModelSt
     // default?: string
     ( typeof arg.default === 'undefined' || typeof arg.default === 'string' ) &&
     // enum?: string[]
-    ( typeof arg.enum === 'undefined' || ( Array.isArray(arg.enum) && arg.enum.every((item: unknown) => typeof item === 'string') ) ) &&
+    ( typeof arg.enum === 'undefined' || ( Array.isArray(arg.enum) && arg.enum.every((item: any) => typeof item === 'string') ) ) &&
     // meta?: V1ContentModelMetaInfo
     ( typeof arg.meta === 'undefined' || isV1ContentModelMetaInfo(arg.meta) ) &&
     // regex?: string
@@ -604,7 +604,7 @@ export function isV1ContentModelVersionList(arg: any): arg is models.V1ContentMo
   arg != null &&
   typeof arg === 'object' &&
     // versions?: V1ContentModelVersion[]
-    ( typeof arg.versions === 'undefined' || ( Array.isArray(arg.versions) && arg.versions.every((item: unknown) => isV1ContentModelVersion(item)) ) ) &&
+    ( typeof arg.versions === 'undefined' || ( Array.isArray(arg.versions) && arg.versions.every((item: any) => isV1ContentModelVersion(item)) ) ) &&
 
   true
   );
