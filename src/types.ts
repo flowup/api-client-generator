@@ -1,5 +1,3 @@
-import { Schema } from 'swagger-schema-official';
-
 export interface Definition {
   readonly definitionName: string;
   readonly properties: Property[];
@@ -24,33 +22,17 @@ export interface TemplateData {
   readonly interfaceFileName: string;
 }
 
-export type In =
-  | 'body'
-  | 'path'
-  | 'query'
-  | 'modelbinding'
-  | 'header'
-  | 'formData';
 export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 export type FileInfix = 'model' | 'enum' | 'service' | 'interface';
 
 export interface Property {
   readonly camelCaseName?: string;
-  readonly isArray?: boolean;
-  readonly isRef?: boolean;
-  readonly isPrimitiveType?: boolean;
-  readonly isDictionary?: boolean;
-  readonly in?: In | string;
   readonly enum?: (string | boolean | number | {})[];
-  readonly items?: Schema | Schema[];
   readonly name: string;
   readonly description?: string;
-  readonly $ref?: string;
-  readonly schema?: Schema;
   readonly type?: string;
   readonly guard?: string;
   readonly parsedSchema?: ParsedSchema;
-  readonly importType?: string;
   readonly isRequired?: boolean;
   readonly imports?: string[];
 }
@@ -71,7 +53,7 @@ export interface Method {
   readonly parameters: Parameter[];
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
   readonly responseTypeSchema: ParsedSchema; // method return type schema
-  readonly requestResponseType?: 'blob'; // supported types of Angular's Http ResponseContentType
+  readonly requestResponseType?: 'blob'; // supported types of Angular HTTP ResponseContentType
   readonly formData?: Pick<Parameter, 'name' | 'camelCaseName'>[]; // list of parameter names which are form data params
 }
 

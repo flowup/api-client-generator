@@ -1,4 +1,4 @@
-import { importableType, removeDuplicateWords, toCamelCase } from './helper';
+import { removeDuplicateWords, toCamelCase } from './helper';
 
 describe('[helpers] to camelCase', () => {
   it('should convert dash to camelCase', () => {
@@ -18,15 +18,6 @@ describe('[helpers] to camelCase', () => {
 
   it('should convert to camelCase and capitalize firs letter', () => {
     expect(toCamelCase('my-awesome.model', false)).toEqual('MyAwesomeModel');
-  });
-});
-
-describe('[helpers] determine types to import', () => {
-  it('should detect build-in types', () => {
-    expect(importableType('{ [key: string]: Right[] }[]')).toEqual('Right');
-    expect(importableType('Pet[]')).toEqual('Pet');
-    expect(importableType('Pet')).toEqual('Pet');
-    expect(importableType('number[]')).toEqual('number'); // fixme: this should probably be filtered out when we stop using isRef check
   });
 });
 

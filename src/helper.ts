@@ -1,7 +1,6 @@
 import { FileInfix } from './types';
 
-export const BASIC_TS_TYPE_REGEX = /\b(?:string|number|integer|bigint|boolean|object|void)\b/;
-const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|bigint|boolean|null|undefined|any|void|object|Object|File)\b/; // TODO: integer can be renamed with "typeName" and "determineResponseType" refactor
+const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|bigint|boolean|null|undefined|any|void|object|Object|File)\b/; // integer is mapped to number in later step of `typeName` conversion
 
 export const ADDITIONAL_PROPERTIES_KEY = '[key: string]';
 
@@ -76,7 +75,7 @@ export function typeName(
 ): string {
   const type = BUILD_IN_TS_TYPE_REGEX.test(name)
     ? /\binteger\b/.test(name)
-      ? 'number' // TODO: this can probably be removed as soon as determineResponseType is refactored (in most of the cases it needs to use "to TypescriptType" instead of "typeName")
+      ? 'number'
       : name
     : toCamelCase(name, false);
 
@@ -140,10 +139,4 @@ export async function flattenAll<T>(promises: Promise<T[]>[]): Promise<T[]> {
 export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
   return (a, b) =>
     a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`) : -1;
-}
-
-export function importableType(type: string): string {
-  return type
-    ?.replace(/(\[\])|({\s?\[.+\]:\s?)|(\s?})|(models\.?)/g, '')
-    .trim();
 }

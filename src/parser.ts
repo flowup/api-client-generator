@@ -18,7 +18,6 @@ import {
   Property,
 } from './types';
 import {
-  BASIC_TS_TYPE_REGEX,
   toCamelCase,
   dereferenceType,
   fileName,
@@ -27,7 +26,6 @@ import {
   logWarn,
   compareStringByKey,
   ADDITIONAL_PROPERTIES_KEY,
-  importableType,
   accessProp,
   guardOptional,
   guardArray,
@@ -46,6 +44,7 @@ type ExtendedParameter = SwaggerParameter & {
   enum?: EnumType;
   type?: 'string' | 'integer';
   'x-enumNames'?: string[];
+  $ref?: string;
 };
 
 interface Definitions {
@@ -53,8 +52,6 @@ interface Definitions {
 }
 
 type EnumType = string[] | number[] | boolean[] | {}[];
-
-type ExtendedSwaggerParam = Parameter | Reference;
 
 export function createTemplateViewModel(
   swagger: Swagger,
@@ -136,7 +133,10 @@ function parseMethods(
           );
 
           const transformedParams = transformParameters(
-            [...(pathDef.parameters || []), ...(operation.parameters || [])],
+            [
+              ...(<any>pathDef.parameters || []), // fixme: there seems to be an inconsistency in swagger / internal param typing
+              ...(operation.parameters || []),
+            ],
             parameters || {},
           );
 
@@ -154,7 +154,7 @@ function parseMethods(
             formData: transformedParams
               .filter(({ name, isFormParameter }) => name && isFormParameter)
               .map(({ name, camelCaseName }) => ({
-                name: name,
+                name,
                 camelCaseName: camelCaseName || name,
               })),
             // turn path interpolation `{this}` into string template `${args.this}
@@ -180,7 +180,7 @@ function parseMethods(
 function parseDefinitions(
   definitions: Definitions = {},
   parameters: Parameters = {},
-  methods?: Method[],
+  tagMethods?: Method[], // methods tagged with tag that is currently generated
 ): Definition[] {
   const allDefs = [
     ...Object.entries(definitions).map(([key, definition]) =>
@@ -198,7 +198,8 @@ function parseDefinitions(
       .map(([key, definition]) => defineEnumOrInterface(key, definition)),
   ];
 
-  if (methods) {
+  // only filter definitions used byt "tagged" methods if tag methods are provided, else return all definitions
+  if (tagMethods) {
     const filterByName = (
       defName: string,
       parentDefs: Definition[] = [],
@@ -206,56 +207,34 @@ function parseDefinitions(
       const namedDefs = allDefs.filter(
         ({ definitionName }) => definitionName === defName,
       );
-      return namedDefs.reduce<Definition[]>(
-        (acc, def) => [
-          ...acc,
-          ...def.properties
-            .filter(prop => prop.typescriptType && prop.isRef)
-            .reduce<Definition[]>(
-              (a, prop) =>
-                parentDefs.some(
-                  ({ definitionName }) =>
-                    definitionName === prop.typescriptType,
-                )
-                  ? a // do not parse if type def already exists in parsed definitions
-                  : [
-                      ...a,
-                      ...filterByName(prop.typescriptType!, [
-                        ...parentDefs,
-                        ...namedDefs,
-                      ]),
-                    ],
-              [],
-            ),
-        ],
-        namedDefs,
-      );
+
+      return [
+        ...namedDefs,
+        ...namedDefs.flatMap(def => [
+          ...def.properties.flatMap(prop =>
+            // check if every import has already been included in definitions
+            prop.parsedSchema?.imports.every(importType =>
+              parentDefs.some(
+                ({ definitionName }) => definitionName === importType,
+              ),
+            )
+              ? [] // do not parse if type (import) def already exists in parsed definitions
+              : prop.parsedSchema?.imports.flatMap(name =>
+                  filterByName(name, [...parentDefs, ...namedDefs]),
+                ) || [],
+          ),
+        ]),
+      ];
     };
 
-    return methods.reduce<Definition[]>(
-      (acc, method) => [
-        ...acc,
-        ...method.parameters.reduce(
-          (a, param) => [
-            ...a,
-            ...filterByName(toCamelCase(param.typescriptType, false)),
-          ],
-          filterByName(
-            toCamelCase(
-              // FIXME: think of better solution to get rid of syntax from name
-              method.response
-                ?.replace('[]', '')
-                .replace('{ [key: string]: ', '')
-                .replace('}', '')
-                .replace('models.', '')
-                .trim(),
-              false,
-            ),
-          ),
-        ),
-      ],
-      [],
-    );
+    // find reference definitions for all parameters of the method and its response type
+    return tagMethods.flatMap(({ parameters, responseTypeSchema }) => [
+      ...parameters.flatMap(
+        ({ parsedSchema }) =>
+          parsedSchema?.imports.flatMap(name => filterByName(name)) || [],
+      ),
+      ...responseTypeSchema.imports.flatMap(name => filterByName(name)),
+    ]);
   }
 
   return allDefs;
@@ -348,10 +327,14 @@ function parseInterfaceProperties(
 
       const property: Property = {
         parsedSchema,
-        isPrimitiveType: BASIC_TS_TYPE_REGEX.test(parsedSchema.type), // TODO: check if this is needed with guards refactored
         isRequired,
         name,
         description: replaceNewLines(propSchema.description),
+        //description: replaceNewLines( // todo: uncomment this for titles with description, consider refactoring to multi line ("docs") comments
+        //           `${(propSchema.title || '') + '\n' || ''}${
+        //             propSchema.description || ''
+        //           }`,
+        //         ),
         type: propertyAllOf.length
           ? propertyAllOf
               .map(({ type }) => type)
@@ -603,19 +586,16 @@ function determineResponseType(response: Response): ParsedSchema {
 }
 
 function transformParameters(
-  parameters: ExtendedSwaggerParam[],
+  parameters: ExtendedParameter[],
   allParams: Parameters,
 ): Parameter[] {
-  return parameters.map((param: ExtendedSwaggerParam) => {
+  return parameters.map((param: ExtendedParameter) => {
     const ref = param.$ref;
     const derefName = ref ? dereferenceType(ref) : undefined;
     const paramRef: SwaggerParameter | undefined = derefName
       ? allParams[derefName]
       : undefined;
-    const name =
-      paramRef && 'name' in paramRef
-        ? paramRef.name || ''
-        : (param as Parameter).name; // TODO: simplify this
+    const name = paramRef?.name || (param as Parameter).name || '';
 
     const parsedSchema = determineResponseType({
       description: '',
@@ -625,14 +605,13 @@ function transformParameters(
         !('schema' in paramRef && paramRef.schema?.type === 'object')
           ? (paramRef as Schema)
           : 'schema' in param
-          ? param.schema
+          ? (param as any).schema // body param has a schema but the typing of Parameter does not reflect that right now
           : (param as Schema),
     });
 
     return {
-      ...param, // todo: check if this needs spreading
       ...determineParamType(
-        paramRef && 'in' in paramRef ? paramRef.in : (param as Parameter).in,
+        paramRef && 'in' in paramRef ? paramRef.in : param.in,
       ),
 
       description: replaceNewLines(
@@ -640,7 +619,6 @@ function transformParameters(
         ' ',
       ),
       camelCaseName: toCamelCase(name),
-      importType: parsedSchema.imports.join('/* this was joined */,'), // todo: this can probably be deleted along with `importType` in type Parameter
       isRequired:
         (param as Parameter).isRequired ||
         // tslint:disable-next-line:no-any
