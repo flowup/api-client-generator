@@ -26,9 +26,11 @@ export class APIClient implements APIClientInterface {
 
   readonly domain: string = `//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`;
 
-  constructor(private readonly http: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    private readonly http: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
 
     if (domain != null) {
       this.domain = domain;

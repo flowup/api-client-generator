@@ -26,9 +26,11 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
 
   readonly domain: string = `https://api.github.com`;
 
-  constructor(private readonly http: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    private readonly http: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
 
     if (domain != null) {
       this.domain = domain;

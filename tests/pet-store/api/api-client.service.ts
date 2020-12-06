@@ -26,9 +26,11 @@ export class APIClient implements APIClientInterface {
 
   readonly domain: string = `https://petstore.swagger.io/v2`;
 
-  constructor(private readonly http: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    private readonly http: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
 
     if (domain != null) {
       this.domain = domain;
