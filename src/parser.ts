@@ -80,8 +80,11 @@ export function createTemplateViewModel(
 export function determineDomain({ schemes, host, basePath }: Swagger): string {
   // if the host definition exists then try to use a protocol from the swagger file
   // otherwise, use the current protocol of loaded app
+  // prefer https protocol
   const protocol =
-    host && schemes && schemes.length > 0 ? `${schemes[0]}://` : '//';
+    host && schemes && schemes.length > 0
+      ? `${schemes.find(scheme => scheme === 'https') || schemes[0]}://`
+      : '//';
 
   // if no host exists in the swagger file use a window location relative path
   const domain = host
