@@ -1,5 +1,10 @@
 import { exists, mkdir, readFile, writeFile } from 'fs';
-import { compile, HelperOptions, registerHelper } from 'handlebars';
+import {
+  compile,
+  HelperOptions,
+  registerHelper,
+  registerPartial,
+} from 'handlebars';
 import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { Operation, Path, Spec as Swagger } from 'swagger-schema-official';
@@ -90,7 +95,12 @@ export async function generateAPIClient(
     helperTypes: await compileTemplate(
       `${__dirname}/../templates/ngx-helper-types.handlebars`,
     ),
+    header: await compileTemplate(
+      `${__dirname}/../templates/header.handlebars`,
+    ),
   };
+
+  registerPartial('header', compiledTemplates['header']);
 
   registerHelper('camelCase', toCamelCase);
   registerHelper('templateType', (

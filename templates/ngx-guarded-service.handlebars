@@ -1,4 +1,4 @@
-/* tslint:disable */
+{{> header}}
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
@@ -12,9 +12,6 @@ import * as models from '.{{#if swaggerTag}}./..{{/if}}/models';
 import * as guards from '.{{#if swaggerTag}}./..{{/if}}/guards';
 {{/if}}
 
-/**
- * Created with https://github.com/flowup/api-client-generator
- */
 @Injectable()
 export class Guarded{{&serviceName}} extends {{&serviceName}} {
 
