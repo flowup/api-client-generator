@@ -11,7 +11,7 @@
 
 
 export interface RestoreForm {
-  'passwordСonfirm': string;
+  &#x27;passwordСonfirm&#x27;: string;
   guid?: string;
   password: string;
 }

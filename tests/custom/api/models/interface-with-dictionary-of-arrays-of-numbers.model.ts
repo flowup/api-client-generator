@@ -14,5 +14,6 @@
  * interesting
  */
 export interface InterfaceWithDictionaryOfArraysOfNumbers {
-  dicOfNumberArrays: { [key: string]: number[] };  // { [key: string]: number[] }
+  /** { [key: string]: number[] } */
+  dicOfNumberArrays: { [key: string]: number[] };
 }

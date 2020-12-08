@@ -19,7 +19,10 @@ import {
  * A filter.
  */
 export interface Filter {
-  compositeFilter?: CompositeFilter;  // A composite filter.
-  fieldFilter?: FieldFilter;  // A filter on a document field.
-  unaryFilter?: UnaryFilter;  // A filter that takes exactly one argument.
+  /** A composite filter. */
+  compositeFilter?: CompositeFilter;
+  /** A filter on a document field. */
+  fieldFilter?: FieldFilter;
+  /** A filter that takes exactly one argument. */
+  unaryFilter?: UnaryFilter;
 }

@@ -11,7 +11,7 @@
 
 
 export interface Branch {
-  _links?: object;
+  links?: object;
   commit?: object;
   name?: string;
 }

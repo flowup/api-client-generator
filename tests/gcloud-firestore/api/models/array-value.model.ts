@@ -17,5 +17,6 @@ import {
  * An array value.
  */
 export interface ArrayValue {
-  values?: Value[];  // Values in the array.
+  /** Values in the array. */
+  values?: Value[];
 }

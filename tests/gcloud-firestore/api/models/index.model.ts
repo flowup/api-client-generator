@@ -17,8 +17,12 @@ import {
  * An index definition.
  */
 export interface Index {
-  collectionId?: string;  // The collection ID to which this index applies. Required.
-  fields?: IndexField[];  // The fields to index.
-  name?: string;  // The resource name of the index.Output only.
-  state?: ('STATE_UNSPECIFIED' | 'CREATING' | 'READY' | 'ERROR');  // The state of the index.Output only.
+  /** The collection ID to which this index applies. Required. */
+  collectionId?: string;
+  /** The fields to index. */
+  fields?: IndexField[];
+  /** The resource name of the index.Output only. */
+  name?: string;
+  /** The state of the index.Output only. */
+  state?: ('STATE_UNSPECIFIED' | 'CREATING' | 'READY' | 'ERROR');
 }

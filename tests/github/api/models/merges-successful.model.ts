@@ -12,7 +12,7 @@
 
 export interface MergesSuccessful {
   author?: object;
-  comments_url?: string;
+  commentsUrl?: string;
   commit?: object;
   committer?: object;
   merged?: boolean;

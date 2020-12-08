@@ -11,9 +11,11 @@
 
 
 export interface PatchOrg {
-  billing_email?: string;  // Billing email address. This address is not publicized.
+  /** Billing email address. This address is not publicized. */
+  billingEmail?: string;
   company?: string;
-  email?: string;  // Publicly visible email address.
+  /** Publicly visible email address. */
+  email?: string;
   location?: string;
   name?: string;
 }

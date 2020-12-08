@@ -11,11 +11,11 @@
 
 
 export interface Emojis {
-  '-1'?: string;
-  '+1'?: string;
-  '100'?: string;
-  '1234'?: string;
-  '8ball'?: string;
+  &#x27;1&#x27;?: string;
+  &#x27;1&#x27;?: string;
+  &#x27;100&#x27;?: string;
+  &#x27;1234&#x27;?: string;
+  &#x27;8ball&#x27;?: string;
   a?: string;
   ab?: string;
 }

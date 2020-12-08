@@ -12,7 +12,7 @@
 
 export interface PullsCommentPost {
   body?: string;
-  commit_id?: string;
+  commitId?: string;
   path?: string;
   position?: number;
 }

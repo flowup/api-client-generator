@@ -11,10 +11,10 @@
 
 
 export interface PutSubscription {
-  created_at?: string;
+  createdAt?: string;
   ignored?: boolean;
   reason?: object;
   subscribed?: boolean;
-  thread_url?: string;
+  threadUrl?: string;
   url?: string;
 }

@@ -15,5 +15,6 @@ import {
 
 export interface SchoolImportStats {
   stats?: ImportStatsGroup;
-  title?: string;  // School name
+  /** School name */
+  title?: string;
 }

@@ -12,6 +12,6 @@
 
 export interface MergesBody {
   base?: string;
-  commit_message?: string;
+  commitMessage?: string;
   head?: string;
 }

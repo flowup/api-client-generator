@@ -12,5 +12,5 @@
 
 export interface SearchCode {
   items?: object[];
-  total_count?: number;
+  totalCount?: number;
 }

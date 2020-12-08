@@ -17,12 +17,16 @@ import {
 
 export interface DataModel {
   audioConfig?: Data;
-  details?: object[];  // { [key: string]: any }[] or object[]
+  /** { [key: string]: any }[] or object[] */
+  details?: object[];
   entities?: number[];
   id?: number;
-  imageData?: string;  // base64 user uploaded image string
-  imageUrl?: string;  // url to user avatar image
-  metadata?: object;  // { [key: string]: any } or object
+  /** base64 user uploaded image string */
+  imageData?: string;
+  /** url to user avatar image */
+  imageUrl?: string;
+  /** { [key: string]: any } or object */
+  metadata?: object;
   roleId?: number;
   testWithArray?: Pet[] & Data;
   text?: ItemList & Data;

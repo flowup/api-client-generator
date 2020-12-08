@@ -11,5 +11,6 @@
 
 
 export interface InterfaceWithSimpleDictionary {
-  foo: { [key: string]: number };  // { [key: string]: number }
+  /** { [key: string]: number } */
+  foo: { [key: string]: number };
 }

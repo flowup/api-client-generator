@@ -12,9 +12,9 @@
 
 export interface Team {
   id?: number;
-  members_count?: number;
+  membersCount?: number;
   name?: string;
   permission?: string;
-  repos_count?: number;
+  reposCount?: number;
   url?: string;
 }

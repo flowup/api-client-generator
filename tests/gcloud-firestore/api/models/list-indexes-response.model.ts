@@ -17,6 +17,8 @@ import {
  * The response for FirestoreAdmin.ListIndexes.
  */
 export interface ListIndexesResponse {
-  indexes?: Index[];  // The indexes.
-  nextPageToken?: string;  // The standard List next-page token.
+  /** The indexes. */
+  indexes?: Index[];
+  /** The standard List next-page token. */
+  nextPageToken?: string;
 }

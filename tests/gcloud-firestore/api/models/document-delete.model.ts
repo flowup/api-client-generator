@@ -20,7 +20,10 @@
  * delete, if multiple targets are affected.
  */
 export interface DocumentDelete {
-  document?: string;  // The resource name of the Document that was deleted.
-  readTime?: string;  // The read timestamp at which the delete was observed.Greater or equal to the `commit_time` of the delete.
-  removedTargetIds?: number[];  // A set of target IDs for targets that previously matched this entity.
+  /** The resource name of the Document that was deleted. */
+  document?: string;
+  /** The read timestamp at which the delete was observed.Greater or equal to the `commit_time` of the delete. */
+  readTime?: string;
+  /** A set of target IDs for targets that previously matched this entity. */
+  removedTargetIds?: number[];
 }

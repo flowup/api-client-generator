@@ -11,6 +11,6 @@
 
 
 export interface DummySelectorSettings {
-  DummyObjId?: number;
-  OrganizerTaskElementId?: number;
+  dummyObjId?: number;
+  organizerTaskElementId?: number;
 }

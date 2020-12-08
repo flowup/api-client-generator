@@ -14,9 +14,9 @@ import {
 } from '.';
 
 export interface RowModel {
-  Children?: ColumnModel[];
-  Id?: number;
-  ParentId?: number;
-  Position?: number;
-  UserId?: number;
+  children?: ColumnModel[];
+  id?: number;
+  parentId?: number;
+  position?: number;
+  userId?: number;
 }

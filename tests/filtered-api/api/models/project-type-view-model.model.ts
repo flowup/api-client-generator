@@ -11,6 +11,6 @@
 
 
 export interface ProjectTypeViewModel {
-  Category?: string;
-  TypeId?: number;
+  category?: string;
+  typeId?: number;
 }

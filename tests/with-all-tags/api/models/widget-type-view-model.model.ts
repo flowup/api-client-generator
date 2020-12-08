@@ -14,15 +14,15 @@ import {
 } from '.';
 
 export interface WidgetTypeViewModel {
-  Beschreibung?: string;
-  Id?: number;
-  KeySystem?: { [key: string]: string };
-  ModulName?: string;
-  ModulNameExtern?: string;
-  Order?: number;
-  OrganizerTaskId?: number;
-  RefSystem?: { [key: string]: string };
-  Severity?: StatusSeverity;
-  SysApplicationId?: number;
-  Titel?: string;
+  beschreibung?: string;
+  id?: number;
+  keySystem?: { [key: string]: string };
+  modulName?: string;
+  modulNameExtern?: string;
+  order?: number;
+  organizerTaskId?: number;
+  refSystem?: { [key: string]: string };
+  severity?: StatusSeverity;
+  sysApplicationId?: number;
+  titel?: string;
 }

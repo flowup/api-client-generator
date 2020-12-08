@@ -11,13 +11,13 @@
 
 
 export interface DeploymentResp {
-  created_at?: string;
+  createdAt?: string;
   creator?: object;
   description?: string;
   id?: number;
   payload?: string;
   sha?: string;
-  statuses_url?: string;
-  updated_at?: string;
+  statusesUrl?: string;
+  updatedAt?: string;
   url?: string;
 }

@@ -18,6 +18,8 @@
  * standard</a>. Values must be within normalized ranges.
  */
 export interface LatLng {
-  latitude?: number;  // The latitude in degrees. It must be in the range [-90.0, +90.0].
-  longitude?: number;  // The longitude in degrees. It must be in the range [-180.0, +180.0].
+  /** The latitude in degrees. It must be in the range [-90.0, +90.0]. */
+  latitude?: number;
+  /** The longitude in degrees. It must be in the range [-180.0, +180.0]. */
+  longitude?: number;
 }

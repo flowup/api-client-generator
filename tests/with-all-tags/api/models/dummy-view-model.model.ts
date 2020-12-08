@@ -11,7 +11,7 @@
 
 
 export interface DummyViewModel {
-  DummyNrTitel?: string;
-  DummyObjId?: number;
-  UniqueId?: string;
+  dummyNrTitel?: string;
+  dummyObjId?: number;
+  uniqueId?: string;
 }

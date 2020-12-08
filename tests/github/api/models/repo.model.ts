@@ -11,37 +11,42 @@
 
 
 export interface Repo {
-  clone_url?: string;
-  created_at?: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+  cloneUrl?: string;
+  /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+  createdAt?: string;
   description?: string;
   fork?: boolean;
   forks?: number;
-  forks_count?: number;
-  full_name?: string;
-  git_url?: string;
-  has_downloads?: boolean;
-  has_issues?: boolean;
-  has_wiki?: boolean;
+  forksCount?: number;
+  fullName?: string;
+  gitUrl?: string;
+  hasDownloads?: boolean;
+  hasIssues?: boolean;
+  hasWiki?: boolean;
   homepage?: string;
-  html_url?: string;
+  htmlUrl?: string;
   id?: number;
   language?: string;
-  master_branch?: string;
-  mirror_url?: string;
+  masterBranch?: string;
+  mirrorUrl?: string;
   name?: string;
-  open_issues?: number;
-  open_issues_count?: number;
+  openIssues?: number;
+  openIssuesCount?: number;
   organization?: object;
   owner?: object;
-  parent?: object;  // Is present when the repo is a fork. Parent is the repo this repo was forked from.
+  /** Is present when the repo is a fork. Parent is the repo this repo was forked from. */
+  parent?: object;
   private?: boolean;
-  pushed_at?: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+  /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+  pushedAt?: string;
   size?: number;
-  source?: object;  // Is present when the repo is a fork. Source is the ultimate source for the network.
-  ssh_url?: string;
-  svn_url?: string;
-  updated_at?: string;  // ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+  /** Is present when the repo is a fork. Source is the ultimate source for the network. */
+  source?: object;
+  sshUrl?: string;
+  svnUrl?: string;
+  /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+  updatedAt?: string;
   url?: string;
   watchers?: number;
-  watchers_count?: number;
+  watchersCount?: number;
 }

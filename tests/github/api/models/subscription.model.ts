@@ -11,10 +11,10 @@
 
 
 export interface Subscription {
-  created_at?: string;
+  createdAt?: string;
   ignored?: boolean;
   reason?: boolean;
   subscribed?: boolean;
-  thread_url?: string;
+  threadUrl?: string;
   url?: string;
 }

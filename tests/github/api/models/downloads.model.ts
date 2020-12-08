@@ -11,10 +11,10 @@
 
 
 export interface Downloads {
-  content_type?: string;
+  contentType?: string;
   description?: string;
-  download_count?: number;
-  html_url?: string;
+  downloadCount?: number;
+  htmlUrl?: string;
   id?: number;
   name?: string;
   size?: number;

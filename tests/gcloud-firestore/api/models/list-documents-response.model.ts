@@ -17,6 +17,8 @@ import {
  * The response for Firestore.ListDocuments.
  */
 export interface ListDocumentsResponse {
-  documents?: Document[];  // The Documents found.
-  nextPageToken?: string;  // The next page token.
+  /** The Documents found. */
+  documents?: Document[];
+  /** The next page token. */
+  nextPageToken?: string;
 }

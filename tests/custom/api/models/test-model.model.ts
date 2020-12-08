@@ -11,9 +11,10 @@
 
 
 export interface TestModel {
-  '42test'?: string;
-  'anotherKey@'?: string;
-  'some-key'?: string;
-  'yet@notherKey'?: string;
-  count?: number;  // sum of everything there is converted to bananas
+  &#x27;42test&#x27;?: string;
+  &#x27;anotherKey@&#x27;?: string;
+  &#x27;someKey&#x27;?: string;
+  &#x27;yet@notherKey&#x27;?: string;
+  /** sum of everything there is converted to bananas */
+  count?: number;
 }

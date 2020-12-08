@@ -12,7 +12,7 @@
 
 export interface Events {
   actor?: object;
-  created_at?: object;
+  createdAt?: object;
   id?: number;
   org?: object;
   payload?: object;

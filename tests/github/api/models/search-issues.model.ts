@@ -12,5 +12,5 @@
 
 export interface SearchIssues {
   items?: object[];
-  total_count?: number;
+  totalCount?: number;
 }

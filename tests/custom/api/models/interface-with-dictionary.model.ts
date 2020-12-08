@@ -14,6 +14,7 @@ import {
 } from '.';
 
 export interface InterfaceWithDictionary {
-  customers?: { [key: string]: Customer };  // { [key: string]: Customer }
+  /** { [key: string]: Customer } */
+  customers?: { [key: string]: Customer };
   id: string;
 }

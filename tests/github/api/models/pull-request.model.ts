@@ -11,30 +11,30 @@
 
 
 export interface PullRequest {
-  _links?: object;
+  links?: object;
   additions?: number;
   base?: object;
   body?: string;
-  changed_files?: number;
-  closed_at?: string;
+  changedFiles?: number;
+  closedAt?: string;
   comments?: number;
   commits?: number;
-  created_at?: string;
+  createdAt?: string;
   deletions?: number;
-  diff_url?: string;
+  diffUrl?: string;
   head?: object;
-  html_url?: string;
-  issue_url?: string;
-  merge_commit_sha?: string;
+  htmlUrl?: string;
+  issueUrl?: string;
+  mergeCommitSha?: string;
   mergeable?: boolean;
   merged?: boolean;
-  merged_at?: string;
-  merged_by?: object;
+  mergedAt?: string;
+  mergedBy?: object;
   number?: number;
-  patch_url?: string;
+  patchUrl?: string;
   state?: string;
   title?: string;
-  updated_at?: string;
+  updatedAt?: string;
   url?: string;
   user?: object;
 }
