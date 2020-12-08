@@ -17,12 +17,18 @@ import * as models from './models';
 export interface APIClientInterface {
 
   /**
+   * Arguments object for method `auth`.
+   */
+  authParams?: {
+    /**  Structure entity object that needs to be added */
+    body: models.AuthForm,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   auth(
-    args: {
-      body: models.AuthForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['authParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
 
@@ -34,32 +40,50 @@ export interface APIClientInterface {
   ): Observable<object>;
 
   /**
+   * Arguments object for method `passwordRestoreRequest`.
+   */
+  passwordRestoreRequestParams?: {
+    /**  Structure entity object that needs to be added */
+    body: models.RestoreForm,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   passwordRestoreRequest(
-    args: {
-      body: models.RestoreForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `passwordRestoreEmailRequest`.
+   */
+  passwordRestoreEmailRequestParams?: {
+    /**  Structure entity object that needs to be added */
+    body: models.RestoreRequestForm,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   passwordRestoreEmailRequest(
-    args: {
-      body: models.RestoreRequestForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `passwordRestoreCheckRestoreGuid`.
+   */
+  passwordRestoreCheckRestoreGuidParams?: {
+    /**  RestoreGuid for check */
+    restoreGuid: string,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   passwordRestoreCheckRestoreGuid(
-    args: {
-      restoreGuid: string,  // RestoreGuid for check
-    },
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
 
@@ -78,35 +102,69 @@ export interface APIClientInterface {
   ): Observable<models.Structure[]>;
 
   /**
+   * Arguments object for method `addStructureEntity`.
+   */
+  addStructureEntityParams?: {
+    /**  Structure entity object that needs to be added */
+    body: models.StructureAddParameters,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   addStructureEntity(
-    args: {
-      body: models.StructureAddParameters,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure>;
+
+  /**
+   * Arguments object for method `updateStructureEntity`.
+   */
+  updateStructureEntityParams?: {
+    /**  structure id to update */
+    structureId: number,
+    /**  Structure entity object that needs to be updated */
+    body: models.StructureForm,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   updateStructureEntity(
-    args: {
-      structureId: number,  // structure id to update
-      body: models.StructureForm,  // Structure entity object that needs to be updated
-    },
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure>;
+
+  /**
+   * Arguments object for method `deleteStructureEntity`.
+   */
+  deleteStructureEntityParams?: {
+    /**  structure id to delete */
+    structureId: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteStructureEntity(
-    args: {
-      structureId: number,  // structure id to delete
-    },
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReportsList`.
+   */
+  getReportsListParams?: {
+    /**  (optional) - 1 Pending - 2 InProgress - 3 Complete  */
+    status?: models.Status,
+    pageSize: number,
+    /**  page number */
+    page: number,
+    /**  id | title | subtitle | criticality | status | issues | deadline */
+    orderBy: ('id' | 'title' | 'subtitle' | 'criticality' | 'status' | 'issues' | 'deadline'),
+    /**  (optional) - asc - desc  */
+    order?: models.Order,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy4z8d)
@@ -114,15 +172,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReportsList(
-    args: {
-      status?: models.Status,  // (optional) - 1 Pending - 2 InProgress - 3 Complete 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('id' | 'title' | 'subtitle' | 'criticality' | 'status' | 'issues' | 'deadline'),  // id | title | subtitle | criticality | status | issues | deadline
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `getReportDetails`.
+   */
+  getReportDetailsParams?: {
+    /**  report id to get */
+    id: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hywkd5)
@@ -130,11 +190,24 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReportDetails(
-    args: {
-      id: number,  // report id to get
-    },
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ReportItem[]>;
+
+  /**
+   * Arguments object for method `getReportPreview`.
+   */
+  getReportPreviewParams?: {
+    /**  [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)  */
+    templateId: number,
+    pageSize: number,
+    /**  page number */
+    page: number,
+    /**  (optional) column id */
+    orderBy?: number,
+    /**  (optional) - asc - desc  */
+    order?: models.Order,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/i3z8zb)
@@ -142,15 +215,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReportPreview(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-      pageSize: number,
-      page: number,  // page number
-      orderBy?: number,  // (optional) column id
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `getImportHistory`.
+   */
+  getImportHistoryParams?: {
+    /**  [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)  */
+    templateId: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/i3ym4j)
@@ -158,11 +233,19 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getImportHistory(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-    },
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportHistoryItem[]>;
+
+  /**
+   * Arguments object for method `uploadFile`.
+   */
+  uploadFileParams?: {
+    /**  [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)  */
+    templateId: number,
+    /**  file to upload */
+    file: File,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy521p)
@@ -170,12 +253,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   uploadFile(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-      file: File,  // file to upload
-    },
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<number>;
+
+  /**
+   * Arguments object for method `listTemplateColumns`.
+   */
+  listTemplateColumnsParams?: {
+    /**  [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)  */
+    templateId: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy52hi)
@@ -183,11 +271,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   listTemplateColumns(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-    },
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]>;
+
+  /**
+   * Arguments object for method `listReportColumns`.
+   */
+  listReportColumnsParams?: {
+    /**  Id of current import */
+    id: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy52zr)
@@ -195,11 +289,19 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   listReportColumns(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]>;
+
+  /**
+   * Arguments object for method `saveColumnsMapping`.
+   */
+  saveColumnsMappingParams?: {
+    /**  Id of current import */
+    id: number,
+    /**  Column mappint for current import */
+    body: models.ColumnMapping[],
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy53jt)
@@ -207,12 +309,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   saveColumnsMapping(
-    args: {
-      id: number,  // Id of current import
-      body: models.ColumnMapping[],  // Column mappint for current import
-    },
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Table>;
+
+  /**
+   * Arguments object for method `getValidationTable`.
+   */
+  getValidationTableParams?: {
+    /**  Id of current import */
+    id: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy5fct)
@@ -220,11 +327,19 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getValidationTable(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ValidatedTable>;
+
+  /**
+   * Arguments object for method `downloadImportedFile`.
+   */
+  downloadImportedFileParams?: {
+    /**  Id of current import */
+    id: number,
+    /**  (optional) Indicator of downloading data(all or errors only) */
+    all?: boolean,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy55ga)
@@ -232,12 +347,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportedFile(
-    args: {
-      id: number,  // Id of current import
-      all?: boolean,  // (optional) Indicator of downloading data(all or errors only)
-    },
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File>;
+
+  /**
+   * Arguments object for method `importConfirmation`.
+   */
+  importConfirmationParams?: {
+    /**  Id of current import */
+    id: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy57nj)
@@ -245,11 +365,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   importConfirmation(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportResponse>;
+
+  /**
+   * Arguments object for method `downloadImportOriginalFile`.
+   */
+  downloadImportOriginalFileParams?: {
+    /**  Id of current import */
+    id: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy5a54)
@@ -257,11 +383,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportOriginalFile(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File>;
+
+  /**
+   * Arguments object for method `downloadImportSkippedFile`.
+   */
+  downloadImportSkippedFileParams?: {
+    /**  Id of current import */
+    id: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy5ae7)
@@ -269,11 +401,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportSkippedFile(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File>;
+
+  /**
+   * Arguments object for method `cancelImport`.
+   */
+  cancelImportParams?: {
+    /**  Id of current import */
+    id: number,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy5aqq)
@@ -281,11 +419,21 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   cancelImport(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `overrideImport`.
+   */
+  overrideImportParams?: {
+    /**  Id of current import */
+    id: number,
+    /**  description of override request */
+    description: string,
+    /**  file to upload */
+    file: File,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/hy5bi6)
@@ -293,13 +441,17 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   overrideImport(
-    args: {
-      id: number,  // Id of current import
-      description: string,  // description of override request
-      file: File,  // file to upload
-    },
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `geImportStats`.
+   */
+  geImportStatsParams?: {
+    /**  (optional) - 1 Year - 2 Month - 3 Week  */
+    period?: models.Period,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/i4052r)
@@ -307,11 +459,26 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   geImportStats(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-    },
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.TotalImportStats>;
+
+  /**
+   * Arguments object for method `getIssuesList`.
+   */
+  getIssuesListParams?: {
+    /**  (optional) - 1 Year - 2 Month - 3 Week  */
+    period?: models.Period,
+    /**  (optional) - 1 Pending - 2 Resolved  */
+    status?: models.IssueStatus,
+    pageSize: number,
+    /**  page number */
+    page: number,
+    /**  name | school | dueDate | alert */
+    orderBy: ('name' | 'school' | 'dueDate' | 'alert'),
+    /**  (optional) - asc - desc  */
+    order?: models.Order,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/i40s18)
@@ -319,16 +486,26 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getIssuesList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.IssueStatus,  // (optional) - 1 Pending - 2 Resolved 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'school' | 'dueDate' | 'alert'),  // name | school | dueDate | alert
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `getStatusesList`.
+   */
+  getStatusesListParams?: {
+    /**  (optional) - 1 Year - 2 Month - 3 Week  */
+    period?: models.Period,
+    /**  (optional) - 1 Live - 2 PastDeadline  */
+    status?: models.ImportStatus,
+    pageSize: number,
+    /**  page number */
+    page: number,
+    /**  name | issues | dueDate | progress */
+    orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),
+    /**  (optional) - asc - desc  */
+    order?: models.Order,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/i4byyx)
@@ -336,41 +513,52 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getStatusesList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),  // name | issues | dueDate | progress
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `getUsersList`.
+   */
+  getUsersListParams?: {
+    /**  (optional) - 1 Year - 2 Month - 3 Week  */
+    period?: models.Period,
+    /**  (optional) - 1 Live - 2 PastDeadline  */
+    status?: models.ImportStatus,
+    pageSize: number,
+    /**  page number */
+    page: number,
+    /**  name | issues | dueDate | progress */
+    orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),
+    /**  (optional) - asc - desc  */
+    order?: models.Order,
+    /**  (optional) role id | [Screenshot from design](http://prntscr.com/ib9yal) */
+    assignedToRole?: number,
+    /**  (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16) */
+    unassignedFromRole?: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),  // name | issues | dueDate | progress
-      order?: models.Order,  // (optional) - asc - desc 
-      assignedToRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9yal)
-      unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
-    },
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `createUser`.
+   */
+  createUserParams?: {
+    /**  User entity object that needs to be added */
+    body: models.UserDetails,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   createUser(
-    args: {
-      body: models.UserDetails,  // User entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails>;
 
@@ -382,33 +570,49 @@ export interface APIClientInterface {
   ): Observable<models.Acl[]>;
 
   /**
+   * Arguments object for method `getUserDetails`.
+   */
+  getUserDetailsParams?: {
+    id: number,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserDetails(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails[]>;
+
+  /**
+   * Arguments object for method `updateUser`.
+   */
+  updateUserParams?: {
+    id: number,
+    /**  User entity object that needs to be updated */
+    body: models.UserDetails,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   updateUser(
-    args: {
-      id: number,
-      body: models.UserDetails,  // User entity object that needs to be updated
-    },
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails>;
+
+  /**
+   * Arguments object for method `deleteUser`.
+   */
+  deleteUserParams?: {
+    id: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteUser(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
 
@@ -422,12 +626,18 @@ export interface APIClientInterface {
   ): Observable<models.RoleListItem[]>;
 
   /**
+   * Arguments object for method `createRole`.
+   */
+  createRoleParams?: {
+    /**  Role entity object that needs to be added */
+    body: object,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   createRole(
-    args: {
-      body: object,  // Role entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem>;
 
@@ -441,33 +651,48 @@ export interface APIClientInterface {
   ): Observable<models.PrivilegeTreeItem[]>;
 
   /**
+   * Arguments object for method `getRoleDetails`.
+   */
+  getRoleDetailsParams?: {
+    id: number,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getRoleDetails(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem[]>;
+
+  /**
+   * Arguments object for method `updateRole`.
+   */
+  updateRoleParams?: {
+    id: number,
+    body?: models.RoleUpdateDetails,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   updateRole(
-    args: {
-      id: number,
-      body?: models.RoleUpdateDetails,
-    },
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem>;
+
+  /**
+   * Arguments object for method `deleteRole`.
+   */
+  deleteRoleParams?: {
+    id: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteRole(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
 
@@ -481,14 +706,32 @@ export interface APIClientInterface {
   ): Observable<models.NotificationListItem[]>;
 
   /**
+   * Arguments object for method `markViewedNotifications`.
+   */
+  markViewedNotificationsParams?: {
+    body?: number[],
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   markViewedNotifications(
-    args: {
-      body?: number[],
-    },
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getNotificationsList`.
+   */
+  getNotificationsListParams?: {
+    pageSize: number,
+    /**  page number */
+    page: number,
+    /**  name | description | priority | date */
+    orderBy: ('name' | 'description' | 'priority' | 'date'),
+    /**  (optional) - asc - desc  */
+    order?: models.Order,
+  };
 
   /**
    * [Screenshot from design](http://prntscr.com/iba8tq)
@@ -496,12 +739,7 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsList(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'description' | 'priority' | 'date'),  // name | description | priority | date
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
 
@@ -525,69 +763,102 @@ export interface APIClientInterface {
   ): Observable<models.NotificationTrigger[]>;
 
   /**
+   * Arguments object for method `getModuleNotificationsList`.
+   */
+  getModuleNotificationsListParams?: {
+    moduleId: number,
+    pageSize: number,
+    /**  page number */
+    page: number,
+    /**  name | description | priority | date */
+    orderBy: ('name' | 'description' | 'priority' | 'date'),
+    /**  (optional) - asc - desc  */
+    order?: models.Order,
+  };
+
+  /**
    * [Screenshot from design](http://prntscr.com/iba8tq)
    * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getModuleNotificationsList(
-    args: {
-      moduleId: number,
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'description' | 'priority' | 'date'),  // name | description | priority | date
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `enableNotification`.
+   */
+  enableNotificationParams?: {
+    id: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   enableNotification(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `disableNotification`.
+   */
+  disableNotificationParams?: {
+    id: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   disableNotification(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getNotification`.
+   */
+  getNotificationParams?: {
+    id: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotification(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationEditableListItem>;
+
+  /**
+   * Arguments object for method `updateNotification`.
+   */
+  updateNotificationParams?: {
+    id: number,
+    body?: models.NotificationEditable,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   updateNotification(
-    args: {
-      id: number,
-      body?: models.NotificationEditable,
-    },
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `createNotification`.
+   */
+  createNotificationParams?: {
+    body?: models.NotificationEditable,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   createNotification(
-    args: {
-      body?: models.NotificationEditable,
-    },
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<number>;
 
@@ -601,14 +872,19 @@ export interface APIClientInterface {
   ): Observable<models.PasswordVerificationPolicies>;
 
   /**
+   * Arguments object for method `udatePassVerificationPolicies`.
+   */
+  udatePassVerificationPoliciesParams?: {
+    body?: models.PasswordVerificationPolicies,
+  };
+
+  /**
    * [Screenshot from design](http://prntscr.com/ijzt2b)
    * 
    * Response generated for [ 200 ] HTTP response code.
    */
   udatePassVerificationPolicies(
-    args: {
-      body?: models.PasswordVerificationPolicies,
-    },
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordVerificationPolicies>;
 
@@ -622,14 +898,19 @@ export interface APIClientInterface {
   ): Observable<models.PasswordCreationPolicies>;
 
   /**
+   * Arguments object for method `udatePassCreationPolicies`.
+   */
+  udatePassCreationPoliciesParams?: {
+    body?: models.PasswordCreationPolicies,
+  };
+
+  /**
    * [Screenshot from design](http://prntscr.com/ijzuv3)
    * 
    * Response generated for [ 200 ] HTTP response code.
    */
   udatePassCreationPolicies(
-    args: {
-      body?: models.PasswordCreationPolicies,
-    },
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordCreationPolicies>;
 
@@ -643,14 +924,19 @@ export interface APIClientInterface {
   ): Observable<models.OtherSecuritySettings>;
 
   /**
+   * Arguments object for method `udateOtherSecuritySettings`.
+   */
+  udateOtherSecuritySettingsParams?: {
+    body?: models.OtherSecuritySettings,
+  };
+
+  /**
    * [Screenshot from design](http://prntscr.com/ijzvo3)
    * 
    * Response generated for [ 200 ] HTTP response code.
    */
   udateOtherSecuritySettings(
-    args: {
-      body?: models.OtherSecuritySettings,
-    },
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.OtherSecuritySettings>;
 

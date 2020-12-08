@@ -17,37 +17,51 @@ import * as models from '../../models';
 export interface GitignoreAPIClientInterface {
 
   /**
+   * Arguments object for method `getGitignoreTemplates`.
+   */
+  getGitignoreTemplatesParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * Listing available templates.
    * List all templates available to pass as an option when creating a repository.
    * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getGitignoreTemplates(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore>;
+
+  /**
+   * Arguments object for method `getGitignoreTemplatesLanguage`.
+   */
+  getGitignoreTemplatesLanguageParams?: {
+    language: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single template.
    * Response generated for [ 200 ] HTTP response code.
    */
   getGitignoreTemplatesLanguage(
-    args: {
-      language: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.GitignoreLang>;
 

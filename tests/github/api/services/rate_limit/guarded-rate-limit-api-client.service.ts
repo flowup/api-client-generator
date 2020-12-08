@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, RateLimitAPIClient } from './rate-limit-api-client.service';
+import { RateLimitAPIClientInterface } from './rate-limit-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedRateLimitAPIClient extends RateLimitAPIClient {
+export class GuardedRateLimitAPIClient extends RateLimitAPIClient implements RateLimitAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,14 +30,7 @@ export class GuardedRateLimitAPIClient extends RateLimitAPIClient {
   }
 
   getRateLimit(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RateLimit> {
     return super.getRateLimit(args, requestHttpOptions)

@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, GistsAPIClient } from './gists-api-client.service';
+import { GistsAPIClientInterface } from './gists-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedGistsAPIClient extends GistsAPIClient {
+export class GuardedGistsAPIClient extends GistsAPIClient implements GistsAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,15 +30,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   getGists(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     return super.getGists(args, requestHttpOptions)
@@ -45,15 +38,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   postGists(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PostGist,
-    },
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     return super.postGists(args, requestHttpOptions)
@@ -61,15 +46,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   getGistsPublic(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     return super.getGistsPublic(args, requestHttpOptions)
@@ -77,15 +54,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   getGistsStarred(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     return super.getGistsStarred(args, requestHttpOptions)
@@ -93,15 +62,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   getGistsId(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     return super.getGistsId(args, requestHttpOptions)
@@ -109,16 +70,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   patchGistsId(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PatchGist,
-    },
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     return super.patchGistsId(args, requestHttpOptions)
@@ -126,15 +78,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   getGistsIdComments(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comments> {
     return super.getGistsIdComments(args, requestHttpOptions)
@@ -142,16 +86,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   postGistsIdComments(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     return super.postGistsIdComments(args, requestHttpOptions)
@@ -159,16 +94,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   getGistsIdCommentsCommentId(
-    args: {
-      id: number,  // Id of gist.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     return super.getGistsIdCommentsCommentId(args, requestHttpOptions)
@@ -176,17 +102,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient {
   }
 
   patchGistsIdCommentsCommentId(
-    args: {
-      id: number,  // Id of gist.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Comment,
-    },
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     return super.patchGistsIdCommentsCommentId(args, requestHttpOptions)

@@ -17,18 +17,25 @@ import * as models from '../../models';
 export interface EventsAPIClientInterface {
 
   /**
+   * Arguments object for method `getEvents`.
+   */
+  getEventsParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * List public events.
    * Response generated for [ 200 ] HTTP response code.
    */
   getEvents(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events>;
 

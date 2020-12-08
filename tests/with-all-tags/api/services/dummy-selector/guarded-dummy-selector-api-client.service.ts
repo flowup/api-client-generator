@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, DummySelectorAPIClient } from './dummy-selector-api-client.service';
+import { DummySelectorAPIClientInterface } from './dummy-selector-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
+export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient implements DummySelectorAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,9 +30,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
   }
 
   get(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorViewModel> {
     return super.get(args, requestHttpOptions)
@@ -39,9 +38,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
   }
 
   getSettings(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorSettings> {
     return super.getSettings(args, requestHttpOptions)
@@ -49,10 +46,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
   }
 
   putSettings(
-    args: {
-      organizerTaskElementId: number,
-      betriebSelectorSettings: models.DummySelectorSettings,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.putSettings(args, requestHttpOptions)
@@ -60,9 +54,7 @@ export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient {
   }
 
   deleteSettings(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.deleteSettings(args, requestHttpOptions)

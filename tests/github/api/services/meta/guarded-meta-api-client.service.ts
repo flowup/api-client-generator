@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, MetaAPIClient } from './meta-api-client.service';
+import { MetaAPIClientInterface } from './meta-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedMetaAPIClient extends MetaAPIClient {
+export class GuardedMetaAPIClient extends MetaAPIClient implements MetaAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,14 +30,7 @@ export class GuardedMetaAPIClient extends MetaAPIClient {
   }
 
   getMeta(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Meta> {
     return super.getMeta(args, requestHttpOptions)

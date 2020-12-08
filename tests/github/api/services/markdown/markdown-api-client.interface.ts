@@ -17,35 +17,49 @@ import * as models from '../../models';
 export interface MarkdownAPIClientInterface {
 
   /**
+   * Arguments object for method `postMarkdown`.
+   */
+  postMarkdownParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.Markdown,
+  };
+
+  /**
    * Render an arbitrary Markdown document
    * Response generated for [ 200 ] HTTP response code.
    */
   postMarkdown(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Markdown,
-    },
+    args: Exclude<MarkdownAPIClientInterface['postMarkdownParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `postMarkdownRaw`.
+   */
+  postMarkdownRawParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Render a Markdown document in raw mode
    * Response generated for [ 200 ] HTTP response code.
    */
   postMarkdownRaw(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
 

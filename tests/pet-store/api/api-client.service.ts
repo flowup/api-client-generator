@@ -55,9 +55,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getPetById(
-    args: {
-      petId: number,  // ID of pet to return
-    },
+    args: Exclude<APIClientInterface['getPetByIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet> {
     const path = `/pet/${args.petId}`;
@@ -73,11 +71,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   updatePetWithForm(
-    args: {
-      petId: number,  // ID of pet that needs to be updated
-      name?: string,  // (optional) Updated name of the pet
-      status?: string,  // (optional) Updated status of the pet
-    },
+    args: Exclude<APIClientInterface['updatePetWithFormParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/pet/${args.petId}`;
@@ -101,10 +95,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   deletePet(
-    args: {
-      apiKey?: string,
-      petId: number,  // Pet id to delete
-    },
+    args: Exclude<APIClientInterface['deletePetParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/pet/${args.petId}`;
@@ -123,11 +114,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   uploadFile(
-    args: {
-      petId: number,  // ID of pet to update
-      additionalMetadata?: string,  // (optional) Additional data to pass to server
-      file?: File,  // (optional) file to upload
-    },
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ApiResponse> {
     const path = `/pet/${args.petId}/uploadImage`;
@@ -151,9 +138,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   addPet(
-    args: {
-      body: models.Pet,  // Pet object that needs to be added to the store
-    },
+    args: Exclude<APIClientInterface['addPetParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/pet`;
@@ -169,9 +154,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   updatePet(
-    args: {
-      body: models.Pet,  // Pet object that needs to be added to the store
-    },
+    args: Exclude<APIClientInterface['updatePetParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/pet`;
@@ -188,9 +171,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   findPetsByStatus(
-    args: {
-      status: ('available' | 'pending' | 'sold')[],  // Status values that need to be considered for filter
-    },
+    args: Exclude<APIClientInterface['findPetsByStatusParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     const path = `/pet/findByStatus`;
@@ -210,9 +191,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   findPetsByTags(
-    args: {
-      tags: string[],  // Tags to filter by
-    },
+    args: Exclude<APIClientInterface['findPetsByTagsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     const path = `/pet/findByTags`;
@@ -248,9 +227,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrderById(
-    args: {
-      orderId: number,  // ID of pet that needs to be fetched
-    },
+    args: Exclude<APIClientInterface['getOrderByIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Order> {
     const path = `/store/order/${args.orderId}`;
@@ -267,9 +244,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   deleteOrder(
-    args: {
-      orderId: number,  // ID of the order that needs to be deleted
-    },
+    args: Exclude<APIClientInterface['deleteOrderParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/store/order/${args.orderId}`;
@@ -285,9 +260,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   placeOrder(
-    args: {
-      body: models.Order,  // order placed for purchasing the pet
-    },
+    args: Exclude<APIClientInterface['placeOrderParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Order> {
     const path = `/store/order`;
@@ -303,9 +276,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserByName(
-    args: {
-      username: string,  // The name that needs to be fetched. Use user1 for testing. 
-    },
+    args: Exclude<APIClientInterface['getUserByNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.User> {
     const path = `/user/${args.username}`;
@@ -322,10 +293,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   updateUser(
-    args: {
-      username: string,  // name that need to be updated
-      body: models.User,  // Updated user object
-    },
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/user/${args.username}`;
@@ -342,9 +310,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   deleteUser(
-    args: {
-      username: string,  // The name that needs to be deleted
-    },
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/user/${args.username}`;
@@ -360,10 +326,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   loginUser(
-    args: {
-      username: string,  // The user name for login
-      password: string,  // The password for login in clear text
-    },
+    args: Exclude<APIClientInterface['loginUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<string> {
     const path = `/user/login`;
@@ -401,9 +364,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   createUser(
-    args: {
-      body: models.User,  // Created user object
-    },
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/user`;
@@ -419,9 +380,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   createUsersWithArrayInput(
-    args: {
-      body: models.User[],  // List of user object
-    },
+    args: Exclude<APIClientInterface['createUsersWithArrayInputParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/user/createWithArray`;
@@ -437,9 +396,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   createUsersWithListInput(
-    args: {
-      body: models.User[],  // List of user object
-    },
+    args: Exclude<APIClientInterface['createUsersWithListInputParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/user/createWithList`;

@@ -57,15 +57,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getGists(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists`;
@@ -103,15 +95,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postGists(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PostGist,
-    },
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     const path = `/gists`;
@@ -146,15 +130,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsPublic(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists/public`;
@@ -192,15 +168,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsStarred(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/gists/starred`;
@@ -238,15 +206,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsId(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/gists/${args.id}`;
@@ -281,15 +241,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsId(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     const path = `/gists/${args.id}`;
@@ -324,16 +276,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchGistsId(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PatchGist,
-    },
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist> {
     const path = `/gists/${args.id}`;
@@ -368,15 +311,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsIdComments(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comments> {
     const path = `/gists/${args.id}/comments`;
@@ -411,16 +346,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postGistsIdComments(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     const path = `/gists/${args.id}/comments`;
@@ -455,16 +381,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsIdCommentsCommentId(
-    args: {
-      id: number,  // Id of gist.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
@@ -499,16 +416,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsIdCommentsCommentId(
-    args: {
-      id: number,  // Id of gist.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
@@ -543,17 +451,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchGistsIdCommentsCommentId(
-    args: {
-      id: number,  // Id of gist.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Comment,
-    },
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
@@ -588,15 +486,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   postGistsIdForks(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/gists/${args.id}/forks`;
@@ -631,15 +521,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsIdStar(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/gists/${args.id}/star`;
@@ -674,15 +556,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   getGistsIdStar(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/gists/${args.id}/star`;
@@ -717,15 +591,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   putGistsIdStar(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/gists/${args.id}/star`;

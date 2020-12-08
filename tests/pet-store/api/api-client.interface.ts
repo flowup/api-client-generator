@@ -17,90 +17,142 @@ import * as models from './models';
 export interface APIClientInterface {
 
   /**
+   * Arguments object for method `getPetById`.
+   */
+  getPetByIdParams?: {
+    /**  ID of pet to return */
+    petId: number,
+  };
+
+  /**
    * Returns a single pet
    * Response generated for [ 200 ] HTTP response code.
    */
   getPetById(
-    args: {
-      petId: number,  // ID of pet to return
-    },
+    args: Exclude<APIClientInterface['getPetByIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet>;
+
+  /**
+   * Arguments object for method `updatePetWithForm`.
+   */
+  updatePetWithFormParams?: {
+    /**  ID of pet that needs to be updated */
+    petId: number,
+    /**  (optional) Updated name of the pet */
+    name?: string,
+    /**  (optional) Updated status of the pet */
+    status?: string,
+  };
 
   /**
    * Response generated for [ missing ] HTTP response code.
    */
   updatePetWithForm(
-    args: {
-      petId: number,  // ID of pet that needs to be updated
-      name?: string,  // (optional) Updated name of the pet
-      status?: string,  // (optional) Updated status of the pet
-    },
+    args: Exclude<APIClientInterface['updatePetWithFormParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `deletePet`.
+   */
+  deletePetParams?: {
+    apiKey?: string,
+    /**  Pet id to delete */
+    petId: number,
+  };
 
   /**
    * Response generated for [ missing ] HTTP response code.
    */
   deletePet(
-    args: {
-      apiKey?: string,
-      petId: number,  // Pet id to delete
-    },
+    args: Exclude<APIClientInterface['deletePetParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `uploadFile`.
+   */
+  uploadFileParams?: {
+    /**  ID of pet to update */
+    petId: number,
+    /**  (optional) Additional data to pass to server */
+    additionalMetadata?: string,
+    /**  (optional) file to upload */
+    file?: File,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   uploadFile(
-    args: {
-      petId: number,  // ID of pet to update
-      additionalMetadata?: string,  // (optional) Additional data to pass to server
-      file?: File,  // (optional) file to upload
-    },
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ApiResponse>;
+
+  /**
+   * Arguments object for method `addPet`.
+   */
+  addPetParams?: {
+    /**  Pet object that needs to be added to the store */
+    body: models.Pet,
+  };
 
   /**
    * Response generated for [ missing ] HTTP response code.
    */
   addPet(
-    args: {
-      body: models.Pet,  // Pet object that needs to be added to the store
-    },
+    args: Exclude<APIClientInterface['addPetParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `updatePet`.
+   */
+  updatePetParams?: {
+    /**  Pet object that needs to be added to the store */
+    body: models.Pet,
+  };
 
   /**
    * Response generated for [ missing ] HTTP response code.
    */
   updatePet(
-    args: {
-      body: models.Pet,  // Pet object that needs to be added to the store
-    },
+    args: Exclude<APIClientInterface['updatePetParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `findPetsByStatus`.
+   */
+  findPetsByStatusParams?: {
+    /**  Status values that need to be considered for filter */
+    status: ('available' | 'pending' | 'sold')[],
+  };
 
   /**
    * Multiple status values can be provided with comma separated strings
    * Response generated for [ 200 ] HTTP response code.
    */
   findPetsByStatus(
-    args: {
-      status: ('available' | 'pending' | 'sold')[],  // Status values that need to be considered for filter
-    },
+    args: Exclude<APIClientInterface['findPetsByStatusParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]>;
+
+  /**
+   * Arguments object for method `findPetsByTags`.
+   */
+  findPetsByTagsParams?: {
+    /**  Tags to filter by */
+    tags: string[],
+  };
 
   /**
    * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
    * Response generated for [ 200 ] HTTP response code.
    */
   findPetsByTags(
-    args: {
-      tags: string[],  // Tags to filter by
-    },
+    args: Exclude<APIClientInterface['findPetsByTagsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]>;
 
@@ -113,78 +165,122 @@ export interface APIClientInterface {
   ): Observable<{ [key: string]: number }>;
 
   /**
+   * Arguments object for method `getOrderById`.
+   */
+  getOrderByIdParams?: {
+    /**  ID of pet that needs to be fetched */
+    orderId: number,
+  };
+
+  /**
    * For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrderById(
-    args: {
-      orderId: number,  // ID of pet that needs to be fetched
-    },
+    args: Exclude<APIClientInterface['getOrderByIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Order>;
+
+  /**
+   * Arguments object for method `deleteOrder`.
+   */
+  deleteOrderParams?: {
+    /**  ID of the order that needs to be deleted */
+    orderId: number,
+  };
 
   /**
    * For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
    * Response generated for [ missing ] HTTP response code.
    */
   deleteOrder(
-    args: {
-      orderId: number,  // ID of the order that needs to be deleted
-    },
+    args: Exclude<APIClientInterface['deleteOrderParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `placeOrder`.
+   */
+  placeOrderParams?: {
+    /**  order placed for purchasing the pet */
+    body: models.Order,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   placeOrder(
-    args: {
-      body: models.Order,  // order placed for purchasing the pet
-    },
+    args: Exclude<APIClientInterface['placeOrderParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Order>;
+
+  /**
+   * Arguments object for method `getUserByName`.
+   */
+  getUserByNameParams?: {
+    /**  The name that needs to be fetched. Use user1 for testing.  */
+    username: string,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserByName(
-    args: {
-      username: string,  // The name that needs to be fetched. Use user1 for testing. 
-    },
+    args: Exclude<APIClientInterface['getUserByNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.User>;
+
+  /**
+   * Arguments object for method `updateUser`.
+   */
+  updateUserParams?: {
+    /**  name that need to be updated */
+    username: string,
+    /**  Updated user object */
+    body: models.User,
+  };
 
   /**
    * This can only be done by the logged in user.
    * Response generated for [ missing ] HTTP response code.
    */
   updateUser(
-    args: {
-      username: string,  // name that need to be updated
-      body: models.User,  // Updated user object
-    },
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `deleteUser`.
+   */
+  deleteUserParams?: {
+    /**  The name that needs to be deleted */
+    username: string,
+  };
 
   /**
    * This can only be done by the logged in user.
    * Response generated for [ missing ] HTTP response code.
    */
   deleteUser(
-    args: {
-      username: string,  // The name that needs to be deleted
-    },
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `loginUser`.
+   */
+  loginUserParams?: {
+    /**  The user name for login */
+    username: string,
+    /**  The password for login in clear text */
+    password: string,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   loginUser(
-    args: {
-      username: string,  // The user name for login
-      password: string,  // The password for login in clear text
-    },
+    args: Exclude<APIClientInterface['loginUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<string>;
 
@@ -196,33 +292,51 @@ export interface APIClientInterface {
   ): Observable<void>;
 
   /**
+   * Arguments object for method `createUser`.
+   */
+  createUserParams?: {
+    /**  Created user object */
+    body: models.User,
+  };
+
+  /**
    * This can only be done by the logged in user.
    * Response generated for [ missing ] HTTP response code.
    */
   createUser(
-    args: {
-      body: models.User,  // Created user object
-    },
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `createUsersWithArrayInput`.
+   */
+  createUsersWithArrayInputParams?: {
+    /**  List of user object */
+    body: models.User[],
+  };
 
   /**
    * Response generated for [ missing ] HTTP response code.
    */
   createUsersWithArrayInput(
-    args: {
-      body: models.User[],  // List of user object
-    },
+    args: Exclude<APIClientInterface['createUsersWithArrayInputParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `createUsersWithListInput`.
+   */
+  createUsersWithListInputParams?: {
+    /**  List of user object */
+    body: models.User[],
+  };
 
   /**
    * Response generated for [ missing ] HTTP response code.
    */
   createUsersWithListInput(
-    args: {
-      body: models.User[],  // List of user object
-    },
+    args: Exclude<APIClientInterface['createUsersWithListInputParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
 

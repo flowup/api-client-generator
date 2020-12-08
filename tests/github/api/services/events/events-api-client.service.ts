@@ -55,14 +55,7 @@ export class EventsAPIClient implements EventsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getEvents(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/events`;

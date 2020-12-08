@@ -17,6 +17,24 @@ import * as models from '../../models';
 export interface ReposAPIClientInterface {
 
   /**
+   * Arguments object for method `deleteReposOwnerRepo`.
+   */
+  deleteReposOwnerRepoParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * Delete a Repository.
    * Deleting a repository requires admin access. If OAuth is used, the delete_repo
    * scope is required.
@@ -24,55 +42,82 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepo(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepo`.
+   */
+  getReposOwnerRepoParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepo(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepo`.
+   */
+  patchReposOwnerRepoParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.RepoEdit,
+  };
 
   /**
    * Edit repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepo(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.RepoEdit,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoAssignees`.
+   */
+  getReposOwnerRepoAssigneesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List assignees.
@@ -82,18 +127,29 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoAssignees(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Assignees>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoAssigneesAssignee`.
+   */
+  getReposOwnerRepoAssigneesAssigneeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Login of the assignee. */
+    assignee: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check assignee.
@@ -102,56 +158,83 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoAssigneesAssignee(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      assignee: string,  // Login of the assignee.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoBranches`.
+   */
+  getReposOwnerRepoBranchesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get list of branches
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoBranches(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Branches>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoBranchesBranch`.
+   */
+  getReposOwnerRepoBranchesBranchParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Name of the branch. */
+    branch: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get Branch
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoBranchesBranch(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      branch: string,  // Name of the branch.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Branch>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoCollaborators`.
+   */
+  getReposOwnerRepoCollaboratorsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List.
@@ -163,75 +246,114 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCollaborators(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoCollaboratorsUser`.
+   */
+  deleteReposOwnerRepoCollaboratorsUserParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Login of the user. */
+    user: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Remove collaborator.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoCollaboratorsUser(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      user: string,  // Login of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoCollaboratorsUser`.
+   */
+  getReposOwnerRepoCollaboratorsUserParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Login of the user. */
+    user: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check if user is a collaborator
    * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoCollaboratorsUser(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      user: string,  // Login of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `putReposOwnerRepoCollaboratorsUser`.
+   */
+  putReposOwnerRepoCollaboratorsUserParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Login of the user. */
+    user: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Add collaborator.
    * Response generated for [ 204 ] HTTP response code.
    */
   putReposOwnerRepoCollaboratorsUser(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      user: string,  // Login of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoComments`.
+   */
+  getReposOwnerRepoCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List commit comments for a repository.
@@ -240,99 +362,153 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoComments>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoCommentsCommentId`.
+   */
+  deleteReposOwnerRepoCommentsCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a commit comment
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoCommentsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoCommentsCommentId`.
+   */
+  getReposOwnerRepoCommentsCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single commit comment.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommentsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoCommentsCommentId`.
+   */
+  patchReposOwnerRepoCommentsCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.CommentBody,
+  };
 
   /**
    * Update a commit comment.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoCommentsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoCommits`.
+   */
+  getReposOwnerRepoCommitsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    since?: string,
+    /**  (optional) Sha or branch to start listing commits from. */
+    sha?: string,
+    /**  (optional) Only commits containing this file path will be returned. */
+    path?: string,
+    /**  (optional) GitHub login, name, or email by which to filter by commit author. */
+    author?: string,
+    /**  (optional) ISO 8601 Date - Only commits before this date will be returned. */
+    until?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List commits on a repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommits(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      sha?: string,  // (optional) Sha or branch to start listing commits from.
-      path?: string,  // (optional) Only commits containing this file path will be returned.
-      author?: string,  // (optional) GitHub login, name, or email by which to filter by commit author.
-      until?: string,  // (optional) ISO 8601 Date - Only commits before this date will be returned.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commits>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoCommitsRefStatus`.
+   */
+  getReposOwnerRepoCommitsRefStatusParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    ref: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get the combined Status for a specific Ref
@@ -343,97 +519,146 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsRefStatus(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RefStatus>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoCommitsShaCode`.
+   */
+  getReposOwnerRepoCommitsShaCodeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  SHA-1 code of the commit. */
+    shaCode: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single commit.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code of the commit.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commit>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoCommitsShaCodeComments`.
+   */
+  getReposOwnerRepoCommitsShaCodeCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  SHA-1 code of the commit. */
+    shaCode: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List comments for a single commitList comments for a single commit.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsShaCodeComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code of the commit.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoComments>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoCommitsShaCodeComments`.
+   */
+  postReposOwnerRepoCommitsShaCodeCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  SHA-1 code of the commit. */
+    shaCode: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.CommitBody,
+  };
 
   /**
    * Create a commit comment.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoCommitsShaCodeComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code of the commit.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommitBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoCompareBaseIdHeadId`.
+   */
+  getReposOwnerRepoCompareBaseIdHeadIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    baseId: string,
+    headId: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Compare two commits
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCompareBaseIdHeadId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      baseId: string,
-      headId: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CompareCommits>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoContentsPath`.
+   */
+  deleteReposOwnerRepoContentsPathParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    path: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.DeleteFileBody,
+  };
 
   /**
    * Delete a file.
@@ -442,20 +667,32 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteReposOwnerRepoContentsPath(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      path: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.DeleteFileBody,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeleteFile>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoContentsPath`.
+   */
+  getReposOwnerRepoContentsPathParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    path: string,
+    /**  (optional) The content path. */
+    queryPath?: string,
+    /**  (optional) The String name of the Commit/Branch/Tag. Defaults to 'master'. */
+    ref?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get contents.
@@ -468,116 +705,172 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoContentsPath(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      path: string,
-      queryPath?: string,  // (optional) The content path.
-      ref?: string,  // (optional) The String name of the Commit/Branch/Tag. Defaults to 'master'.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContentsPath>;
+
+  /**
+   * Arguments object for method `putReposOwnerRepoContentsPath`.
+   */
+  putReposOwnerRepoContentsPathParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    path: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.CreateFileBody,
+  };
 
   /**
    * Create a file.
    * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoContentsPath(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      path: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CreateFileBody,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CreateFile>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoContributors`.
+   */
+  getReposOwnerRepoContributorsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Set to 1 or true to include anonymous contributors in results. */
+    anon: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get list of contributors.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoContributors(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      anon: string,  // Set to 1 or true to include anonymous contributors in results.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Contributors>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoDeployments`.
+   */
+  getReposOwnerRepoDeploymentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Users with pull access can view deployments for a repository
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDeployments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoDeployments>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoDeployments`.
+   */
+  postReposOwnerRepoDeploymentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.Deployment,
+  };
 
   /**
    * Users with push access can create a deployment for a given ref
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoDeployments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Deployment,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeploymentResp>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoDeploymentsIdStatuses`.
+   */
+  getReposOwnerRepoDeploymentsIdStatusesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  The Deployment ID to list the statuses from. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Users with pull access can view deployment statuses for a deployment
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDeploymentsIdStatuses(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: number,  // The Deployment ID to list the statuses from.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeploymentStatuses>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoDeploymentsIdStatuses`.
+   */
+  postReposOwnerRepoDeploymentsIdStatusesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  The Deployment ID to list the statuses from. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.DeploymentStatusesCreate,
+  };
 
   /**
    * Create a Deployment Status
@@ -586,113 +879,168 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoDeploymentsIdStatuses(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: number,  // The Deployment ID to list the statuses from.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.DeploymentStatusesCreate,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoDownloads`.
+   */
+  getReposOwnerRepoDownloadsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Deprecated. List downloads for a repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDownloads(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Downloads>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoDownloadsDownloadId`.
+   */
+  deleteReposOwnerRepoDownloadsDownloadIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of download. */
+    downloadId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Deprecated. Delete a download.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoDownloadsDownloadId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      downloadId: number,  // Id of download.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoDownloadsDownloadId`.
+   */
+  getReposOwnerRepoDownloadsDownloadIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of download. */
+    downloadId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Deprecated. Get a single download.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDownloadsDownloadId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      downloadId: number,  // Id of download.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Downloads>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoEvents`.
+   */
+  getReposOwnerRepoEventsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get list of repository events.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoEvents(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoForks`.
+   */
+  getReposOwnerRepoForksParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    sort?: ('newes' | 'oldes' | 'watchers'),
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List forks.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoForks(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      sort?: ('newes' | 'oldes' | 'watchers'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Forks>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoForks`.
+   */
+  postReposOwnerRepoForksParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.ForkBody,
+  };
 
   /**
    * Create a fork.
@@ -703,38 +1051,57 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoForks(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.ForkBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Fork>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoGitBlobs`.
+   */
+  postReposOwnerRepoGitBlobsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.Blob,
+  };
 
   /**
    * Create a Blob.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitBlobs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Blob,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blobs>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoGitBlobsShaCode`.
+   */
+  getReposOwnerRepoGitBlobsShaCodeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  SHA-1 code. */
+    shaCode: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a Blob.
@@ -746,94 +1113,140 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitBlobsShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blob>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoGitCommits`.
+   */
+  postReposOwnerRepoGitCommitsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.RepoCommitBody,
+  };
 
   /**
    * Create a Commit.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitCommits(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.RepoCommitBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.GitCommit>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoGitCommitsShaCode`.
+   */
+  getReposOwnerRepoGitCommitsShaCodeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  SHA-1 code. */
+    shaCode: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a Commit.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitCommitsShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoCommit>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoGitRefs`.
+   */
+  getReposOwnerRepoGitRefsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get all References
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitRefs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Refs>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoGitRefs`.
+   */
+  postReposOwnerRepoGitRefsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.RefsBody,
+  };
 
   /**
    * Create a Reference
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitRefs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.RefsBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoGitRefsRef`.
+   */
+  deleteReposOwnerRepoGitRefsRefParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    ref: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a Reference
@@ -843,58 +1256,85 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoGitRefsRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoGitRefsRef`.
+   */
+  getReposOwnerRepoGitRefsRefParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    ref: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a Reference
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitRefsRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoGitRefsRef`.
+   */
+  patchReposOwnerRepoGitRefsRefParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    ref: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.GitRefPatch,
+  };
 
   /**
    * Update a Reference
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoGitRefsRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.GitRefPatch,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoGitTags`.
+   */
+  postReposOwnerRepoGitTagsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.Tag,
+  };
 
   /**
    * Create a Tag Object.
@@ -907,38 +1347,56 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTags(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Tag,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tags>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoGitTagsShaCode`.
+   */
+  getReposOwnerRepoGitTagsShaCodeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    shaCode: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a Tag.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitTagsShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tag>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoGitTrees`.
+   */
+  postReposOwnerRepoGitTreesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.Tree,
+  };
 
   /**
    * Create a Tree.
@@ -949,134 +1407,203 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTrees(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Tree,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Trees>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoGitTreesShaCode`.
+   */
+  getReposOwnerRepoGitTreesShaCodeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Tree SHA. */
+    shaCode: string,
+    /**  (optional) Get a Tree Recursively. (0 or 1) */
+    recursive?: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a Tree.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitTreesShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // Tree SHA.
-      recursive?: number,  // (optional) Get a Tree Recursively. (0 or 1)
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tree>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoHooks`.
+   */
+  getReposOwnerRepoHooksParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get list of hooks.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoHooks(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoHooks`.
+   */
+  postReposOwnerRepoHooksParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.HookBody,
+  };
 
   /**
    * Create a hook.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoHooks(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.HookBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoHooksHookId`.
+   */
+  deleteReposOwnerRepoHooksHookIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of hook. */
+    hookId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a hook.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoHooksHookId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      hookId: number,  // Id of hook.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoHooksHookId`.
+   */
+  getReposOwnerRepoHooksHookIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of hook. */
+    hookId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get single hook.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoHooksHookId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      hookId: number,  // Id of hook.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoHooksHookId`.
+   */
+  patchReposOwnerRepoHooksHookIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of hook. */
+    hookId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.HookBody,
+  };
 
   /**
    * Edit a hook.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoHooksHookId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      hookId: number,  // Id of hook.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.HookBody,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoHooksHookIdTests`.
+   */
+  postReposOwnerRepoHooksHookIdTestsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of hook. */
+    hookId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Test a push hook.
@@ -1089,43 +1616,64 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   postReposOwnerRepoHooksHookIdTests(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      hookId: number,  // Id of hook.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssues`.
+   */
+  getReposOwnerRepoIssuesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see  */
+    filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),
+    state: ('open' | 'closed'),
+    /**  String list of comma separated Label names. Example - bug,ui,@high. */
+    labels: string,
+    sort: ('created' | 'updated' | 'comments'),
+    direction: ('asc' | 'desc'),
+    /**  (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List issues for a repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssues(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: ('open' | 'closed'),
-      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: ('created' | 'updated' | 'comments'),
-      direction: ('asc' | 'desc'),
-      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoIssues`.
+   */
+  postReposOwnerRepoIssuesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.Issue,
+  };
 
   /**
    * Create an issue.
@@ -1134,154 +1682,235 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssues(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Issue,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssuesComments`.
+   */
+  getReposOwnerRepoIssuesCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) Ignored without 'sort' parameter. */
+    direction?: string,
+    sort?: ('created' | 'updated'),
+    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List comments in a repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: ('created' | 'updated'),
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoIssuesCommentId`.
+   */
+  deleteReposOwnerRepoIssuesCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  ID of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a comment.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // ID of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssuesCommentId`.
+   */
+  getReposOwnerRepoIssuesCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  ID of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single comment.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // ID of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoIssuesCommentId`.
+   */
+  patchReposOwnerRepoIssuesCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  ID of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.CommentBody,
+  };
 
   /**
    * Edit a comment.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoIssuesCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // ID of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssuesEvents`.
+   */
+  getReposOwnerRepoIssuesEventsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List issue events for a repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesEvents(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssuesEventId`.
+   */
+  getReposOwnerRepoIssuesEventIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of the event. */
+    eventId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single event.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesEventId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      eventId: number,  // Id of the event.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Event>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssuesNumber`.
+   */
+  getReposOwnerRepoIssuesNumberParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single issue
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoIssuesNumber`.
+   */
+  patchReposOwnerRepoIssuesNumberParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.Issue,
+  };
 
   /**
    * Edit an issue.
@@ -1290,136 +1919,206 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoIssuesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Issue,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssuesNumberComments`.
+   */
+  getReposOwnerRepoIssuesNumberCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List comments on an issue.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoIssuesNumberComments`.
+   */
+  postReposOwnerRepoIssuesNumberCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.CommentBody,
+  };
 
   /**
    * Create a comment.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssuesNumberComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssuesNumberEvents`.
+   */
+  getReposOwnerRepoIssuesNumberEventsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List events for an issue.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberEvents(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoIssuesNumberLabels`.
+   */
+  deleteReposOwnerRepoIssuesNumberLabelsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Remove all labels from an issue.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoIssuesNumberLabels`.
+   */
+  getReposOwnerRepoIssuesNumberLabelsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List labels on an issue.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoIssuesNumberLabels`.
+   */
+  postReposOwnerRepoIssuesNumberLabelsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.EmailsPost,
+  };
 
   /**
    * Add labels to an issue.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssuesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label>;
+
+  /**
+   * Arguments object for method `putReposOwnerRepoIssuesNumberLabels`.
+   */
+  putReposOwnerRepoIssuesNumberLabelsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.EmailsPost,
+  };
 
   /**
    * Replace all labels for an issue.
@@ -1428,210 +2127,314 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   putReposOwnerRepoIssuesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoIssuesNumberLabelsName`.
+   */
+  deleteReposOwnerRepoIssuesNumberLabelsNameParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of issue. */
+    number: number,
+    /**  Name of the label. */
+    name: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Remove a label from an issue.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesNumberLabelsName(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      name: string,  // Name of the label.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoKeys`.
+   */
+  getReposOwnerRepoKeysParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get list of keys.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoKeys(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Keys>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoKeys`.
+   */
+  postReposOwnerRepoKeysParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.UserKeysPost,
+  };
 
   /**
    * Create a key.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoKeys(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.UserKeysPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoKeysKeyId`.
+   */
+  deleteReposOwnerRepoKeysKeyIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of key. */
+    keyId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a key.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoKeysKeyId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      keyId: number,  // Id of key.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoKeysKeyId`.
+   */
+  getReposOwnerRepoKeysKeyIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of key. */
+    keyId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a key
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoKeysKeyId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      keyId: number,  // Id of key.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoLabels`.
+   */
+  getReposOwnerRepoLabelsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List all labels for this repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoLabels`.
+   */
+  postReposOwnerRepoLabelsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.EmailsPost,
+  };
 
   /**
    * Create a label.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoLabelsName`.
+   */
+  deleteReposOwnerRepoLabelsNameParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Name of the label. */
+    name: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a label.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoLabelsName(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      name: string,  // Name of the label.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoLabelsName`.
+   */
+  getReposOwnerRepoLabelsNameParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Name of the label. */
+    name: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single label.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLabelsName(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      name: string,  // Name of the label.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoLabelsName`.
+   */
+  patchReposOwnerRepoLabelsNameParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Name of the label. */
+    name: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.EmailsPost,
+  };
 
   /**
    * Update a label.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoLabelsName(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      name: string,  // Name of the label.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoLanguages`.
+   */
+  getReposOwnerRepoLanguagesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List languages.
@@ -1641,154 +2444,238 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLanguages(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Languages>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoMerges`.
+   */
+  postReposOwnerRepoMergesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.MergesBody,
+  };
 
   /**
    * Perform a merge.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoMerges(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.MergesBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.MergesSuccessful>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoMilestones`.
+   */
+  getReposOwnerRepoMilestonesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) String to filter by state. */
+    state?: ('open' | 'closed'),
+    /**  (optional) Ignored without 'sort' parameter. */
+    direction?: string,
+    sort?: ('due_date' | 'completeness'),
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List milestones for a repository.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestones(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      state?: ('open' | 'closed'),  // (optional) String to filter by state.
-      direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: ('due_date' | 'completeness'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoMilestones`.
+   */
+  postReposOwnerRepoMilestonesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.MilestoneUpdate,
+  };
 
   /**
    * Create a milestone.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoMilestones(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.MilestoneUpdate,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoMilestonesNumber`.
+   */
+  deleteReposOwnerRepoMilestonesNumberParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of milestone. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a milestone.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoMilestonesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of milestone.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoMilestonesNumber`.
+   */
+  getReposOwnerRepoMilestonesNumberParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of milestone. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single milestone.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestonesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of milestone.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoMilestonesNumber`.
+   */
+  patchReposOwnerRepoMilestonesNumberParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of milestone. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.MilestoneUpdate,
+  };
 
   /**
    * Update a milestone.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoMilestonesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of milestone.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.MilestoneUpdate,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoMilestonesNumberLabels`.
+   */
+  getReposOwnerRepoMilestonesNumberLabelsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Number of milestone. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get labels for every issue in a milestone.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestonesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of milestone.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoNotifications`.
+   */
+  getReposOwnerRepoNotificationsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) True to show notifications marked as read. */
+    all?: boolean,
+    /**  (optional) True to show only notifications in which the user is directly participating or mentioned.  */
+    participating?: boolean,
+    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List your notifications in a repository
@@ -1797,21 +2684,28 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoNotifications(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      all?: boolean,  // (optional) True to show notifications marked as read.
-      participating?: boolean,  // (optional) True to show only notifications in which the user is directly participating or mentioned. 
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications>;
+
+  /**
+   * Arguments object for method `putReposOwnerRepoNotifications`.
+   */
+  putReposOwnerRepoNotificationsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.NotificationMarkRead,
+  };
 
   /**
    * Mark notifications as read in a repository.
@@ -1821,59 +2715,93 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 205 ] HTTP response code.
    */
   putReposOwnerRepoNotifications(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.NotificationMarkRead,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoPulls`.
+   */
+  getReposOwnerRepoPullsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) String to filter by state. */
+    state?: ('open' | 'closed'),
+    /**  (optional) Filter pulls by head user and branch name in the format of 'user:ref-name'. Example: github:new-script-format.  */
+    head?: string,
+    /**  (optional) Filter pulls by base branch name. Example - gh-pages. */
+    base?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List pull requests.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPulls(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      state?: ('open' | 'closed'),  // (optional) String to filter by state.
-      head?: string,  // (optional) Filter pulls by head user and branch name in the format of 'user:ref-name'. Example: github:new-script-format. 
-      base?: string,  // (optional) Filter pulls by base branch name. Example - gh-pages.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoPulls`.
+   */
+  postReposOwnerRepoPullsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.PullsPost,
+  };
 
   /**
    * Create a pull request.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoPulls(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PullsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoPullsComments`.
+   */
+  getReposOwnerRepoPullsCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) Ignored without 'sort' parameter. */
+    direction?: string,
+    sort?: ('created' | 'updated'),
+    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List comments in a repository.
@@ -1882,137 +2810,206 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: ('created' | 'updated'),
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoPullsCommentId`.
+   */
+  deleteReposOwnerRepoPullsCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a comment.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoPullsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoPullsCommentId`.
+   */
+  getReposOwnerRepoPullsCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single comment.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoPullsCommentId`.
+   */
+  patchReposOwnerRepoPullsCommentIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.CommentBody,
+  };
 
   /**
    * Edit a comment.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoPullsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoPullsNumber`.
+   */
+  getReposOwnerRepoPullsNumberParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of pull. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single pull request.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullRequest>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoPullsNumber`.
+   */
+  patchReposOwnerRepoPullsNumberParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of pull. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.PullUpdate,
+  };
 
   /**
    * Update a pull request.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoPullsNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PullUpdate,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoPullsNumberComments`.
+   */
+  getReposOwnerRepoPullsNumberCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of pull. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List comments on a pull request.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoPullsNumberComments`.
+   */
+  postReposOwnerRepoPullsNumberCommentsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of pull. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.PullsCommentPost,
+  };
 
   /**
    * Create a comment.
@@ -2041,97 +3038,146 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoPullsNumberComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PullsCommentPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoPullsNumberCommits`.
+   */
+  getReposOwnerRepoPullsNumberCommitsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of pull. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List commits on a pull request.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberCommits(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commits>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoPullsNumberFiles`.
+   */
+  getReposOwnerRepoPullsNumberFilesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of pull. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List pull requests files.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberFiles(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoPullsNumberMerge`.
+   */
+  getReposOwnerRepoPullsNumberMergeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of pull. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get if a pull request has been merged.
    * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberMerge(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `putReposOwnerRepoPullsNumberMerge`.
+   */
+  putReposOwnerRepoPullsNumberMergeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Id of pull. */
+    number: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.MergePullBody,
+  };
 
   /**
    * Merge a pull request (Merge Button's)
    * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoPullsNumberMerge(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.MergePullBody,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Merge>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoReadme`.
+   */
+  getReposOwnerRepoReadmeParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) The String name of the Commit/Branch/Tag. Defaults to master. */
+    ref?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get the README.
@@ -2140,37 +3186,55 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReadme(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref?: string,  // (optional) The String name of the Commit/Branch/Tag. Defaults to master.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContentsPath>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoReleases`.
+   */
+  getReposOwnerRepoReleasesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Users with push access to the repository will receive all releases (i.e., published releases and draft releases). Users with pull access will receive published releases only
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleases(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Releases>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoReleases`.
+   */
+  postReposOwnerRepoReleasesParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.ReleaseCreate,
+  };
 
   /**
    * Create a release
@@ -2179,57 +3243,85 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoReleases(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.ReleaseCreate,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoReleasesAssetsId`.
+   */
+  deleteReposOwnerRepoReleasesAssetsIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    id: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a release asset
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoReleasesAssetsId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoReleasesAssetsId`.
+   */
+  getReposOwnerRepoReleasesAssetsIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    id: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single release asset
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesAssetsId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Asset>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoReleasesAssetsId`.
+   */
+  patchReposOwnerRepoReleasesAssetsIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    id: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.AssetPatch,
+  };
 
   /**
    * Edit a release asset
@@ -2238,115 +3330,167 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoReleasesAssetsId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.AssetPatch,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Asset>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoReleasesId`.
+   */
+  deleteReposOwnerRepoReleasesIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    id: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Users with push access to the repository can delete a release.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoReleasesId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoReleasesId`.
+   */
+  getReposOwnerRepoReleasesIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    id: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single release
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release>;
+
+  /**
+   * Arguments object for method `patchReposOwnerRepoReleasesId`.
+   */
+  patchReposOwnerRepoReleasesIdParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    id: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.ReleaseCreate,
+  };
 
   /**
    * Users with push access to the repository can edit a release
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoReleasesId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.ReleaseCreate,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoReleasesIdAssets`.
+   */
+  getReposOwnerRepoReleasesIdAssetsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    id: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List assets for a release
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesIdAssets(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Assets>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoStargazers`.
+   */
+  getReposOwnerRepoStargazersParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List Stargazers.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStargazers(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoStatsCodeFrequency`.
+   */
+  getReposOwnerRepoStatsCodeFrequencyParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get the number of additions and deletions per week.
@@ -2356,18 +3500,27 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCodeFrequency(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoStatsCommitActivity`.
+   */
+  getReposOwnerRepoStatsCommitActivityParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get the last year of commit activity data.
@@ -2377,54 +3530,81 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCommitActivity(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitActivityStats>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoStatsContributors`.
+   */
+  getReposOwnerRepoStatsContributorsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get contributors list with additions, deletions, and commit counts.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsContributors(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContributorsStats>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoStatsParticipation`.
+   */
+  getReposOwnerRepoStatsParticipationParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get the weekly commit count for the repo owner and everyone else.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsParticipation(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ParticipationStats>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoStatsPunchCard`.
+   */
+  getReposOwnerRepoStatsPunchCardParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get the number of commits per hour in each day.
@@ -2441,184 +3621,279 @@ export interface ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsPunchCard(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoStatusesRef`.
+   */
+  getReposOwnerRepoStatusesRefParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.  */
+    ref: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List Statuses for a specific Ref.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatusesRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,  // Ref to list the statuses from. It can be a SHA, a branch name, or a tag name. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Ref>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoStatusesRef`.
+   */
+  postReposOwnerRepoStatusesRefParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.  */
+    ref: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.HeadBranch,
+  };
 
   /**
    * Create a Status.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoStatusesRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,  // Ref to list the statuses from. It can be a SHA, a branch name, or a tag name. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.HeadBranch,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Ref>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoSubscribers`.
+   */
+  getReposOwnerRepoSubscribersParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List watchers.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoSubscribers(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `deleteReposOwnerRepoSubscription`.
+   */
+  deleteReposOwnerRepoSubscriptionParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a Repository Subscription.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoSubscription(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoSubscription`.
+   */
+  getReposOwnerRepoSubscriptionParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a Repository Subscription.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoSubscription(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscribition>;
+
+  /**
+   * Arguments object for method `putReposOwnerRepoSubscription`.
+   */
+  putReposOwnerRepoSubscriptionParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.SubscribitionBody,
+  };
 
   /**
    * Set a Repository Subscription
    * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoSubscription(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.SubscribitionBody,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscribition>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoTags`.
+   */
+  getReposOwnerRepoTagsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get list of tags.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoTags(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tags>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoTeams`.
+   */
+  getReposOwnerRepoTeamsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get list of teams
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoTeams(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Teams>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoWatchers`.
+   */
+  getReposOwnerRepoWatchersParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List Stargazers. New implementation.
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoWatchers(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoArchiveFormatPath`.
+   */
+  getReposOwnerRepoArchiveFormatPathParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    archiveFormat: ('tarball' | 'zipball'),
+    /**  Valid Git reference, defaults to 'master'. */
+    path: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get archive link.
@@ -2631,18 +3906,7 @@ export interface ReposAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   getReposOwnerRepoArchiveFormatPath(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      archiveFormat: ('tarball' | 'zipball'),
-      path: string,  // Valid Git reference, defaults to 'master'.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
 

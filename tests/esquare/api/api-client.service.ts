@@ -54,9 +54,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   auth(
-    args: {
-      body: models.AuthForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['authParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/auth`;
@@ -87,9 +85,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   passwordRestoreRequest(
-    args: {
-      body: models.RestoreForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/restore`;
@@ -105,9 +101,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   passwordRestoreEmailRequest(
-    args: {
-      body: models.RestoreRequestForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/restore/request`;
@@ -123,9 +117,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   passwordRestoreCheckRestoreGuid(
-    args: {
-      restoreGuid: string,  // RestoreGuid for check
-    },
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/restore/checkGuid`;
@@ -176,9 +168,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   addStructureEntity(
-    args: {
-      body: models.StructureAddParameters,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure> {
     const path = `/structure`;
@@ -194,10 +184,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   updateStructureEntity(
-    args: {
-      structureId: number,  // structure id to update
-      body: models.StructureForm,  // Structure entity object that needs to be updated
-    },
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure> {
     const path = `/structure/${args.structureId}`;
@@ -213,9 +200,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteStructureEntity(
-    args: {
-      structureId: number,  // structure id to delete
-    },
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/structure/${args.structureId}`;
@@ -233,13 +218,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReportsList(
-    args: {
-      status?: models.Status,  // (optional) - 1 Pending - 2 InProgress - 3 Complete 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('id' | 'title' | 'subtitle' | 'criticality' | 'status' | 'issues' | 'deadline'),  // id | title | subtitle | criticality | status | issues | deadline
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/report`;
@@ -272,9 +251,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReportDetails(
-    args: {
-      id: number,  // report id to get
-    },
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ReportItem[]> {
     const path = `/report/${args.id}`;
@@ -292,13 +269,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReportPreview(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-      pageSize: number,
-      page: number,  // page number
-      orderBy?: number,  // (optional) column id
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/report/preview/${args.templateId}`;
@@ -328,9 +299,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getImportHistory(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-    },
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportHistoryItem[]> {
     const path = `/report/history/${args.templateId}`;
@@ -348,10 +317,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   uploadFile(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-      file: File,  // file to upload
-    },
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<number> {
     const path = `/report/wizard/uploadfile/${args.templateId}`;
@@ -374,9 +340,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   listTemplateColumns(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-    },
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]> {
     const path = `/report/wizard/${args.templateId}/templateColumns`;
@@ -394,9 +358,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   listReportColumns(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]> {
     const path = `/report/wizard/${args.id}/reportColumns`;
@@ -414,10 +376,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   saveColumnsMapping(
-    args: {
-      id: number,  // Id of current import
-      body: models.ColumnMapping[],  // Column mappint for current import
-    },
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Table> {
     const path = `/report/wizard/${args.id}/mapping`;
@@ -435,9 +394,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getValidationTable(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ValidatedTable> {
     const path = `/report/wizard/${args.id}/validationTable`;
@@ -455,10 +412,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportedFile(
-    args: {
-      id: number,  // Id of current import
-      all?: boolean,  // (optional) Indicator of downloading data(all or errors only)
-    },
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     const path = `/report/wizard/${args.id}/downloadImported`;
@@ -480,9 +434,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   importConfirmation(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportResponse> {
     const path = `/report/wizard/${args.id}/import`;
@@ -500,9 +452,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportOriginalFile(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     const path = `/report/wizard/${args.id}/downloadOriginal`;
@@ -521,9 +471,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   downloadImportSkippedFile(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     const path = `/report/wizard/${args.id}/downloadSkipped`;
@@ -542,9 +490,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   cancelImport(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/report/wizard/${args.id}/cancelImport`;
@@ -562,11 +508,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   overrideImport(
-    args: {
-      id: number,  // Id of current import
-      description: string,  // description of override request
-      file: File,  // file to upload
-    },
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/report/wizard/${args.id}/override`;
@@ -592,9 +534,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   geImportStats(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-    },
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.TotalImportStats> {
     const path = `/report/ministry/statistic`;
@@ -615,14 +555,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getIssuesList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.IssueStatus,  // (optional) - 1 Pending - 2 Resolved 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'school' | 'dueDate' | 'alert'),  // name | school | dueDate | alert
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/report/ministry/issues`;
@@ -658,14 +591,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getStatusesList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),  // name | issues | dueDate | progress
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/report/ministry/statuses`;
@@ -699,16 +625,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),  // name | issues | dueDate | progress
-      order?: models.Order,  // (optional) - asc - desc 
-      assignedToRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9yal)
-      unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
-    },
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/users`;
@@ -748,9 +665,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   createUser(
-    args: {
-      body: models.UserDetails,  // User entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails> {
     const path = `/users`;
@@ -781,9 +696,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserDetails(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails[]> {
     const path = `/users/${args.id}`;
@@ -799,10 +712,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   updateUser(
-    args: {
-      id: number,
-      body: models.UserDetails,  // User entity object that needs to be updated
-    },
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails> {
     const path = `/users/${args.id}`;
@@ -818,9 +728,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteUser(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/${args.id}`;
@@ -853,9 +761,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   createRole(
-    args: {
-      body: object,  // Role entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
     const path = `/users/roles`;
@@ -888,9 +794,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getRoleDetails(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem[]> {
     const path = `/users/roles/${args.id}`;
@@ -906,10 +810,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   updateRole(
-    args: {
-      id: number,
-      body?: models.RoleUpdateDetails,
-    },
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
     const path = `/users/roles/${args.id}`;
@@ -925,9 +826,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteRole(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/roles/${args.id}`;
@@ -960,9 +859,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   markViewedNotifications(
-    args: {
-      body?: number[],
-    },
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/notifications/markAsViewed`;
@@ -980,12 +877,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsList(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'description' | 'priority' | 'date'),  // name | description | priority | date
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/notifications/all`;
@@ -1050,13 +942,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getModuleNotificationsList(
-    args: {
-      moduleId: number,
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'description' | 'priority' | 'date'),  // name | description | priority | date
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/notifications/modules/${args.moduleId}`;
@@ -1084,9 +970,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   enableNotification(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/notifications/enable/${args.id}`;
@@ -1102,9 +986,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   disableNotification(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/notifications/disable/${args.id}`;
@@ -1120,9 +1002,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotification(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationEditableListItem> {
     const path = `/notifications/${args.id}`;
@@ -1138,10 +1018,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   updateNotification(
-    args: {
-      id: number,
-      body?: models.NotificationEditable,
-    },
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/notifications/${args.id}`;
@@ -1157,9 +1034,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   createNotification(
-    args: {
-      body?: models.NotificationEditable,
-    },
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<number> {
     const path = `/notifications`;
@@ -1194,9 +1069,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udatePassVerificationPolicies(
-    args: {
-      body?: models.PasswordVerificationPolicies,
-    },
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordVerificationPolicies> {
     const path = `/security-policy/password-verification`;
@@ -1231,9 +1104,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udatePassCreationPolicies(
-    args: {
-      body?: models.PasswordCreationPolicies,
-    },
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordCreationPolicies> {
     const path = `/security-policy/password-creation`;
@@ -1268,9 +1139,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udateOtherSecuritySettings(
-    args: {
-      body?: models.OtherSecuritySettings,
-    },
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.OtherSecuritySettings> {
     const path = `/security-policy/other-settings`;

@@ -24,33 +24,48 @@ export interface DashboardAPIClientInterface {
   ): Observable<models.WidgetTypeViewModel[]>;
 
   /**
+   * Arguments object for method `get`.
+   */
+  getParams?: {
+    dashboardId: number,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   get(
-    args: {
-      dashboardId: number,
-    },
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DashboardViewModel>;
+
+  /**
+   * Arguments object for method `getSettings`.
+   */
+  getSettingsParams?: {
+    dashboardId: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getSettings(
-    args: {
-      dashboardId: number,
-    },
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RowModel[]>;
+
+  /**
+   * Arguments object for method `putSettings`.
+   */
+  putSettingsParams?: {
+    dashboardId: number,
+    rows: models.RowModel[],
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   putSettings(
-    args: {
-      dashboardId: number,
-      rows: models.RowModel[],
-    },
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
 

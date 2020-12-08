@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, RepositoriesAPIClient } from './repositories-api-client.service';
+import { RepositoriesAPIClientInterface } from './repositories-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedRepositoriesAPIClient extends RepositoriesAPIClient {
+export class GuardedRepositoriesAPIClient extends RepositoriesAPIClient implements RepositoriesAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,15 +30,7 @@ export class GuardedRepositoriesAPIClient extends RepositoriesAPIClient {
   }
 
   getRepositories(
-    args: {
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repositories> {
     return super.getRepositories(args, requestHttpOptions)

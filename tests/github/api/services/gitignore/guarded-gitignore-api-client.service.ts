@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, GitignoreAPIClient } from './gitignore-api-client.service';
+import { GitignoreAPIClientInterface } from './gitignore-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedGitignoreAPIClient extends GitignoreAPIClient {
+export class GuardedGitignoreAPIClient extends GitignoreAPIClient implements GitignoreAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,14 +30,7 @@ export class GuardedGitignoreAPIClient extends GitignoreAPIClient {
   }
 
   getGitignoreTemplates(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getGitignoreTemplates(args, requestHttpOptions)
@@ -44,15 +38,7 @@ export class GuardedGitignoreAPIClient extends GitignoreAPIClient {
   }
 
   getGitignoreTemplatesLanguage(
-    args: {
-      language: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.GitignoreLang> {
     return super.getGitignoreTemplatesLanguage(args, requestHttpOptions)

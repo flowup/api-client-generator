@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, OrgsAPIClient } from './orgs-api-client.service';
+import { OrgsAPIClientInterface } from './orgs-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedOrgsAPIClient extends OrgsAPIClient {
+export class GuardedOrgsAPIClient extends OrgsAPIClient implements OrgsAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,15 +30,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   getOrgsOrg(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Organization> {
     return super.getOrgsOrg(args, requestHttpOptions)
@@ -45,16 +38,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   patchOrgsOrg(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PatchOrg,
-    },
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Organization> {
     return super.patchOrgsOrg(args, requestHttpOptions)
@@ -62,15 +46,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   getOrgsOrgEvents(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     return super.getOrgsOrgEvents(args, requestHttpOptions)
@@ -78,21 +54,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   getOrgsOrgIssues(
-    args: {
-      org: string,  // Name of organisation.
-      filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: ('open' | 'closed'),
-      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: ('created' | 'updated' | 'comments'),
-      direction: ('asc' | 'desc'),
-      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     return super.getOrgsOrgIssues(args, requestHttpOptions)
@@ -100,15 +62,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   getOrgsOrgMembers(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getOrgsOrgMembers(args, requestHttpOptions)
@@ -116,15 +70,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   getOrgsOrgPublicMembers(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getOrgsOrgPublicMembers(args, requestHttpOptions)
@@ -132,16 +78,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   getOrgsOrgRepos(
-    args: {
-      org: string,  // Name of organisation.
-      type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.getOrgsOrgRepos(args, requestHttpOptions)
@@ -149,16 +86,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   postOrgsOrgRepos(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PostRepo,
-    },
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.postOrgsOrgRepos(args, requestHttpOptions)
@@ -166,15 +94,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   getOrgsOrgTeams(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Teams> {
     return super.getOrgsOrgTeams(args, requestHttpOptions)
@@ -182,16 +102,7 @@ export class GuardedOrgsAPIClient extends OrgsAPIClient {
   }
 
   postOrgsOrgTeams(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.OrgTeamsPost,
-    },
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Team> {
     return super.postOrgsOrgTeams(args, requestHttpOptions)

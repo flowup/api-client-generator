@@ -69,9 +69,7 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   get(
-    args: {
-      dashboardId: number,
-    },
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DashboardViewModel> {
     const path = `/api/dashboards/${args.dashboardId}`;
@@ -87,9 +85,7 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getSettings(
-    args: {
-      dashboardId: number,
-    },
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RowModel[]> {
     const path = `/api/dashboards/${args.dashboardId}/settings`;
@@ -105,10 +101,7 @@ export class DashboardAPIClient implements DashboardAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   putSettings(
-    args: {
-      dashboardId: number,
-      rows: models.RowModel[],
-    },
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/api/dashboards/${args.dashboardId}/settings`;

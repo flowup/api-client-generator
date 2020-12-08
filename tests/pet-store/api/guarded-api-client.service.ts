@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from './types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, APIClient } from './api-client.service';
+import { APIClientInterface } from './api-client.interface';
 
 import * as models from './models';
 import * as guards from './guards';
 
 @Injectable()
-export class GuardedAPIClient extends APIClient {
+export class GuardedAPIClient extends APIClient implements APIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,9 +30,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getPetById(
-    args: {
-      petId: number,  // ID of pet to return
-    },
+    args: Exclude<APIClientInterface['getPetByIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet> {
     return super.getPetById(args, requestHttpOptions)
@@ -39,11 +38,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   uploadFile(
-    args: {
-      petId: number,  // ID of pet to update
-      additionalMetadata?: string,  // (optional) Additional data to pass to server
-      file?: File,  // (optional) file to upload
-    },
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ApiResponse> {
     return super.uploadFile(args, requestHttpOptions)
@@ -51,9 +46,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   findPetsByStatus(
-    args: {
-      status: ('available' | 'pending' | 'sold')[],  // Status values that need to be considered for filter
-    },
+    args: Exclude<APIClientInterface['findPetsByStatusParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.findPetsByStatus(args, requestHttpOptions)
@@ -61,9 +54,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   findPetsByTags(
-    args: {
-      tags: string[],  // Tags to filter by
-    },
+    args: Exclude<APIClientInterface['findPetsByTagsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.findPetsByTags(args, requestHttpOptions)
@@ -78,9 +69,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getOrderById(
-    args: {
-      orderId: number,  // ID of pet that needs to be fetched
-    },
+    args: Exclude<APIClientInterface['getOrderByIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Order> {
     return super.getOrderById(args, requestHttpOptions)
@@ -88,9 +77,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   placeOrder(
-    args: {
-      body: models.Order,  // order placed for purchasing the pet
-    },
+    args: Exclude<APIClientInterface['placeOrderParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Order> {
     return super.placeOrder(args, requestHttpOptions)
@@ -98,9 +85,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getUserByName(
-    args: {
-      username: string,  // The name that needs to be fetched. Use user1 for testing. 
-    },
+    args: Exclude<APIClientInterface['getUserByNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.User> {
     return super.getUserByName(args, requestHttpOptions)
@@ -108,10 +93,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   loginUser(
-    args: {
-      username: string,  // The user name for login
-      password: string,  // The password for login in clear text
-    },
+    args: Exclude<APIClientInterface['loginUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<string> {
     return super.loginUser(args, requestHttpOptions)

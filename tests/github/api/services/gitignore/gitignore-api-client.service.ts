@@ -57,14 +57,7 @@ export class GitignoreAPIClient implements GitignoreAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getGitignoreTemplates(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/gitignore/templates`;
@@ -99,15 +92,7 @@ export class GitignoreAPIClient implements GitignoreAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getGitignoreTemplatesLanguage(
-    args: {
-      language: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.GitignoreLang> {
     const path = `/gitignore/templates/${args.language}`;

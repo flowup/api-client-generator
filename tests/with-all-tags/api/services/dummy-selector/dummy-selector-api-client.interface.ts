@@ -17,43 +17,63 @@ import * as models from '../../models';
 export interface DummySelectorAPIClientInterface {
 
   /**
+   * Arguments object for method `get`.
+   */
+  getParams?: {
+    organizerTaskElementId: number,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   get(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorViewModel>;
+
+  /**
+   * Arguments object for method `getSettings`.
+   */
+  getSettingsParams?: {
+    organizerTaskElementId: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getSettings(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorSettings>;
+
+  /**
+   * Arguments object for method `putSettings`.
+   */
+  putSettingsParams?: {
+    organizerTaskElementId: number,
+    betriebSelectorSettings: models.DummySelectorSettings,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   putSettings(
-    args: {
-      organizerTaskElementId: number,
-      betriebSelectorSettings: models.DummySelectorSettings,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `deleteSettings`.
+   */
+  deleteSettingsParams?: {
+    organizerTaskElementId: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteSettings(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
 

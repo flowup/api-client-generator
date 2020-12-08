@@ -17,26 +17,36 @@ import * as models from '../../models';
 export interface IssuesAPIClientInterface {
 
   /**
+   * Arguments object for method `getIssues`.
+   */
+  getIssuesParams?: {
+    /**  Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see  */
+    filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),
+    state: ('open' | 'closed'),
+    /**  String list of comma separated Label names. Example - bug,ui,@high. */
+    labels: string,
+    sort: ('created' | 'updated' | 'comments'),
+    direction: ('asc' | 'desc'),
+    /**  (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * List issues.
    * List all issues across all the authenticated user's visible repositories.
    * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getIssues(
-    args: {
-      filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: ('open' | 'closed'),
-      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: ('created' | 'updated' | 'comments'),
-      direction: ('asc' | 'desc'),
-      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<IssuesAPIClientInterface['getIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues>;
 

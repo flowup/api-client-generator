@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from './types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, APIClient } from './api-client.service';
+import { APIClientInterface } from './api-client.interface';
 
 import * as models from './models';
 import * as guards from './guards';
 
 @Injectable()
-export class GuardedAPIClient extends APIClient {
+export class GuardedAPIClient extends APIClient implements APIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,10 +30,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getItems(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-    },
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ItemList> {
     return super.getItems(args, requestHttpOptions)
@@ -40,10 +38,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getItemModels(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-    },
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getItemModels(args, requestHttpOptions)
@@ -51,9 +46,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getPetsId(
-    args: {
-      id: string,
-    },
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     return super.getPetsId(args, requestHttpOptions)
@@ -75,9 +68,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getFileId(
-    args: {
-      id: string,
-    },
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.getFileId(args, requestHttpOptions)
@@ -120,17 +111,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   firestoreProjectsDatabasesDocumentsCommit(
-    args: {
-      wololo?: models.NumberEnumParam,  // (optional) - error format - 1 V1 - 2 V2 
-      alt?: models.StringEnumParam,  // (optional) Data format for response.
-      accessToken?: string,  // (optional) OAuth access token.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) should pretty print
-      simpleQueryParam?: string,
-      simpleArrayQueryParam?: number[],
-      body?: models.Data,
-      database: string,  // The database name. In the format `database:{{name}}`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Dictionary> {
     return super.firestoreProjectsDatabasesDocumentsCommit(args, requestHttpOptions)
@@ -138,12 +119,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   postReposOwnerRepoGitBlobs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      accept?: string,  // (optional) Is used to set specified media type.
-      body: models.Blob,  // Custom blob (should be imported from models)
-    },
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blob[]> {
     return super.postReposOwnerRepoGitBlobs(args, requestHttpOptions)
@@ -151,13 +127,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getReposOwnerRepoGitBlobsShaCode(
-    args: {
-      body?: models.ModelParam,
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code.
-      accept?: string,  // (optional) Is used to set specified media type.
-    },
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.getReposOwnerRepoGitBlobsShaCode(args, requestHttpOptions)

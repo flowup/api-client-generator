@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, UserAPIClient } from './user-api-client.service';
+import { UserAPIClientInterface } from './user-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedUserAPIClient extends UserAPIClient {
+export class GuardedUserAPIClient extends UserAPIClient implements UserAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,14 +30,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUser(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.User> {
     return super.getUser(args, requestHttpOptions)
@@ -44,15 +38,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   patchUser(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.UserUpdate,
-    },
+    args: Exclude<UserAPIClientInterface['patchUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.User> {
     return super.patchUser(args, requestHttpOptions)
@@ -60,14 +46,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserEmails(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserEmails> {
     return super.getUserEmails(args, requestHttpOptions)
@@ -75,14 +54,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserFollowers(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getUserFollowers(args, requestHttpOptions)
@@ -90,14 +62,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserFollowing(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getUserFollowing(args, requestHttpOptions)
@@ -105,20 +70,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserIssues(
-    args: {
-      filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: ('open' | 'closed'),
-      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: ('created' | 'updated' | 'comments'),
-      direction: ('asc' | 'desc'),
-      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     return super.getUserIssues(args, requestHttpOptions)
@@ -126,14 +78,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserKeys(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getUserKeys(args, requestHttpOptions)
@@ -141,15 +86,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   postUserKeys(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.UserKeysPost,
-    },
+    args: Exclude<UserAPIClientInterface['postUserKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     return super.postUserKeys(args, requestHttpOptions)
@@ -157,15 +94,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserKeysKeyId(
-    args: {
-      keyId: number,  // ID of key.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserKeysKeyIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     return super.getUserKeysKeyId(args, requestHttpOptions)
@@ -173,14 +102,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserOrgs(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getUserOrgs(args, requestHttpOptions)
@@ -188,15 +110,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserRepos(
-    args: {
-      type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.getUserRepos(args, requestHttpOptions)
@@ -204,15 +118,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   postUserRepos(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PostRepo,
-    },
+    args: Exclude<UserAPIClientInterface['postUserReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.postUserRepos(args, requestHttpOptions)
@@ -220,16 +126,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserStarred(
-    args: {
-      direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: ('created' | 'updated'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getUserStarred(args, requestHttpOptions)
@@ -237,14 +134,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserSubscriptions(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserIdSubscribitions> {
     return super.getUserSubscriptions(args, requestHttpOptions)
@@ -252,14 +142,7 @@ export class GuardedUserAPIClient extends UserAPIClient {
   }
 
   getUserTeams(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamsList> {
     return super.getUserTeams(args, requestHttpOptions)

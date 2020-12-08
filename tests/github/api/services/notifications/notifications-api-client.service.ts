@@ -57,17 +57,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotifications(
-    args: {
-      all?: boolean,  // (optional) True to show notifications marked as read.
-      participating?: boolean,  // (optional) True to show only notifications in which the user is directly participating or mentioned. 
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/notifications`;
@@ -113,15 +103,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * Response generated for [ 205 ] HTTP response code.
    */
   putNotifications(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.NotificationMarkRead,
-    },
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/notifications`;
@@ -156,15 +138,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsThreadsId(
-    args: {
-      id: number,  // Id of thread.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/notifications/threads/${args.id}`;
@@ -199,15 +173,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * Response generated for [ 205 ] HTTP response code.
    */
   patchNotificationsThreadsId(
-    args: {
-      id: number,  // Id of thread.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/notifications/threads/${args.id}`;
@@ -242,15 +208,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteNotificationsThreadsIdSubscription(
-    args: {
-      id: number,  // Id of thread.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/notifications/threads/${args.id}/subscription`;
@@ -285,15 +243,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotificationsThreadsIdSubscription(
-    args: {
-      id: number,  // Id of thread.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscription> {
     const path = `/notifications/threads/${args.id}/subscription`;
@@ -332,16 +282,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   putNotificationsThreadsIdSubscription(
-    args: {
-      id: number,  // Id of thread.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PutSubscription,
-    },
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscription> {
     const path = `/notifications/threads/${args.id}/subscription`;

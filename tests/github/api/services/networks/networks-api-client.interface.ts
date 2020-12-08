@@ -17,20 +17,29 @@ import * as models from '../../models';
 export interface NetworksAPIClientInterface {
 
   /**
+   * Arguments object for method `getNetworksOwnerRepoEvents`.
+   */
+  getNetworksOwnerRepoEventsParams?: {
+    /**  Name of the owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * List public events for a network of repositories.
    * Response generated for [ 200 ] HTTP response code.
    */
   getNetworksOwnerRepoEvents(
-    args: {
-      owner: string,  // Name of the owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<NetworksAPIClientInterface['getNetworksOwnerRepoEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events>;
 

@@ -17,6 +17,41 @@ import * as models from './models';
 export interface APIClientInterface {
 
   /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsBatchGet`.
+   */
+  firestoreProjectsDatabasesDocumentsBatchGetParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.BatchGetDocumentsRequest,
+    /**  The database name. In the format: `projects/{project_id}/databases/{database_id}`. */
+    database: string,
+  };
+
+  /**
    * Gets multiple documents.
    * 
    * 
@@ -25,259 +60,460 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsBatchGet(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.BatchGetDocumentsRequest,
-      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.BatchGetDocumentsResponse>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsBeginTransaction`.
+   */
+  firestoreProjectsDatabasesDocumentsBeginTransactionParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.BeginTransactionRequest,
+    /**  The database name. In the format: `projects/{project_id}/databases/{database_id}`. */
+    database: string,
+  };
 
   /**
    * Starts a new transaction.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsBeginTransaction(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.BeginTransactionRequest,
-      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.BeginTransactionResponse>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsCommit`.
+   */
+  firestoreProjectsDatabasesDocumentsCommitParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.CommitRequest,
+    /**  The database name. In the format: `projects/{project_id}/databases/{database_id}`. */
+    database: string,
+  };
 
   /**
    * Commits a transaction, while optionally updating documents.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsCommit(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.CommitRequest,
-      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitResponse>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsListen`.
+   */
+  firestoreProjectsDatabasesDocumentsListenParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.ListenRequest,
+    /**  The database name. In the format: `projects/{project_id}/databases/{database_id}`. */
+    database: string,
+  };
 
   /**
    * Listens to changes.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsListen(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.ListenRequest,
-      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListenResponse>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsRollback`.
+   */
+  firestoreProjectsDatabasesDocumentsRollbackParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.RollbackRequest,
+    /**  The database name. In the format: `projects/{project_id}/databases/{database_id}`. */
+    database: string,
+  };
 
   /**
    * Rolls back a transaction.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsRollback(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.RollbackRequest,
-      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Empty>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsWrite`.
+   */
+  firestoreProjectsDatabasesDocumentsWriteParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.WriteRequest,
+    /**  The database name. In the format: `projects/{project_id}/databases/{database_id}`. This is only required in the first message. */
+    database: string,
+  };
 
   /**
    * Streams batches of document updates and deletes, in order.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsWrite(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.WriteRequest,
-      database: string,  // The database name. In the format: `projects/{project_id}/databases/{database_id}`. This is only required in the first message.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.WriteResponse>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesIndexesDelete`.
+   */
+  firestoreProjectsDatabasesIndexesDeleteParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    /**  (optional) When set to `true`, the target document must exist. When set to `false`, the target document must not exist. */
+    currentDocumentExists?: boolean,
+    /**  (optional) When set, the target document must exist and have been last updated at that time. */
+    currentDocumentUpdateTime?: string,
+    /**  The index name. For example: `projects/{project_id}/databases/{database_id}/indexes/{index_id}` */
+    name: string,
+  };
 
   /**
    * Deletes an index.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesIndexesDelete(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      currentDocumentExists?: boolean,  // (optional) When set to `true`, the target document must exist. When set to `false`, the target document must not exist.
-      currentDocumentUpdateTime?: string,  // (optional) When set, the target document must exist and have been last updated at that time.
-      name: string,  // The index name. For example: `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Empty>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesIndexesGet`.
+   */
+  firestoreProjectsDatabasesIndexesGetParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    /**  (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference. */
+    maskFieldPaths?: string[],
+    /**  The name of the index. For example: `projects/{project_id}/databases/{database_id}/indexes/{index_id}` */
+    name: string,
+    /**  (optional) Reads the version of the document at the given time. This may not be older than 60 seconds. */
+    readTime?: string,
+    /**  (optional) Reads the document in a transaction. */
+    transaction?: string,
+  };
 
   /**
    * Gets an index.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesIndexesGet(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
-      name: string,  // The name of the index. For example: `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
-      readTime?: string,  // (optional) Reads the version of the document at the given time. This may not be older than 60 seconds.
-      transaction?: string,  // (optional) Reads the document in a transaction.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Index>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsPatch`.
+   */
+  firestoreProjectsDatabasesDocumentsPatchParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.Document,
+    /**  (optional) When set to `true`, the target document must exist. When set to `false`, the target document must not exist. */
+    currentDocumentExists?: boolean,
+    /**  (optional) When set, the target document must exist and have been last updated at that time. */
+    currentDocumentUpdateTime?: string,
+    /**  (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference. */
+    maskFieldPaths?: string[],
+    /**  The resource name of the document, for example `projects/{project_id}/databases/{database_id}/documents/{document_path}`. */
+    name: string,
+    /**  (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference. */
+    updateMaskFieldPaths?: string[],
+  };
 
   /**
    * Updates or inserts a document.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsPatch(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.Document,
-      currentDocumentExists?: boolean,  // (optional) When set to `true`, the target document must exist. When set to `false`, the target document must not exist.
-      currentDocumentUpdateTime?: string,  // (optional) When set, the target document must exist and have been last updated at that time.
-      maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
-      name: string,  // The resource name of the document, for example `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
-      updateMaskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Document>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesIndexesList`.
+   */
+  firestoreProjectsDatabasesIndexesListParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    filter?: string,
+    /**  (optional) The standard List page size. */
+    pageSize?: number,
+    /**  (optional) The standard List page token. */
+    pageToken?: string,
+    /**  The database name. For example: `projects/{project_id}/databases/{database_id}` */
+    parent: string,
+  };
 
   /**
    * Lists the indexes that match the specified filters.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesIndexesList(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      filter?: string,
-      pageSize?: number,  // (optional) The standard List page size.
-      pageToken?: string,  // (optional) The standard List page token.
-      parent: string,  // The database name. For example: `projects/{project_id}/databases/{database_id}`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListIndexesResponse>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesIndexesCreate`.
+   */
+  firestoreProjectsDatabasesIndexesCreateParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.Index,
+    /**  The name of the database this index will apply to. For example: `projects/{project_id}/databases/{database_id}` */
+    parent: string,
+  };
 
   /**
    * Creates the specified index.
@@ -298,133 +534,204 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesIndexesCreate(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.Index,
-      parent: string,  // The name of the database this index will apply to. For example: `projects/{project_id}/databases/{database_id}`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Operation>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsList`.
+   */
+  firestoreProjectsDatabasesDocumentsListParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    /**  The collection ID, relative to `parent`, to list. For example: `chatrooms` or `messages`. */
+    collectionId: string,
+    /**  (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference. */
+    maskFieldPaths?: string[],
+    /**  (optional) The order to sort results by. For example: `priority desc, name`. */
+    orderBy?: string,
+    /**  (optional) The maximum number of documents to return. */
+    pageSize?: number,
+    /**  (optional) The `next_page_token` value returned from a previous List request, if any. */
+    pageToken?: string,
+    /**  The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom` */
+    parent: string,
+    /**  (optional) Reads documents as they were at the given time. This may not be older than 60 seconds. */
+    readTime?: string,
+    /**  (optional) If the list should show missing documents. A missing document is a document that does not exist but has sub-documents. These documents will be returned with a key but will not have fields, Document.create_time, or Document.update_time set.   Requests with `show_missing` may not specify `where` or `order_by`. */
+    showMissing?: boolean,
+    /**  (optional) Reads documents in a transaction. */
+    transaction?: string,
+  };
 
   /**
    * Lists documents.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsList(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      collectionId: string,  // The collection ID, relative to `parent`, to list. For example: `chatrooms` or `messages`.
-      maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
-      orderBy?: string,  // (optional) The order to sort results by. For example: `priority desc, name`.
-      pageSize?: number,  // (optional) The maximum number of documents to return.
-      pageToken?: string,  // (optional) The `next_page_token` value returned from a previous List request, if any.
-      parent: string,  // The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
-      readTime?: string,  // (optional) Reads documents as they were at the given time. This may not be older than 60 seconds.
-      showMissing?: boolean,  // (optional) If the list should show missing documents. A missing document is a document that does not exist but has sub-documents. These documents will be returned with a key but will not have fields, Document.create_time, or Document.update_time set.   Requests with `show_missing` may not specify `where` or `order_by`.
-      transaction?: string,  // (optional) Reads documents in a transaction.
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListDocumentsResponse>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsCreateDocument`.
+   */
+  firestoreProjectsDatabasesDocumentsCreateDocumentParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.Document,
+    /**  The collection ID, relative to `parent`, to list. For example: `chatrooms`. */
+    collectionId: string,
+    /**  (optional) The client-assigned document ID to use for this document.  Optional. If not specified, an ID will be assigned by the service. */
+    documentId?: string,
+    /**  (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference. */
+    maskFieldPaths?: string[],
+    /**  The parent resource. For example: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}` */
+    parent: string,
+  };
 
   /**
    * Creates a new document.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsCreateDocument(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.Document,
-      collectionId: string,  // The collection ID, relative to `parent`, to list. For example: `chatrooms`.
-      documentId?: string,  // (optional) The client-assigned document ID to use for this document.  Optional. If not specified, an ID will be assigned by the service.
-      maskFieldPaths?: string[],  // (optional) The list of field paths in the mask. See Document.fields for a field path syntax reference.
-      parent: string,  // The parent resource. For example: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Document>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsListCollectionIds`.
+   */
+  firestoreProjectsDatabasesDocumentsListCollectionIdsParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.ListCollectionIdsRequest,
+    /**  The parent document. In the format: `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom` */
+    parent: string,
+  };
 
   /**
    * Lists all the collection IDs underneath a document.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsListCollectionIds(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.ListCollectionIdsRequest,
-      parent: string,  // The parent document. In the format: `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ListCollectionIdsResponse>;
+
+  /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsRunQuery`.
+   */
+  firestoreProjectsDatabasesDocumentsRunQueryParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    $Xgafv?: models.$Xgafv,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Data format for response. */
+    alt?: models.Alt,
+    /**  (optional) OAuth bearer token. */
+    bearerToken?: string,
+    /**  (optional) JSONP */
+    callback?: string,
+    /**  (optional) Selector specifying which fields to include in a partial response. */
+    fields?: string,
+    /**  (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. */
+    key?: string,
+    /**  (optional) OAuth 2.0 token for the current user. */
+    oauthToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) Returns response with indentations and line breaks. */
+    prettyPrint?: boolean,
+    /**  (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. */
+    quotaUser?: string,
+    /**  (optional) Legacy upload protocol for media (e.g. "media", "multipart"). */
+    uploadType?: string,
+    /**  (optional) Upload protocol for media (e.g. "raw", "multipart"). */
+    uploadProtocol?: string,
+    body?: models.RunQueryRequest,
+    /**  The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom` */
+    parent: string,
+  };
 
   /**
    * Runs a query.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsRunQuery(
-    args: {
-      $Xgafv?: models.$Xgafv,  // (optional) - error format - 1 V1 - 2 V2 
-      accessToken?: string,  // (optional) OAuth access token.
-      alt?: models.Alt,  // (optional) Data format for response.
-      bearerToken?: string,  // (optional) OAuth bearer token.
-      callback?: string,  // (optional) JSONP
-      fields?: string,  // (optional) Selector specifying which fields to include in a partial response.
-      key?: string,  // (optional) API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      oauthToken?: string,  // (optional) OAuth 2.0 token for the current user.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) Returns response with indentations and line breaks.
-      quotaUser?: string,  // (optional) Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      uploadType?: string,  // (optional) Legacy upload protocol for media (e.g. "media", "multipart").
-      uploadProtocol?: string,  // (optional) Upload protocol for media (e.g. "raw", "multipart").
-      body?: models.RunQueryRequest,
-      parent: string,  // The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RunQueryResponse>;
 

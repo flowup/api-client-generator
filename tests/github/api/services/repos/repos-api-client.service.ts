@@ -58,16 +58,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepo(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}`;
@@ -102,16 +93,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepo(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}`;
@@ -146,17 +128,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepo(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.RepoEdit,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}`;
@@ -194,16 +166,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoAssignees(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Assignees> {
     const path = `/repos/${args.owner}/${args.repo}/assignees`;
@@ -240,17 +203,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoAssigneesAssignee(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      assignee: string,  // Login of the assignee.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/assignees/${args.assignee}`;
@@ -285,16 +238,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoBranches(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Branches> {
     const path = `/repos/${args.owner}/${args.repo}/branches`;
@@ -329,17 +273,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoBranchesBranch(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      branch: string,  // Name of the branch.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Branch> {
     const path = `/repos/${args.owner}/${args.repo}/branches/${args.branch}`;
@@ -379,16 +313,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCollaborators(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators`;
@@ -423,17 +348,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoCollaboratorsUser(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      user: string,  // Login of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
@@ -468,17 +383,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoCollaboratorsUser(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      user: string,  // Login of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
@@ -513,17 +418,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   putReposOwnerRepoCollaboratorsUser(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      user: string,  // Login of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
@@ -560,16 +455,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments`;
@@ -604,17 +490,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoCommentsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
@@ -649,17 +525,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommentsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
@@ -694,18 +560,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoCommentsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
@@ -740,21 +595,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommits(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      sha?: string,  // (optional) Sha or branch to start listing commits from.
-      path?: string,  // (optional) Only commits containing this file path will be returned.
-      author?: string,  // (optional) GitHub login, name, or email by which to filter by commit author.
-      until?: string,  // (optional) ISO 8601 Date - Only commits before this date will be returned.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commits> {
     const path = `/repos/${args.owner}/${args.repo}/commits`;
@@ -808,17 +649,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsRefStatus(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RefStatus> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.ref}/status`;
@@ -853,17 +684,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code of the commit.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commit> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}`;
@@ -898,17 +719,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsShaCodeComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code of the commit.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoComments> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}/comments`;
@@ -943,18 +754,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoCommitsShaCodeComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code of the commit.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommitBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitComments> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}/comments`;
@@ -989,18 +789,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCompareBaseIdHeadId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      baseId: string,
-      headId: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CompareCommits> {
     const path = `/repos/${args.owner}/${args.repo}/compare/${args.baseId}...${args.headId}`;
@@ -1037,18 +826,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteReposOwnerRepoContentsPath(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      path: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.DeleteFileBody,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeleteFile> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
@@ -1089,19 +867,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoContentsPath(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      path: string,
-      queryPath?: string,  // (optional) The content path.
-      ref?: string,  // (optional) The String name of the Commit/Branch/Tag. Defaults to 'master'.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContentsPath> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
@@ -1142,18 +908,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoContentsPath(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      path: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CreateFileBody,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CreateFile> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
@@ -1188,17 +943,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoContributors(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      anon: string,  // Set to 1 or true to include anonymous contributors in results.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Contributors> {
     const path = `/repos/${args.owner}/${args.repo}/contributors`;
@@ -1236,16 +981,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDeployments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoDeployments> {
     const path = `/repos/${args.owner}/${args.repo}/deployments`;
@@ -1280,17 +1016,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoDeployments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Deployment,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeploymentResp> {
     const path = `/repos/${args.owner}/${args.repo}/deployments`;
@@ -1325,17 +1051,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDeploymentsIdStatuses(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: number,  // The Deployment ID to list the statuses from.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DeploymentStatuses> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
@@ -1372,18 +1088,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoDeploymentsIdStatuses(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: number,  // The Deployment ID to list the statuses from.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.DeploymentStatusesCreate,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
@@ -1418,16 +1123,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDownloads(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Downloads> {
     const path = `/repos/${args.owner}/${args.repo}/downloads`;
@@ -1462,17 +1158,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoDownloadsDownloadId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      downloadId: number,  // Id of download.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
@@ -1507,17 +1193,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoDownloadsDownloadId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      downloadId: number,  // Id of download.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Downloads> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
@@ -1552,16 +1228,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoEvents(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/events`;
@@ -1596,17 +1263,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoForks(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      sort?: ('newes' | 'oldes' | 'watchers'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Forks> {
     const path = `/repos/${args.owner}/${args.repo}/forks`;
@@ -1648,17 +1305,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoForks(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.ForkBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Fork> {
     const path = `/repos/${args.owner}/${args.repo}/forks`;
@@ -1693,17 +1340,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitBlobs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Blob,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blobs> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs`;
@@ -1743,17 +1380,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitBlobsShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blob> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs/${args.shaCode}`;
@@ -1788,17 +1415,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitCommits(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.RepoCommitBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.GitCommit> {
     const path = `/repos/${args.owner}/${args.repo}/git/commits`;
@@ -1833,17 +1450,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitCommitsShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RepoCommit> {
     const path = `/repos/${args.owner}/${args.repo}/git/commits/${args.shaCode}`;
@@ -1878,16 +1485,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitRefs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Refs> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs`;
@@ -1922,17 +1520,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitRefs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.RefsBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs`;
@@ -1970,17 +1558,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoGitRefsRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
@@ -2015,17 +1593,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitRefsRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
@@ -2060,18 +1628,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoGitRefsRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.GitRefPatch,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.HeadBranch> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
@@ -2112,17 +1669,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTags(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Tag,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tags> {
     const path = `/repos/${args.owner}/${args.repo}/git/tags`;
@@ -2157,17 +1704,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitTagsShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tag> {
     const path = `/repos/${args.owner}/${args.repo}/git/tags/${args.shaCode}`;
@@ -2206,17 +1743,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTrees(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Tree,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Trees> {
     const path = `/repos/${args.owner}/${args.repo}/git/trees`;
@@ -2251,18 +1778,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitTreesShaCode(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // Tree SHA.
-      recursive?: number,  // (optional) Get a Tree Recursively. (0 or 1)
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tree> {
     const path = `/repos/${args.owner}/${args.repo}/git/trees/${args.shaCode}`;
@@ -2300,16 +1816,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoHooks(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks`;
@@ -2344,17 +1851,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoHooks(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.HookBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks`;
@@ -2389,17 +1886,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoHooksHookId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      hookId: number,  // Id of hook.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
@@ -2434,17 +1921,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoHooksHookId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      hookId: number,  // Id of hook.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
@@ -2479,18 +1956,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoHooksHookId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      hookId: number,  // Id of hook.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.HookBody,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Hook> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
@@ -2531,17 +1997,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   postReposOwnerRepoHooksHookIdTests(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      hookId: number,  // Id of hook.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}/tests`;
@@ -2576,22 +2032,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssues(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: ('open' | 'closed'),
-      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: ('created' | 'updated' | 'comments'),
-      direction: ('asc' | 'desc'),
-      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues> {
     const path = `/repos/${args.owner}/${args.repo}/issues`;
@@ -2646,17 +2087,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssues(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Issue,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     const path = `/repos/${args.owner}/${args.repo}/issues`;
@@ -2691,19 +2122,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: ('created' | 'updated'),
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments`;
@@ -2747,17 +2166,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // ID of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
@@ -2792,17 +2201,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // ID of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
@@ -2837,18 +2236,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoIssuesCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // ID of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
@@ -2883,16 +2271,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesEvents(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/issues/events`;
@@ -2927,17 +2306,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesEventId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      eventId: number,  // Id of the event.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Event> {
     const path = `/repos/${args.owner}/${args.repo}/issues/events/${args.eventId}`;
@@ -2972,17 +2341,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}`;
@@ -3019,18 +2378,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoIssuesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Issue,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issue> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}`;
@@ -3065,17 +2413,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/comments`;
@@ -3110,18 +2448,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssuesNumberComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComment> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/comments`;
@@ -3156,17 +2483,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberEvents(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/events`;
@@ -3201,17 +2518,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
@@ -3246,17 +2553,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoIssuesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
@@ -3291,18 +2588,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssuesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
@@ -3339,18 +2625,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   putReposOwnerRepoIssuesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
@@ -3385,18 +2660,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoIssuesNumberLabelsName(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of issue.
-      name: string,  // Name of the label.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels/${args.name}`;
@@ -3431,16 +2695,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoKeys(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Keys> {
     const path = `/repos/${args.owner}/${args.repo}/keys`;
@@ -3475,17 +2730,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoKeys(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.UserKeysPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     const path = `/repos/${args.owner}/${args.repo}/keys`;
@@ -3520,17 +2765,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoKeysKeyId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      keyId: number,  // Id of key.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
@@ -3565,17 +2800,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoKeysKeyId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      keyId: number,  // Id of key.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
@@ -3610,16 +2835,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/labels`;
@@ -3654,17 +2870,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/labels`;
@@ -3699,17 +2905,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoLabelsName(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      name: string,  // Name of the label.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
@@ -3744,17 +2940,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLabelsName(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      name: string,  // Name of the label.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
@@ -3789,18 +2975,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoLabelsName(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      name: string,  // Name of the label.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Label> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
@@ -3838,16 +3013,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLanguages(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Languages> {
     const path = `/repos/${args.owner}/${args.repo}/languages`;
@@ -3882,17 +3048,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoMerges(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.MergesBody,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.MergesSuccessful> {
     const path = `/repos/${args.owner}/${args.repo}/merges`;
@@ -3927,19 +3083,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestones(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      state?: ('open' | 'closed'),  // (optional) String to filter by state.
-      direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: ('due_date' | 'completeness'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones`;
@@ -3983,17 +3127,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoMilestones(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.MilestoneUpdate,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones`;
@@ -4028,17 +3162,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoMilestonesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of milestone.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
@@ -4073,17 +3197,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestonesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of milestone.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
@@ -4118,18 +3232,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoMilestonesNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of milestone.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.MilestoneUpdate,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Milestone> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
@@ -4164,17 +3267,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoMilestonesNumberLabels(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Number of milestone.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Labels> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}/labels`;
@@ -4211,19 +3304,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoNotifications(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      all?: boolean,  // (optional) True to show notifications marked as read.
-      participating?: boolean,  // (optional) True to show only notifications in which the user is directly participating or mentioned. 
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Notifications> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
@@ -4270,17 +3351,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 205 ] HTTP response code.
    */
   putReposOwnerRepoNotifications(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.NotificationMarkRead,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
@@ -4315,19 +3386,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPulls(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      state?: ('open' | 'closed'),  // (optional) String to filter by state.
-      head?: string,  // (optional) Filter pulls by head user and branch name in the format of 'user:ref-name'. Example: github:new-script-format. 
-      base?: string,  // (optional) Filter pulls by base branch name. Example - gh-pages.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     const path = `/repos/${args.owner}/${args.repo}/pulls`;
@@ -4371,17 +3430,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoPulls(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PullsPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     const path = `/repos/${args.owner}/${args.repo}/pulls`;
@@ -4418,19 +3467,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: ('created' | 'updated'),
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.IssuesComments> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments`;
@@ -4474,17 +3511,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoPullsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
@@ -4519,17 +3546,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
@@ -4564,18 +3581,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoPullsCommentId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
@@ -4610,17 +3616,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullRequest> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}`;
@@ -4655,18 +3651,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoPullsNumber(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PullUpdate,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repo> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}`;
@@ -4701,17 +3686,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/comments`;
@@ -4768,18 +3743,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoPullsNumberComments(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PullsCommentPost,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PullsComment> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/comments`;
@@ -4814,17 +3778,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberCommits(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Commits> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/commits`;
@@ -4859,17 +3813,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberFiles(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pulls> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/files`;
@@ -4904,17 +3848,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoPullsNumberMerge(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
@@ -4949,18 +3883,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoPullsNumberMerge(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      number: number,  // Id of pull.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.MergePullBody,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Merge> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
@@ -4997,17 +3920,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReadme(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref?: string,  // (optional) The String name of the Commit/Branch/Tag. Defaults to master.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContentsPath> {
     const path = `/repos/${args.owner}/${args.repo}/readme`;
@@ -5045,16 +3958,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleases(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Releases> {
     const path = `/repos/${args.owner}/${args.repo}/releases`;
@@ -5091,17 +3995,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoReleases(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.ReleaseCreate,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     const path = `/repos/${args.owner}/${args.repo}/releases`;
@@ -5136,17 +4030,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoReleasesAssetsId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
@@ -5181,17 +4065,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesAssetsId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Asset> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
@@ -5228,18 +4102,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoReleasesAssetsId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.AssetPatch,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Asset> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
@@ -5274,17 +4137,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoReleasesId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
@@ -5319,17 +4172,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
@@ -5364,18 +4207,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoReleasesId(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.ReleaseCreate,
-    },
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Release> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
@@ -5410,17 +4242,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReleasesIdAssets(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      id: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Assets> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}/assets`;
@@ -5455,16 +4277,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStargazers(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/stargazers`;
@@ -5502,16 +4315,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCodeFrequency(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/code_frequency`;
@@ -5549,16 +4353,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCommitActivity(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CommitActivityStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/commit_activity`;
@@ -5593,16 +4388,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsContributors(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ContributorsStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/contributors`;
@@ -5637,16 +4423,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsParticipation(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ParticipationStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/participation`;
@@ -5691,16 +4468,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsPunchCard(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.CodeFrequencyStats> {
     const path = `/repos/${args.owner}/${args.repo}/stats/punch_card`;
@@ -5735,17 +4503,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatusesRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,  // Ref to list the statuses from. It can be a SHA, a branch name, or a tag name. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Ref> {
     const path = `/repos/${args.owner}/${args.repo}/statuses/${args.ref}`;
@@ -5780,18 +4538,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoStatusesRef(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      ref: string,  // Ref to list the statuses from. It can be a SHA, a branch name, or a tag name. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.HeadBranch,
-    },
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Ref> {
     const path = `/repos/${args.owner}/${args.repo}/statuses/${args.ref}`;
@@ -5826,16 +4573,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoSubscribers(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/subscribers`;
@@ -5870,16 +4608,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoSubscription(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
@@ -5914,16 +4643,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoSubscription(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscribition> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
@@ -5958,17 +4678,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   putReposOwnerRepoSubscription(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.SubscribitionBody,
-    },
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Subscribition> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
@@ -6003,16 +4713,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoTags(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Tags> {
     const path = `/repos/${args.owner}/${args.repo}/tags`;
@@ -6047,16 +4748,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoTeams(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Teams> {
     const path = `/repos/${args.owner}/${args.repo}/teams`;
@@ -6091,16 +4783,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoWatchers(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/repos/${args.owner}/${args.repo}/watchers`;
@@ -6141,18 +4824,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   getReposOwnerRepoArchiveFormatPath(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      archiveFormat: ('tarball' | 'zipball'),
-      path: string,  // Valid Git reference, defaults to 'master'.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/repos/${args.owner}/${args.repo}/${args.archiveFormat}/${args.path}`;

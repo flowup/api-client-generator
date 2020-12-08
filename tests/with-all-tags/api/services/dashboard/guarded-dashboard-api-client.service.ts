@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, DashboardAPIClient } from './dashboard-api-client.service';
+import { DashboardAPIClientInterface } from './dashboard-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedDashboardAPIClient extends DashboardAPIClient {
+export class GuardedDashboardAPIClient extends DashboardAPIClient implements DashboardAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -36,9 +37,7 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
   }
 
   get(
-    args: {
-      dashboardId: number,
-    },
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DashboardViewModel> {
     return super.get(args, requestHttpOptions)
@@ -46,9 +45,7 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
   }
 
   getSettings(
-    args: {
-      dashboardId: number,
-    },
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RowModel[]> {
     return super.getSettings(args, requestHttpOptions)
@@ -56,10 +53,7 @@ export class GuardedDashboardAPIClient extends DashboardAPIClient {
   }
 
   putSettings(
-    args: {
-      dashboardId: number,
-      rows: models.RowModel[],
-    },
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.putSettings(args, requestHttpOptions)

@@ -17,37 +17,66 @@ import * as models from '../../models';
 export interface UserAPIClientInterface {
 
   /**
+   * Arguments object for method `getUser`.
+   */
+  getUserParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * Get the authenticated user.
    * Response generated for [ 200 ] HTTP response code.
    */
   getUser(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.User>;
+
+  /**
+   * Arguments object for method `patchUser`.
+   */
+  patchUserParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.UserUpdate,
+  };
 
   /**
    * Update the authenticated user.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchUser(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.UserUpdate,
-    },
+    args: Exclude<UserAPIClientInterface['patchUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.User>;
+
+  /**
+   * Arguments object for method `deleteUserEmails`.
+   */
+  deleteUserEmailsParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.UserEmails,
+  };
 
   /**
    * Delete email address(es).
@@ -56,17 +85,23 @@ export interface UserAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserEmails(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.UserEmails,
-    },
+    args: Exclude<UserAPIClientInterface['deleteUserEmailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserEmails`.
+   */
+  getUserEmailsParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List email addresses for a user.
@@ -79,16 +114,24 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserEmails(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserEmails>;
+
+  /**
+   * Arguments object for method `postUserEmails`.
+   */
+  postUserEmailsParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.EmailsPost,
+  };
 
   /**
    * Add email address(es).
@@ -97,49 +140,71 @@ export interface UserAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   postUserEmails(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EmailsPost,
-    },
+    args: Exclude<UserAPIClientInterface['postUserEmailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserFollowers`.
+   */
+  getUserFollowersParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List the authenticated user's followers
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserFollowers(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `getUserFollowing`.
+   */
+  getUserFollowingParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List who the authenticated user is following.
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserFollowing(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `deleteUserFollowingUsername`.
+   */
+  deleteUserFollowingUsernameParams?: {
+    /**  Name of user. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Unfollow a user.
@@ -149,34 +214,50 @@ export interface UserAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserFollowingUsername(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['deleteUserFollowingUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserFollowingUsername`.
+   */
+  getUserFollowingUsernameParams?: {
+    /**  Name of user. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check if you are following a user.
    * Response generated for [ 204 ] HTTP response code.
    */
   getUserFollowingUsername(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserFollowingUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `putUserFollowingUsername`.
+   */
+  putUserFollowingUsernameParams?: {
+    /**  Name of user. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Follow a user.
@@ -186,17 +267,32 @@ export interface UserAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   putUserFollowingUsername(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['putUserFollowingUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserIssues`.
+   */
+  getUserIssuesParams?: {
+    /**  Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see  */
+    filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),
+    state: ('open' | 'closed'),
+    /**  String list of comma separated Label names. Example - bug,ui,@high. */
+    labels: string,
+    sort: ('created' | 'updated' | 'comments'),
+    direction: ('asc' | 'desc'),
+    /**  (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List issues.
@@ -206,22 +302,23 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserIssues(
-    args: {
-      filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: ('open' | 'closed'),
-      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: ('created' | 'updated' | 'comments'),
-      direction: ('asc' | 'desc'),
-      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues>;
+
+  /**
+   * Arguments object for method `getUserKeys`.
+   */
+  getUserKeysParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List your public keys.
@@ -231,83 +328,121 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeys(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore>;
+
+  /**
+   * Arguments object for method `postUserKeys`.
+   */
+  postUserKeysParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.UserKeysPost,
+  };
 
   /**
    * Create a public key.
    * Response generated for [ 201 ] HTTP response code.
    */
   postUserKeys(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.UserKeysPost,
-    },
+    args: Exclude<UserAPIClientInterface['postUserKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId>;
+
+  /**
+   * Arguments object for method `deleteUserKeysKeyId`.
+   */
+  deleteUserKeysKeyIdParams?: {
+    /**  ID of key. */
+    keyId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a public key. Removes a public key. Requires that you are authenticated via Basic Auth or via OAuth with at least admin:public_key scope.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserKeysKeyId(
-    args: {
-      keyId: number,  // ID of key.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['deleteUserKeysKeyIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserKeysKeyId`.
+   */
+  getUserKeysKeyIdParams?: {
+    /**  ID of key. */
+    keyId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single public key.
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeysKeyId(
-    args: {
-      keyId: number,  // ID of key.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserKeysKeyIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserKeysKeyId>;
+
+  /**
+   * Arguments object for method `getUserOrgs`.
+   */
+  getUserOrgsParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List public and private organizations for the authenticated user.
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserOrgs(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore>;
+
+  /**
+   * Arguments object for method `getUserRepos`.
+   */
+  getUserReposParams?: {
+    type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List repositories for the authenticated user. Note that this does not include
@@ -317,17 +452,24 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserRepos(
-    args: {
-      type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos>;
+
+  /**
+   * Arguments object for method `postUserRepos`.
+   */
+  postUserReposParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.PostRepo,
+  };
 
   /**
    * Create a new repository for the authenticated user. OAuth users must supply
@@ -336,173 +478,241 @@ export interface UserAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postUserRepos(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PostRepo,
-    },
+    args: Exclude<UserAPIClientInterface['postUserReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos>;
+
+  /**
+   * Arguments object for method `getUserStarred`.
+   */
+  getUserStarredParams?: {
+    /**  (optional) Ignored without 'sort' parameter. */
+    direction?: string,
+    sort?: ('created' | 'updated'),
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List repositories being starred by the authenticated user.
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserStarred(
-    args: {
-      direction?: string,  // (optional) Ignored without 'sort' parameter.
-      sort?: ('created' | 'updated'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore>;
+
+  /**
+   * Arguments object for method `deleteUserStarredOwnerRepo`.
+   */
+  deleteUserStarredOwnerRepoParams?: {
+    /**  Name of a repository owner. */
+    owner: string,
+    /**  Name of a repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Unstar a repository
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserStarredOwnerRepo(
-    args: {
-      owner: string,  // Name of a repository owner.
-      repo: string,  // Name of a repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['deleteUserStarredOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserStarredOwnerRepo`.
+   */
+  getUserStarredOwnerRepoParams?: {
+    /**  Name of a repository owner. */
+    owner: string,
+    /**  Name of a repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check if you are starring a repository.
    * Response generated for [ 204 ] HTTP response code.
    */
   getUserStarredOwnerRepo(
-    args: {
-      owner: string,  // Name of a repository owner.
-      repo: string,  // Name of a repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserStarredOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `putUserStarredOwnerRepo`.
+   */
+  putUserStarredOwnerRepoParams?: {
+    /**  Name of a repository owner. */
+    owner: string,
+    /**  Name of a repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Star a repository.
    * Response generated for [ 204 ] HTTP response code.
    */
   putUserStarredOwnerRepo(
-    args: {
-      owner: string,  // Name of a repository owner.
-      repo: string,  // Name of a repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['putUserStarredOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserSubscriptions`.
+   */
+  getUserSubscriptionsParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List repositories being watched by the authenticated user.
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserSubscriptions(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserIdSubscribitions>;
+
+  /**
+   * Arguments object for method `deleteUserSubscriptionsOwnerRepo`.
+   */
+  deleteUserSubscriptionsOwnerRepoParams?: {
+    /**  Name of the owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Stop watching a repository
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserSubscriptionsOwnerRepo(
-    args: {
-      owner: string,  // Name of the owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['deleteUserSubscriptionsOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserSubscriptionsOwnerRepo`.
+   */
+  getUserSubscriptionsOwnerRepoParams?: {
+    /**  Name of the owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check if you are watching a repository.
    * Response generated for [ 204 ] HTTP response code.
    */
   getUserSubscriptionsOwnerRepo(
-    args: {
-      owner: string,  // Name of the owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `putUserSubscriptionsOwnerRepo`.
+   */
+  putUserSubscriptionsOwnerRepoParams?: {
+    /**  Name of the owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Watch a repository.
    * Response generated for [ 204 ] HTTP response code.
    */
   putUserSubscriptionsOwnerRepo(
-    args: {
-      owner: string,  // Name of the owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['putUserSubscriptionsOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getUserTeams`.
+   */
+  getUserTeamsParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires user or repo scope when authenticating via OAuth.
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserTeams(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamsList>;
 

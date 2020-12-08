@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '{{#if serviceTag}}../.{{/if}}./types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, {{&serviceName}} } from './{{&serviceFileName}}';
+import { {{&interfaceName}} } from './{{&interfaceFileName}}';
 
 {{#if definitions.length}}
 import * as models from '.{{#if swaggerTag}}./..{{/if}}/models';
@@ -13,7 +14,7 @@ import * as guards from '.{{#if swaggerTag}}./..{{/if}}/guards';
 {{/if}}
 
 @Injectable()
-export class Guarded{{&serviceName}} extends {{&serviceName}} {
+export class Guarded{{&serviceName}} extends {{&serviceName}} implements {{&interfaceName}} {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -24,11 +25,7 @@ export class Guarded{{&serviceName}} extends {{&serviceName}} {
 {{#methods}}
 {{#if responseGuard}}  {{&methodName}}(
   {{#if parameters.length}}
-    args: {
-    {{#each parameters}}
-      {{camelCase name}}{{^isRequired}}?{{/isRequired}}: {{&type}},{{#if description}}  //{{#unless isRequired}} (optional){{/unless}} {{&description}}{{/if}}
-    {{/each}}
-    },
+    args: Exclude<{{&../interfaceName}}['{{&methodName}}Params'], undefined>,
   {{/if}}
     requestHttpOptions?: HttpOptions
   ): Observable<{{&responseTypeSchema.type}}> {

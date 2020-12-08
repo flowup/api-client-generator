@@ -17,282 +17,412 @@ import * as models from '../../models';
 export interface GistsAPIClientInterface {
 
   /**
+   * Arguments object for method `getGists`.
+   */
+  getGistsParams?: {
+    /**  (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned.  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * List the authenticated user's gists or if called anonymously, this will
    * return all public gists.
    * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getGists(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists>;
+
+  /**
+   * Arguments object for method `postGists`.
+   */
+  postGistsParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.PostGist,
+  };
 
   /**
    * Create a gist.
    * Response generated for [ 201 ] HTTP response code.
    */
   postGists(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PostGist,
-    },
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist>;
+
+  /**
+   * Arguments object for method `getGistsPublic`.
+   */
+  getGistsPublicParams?: {
+    /**  (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned.  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List all public gists.
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsPublic(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists>;
+
+  /**
+   * Arguments object for method `getGistsStarred`.
+   */
+  getGistsStarredParams?: {
+    /**  (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned.  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List the authenticated user's starred gists.
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsStarred(
-    args: {
-      since?: string,  // (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists>;
+
+  /**
+   * Arguments object for method `deleteGistsId`.
+   */
+  deleteGistsIdParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a gist.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsId(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getGistsId`.
+   */
+  getGistsIdParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single gist.
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsId(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist>;
+
+  /**
+   * Arguments object for method `patchGistsId`.
+   */
+  patchGistsIdParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.PatchGist,
+  };
 
   /**
    * Edit a gist.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchGistsId(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PatchGist,
-    },
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gist>;
+
+  /**
+   * Arguments object for method `getGistsIdComments`.
+   */
+  getGistsIdCommentsParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List comments on a gist.
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsIdComments(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comments>;
+
+  /**
+   * Arguments object for method `postGistsIdComments`.
+   */
+  postGistsIdCommentsParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.CommentBody,
+  };
 
   /**
    * Create a commen
    * Response generated for [ 201 ] HTTP response code.
    */
   postGistsIdComments(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.CommentBody,
-    },
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment>;
+
+  /**
+   * Arguments object for method `deleteGistsIdCommentsCommentId`.
+   */
+  deleteGistsIdCommentsCommentIdParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Delete a comment.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsIdCommentsCommentId(
-    args: {
-      id: number,  // Id of gist.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getGistsIdCommentsCommentId`.
+   */
+  getGistsIdCommentsCommentIdParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get a single comment.
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsIdCommentsCommentId(
-    args: {
-      id: number,  // Id of gist.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment>;
+
+  /**
+   * Arguments object for method `patchGistsIdCommentsCommentId`.
+   */
+  patchGistsIdCommentsCommentIdParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  Id of comment. */
+    commentId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.Comment,
+  };
 
   /**
    * Edit a comment.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchGistsIdCommentsCommentId(
-    args: {
-      id: number,  // Id of gist.
-      commentId: number,  // Id of comment.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.Comment,
-    },
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Comment>;
+
+  /**
+   * Arguments object for method `postGistsIdForks`.
+   */
+  postGistsIdForksParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Fork a gist.
    * Response generated for [ 204 ] HTTP response code.
    */
   postGistsIdForks(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `deleteGistsIdStar`.
+   */
+  deleteGistsIdStarParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Unstar a gist.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteGistsIdStar(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getGistsIdStar`.
+   */
+  getGistsIdStarParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check if a gist is starred.
    * Response generated for [ 204 ] HTTP response code.
    */
   getGistsIdStar(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `putGistsIdStar`.
+   */
+  putGistsIdStarParams?: {
+    /**  Id of gist. */
+    id: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Star a gist.
    * Response generated for [ 204 ] HTTP response code.
    */
   putGistsIdStar(
-    args: {
-      id: number,  // Id of gist.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
 

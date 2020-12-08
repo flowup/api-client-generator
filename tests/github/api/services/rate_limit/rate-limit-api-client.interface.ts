@@ -17,20 +17,27 @@ import * as models from '../../models';
 export interface RateLimitAPIClientInterface {
 
   /**
+   * Arguments object for method `getRateLimit`.
+   */
+  getRateLimitParams?: {
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * Get your current rate limit status
    * Note: Accessing this endpoint does not count against your rate limit.
    * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getRateLimit(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RateLimit>;
 

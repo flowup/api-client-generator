@@ -17,6 +17,22 @@ import * as models from '../../models';
 export interface TeamsAPIClientInterface {
 
   /**
+   * Arguments object for method `deleteTeamsTeamId`.
+   */
+  deleteTeamsTeamIdParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * Delete team.
    * In order to delete a team, the authenticated user must be an owner of the
    * org that the team is associated with.
@@ -24,34 +40,51 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteTeamsTeamId(
-    args: {
-      teamId: number,  // Id of team.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getTeamsTeamId`.
+   */
+  getTeamsTeamIdParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get team.
    * Response generated for [ 200 ] HTTP response code.
    */
   getTeamsTeamId(
-    args: {
-      teamId: number,  // Id of team.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Team>;
+
+  /**
+   * Arguments object for method `patchTeamsTeamId`.
+   */
+  patchTeamsTeamIdParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.EditTeam,
+  };
 
   /**
    * Edit team.
@@ -61,18 +94,25 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   patchTeamsTeamId(
-    args: {
-      teamId: number,  // Id of team.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.EditTeam,
-    },
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Team>;
+
+  /**
+   * Arguments object for method `getTeamsTeamIdMembers`.
+   */
+  getTeamsTeamIdMembersParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List team members.
@@ -82,17 +122,27 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getTeamsTeamIdMembers(
-    args: {
-      teamId: number,  // Id of team.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `deleteTeamsTeamIdMembersUsername`.
+   */
+  deleteTeamsTeamIdMembersUsernameParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a member. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * The "Remove team member" API is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Remove team membership API instead. It allows you to remove both active and pending memberships.
@@ -107,18 +157,27 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteTeamsTeamIdMembersUsername(
-    args: {
-      teamId: number,  // Id of team.
-      username: string,  // Name of a member.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getTeamsTeamIdMembersUsername`.
+   */
+  getTeamsTeamIdMembersUsernameParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a member. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * The "Get team member" API is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Get team membership API instead. It allows you to get both active and pending memberships.
@@ -131,18 +190,27 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   getTeamsTeamIdMembersUsername(
-    args: {
-      teamId: number,  // Id of team.
-      username: string,  // Name of a member.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `putTeamsTeamIdMembersUsername`.
+   */
+  putTeamsTeamIdMembersUsernameParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a member. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * The API (described below) is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Add team membership API instead. It allows you to invite new organization members to your teams.
@@ -156,18 +224,27 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   putTeamsTeamIdMembersUsername(
-    args: {
-      teamId: number,  // Id of team.
-      username: string,  // Name of a member.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `deleteTeamsTeamIdMembershipsUsername`.
+   */
+  deleteTeamsTeamIdMembershipsUsernameParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a member. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Remove team membership.
@@ -176,18 +253,27 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteTeamsTeamIdMembershipsUsername(
-    args: {
-      teamId: number,  // Id of team.
-      username: string,  // Name of a member.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getTeamsTeamIdMembershipsUsername`.
+   */
+  getTeamsTeamIdMembershipsUsernameParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a member. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Get team membership.
@@ -196,18 +282,27 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getTeamsTeamIdMembershipsUsername(
-    args: {
-      teamId: number,  // Id of team.
-      username: string,  // Name of a member.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamMembership>;
+
+  /**
+   * Arguments object for method `putTeamsTeamIdMembershipsUsername`.
+   */
+  putTeamsTeamIdMembershipsUsernameParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a member. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Add team membership.
@@ -222,90 +317,119 @@ export interface TeamsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   putTeamsTeamIdMembershipsUsername(
-    args: {
-      teamId: number,  // Id of team.
-      username: string,  // Name of a member.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamMembership>;
+
+  /**
+   * Arguments object for method `getTeamsTeamIdRepos`.
+   */
+  getTeamsTeamIdReposParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List team repos
    * Response generated for [ 200 ] HTTP response code.
    */
   getTeamsTeamIdRepos(
-    args: {
-      teamId: number,  // Id of team.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.TeamRepos>;
+
+  /**
+   * Arguments object for method `putTeamsTeamIdReposOrgRepo`.
+   */
+  putTeamsTeamIdReposOrgRepoParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a organization. */
+    org: string,
+    /**  Name of a repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * In order to add a repository to a team, the authenticated user must be an owner of the org that the team is associated with. Also, the repository must be owned by the organization, or a direct fork of a repository owned by the organization.
    * Response generated for [ missing ] HTTP response code.
    */
   putTeamsTeamIdReposOrgRepo(
-    args: {
-      teamId: number,  // Id of team.
-      org: string,  // Name of a organization.
-      repo: string,  // Name of a repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `deleteTeamsTeamIdReposOwnerRepo`.
+   */
+  deleteTeamsTeamIdReposOwnerRepoParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a repository owner. */
+    owner: string,
+    /**  Name of a repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * In order to remove a repository from a team, the authenticated user must be an owner of the org that the team is associated with. NOTE: This does not delete the repository, it just removes it from the team.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteTeamsTeamIdReposOwnerRepo(
-    args: {
-      teamId: number,  // Id of team.
-      owner: string,  // Name of a repository owner.
-      repo: string,  // Name of a repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getTeamsTeamIdReposOwnerRepo`.
+   */
+  getTeamsTeamIdReposOwnerRepoParams?: {
+    /**  Id of team. */
+    teamId: number,
+    /**  Name of a repository owner. */
+    owner: string,
+    /**  Name of a repository. */
+    repo: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check if a team manages a repository
    * Response generated for [ missing ] HTTP response code.
    */
   getTeamsTeamIdReposOwnerRepo(
-    args: {
-      teamId: number,  // Id of team.
-      owner: string,  // Name of a repository owner.
-      repo: string,  // Name of a repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
 

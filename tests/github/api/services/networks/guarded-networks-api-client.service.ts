@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, NetworksAPIClient } from './networks-api-client.service';
+import { NetworksAPIClientInterface } from './networks-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedNetworksAPIClient extends NetworksAPIClient {
+export class GuardedNetworksAPIClient extends NetworksAPIClient implements NetworksAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,16 +30,7 @@ export class GuardedNetworksAPIClient extends NetworksAPIClient {
   }
 
   getNetworksOwnerRepoEvents(
-    args: {
-      owner: string,  // Name of the owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<NetworksAPIClientInterface['getNetworksOwnerRepoEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     return super.getNetworksOwnerRepoEvents(args, requestHttpOptions)

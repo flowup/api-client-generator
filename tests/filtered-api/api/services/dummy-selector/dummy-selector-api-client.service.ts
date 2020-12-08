@@ -54,9 +54,7 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   get(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorViewModel> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}`;
@@ -72,9 +70,7 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getSettings(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.DummySelectorSettings> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
@@ -90,10 +86,7 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   putSettings(
-    args: {
-      organizerTaskElementId: number,
-      betriebSelectorSettings: models.DummySelectorSettings,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
@@ -109,9 +102,7 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteSettings(
-    args: {
-      organizerTaskElementId: number,
-    },
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;

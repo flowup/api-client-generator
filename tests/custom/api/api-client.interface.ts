@@ -17,44 +17,66 @@ import * as models from './models';
 export interface APIClientInterface {
 
   /**
+   * Arguments object for method `getItems`.
+   */
+  getItemsParams?: {
+    pageSize: number,
+    /**  page number */
+    page: number,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getItems(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-    },
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ItemList>;
+
+  /**
+   * Arguments object for method `getItemModels`.
+   */
+  getItemModelsParams?: {
+    pageSize: number,
+    /**  page number */
+    page: number,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getItemModels(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-    },
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object>;
+
+  /**
+   * Arguments object for method `getPetsId`.
+   */
+  getPetsIdParams?: {
+    id: string,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getPetsId(
-    args: {
-      id: string,
-    },
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]>;
+
+  /**
+   * Arguments object for method `deletePetsId`.
+   */
+  deletePetsIdParams?: {
+    id: string,
+  };
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   deletePetsId(
-    args: {
-      id: string,
-    },
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
 
@@ -73,12 +95,17 @@ export interface APIClientInterface {
   ): Observable<models.Dictionary>;
 
   /**
+   * Arguments object for method `getFileId`.
+   */
+  getFileIdParams?: {
+    id: string,
+  };
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getFileId(
-    args: {
-      id: string,
-    },
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File>;
 
@@ -118,50 +145,79 @@ export interface APIClientInterface {
   ): Observable<{ [key: string]: number }[]>;
 
   /**
+   * Arguments object for method `firestoreProjectsDatabasesDocumentsCommit`.
+   */
+  firestoreProjectsDatabasesDocumentsCommitParams?: {
+    /**  (optional) - error format - 1 V1 - 2 V2  */
+    wololo?: models.NumberEnumParam,
+    /**  (optional) Data format for response. */
+    alt?: models.StringEnumParam,
+    /**  (optional) OAuth access token. */
+    accessToken?: string,
+    /**  (optional) Pretty-print response. */
+    pp?: boolean,
+    /**  (optional) should pretty print */
+    prettyPrint?: boolean,
+    simpleQueryParam?: string,
+    simpleArrayQueryParam?: number[],
+    body?: models.Data,
+    /**  The database name. In the format `database:{{name}}` */
+    database: string,
+  };
+
+  /**
    * Commits a transaction, while optionally updating documents.
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsCommit(
-    args: {
-      wololo?: models.NumberEnumParam,  // (optional) - error format - 1 V1 - 2 V2 
-      alt?: models.StringEnumParam,  // (optional) Data format for response.
-      accessToken?: string,  // (optional) OAuth access token.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) should pretty print
-      simpleQueryParam?: string,
-      simpleArrayQueryParam?: number[],
-      body?: models.Data,
-      database: string,  // The database name. In the format `database:{{name}}`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Dictionary>;
+
+  /**
+   * Arguments object for method `postReposOwnerRepoGitBlobs`.
+   */
+  postReposOwnerRepoGitBlobsParams?: {
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    /**  Custom blob (should be imported from models) */
+    body: models.Blob,
+  };
 
   /**
    * Create a custom Blob.
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitBlobs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      accept?: string,  // (optional) Is used to set specified media type.
-      body: models.Blob,  // Custom blob (should be imported from models)
-    },
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blob[]>;
+
+  /**
+   * Arguments object for method `getReposOwnerRepoGitBlobsShaCode`.
+   */
+  getReposOwnerRepoGitBlobsShaCodeParams?: {
+    body?: models.ModelParam,
+    /**  Name of repository owner. */
+    owner: string,
+    /**  Name of repository. */
+    repo: string,
+    /**  SHA-1 code. */
+    shaCode: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+  };
 
   /**
    * Get standard File
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitBlobsShaCode(
-    args: {
-      body?: models.ModelParam,
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code.
-      accept?: string,  // (optional) Is used to set specified media type.
-    },
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File>;
 

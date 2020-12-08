@@ -47,18 +47,22 @@ export class {{&serviceName}} implements {{&interfaceName}}{{/if}}{{#if (templat
   }
 
 {{/if}}
-{{#methods}}
-  {{#description}}
-  /**
+{{#methods}}{{#if (templateType 'interface')}}{{#if parameters.length}}  /**
+   * Arguments object for method `{{&methodName}}`.
+   */
+  {{&methodName}}Params?: {
+    {{#each parameters}}
+    {{#if description}}/** {{#unless isRequired}} (optional){{/unless}} {{&description}} */
+    {{/if}}{{camelCase name}}{{^isRequired}}?{{/isRequired}}: {{&type}},
+    {{/each}}
+  };
+
+{{/if}}{{/if}}{{#description}}  /**
    * {{&.}}
    */
 {{/description}}  {{&methodName}}(
   {{#if parameters.length}}
-    args: {
-      {{#each parameters}}
-      {{camelCase name}}{{^isRequired}}?{{/isRequired}}: {{&type}},{{#if description}}  //{{#unless isRequired}} (optional){{/unless}} {{&description}}{{/if}}
-      {{/each}}
-    },
+    args: Exclude<{{&../interfaceName}}['{{&methodName}}Params'], undefined>,
   {{/if}}
     requestHttpOptions?: HttpOptions
   ): Observable<{{&responseTypeSchema.type}}>{{#if (templateType 'service')}} {

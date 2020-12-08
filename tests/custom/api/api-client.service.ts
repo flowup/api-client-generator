@@ -54,10 +54,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getItems(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-    },
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ItemList> {
     const path = `/items`;
@@ -79,10 +76,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getItemModels(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-    },
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     const path = `/itemModels`;
@@ -104,9 +98,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getPetsId(
-    args: {
-      id: string,
-    },
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Pet[]> {
     const path = `/pets/${args.id}`;
@@ -122,9 +114,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   deletePetsId(
-    args: {
-      id: string,
-    },
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/pets/${args.id}`;
@@ -170,9 +160,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getFileId(
-    args: {
-      id: string,
-    },
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     const path = `/file/${args.id}`;
@@ -265,17 +253,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   firestoreProjectsDatabasesDocumentsCommit(
-    args: {
-      wololo?: models.NumberEnumParam,  // (optional) - error format - 1 V1 - 2 V2 
-      alt?: models.StringEnumParam,  // (optional) Data format for response.
-      accessToken?: string,  // (optional) OAuth access token.
-      pp?: boolean,  // (optional) Pretty-print response.
-      prettyPrint?: boolean,  // (optional) should pretty print
-      simpleQueryParam?: string,
-      simpleArrayQueryParam?: number[],
-      body?: models.Data,
-      database: string,  // The database name. In the format `database:{{name}}`
-    },
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Dictionary> {
     const path = `/${args.database}/write`;
@@ -313,12 +291,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitBlobs(
-    args: {
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      accept?: string,  // (optional) Is used to set specified media type.
-      body: models.Blob,  // Custom blob (should be imported from models)
-    },
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Blob[]> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs`;
@@ -338,13 +311,7 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitBlobsShaCode(
-    args: {
-      body?: models.ModelParam,
-      owner: string,  // Name of repository owner.
-      repo: string,  // Name of repository.
-      shaCode: string,  // SHA-1 code.
-      accept?: string,  // (optional) Is used to set specified media type.
-    },
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs/${args.shaCode}`;

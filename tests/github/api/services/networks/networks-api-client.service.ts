@@ -55,16 +55,7 @@ export class NetworksAPIClient implements NetworksAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getNetworksOwnerRepoEvents(
-    args: {
-      owner: string,  // Name of the owner.
-      repo: string,  // Name of repository.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<NetworksAPIClientInterface['getNetworksOwnerRepoEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events> {
     const path = `/networks/${args.owner}/${args.repo}/events`;

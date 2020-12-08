@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, UsersAPIClient } from './users-api-client.service';
+import { UsersAPIClientInterface } from './users-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedUsersAPIClient extends UsersAPIClient {
+export class GuardedUsersAPIClient extends UsersAPIClient implements UsersAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,15 +30,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient {
   }
 
   getUsers(
-    args: {
-      since?: number,  // (optional) The integer ID of the last User that you've seen.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getUsers(args, requestHttpOptions)
@@ -45,15 +38,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient {
   }
 
   getUsersUsername(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getUsersUsername(args, requestHttpOptions)
@@ -61,15 +46,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient {
   }
 
   getUsersUsernameFollowers(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     return super.getUsersUsernameFollowers(args, requestHttpOptions)
@@ -77,16 +54,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient {
   }
 
   getUsersUsernameGists(
-    args: {
-      username: string,  // Name of user.
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameGistsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     return super.getUsersUsernameGists(args, requestHttpOptions)
@@ -94,15 +62,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient {
   }
 
   getUsersUsernameKeys(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getUsersUsernameKeys(args, requestHttpOptions)
@@ -110,15 +70,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient {
   }
 
   getUsersUsernameOrgs(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameOrgsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     return super.getUsersUsernameOrgs(args, requestHttpOptions)
@@ -126,16 +78,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient {
   }
 
   getUsersUsernameRepos(
-    args: {
-      username: string,  // Name of user.
-      type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     return super.getUsersUsernameRepos(args, requestHttpOptions)

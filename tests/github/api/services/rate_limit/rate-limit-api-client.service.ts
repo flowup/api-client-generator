@@ -57,14 +57,7 @@ export class RateLimitAPIClient implements RateLimitAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getRateLimit(
-    args: {
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RateLimit> {
     const path = `/rate_limit`;

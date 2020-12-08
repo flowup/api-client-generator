@@ -59,15 +59,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsers(
-    args: {
-      since?: number,  // (optional) The integer ID of the last User that you've seen.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/users`;
@@ -105,15 +97,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsername(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/users/${args.username}`;
@@ -148,15 +132,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameEvents(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/${args.username}/events`;
@@ -191,16 +167,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameEventsOrg(
-    args: {
-      username: string,  // Name of user.
-      org: string,
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsOrgParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/${args.username}/events/orgs/${args.org}`;
@@ -235,15 +202,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameFollowers(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users> {
     const path = `/users/${args.username}/followers`;
@@ -278,16 +237,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   getUsersUsernameFollowingTargetUser(
-    args: {
-      username: string,  // Name of user.
-      targetUser: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowingTargetUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/${args.username}/following/${args.targetUser}`;
@@ -322,16 +272,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameGists(
-    args: {
-      username: string,  // Name of user.
-      since?: string,  // (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z". 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameGistsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gists> {
     const path = `/users/${args.username}/gists`;
@@ -371,15 +312,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameKeys(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameKeysParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/users/${args.username}/keys`;
@@ -414,15 +347,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameOrgs(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameOrgsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Gitignore> {
     const path = `/users/${args.username}/orgs`;
@@ -457,15 +382,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameReceivedEvents(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/${args.username}/received_events`;
@@ -500,15 +417,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameReceivedEventsPublic(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsPublicParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/${args.username}/received_events/public`;
@@ -543,16 +452,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameRepos(
-    args: {
-      username: string,  // Name of user.
-      type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos> {
     const path = `/users/${args.username}/repos`;
@@ -590,15 +490,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameStarred(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameStarredParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/${args.username}/starred`;
@@ -633,15 +525,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * Response generated for [ missing ] HTTP response code.
    */
   getUsersUsernameSubscriptions(
-    args: {
-      username: string,  // Name of user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameSubscriptionsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void> {
     const path = `/users/${args.username}/subscriptions`;

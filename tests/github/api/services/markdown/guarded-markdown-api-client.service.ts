@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, MarkdownAPIClient } from './markdown-api-client.service';
+import { MarkdownAPIClientInterface } from './markdown-api-client.interface';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
 
 @Injectable()
-export class GuardedMarkdownAPIClient extends MarkdownAPIClient {
+export class GuardedMarkdownAPIClient extends MarkdownAPIClient implements MarkdownAPIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,

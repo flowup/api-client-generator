@@ -17,56 +17,105 @@ import * as models from '../../models';
 export interface OrgsAPIClientInterface {
 
   /**
+   * Arguments object for method `getOrgsOrg`.
+   */
+  getOrgsOrgParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
+
+  /**
    * Get an Organization.
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrg(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Organization>;
+
+  /**
+   * Arguments object for method `patchOrgsOrg`.
+   */
+  patchOrgsOrgParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.PatchOrg,
+  };
 
   /**
    * Edit an Organization.
    * Response generated for [ 200 ] HTTP response code.
    */
   patchOrgsOrg(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PatchOrg,
-    },
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Organization>;
+
+  /**
+   * Arguments object for method `getOrgsOrgEvents`.
+   */
+  getOrgsOrgEventsParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List public events for an organization.
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgEvents(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Events>;
+
+  /**
+   * Arguments object for method `getOrgsOrgIssues`.
+   */
+  getOrgsOrgIssuesParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see  */
+    filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),
+    state: ('open' | 'closed'),
+    /**  String list of comma separated Label names. Example - bug,ui,@high. */
+    labels: string,
+    sort: ('created' | 'updated' | 'comments'),
+    direction: ('asc' | 'desc'),
+    /**  (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.  */
+    since?: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List issues.
@@ -75,23 +124,25 @@ export interface OrgsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgIssues(
-    args: {
-      org: string,  // Name of organisation.
-      filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),  // Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see 
-      state: ('open' | 'closed'),
-      labels: string,  // String list of comma separated Label names. Example - bug,ui,@high.
-      sort: ('created' | 'updated' | 'comments'),
-      direction: ('asc' | 'desc'),
-      since?: string,  // (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned. 
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Issues>;
+
+  /**
+   * Arguments object for method `getOrgsOrgMembers`.
+   */
+  getOrgsOrgMembersParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Members list.
@@ -104,17 +155,27 @@ export interface OrgsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgMembers(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `deleteOrgsOrgMembersUsername`.
+   */
+  deleteOrgsOrgMembersUsernameParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  Name of the user. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Remove a member.
@@ -124,36 +185,52 @@ export interface OrgsAPIClientInterface {
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteOrgsOrgMembersUsername(
-    args: {
-      org: string,  // Name of organisation.
-      username: string,  // Name of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getOrgsOrgMembersUsername`.
+   */
+  getOrgsOrgMembersUsernameParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  Name of the user. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check if a user is, publicly or privately, a member of the organization.
    * Response generated for [ 204 ] HTTP response code.
    */
   getOrgsOrgMembersUsername(
-    args: {
-      org: string,  // Name of organisation.
-      username: string,  // Name of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getOrgsOrgPublicMembers`.
+   */
+  getOrgsOrgPublicMembersParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Public members list.
@@ -163,89 +240,133 @@ export interface OrgsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgPublicMembers(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Users>;
+
+  /**
+   * Arguments object for method `deleteOrgsOrgPublicMembersUsername`.
+   */
+  deleteOrgsOrgPublicMembersUsernameParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  Name of the user. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Conceal a user's membership.
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteOrgsOrgPublicMembersUsername(
-    args: {
-      org: string,  // Name of organisation.
-      username: string,  // Name of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getOrgsOrgPublicMembersUsername`.
+   */
+  getOrgsOrgPublicMembersUsernameParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  Name of the user. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Check public membership.
    * Response generated for [ 204 ] HTTP response code.
    */
   getOrgsOrgPublicMembersUsername(
-    args: {
-      org: string,  // Name of organisation.
-      username: string,  // Name of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `putOrgsOrgPublicMembersUsername`.
+   */
+  putOrgsOrgPublicMembersUsernameParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  Name of the user. */
+    username: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * Publicize a user's membership.
    * Response generated for [ 204 ] HTTP response code.
    */
   putOrgsOrgPublicMembersUsername(
-    args: {
-      org: string,  // Name of organisation.
-      username: string,  // Name of the user.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<void>;
+
+  /**
+   * Arguments object for method `getOrgsOrgRepos`.
+   */
+  getOrgsOrgReposParams?: {
+    /**  Name of organisation. */
+    org: string,
+    type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List repositories for the specified org.
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgRepos(
-    args: {
-      org: string,  // Name of organisation.
-      type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos>;
+
+  /**
+   * Arguments object for method `postOrgsOrgRepos`.
+   */
+  postOrgsOrgReposParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.PostRepo,
+  };
 
   /**
    * Create a new repository for the authenticated user. OAuth users must supply
@@ -254,35 +375,51 @@ export interface OrgsAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postOrgsOrgRepos(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.PostRepo,
-    },
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Repos>;
+
+  /**
+   * Arguments object for method `getOrgsOrgTeams`.
+   */
+  getOrgsOrgTeamsParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+  };
 
   /**
    * List teams.
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgTeams(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-    },
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Teams>;
+
+  /**
+   * Arguments object for method `postOrgsOrgTeams`.
+   */
+  postOrgsOrgTeamsParams?: {
+    /**  Name of organisation. */
+    org: string,
+    /**  (optional) You can check the current version of media type in responses.  */
+    xGitHubMediaType?: string,
+    /**  (optional) Is used to set specified media type. */
+    accept?: string,
+    xRateLimit?: number,
+    xRateLimitRemaining?: number,
+    xRateLimitReset?: number,
+    xGitHubRequestId?: number,
+    body: models.OrgTeamsPost,
+  };
 
   /**
    * Create team.
@@ -291,16 +428,7 @@ export interface OrgsAPIClientInterface {
    * Response generated for [ 201 ] HTTP response code.
    */
   postOrgsOrgTeams(
-    args: {
-      org: string,  // Name of organisation.
-      xGitHubMediaType?: string,  // (optional) You can check the current version of media type in responses. 
-      accept?: string,  // (optional) Is used to set specified media type.
-      xRateLimit?: number,
-      xRateLimitRemaining?: number,
-      xRateLimitReset?: number,
-      xGitHubRequestId?: number,
-      body: models.OrgTeamsPost,
-    },
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Team>;
 

@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DefaultHttpOptions, HttpOptions } from './types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, APIClient } from './api-client.service';
+import { APIClientInterface } from './api-client.interface';
 
 import * as models from './models';
 import * as guards from './guards';
 
 @Injectable()
-export class GuardedAPIClient extends APIClient {
+export class GuardedAPIClient extends APIClient implements APIClientInterface {
 
   constructor(readonly httpClient: HttpClient,
               @Optional() @Inject(USE_DOMAIN) domain?: string,
@@ -29,9 +30,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   auth(
-    args: {
-      body: models.AuthForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['authParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.auth(args, requestHttpOptions)
@@ -46,9 +45,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   passwordRestoreRequest(
-    args: {
-      body: models.RestoreForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.passwordRestoreRequest(args, requestHttpOptions)
@@ -56,9 +53,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   passwordRestoreEmailRequest(
-    args: {
-      body: models.RestoreRequestForm,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.passwordRestoreEmailRequest(args, requestHttpOptions)
@@ -66,9 +61,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   passwordRestoreCheckRestoreGuid(
-    args: {
-      restoreGuid: string,  // RestoreGuid for check
-    },
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.passwordRestoreCheckRestoreGuid(args, requestHttpOptions)
@@ -90,9 +83,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   addStructureEntity(
-    args: {
-      body: models.StructureAddParameters,  // Structure entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure> {
     return super.addStructureEntity(args, requestHttpOptions)
@@ -100,10 +91,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   updateStructureEntity(
-    args: {
-      structureId: number,  // structure id to update
-      body: models.StructureForm,  // Structure entity object that needs to be updated
-    },
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Structure> {
     return super.updateStructureEntity(args, requestHttpOptions)
@@ -111,13 +99,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getReportsList(
-    args: {
-      status?: models.Status,  // (optional) - 1 Pending - 2 InProgress - 3 Complete 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('id' | 'title' | 'subtitle' | 'criticality' | 'status' | 'issues' | 'deadline'),  // id | title | subtitle | criticality | status | issues | deadline
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getReportsList(args, requestHttpOptions)
@@ -125,9 +107,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getReportDetails(
-    args: {
-      id: number,  // report id to get
-    },
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ReportItem[]> {
     return super.getReportDetails(args, requestHttpOptions)
@@ -135,13 +115,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getReportPreview(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-      pageSize: number,
-      page: number,  // page number
-      orderBy?: number,  // (optional) column id
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getReportPreview(args, requestHttpOptions)
@@ -149,9 +123,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getImportHistory(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-    },
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportHistoryItem[]> {
     return super.getImportHistory(args, requestHttpOptions)
@@ -159,10 +131,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   uploadFile(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-      file: File,  // file to upload
-    },
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<number> {
     return super.uploadFile(args, requestHttpOptions)
@@ -170,9 +139,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   listTemplateColumns(
-    args: {
-      templateId: number,  // [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails) 
-    },
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]> {
     return super.listTemplateColumns(args, requestHttpOptions)
@@ -180,9 +147,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   listReportColumns(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Column[]> {
     return super.listReportColumns(args, requestHttpOptions)
@@ -190,10 +155,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   saveColumnsMapping(
-    args: {
-      id: number,  // Id of current import
-      body: models.ColumnMapping[],  // Column mappint for current import
-    },
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.Table> {
     return super.saveColumnsMapping(args, requestHttpOptions)
@@ -201,9 +163,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getValidationTable(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ValidatedTable> {
     return super.getValidationTable(args, requestHttpOptions)
@@ -211,10 +171,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   downloadImportedFile(
-    args: {
-      id: number,  // Id of current import
-      all?: boolean,  // (optional) Indicator of downloading data(all or errors only)
-    },
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.downloadImportedFile(args, requestHttpOptions)
@@ -222,9 +179,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   importConfirmation(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.ImportResponse> {
     return super.importConfirmation(args, requestHttpOptions)
@@ -232,9 +187,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   downloadImportOriginalFile(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.downloadImportOriginalFile(args, requestHttpOptions)
@@ -242,9 +195,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   downloadImportSkippedFile(
-    args: {
-      id: number,  // Id of current import
-    },
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<File> {
     return super.downloadImportSkippedFile(args, requestHttpOptions)
@@ -252,9 +203,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   geImportStats(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-    },
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.TotalImportStats> {
     return super.geImportStats(args, requestHttpOptions)
@@ -262,14 +211,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getIssuesList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.IssueStatus,  // (optional) - 1 Pending - 2 Resolved 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'school' | 'dueDate' | 'alert'),  // name | school | dueDate | alert
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getIssuesList(args, requestHttpOptions)
@@ -277,14 +219,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getStatusesList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),  // name | issues | dueDate | progress
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getStatusesList(args, requestHttpOptions)
@@ -292,16 +227,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getUsersList(
-    args: {
-      period?: models.Period,  // (optional) - 1 Year - 2 Month - 3 Week 
-      status?: models.ImportStatus,  // (optional) - 1 Live - 2 PastDeadline 
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),  // name | issues | dueDate | progress
-      order?: models.Order,  // (optional) - asc - desc 
-      assignedToRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9yal)
-      unassignedFromRole?: number,  // (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16)
-    },
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getUsersList(args, requestHttpOptions)
@@ -309,9 +235,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   createUser(
-    args: {
-      body: models.UserDetails,  // User entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails> {
     return super.createUser(args, requestHttpOptions)
@@ -326,9 +250,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getUserDetails(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails[]> {
     return super.getUserDetails(args, requestHttpOptions)
@@ -336,10 +258,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   updateUser(
-    args: {
-      id: number,
-      body: models.UserDetails,  // User entity object that needs to be updated
-    },
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.UserDetails> {
     return super.updateUser(args, requestHttpOptions)
@@ -354,9 +273,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   createRole(
-    args: {
-      body: object,  // Role entity object that needs to be added
-    },
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
     return super.createRole(args, requestHttpOptions)
@@ -371,9 +288,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getRoleDetails(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem[]> {
     return super.getRoleDetails(args, requestHttpOptions)
@@ -381,10 +296,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   updateRole(
-    args: {
-      id: number,
-      body?: models.RoleUpdateDetails,
-    },
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.RoleDetailsItem> {
     return super.updateRole(args, requestHttpOptions)
@@ -399,12 +311,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getNotificationsList(
-    args: {
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'description' | 'priority' | 'date'),  // name | description | priority | date
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getNotificationsList(args, requestHttpOptions)
@@ -426,13 +333,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getModuleNotificationsList(
-    args: {
-      moduleId: number,
-      pageSize: number,
-      page: number,  // page number
-      orderBy: ('name' | 'description' | 'priority' | 'date'),  // name | description | priority | date
-      order?: models.Order,  // (optional) - asc - desc 
-    },
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<object> {
     return super.getModuleNotificationsList(args, requestHttpOptions)
@@ -440,9 +341,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   getNotification(
-    args: {
-      id: number,
-    },
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.NotificationEditableListItem> {
     return super.getNotification(args, requestHttpOptions)
@@ -450,9 +349,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   createNotification(
-    args: {
-      body?: models.NotificationEditable,
-    },
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<number> {
     return super.createNotification(args, requestHttpOptions)
@@ -467,9 +364,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   udatePassVerificationPolicies(
-    args: {
-      body?: models.PasswordVerificationPolicies,
-    },
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordVerificationPolicies> {
     return super.udatePassVerificationPolicies(args, requestHttpOptions)
@@ -484,9 +379,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   udatePassCreationPolicies(
-    args: {
-      body?: models.PasswordCreationPolicies,
-    },
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.PasswordCreationPolicies> {
     return super.udatePassCreationPolicies(args, requestHttpOptions)
@@ -501,9 +394,7 @@ export class GuardedAPIClient extends APIClient {
   }
 
   udateOtherSecuritySettings(
-    args: {
-      body?: models.OtherSecuritySettings,
-    },
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
     requestHttpOptions?: HttpOptions
   ): Observable<models.OtherSecuritySettings> {
     return super.udateOtherSecuritySettings(args, requestHttpOptions)
