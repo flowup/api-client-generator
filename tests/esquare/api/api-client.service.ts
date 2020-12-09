@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { APIClientInterface } from './api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from './types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 export const USE_DOMAIN = new InjectionToken<string>('APIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('APIClient_USE_H
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class APIClient implements APIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -55,30 +52,61 @@ export class APIClient implements APIClientInterface {
    */
   auth(
     args: Exclude<APIClientInterface['authParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  auth(
+    args: Exclude<APIClientInterface['authParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  auth(
+    args: Exclude<APIClientInterface['authParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  auth(
+    args: Exclude<APIClientInterface['authParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/auth`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<object>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<object>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   authRef(
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  authRef(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  authRef(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  authRef(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/auth/refresh`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<object>('POST', path, options);
+    return this.http.post<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -86,15 +114,32 @@ export class APIClient implements APIClientInterface {
    */
   passwordRestoreRequest(
     args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  passwordRestoreRequest(
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  passwordRestoreRequest(
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  passwordRestoreRequest(
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/restore`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<object>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<object>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -102,15 +147,32 @@ export class APIClient implements APIClientInterface {
    */
   passwordRestoreEmailRequest(
     args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  passwordRestoreEmailRequest(
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  passwordRestoreEmailRequest(
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  passwordRestoreEmailRequest(
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/restore/request`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<object>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<object>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -118,12 +180,29 @@ export class APIClient implements APIClientInterface {
    */
   passwordRestoreCheckRestoreGuid(
     args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  passwordRestoreCheckRestoreGuid(
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  passwordRestoreCheckRestoreGuid(
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  passwordRestoreCheckRestoreGuid(
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/restore/checkGuid`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     const formData = new FormData();
@@ -131,37 +210,65 @@ export class APIClient implements APIClientInterface {
       formData.append('restoreGuid', args.restoreGuid);
     }
 
-    return this.sendRequest<object>('POST', path, options, formData);
+    return this.http.post<object>(`${this.domain}${path}`, formData, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getAclList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.AclItem[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.AclItem[]>;
+  getAclList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.AclItem[]>>;
+  getAclList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.AclItem[]>>;
+  getAclList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.AclItem[] | HttpResponse<models.AclItem[]> | HttpEvent<models.AclItem[]>> {
     const path = `/acl`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.AclItem[]>('GET', path, options);
+    return this.http.get<models.AclItem[]>(`${this.domain}${path}`, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getStructureEntitiesList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Structure[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Structure[]>;
+  getStructureEntitiesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Structure[]>>;
+  getStructureEntitiesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Structure[]>>;
+  getStructureEntitiesList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Structure[] | HttpResponse<models.Structure[]> | HttpEvent<models.Structure[]>> {
     const path = `/structure`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Structure[]>('GET', path, options);
+    return this.http.get<models.Structure[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -169,15 +276,32 @@ export class APIClient implements APIClientInterface {
    */
   addStructureEntity(
     args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Structure> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Structure>;
+  addStructureEntity(
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Structure>>;
+  addStructureEntity(
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Structure>>;
+  addStructureEntity(
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Structure | HttpResponse<models.Structure> | HttpEvent<models.Structure>> {
     const path = `/structure`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Structure>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Structure>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -185,15 +309,32 @@ export class APIClient implements APIClientInterface {
    */
   updateStructureEntity(
     args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Structure> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Structure>;
+  updateStructureEntity(
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Structure>>;
+  updateStructureEntity(
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Structure>>;
+  updateStructureEntity(
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Structure | HttpResponse<models.Structure> | HttpEvent<models.Structure>> {
     const path = `/structure/${args.structureId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Structure>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.Structure>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -201,15 +342,32 @@ export class APIClient implements APIClientInterface {
    */
   deleteStructureEntity(
     args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteStructureEntity(
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteStructureEntity(
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteStructureEntity(
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/structure/${args.structureId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -219,12 +377,29 @@ export class APIClient implements APIClientInterface {
    */
   getReportsList(
     args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getReportsList(
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getReportsList(
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getReportsList(
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/report`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('status' in args) {
@@ -242,7 +417,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -252,15 +427,32 @@ export class APIClient implements APIClientInterface {
    */
   getReportDetails(
     args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ReportItem[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ReportItem[]>;
+  getReportDetails(
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ReportItem[]>>;
+  getReportDetails(
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ReportItem[]>>;
+  getReportDetails(
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ReportItem[] | HttpResponse<models.ReportItem[]> | HttpEvent<models.ReportItem[]>> {
     const path = `/report/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.ReportItem[]>('GET', path, options);
+    return this.http.get<models.ReportItem[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -270,12 +462,29 @@ export class APIClient implements APIClientInterface {
    */
   getReportPreview(
     args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getReportPreview(
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getReportPreview(
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getReportPreview(
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/report/preview/${args.templateId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('pageSize' in args) {
@@ -290,7 +499,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -300,15 +509,32 @@ export class APIClient implements APIClientInterface {
    */
   getImportHistory(
     args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ImportHistoryItem[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ImportHistoryItem[]>;
+  getImportHistory(
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ImportHistoryItem[]>>;
+  getImportHistory(
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ImportHistoryItem[]>>;
+  getImportHistory(
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ImportHistoryItem[] | HttpResponse<models.ImportHistoryItem[]> | HttpEvent<models.ImportHistoryItem[]>> {
     const path = `/report/history/${args.templateId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.ImportHistoryItem[]>('GET', path, options);
+    return this.http.get<models.ImportHistoryItem[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -318,12 +544,29 @@ export class APIClient implements APIClientInterface {
    */
   uploadFile(
     args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<number> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<number>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<number>>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<number>>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<number | HttpResponse<number> | HttpEvent<number>> {
     const path = `/report/wizard/uploadfile/${args.templateId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     const formData = new FormData();
@@ -331,7 +574,7 @@ export class APIClient implements APIClientInterface {
       formData.append('file', args.file);
     }
 
-    return this.sendRequest<number>('POST', path, options, formData);
+    return this.http.post<number>(`${this.domain}${path}`, formData, options);
   }
 
   /**
@@ -341,15 +584,32 @@ export class APIClient implements APIClientInterface {
    */
   listTemplateColumns(
     args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Column[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Column[]>;
+  listTemplateColumns(
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Column[]>>;
+  listTemplateColumns(
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Column[]>>;
+  listTemplateColumns(
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Column[] | HttpResponse<models.Column[]> | HttpEvent<models.Column[]>> {
     const path = `/report/wizard/${args.templateId}/templateColumns`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Column[]>('GET', path, options);
+    return this.http.get<models.Column[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -359,15 +619,32 @@ export class APIClient implements APIClientInterface {
    */
   listReportColumns(
     args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Column[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Column[]>;
+  listReportColumns(
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Column[]>>;
+  listReportColumns(
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Column[]>>;
+  listReportColumns(
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Column[] | HttpResponse<models.Column[]> | HttpEvent<models.Column[]>> {
     const path = `/report/wizard/${args.id}/reportColumns`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Column[]>('GET', path, options);
+    return this.http.get<models.Column[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -377,15 +654,32 @@ export class APIClient implements APIClientInterface {
    */
   saveColumnsMapping(
     args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Table> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Table>;
+  saveColumnsMapping(
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Table>>;
+  saveColumnsMapping(
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Table>>;
+  saveColumnsMapping(
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Table | HttpResponse<models.Table> | HttpEvent<models.Table>> {
     const path = `/report/wizard/${args.id}/mapping`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Table>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Table>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -395,15 +689,32 @@ export class APIClient implements APIClientInterface {
    */
   getValidationTable(
     args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ValidatedTable> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ValidatedTable>;
+  getValidationTable(
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ValidatedTable>>;
+  getValidationTable(
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ValidatedTable>>;
+  getValidationTable(
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ValidatedTable | HttpResponse<models.ValidatedTable> | HttpEvent<models.ValidatedTable>> {
     const path = `/report/wizard/${args.id}/validationTable`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.ValidatedTable>('GET', path, options);
+    return this.http.get<models.ValidatedTable>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -413,19 +724,36 @@ export class APIClient implements APIClientInterface {
    */
   downloadImportedFile(
     args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  downloadImportedFile(
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  downloadImportedFile(
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  downloadImportedFile(
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
     const path = `/report/wizard/${args.id}/downloadImported`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
-      responseType: 'blob',
+      observe,
+      responseType: 'blob' as 'json',
     };
 
     if ('all' in args) {
       options.params = options.params.set('all', String(args.all));
     }
-    return this.sendRequest<File>('GET', path, options);
+    return this.http.get<File>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -435,15 +763,32 @@ export class APIClient implements APIClientInterface {
    */
   importConfirmation(
     args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ImportResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ImportResponse>;
+  importConfirmation(
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ImportResponse>>;
+  importConfirmation(
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ImportResponse>>;
+  importConfirmation(
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ImportResponse | HttpResponse<models.ImportResponse> | HttpEvent<models.ImportResponse>> {
     const path = `/report/wizard/${args.id}/import`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.ImportResponse>('POST', path, options);
+    return this.http.post<models.ImportResponse>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -453,16 +798,33 @@ export class APIClient implements APIClientInterface {
    */
   downloadImportOriginalFile(
     args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  downloadImportOriginalFile(
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  downloadImportOriginalFile(
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  downloadImportOriginalFile(
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
     const path = `/report/wizard/${args.id}/downloadOriginal`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
-      responseType: 'blob',
+      observe,
+      responseType: 'blob' as 'json',
     };
 
-    return this.sendRequest<File>('GET', path, options);
+    return this.http.get<File>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -472,16 +834,33 @@ export class APIClient implements APIClientInterface {
    */
   downloadImportSkippedFile(
     args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  downloadImportSkippedFile(
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  downloadImportSkippedFile(
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  downloadImportSkippedFile(
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
     const path = `/report/wizard/${args.id}/downloadSkipped`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
-      responseType: 'blob',
+      observe,
+      responseType: 'blob' as 'json',
     };
 
-    return this.sendRequest<File>('GET', path, options);
+    return this.http.get<File>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -491,15 +870,32 @@ export class APIClient implements APIClientInterface {
    */
   cancelImport(
     args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  cancelImport(
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  cancelImport(
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  cancelImport(
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/report/wizard/${args.id}/cancelImport`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('POST', path, options);
+    return this.http.post<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -509,12 +905,29 @@ export class APIClient implements APIClientInterface {
    */
   overrideImport(
     args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  overrideImport(
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  overrideImport(
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  overrideImport(
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/report/wizard/${args.id}/override`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     const formData = new FormData();
@@ -525,7 +938,7 @@ export class APIClient implements APIClientInterface {
       formData.append('file', args.file);
     }
 
-    return this.sendRequest<void>('POST', path, options, formData);
+    return this.http.post<void>(`${this.domain}${path}`, formData, options);
   }
 
   /**
@@ -535,18 +948,35 @@ export class APIClient implements APIClientInterface {
    */
   geImportStats(
     args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TotalImportStats> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TotalImportStats>;
+  geImportStats(
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TotalImportStats>>;
+  geImportStats(
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TotalImportStats>>;
+  geImportStats(
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TotalImportStats | HttpResponse<models.TotalImportStats> | HttpEvent<models.TotalImportStats>> {
     const path = `/report/ministry/statistic`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('period' in args) {
       options.params = options.params.set('period', String(args.period));
     }
-    return this.sendRequest<models.TotalImportStats>('GET', path, options);
+    return this.http.get<models.TotalImportStats>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -556,12 +986,29 @@ export class APIClient implements APIClientInterface {
    */
   getIssuesList(
     args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getIssuesList(
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getIssuesList(
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getIssuesList(
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/report/ministry/issues`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('period' in args) {
@@ -582,7 +1029,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -592,12 +1039,29 @@ export class APIClient implements APIClientInterface {
    */
   getStatusesList(
     args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getStatusesList(
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getStatusesList(
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getStatusesList(
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/report/ministry/statuses`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('period' in args) {
@@ -618,7 +1082,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -626,12 +1090,29 @@ export class APIClient implements APIClientInterface {
    */
   getUsersList(
     args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getUsersList(
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getUsersList(
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getUsersList(
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/users`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('period' in args) {
@@ -658,7 +1139,7 @@ export class APIClient implements APIClientInterface {
     if ('unassignedFromRole' in args) {
       options.params = options.params.set('unassignedFromRole', String(args.unassignedFromRole));
     }
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -666,30 +1147,61 @@ export class APIClient implements APIClientInterface {
    */
   createUser(
     args: Exclude<APIClientInterface['createUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserDetails> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserDetails>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserDetails>>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserDetails>>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserDetails | HttpResponse<models.UserDetails> | HttpEvent<models.UserDetails>> {
     const path = `/users`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.UserDetails>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.UserDetails>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getAclStructure(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Acl[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Acl[]>;
+  getAclStructure(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Acl[]>>;
+  getAclStructure(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Acl[]>>;
+  getAclStructure(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Acl[] | HttpResponse<models.Acl[]> | HttpEvent<models.Acl[]>> {
     const path = `/users/acl`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Acl[]>('GET', path, options);
+    return this.http.get<models.Acl[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -697,15 +1209,32 @@ export class APIClient implements APIClientInterface {
    */
   getUserDetails(
     args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserDetails[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserDetails[]>;
+  getUserDetails(
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserDetails[]>>;
+  getUserDetails(
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserDetails[]>>;
+  getUserDetails(
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserDetails[] | HttpResponse<models.UserDetails[]> | HttpEvent<models.UserDetails[]>> {
     const path = `/users/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.UserDetails[]>('GET', path, options);
+    return this.http.get<models.UserDetails[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -713,15 +1242,32 @@ export class APIClient implements APIClientInterface {
    */
   updateUser(
     args: Exclude<APIClientInterface['updateUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserDetails> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserDetails>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserDetails>>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserDetails>>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserDetails | HttpResponse<models.UserDetails> | HttpEvent<models.UserDetails>> {
     const path = `/users/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.UserDetails>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.UserDetails>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -729,15 +1275,32 @@ export class APIClient implements APIClientInterface {
    */
   deleteUser(
     args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/users/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -746,15 +1309,29 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getRolesList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RoleListItem[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RoleListItem[]>;
+  getRolesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RoleListItem[]>>;
+  getRolesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RoleListItem[]>>;
+  getRolesList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RoleListItem[] | HttpResponse<models.RoleListItem[]> | HttpEvent<models.RoleListItem[]>> {
     const path = `/users/roles`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.RoleListItem[]>('GET', path, options);
+    return this.http.get<models.RoleListItem[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -762,15 +1339,32 @@ export class APIClient implements APIClientInterface {
    */
   createRole(
     args: Exclude<APIClientInterface['createRoleParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RoleDetailsItem> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RoleDetailsItem>;
+  createRole(
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RoleDetailsItem>>;
+  createRole(
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RoleDetailsItem>>;
+  createRole(
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RoleDetailsItem | HttpResponse<models.RoleDetailsItem> | HttpEvent<models.RoleDetailsItem>> {
     const path = `/users/roles`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.RoleDetailsItem>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.RoleDetailsItem>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -779,15 +1373,29 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PrivilegeTreeItem[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PrivilegeTreeItem[]>;
+  getList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PrivilegeTreeItem[]>>;
+  getList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PrivilegeTreeItem[]>>;
+  getList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PrivilegeTreeItem[] | HttpResponse<models.PrivilegeTreeItem[]> | HttpEvent<models.PrivilegeTreeItem[]>> {
     const path = `/users/privileges`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.PrivilegeTreeItem[]>('GET', path, options);
+    return this.http.get<models.PrivilegeTreeItem[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -795,15 +1403,32 @@ export class APIClient implements APIClientInterface {
    */
   getRoleDetails(
     args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RoleDetailsItem[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RoleDetailsItem[]>;
+  getRoleDetails(
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RoleDetailsItem[]>>;
+  getRoleDetails(
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RoleDetailsItem[]>>;
+  getRoleDetails(
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RoleDetailsItem[] | HttpResponse<models.RoleDetailsItem[]> | HttpEvent<models.RoleDetailsItem[]>> {
     const path = `/users/roles/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.RoleDetailsItem[]>('GET', path, options);
+    return this.http.get<models.RoleDetailsItem[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -811,15 +1436,32 @@ export class APIClient implements APIClientInterface {
    */
   updateRole(
     args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RoleDetailsItem> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RoleDetailsItem>;
+  updateRole(
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RoleDetailsItem>>;
+  updateRole(
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RoleDetailsItem>>;
+  updateRole(
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RoleDetailsItem | HttpResponse<models.RoleDetailsItem> | HttpEvent<models.RoleDetailsItem>> {
     const path = `/users/roles/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.RoleDetailsItem>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.RoleDetailsItem>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -827,15 +1469,32 @@ export class APIClient implements APIClientInterface {
    */
   deleteRole(
     args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteRole(
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteRole(
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteRole(
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/users/roles/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -844,15 +1503,29 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getNewNotificationsList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.NotificationListItem[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.NotificationListItem[]>;
+  getNewNotificationsList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.NotificationListItem[]>>;
+  getNewNotificationsList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.NotificationListItem[]>>;
+  getNewNotificationsList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.NotificationListItem[] | HttpResponse<models.NotificationListItem[]> | HttpEvent<models.NotificationListItem[]>> {
     const path = `/notifications/new`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.NotificationListItem[]>('GET', path, options);
+    return this.http.get<models.NotificationListItem[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -860,15 +1533,32 @@ export class APIClient implements APIClientInterface {
    */
   markViewedNotifications(
     args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  markViewedNotifications(
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  markViewedNotifications(
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  markViewedNotifications(
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/notifications/markAsViewed`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -878,12 +1568,29 @@ export class APIClient implements APIClientInterface {
    */
   getNotificationsList(
     args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getNotificationsList(
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getNotificationsList(
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getNotificationsList(
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/notifications/all`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('pageSize' in args) {
@@ -898,7 +1605,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -908,15 +1615,29 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getModulesList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.NotificationModule[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.NotificationModule[]>;
+  getModulesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.NotificationModule[]>>;
+  getModulesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.NotificationModule[]>>;
+  getModulesList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.NotificationModule[] | HttpResponse<models.NotificationModule[]> | HttpEvent<models.NotificationModule[]>> {
     const path = `/notifications/modules`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.NotificationModule[]>('GET', path, options);
+    return this.http.get<models.NotificationModule[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -925,15 +1646,29 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getTriggersList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.NotificationTrigger[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.NotificationTrigger[]>;
+  getTriggersList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.NotificationTrigger[]>>;
+  getTriggersList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.NotificationTrigger[]>>;
+  getTriggersList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.NotificationTrigger[] | HttpResponse<models.NotificationTrigger[]> | HttpEvent<models.NotificationTrigger[]>> {
     const path = `/notifications/triggers`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.NotificationTrigger[]>('GET', path, options);
+    return this.http.get<models.NotificationTrigger[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -943,12 +1678,29 @@ export class APIClient implements APIClientInterface {
    */
   getModuleNotificationsList(
     args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getModuleNotificationsList(
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getModuleNotificationsList(
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getModuleNotificationsList(
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/notifications/modules/${args.moduleId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('pageSize' in args) {
@@ -963,7 +1715,7 @@ export class APIClient implements APIClientInterface {
     if ('order' in args) {
       options.params = options.params.set('order', String(args.order));
     }
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -971,15 +1723,32 @@ export class APIClient implements APIClientInterface {
    */
   enableNotification(
     args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  enableNotification(
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  enableNotification(
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  enableNotification(
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/notifications/enable/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -987,15 +1756,32 @@ export class APIClient implements APIClientInterface {
    */
   disableNotification(
     args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  disableNotification(
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  disableNotification(
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  disableNotification(
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/notifications/disable/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1003,15 +1789,32 @@ export class APIClient implements APIClientInterface {
    */
   getNotification(
     args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.NotificationEditableListItem> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.NotificationEditableListItem>;
+  getNotification(
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.NotificationEditableListItem>>;
+  getNotification(
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.NotificationEditableListItem>>;
+  getNotification(
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.NotificationEditableListItem | HttpResponse<models.NotificationEditableListItem> | HttpEvent<models.NotificationEditableListItem>> {
     const path = `/notifications/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.NotificationEditableListItem>('GET', path, options);
+    return this.http.get<models.NotificationEditableListItem>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1019,15 +1822,32 @@ export class APIClient implements APIClientInterface {
    */
   updateNotification(
     args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  updateNotification(
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  updateNotification(
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  updateNotification(
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/notifications/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1035,15 +1855,32 @@ export class APIClient implements APIClientInterface {
    */
   createNotification(
     args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<number> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<number>;
+  createNotification(
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<number>>;
+  createNotification(
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<number>>;
+  createNotification(
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<number | HttpResponse<number> | HttpEvent<number>> {
     const path = `/notifications`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<number>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<number>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1052,15 +1889,29 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getPassVerificationPolicies(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PasswordVerificationPolicies> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PasswordVerificationPolicies>;
+  getPassVerificationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PasswordVerificationPolicies>>;
+  getPassVerificationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PasswordVerificationPolicies>>;
+  getPassVerificationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PasswordVerificationPolicies | HttpResponse<models.PasswordVerificationPolicies> | HttpEvent<models.PasswordVerificationPolicies>> {
     const path = `/security-policy/password-verification`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.PasswordVerificationPolicies>('GET', path, options);
+    return this.http.get<models.PasswordVerificationPolicies>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1070,15 +1921,32 @@ export class APIClient implements APIClientInterface {
    */
   udatePassVerificationPolicies(
     args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PasswordVerificationPolicies> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PasswordVerificationPolicies>;
+  udatePassVerificationPolicies(
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PasswordVerificationPolicies>>;
+  udatePassVerificationPolicies(
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PasswordVerificationPolicies>>;
+  udatePassVerificationPolicies(
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PasswordVerificationPolicies | HttpResponse<models.PasswordVerificationPolicies> | HttpEvent<models.PasswordVerificationPolicies>> {
     const path = `/security-policy/password-verification`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.PasswordVerificationPolicies>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.PasswordVerificationPolicies>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1087,15 +1955,29 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getPassCreationPolicies(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PasswordCreationPolicies> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PasswordCreationPolicies>;
+  getPassCreationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PasswordCreationPolicies>>;
+  getPassCreationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PasswordCreationPolicies>>;
+  getPassCreationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PasswordCreationPolicies | HttpResponse<models.PasswordCreationPolicies> | HttpEvent<models.PasswordCreationPolicies>> {
     const path = `/security-policy/password-creation`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.PasswordCreationPolicies>('GET', path, options);
+    return this.http.get<models.PasswordCreationPolicies>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1105,15 +1987,32 @@ export class APIClient implements APIClientInterface {
    */
   udatePassCreationPolicies(
     args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PasswordCreationPolicies> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PasswordCreationPolicies>;
+  udatePassCreationPolicies(
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PasswordCreationPolicies>>;
+  udatePassCreationPolicies(
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PasswordCreationPolicies>>;
+  udatePassCreationPolicies(
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PasswordCreationPolicies | HttpResponse<models.PasswordCreationPolicies> | HttpEvent<models.PasswordCreationPolicies>> {
     const path = `/security-policy/password-creation`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.PasswordCreationPolicies>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.PasswordCreationPolicies>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1122,15 +2021,29 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getOtherSecuritySettings(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.OtherSecuritySettings> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.OtherSecuritySettings>;
+  getOtherSecuritySettings(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.OtherSecuritySettings>>;
+  getOtherSecuritySettings(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.OtherSecuritySettings>>;
+  getOtherSecuritySettings(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.OtherSecuritySettings | HttpResponse<models.OtherSecuritySettings> | HttpEvent<models.OtherSecuritySettings>> {
     const path = `/security-policy/other-settings`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.OtherSecuritySettings>('GET', path, options);
+    return this.http.get<models.OtherSecuritySettings>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1140,36 +2053,32 @@ export class APIClient implements APIClientInterface {
    */
   udateOtherSecuritySettings(
     args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.OtherSecuritySettings> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.OtherSecuritySettings>;
+  udateOtherSecuritySettings(
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.OtherSecuritySettings>>;
+  udateOtherSecuritySettings(
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.OtherSecuritySettings>>;
+  udateOtherSecuritySettings(
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.OtherSecuritySettings | HttpResponse<models.OtherSecuritySettings> | HttpEvent<models.OtherSecuritySettings>> {
     const path = `/security-policy/other-settings`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.OtherSecuritySettings>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.OtherSecuritySettings>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

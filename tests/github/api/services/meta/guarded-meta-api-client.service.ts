@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { MetaAPIClientInterface } from './meta-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, MetaAPIClient } from './meta-api-client.service';
-import { MetaAPIClientInterface } from './meta-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,17 +23,40 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedMetaAPIClient extends MetaAPIClient implements MetaAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * This gives some information about GitHub.com, the service.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getMeta(
     args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Meta> {
-    return super.getMeta(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Meta>;
+  getMeta(
+    args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Meta>>;
+  getMeta(
+    args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Meta>>;
+  getMeta(
+    args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Meta | HttpResponse<models.Meta> | HttpEvent<models.Meta>> {
+
+    return super.getMeta(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isMeta(res) || console.error(`TypeGuard for response 'models.Meta' caught inconsistency.`, res)));
   }
 

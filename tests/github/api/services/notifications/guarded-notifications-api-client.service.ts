@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { NotificationsAPIClientInterface } from './notifications-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, NotificationsAPIClient } from './notifications-api-client.service';
-import { NotificationsAPIClientInterface } from './notifications-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,41 +23,219 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedNotificationsAPIClient extends NotificationsAPIClient implements NotificationsAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * List your notifications.
+   * List all notifications for the current user, grouped by repository.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getNotifications(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Notifications> {
-    return super.getNotifications(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Notifications>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Notifications>>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Notifications>>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>> {
+
+    return super.getNotifications(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'models.Notifications' caught inconsistency.`, res)));
   }
 
+  /**
+   * Mark as read.
+   * Marking a notification as "read" removes it from the default view on GitHub.com.
+   * 
+   * Response generated for [ 205 ] HTTP response code.
+   */
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.putNotifications(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * View a single thread.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getNotificationsThreadsId(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Notifications> {
-    return super.getNotificationsThreadsId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Notifications>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Notifications>>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Notifications>>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>> {
+
+    return super.getNotificationsThreadsId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'models.Notifications' caught inconsistency.`, res)));
   }
 
+  /**
+   * Mark a thread as read
+   * Response generated for [ 205 ] HTTP response code.
+   */
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.patchNotificationsThreadsId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Delete a Thread Subscription.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteNotificationsThreadsIdSubscription(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a Thread Subscription.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getNotificationsThreadsIdSubscription(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Subscription> {
-    return super.getNotificationsThreadsIdSubscription(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Subscription>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscription>>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscription>>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Subscription | HttpResponse<models.Subscription> | HttpEvent<models.Subscription>> {
+
+    return super.getNotificationsThreadsIdSubscription(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSubscription(res) || console.error(`TypeGuard for response 'models.Subscription' caught inconsistency.`, res)));
   }
 
+  /**
+   * Set a Thread Subscription.
+   * This lets you subscribe to a thread, or ignore it. Subscribing to a thread
+   * is unnecessary if the user is already subscribed to the repository. Ignoring
+   * a thread will mute all future notifications (until you comment or get @mentioned).
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putNotificationsThreadsIdSubscription(
     args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Subscription> {
-    return super.putNotificationsThreadsIdSubscription(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Subscription>;
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscription>>;
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscription>>;
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Subscription | HttpResponse<models.Subscription> | HttpEvent<models.Subscription>> {
+
+    return super.putNotificationsThreadsIdSubscription(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSubscription(res) || console.error(`TypeGuard for response 'models.Subscription' caught inconsistency.`, res)));
   }
 

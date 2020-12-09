@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { RateLimitAPIClientInterface } from './rate-limit-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, RateLimitAPIClient } from './rate-limit-api-client.service';
-import { RateLimitAPIClientInterface } from './rate-limit-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,17 +23,42 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedRateLimitAPIClient extends RateLimitAPIClient implements RateLimitAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Get your current rate limit status
+   * Note: Accessing this endpoint does not count against your rate limit.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getRateLimit(
     args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RateLimit> {
-    return super.getRateLimit(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RateLimit>;
+  getRateLimit(
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RateLimit>>;
+  getRateLimit(
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RateLimit>>;
+  getRateLimit(
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RateLimit | HttpResponse<models.RateLimit> | HttpEvent<models.RateLimit>> {
+
+    return super.getRateLimit(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRateLimit(res) || console.error(`TypeGuard for response 'models.RateLimit' caught inconsistency.`, res)));
   }
 

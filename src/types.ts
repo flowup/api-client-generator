@@ -22,7 +22,17 @@ export interface TemplateData {
   readonly interfaceFileName: string;
 }
 
-export type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+export type MethodType =
+  /* these have body */
+  | 'post'
+  | 'put'
+  | 'patch'
+  /* these doesn't have body */
+  | 'get'
+  | 'delete'
+  | 'head'
+  | 'options';
+
 export type FileInfix = 'model' | 'enum' | 'service' | 'interface';
 
 export interface Property {
@@ -77,6 +87,10 @@ export interface GenOptions {
    * Skip creating index file with module export
    */
   skipModuleExport?: boolean;
+  /**
+   * Skip creating type guards and guarded API client service
+   */
+  skipGuards?: boolean;
 }
 
 // tslint:disable-next-line no-any

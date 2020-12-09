@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface EventsAPIClientInterface {
-
   /**
    * Arguments object for method `getEvents`.
    */
@@ -36,8 +34,23 @@ export interface EventsAPIClientInterface {
    */
   getEvents(
     args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Events>;
-
+  getEvents(
+    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getEvents(
+    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getEvents(
+    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>>;
 
 }

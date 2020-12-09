@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { APIClientInterface } from './api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from './types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, APIClient } from './api-client.service';
-import { APIClientInterface } from './api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 import * as guards from './guards';
@@ -23,381 +23,1613 @@ import * as guards from './guards';
 @Injectable()
 export class GuardedAPIClient extends APIClient implements APIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   auth(
     args: Exclude<APIClientInterface['authParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.auth(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  auth(
+    args: Exclude<APIClientInterface['authParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  auth(
+    args: Exclude<APIClientInterface['authParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  auth(
+    args: Exclude<APIClientInterface['authParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.auth(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   authRef(
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.authRef(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  authRef(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  authRef(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  authRef(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.authRef(requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   passwordRestoreRequest(
     args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.passwordRestoreRequest(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  passwordRestoreRequest(
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  passwordRestoreRequest(
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  passwordRestoreRequest(
+    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.passwordRestoreRequest(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   passwordRestoreEmailRequest(
     args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.passwordRestoreEmailRequest(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  passwordRestoreEmailRequest(
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  passwordRestoreEmailRequest(
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  passwordRestoreEmailRequest(
+    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.passwordRestoreEmailRequest(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   passwordRestoreCheckRestoreGuid(
     args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.passwordRestoreCheckRestoreGuid(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  passwordRestoreCheckRestoreGuid(
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  passwordRestoreCheckRestoreGuid(
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  passwordRestoreCheckRestoreGuid(
+    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.passwordRestoreCheckRestoreGuid(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getAclList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.AclItem[]> {
-    return super.getAclList(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.AclItem[]>;
+  getAclList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.AclItem[]>>;
+  getAclList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.AclItem[]>>;
+  getAclList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.AclItem[] | HttpResponse<models.AclItem[]> | HttpEvent<models.AclItem[]>> {
+
+    return super.getAclList(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isAclItem(item)) ) || console.error(`TypeGuard for response 'models.AclItem[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getStructureEntitiesList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Structure[]> {
-    return super.getStructureEntitiesList(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Structure[]>;
+  getStructureEntitiesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Structure[]>>;
+  getStructureEntitiesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Structure[]>>;
+  getStructureEntitiesList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Structure[] | HttpResponse<models.Structure[]> | HttpEvent<models.Structure[]>> {
+
+    return super.getStructureEntitiesList(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isStructure(item)) ) || console.error(`TypeGuard for response 'models.Structure[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   addStructureEntity(
     args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Structure> {
-    return super.addStructureEntity(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Structure>;
+  addStructureEntity(
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Structure>>;
+  addStructureEntity(
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Structure>>;
+  addStructureEntity(
+    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Structure | HttpResponse<models.Structure> | HttpEvent<models.Structure>> {
+
+    return super.addStructureEntity(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isStructure(res) || console.error(`TypeGuard for response 'models.Structure' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   updateStructureEntity(
     args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Structure> {
-    return super.updateStructureEntity(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Structure>;
+  updateStructureEntity(
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Structure>>;
+  updateStructureEntity(
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Structure>>;
+  updateStructureEntity(
+    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Structure | HttpResponse<models.Structure> | HttpEvent<models.Structure>> {
+
+    return super.updateStructureEntity(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isStructure(res) || console.error(`TypeGuard for response 'models.Structure' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  deleteStructureEntity(
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteStructureEntity(
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteStructureEntity(
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteStructureEntity(
+    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteStructureEntity(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * [Screenshot from design](http://prntscr.com/hy4z8d)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReportsList(
     args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getReportsList(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getReportsList(
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getReportsList(
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getReportsList(
+    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getReportsList(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hywkd5)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReportDetails(
     args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ReportItem[]> {
-    return super.getReportDetails(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ReportItem[]>;
+  getReportDetails(
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ReportItem[]>>;
+  getReportDetails(
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ReportItem[]>>;
+  getReportDetails(
+    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ReportItem[] | HttpResponse<models.ReportItem[]> | HttpEvent<models.ReportItem[]>> {
+
+    return super.getReportDetails(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isReportItem(item)) ) || console.error(`TypeGuard for response 'models.ReportItem[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i3z8zb)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReportPreview(
     args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getReportPreview(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getReportPreview(
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getReportPreview(
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getReportPreview(
+    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getReportPreview(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i3ym4j)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getImportHistory(
     args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ImportHistoryItem[]> {
-    return super.getImportHistory(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ImportHistoryItem[]>;
+  getImportHistory(
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ImportHistoryItem[]>>;
+  getImportHistory(
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ImportHistoryItem[]>>;
+  getImportHistory(
+    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ImportHistoryItem[] | HttpResponse<models.ImportHistoryItem[]> | HttpEvent<models.ImportHistoryItem[]>> {
+
+    return super.getImportHistory(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isImportHistoryItem(item)) ) || console.error(`TypeGuard for response 'models.ImportHistoryItem[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy521p)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   uploadFile(
     args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<number> {
-    return super.uploadFile(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<number>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<number>>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<number>>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<number | HttpResponse<number> | HttpEvent<number>> {
+
+    return super.uploadFile(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'number' || console.error(`TypeGuard for response 'number' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy52hi)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   listTemplateColumns(
     args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Column[]> {
-    return super.listTemplateColumns(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Column[]>;
+  listTemplateColumns(
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Column[]>>;
+  listTemplateColumns(
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Column[]>>;
+  listTemplateColumns(
+    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Column[] | HttpResponse<models.Column[]> | HttpEvent<models.Column[]>> {
+
+    return super.listTemplateColumns(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isColumn(item)) ) || console.error(`TypeGuard for response 'models.Column[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy52zr)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   listReportColumns(
     args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Column[]> {
-    return super.listReportColumns(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Column[]>;
+  listReportColumns(
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Column[]>>;
+  listReportColumns(
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Column[]>>;
+  listReportColumns(
+    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Column[] | HttpResponse<models.Column[]> | HttpEvent<models.Column[]>> {
+
+    return super.listReportColumns(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isColumn(item)) ) || console.error(`TypeGuard for response 'models.Column[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy53jt)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   saveColumnsMapping(
     args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Table> {
-    return super.saveColumnsMapping(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Table>;
+  saveColumnsMapping(
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Table>>;
+  saveColumnsMapping(
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Table>>;
+  saveColumnsMapping(
+    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Table | HttpResponse<models.Table> | HttpEvent<models.Table>> {
+
+    return super.saveColumnsMapping(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTable(res) || console.error(`TypeGuard for response 'models.Table' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5fct)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getValidationTable(
     args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ValidatedTable> {
-    return super.getValidationTable(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ValidatedTable>;
+  getValidationTable(
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ValidatedTable>>;
+  getValidationTable(
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ValidatedTable>>;
+  getValidationTable(
+    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ValidatedTable | HttpResponse<models.ValidatedTable> | HttpEvent<models.ValidatedTable>> {
+
+    return super.getValidationTable(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isValidatedTable(res) || console.error(`TypeGuard for response 'models.ValidatedTable' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy55ga)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   downloadImportedFile(
     args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
-    return super.downloadImportedFile(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  downloadImportedFile(
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  downloadImportedFile(
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  downloadImportedFile(
+    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
+
+    return super.downloadImportedFile(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => res instanceof File || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy57nj)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   importConfirmation(
     args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ImportResponse> {
-    return super.importConfirmation(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ImportResponse>;
+  importConfirmation(
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ImportResponse>>;
+  importConfirmation(
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ImportResponse>>;
+  importConfirmation(
+    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ImportResponse | HttpResponse<models.ImportResponse> | HttpEvent<models.ImportResponse>> {
+
+    return super.importConfirmation(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isImportResponse(res) || console.error(`TypeGuard for response 'models.ImportResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5a54)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   downloadImportOriginalFile(
     args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
-    return super.downloadImportOriginalFile(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  downloadImportOriginalFile(
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  downloadImportOriginalFile(
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  downloadImportOriginalFile(
+    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
+
+    return super.downloadImportOriginalFile(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => res instanceof File || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5ae7)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   downloadImportSkippedFile(
     args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
-    return super.downloadImportSkippedFile(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  downloadImportSkippedFile(
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  downloadImportSkippedFile(
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  downloadImportSkippedFile(
+    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
+
+    return super.downloadImportSkippedFile(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => res instanceof File || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5aqq)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  cancelImport(
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  cancelImport(
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  cancelImport(
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  cancelImport(
+    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.cancelImport(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * [Screenshot from design](http://prntscr.com/hy5bi6)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  overrideImport(
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  overrideImport(
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  overrideImport(
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  overrideImport(
+    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.overrideImport(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * [Screenshot from design](http://prntscr.com/i4052r)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   geImportStats(
     args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TotalImportStats> {
-    return super.geImportStats(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TotalImportStats>;
+  geImportStats(
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TotalImportStats>>;
+  geImportStats(
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TotalImportStats>>;
+  geImportStats(
+    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TotalImportStats | HttpResponse<models.TotalImportStats> | HttpEvent<models.TotalImportStats>> {
+
+    return super.geImportStats(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTotalImportStats(res) || console.error(`TypeGuard for response 'models.TotalImportStats' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i40s18)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getIssuesList(
     args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getIssuesList(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getIssuesList(
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getIssuesList(
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getIssuesList(
+    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getIssuesList(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i4byyx)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getStatusesList(
     args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getStatusesList(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getStatusesList(
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getStatusesList(
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getStatusesList(
+    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getStatusesList(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getUsersList(
     args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getUsersList(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getUsersList(
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getUsersList(
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getUsersList(
+    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getUsersList(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   createUser(
     args: Exclude<APIClientInterface['createUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserDetails> {
-    return super.createUser(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserDetails>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserDetails>>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserDetails>>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserDetails | HttpResponse<models.UserDetails> | HttpEvent<models.UserDetails>> {
+
+    return super.createUser(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUserDetails(res) || console.error(`TypeGuard for response 'models.UserDetails' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getAclStructure(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Acl[]> {
-    return super.getAclStructure(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Acl[]>;
+  getAclStructure(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Acl[]>>;
+  getAclStructure(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Acl[]>>;
+  getAclStructure(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Acl[] | HttpResponse<models.Acl[]> | HttpEvent<models.Acl[]>> {
+
+    return super.getAclStructure(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isAcl(item)) ) || console.error(`TypeGuard for response 'models.Acl[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getUserDetails(
     args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserDetails[]> {
-    return super.getUserDetails(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserDetails[]>;
+  getUserDetails(
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserDetails[]>>;
+  getUserDetails(
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserDetails[]>>;
+  getUserDetails(
+    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserDetails[] | HttpResponse<models.UserDetails[]> | HttpEvent<models.UserDetails[]>> {
+
+    return super.getUserDetails(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isUserDetails(item)) ) || console.error(`TypeGuard for response 'models.UserDetails[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   updateUser(
     args: Exclude<APIClientInterface['updateUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserDetails> {
-    return super.updateUser(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserDetails>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserDetails>>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserDetails>>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserDetails | HttpResponse<models.UserDetails> | HttpEvent<models.UserDetails>> {
+
+    return super.updateUser(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUserDetails(res) || console.error(`TypeGuard for response 'models.UserDetails' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteUser(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * [Screenshot from design](http://prntscr.com/i93q0s)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getRolesList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RoleListItem[]> {
-    return super.getRolesList(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RoleListItem[]>;
+  getRolesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RoleListItem[]>>;
+  getRolesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RoleListItem[]>>;
+  getRolesList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RoleListItem[] | HttpResponse<models.RoleListItem[]> | HttpEvent<models.RoleListItem[]>> {
+
+    return super.getRolesList(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isRoleListItem(item)) ) || console.error(`TypeGuard for response 'models.RoleListItem[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   createRole(
     args: Exclude<APIClientInterface['createRoleParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RoleDetailsItem> {
-    return super.createRole(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RoleDetailsItem>;
+  createRole(
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RoleDetailsItem>>;
+  createRole(
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RoleDetailsItem>>;
+  createRole(
+    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RoleDetailsItem | HttpResponse<models.RoleDetailsItem> | HttpEvent<models.RoleDetailsItem>> {
+
+    return super.createRole(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRoleDetailsItem(res) || console.error(`TypeGuard for response 'models.RoleDetailsItem' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/i947a3)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PrivilegeTreeItem[]> {
-    return super.getList(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PrivilegeTreeItem[]>;
+  getList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PrivilegeTreeItem[]>>;
+  getList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PrivilegeTreeItem[]>>;
+  getList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PrivilegeTreeItem[] | HttpResponse<models.PrivilegeTreeItem[]> | HttpEvent<models.PrivilegeTreeItem[]>> {
+
+    return super.getList(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isPrivilegeTreeItem(item)) ) || console.error(`TypeGuard for response 'models.PrivilegeTreeItem[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getRoleDetails(
     args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RoleDetailsItem[]> {
-    return super.getRoleDetails(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RoleDetailsItem[]>;
+  getRoleDetails(
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RoleDetailsItem[]>>;
+  getRoleDetails(
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RoleDetailsItem[]>>;
+  getRoleDetails(
+    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RoleDetailsItem[] | HttpResponse<models.RoleDetailsItem[]> | HttpEvent<models.RoleDetailsItem[]>> {
+
+    return super.getRoleDetails(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isRoleDetailsItem(item)) ) || console.error(`TypeGuard for response 'models.RoleDetailsItem[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   updateRole(
     args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RoleDetailsItem> {
-    return super.updateRole(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RoleDetailsItem>;
+  updateRole(
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RoleDetailsItem>>;
+  updateRole(
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RoleDetailsItem>>;
+  updateRole(
+    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RoleDetailsItem | HttpResponse<models.RoleDetailsItem> | HttpEvent<models.RoleDetailsItem>> {
+
+    return super.updateRole(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRoleDetailsItem(res) || console.error(`TypeGuard for response 'models.RoleDetailsItem' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  deleteRole(
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteRole(
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteRole(
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteRole(
+    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteRole(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * [Screenshot from design](http://prntscr.com/iba7xr)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getNewNotificationsList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.NotificationListItem[]> {
-    return super.getNewNotificationsList(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.NotificationListItem[]>;
+  getNewNotificationsList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.NotificationListItem[]>>;
+  getNewNotificationsList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.NotificationListItem[]>>;
+  getNewNotificationsList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.NotificationListItem[] | HttpResponse<models.NotificationListItem[]> | HttpEvent<models.NotificationListItem[]>> {
+
+    return super.getNewNotificationsList(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isNotificationListItem(item)) ) || console.error(`TypeGuard for response 'models.NotificationListItem[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  markViewedNotifications(
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  markViewedNotifications(
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  markViewedNotifications(
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  markViewedNotifications(
+    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.markViewedNotifications(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * [Screenshot from design](http://prntscr.com/iba8tq)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getNotificationsList(
     args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getNotificationsList(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getNotificationsList(
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getNotificationsList(
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getNotificationsList(
+    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getNotificationsList(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ibac47) |
+   * [Screenshot from design](http://prntscr.com/ibacgu)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getModulesList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.NotificationModule[]> {
-    return super.getModulesList(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.NotificationModule[]>;
+  getModulesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.NotificationModule[]>>;
+  getModulesList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.NotificationModule[]>>;
+  getModulesList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.NotificationModule[] | HttpResponse<models.NotificationModule[]> | HttpEvent<models.NotificationModule[]>> {
+
+    return super.getModulesList(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isNotificationModule(item)) ) || console.error(`TypeGuard for response 'models.NotificationModule[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ibad9m)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getTriggersList(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.NotificationTrigger[]> {
-    return super.getTriggersList(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.NotificationTrigger[]>;
+  getTriggersList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.NotificationTrigger[]>>;
+  getTriggersList(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.NotificationTrigger[]>>;
+  getTriggersList(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.NotificationTrigger[] | HttpResponse<models.NotificationTrigger[]> | HttpEvent<models.NotificationTrigger[]>> {
+
+    return super.getTriggersList(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isNotificationTrigger(item)) ) || console.error(`TypeGuard for response 'models.NotificationTrigger[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/iba8tq)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getModuleNotificationsList(
     args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getModuleNotificationsList(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getModuleNotificationsList(
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getModuleNotificationsList(
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getModuleNotificationsList(
+    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getModuleNotificationsList(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  enableNotification(
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  enableNotification(
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  enableNotification(
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  enableNotification(
+    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.enableNotification(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  disableNotification(
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  disableNotification(
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  disableNotification(
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  disableNotification(
+    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.disableNotification(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getNotification(
     args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.NotificationEditableListItem> {
-    return super.getNotification(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.NotificationEditableListItem>;
+  getNotification(
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.NotificationEditableListItem>>;
+  getNotification(
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.NotificationEditableListItem>>;
+  getNotification(
+    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.NotificationEditableListItem | HttpResponse<models.NotificationEditableListItem> | HttpEvent<models.NotificationEditableListItem>> {
+
+    return super.getNotification(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isNotificationEditableListItem(res) || console.error(`TypeGuard for response 'models.NotificationEditableListItem' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  updateNotification(
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  updateNotification(
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  updateNotification(
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  updateNotification(
+    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.updateNotification(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   createNotification(
     args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<number> {
-    return super.createNotification(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<number>;
+  createNotification(
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<number>>;
+  createNotification(
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<number>>;
+  createNotification(
+    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<number | HttpResponse<number> | HttpEvent<number>> {
+
+    return super.createNotification(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'number' || console.error(`TypeGuard for response 'number' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzt2b)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getPassVerificationPolicies(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PasswordVerificationPolicies> {
-    return super.getPassVerificationPolicies(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PasswordVerificationPolicies>;
+  getPassVerificationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PasswordVerificationPolicies>>;
+  getPassVerificationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PasswordVerificationPolicies>>;
+  getPassVerificationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PasswordVerificationPolicies | HttpResponse<models.PasswordVerificationPolicies> | HttpEvent<models.PasswordVerificationPolicies>> {
+
+    return super.getPassVerificationPolicies(requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPasswordVerificationPolicies(res) || console.error(`TypeGuard for response 'models.PasswordVerificationPolicies' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzt2b)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   udatePassVerificationPolicies(
     args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PasswordVerificationPolicies> {
-    return super.udatePassVerificationPolicies(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PasswordVerificationPolicies>;
+  udatePassVerificationPolicies(
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PasswordVerificationPolicies>>;
+  udatePassVerificationPolicies(
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PasswordVerificationPolicies>>;
+  udatePassVerificationPolicies(
+    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PasswordVerificationPolicies | HttpResponse<models.PasswordVerificationPolicies> | HttpEvent<models.PasswordVerificationPolicies>> {
+
+    return super.udatePassVerificationPolicies(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPasswordVerificationPolicies(res) || console.error(`TypeGuard for response 'models.PasswordVerificationPolicies' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzuv3)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getPassCreationPolicies(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PasswordCreationPolicies> {
-    return super.getPassCreationPolicies(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PasswordCreationPolicies>;
+  getPassCreationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PasswordCreationPolicies>>;
+  getPassCreationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PasswordCreationPolicies>>;
+  getPassCreationPolicies(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PasswordCreationPolicies | HttpResponse<models.PasswordCreationPolicies> | HttpEvent<models.PasswordCreationPolicies>> {
+
+    return super.getPassCreationPolicies(requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPasswordCreationPolicies(res) || console.error(`TypeGuard for response 'models.PasswordCreationPolicies' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzuv3)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   udatePassCreationPolicies(
     args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PasswordCreationPolicies> {
-    return super.udatePassCreationPolicies(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PasswordCreationPolicies>;
+  udatePassCreationPolicies(
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PasswordCreationPolicies>>;
+  udatePassCreationPolicies(
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PasswordCreationPolicies>>;
+  udatePassCreationPolicies(
+    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PasswordCreationPolicies | HttpResponse<models.PasswordCreationPolicies> | HttpEvent<models.PasswordCreationPolicies>> {
+
+    return super.udatePassCreationPolicies(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPasswordCreationPolicies(res) || console.error(`TypeGuard for response 'models.PasswordCreationPolicies' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzvo3)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getOtherSecuritySettings(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.OtherSecuritySettings> {
-    return super.getOtherSecuritySettings(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.OtherSecuritySettings>;
+  getOtherSecuritySettings(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.OtherSecuritySettings>>;
+  getOtherSecuritySettings(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.OtherSecuritySettings>>;
+  getOtherSecuritySettings(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.OtherSecuritySettings | HttpResponse<models.OtherSecuritySettings> | HttpEvent<models.OtherSecuritySettings>> {
+
+    return super.getOtherSecuritySettings(requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isOtherSecuritySettings(res) || console.error(`TypeGuard for response 'models.OtherSecuritySettings' caught inconsistency.`, res)));
   }
 
+  /**
+   * [Screenshot from design](http://prntscr.com/ijzvo3)
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   udateOtherSecuritySettings(
     args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.OtherSecuritySettings> {
-    return super.udateOtherSecuritySettings(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.OtherSecuritySettings>;
+  udateOtherSecuritySettings(
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.OtherSecuritySettings>>;
+  udateOtherSecuritySettings(
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.OtherSecuritySettings>>;
+  udateOtherSecuritySettings(
+    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.OtherSecuritySettings | HttpResponse<models.OtherSecuritySettings> | HttpEvent<models.OtherSecuritySettings>> {
+
+    return super.udateOtherSecuritySettings(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isOtherSecuritySettings(res) || console.error(`TypeGuard for response 'models.OtherSecuritySettings' caught inconsistency.`, res)));
   }
 

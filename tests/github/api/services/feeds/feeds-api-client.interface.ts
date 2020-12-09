@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface FeedsAPIClientInterface {
-
   /**
    * Arguments object for method `getFeeds`.
    */
@@ -40,8 +38,23 @@ export interface FeedsAPIClientInterface {
    */
   getFeeds(
     args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Feeds>;
-
+  getFeeds(
+    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Feeds>>;
+  getFeeds(
+    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Feeds>>;
+  getFeeds(
+    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Feeds | HttpResponse<models.Feeds> | HttpEvent<models.Feeds>>;
 
 }

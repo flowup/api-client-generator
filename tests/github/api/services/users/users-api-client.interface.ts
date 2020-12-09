@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface UsersAPIClientInterface {
-
   /**
    * Arguments object for method `getUsers`.
    */
@@ -42,8 +40,24 @@ export interface UsersAPIClientInterface {
    */
   getUsers(
     args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Users>;
+  getUsers(
+    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getUsers(
+    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getUsers(
+    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getUsersUsername`.
@@ -67,8 +81,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsername(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Users>;
+  getUsersUsername(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getUsersUsername(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getUsersUsername(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getUsersUsernameEvents`.
@@ -92,8 +122,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameEvents(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getUsersUsernameEvents(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUsersUsernameEvents(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUsersUsernameEvents(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameEventsOrg`.
@@ -118,8 +164,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameEventsOrg(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getUsersUsernameEventsOrg(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUsersUsernameEventsOrg(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUsersUsernameEventsOrg(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameFollowers`.
@@ -143,8 +205,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameFollowers(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Users>;
+  getUsersUsernameFollowers(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getUsersUsernameFollowers(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getUsersUsernameFollowers(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getUsersUsernameFollowingTargetUser`.
@@ -170,8 +248,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameFollowingTargetUser(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowingTargetUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getUsersUsernameFollowingTargetUser(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowingTargetUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUsersUsernameFollowingTargetUser(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowingTargetUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUsersUsernameFollowingTargetUser(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowingTargetUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameGists`.
@@ -197,8 +291,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameGists(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameGistsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gists>;
+  getUsersUsernameGists(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gists>>;
+  getUsersUsernameGists(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gists>>;
+  getUsersUsernameGists(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>>;
 
   /**
    * Arguments object for method `getUsersUsernameKeys`.
@@ -224,8 +334,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameKeys(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gitignore>;
+  getUsersUsernameKeys(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gitignore>>;
+  getUsersUsernameKeys(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gitignore>>;
+  getUsersUsernameKeys(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `getUsersUsernameOrgs`.
@@ -249,8 +375,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameOrgs(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameOrgsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gitignore>;
+  getUsersUsernameOrgs(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameOrgsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gitignore>>;
+  getUsersUsernameOrgs(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameOrgsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gitignore>>;
+  getUsersUsernameOrgs(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameOrgsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `getUsersUsernameReceivedEvents`.
@@ -274,8 +416,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameReceivedEvents(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getUsersUsernameReceivedEvents(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUsersUsernameReceivedEvents(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUsersUsernameReceivedEvents(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameReceivedEventsPublic`.
@@ -299,8 +457,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameReceivedEventsPublic(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsPublicParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getUsersUsernameReceivedEventsPublic(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUsersUsernameReceivedEventsPublic(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUsersUsernameReceivedEventsPublic(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameRepos`.
@@ -325,8 +499,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameRepos(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Repos>;
+  getUsersUsernameRepos(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  getUsersUsernameRepos(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  getUsersUsernameRepos(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>>;
 
   /**
    * Arguments object for method `getUsersUsernameStarred`.
@@ -350,8 +540,24 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameStarred(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameStarredParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getUsersUsernameStarred(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUsersUsernameStarred(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUsersUsernameStarred(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameSubscriptions`.
@@ -375,8 +581,23 @@ export interface UsersAPIClientInterface {
    */
   getUsersUsernameSubscriptions(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameSubscriptionsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
-
+  getUsersUsernameSubscriptions(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameSubscriptionsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUsersUsernameSubscriptions(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameSubscriptionsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUsersUsernameSubscriptions(
+    args: Exclude<UsersAPIClientInterface['getUsersUsernameSubscriptionsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
 }

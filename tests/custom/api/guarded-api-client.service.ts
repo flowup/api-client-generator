@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { APIClientInterface } from './api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from './types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, APIClient } from './api-client.service';
-import { APIClientInterface } from './api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 import * as guards from './guards';
@@ -23,114 +23,405 @@ import * as guards from './guards';
 @Injectable()
 export class GuardedAPIClient extends APIClient implements APIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getItems(
     args: Exclude<APIClientInterface['getItemsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ItemList> {
-    return super.getItems(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ItemList>;
+  getItems(
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ItemList>>;
+  getItems(
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ItemList>>;
+  getItems(
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ItemList | HttpResponse<models.ItemList> | HttpEvent<models.ItemList>> {
+
+    return super.getItems(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isItemList(res) || console.error(`TypeGuard for response 'models.ItemList' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getItemModels(
     args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getItemModels(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getItemModels(
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getItemModels(
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getItemModels(
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getItemModels(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getPetsId(
     args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Pet[]> {
-    return super.getPetsId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pet[]>;
+  getPetsId(
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pet[]>>;
+  getPetsId(
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pet[]>>;
+  getPetsId(
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pet[] | HttpResponse<models.Pet[]> | HttpEvent<models.Pet[]>> {
+
+    return super.getPetsId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isPet(item)) ) || console.error(`TypeGuard for response 'models.Pet[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  deletePetsId(
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deletePetsId(
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deletePetsId(
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deletePetsId(
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deletePetsId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getCustomers(
-    requestHttpOptions?: HttpOptions
-  ): Observable<(models.Customer[]) | null> {
-    return super.getCustomers(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<(models.Customer[]) | null>;
+  getCustomers(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<(models.Customer[]) | null>>;
+  getCustomers(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<(models.Customer[]) | null>>;
+  getCustomers(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<(models.Customer[]) | null | HttpResponse<(models.Customer[]) | null> | HttpEvent<(models.Customer[]) | null>> {
+
+    return super.getCustomers(requestHttpOptions, observe)
       .pipe(tap((res: any) => (res == null || ( Array.isArray(res) && res.every((item: any) => guards.isCustomer(item)) )) || console.error(`TypeGuard for response '(models.Customer[]) | null' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getDictionaries(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Dictionary> {
-    return super.getDictionaries(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Dictionary>;
+  getDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Dictionary>>;
+  getDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Dictionary>>;
+  getDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Dictionary | HttpResponse<models.Dictionary> | HttpEvent<models.Dictionary>> {
+
+    return super.getDictionaries(requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDictionary(res) || console.error(`TypeGuard for response 'models.Dictionary' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getFileId(
     args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
-    return super.getFileId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  getFileId(
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  getFileId(
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  getFileId(
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
+
+    return super.getFileId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => res instanceof File || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getRandomObject(
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getRandomObject(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getRandomObject(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getRandomObject(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getRandomObject(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getRandomObject(requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getRandomModel(
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.getRandomModel(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getRandomModel(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getRandomModel(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getRandomModel(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.getRandomModel(requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getRandomString(
-    requestHttpOptions?: HttpOptions
-  ): Observable<string> {
-    return super.getRandomString(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<string>;
+  getRandomString(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<string>>;
+  getRandomString(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<string>>;
+  getRandomString(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<string | HttpResponse<string> | HttpEvent<string>> {
+
+    return super.getRandomString(requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'string' || console.error(`TypeGuard for response 'string' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getDictionary(
-    requestHttpOptions?: HttpOptions
-  ): Observable<{ [key: string]: number }> {
-    return super.getDictionary(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<{ [key: string]: number }>;
+  getDictionary(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<{ [key: string]: number }>>;
+  getDictionary(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<{ [key: string]: number }>>;
+  getDictionary(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<{ [key: string]: number } | HttpResponse<{ [key: string]: number }> | HttpEvent<{ [key: string]: number }>> {
+
+    return super.getDictionary(requestHttpOptions, observe)
       .pipe(tap((res: any) => Object.values(res).every((value: any) => typeof value === 'number') || console.error(`TypeGuard for response '{ [key: string]: number }' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getArrayOfDictionaries(
-    requestHttpOptions?: HttpOptions
-  ): Observable<{ [key: string]: number }[]> {
-    return super.getArrayOfDictionaries(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<{ [key: string]: number }[]>;
+  getArrayOfDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<{ [key: string]: number }[]>>;
+  getArrayOfDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<{ [key: string]: number }[]>>;
+  getArrayOfDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<{ [key: string]: number }[] | HttpResponse<{ [key: string]: number }[]> | HttpEvent<{ [key: string]: number }[]>> {
+
+    return super.getArrayOfDictionaries(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => Object.values(item).every((value: any) => typeof value === 'number')) ) || console.error(`TypeGuard for response '{ [key: string]: number }[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Commits a transaction, while optionally updating documents.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsCommit(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Dictionary> {
-    return super.firestoreProjectsDatabasesDocumentsCommit(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Dictionary>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Dictionary>>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Dictionary>>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Dictionary | HttpResponse<models.Dictionary> | HttpEvent<models.Dictionary>> {
+
+    return super.firestoreProjectsDatabasesDocumentsCommit(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDictionary(res) || console.error(`TypeGuard for response 'models.Dictionary' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a custom Blob.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoGitBlobs(
     args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Blob[]> {
-    return super.postReposOwnerRepoGitBlobs(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Blob[]>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Blob[]>>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Blob[]>>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Blob[] | HttpResponse<models.Blob[]> | HttpEvent<models.Blob[]>> {
+
+    return super.postReposOwnerRepoGitBlobs(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isBlob(item)) ) || console.error(`TypeGuard for response 'models.Blob[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get standard File
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoGitBlobsShaCode(
     args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
-    return super.getReposOwnerRepoGitBlobsShaCode(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
+
+    return super.getReposOwnerRepoGitBlobsShaCode(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => res instanceof File || console.error(`TypeGuard for response 'File' caught inconsistency.`, res)));
   }
 

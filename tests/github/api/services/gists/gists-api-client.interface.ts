@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface GistsAPIClientInterface {
-
   /**
    * Arguments object for method `getGists`.
    */
@@ -40,8 +38,24 @@ export interface GistsAPIClientInterface {
    */
   getGists(
     args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gists>;
+  getGists(
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gists>>;
+  getGists(
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gists>>;
+  getGists(
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>>;
 
   /**
    * Arguments object for method `postGists`.
@@ -64,8 +78,24 @@ export interface GistsAPIClientInterface {
    */
   postGists(
     args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gist>;
+  postGists(
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gist>>;
+  postGists(
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gist>>;
+  postGists(
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gist | HttpResponse<models.Gist> | HttpEvent<models.Gist>>;
 
   /**
    * Arguments object for method `getGistsPublic`.
@@ -89,8 +119,24 @@ export interface GistsAPIClientInterface {
    */
   getGistsPublic(
     args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gists>;
+  getGistsPublic(
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gists>>;
+  getGistsPublic(
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gists>>;
+  getGistsPublic(
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>>;
 
   /**
    * Arguments object for method `getGistsStarred`.
@@ -114,8 +160,24 @@ export interface GistsAPIClientInterface {
    */
   getGistsStarred(
     args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gists>;
+  getGistsStarred(
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gists>>;
+  getGistsStarred(
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gists>>;
+  getGistsStarred(
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>>;
 
   /**
    * Arguments object for method `deleteGistsId`.
@@ -139,8 +201,24 @@ export interface GistsAPIClientInterface {
    */
   deleteGistsId(
     args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteGistsId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteGistsId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteGistsId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getGistsId`.
@@ -164,8 +242,24 @@ export interface GistsAPIClientInterface {
    */
   getGistsId(
     args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gist>;
+  getGistsId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gist>>;
+  getGistsId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gist>>;
+  getGistsId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gist | HttpResponse<models.Gist> | HttpEvent<models.Gist>>;
 
   /**
    * Arguments object for method `patchGistsId`.
@@ -190,8 +284,24 @@ export interface GistsAPIClientInterface {
    */
   patchGistsId(
     args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gist>;
+  patchGistsId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gist>>;
+  patchGistsId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gist>>;
+  patchGistsId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gist | HttpResponse<models.Gist> | HttpEvent<models.Gist>>;
 
   /**
    * Arguments object for method `getGistsIdComments`.
@@ -215,8 +325,24 @@ export interface GistsAPIClientInterface {
    */
   getGistsIdComments(
     args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Comments>;
+  getGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Comments>>;
+  getGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Comments>>;
+  getGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Comments | HttpResponse<models.Comments> | HttpEvent<models.Comments>>;
 
   /**
    * Arguments object for method `postGistsIdComments`.
@@ -241,8 +367,24 @@ export interface GistsAPIClientInterface {
    */
   postGistsIdComments(
     args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Comment>;
+  postGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Comment>>;
+  postGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Comment>>;
+  postGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Comment | HttpResponse<models.Comment> | HttpEvent<models.Comment>>;
 
   /**
    * Arguments object for method `deleteGistsIdCommentsCommentId`.
@@ -268,8 +410,24 @@ export interface GistsAPIClientInterface {
    */
   deleteGistsIdCommentsCommentId(
     args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getGistsIdCommentsCommentId`.
@@ -295,8 +453,24 @@ export interface GistsAPIClientInterface {
    */
   getGistsIdCommentsCommentId(
     args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Comment>;
+  getGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Comment>>;
+  getGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Comment>>;
+  getGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Comment | HttpResponse<models.Comment> | HttpEvent<models.Comment>>;
 
   /**
    * Arguments object for method `patchGistsIdCommentsCommentId`.
@@ -323,8 +497,24 @@ export interface GistsAPIClientInterface {
    */
   patchGistsIdCommentsCommentId(
     args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Comment>;
+  patchGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Comment>>;
+  patchGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Comment>>;
+  patchGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Comment | HttpResponse<models.Comment> | HttpEvent<models.Comment>>;
 
   /**
    * Arguments object for method `postGistsIdForks`.
@@ -348,8 +538,24 @@ export interface GistsAPIClientInterface {
    */
   postGistsIdForks(
     args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  postGistsIdForks(
+    args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postGistsIdForks(
+    args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postGistsIdForks(
+    args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `deleteGistsIdStar`.
@@ -373,8 +579,24 @@ export interface GistsAPIClientInterface {
    */
   deleteGistsIdStar(
     args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getGistsIdStar`.
@@ -398,8 +620,24 @@ export interface GistsAPIClientInterface {
    */
   getGistsIdStar(
     args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putGistsIdStar`.
@@ -423,8 +661,23 @@ export interface GistsAPIClientInterface {
    */
   putGistsIdStar(
     args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
-
+  putGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
 }

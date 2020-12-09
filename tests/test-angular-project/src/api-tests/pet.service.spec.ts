@@ -28,7 +28,7 @@ describe('PetService', () => {
 
   it('should set id to path', inject(
     [PetAPIClient, HttpTestingController],
-    async (api, backend) => {
+    async (api: PetAPIClient, backend: HttpTestingController) => {
       api.getPetById({ petId: 42 }).subscribe(async data => {
         await expect(data).toBeNull();
       });
@@ -44,7 +44,7 @@ describe('PetService', () => {
 
   it('should set name and status to query', inject(
     [PetAPIClient, HttpTestingController],
-    async (api, backend) => {
+    async (api: PetAPIClient, backend: HttpTestingController) => {
       api
         .updatePetWithQuery({
           petId: 42,
@@ -57,6 +57,8 @@ describe('PetService', () => {
         req => req.method === 'POST' && req.url === '/pet/42',
       );
 
+      console.log('req.request', req.request.params);
+
       await expect(req.request.params.getAll('name')).toEqual(['wololo']);
       await expect(req.request.params.getAll('status')).toEqual(['OK']);
     },
@@ -64,7 +66,7 @@ describe('PetService', () => {
 
   it('should delete pet with ID and set api key header', inject(
     [PetAPIClient, HttpTestingController],
-    async (api, backend) => {
+    async (api: PetAPIClient, backend: HttpTestingController) => {
       api
         .deletePet({
           apiKey: 'DUMMY_API_KEY',

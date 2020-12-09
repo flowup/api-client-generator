@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { OrgsAPIClientInterface } from './orgs-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, OrgsAPIClient } from './orgs-api-client.service';
-import { OrgsAPIClientInterface } from './orgs-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,89 +23,459 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedOrgsAPIClient extends OrgsAPIClient implements OrgsAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Get an Organization.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getOrgsOrg(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Organization> {
-    return super.getOrgsOrg(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Organization>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Organization>>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Organization>>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Organization | HttpResponse<models.Organization> | HttpEvent<models.Organization>> {
+
+    return super.getOrgsOrg(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isOrganization(res) || console.error(`TypeGuard for response 'models.Organization' caught inconsistency.`, res)));
   }
 
+  /**
+   * Edit an Organization.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchOrgsOrg(
     args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Organization> {
-    return super.patchOrgsOrg(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Organization>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Organization>>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Organization>>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Organization | HttpResponse<models.Organization> | HttpEvent<models.Organization>> {
+
+    return super.patchOrgsOrg(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isOrganization(res) || console.error(`TypeGuard for response 'models.Organization' caught inconsistency.`, res)));
   }
 
+  /**
+   * List public events for an organization.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getOrgsOrgEvents(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Events> {
-    return super.getOrgsOrgEvents(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Events>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {
+
+    return super.getOrgsOrgEvents(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'models.Events' caught inconsistency.`, res)));
   }
 
+  /**
+   * List issues.
+   * List all issues for a given organization for the authenticated user.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getOrgsOrgIssues(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issues> {
-    return super.getOrgsOrgIssues(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issues>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issues>>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issues>>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>> {
+
+    return super.getOrgsOrgIssues(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssues(res) || console.error(`TypeGuard for response 'models.Issues' caught inconsistency.`, res)));
   }
 
+  /**
+   * Members list.
+   * List all users who are members of an organization. A member is a user tha
+   * belongs to at least 1 team in the organization. If the authenticated user
+   * is also an owner of this organization then both concealed and public members
+   * will be returned. If the requester is not an owner of the organization the
+   * query will be redirected to the public members list.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getOrgsOrgMembers(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
-    return super.getOrgsOrgMembers(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
+
+    return super.getOrgsOrgMembers(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
+  /**
+   * Remove a member.
+   * Removing a user from this list will remove them from all teams and they
+   * will no longer have any access to the organization's repositories.
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteOrgsOrgMembersUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Check if a user is, publicly or privately, a member of the organization.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.getOrgsOrgMembersUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Public members list.
+   * Members of an organization can choose to have their membership publicized
+   * or not.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getOrgsOrgPublicMembers(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
-    return super.getOrgsOrgPublicMembers(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
+
+    return super.getOrgsOrgPublicMembers(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
+  /**
+   * Conceal a user's membership.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteOrgsOrgPublicMembersUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Check public membership.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.getOrgsOrgPublicMembersUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Publicize a user's membership.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.putOrgsOrgPublicMembersUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * List repositories for the specified org.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getOrgsOrgRepos(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repos> {
-    return super.getOrgsOrgRepos(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repos>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>> {
+
+    return super.getOrgsOrgRepos(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepos(res) || console.error(`TypeGuard for response 'models.Repos' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a new repository for the authenticated user. OAuth users must supply
+   * repo scope.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postOrgsOrgRepos(
     args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repos> {
-    return super.postOrgsOrgRepos(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repos>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>> {
+
+    return super.postOrgsOrgRepos(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepos(res) || console.error(`TypeGuard for response 'models.Repos' caught inconsistency.`, res)));
   }
 
+  /**
+   * List teams.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getOrgsOrgTeams(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Teams> {
-    return super.getOrgsOrgTeams(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Teams>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Teams>>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Teams>>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Teams | HttpResponse<models.Teams> | HttpEvent<models.Teams>> {
+
+    return super.getOrgsOrgTeams(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTeams(res) || console.error(`TypeGuard for response 'models.Teams' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create team.
+   * In order to create a team, the authenticated user must be an owner of organization.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postOrgsOrgTeams(
     args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Team> {
-    return super.postOrgsOrgTeams(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Team>;
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>> {
+
+    return super.postOrgsOrgTeams(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTeam(res) || console.error(`TypeGuard for response 'models.Team' caught inconsistency.`, res)));
   }
 

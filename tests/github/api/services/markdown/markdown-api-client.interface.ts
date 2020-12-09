@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface MarkdownAPIClientInterface {
-
   /**
    * Arguments object for method `postMarkdown`.
    */
@@ -37,8 +35,24 @@ export interface MarkdownAPIClientInterface {
    */
   postMarkdown(
     args: Exclude<MarkdownAPIClientInterface['postMarkdownParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  postMarkdown(
+    args: Exclude<MarkdownAPIClientInterface['postMarkdownParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postMarkdown(
+    args: Exclude<MarkdownAPIClientInterface['postMarkdownParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postMarkdown(
+    args: Exclude<MarkdownAPIClientInterface['postMarkdownParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `postMarkdownRaw`.
@@ -60,8 +74,23 @@ export interface MarkdownAPIClientInterface {
    */
   postMarkdownRaw(
     args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
-
+  postMarkdownRaw(
+    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postMarkdownRaw(
+    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postMarkdownRaw(
+    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
 }

@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { APIClientInterface } from './api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from './types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 export const USE_DOMAIN = new InjectionToken<string>('APIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('APIClient_USE_H
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class APIClient implements APIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -60,12 +57,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsBatchGet(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.BatchGetDocumentsResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.BatchGetDocumentsResponse>;
+  firestoreProjectsDatabasesDocumentsBatchGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.BatchGetDocumentsResponse>>;
+  firestoreProjectsDatabasesDocumentsBatchGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.BatchGetDocumentsResponse>>;
+  firestoreProjectsDatabasesDocumentsBatchGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.BatchGetDocumentsResponse | HttpResponse<models.BatchGetDocumentsResponse> | HttpEvent<models.BatchGetDocumentsResponse>> {
     const path = `/${args.database}/documents:batchGet`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -107,7 +121,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.BatchGetDocumentsResponse>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.BatchGetDocumentsResponse>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -116,12 +130,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsBeginTransaction(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.BeginTransactionResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.BeginTransactionResponse>;
+  firestoreProjectsDatabasesDocumentsBeginTransaction(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.BeginTransactionResponse>>;
+  firestoreProjectsDatabasesDocumentsBeginTransaction(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.BeginTransactionResponse>>;
+  firestoreProjectsDatabasesDocumentsBeginTransaction(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.BeginTransactionResponse | HttpResponse<models.BeginTransactionResponse> | HttpEvent<models.BeginTransactionResponse>> {
     const path = `/${args.database}/documents:beginTransaction`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -163,7 +194,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.BeginTransactionResponse>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.BeginTransactionResponse>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -172,12 +203,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsCommit(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitResponse>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitResponse>>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitResponse>>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitResponse | HttpResponse<models.CommitResponse> | HttpEvent<models.CommitResponse>> {
     const path = `/${args.database}/documents:commit`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -219,7 +267,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.CommitResponse>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.CommitResponse>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -228,12 +276,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsListen(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ListenResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ListenResponse>;
+  firestoreProjectsDatabasesDocumentsListen(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ListenResponse>>;
+  firestoreProjectsDatabasesDocumentsListen(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ListenResponse>>;
+  firestoreProjectsDatabasesDocumentsListen(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ListenResponse | HttpResponse<models.ListenResponse> | HttpEvent<models.ListenResponse>> {
     const path = `/${args.database}/documents:listen`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -275,7 +340,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.ListenResponse>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.ListenResponse>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -284,12 +349,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsRollback(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Empty> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Empty>;
+  firestoreProjectsDatabasesDocumentsRollback(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Empty>>;
+  firestoreProjectsDatabasesDocumentsRollback(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Empty>>;
+  firestoreProjectsDatabasesDocumentsRollback(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Empty | HttpResponse<models.Empty> | HttpEvent<models.Empty>> {
     const path = `/${args.database}/documents:rollback`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -331,7 +413,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.Empty>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Empty>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -340,12 +422,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsWrite(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.WriteResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.WriteResponse>;
+  firestoreProjectsDatabasesDocumentsWrite(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.WriteResponse>>;
+  firestoreProjectsDatabasesDocumentsWrite(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.WriteResponse>>;
+  firestoreProjectsDatabasesDocumentsWrite(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.WriteResponse | HttpResponse<models.WriteResponse> | HttpEvent<models.WriteResponse>> {
     const path = `/${args.database}/documents:write`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -387,7 +486,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.WriteResponse>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.WriteResponse>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -396,12 +495,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesIndexesDelete(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Empty> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Empty>;
+  firestoreProjectsDatabasesIndexesDelete(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Empty>>;
+  firestoreProjectsDatabasesIndexesDelete(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Empty>>;
+  firestoreProjectsDatabasesIndexesDelete(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Empty | HttpResponse<models.Empty> | HttpEvent<models.Empty>> {
     const path = `/${args.name}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -449,7 +565,7 @@ export class APIClient implements APIClientInterface {
     if ('currentDocumentUpdateTime' in args) {
       options.params = options.params.set('currentDocument.updateTime', String(args.currentDocumentUpdateTime));
     }
-    return this.sendRequest<models.Empty>('DELETE', path, options);
+    return this.http.delete<models.Empty>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -458,12 +574,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesIndexesGet(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Index> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Index>;
+  firestoreProjectsDatabasesIndexesGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Index>>;
+  firestoreProjectsDatabasesIndexesGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Index>>;
+  firestoreProjectsDatabasesIndexesGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Index | HttpResponse<models.Index> | HttpEvent<models.Index>> {
     const path = `/${args.name}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -514,7 +647,7 @@ export class APIClient implements APIClientInterface {
     if ('transaction' in args) {
       options.params = options.params.set('transaction', String(args.transaction));
     }
-    return this.sendRequest<models.Index>('GET', path, options);
+    return this.http.get<models.Index>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -523,12 +656,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsPatch(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Document> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Document>;
+  firestoreProjectsDatabasesDocumentsPatch(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Document>>;
+  firestoreProjectsDatabasesDocumentsPatch(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Document>>;
+  firestoreProjectsDatabasesDocumentsPatch(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Document | HttpResponse<models.Document> | HttpEvent<models.Document>> {
     const path = `/${args.name}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -582,7 +732,7 @@ export class APIClient implements APIClientInterface {
     if ('updateMaskFieldPaths' in args) {
       options.params = options.params.set('updateMask.fieldPaths', String(args.updateMaskFieldPaths));
     }
-    return this.sendRequest<models.Document>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Document>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -591,12 +741,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesIndexesList(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ListIndexesResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ListIndexesResponse>;
+  firestoreProjectsDatabasesIndexesList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ListIndexesResponse>>;
+  firestoreProjectsDatabasesIndexesList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ListIndexesResponse>>;
+  firestoreProjectsDatabasesIndexesList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ListIndexesResponse | HttpResponse<models.ListIndexesResponse> | HttpEvent<models.ListIndexesResponse>> {
     const path = `/${args.parent}/indexes`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -647,7 +814,7 @@ export class APIClient implements APIClientInterface {
     if ('pageToken' in args) {
       options.params = options.params.set('pageToken', String(args.pageToken));
     }
-    return this.sendRequest<models.ListIndexesResponse>('GET', path, options);
+    return this.http.get<models.ListIndexesResponse>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -670,12 +837,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesIndexesCreate(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Operation> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Operation>;
+  firestoreProjectsDatabasesIndexesCreate(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Operation>>;
+  firestoreProjectsDatabasesIndexesCreate(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Operation>>;
+  firestoreProjectsDatabasesIndexesCreate(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Operation | HttpResponse<models.Operation> | HttpEvent<models.Operation>> {
     const path = `/${args.parent}/indexes`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -717,7 +901,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.Operation>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Operation>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -726,12 +910,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsList(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ListDocumentsResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ListDocumentsResponse>;
+  firestoreProjectsDatabasesDocumentsList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ListDocumentsResponse>>;
+  firestoreProjectsDatabasesDocumentsList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ListDocumentsResponse>>;
+  firestoreProjectsDatabasesDocumentsList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ListDocumentsResponse | HttpResponse<models.ListDocumentsResponse> | HttpEvent<models.ListDocumentsResponse>> {
     const path = `/${args.parent}/${args.collectionId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -794,7 +995,7 @@ export class APIClient implements APIClientInterface {
     if ('transaction' in args) {
       options.params = options.params.set('transaction', String(args.transaction));
     }
-    return this.sendRequest<models.ListDocumentsResponse>('GET', path, options);
+    return this.http.get<models.ListDocumentsResponse>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -803,12 +1004,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsCreateDocument(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Document> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Document>;
+  firestoreProjectsDatabasesDocumentsCreateDocument(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Document>>;
+  firestoreProjectsDatabasesDocumentsCreateDocument(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Document>>;
+  firestoreProjectsDatabasesDocumentsCreateDocument(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Document | HttpResponse<models.Document> | HttpEvent<models.Document>> {
     const path = `/${args.parent}/${args.collectionId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -856,7 +1074,7 @@ export class APIClient implements APIClientInterface {
     if ('maskFieldPaths' in args) {
       options.params = options.params.set('mask.fieldPaths', String(args.maskFieldPaths));
     }
-    return this.sendRequest<models.Document>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Document>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -865,12 +1083,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsListCollectionIds(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ListCollectionIdsResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ListCollectionIdsResponse>;
+  firestoreProjectsDatabasesDocumentsListCollectionIds(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ListCollectionIdsResponse>>;
+  firestoreProjectsDatabasesDocumentsListCollectionIds(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ListCollectionIdsResponse>>;
+  firestoreProjectsDatabasesDocumentsListCollectionIds(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ListCollectionIdsResponse | HttpResponse<models.ListCollectionIdsResponse> | HttpEvent<models.ListCollectionIdsResponse>> {
     const path = `/${args.parent}:listCollectionIds`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -912,7 +1147,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.ListCollectionIdsResponse>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.ListCollectionIdsResponse>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -921,12 +1156,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsRunQuery(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RunQueryResponse> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RunQueryResponse>;
+  firestoreProjectsDatabasesDocumentsRunQuery(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RunQueryResponse>>;
+  firestoreProjectsDatabasesDocumentsRunQuery(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RunQueryResponse>>;
+  firestoreProjectsDatabasesDocumentsRunQuery(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RunQueryResponse | HttpResponse<models.RunQueryResponse> | HttpEvent<models.RunQueryResponse>> {
     const path = `/${args.parent}:runQuery`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('$Xgafv' in args) {
@@ -968,28 +1220,7 @@ export class APIClient implements APIClientInterface {
     if ('uploadProtocol' in args) {
       options.params = options.params.set('upload_protocol', String(args.uploadProtocol));
     }
-    return this.sendRequest<models.RunQueryResponse>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.RunQueryResponse>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

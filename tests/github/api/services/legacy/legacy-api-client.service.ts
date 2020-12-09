@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { LegacyAPIClientInterface } from './legacy-api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 export const USE_DOMAIN = new InjectionToken<string>('LegacyAPIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('LegacyAPIClient
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -56,12 +53,29 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
    */
   getLegacyIssuesSearchOwnerRepositoryStateKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchIssuesByKeyword> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchIssuesByKeyword>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchIssuesByKeyword>>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchIssuesByKeyword>>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchIssuesByKeyword | HttpResponse<models.SearchIssuesByKeyword> | HttpEvent<models.SearchIssuesByKeyword>> {
     const path = `/legacy/issues/search/${args.owner}/${args.repository}/${args.state}/${args.keyword}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -82,7 +96,7 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.SearchIssuesByKeyword>('GET', path, options);
+    return this.http.get<models.SearchIssuesByKeyword>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -91,12 +105,29 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
    */
   getLegacyReposSearchKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchRepositoriesByKeyword> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchRepositoriesByKeyword>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchRepositoriesByKeyword>>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchRepositoriesByKeyword>>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchRepositoriesByKeyword | HttpResponse<models.SearchRepositoriesByKeyword> | HttpEvent<models.SearchRepositoriesByKeyword>> {
     const path = `/legacy/repos/search/${args.keyword}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('order' in args) {
@@ -129,7 +160,7 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.SearchRepositoriesByKeyword>('GET', path, options);
+    return this.http.get<models.SearchRepositoriesByKeyword>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -138,12 +169,29 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
    */
   getLegacyUserEmail(
     args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchUserByEmail> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchUserByEmail>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchUserByEmail>>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchUserByEmail>>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchUserByEmail | HttpResponse<models.SearchUserByEmail> | HttpEvent<models.SearchUserByEmail>> {
     const path = `/legacy/user/email/${args.email}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -164,7 +212,7 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.SearchUserByEmail>('GET', path, options);
+    return this.http.get<models.SearchUserByEmail>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -173,12 +221,29 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
    */
   getLegacyUserSearchKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchUsersByKeyword> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchUsersByKeyword>;
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchUsersByKeyword>>;
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchUsersByKeyword>>;
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchUsersByKeyword | HttpResponse<models.SearchUsersByKeyword> | HttpEvent<models.SearchUsersByKeyword>> {
     const path = `/legacy/user/search/${args.keyword}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('order' in args) {
@@ -208,28 +273,7 @@ export class LegacyAPIClient implements LegacyAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.SearchUsersByKeyword>('GET', path, options);
+    return this.http.get<models.SearchUsersByKeyword>(`${this.domain}${path}`, options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

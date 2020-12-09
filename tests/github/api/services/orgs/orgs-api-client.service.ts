@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { OrgsAPIClientInterface } from './orgs-api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 export const USE_DOMAIN = new InjectionToken<string>('OrgsAPIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('OrgsAPIClient_U
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -56,12 +53,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrg(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Organization> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Organization>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Organization>>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Organization>>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Organization | HttpResponse<models.Organization> | HttpEvent<models.Organization>> {
     const path = `/orgs/${args.org}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -82,7 +96,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Organization>('GET', path, options);
+    return this.http.get<models.Organization>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -91,12 +105,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   patchOrgsOrg(
     args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Organization> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Organization>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Organization>>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Organization>>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Organization | HttpResponse<models.Organization> | HttpEvent<models.Organization>> {
     const path = `/orgs/${args.org}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -117,7 +148,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Organization>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Organization>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -126,12 +157,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrgEvents(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Events> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Events>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {
     const path = `/orgs/${args.org}/events`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -152,7 +200,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Events>('GET', path, options);
+    return this.http.get<models.Events>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -163,12 +211,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrgIssues(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issues> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issues>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issues>>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issues>>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>> {
     const path = `/orgs/${args.org}/issues`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('filter' in args) {
@@ -207,7 +272,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Issues>('GET', path, options);
+    return this.http.get<models.Issues>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -222,12 +287,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrgMembers(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/orgs/${args.org}/members`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -248,7 +330,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -260,12 +342,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   deleteOrgsOrgMembersUsername(
     args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/orgs/${args.org}/members/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -286,7 +385,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -295,12 +394,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrgMembersUsername(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/orgs/${args.org}/members/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -321,7 +437,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -333,12 +449,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrgPublicMembers(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/orgs/${args.org}/public_members`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -359,7 +492,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -368,12 +501,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   deleteOrgsOrgPublicMembersUsername(
     args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -394,7 +544,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -403,12 +553,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrgPublicMembersUsername(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -429,7 +596,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -438,12 +605,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   putOrgsOrgPublicMembersUsername(
     args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/orgs/${args.org}/public_members/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -464,7 +648,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -473,12 +657,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrgRepos(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repos> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repos>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>> {
     const path = `/orgs/${args.org}/repos`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('type' in args) {
@@ -502,7 +703,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Repos>('GET', path, options);
+    return this.http.get<models.Repos>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -513,12 +714,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   postOrgsOrgRepos(
     args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repos> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repos>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>> {
     const path = `/orgs/${args.org}/repos`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -539,7 +757,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Repos>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Repos>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -548,12 +766,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   getOrgsOrgTeams(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Teams> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Teams>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Teams>>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Teams>>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Teams | HttpResponse<models.Teams> | HttpEvent<models.Teams>> {
     const path = `/orgs/${args.org}/teams`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -574,7 +809,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Teams>('GET', path, options);
+    return this.http.get<models.Teams>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -585,12 +820,29 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
    */
   postOrgsOrgTeams(
     args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Team> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Team>;
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>> {
     const path = `/orgs/${args.org}/teams`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -611,28 +863,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Team>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Team>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

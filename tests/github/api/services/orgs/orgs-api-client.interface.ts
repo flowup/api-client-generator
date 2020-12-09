@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface OrgsAPIClientInterface {
-
   /**
    * Arguments object for method `getOrgsOrg`.
    */
@@ -38,8 +36,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrg(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Organization>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Organization>>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Organization>>;
+  getOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Organization | HttpResponse<models.Organization> | HttpEvent<models.Organization>>;
 
   /**
    * Arguments object for method `patchOrgsOrg`.
@@ -64,8 +78,24 @@ export interface OrgsAPIClientInterface {
    */
   patchOrgsOrg(
     args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Organization>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Organization>>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Organization>>;
+  patchOrgsOrg(
+    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Organization | HttpResponse<models.Organization> | HttpEvent<models.Organization>>;
 
   /**
    * Arguments object for method `getOrgsOrgEvents`.
@@ -89,8 +119,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrgEvents(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Events>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getOrgsOrgEvents(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>>;
 
   /**
    * Arguments object for method `getOrgsOrgIssues`.
@@ -125,8 +171,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrgIssues(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Issues>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issues>>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issues>>;
+  getOrgsOrgIssues(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>>;
 
   /**
    * Arguments object for method `getOrgsOrgMembers`.
@@ -156,8 +218,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrgMembers(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Users>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getOrgsOrgMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `deleteOrgsOrgMembersUsername`.
@@ -186,8 +264,24 @@ export interface OrgsAPIClientInterface {
    */
   deleteOrgsOrgMembersUsername(
     args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getOrgsOrgMembersUsername`.
@@ -213,8 +307,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrgMembersUsername(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getOrgsOrgMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getOrgsOrgPublicMembers`.
@@ -241,8 +351,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrgPublicMembers(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Users>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getOrgsOrgPublicMembers(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `deleteOrgsOrgPublicMembersUsername`.
@@ -268,8 +394,24 @@ export interface OrgsAPIClientInterface {
    */
   deleteOrgsOrgPublicMembersUsername(
     args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getOrgsOrgPublicMembersUsername`.
@@ -295,8 +437,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrgPublicMembersUsername(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putOrgsOrgPublicMembersUsername`.
@@ -322,8 +480,24 @@ export interface OrgsAPIClientInterface {
    */
   putOrgsOrgPublicMembersUsername(
     args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putOrgsOrgPublicMembersUsername(
+    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getOrgsOrgRepos`.
@@ -348,8 +522,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrgRepos(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Repos>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  getOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>>;
 
   /**
    * Arguments object for method `postOrgsOrgRepos`.
@@ -376,8 +566,24 @@ export interface OrgsAPIClientInterface {
    */
   postOrgsOrgRepos(
     args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Repos>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  postOrgsOrgRepos(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>>;
 
   /**
    * Arguments object for method `getOrgsOrgTeams`.
@@ -401,8 +607,24 @@ export interface OrgsAPIClientInterface {
    */
   getOrgsOrgTeams(
     args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Teams>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Teams>>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Teams>>;
+  getOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Teams | HttpResponse<models.Teams> | HttpEvent<models.Teams>>;
 
   /**
    * Arguments object for method `postOrgsOrgTeams`.
@@ -429,8 +651,23 @@ export interface OrgsAPIClientInterface {
    */
   postOrgsOrgTeams(
     args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Team>;
-
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  postOrgsOrgTeams(
+    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>>;
 
 }

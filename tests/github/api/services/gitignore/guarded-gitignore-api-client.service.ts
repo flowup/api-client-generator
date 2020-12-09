@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { GitignoreAPIClientInterface } from './gitignore-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, GitignoreAPIClient } from './gitignore-api-client.service';
-import { GitignoreAPIClientInterface } from './gitignore-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,25 +23,71 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedGitignoreAPIClient extends GitignoreAPIClient implements GitignoreAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Listing available templates.
+   * List all templates available to pass as an option when creating a repository.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getGitignoreTemplates(
     args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gitignore> {
-    return super.getGitignoreTemplates(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gitignore>;
+  getGitignoreTemplates(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gitignore>>;
+  getGitignoreTemplates(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gitignore>>;
+  getGitignoreTemplates(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>> {
+
+    return super.getGitignoreTemplates(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isGitignore(res) || console.error(`TypeGuard for response 'models.Gitignore' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a single template.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getGitignoreTemplatesLanguage(
     args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.GitignoreLang> {
-    return super.getGitignoreTemplatesLanguage(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.GitignoreLang>;
+  getGitignoreTemplatesLanguage(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.GitignoreLang>>;
+  getGitignoreTemplatesLanguage(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.GitignoreLang>>;
+  getGitignoreTemplatesLanguage(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.GitignoreLang | HttpResponse<models.GitignoreLang> | HttpEvent<models.GitignoreLang>> {
+
+    return super.getGitignoreTemplatesLanguage(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isGitignoreLang(res) || console.error(`TypeGuard for response 'models.GitignoreLang' caught inconsistency.`, res)));
   }
 

@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { DashboardAPIClientInterface } from './dashboard-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, DashboardAPIClient } from './dashboard-api-client.service';
-import { DashboardAPIClientInterface } from './dashboard-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,40 +23,119 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedDashboardAPIClient extends DashboardAPIClient implements DashboardAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getWidgetTypes(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.WidgetTypeViewModel[]> {
-    return super.getWidgetTypes(requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.WidgetTypeViewModel[]>;
+  getWidgetTypes(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.WidgetTypeViewModel[]>>;
+  getWidgetTypes(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.WidgetTypeViewModel[]>>;
+  getWidgetTypes(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.WidgetTypeViewModel[] | HttpResponse<models.WidgetTypeViewModel[]> | HttpEvent<models.WidgetTypeViewModel[]>> {
+
+    return super.getWidgetTypes(requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isWidgetTypeViewModel(item)) ) || console.error(`TypeGuard for response 'models.WidgetTypeViewModel[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   get(
     args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DashboardViewModel> {
-    return super.get(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DashboardViewModel>;
+  get(
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DashboardViewModel>>;
+  get(
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DashboardViewModel>>;
+  get(
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DashboardViewModel | HttpResponse<models.DashboardViewModel> | HttpEvent<models.DashboardViewModel>> {
+
+    return super.get(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDashboardViewModel(res) || console.error(`TypeGuard for response 'models.DashboardViewModel' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSettings(
     args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RowModel[]> {
-    return super.getSettings(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RowModel[]>;
+  getSettings(
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RowModel[]>>;
+  getSettings(
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RowModel[]>>;
+  getSettings(
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RowModel[] | HttpResponse<models.RowModel[]> | HttpEvent<models.RowModel[]>> {
+
+    return super.getSettings(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => ( Array.isArray(res) && res.every((item: any) => guards.isRowModel(item)) ) || console.error(`TypeGuard for response 'models.RowModel[]' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putSettings(
     args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.putSettings(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  putSettings(
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  putSettings(
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  putSettings(
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.putSettings(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 

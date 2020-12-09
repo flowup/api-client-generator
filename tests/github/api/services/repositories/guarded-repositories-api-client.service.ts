@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { RepositoriesAPIClientInterface } from './repositories-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, RepositoriesAPIClient } from './repositories-api-client.service';
-import { RepositoriesAPIClientInterface } from './repositories-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,17 +23,45 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedRepositoriesAPIClient extends RepositoriesAPIClient implements RepositoriesAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * List all public repositories.
+   * This provides a dump of every public repository, in the order that they
+   * were created.
+   * Note: Pagination is powered exclusively by the since parameter. is the
+   * Link header to get the URL for the next page of repositories.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getRepositories(
     args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repositories> {
-    return super.getRepositories(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repositories>;
+  getRepositories(
+    args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repositories>>;
+  getRepositories(
+    args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repositories>>;
+  getRepositories(
+    args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repositories | HttpResponse<models.Repositories> | HttpEvent<models.Repositories>> {
+
+    return super.getRepositories(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepositories(res) || console.error(`TypeGuard for response 'models.Repositories' caught inconsistency.`, res)));
   }
 

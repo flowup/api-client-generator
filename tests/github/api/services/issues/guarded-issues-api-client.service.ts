@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { IssuesAPIClientInterface } from './issues-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, IssuesAPIClient } from './issues-api-client.service';
-import { IssuesAPIClientInterface } from './issues-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,17 +23,42 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedIssuesAPIClient extends IssuesAPIClient implements IssuesAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * List issues.
+   * List all issues across all the authenticated user's visible repositories.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getIssues(
     args: Exclude<IssuesAPIClientInterface['getIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issues> {
-    return super.getIssues(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issues>;
+  getIssues(
+    args: Exclude<IssuesAPIClientInterface['getIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issues>>;
+  getIssues(
+    args: Exclude<IssuesAPIClientInterface['getIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issues>>;
+  getIssues(
+    args: Exclude<IssuesAPIClientInterface['getIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>> {
+
+    return super.getIssues(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssues(res) || console.error(`TypeGuard for response 'models.Issues' caught inconsistency.`, res)));
   }
 

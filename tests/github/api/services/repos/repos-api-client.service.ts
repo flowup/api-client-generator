@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { ReposAPIClientInterface } from './repos-api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 export const USE_DOMAIN = new InjectionToken<string>('ReposAPIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('ReposAPIClient_
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -59,12 +56,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepo(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -85,7 +99,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -94,12 +108,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepo(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repo> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repo>;
+  getReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repo>>;
+  getReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repo>>;
+  getReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -120,7 +151,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Repo>('GET', path, options);
+    return this.http.get<models.Repo>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -129,12 +160,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepo(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repo> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repo>;
+  patchReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repo>>;
+  patchReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repo>>;
+  patchReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>> {
     const path = `/repos/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -155,7 +203,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Repo>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Repo>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -167,12 +215,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoAssignees(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Assignees> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Assignees>;
+  getReposOwnerRepoAssignees(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Assignees>>;
+  getReposOwnerRepoAssignees(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Assignees>>;
+  getReposOwnerRepoAssignees(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Assignees | HttpResponse<models.Assignees> | HttpEvent<models.Assignees>> {
     const path = `/repos/${args.owner}/${args.repo}/assignees`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -193,7 +258,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Assignees>('GET', path, options);
+    return this.http.get<models.Assignees>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -204,12 +269,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoAssigneesAssignee(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getReposOwnerRepoAssigneesAssignee(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getReposOwnerRepoAssigneesAssignee(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getReposOwnerRepoAssigneesAssignee(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/assignees/${args.assignee}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -230,7 +312,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -239,12 +321,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoBranches(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Branches> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Branches>;
+  getReposOwnerRepoBranches(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Branches>>;
+  getReposOwnerRepoBranches(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Branches>>;
+  getReposOwnerRepoBranches(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Branches | HttpResponse<models.Branches> | HttpEvent<models.Branches>> {
     const path = `/repos/${args.owner}/${args.repo}/branches`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -265,7 +364,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Branches>('GET', path, options);
+    return this.http.get<models.Branches>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -274,12 +373,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoBranchesBranch(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Branch> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Branch>;
+  getReposOwnerRepoBranchesBranch(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Branch>>;
+  getReposOwnerRepoBranchesBranch(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Branch>>;
+  getReposOwnerRepoBranchesBranch(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Branch | HttpResponse<models.Branch> | HttpEvent<models.Branch>> {
     const path = `/repos/${args.owner}/${args.repo}/branches/${args.branch}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -300,7 +416,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Branch>('GET', path, options);
+    return this.http.get<models.Branch>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -314,12 +430,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoCollaborators(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getReposOwnerRepoCollaborators(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getReposOwnerRepoCollaborators(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getReposOwnerRepoCollaborators(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -340,7 +473,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -349,12 +482,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoCollaboratorsUser(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -375,7 +525,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -384,12 +534,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoCollaboratorsUser(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -410,7 +577,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -419,12 +586,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   putReposOwnerRepoCollaboratorsUser(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/collaborators/${args.user}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -445,7 +629,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -456,12 +640,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RepoComments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RepoComments>;
+  getReposOwnerRepoComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RepoComments>>;
+  getReposOwnerRepoComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RepoComments>>;
+  getReposOwnerRepoComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RepoComments | HttpResponse<models.RepoComments> | HttpEvent<models.RepoComments>> {
     const path = `/repos/${args.owner}/${args.repo}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -482,7 +683,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.RepoComments>('GET', path, options);
+    return this.http.get<models.RepoComments>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -491,12 +692,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoCommentsCommentId(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -517,7 +735,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -526,12 +744,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoCommentsCommentId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitComments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitComments>;
+  getReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitComments>>;
+  getReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitComments>>;
+  getReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -552,7 +787,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.CommitComments>('GET', path, options);
+    return this.http.get<models.CommitComments>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -561,12 +796,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoCommentsCommentId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitComments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitComments>;
+  patchReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitComments>>;
+  patchReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitComments>>;
+  patchReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>> {
     const path = `/repos/${args.owner}/${args.repo}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -587,7 +839,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.CommitComments>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.CommitComments>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -596,12 +848,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoCommits(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Commits> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Commits>;
+  getReposOwnerRepoCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Commits>>;
+  getReposOwnerRepoCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Commits>>;
+  getReposOwnerRepoCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Commits | HttpResponse<models.Commits> | HttpEvent<models.Commits>> {
     const path = `/repos/${args.owner}/${args.repo}/commits`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('since' in args) {
@@ -637,7 +906,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Commits>('GET', path, options);
+    return this.http.get<models.Commits>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -650,12 +919,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoCommitsRefStatus(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RefStatus> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RefStatus>;
+  getReposOwnerRepoCommitsRefStatus(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RefStatus>>;
+  getReposOwnerRepoCommitsRefStatus(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RefStatus>>;
+  getReposOwnerRepoCommitsRefStatus(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RefStatus | HttpResponse<models.RefStatus> | HttpEvent<models.RefStatus>> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.ref}/status`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -676,7 +962,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.RefStatus>('GET', path, options);
+    return this.http.get<models.RefStatus>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -685,12 +971,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoCommitsShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Commit> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Commit>;
+  getReposOwnerRepoCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Commit>>;
+  getReposOwnerRepoCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Commit>>;
+  getReposOwnerRepoCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Commit | HttpResponse<models.Commit> | HttpEvent<models.Commit>> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -711,7 +1014,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Commit>('GET', path, options);
+    return this.http.get<models.Commit>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -720,12 +1023,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoCommitsShaCodeComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RepoComments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RepoComments>;
+  getReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RepoComments>>;
+  getReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RepoComments>>;
+  getReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RepoComments | HttpResponse<models.RepoComments> | HttpEvent<models.RepoComments>> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -746,7 +1066,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.RepoComments>('GET', path, options);
+    return this.http.get<models.RepoComments>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -755,12 +1075,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoCommitsShaCodeComments(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitComments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitComments>;
+  postReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitComments>>;
+  postReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitComments>>;
+  postReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>> {
     const path = `/repos/${args.owner}/${args.repo}/commits/${args.shaCode}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -781,7 +1118,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.CommitComments>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.CommitComments>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -790,12 +1127,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoCompareBaseIdHeadId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CompareCommits> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CompareCommits>;
+  getReposOwnerRepoCompareBaseIdHeadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CompareCommits>>;
+  getReposOwnerRepoCompareBaseIdHeadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CompareCommits>>;
+  getReposOwnerRepoCompareBaseIdHeadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CompareCommits | HttpResponse<models.CompareCommits> | HttpEvent<models.CompareCommits>> {
     const path = `/repos/${args.owner}/${args.repo}/compare/${args.baseId}...${args.headId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -816,7 +1170,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.CompareCommits>('GET', path, options);
+    return this.http.get<models.CompareCommits>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -827,12 +1181,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoContentsPath(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DeleteFile> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DeleteFile>;
+  deleteReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DeleteFile>>;
+  deleteReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DeleteFile>>;
+  deleteReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DeleteFile | HttpResponse<models.DeleteFile> | HttpEvent<models.DeleteFile>> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -853,7 +1224,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.DeleteFile>('DELETE', path, options, JSON.stringify(args.body));
+    return this.http.delete<models.DeleteFile>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -868,12 +1239,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoContentsPath(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ContentsPath> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ContentsPath>;
+  getReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ContentsPath>>;
+  getReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ContentsPath>>;
+  getReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ContentsPath | HttpResponse<models.ContentsPath> | HttpEvent<models.ContentsPath>> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('queryPath' in args) {
@@ -900,7 +1288,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.ContentsPath>('GET', path, options);
+    return this.http.get<models.ContentsPath>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -909,12 +1297,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   putReposOwnerRepoContentsPath(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CreateFile> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CreateFile>;
+  putReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CreateFile>>;
+  putReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CreateFile>>;
+  putReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CreateFile | HttpResponse<models.CreateFile> | HttpEvent<models.CreateFile>> {
     const path = `/repos/${args.owner}/${args.repo}/contents/${args.path}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -935,7 +1340,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.CreateFile>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.CreateFile>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -944,12 +1349,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoContributors(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Contributors> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Contributors>;
+  getReposOwnerRepoContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Contributors>>;
+  getReposOwnerRepoContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Contributors>>;
+  getReposOwnerRepoContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Contributors | HttpResponse<models.Contributors> | HttpEvent<models.Contributors>> {
     const path = `/repos/${args.owner}/${args.repo}/contributors`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('anon' in args) {
@@ -973,7 +1395,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Contributors>('GET', path, options);
+    return this.http.get<models.Contributors>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -982,12 +1404,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoDeployments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RepoDeployments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RepoDeployments>;
+  getReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RepoDeployments>>;
+  getReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RepoDeployments>>;
+  getReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RepoDeployments | HttpResponse<models.RepoDeployments> | HttpEvent<models.RepoDeployments>> {
     const path = `/repos/${args.owner}/${args.repo}/deployments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1008,7 +1447,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.RepoDeployments>('GET', path, options);
+    return this.http.get<models.RepoDeployments>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1017,12 +1456,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoDeployments(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DeploymentResp> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DeploymentResp>;
+  postReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DeploymentResp>>;
+  postReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DeploymentResp>>;
+  postReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DeploymentResp | HttpResponse<models.DeploymentResp> | HttpEvent<models.DeploymentResp>> {
     const path = `/repos/${args.owner}/${args.repo}/deployments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1043,7 +1499,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.DeploymentResp>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.DeploymentResp>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1052,12 +1508,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoDeploymentsIdStatuses(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DeploymentStatuses> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DeploymentStatuses>;
+  getReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DeploymentStatuses>>;
+  getReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DeploymentStatuses>>;
+  getReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DeploymentStatuses | HttpResponse<models.DeploymentStatuses> | HttpEvent<models.DeploymentStatuses>> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1078,7 +1551,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.DeploymentStatuses>('GET', path, options);
+    return this.http.get<models.DeploymentStatuses>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1089,12 +1562,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoDeploymentsIdStatuses(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  postReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/deployments/${args.id}/statuses`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1115,7 +1605,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1124,12 +1614,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoDownloads(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Downloads> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Downloads>;
+  getReposOwnerRepoDownloads(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Downloads>>;
+  getReposOwnerRepoDownloads(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Downloads>>;
+  getReposOwnerRepoDownloads(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Downloads | HttpResponse<models.Downloads> | HttpEvent<models.Downloads>> {
     const path = `/repos/${args.owner}/${args.repo}/downloads`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1150,7 +1657,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Downloads>('GET', path, options);
+    return this.http.get<models.Downloads>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1159,12 +1666,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoDownloadsDownloadId(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1185,7 +1709,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1194,12 +1718,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoDownloadsDownloadId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Downloads> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Downloads>;
+  getReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Downloads>>;
+  getReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Downloads>>;
+  getReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Downloads | HttpResponse<models.Downloads> | HttpEvent<models.Downloads>> {
     const path = `/repos/${args.owner}/${args.repo}/downloads/${args.downloadId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1220,7 +1761,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Downloads>('GET', path, options);
+    return this.http.get<models.Downloads>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1229,12 +1770,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoEvents(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Events> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Events>;
+  getReposOwnerRepoEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getReposOwnerRepoEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getReposOwnerRepoEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {
     const path = `/repos/${args.owner}/${args.repo}/events`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1255,7 +1813,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Events>('GET', path, options);
+    return this.http.get<models.Events>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1264,12 +1822,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoForks(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Forks> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Forks>;
+  getReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Forks>>;
+  getReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Forks>>;
+  getReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Forks | HttpResponse<models.Forks> | HttpEvent<models.Forks>> {
     const path = `/repos/${args.owner}/${args.repo}/forks`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('sort' in args) {
@@ -1293,7 +1868,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Forks>('GET', path, options);
+    return this.http.get<models.Forks>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1306,12 +1881,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoForks(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Fork> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Fork>;
+  postReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Fork>>;
+  postReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Fork>>;
+  postReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Fork | HttpResponse<models.Fork> | HttpEvent<models.Fork>> {
     const path = `/repos/${args.owner}/${args.repo}/forks`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1332,7 +1924,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Fork>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Fork>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1341,12 +1933,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoGitBlobs(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Blobs> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Blobs>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Blobs>>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Blobs>>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Blobs | HttpResponse<models.Blobs> | HttpEvent<models.Blobs>> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1367,7 +1976,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Blobs>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Blobs>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1381,12 +1990,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoGitBlobsShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Blob> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Blob>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Blob>>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Blob>>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Blob | HttpResponse<models.Blob> | HttpEvent<models.Blob>> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs/${args.shaCode}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1407,7 +2033,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Blob>('GET', path, options);
+    return this.http.get<models.Blob>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1416,12 +2042,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoGitCommits(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.GitCommit> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.GitCommit>;
+  postReposOwnerRepoGitCommits(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.GitCommit>>;
+  postReposOwnerRepoGitCommits(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.GitCommit>>;
+  postReposOwnerRepoGitCommits(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.GitCommit | HttpResponse<models.GitCommit> | HttpEvent<models.GitCommit>> {
     const path = `/repos/${args.owner}/${args.repo}/git/commits`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1442,7 +2085,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.GitCommit>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.GitCommit>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1451,12 +2094,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoGitCommitsShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RepoCommit> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RepoCommit>;
+  getReposOwnerRepoGitCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RepoCommit>>;
+  getReposOwnerRepoGitCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RepoCommit>>;
+  getReposOwnerRepoGitCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RepoCommit | HttpResponse<models.RepoCommit> | HttpEvent<models.RepoCommit>> {
     const path = `/repos/${args.owner}/${args.repo}/git/commits/${args.shaCode}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1477,7 +2137,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.RepoCommit>('GET', path, options);
+    return this.http.get<models.RepoCommit>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1486,12 +2146,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoGitRefs(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Refs> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Refs>;
+  getReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Refs>>;
+  getReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Refs>>;
+  getReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Refs | HttpResponse<models.Refs> | HttpEvent<models.Refs>> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1512,7 +2189,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Refs>('GET', path, options);
+    return this.http.get<models.Refs>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1521,12 +2198,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoGitRefs(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.HeadBranch> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.HeadBranch>;
+  postReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.HeadBranch>>;
+  postReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.HeadBranch>>;
+  postReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1547,7 +2241,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.HeadBranch>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.HeadBranch>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1559,12 +2253,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoGitRefsRef(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1585,7 +2296,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1594,12 +2305,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoGitRefsRef(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.HeadBranch> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.HeadBranch>;
+  getReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.HeadBranch>>;
+  getReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.HeadBranch>>;
+  getReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1620,7 +2348,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.HeadBranch>('GET', path, options);
+    return this.http.get<models.HeadBranch>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1629,12 +2357,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoGitRefsRef(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.HeadBranch> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.HeadBranch>;
+  patchReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.HeadBranch>>;
+  patchReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.HeadBranch>>;
+  patchReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>> {
     const path = `/repos/${args.owner}/${args.repo}/git/refs/${args.ref}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1655,7 +2400,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.HeadBranch>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.HeadBranch>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1670,12 +2415,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoGitTags(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Tags> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Tags>;
+  postReposOwnerRepoGitTags(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Tags>>;
+  postReposOwnerRepoGitTags(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Tags>>;
+  postReposOwnerRepoGitTags(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Tags | HttpResponse<models.Tags> | HttpEvent<models.Tags>> {
     const path = `/repos/${args.owner}/${args.repo}/git/tags`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1696,7 +2458,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Tags>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Tags>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1705,12 +2467,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoGitTagsShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Tag> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Tag>;
+  getReposOwnerRepoGitTagsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Tag>>;
+  getReposOwnerRepoGitTagsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Tag>>;
+  getReposOwnerRepoGitTagsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Tag | HttpResponse<models.Tag> | HttpEvent<models.Tag>> {
     const path = `/repos/${args.owner}/${args.repo}/git/tags/${args.shaCode}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1731,7 +2510,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Tag>('GET', path, options);
+    return this.http.get<models.Tag>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1744,12 +2523,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoGitTrees(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Trees> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Trees>;
+  postReposOwnerRepoGitTrees(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Trees>>;
+  postReposOwnerRepoGitTrees(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Trees>>;
+  postReposOwnerRepoGitTrees(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Trees | HttpResponse<models.Trees> | HttpEvent<models.Trees>> {
     const path = `/repos/${args.owner}/${args.repo}/git/trees`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1770,7 +2566,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Trees>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Trees>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1779,12 +2575,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoGitTreesShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Tree> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Tree>;
+  getReposOwnerRepoGitTreesShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Tree>>;
+  getReposOwnerRepoGitTreesShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Tree>>;
+  getReposOwnerRepoGitTreesShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Tree | HttpResponse<models.Tree> | HttpEvent<models.Tree>> {
     const path = `/repos/${args.owner}/${args.repo}/git/trees/${args.shaCode}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('recursive' in args) {
@@ -1808,7 +2621,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Tree>('GET', path, options);
+    return this.http.get<models.Tree>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1817,12 +2630,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoHooks(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Hook> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Hook>;
+  getReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Hook>>;
+  getReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Hook>>;
+  getReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>> {
     const path = `/repos/${args.owner}/${args.repo}/hooks`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1843,7 +2673,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Hook>('GET', path, options);
+    return this.http.get<models.Hook>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1852,12 +2682,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoHooks(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Hook> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Hook>;
+  postReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Hook>>;
+  postReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Hook>>;
+  postReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>> {
     const path = `/repos/${args.owner}/${args.repo}/hooks`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1878,7 +2725,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Hook>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Hook>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1887,12 +2734,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoHooksHookId(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1913,7 +2777,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1922,12 +2786,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoHooksHookId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Hook> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Hook>;
+  getReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Hook>>;
+  getReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Hook>>;
+  getReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1948,7 +2829,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Hook>('GET', path, options);
+    return this.http.get<models.Hook>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1957,12 +2838,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoHooksHookId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Hook> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Hook>;
+  patchReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Hook>>;
+  patchReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Hook>>;
+  patchReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1983,7 +2881,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Hook>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Hook>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -1998,12 +2896,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoHooksHookIdTests(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  postReposOwnerRepoHooksHookIdTests(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postReposOwnerRepoHooksHookIdTests(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postReposOwnerRepoHooksHookIdTests(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/hooks/${args.hookId}/tests`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2024,7 +2939,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('POST', path, options);
+    return this.http.post<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2033,12 +2948,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssues(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issues> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issues>;
+  getReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issues>>;
+  getReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issues>>;
+  getReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>> {
     const path = `/repos/${args.owner}/${args.repo}/issues`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('filter' in args) {
@@ -2077,7 +3009,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Issues>('GET', path, options);
+    return this.http.get<models.Issues>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2088,12 +3020,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoIssues(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issue> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issue>;
+  postReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issue>>;
+  postReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issue>>;
+  postReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>> {
     const path = `/repos/${args.owner}/${args.repo}/issues`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2114,7 +3063,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Issue>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Issue>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -2123,12 +3072,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssuesComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComments>;
+  getReposOwnerRepoIssuesComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComments>>;
+  getReposOwnerRepoIssuesComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComments>>;
+  getReposOwnerRepoIssuesComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('direction' in args) {
@@ -2158,7 +3124,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.IssuesComments>('GET', path, options);
+    return this.http.get<models.IssuesComments>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2167,12 +3133,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoIssuesCommentId(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2193,7 +3176,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2202,12 +3185,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssuesCommentId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComment>;
+  getReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComment>>;
+  getReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComment>>;
+  getReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2228,7 +3228,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.IssuesComment>('GET', path, options);
+    return this.http.get<models.IssuesComment>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2237,12 +3237,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoIssuesCommentId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComment>;
+  patchReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComment>>;
+  patchReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComment>>;
+  patchReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2263,7 +3280,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.IssuesComment>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.IssuesComment>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -2272,12 +3289,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssuesEvents(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Events> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Events>;
+  getReposOwnerRepoIssuesEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getReposOwnerRepoIssuesEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getReposOwnerRepoIssuesEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/events`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2298,7 +3332,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Events>('GET', path, options);
+    return this.http.get<models.Events>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2307,12 +3341,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssuesEventId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Event> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Event>;
+  getReposOwnerRepoIssuesEventId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Event>>;
+  getReposOwnerRepoIssuesEventId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Event>>;
+  getReposOwnerRepoIssuesEventId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Event | HttpResponse<models.Event> | HttpEvent<models.Event>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/events/${args.eventId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2333,7 +3384,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Event>('GET', path, options);
+    return this.http.get<models.Event>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2342,12 +3393,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssuesNumber(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issue> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issue>;
+  getReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issue>>;
+  getReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issue>>;
+  getReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2368,7 +3436,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Issue>('GET', path, options);
+    return this.http.get<models.Issue>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2379,12 +3447,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoIssuesNumber(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issue> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issue>;
+  patchReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issue>>;
+  patchReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issue>>;
+  patchReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2405,7 +3490,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Issue>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Issue>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -2414,12 +3499,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssuesNumberComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComments>;
+  getReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComments>>;
+  getReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComments>>;
+  getReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2440,7 +3542,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.IssuesComments>('GET', path, options);
+    return this.http.get<models.IssuesComments>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2449,12 +3551,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoIssuesNumberComments(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComment>;
+  postReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComment>>;
+  postReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComment>>;
+  postReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2475,7 +3594,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.IssuesComment>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.IssuesComment>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -2484,12 +3603,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssuesNumberEvents(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Events> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Events>;
+  getReposOwnerRepoIssuesNumberEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getReposOwnerRepoIssuesNumberEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getReposOwnerRepoIssuesNumberEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/events`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2510,7 +3646,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Events>('GET', path, options);
+    return this.http.get<models.Events>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2519,12 +3655,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoIssuesNumberLabels(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2545,7 +3698,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2554,12 +3707,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoIssuesNumberLabels(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Labels> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Labels>;
+  getReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Labels>>;
+  getReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Labels>>;
+  getReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2580,7 +3750,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Labels>('GET', path, options);
+    return this.http.get<models.Labels>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2589,12 +3759,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoIssuesNumberLabels(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  postReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  postReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  postReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2615,7 +3802,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Label>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Label>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -2626,12 +3813,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   putReposOwnerRepoIssuesNumberLabels(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  putReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  putReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  putReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2652,7 +3856,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Label>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.Label>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -2661,12 +3865,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoIssuesNumberLabelsName(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoIssuesNumberLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoIssuesNumberLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoIssuesNumberLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/issues/${args.number}/labels/${args.name}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2687,7 +3908,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2696,12 +3917,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoKeys(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Keys> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Keys>;
+  getReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Keys>>;
+  getReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Keys>>;
+  getReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Keys | HttpResponse<models.Keys> | HttpEvent<models.Keys>> {
     const path = `/repos/${args.owner}/${args.repo}/keys`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2722,7 +3960,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Keys>('GET', path, options);
+    return this.http.get<models.Keys>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2731,12 +3969,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoKeys(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserKeysKeyId> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserKeysKeyId>;
+  postReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserKeysKeyId>>;
+  postReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserKeysKeyId>>;
+  postReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>> {
     const path = `/repos/${args.owner}/${args.repo}/keys`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2757,7 +4012,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.UserKeysKeyId>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.UserKeysKeyId>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -2766,12 +4021,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoKeysKeyId(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2792,7 +4064,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2801,12 +4073,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoKeysKeyId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserKeysKeyId> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserKeysKeyId>;
+  getReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserKeysKeyId>>;
+  getReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserKeysKeyId>>;
+  getReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>> {
     const path = `/repos/${args.owner}/${args.repo}/keys/${args.keyId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2827,7 +4116,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.UserKeysKeyId>('GET', path, options);
+    return this.http.get<models.UserKeysKeyId>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2836,12 +4125,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoLabels(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Labels> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Labels>;
+  getReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Labels>>;
+  getReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Labels>>;
+  getReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>> {
     const path = `/repos/${args.owner}/${args.repo}/labels`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2862,7 +4168,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Labels>('GET', path, options);
+    return this.http.get<models.Labels>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2871,12 +4177,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoLabels(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  postReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  postReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  postReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
     const path = `/repos/${args.owner}/${args.repo}/labels`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2897,7 +4220,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Label>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Label>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -2906,12 +4229,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoLabelsName(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2932,7 +4272,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2941,12 +4281,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoLabelsName(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  getReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  getReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  getReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -2967,7 +4324,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Label>('GET', path, options);
+    return this.http.get<models.Label>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -2976,12 +4333,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoLabelsName(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  patchReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  patchReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  patchReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
     const path = `/repos/${args.owner}/${args.repo}/labels/${args.name}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3002,7 +4376,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Label>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Label>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3014,12 +4388,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoLanguages(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Languages> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Languages>;
+  getReposOwnerRepoLanguages(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Languages>>;
+  getReposOwnerRepoLanguages(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Languages>>;
+  getReposOwnerRepoLanguages(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Languages | HttpResponse<models.Languages> | HttpEvent<models.Languages>> {
     const path = `/repos/${args.owner}/${args.repo}/languages`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3040,7 +4431,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Languages>('GET', path, options);
+    return this.http.get<models.Languages>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3049,12 +4440,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoMerges(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.MergesSuccessful> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.MergesSuccessful>;
+  postReposOwnerRepoMerges(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.MergesSuccessful>>;
+  postReposOwnerRepoMerges(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.MergesSuccessful>>;
+  postReposOwnerRepoMerges(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.MergesSuccessful | HttpResponse<models.MergesSuccessful> | HttpEvent<models.MergesSuccessful>> {
     const path = `/repos/${args.owner}/${args.repo}/merges`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3075,7 +4483,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.MergesSuccessful>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.MergesSuccessful>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3084,12 +4492,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoMilestones(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Milestone> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Milestone>;
+  getReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Milestone>>;
+  getReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Milestone>>;
+  getReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>> {
     const path = `/repos/${args.owner}/${args.repo}/milestones`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('state' in args) {
@@ -3119,7 +4544,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Milestone>('GET', path, options);
+    return this.http.get<models.Milestone>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3128,12 +4553,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoMilestones(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Milestone> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Milestone>;
+  postReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Milestone>>;
+  postReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Milestone>>;
+  postReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>> {
     const path = `/repos/${args.owner}/${args.repo}/milestones`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3154,7 +4596,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Milestone>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Milestone>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3163,12 +4605,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoMilestonesNumber(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3189,7 +4648,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3198,12 +4657,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoMilestonesNumber(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Milestone> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Milestone>;
+  getReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Milestone>>;
+  getReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Milestone>>;
+  getReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3224,7 +4700,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Milestone>('GET', path, options);
+    return this.http.get<models.Milestone>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3233,12 +4709,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoMilestonesNumber(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Milestone> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Milestone>;
+  patchReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Milestone>>;
+  patchReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Milestone>>;
+  patchReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3259,7 +4752,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Milestone>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Milestone>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3268,12 +4761,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoMilestonesNumberLabels(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Labels> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Labels>;
+  getReposOwnerRepoMilestonesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Labels>>;
+  getReposOwnerRepoMilestonesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Labels>>;
+  getReposOwnerRepoMilestonesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>> {
     const path = `/repos/${args.owner}/${args.repo}/milestones/${args.number}/labels`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3294,7 +4804,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Labels>('GET', path, options);
+    return this.http.get<models.Labels>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3305,12 +4815,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoNotifications(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Notifications> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Notifications>;
+  getReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Notifications>>;
+  getReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Notifications>>;
+  getReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('all' in args) {
@@ -3340,7 +4867,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Notifications>('GET', path, options);
+    return this.http.get<models.Notifications>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3352,12 +4879,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   putReposOwnerRepoNotifications(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/notifications`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3378,7 +4922,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3387,12 +4931,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoPulls(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Pulls> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pulls>;
+  getReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pulls>>;
+  getReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pulls>>;
+  getReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('state' in args) {
@@ -3422,7 +4983,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Pulls>('GET', path, options);
+    return this.http.get<models.Pulls>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3431,12 +4992,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoPulls(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Pulls> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pulls>;
+  postReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pulls>>;
+  postReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pulls>>;
+  postReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3457,7 +5035,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Pulls>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Pulls>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3468,12 +5046,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoPullsComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComments>;
+  getReposOwnerRepoPullsComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComments>>;
+  getReposOwnerRepoPullsComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComments>>;
+  getReposOwnerRepoPullsComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('direction' in args) {
@@ -3503,7 +5098,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.IssuesComments>('GET', path, options);
+    return this.http.get<models.IssuesComments>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3512,12 +5107,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoPullsCommentId(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3538,7 +5150,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3547,12 +5159,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoPullsCommentId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullsComment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullsComment>;
+  getReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullsComment>>;
+  getReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullsComment>>;
+  getReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3573,7 +5202,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.PullsComment>('GET', path, options);
+    return this.http.get<models.PullsComment>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3582,12 +5211,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoPullsCommentId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullsComment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullsComment>;
+  patchReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullsComment>>;
+  patchReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullsComment>>;
+  patchReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3608,7 +5254,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.PullsComment>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.PullsComment>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3617,12 +5263,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoPullsNumber(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullRequest> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullRequest>;
+  getReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullRequest>>;
+  getReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullRequest>>;
+  getReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullRequest | HttpResponse<models.PullRequest> | HttpEvent<models.PullRequest>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3643,7 +5306,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.PullRequest>('GET', path, options);
+    return this.http.get<models.PullRequest>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3652,12 +5315,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoPullsNumber(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repo> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repo>;
+  patchReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repo>>;
+  patchReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repo>>;
+  patchReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3678,7 +5358,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Repo>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Repo>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3687,12 +5367,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoPullsNumberComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullsComment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullsComment>;
+  getReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullsComment>>;
+  getReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullsComment>>;
+  getReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3713,7 +5410,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.PullsComment>('GET', path, options);
+    return this.http.get<models.PullsComment>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3744,12 +5441,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoPullsNumberComments(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullsComment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullsComment>;
+  postReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullsComment>>;
+  postReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullsComment>>;
+  postReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3770,7 +5484,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.PullsComment>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.PullsComment>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3779,12 +5493,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoPullsNumberCommits(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Commits> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Commits>;
+  getReposOwnerRepoPullsNumberCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Commits>>;
+  getReposOwnerRepoPullsNumberCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Commits>>;
+  getReposOwnerRepoPullsNumberCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Commits | HttpResponse<models.Commits> | HttpEvent<models.Commits>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/commits`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3805,7 +5536,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Commits>('GET', path, options);
+    return this.http.get<models.Commits>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3814,12 +5545,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoPullsNumberFiles(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Pulls> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pulls>;
+  getReposOwnerRepoPullsNumberFiles(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pulls>>;
+  getReposOwnerRepoPullsNumberFiles(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pulls>>;
+  getReposOwnerRepoPullsNumberFiles(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/files`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3840,7 +5588,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Pulls>('GET', path, options);
+    return this.http.get<models.Pulls>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3849,12 +5597,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoPullsNumberMerge(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3875,7 +5640,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3884,12 +5649,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   putReposOwnerRepoPullsNumberMerge(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Merge> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Merge>;
+  putReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Merge>>;
+  putReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Merge>>;
+  putReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Merge | HttpResponse<models.Merge> | HttpEvent<models.Merge>> {
     const path = `/repos/${args.owner}/${args.repo}/pulls/${args.number}/merge`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3910,7 +5692,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Merge>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.Merge>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -3921,12 +5703,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoReadme(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ContentsPath> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ContentsPath>;
+  getReposOwnerRepoReadme(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ContentsPath>>;
+  getReposOwnerRepoReadme(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ContentsPath>>;
+  getReposOwnerRepoReadme(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ContentsPath | HttpResponse<models.ContentsPath> | HttpEvent<models.ContentsPath>> {
     const path = `/repos/${args.owner}/${args.repo}/readme`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('ref' in args) {
@@ -3950,7 +5749,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.ContentsPath>('GET', path, options);
+    return this.http.get<models.ContentsPath>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3959,12 +5758,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoReleases(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Releases> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Releases>;
+  getReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Releases>>;
+  getReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Releases>>;
+  getReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Releases | HttpResponse<models.Releases> | HttpEvent<models.Releases>> {
     const path = `/repos/${args.owner}/${args.repo}/releases`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -3985,7 +5801,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Releases>('GET', path, options);
+    return this.http.get<models.Releases>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -3996,12 +5812,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoReleases(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Release> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Release>;
+  postReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Release>>;
+  postReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Release>>;
+  postReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>> {
     const path = `/repos/${args.owner}/${args.repo}/releases`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4022,7 +5855,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Release>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Release>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -4031,12 +5864,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoReleasesAssetsId(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4057,7 +5907,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4066,12 +5916,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoReleasesAssetsId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Asset> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Asset>;
+  getReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Asset>>;
+  getReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Asset>>;
+  getReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Asset | HttpResponse<models.Asset> | HttpEvent<models.Asset>> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4092,7 +5959,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Asset>('GET', path, options);
+    return this.http.get<models.Asset>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4103,12 +5970,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoReleasesAssetsId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Asset> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Asset>;
+  patchReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Asset>>;
+  patchReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Asset>>;
+  patchReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Asset | HttpResponse<models.Asset> | HttpEvent<models.Asset>> {
     const path = `/repos/${args.owner}/${args.repo}/releases/assets/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4129,7 +6013,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Asset>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Asset>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -4138,12 +6022,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoReleasesId(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4164,7 +6065,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4173,12 +6074,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoReleasesId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Release> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Release>;
+  getReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Release>>;
+  getReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Release>>;
+  getReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4199,7 +6117,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Release>('GET', path, options);
+    return this.http.get<models.Release>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4208,12 +6126,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   patchReposOwnerRepoReleasesId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Release> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Release>;
+  patchReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Release>>;
+  patchReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Release>>;
+  patchReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4234,7 +6169,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Release>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Release>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -4243,12 +6178,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoReleasesIdAssets(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Assets> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Assets>;
+  getReposOwnerRepoReleasesIdAssets(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Assets>>;
+  getReposOwnerRepoReleasesIdAssets(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Assets>>;
+  getReposOwnerRepoReleasesIdAssets(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Assets | HttpResponse<models.Assets> | HttpEvent<models.Assets>> {
     const path = `/repos/${args.owner}/${args.repo}/releases/${args.id}/assets`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4269,7 +6221,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Assets>('GET', path, options);
+    return this.http.get<models.Assets>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4278,12 +6230,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoStargazers(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getReposOwnerRepoStargazers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getReposOwnerRepoStargazers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getReposOwnerRepoStargazers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/repos/${args.owner}/${args.repo}/stargazers`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4304,7 +6273,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4316,12 +6285,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoStatsCodeFrequency(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CodeFrequencyStats> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CodeFrequencyStats>;
+  getReposOwnerRepoStatsCodeFrequency(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CodeFrequencyStats>>;
+  getReposOwnerRepoStatsCodeFrequency(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CodeFrequencyStats>>;
+  getReposOwnerRepoStatsCodeFrequency(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CodeFrequencyStats | HttpResponse<models.CodeFrequencyStats> | HttpEvent<models.CodeFrequencyStats>> {
     const path = `/repos/${args.owner}/${args.repo}/stats/code_frequency`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4342,7 +6328,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.CodeFrequencyStats>('GET', path, options);
+    return this.http.get<models.CodeFrequencyStats>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4354,12 +6340,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoStatsCommitActivity(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitActivityStats> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitActivityStats>;
+  getReposOwnerRepoStatsCommitActivity(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitActivityStats>>;
+  getReposOwnerRepoStatsCommitActivity(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitActivityStats>>;
+  getReposOwnerRepoStatsCommitActivity(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitActivityStats | HttpResponse<models.CommitActivityStats> | HttpEvent<models.CommitActivityStats>> {
     const path = `/repos/${args.owner}/${args.repo}/stats/commit_activity`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4380,7 +6383,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.CommitActivityStats>('GET', path, options);
+    return this.http.get<models.CommitActivityStats>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4389,12 +6392,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoStatsContributors(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ContributorsStats> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ContributorsStats>;
+  getReposOwnerRepoStatsContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ContributorsStats>>;
+  getReposOwnerRepoStatsContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ContributorsStats>>;
+  getReposOwnerRepoStatsContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ContributorsStats | HttpResponse<models.ContributorsStats> | HttpEvent<models.ContributorsStats>> {
     const path = `/repos/${args.owner}/${args.repo}/stats/contributors`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4415,7 +6435,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.ContributorsStats>('GET', path, options);
+    return this.http.get<models.ContributorsStats>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4424,12 +6444,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoStatsParticipation(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ParticipationStats> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ParticipationStats>;
+  getReposOwnerRepoStatsParticipation(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ParticipationStats>>;
+  getReposOwnerRepoStatsParticipation(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ParticipationStats>>;
+  getReposOwnerRepoStatsParticipation(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ParticipationStats | HttpResponse<models.ParticipationStats> | HttpEvent<models.ParticipationStats>> {
     const path = `/repos/${args.owner}/${args.repo}/stats/participation`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4450,7 +6487,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.ParticipationStats>('GET', path, options);
+    return this.http.get<models.ParticipationStats>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4469,12 +6506,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoStatsPunchCard(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CodeFrequencyStats> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CodeFrequencyStats>;
+  getReposOwnerRepoStatsPunchCard(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CodeFrequencyStats>>;
+  getReposOwnerRepoStatsPunchCard(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CodeFrequencyStats>>;
+  getReposOwnerRepoStatsPunchCard(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CodeFrequencyStats | HttpResponse<models.CodeFrequencyStats> | HttpEvent<models.CodeFrequencyStats>> {
     const path = `/repos/${args.owner}/${args.repo}/stats/punch_card`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4495,7 +6549,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.CodeFrequencyStats>('GET', path, options);
+    return this.http.get<models.CodeFrequencyStats>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4504,12 +6558,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoStatusesRef(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Ref> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Ref>;
+  getReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Ref>>;
+  getReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Ref>>;
+  getReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Ref | HttpResponse<models.Ref> | HttpEvent<models.Ref>> {
     const path = `/repos/${args.owner}/${args.repo}/statuses/${args.ref}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4530,7 +6601,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Ref>('GET', path, options);
+    return this.http.get<models.Ref>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4539,12 +6610,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   postReposOwnerRepoStatusesRef(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Ref> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Ref>;
+  postReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Ref>>;
+  postReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Ref>>;
+  postReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Ref | HttpResponse<models.Ref> | HttpEvent<models.Ref>> {
     const path = `/repos/${args.owner}/${args.repo}/statuses/${args.ref}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4565,7 +6653,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Ref>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Ref>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -4574,12 +6662,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoSubscribers(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getReposOwnerRepoSubscribers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getReposOwnerRepoSubscribers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getReposOwnerRepoSubscribers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/repos/${args.owner}/${args.repo}/subscribers`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4600,7 +6705,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4609,12 +6714,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   deleteReposOwnerRepoSubscription(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4635,7 +6757,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4644,12 +6766,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoSubscription(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Subscribition> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Subscribition>;
+  getReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscribition>>;
+  getReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscribition>>;
+  getReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Subscribition | HttpResponse<models.Subscribition> | HttpEvent<models.Subscribition>> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4670,7 +6809,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Subscribition>('GET', path, options);
+    return this.http.get<models.Subscribition>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4679,12 +6818,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   putReposOwnerRepoSubscription(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Subscribition> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Subscribition>;
+  putReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscribition>>;
+  putReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscribition>>;
+  putReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Subscribition | HttpResponse<models.Subscribition> | HttpEvent<models.Subscribition>> {
     const path = `/repos/${args.owner}/${args.repo}/subscription`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4705,7 +6861,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Subscribition>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.Subscribition>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -4714,12 +6870,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoTags(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Tags> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Tags>;
+  getReposOwnerRepoTags(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Tags>>;
+  getReposOwnerRepoTags(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Tags>>;
+  getReposOwnerRepoTags(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Tags | HttpResponse<models.Tags> | HttpEvent<models.Tags>> {
     const path = `/repos/${args.owner}/${args.repo}/tags`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4740,7 +6913,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Tags>('GET', path, options);
+    return this.http.get<models.Tags>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4749,12 +6922,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoTeams(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Teams> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Teams>;
+  getReposOwnerRepoTeams(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Teams>>;
+  getReposOwnerRepoTeams(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Teams>>;
+  getReposOwnerRepoTeams(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Teams | HttpResponse<models.Teams> | HttpEvent<models.Teams>> {
     const path = `/repos/${args.owner}/${args.repo}/teams`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4775,7 +6965,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Teams>('GET', path, options);
+    return this.http.get<models.Teams>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4784,12 +6974,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoWatchers(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getReposOwnerRepoWatchers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getReposOwnerRepoWatchers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getReposOwnerRepoWatchers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/repos/${args.owner}/${args.repo}/watchers`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4810,7 +7017,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -4825,12 +7032,29 @@ export class ReposAPIClient implements ReposAPIClientInterface {
    */
   getReposOwnerRepoArchiveFormatPath(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getReposOwnerRepoArchiveFormatPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getReposOwnerRepoArchiveFormatPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getReposOwnerRepoArchiveFormatPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/repos/${args.owner}/${args.repo}/${args.archiveFormat}/${args.path}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -4851,28 +7075,7 @@ export class ReposAPIClient implements ReposAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

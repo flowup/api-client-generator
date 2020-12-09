@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface LegacyAPIClientInterface {
-
   /**
    * Arguments object for method `getLegacyIssuesSearchOwnerRepositoryStateKeyword`.
    */
@@ -42,8 +40,24 @@ export interface LegacyAPIClientInterface {
    */
   getLegacyIssuesSearchOwnerRepositoryStateKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.SearchIssuesByKeyword>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchIssuesByKeyword>>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchIssuesByKeyword>>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.SearchIssuesByKeyword | HttpResponse<models.SearchIssuesByKeyword> | HttpEvent<models.SearchIssuesByKeyword>>;
 
   /**
    * Arguments object for method `getLegacyReposSearchKeyword`.
@@ -75,8 +89,24 @@ export interface LegacyAPIClientInterface {
    */
   getLegacyReposSearchKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.SearchRepositoriesByKeyword>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchRepositoriesByKeyword>>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchRepositoriesByKeyword>>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.SearchRepositoriesByKeyword | HttpResponse<models.SearchRepositoriesByKeyword> | HttpEvent<models.SearchRepositoriesByKeyword>>;
 
   /**
    * Arguments object for method `getLegacyUserEmail`.
@@ -100,8 +130,24 @@ export interface LegacyAPIClientInterface {
    */
   getLegacyUserEmail(
     args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.SearchUserByEmail>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchUserByEmail>>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchUserByEmail>>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.SearchUserByEmail | HttpResponse<models.SearchUserByEmail> | HttpEvent<models.SearchUserByEmail>>;
 
   /**
    * Arguments object for method `getLegacyUserSearchKeyword`.
@@ -131,8 +177,23 @@ export interface LegacyAPIClientInterface {
    */
   getLegacyUserSearchKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.SearchUsersByKeyword>;
-
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchUsersByKeyword>>;
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchUsersByKeyword>>;
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.SearchUsersByKeyword | HttpResponse<models.SearchUsersByKeyword> | HttpEvent<models.SearchUsersByKeyword>>;
 
 }

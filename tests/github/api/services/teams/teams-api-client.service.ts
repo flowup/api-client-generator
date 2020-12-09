@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { TeamsAPIClientInterface } from './teams-api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 export const USE_DOMAIN = new InjectionToken<string>('TeamsAPIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('TeamsAPIClient_
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -59,12 +56,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   deleteTeamsTeamId(
     args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/teams/${args.teamId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -85,7 +99,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -94,12 +108,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   getTeamsTeamId(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Team> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Team>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>> {
     const path = `/teams/${args.teamId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -120,7 +151,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Team>('GET', path, options);
+    return this.http.get<models.Team>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -132,12 +163,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   patchTeamsTeamId(
     args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Team> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Team>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>> {
     const path = `/teams/${args.teamId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -158,7 +206,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Team>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Team>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -170,12 +218,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   getTeamsTeamIdMembers(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/teams/${args.teamId}/members`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -196,7 +261,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -213,12 +278,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   deleteTeamsTeamIdMembersUsername(
     args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/teams/${args.teamId}/members/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -239,7 +321,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -254,12 +336,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   getTeamsTeamIdMembersUsername(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/teams/${args.teamId}/members/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -280,7 +379,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -296,12 +395,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   putTeamsTeamIdMembersUsername(
     args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/teams/${args.teamId}/members/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -322,7 +438,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -333,12 +449,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   deleteTeamsTeamIdMembershipsUsername(
     args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/teams/${args.teamId}/memberships/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -359,7 +492,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -370,12 +503,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   getTeamsTeamIdMembershipsUsername(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TeamMembership> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TeamMembership>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamMembership>>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamMembership>>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TeamMembership | HttpResponse<models.TeamMembership> | HttpEvent<models.TeamMembership>> {
     const path = `/teams/${args.teamId}/memberships/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -396,7 +546,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.TeamMembership>('GET', path, options);
+    return this.http.get<models.TeamMembership>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -413,12 +563,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   putTeamsTeamIdMembershipsUsername(
     args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TeamMembership> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TeamMembership>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamMembership>>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamMembership>>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TeamMembership | HttpResponse<models.TeamMembership> | HttpEvent<models.TeamMembership>> {
     const path = `/teams/${args.teamId}/memberships/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -439,7 +606,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.TeamMembership>('PUT', path, options);
+    return this.http.put<models.TeamMembership>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -448,12 +615,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   getTeamsTeamIdRepos(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TeamRepos> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TeamRepos>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamRepos>>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamRepos>>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TeamRepos | HttpResponse<models.TeamRepos> | HttpEvent<models.TeamRepos>> {
     const path = `/teams/${args.teamId}/repos`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -474,7 +658,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.TeamRepos>('GET', path, options);
+    return this.http.get<models.TeamRepos>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -483,12 +667,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   putTeamsTeamIdReposOrgRepo(
     args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/teams/${args.teamId}/repos/${args.org}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -509,7 +710,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -518,12 +719,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   deleteTeamsTeamIdReposOwnerRepo(
     args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/teams/${args.teamId}/repos/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -544,7 +762,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -553,12 +771,29 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
    */
   getTeamsTeamIdReposOwnerRepo(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/teams/${args.teamId}/repos/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -579,28 +814,7 @@ export class TeamsAPIClient implements TeamsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

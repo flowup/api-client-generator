@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { ReposAPIClientInterface } from './repos-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, ReposAPIClient } from './repos-api-client.service';
-import { ReposAPIClientInterface } from './repos-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,866 +23,3910 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedReposAPIClient extends ReposAPIClient implements ReposAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Delete a Repository.
+   * Deleting a repository requires admin access. If OAuth is used, the delete_repo
+   * scope is required.
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepo(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepo(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repo> {
-    return super.getReposOwnerRepo(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repo>;
+  getReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repo>>;
+  getReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repo>>;
+  getReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>> {
+
+    return super.getReposOwnerRepo(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'models.Repo' caught inconsistency.`, res)));
   }
 
+  /**
+   * Edit repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepo(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repo> {
-    return super.patchReposOwnerRepo(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repo>;
+  patchReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repo>>;
+  patchReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repo>>;
+  patchReposOwnerRepo(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>> {
+
+    return super.patchReposOwnerRepo(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'models.Repo' caught inconsistency.`, res)));
   }
 
+  /**
+   * List assignees.
+   * This call lists all the available assignees (owner + collaborators) to which
+   * issues may be assigned.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoAssignees(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Assignees> {
-    return super.getReposOwnerRepoAssignees(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Assignees>;
+  getReposOwnerRepoAssignees(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Assignees>>;
+  getReposOwnerRepoAssignees(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Assignees>>;
+  getReposOwnerRepoAssignees(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Assignees | HttpResponse<models.Assignees> | HttpEvent<models.Assignees>> {
+
+    return super.getReposOwnerRepoAssignees(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isAssignees(res) || console.error(`TypeGuard for response 'models.Assignees' caught inconsistency.`, res)));
   }
 
+  /**
+   * Check assignee.
+   * You may also check to see if a particular user is an assignee for a repository.
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  getReposOwnerRepoAssigneesAssignee(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getReposOwnerRepoAssigneesAssignee(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getReposOwnerRepoAssigneesAssignee(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getReposOwnerRepoAssigneesAssignee(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.getReposOwnerRepoAssigneesAssignee(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get list of branches
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoBranches(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Branches> {
-    return super.getReposOwnerRepoBranches(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Branches>;
+  getReposOwnerRepoBranches(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Branches>>;
+  getReposOwnerRepoBranches(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Branches>>;
+  getReposOwnerRepoBranches(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Branches | HttpResponse<models.Branches> | HttpEvent<models.Branches>> {
+
+    return super.getReposOwnerRepoBranches(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isBranches(res) || console.error(`TypeGuard for response 'models.Branches' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get Branch
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoBranchesBranch(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Branch> {
-    return super.getReposOwnerRepoBranchesBranch(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Branch>;
+  getReposOwnerRepoBranchesBranch(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Branch>>;
+  getReposOwnerRepoBranchesBranch(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Branch>>;
+  getReposOwnerRepoBranchesBranch(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Branch | HttpResponse<models.Branch> | HttpEvent<models.Branch>> {
+
+    return super.getReposOwnerRepoBranchesBranch(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isBranch(res) || console.error(`TypeGuard for response 'models.Branch' caught inconsistency.`, res)));
   }
 
+  /**
+   * List.
+   * When authenticating as an organization owner of an organization-owned
+   * repository, all organization owners are included in the list of
+   * collaborators. Otherwise, only users with access to the repository are
+   * returned in the collaborators list.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoCollaborators(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
-    return super.getReposOwnerRepoCollaborators(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getReposOwnerRepoCollaborators(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getReposOwnerRepoCollaborators(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getReposOwnerRepoCollaborators(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
+
+    return super.getReposOwnerRepoCollaborators(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
+  /**
+   * Remove collaborator.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoCollaboratorsUser(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Check if user is a collaborator
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  getReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.getReposOwnerRepoCollaboratorsUser(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Add collaborator.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  putReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putReposOwnerRepoCollaboratorsUser(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.putReposOwnerRepoCollaboratorsUser(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * List commit comments for a repository.
+   * Comments are ordered by ascending ID.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RepoComments> {
-    return super.getReposOwnerRepoComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RepoComments>;
+  getReposOwnerRepoComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RepoComments>>;
+  getReposOwnerRepoComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RepoComments>>;
+  getReposOwnerRepoComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RepoComments | HttpResponse<models.RepoComments> | HttpEvent<models.RepoComments>> {
+
+    return super.getReposOwnerRepoComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepoComments(res) || console.error(`TypeGuard for response 'models.RepoComments' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a commit comment
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoCommentsCommentId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a single commit comment.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoCommentsCommentId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitComments> {
-    return super.getReposOwnerRepoCommentsCommentId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitComments>;
+  getReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitComments>>;
+  getReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitComments>>;
+  getReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>> {
+
+    return super.getReposOwnerRepoCommentsCommentId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'models.CommitComments' caught inconsistency.`, res)));
   }
 
+  /**
+   * Update a commit comment.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoCommentsCommentId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitComments> {
-    return super.patchReposOwnerRepoCommentsCommentId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitComments>;
+  patchReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitComments>>;
+  patchReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitComments>>;
+  patchReposOwnerRepoCommentsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>> {
+
+    return super.patchReposOwnerRepoCommentsCommentId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'models.CommitComments' caught inconsistency.`, res)));
   }
 
+  /**
+   * List commits on a repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoCommits(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Commits> {
-    return super.getReposOwnerRepoCommits(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Commits>;
+  getReposOwnerRepoCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Commits>>;
+  getReposOwnerRepoCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Commits>>;
+  getReposOwnerRepoCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Commits | HttpResponse<models.Commits> | HttpEvent<models.Commits>> {
+
+    return super.getReposOwnerRepoCommits(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCommits(res) || console.error(`TypeGuard for response 'models.Commits' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get the combined Status for a specific Ref
+   * The Combined status endpoint is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the blog post for full details.
+   * To access this endpoint during the preview period, you must provide a custom media type in the Accept header:
+   * application/vnd.github.she-hulk-preview+json
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoCommitsRefStatus(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RefStatus> {
-    return super.getReposOwnerRepoCommitsRefStatus(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RefStatus>;
+  getReposOwnerRepoCommitsRefStatus(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RefStatus>>;
+  getReposOwnerRepoCommitsRefStatus(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RefStatus>>;
+  getReposOwnerRepoCommitsRefStatus(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RefStatus | HttpResponse<models.RefStatus> | HttpEvent<models.RefStatus>> {
+
+    return super.getReposOwnerRepoCommitsRefStatus(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRefStatus(res) || console.error(`TypeGuard for response 'models.RefStatus' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a single commit.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoCommitsShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Commit> {
-    return super.getReposOwnerRepoCommitsShaCode(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Commit>;
+  getReposOwnerRepoCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Commit>>;
+  getReposOwnerRepoCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Commit>>;
+  getReposOwnerRepoCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Commit | HttpResponse<models.Commit> | HttpEvent<models.Commit>> {
+
+    return super.getReposOwnerRepoCommitsShaCode(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCommit(res) || console.error(`TypeGuard for response 'models.Commit' caught inconsistency.`, res)));
   }
 
+  /**
+   * List comments for a single commitList comments for a single commit.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoCommitsShaCodeComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RepoComments> {
-    return super.getReposOwnerRepoCommitsShaCodeComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RepoComments>;
+  getReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RepoComments>>;
+  getReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RepoComments>>;
+  getReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RepoComments | HttpResponse<models.RepoComments> | HttpEvent<models.RepoComments>> {
+
+    return super.getReposOwnerRepoCommitsShaCodeComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepoComments(res) || console.error(`TypeGuard for response 'models.RepoComments' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a commit comment.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoCommitsShaCodeComments(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitComments> {
-    return super.postReposOwnerRepoCommitsShaCodeComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitComments>;
+  postReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitComments>>;
+  postReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitComments>>;
+  postReposOwnerRepoCommitsShaCodeComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>> {
+
+    return super.postReposOwnerRepoCommitsShaCodeComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCommitComments(res) || console.error(`TypeGuard for response 'models.CommitComments' caught inconsistency.`, res)));
   }
 
+  /**
+   * Compare two commits
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoCompareBaseIdHeadId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CompareCommits> {
-    return super.getReposOwnerRepoCompareBaseIdHeadId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CompareCommits>;
+  getReposOwnerRepoCompareBaseIdHeadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CompareCommits>>;
+  getReposOwnerRepoCompareBaseIdHeadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CompareCommits>>;
+  getReposOwnerRepoCompareBaseIdHeadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CompareCommits | HttpResponse<models.CompareCommits> | HttpEvent<models.CompareCommits>> {
+
+    return super.getReposOwnerRepoCompareBaseIdHeadId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCompareCommits(res) || console.error(`TypeGuard for response 'models.CompareCommits' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a file.
+   * This method deletes a file in a repository.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   deleteReposOwnerRepoContentsPath(
     args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DeleteFile> {
-    return super.deleteReposOwnerRepoContentsPath(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DeleteFile>;
+  deleteReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DeleteFile>>;
+  deleteReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DeleteFile>>;
+  deleteReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DeleteFile | HttpResponse<models.DeleteFile> | HttpEvent<models.DeleteFile>> {
+
+    return super.deleteReposOwnerRepoContentsPath(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDeleteFile(res) || console.error(`TypeGuard for response 'models.DeleteFile' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get contents.
+   * This method returns the contents of a file or directory in a repository.
+   * Files and symlinks support a custom media type for getting the raw content.
+   * Directories and submodules do not support custom media types.
+   * Note: This API supports files up to 1 megabyte in size.
+   * Here can be many outcomes. For details see "http://developer.github.com/v3/repos/contents/"
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoContentsPath(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ContentsPath> {
-    return super.getReposOwnerRepoContentsPath(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ContentsPath>;
+  getReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ContentsPath>>;
+  getReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ContentsPath>>;
+  getReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ContentsPath | HttpResponse<models.ContentsPath> | HttpEvent<models.ContentsPath>> {
+
+    return super.getReposOwnerRepoContentsPath(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isContentsPath(res) || console.error(`TypeGuard for response 'models.ContentsPath' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a file.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putReposOwnerRepoContentsPath(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CreateFile> {
-    return super.putReposOwnerRepoContentsPath(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CreateFile>;
+  putReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CreateFile>>;
+  putReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CreateFile>>;
+  putReposOwnerRepoContentsPath(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CreateFile | HttpResponse<models.CreateFile> | HttpEvent<models.CreateFile>> {
+
+    return super.putReposOwnerRepoContentsPath(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCreateFile(res) || console.error(`TypeGuard for response 'models.CreateFile' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get list of contributors.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoContributors(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Contributors> {
-    return super.getReposOwnerRepoContributors(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Contributors>;
+  getReposOwnerRepoContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Contributors>>;
+  getReposOwnerRepoContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Contributors>>;
+  getReposOwnerRepoContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Contributors | HttpResponse<models.Contributors> | HttpEvent<models.Contributors>> {
+
+    return super.getReposOwnerRepoContributors(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isContributors(res) || console.error(`TypeGuard for response 'models.Contributors' caught inconsistency.`, res)));
   }
 
+  /**
+   * Users with pull access can view deployments for a repository
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoDeployments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RepoDeployments> {
-    return super.getReposOwnerRepoDeployments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RepoDeployments>;
+  getReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RepoDeployments>>;
+  getReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RepoDeployments>>;
+  getReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RepoDeployments | HttpResponse<models.RepoDeployments> | HttpEvent<models.RepoDeployments>> {
+
+    return super.getReposOwnerRepoDeployments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepoDeployments(res) || console.error(`TypeGuard for response 'models.RepoDeployments' caught inconsistency.`, res)));
   }
 
+  /**
+   * Users with push access can create a deployment for a given ref
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoDeployments(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DeploymentResp> {
-    return super.postReposOwnerRepoDeployments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DeploymentResp>;
+  postReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DeploymentResp>>;
+  postReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DeploymentResp>>;
+  postReposOwnerRepoDeployments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DeploymentResp | HttpResponse<models.DeploymentResp> | HttpEvent<models.DeploymentResp>> {
+
+    return super.postReposOwnerRepoDeployments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDeploymentResp(res) || console.error(`TypeGuard for response 'models.DeploymentResp' caught inconsistency.`, res)));
   }
 
+  /**
+   * Users with pull access can view deployment statuses for a deployment
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoDeploymentsIdStatuses(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DeploymentStatuses> {
-    return super.getReposOwnerRepoDeploymentsIdStatuses(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DeploymentStatuses>;
+  getReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DeploymentStatuses>>;
+  getReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DeploymentStatuses>>;
+  getReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DeploymentStatuses | HttpResponse<models.DeploymentStatuses> | HttpEvent<models.DeploymentStatuses>> {
+
+    return super.getReposOwnerRepoDeploymentsIdStatuses(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDeploymentStatuses(res) || console.error(`TypeGuard for response 'models.DeploymentStatuses' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a Deployment Status
+   * Users with push access can create deployment statuses for a given deployment:
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
+  postReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  postReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postReposOwnerRepoDeploymentsIdStatuses(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.postReposOwnerRepoDeploymentsIdStatuses(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Deprecated. List downloads for a repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoDownloads(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Downloads> {
-    return super.getReposOwnerRepoDownloads(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Downloads>;
+  getReposOwnerRepoDownloads(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Downloads>>;
+  getReposOwnerRepoDownloads(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Downloads>>;
+  getReposOwnerRepoDownloads(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Downloads | HttpResponse<models.Downloads> | HttpEvent<models.Downloads>> {
+
+    return super.getReposOwnerRepoDownloads(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDownloads(res) || console.error(`TypeGuard for response 'models.Downloads' caught inconsistency.`, res)));
   }
 
+  /**
+   * Deprecated. Delete a download.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoDownloadsDownloadId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Deprecated. Get a single download.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoDownloadsDownloadId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Downloads> {
-    return super.getReposOwnerRepoDownloadsDownloadId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Downloads>;
+  getReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Downloads>>;
+  getReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Downloads>>;
+  getReposOwnerRepoDownloadsDownloadId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Downloads | HttpResponse<models.Downloads> | HttpEvent<models.Downloads>> {
+
+    return super.getReposOwnerRepoDownloadsDownloadId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDownloads(res) || console.error(`TypeGuard for response 'models.Downloads' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get list of repository events.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoEvents(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Events> {
-    return super.getReposOwnerRepoEvents(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Events>;
+  getReposOwnerRepoEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getReposOwnerRepoEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getReposOwnerRepoEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {
+
+    return super.getReposOwnerRepoEvents(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'models.Events' caught inconsistency.`, res)));
   }
 
+  /**
+   * List forks.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoForks(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Forks> {
-    return super.getReposOwnerRepoForks(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Forks>;
+  getReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Forks>>;
+  getReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Forks>>;
+  getReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Forks | HttpResponse<models.Forks> | HttpEvent<models.Forks>> {
+
+    return super.getReposOwnerRepoForks(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isForks(res) || console.error(`TypeGuard for response 'models.Forks' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a fork.
+   * Forking a Repository happens asynchronously. Therefore, you may have to wai
+   * a short period before accessing the git objects. If this takes longer than 5
+   * minutes, be sure to contact Support.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoForks(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Fork> {
-    return super.postReposOwnerRepoForks(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Fork>;
+  postReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Fork>>;
+  postReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Fork>>;
+  postReposOwnerRepoForks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Fork | HttpResponse<models.Fork> | HttpEvent<models.Fork>> {
+
+    return super.postReposOwnerRepoForks(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isFork(res) || console.error(`TypeGuard for response 'models.Fork' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a Blob.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoGitBlobs(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Blobs> {
-    return super.postReposOwnerRepoGitBlobs(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Blobs>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Blobs>>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Blobs>>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Blobs | HttpResponse<models.Blobs> | HttpEvent<models.Blobs>> {
+
+    return super.postReposOwnerRepoGitBlobs(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isBlobs(res) || console.error(`TypeGuard for response 'models.Blobs' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a Blob.
+   * Since blobs can be any arbitrary binary data, the input and responses for
+   * the blob API takes an encoding parameter that can be either utf-8 or
+   * base64. If your data cannot be losslessly sent as a UTF-8 string, you can
+   * base64 encode it.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoGitBlobsShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Blob> {
-    return super.getReposOwnerRepoGitBlobsShaCode(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Blob>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Blob>>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Blob>>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Blob | HttpResponse<models.Blob> | HttpEvent<models.Blob>> {
+
+    return super.getReposOwnerRepoGitBlobsShaCode(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isBlob(res) || console.error(`TypeGuard for response 'models.Blob' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a Commit.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoGitCommits(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.GitCommit> {
-    return super.postReposOwnerRepoGitCommits(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.GitCommit>;
+  postReposOwnerRepoGitCommits(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.GitCommit>>;
+  postReposOwnerRepoGitCommits(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.GitCommit>>;
+  postReposOwnerRepoGitCommits(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.GitCommit | HttpResponse<models.GitCommit> | HttpEvent<models.GitCommit>> {
+
+    return super.postReposOwnerRepoGitCommits(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isGitCommit(res) || console.error(`TypeGuard for response 'models.GitCommit' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a Commit.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoGitCommitsShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RepoCommit> {
-    return super.getReposOwnerRepoGitCommitsShaCode(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RepoCommit>;
+  getReposOwnerRepoGitCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RepoCommit>>;
+  getReposOwnerRepoGitCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RepoCommit>>;
+  getReposOwnerRepoGitCommitsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RepoCommit | HttpResponse<models.RepoCommit> | HttpEvent<models.RepoCommit>> {
+
+    return super.getReposOwnerRepoGitCommitsShaCode(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepoCommit(res) || console.error(`TypeGuard for response 'models.RepoCommit' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get all References
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoGitRefs(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Refs> {
-    return super.getReposOwnerRepoGitRefs(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Refs>;
+  getReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Refs>>;
+  getReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Refs>>;
+  getReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Refs | HttpResponse<models.Refs> | HttpEvent<models.Refs>> {
+
+    return super.getReposOwnerRepoGitRefs(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRefs(res) || console.error(`TypeGuard for response 'models.Refs' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a Reference
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoGitRefs(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.HeadBranch> {
-    return super.postReposOwnerRepoGitRefs(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.HeadBranch>;
+  postReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.HeadBranch>>;
+  postReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.HeadBranch>>;
+  postReposOwnerRepoGitRefs(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>> {
+
+    return super.postReposOwnerRepoGitRefs(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'models.HeadBranch' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a Reference
+   * Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a 
+   * Example: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoGitRefsRef(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a Reference
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoGitRefsRef(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.HeadBranch> {
-    return super.getReposOwnerRepoGitRefsRef(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.HeadBranch>;
+  getReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.HeadBranch>>;
+  getReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.HeadBranch>>;
+  getReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>> {
+
+    return super.getReposOwnerRepoGitRefsRef(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'models.HeadBranch' caught inconsistency.`, res)));
   }
 
+  /**
+   * Update a Reference
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoGitRefsRef(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.HeadBranch> {
-    return super.patchReposOwnerRepoGitRefsRef(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.HeadBranch>;
+  patchReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.HeadBranch>>;
+  patchReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.HeadBranch>>;
+  patchReposOwnerRepoGitRefsRef(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>> {
+
+    return super.patchReposOwnerRepoGitRefsRef(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isHeadBranch(res) || console.error(`TypeGuard for response 'models.HeadBranch' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a Tag Object.
+   * Note that creating a tag object does not create the reference that makes a
+   * tag in Git. If you want to create an annotated tag in Git, you have to do
+   * this call to create the tag object, and then create the refs/tags/[tag]
+   * reference. If you want to create a lightweight tag, you only have to create
+   * the tag reference - this call would be unnecessary.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoGitTags(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Tags> {
-    return super.postReposOwnerRepoGitTags(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Tags>;
+  postReposOwnerRepoGitTags(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Tags>>;
+  postReposOwnerRepoGitTags(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Tags>>;
+  postReposOwnerRepoGitTags(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Tags | HttpResponse<models.Tags> | HttpEvent<models.Tags>> {
+
+    return super.postReposOwnerRepoGitTags(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTags(res) || console.error(`TypeGuard for response 'models.Tags' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a Tag.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoGitTagsShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Tag> {
-    return super.getReposOwnerRepoGitTagsShaCode(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Tag>;
+  getReposOwnerRepoGitTagsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Tag>>;
+  getReposOwnerRepoGitTagsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Tag>>;
+  getReposOwnerRepoGitTagsShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Tag | HttpResponse<models.Tag> | HttpEvent<models.Tag>> {
+
+    return super.getReposOwnerRepoGitTagsShaCode(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTag(res) || console.error(`TypeGuard for response 'models.Tag' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a Tree.
+   * The tree creation API will take nested entries as well. If both a tree and
+   * a nested path modifying that tree are specified, it will overwrite the
+   * contents of that tree with the new path contents and write a new tree out.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoGitTrees(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Trees> {
-    return super.postReposOwnerRepoGitTrees(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Trees>;
+  postReposOwnerRepoGitTrees(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Trees>>;
+  postReposOwnerRepoGitTrees(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Trees>>;
+  postReposOwnerRepoGitTrees(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Trees | HttpResponse<models.Trees> | HttpEvent<models.Trees>> {
+
+    return super.postReposOwnerRepoGitTrees(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTrees(res) || console.error(`TypeGuard for response 'models.Trees' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a Tree.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoGitTreesShaCode(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Tree> {
-    return super.getReposOwnerRepoGitTreesShaCode(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Tree>;
+  getReposOwnerRepoGitTreesShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Tree>>;
+  getReposOwnerRepoGitTreesShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Tree>>;
+  getReposOwnerRepoGitTreesShaCode(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Tree | HttpResponse<models.Tree> | HttpEvent<models.Tree>> {
+
+    return super.getReposOwnerRepoGitTreesShaCode(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTree(res) || console.error(`TypeGuard for response 'models.Tree' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get list of hooks.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoHooks(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Hook> {
-    return super.getReposOwnerRepoHooks(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Hook>;
+  getReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Hook>>;
+  getReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Hook>>;
+  getReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>> {
+
+    return super.getReposOwnerRepoHooks(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'models.Hook' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a hook.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoHooks(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Hook> {
-    return super.postReposOwnerRepoHooks(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Hook>;
+  postReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Hook>>;
+  postReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Hook>>;
+  postReposOwnerRepoHooks(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>> {
+
+    return super.postReposOwnerRepoHooks(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'models.Hook' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a hook.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoHooksHookId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get single hook.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoHooksHookId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Hook> {
-    return super.getReposOwnerRepoHooksHookId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Hook>;
+  getReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Hook>>;
+  getReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Hook>>;
+  getReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>> {
+
+    return super.getReposOwnerRepoHooksHookId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'models.Hook' caught inconsistency.`, res)));
   }
 
+  /**
+   * Edit a hook.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoHooksHookId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Hook> {
-    return super.patchReposOwnerRepoHooksHookId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Hook>;
+  patchReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Hook>>;
+  patchReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Hook>>;
+  patchReposOwnerRepoHooksHookId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>> {
+
+    return super.patchReposOwnerRepoHooksHookId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isHook(res) || console.error(`TypeGuard for response 'models.Hook' caught inconsistency.`, res)));
   }
 
+  /**
+   * Test a push hook.
+   * This will trigger the hook with the latest push to the current repository
+   * if the hook is subscribed to push events. If the hook is not subscribed
+   * to push events, the server will respond with 204 but no test POST will
+   * be generated.
+   * Note: Previously /repos/:owner/:repo/hooks/:id/tes
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  postReposOwnerRepoHooksHookIdTests(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  postReposOwnerRepoHooksHookIdTests(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postReposOwnerRepoHooksHookIdTests(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postReposOwnerRepoHooksHookIdTests(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.postReposOwnerRepoHooksHookIdTests(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * List issues for a repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssues(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issues> {
-    return super.getReposOwnerRepoIssues(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issues>;
+  getReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issues>>;
+  getReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issues>>;
+  getReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>> {
+
+    return super.getReposOwnerRepoIssues(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssues(res) || console.error(`TypeGuard for response 'models.Issues' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create an issue.
+   * Any user with pull access to a repository can create an issue.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoIssues(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issue> {
-    return super.postReposOwnerRepoIssues(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issue>;
+  postReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issue>>;
+  postReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issue>>;
+  postReposOwnerRepoIssues(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>> {
+
+    return super.postReposOwnerRepoIssues(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'models.Issue' caught inconsistency.`, res)));
   }
 
+  /**
+   * List comments in a repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssuesComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComments> {
-    return super.getReposOwnerRepoIssuesComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComments>;
+  getReposOwnerRepoIssuesComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComments>>;
+  getReposOwnerRepoIssuesComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComments>>;
+  getReposOwnerRepoIssuesComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>> {
+
+    return super.getReposOwnerRepoIssuesComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'models.IssuesComments' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a comment.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoIssuesCommentId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a single comment.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssuesCommentId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComment> {
-    return super.getReposOwnerRepoIssuesCommentId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComment>;
+  getReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComment>>;
+  getReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComment>>;
+  getReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>> {
+
+    return super.getReposOwnerRepoIssuesCommentId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'models.IssuesComment' caught inconsistency.`, res)));
   }
 
+  /**
+   * Edit a comment.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoIssuesCommentId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComment> {
-    return super.patchReposOwnerRepoIssuesCommentId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComment>;
+  patchReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComment>>;
+  patchReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComment>>;
+  patchReposOwnerRepoIssuesCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>> {
+
+    return super.patchReposOwnerRepoIssuesCommentId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'models.IssuesComment' caught inconsistency.`, res)));
   }
 
+  /**
+   * List issue events for a repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssuesEvents(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Events> {
-    return super.getReposOwnerRepoIssuesEvents(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Events>;
+  getReposOwnerRepoIssuesEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getReposOwnerRepoIssuesEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getReposOwnerRepoIssuesEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {
+
+    return super.getReposOwnerRepoIssuesEvents(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'models.Events' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a single event.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssuesEventId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Event> {
-    return super.getReposOwnerRepoIssuesEventId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Event>;
+  getReposOwnerRepoIssuesEventId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Event>>;
+  getReposOwnerRepoIssuesEventId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Event>>;
+  getReposOwnerRepoIssuesEventId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Event | HttpResponse<models.Event> | HttpEvent<models.Event>> {
+
+    return super.getReposOwnerRepoIssuesEventId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isEvent(res) || console.error(`TypeGuard for response 'models.Event' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a single issue
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssuesNumber(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issue> {
-    return super.getReposOwnerRepoIssuesNumber(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issue>;
+  getReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issue>>;
+  getReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issue>>;
+  getReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>> {
+
+    return super.getReposOwnerRepoIssuesNumber(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'models.Issue' caught inconsistency.`, res)));
   }
 
+  /**
+   * Edit an issue.
+   * Issue owners and users with push access can edit an issue.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoIssuesNumber(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issue> {
-    return super.patchReposOwnerRepoIssuesNumber(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issue>;
+  patchReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issue>>;
+  patchReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issue>>;
+  patchReposOwnerRepoIssuesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>> {
+
+    return super.patchReposOwnerRepoIssuesNumber(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssue(res) || console.error(`TypeGuard for response 'models.Issue' caught inconsistency.`, res)));
   }
 
+  /**
+   * List comments on an issue.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssuesNumberComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComments> {
-    return super.getReposOwnerRepoIssuesNumberComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComments>;
+  getReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComments>>;
+  getReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComments>>;
+  getReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>> {
+
+    return super.getReposOwnerRepoIssuesNumberComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'models.IssuesComments' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a comment.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoIssuesNumberComments(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComment> {
-    return super.postReposOwnerRepoIssuesNumberComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComment>;
+  postReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComment>>;
+  postReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComment>>;
+  postReposOwnerRepoIssuesNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>> {
+
+    return super.postReposOwnerRepoIssuesNumberComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssuesComment(res) || console.error(`TypeGuard for response 'models.IssuesComment' caught inconsistency.`, res)));
   }
 
+  /**
+   * List events for an issue.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssuesNumberEvents(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Events> {
-    return super.getReposOwnerRepoIssuesNumberEvents(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Events>;
+  getReposOwnerRepoIssuesNumberEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Events>>;
+  getReposOwnerRepoIssuesNumberEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Events>>;
+  getReposOwnerRepoIssuesNumberEvents(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {
+
+    return super.getReposOwnerRepoIssuesNumberEvents(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isEvents(res) || console.error(`TypeGuard for response 'models.Events' caught inconsistency.`, res)));
   }
 
+  /**
+   * Remove all labels from an issue.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * List labels on an issue.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoIssuesNumberLabels(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Labels> {
-    return super.getReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Labels>;
+  getReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Labels>>;
+  getReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Labels>>;
+  getReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>> {
+
+    return super.getReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'models.Labels' caught inconsistency.`, res)));
   }
 
+  /**
+   * Add labels to an issue.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoIssuesNumberLabels(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
-    return super.postReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  postReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  postReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  postReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
+
+    return super.postReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
+  /**
+   * Replace all labels for an issue.
+   * Sending an empty array ([]) will remove all Labels from the Issue.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   putReposOwnerRepoIssuesNumberLabels(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
-    return super.putReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  putReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  putReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  putReposOwnerRepoIssuesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
+
+    return super.putReposOwnerRepoIssuesNumberLabels(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
+  /**
+   * Remove a label from an issue.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoIssuesNumberLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoIssuesNumberLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoIssuesNumberLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoIssuesNumberLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoIssuesNumberLabelsName(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get list of keys.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoKeys(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Keys> {
-    return super.getReposOwnerRepoKeys(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Keys>;
+  getReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Keys>>;
+  getReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Keys>>;
+  getReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Keys | HttpResponse<models.Keys> | HttpEvent<models.Keys>> {
+
+    return super.getReposOwnerRepoKeys(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isKeys(res) || console.error(`TypeGuard for response 'models.Keys' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a key.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoKeys(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserKeysKeyId> {
-    return super.postReposOwnerRepoKeys(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserKeysKeyId>;
+  postReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserKeysKeyId>>;
+  postReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserKeysKeyId>>;
+  postReposOwnerRepoKeys(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>> {
+
+    return super.postReposOwnerRepoKeys(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUserKeysKeyId(res) || console.error(`TypeGuard for response 'models.UserKeysKeyId' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a key.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoKeysKeyId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a key
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoKeysKeyId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserKeysKeyId> {
-    return super.getReposOwnerRepoKeysKeyId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserKeysKeyId>;
+  getReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserKeysKeyId>>;
+  getReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserKeysKeyId>>;
+  getReposOwnerRepoKeysKeyId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>> {
+
+    return super.getReposOwnerRepoKeysKeyId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUserKeysKeyId(res) || console.error(`TypeGuard for response 'models.UserKeysKeyId' caught inconsistency.`, res)));
   }
 
+  /**
+   * List all labels for this repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoLabels(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Labels> {
-    return super.getReposOwnerRepoLabels(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Labels>;
+  getReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Labels>>;
+  getReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Labels>>;
+  getReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>> {
+
+    return super.getReposOwnerRepoLabels(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'models.Labels' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a label.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoLabels(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
-    return super.postReposOwnerRepoLabels(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  postReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  postReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  postReposOwnerRepoLabels(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
+
+    return super.postReposOwnerRepoLabels(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a label.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoLabelsName(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a single label.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoLabelsName(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
-    return super.getReposOwnerRepoLabelsName(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  getReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  getReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  getReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
+
+    return super.getReposOwnerRepoLabelsName(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
+  /**
+   * Update a label.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoLabelsName(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Label> {
-    return super.patchReposOwnerRepoLabelsName(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Label>;
+  patchReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Label>>;
+  patchReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Label>>;
+  patchReposOwnerRepoLabelsName(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>> {
+
+    return super.patchReposOwnerRepoLabelsName(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLabel(res) || console.error(`TypeGuard for response 'models.Label' caught inconsistency.`, res)));
   }
 
+  /**
+   * List languages.
+   * List languages for the specified repository. The value on the right of a
+   * language is the number of bytes of code written in that language.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoLanguages(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Languages> {
-    return super.getReposOwnerRepoLanguages(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Languages>;
+  getReposOwnerRepoLanguages(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Languages>>;
+  getReposOwnerRepoLanguages(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Languages>>;
+  getReposOwnerRepoLanguages(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Languages | HttpResponse<models.Languages> | HttpEvent<models.Languages>> {
+
+    return super.getReposOwnerRepoLanguages(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLanguages(res) || console.error(`TypeGuard for response 'models.Languages' caught inconsistency.`, res)));
   }
 
+  /**
+   * Perform a merge.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoMerges(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.MergesSuccessful> {
-    return super.postReposOwnerRepoMerges(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.MergesSuccessful>;
+  postReposOwnerRepoMerges(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.MergesSuccessful>>;
+  postReposOwnerRepoMerges(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.MergesSuccessful>>;
+  postReposOwnerRepoMerges(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.MergesSuccessful | HttpResponse<models.MergesSuccessful> | HttpEvent<models.MergesSuccessful>> {
+
+    return super.postReposOwnerRepoMerges(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isMergesSuccessful(res) || console.error(`TypeGuard for response 'models.MergesSuccessful' caught inconsistency.`, res)));
   }
 
+  /**
+   * List milestones for a repository.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoMilestones(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Milestone> {
-    return super.getReposOwnerRepoMilestones(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Milestone>;
+  getReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Milestone>>;
+  getReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Milestone>>;
+  getReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>> {
+
+    return super.getReposOwnerRepoMilestones(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'models.Milestone' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a milestone.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoMilestones(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Milestone> {
-    return super.postReposOwnerRepoMilestones(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Milestone>;
+  postReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Milestone>>;
+  postReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Milestone>>;
+  postReposOwnerRepoMilestones(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>> {
+
+    return super.postReposOwnerRepoMilestones(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'models.Milestone' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a milestone.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoMilestonesNumber(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a single milestone.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoMilestonesNumber(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Milestone> {
-    return super.getReposOwnerRepoMilestonesNumber(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Milestone>;
+  getReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Milestone>>;
+  getReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Milestone>>;
+  getReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>> {
+
+    return super.getReposOwnerRepoMilestonesNumber(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'models.Milestone' caught inconsistency.`, res)));
   }
 
+  /**
+   * Update a milestone.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoMilestonesNumber(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Milestone> {
-    return super.patchReposOwnerRepoMilestonesNumber(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Milestone>;
+  patchReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Milestone>>;
+  patchReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Milestone>>;
+  patchReposOwnerRepoMilestonesNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>> {
+
+    return super.patchReposOwnerRepoMilestonesNumber(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isMilestone(res) || console.error(`TypeGuard for response 'models.Milestone' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get labels for every issue in a milestone.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoMilestonesNumberLabels(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Labels> {
-    return super.getReposOwnerRepoMilestonesNumberLabels(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Labels>;
+  getReposOwnerRepoMilestonesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Labels>>;
+  getReposOwnerRepoMilestonesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Labels>>;
+  getReposOwnerRepoMilestonesNumberLabels(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>> {
+
+    return super.getReposOwnerRepoMilestonesNumberLabels(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isLabels(res) || console.error(`TypeGuard for response 'models.Labels' caught inconsistency.`, res)));
   }
 
+  /**
+   * List your notifications in a repository
+   * List all notifications for the current user.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoNotifications(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Notifications> {
-    return super.getReposOwnerRepoNotifications(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Notifications>;
+  getReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Notifications>>;
+  getReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Notifications>>;
+  getReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>> {
+
+    return super.getReposOwnerRepoNotifications(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isNotifications(res) || console.error(`TypeGuard for response 'models.Notifications' caught inconsistency.`, res)));
   }
 
+  /**
+   * Mark notifications as read in a repository.
+   * Marking all notifications in a repository as "read" removes them from the
+   * default view on GitHub.com.
+   * 
+   * Response generated for [ 205 ] HTTP response code.
+   */
+  putReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putReposOwnerRepoNotifications(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.putReposOwnerRepoNotifications(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * List pull requests.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoPulls(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Pulls> {
-    return super.getReposOwnerRepoPulls(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pulls>;
+  getReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pulls>>;
+  getReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pulls>>;
+  getReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>> {
+
+    return super.getReposOwnerRepoPulls(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'models.Pulls' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a pull request.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoPulls(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Pulls> {
-    return super.postReposOwnerRepoPulls(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pulls>;
+  postReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pulls>>;
+  postReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pulls>>;
+  postReposOwnerRepoPulls(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>> {
+
+    return super.postReposOwnerRepoPulls(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'models.Pulls' caught inconsistency.`, res)));
   }
 
+  /**
+   * List comments in a repository.
+   * By default, Review Comments are ordered by ascending ID.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoPullsComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.IssuesComments> {
-    return super.getReposOwnerRepoPullsComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.IssuesComments>;
+  getReposOwnerRepoPullsComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.IssuesComments>>;
+  getReposOwnerRepoPullsComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.IssuesComments>>;
+  getReposOwnerRepoPullsComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>> {
+
+    return super.getReposOwnerRepoPullsComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIssuesComments(res) || console.error(`TypeGuard for response 'models.IssuesComments' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a comment.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoPullsCommentId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a single comment.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoPullsCommentId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullsComment> {
-    return super.getReposOwnerRepoPullsCommentId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullsComment>;
+  getReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullsComment>>;
+  getReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullsComment>>;
+  getReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>> {
+
+    return super.getReposOwnerRepoPullsCommentId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'models.PullsComment' caught inconsistency.`, res)));
   }
 
+  /**
+   * Edit a comment.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoPullsCommentId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullsComment> {
-    return super.patchReposOwnerRepoPullsCommentId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullsComment>;
+  patchReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullsComment>>;
+  patchReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullsComment>>;
+  patchReposOwnerRepoPullsCommentId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>> {
+
+    return super.patchReposOwnerRepoPullsCommentId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'models.PullsComment' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get a single pull request.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoPullsNumber(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullRequest> {
-    return super.getReposOwnerRepoPullsNumber(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullRequest>;
+  getReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullRequest>>;
+  getReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullRequest>>;
+  getReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullRequest | HttpResponse<models.PullRequest> | HttpEvent<models.PullRequest>> {
+
+    return super.getReposOwnerRepoPullsNumber(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPullRequest(res) || console.error(`TypeGuard for response 'models.PullRequest' caught inconsistency.`, res)));
   }
 
+  /**
+   * Update a pull request.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoPullsNumber(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repo> {
-    return super.patchReposOwnerRepoPullsNumber(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repo>;
+  patchReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repo>>;
+  patchReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repo>>;
+  patchReposOwnerRepoPullsNumber(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>> {
+
+    return super.patchReposOwnerRepoPullsNumber(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRepo(res) || console.error(`TypeGuard for response 'models.Repo' caught inconsistency.`, res)));
   }
 
+  /**
+   * List comments on a pull request.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoPullsNumberComments(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullsComment> {
-    return super.getReposOwnerRepoPullsNumberComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullsComment>;
+  getReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullsComment>>;
+  getReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullsComment>>;
+  getReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>> {
+
+    return super.getReposOwnerRepoPullsNumberComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'models.PullsComment' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a comment.
+   * 
+   *   #TODO Alternative input
+   * ( http://developer.github.com/v3/pulls/comments/ )
+   * 
+   *   description: |
+   * 
+   *     Alternative Input.
+   * 
+   *     Instead of passing commit_id, path, and position you can reply to an
+   * 
+   *     existing Pull Request Comment like this:
+   * 
+   * 
+   * 
+   *         body
+   * 
+   *            Required string
+   * 
+   *         in_reply_to
+   * 
+   *            Required number - Comment id to reply to.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoPullsNumberComments(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.PullsComment> {
-    return super.postReposOwnerRepoPullsNumberComments(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.PullsComment>;
+  postReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.PullsComment>>;
+  postReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.PullsComment>>;
+  postReposOwnerRepoPullsNumberComments(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>> {
+
+    return super.postReposOwnerRepoPullsNumberComments(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPullsComment(res) || console.error(`TypeGuard for response 'models.PullsComment' caught inconsistency.`, res)));
   }
 
+  /**
+   * List commits on a pull request.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoPullsNumberCommits(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Commits> {
-    return super.getReposOwnerRepoPullsNumberCommits(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Commits>;
+  getReposOwnerRepoPullsNumberCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Commits>>;
+  getReposOwnerRepoPullsNumberCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Commits>>;
+  getReposOwnerRepoPullsNumberCommits(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Commits | HttpResponse<models.Commits> | HttpEvent<models.Commits>> {
+
+    return super.getReposOwnerRepoPullsNumberCommits(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCommits(res) || console.error(`TypeGuard for response 'models.Commits' caught inconsistency.`, res)));
   }
 
+  /**
+   * List pull requests files.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoPullsNumberFiles(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Pulls> {
-    return super.getReposOwnerRepoPullsNumberFiles(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pulls>;
+  getReposOwnerRepoPullsNumberFiles(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pulls>>;
+  getReposOwnerRepoPullsNumberFiles(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pulls>>;
+  getReposOwnerRepoPullsNumberFiles(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>> {
+
+    return super.getReposOwnerRepoPullsNumberFiles(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isPulls(res) || console.error(`TypeGuard for response 'models.Pulls' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get if a pull request has been merged.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  getReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.getReposOwnerRepoPullsNumberMerge(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Merge a pull request (Merge Button's)
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putReposOwnerRepoPullsNumberMerge(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Merge> {
-    return super.putReposOwnerRepoPullsNumberMerge(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Merge>;
+  putReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Merge>>;
+  putReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Merge>>;
+  putReposOwnerRepoPullsNumberMerge(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Merge | HttpResponse<models.Merge> | HttpEvent<models.Merge>> {
+
+    return super.putReposOwnerRepoPullsNumberMerge(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isMerge(res) || console.error(`TypeGuard for response 'models.Merge' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get the README.
+   * This method returns the preferred README for a repository.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoReadme(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ContentsPath> {
-    return super.getReposOwnerRepoReadme(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ContentsPath>;
+  getReposOwnerRepoReadme(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ContentsPath>>;
+  getReposOwnerRepoReadme(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ContentsPath>>;
+  getReposOwnerRepoReadme(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ContentsPath | HttpResponse<models.ContentsPath> | HttpEvent<models.ContentsPath>> {
+
+    return super.getReposOwnerRepoReadme(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isContentsPath(res) || console.error(`TypeGuard for response 'models.ContentsPath' caught inconsistency.`, res)));
   }
 
+  /**
+   * Users with push access to the repository will receive all releases (i.e., published releases and draft releases). Users with pull access will receive published releases only
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoReleases(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Releases> {
-    return super.getReposOwnerRepoReleases(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Releases>;
+  getReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Releases>>;
+  getReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Releases>>;
+  getReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Releases | HttpResponse<models.Releases> | HttpEvent<models.Releases>> {
+
+    return super.getReposOwnerRepoReleases(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isReleases(res) || console.error(`TypeGuard for response 'models.Releases' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a release
+   * Users with push access to the repository can create a release.
+   * 
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoReleases(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Release> {
-    return super.postReposOwnerRepoReleases(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Release>;
+  postReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Release>>;
+  postReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Release>>;
+  postReposOwnerRepoReleases(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>> {
+
+    return super.postReposOwnerRepoReleases(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'models.Release' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a release asset
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoReleasesAssetsId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a single release asset
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoReleasesAssetsId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Asset> {
-    return super.getReposOwnerRepoReleasesAssetsId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Asset>;
+  getReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Asset>>;
+  getReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Asset>>;
+  getReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Asset | HttpResponse<models.Asset> | HttpEvent<models.Asset>> {
+
+    return super.getReposOwnerRepoReleasesAssetsId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isAsset(res) || console.error(`TypeGuard for response 'models.Asset' caught inconsistency.`, res)));
   }
 
+  /**
+   * Edit a release asset
+   * Users with push access to the repository can edit a release asset.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoReleasesAssetsId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Asset> {
-    return super.patchReposOwnerRepoReleasesAssetsId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Asset>;
+  patchReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Asset>>;
+  patchReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Asset>>;
+  patchReposOwnerRepoReleasesAssetsId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Asset | HttpResponse<models.Asset> | HttpEvent<models.Asset>> {
+
+    return super.patchReposOwnerRepoReleasesAssetsId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isAsset(res) || console.error(`TypeGuard for response 'models.Asset' caught inconsistency.`, res)));
   }
 
+  /**
+   * Users with push access to the repository can delete a release.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoReleasesId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a single release
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoReleasesId(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Release> {
-    return super.getReposOwnerRepoReleasesId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Release>;
+  getReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Release>>;
+  getReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Release>>;
+  getReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>> {
+
+    return super.getReposOwnerRepoReleasesId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'models.Release' caught inconsistency.`, res)));
   }
 
+  /**
+   * Users with push access to the repository can edit a release
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchReposOwnerRepoReleasesId(
     args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Release> {
-    return super.patchReposOwnerRepoReleasesId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Release>;
+  patchReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Release>>;
+  patchReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Release>>;
+  patchReposOwnerRepoReleasesId(
+    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>> {
+
+    return super.patchReposOwnerRepoReleasesId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRelease(res) || console.error(`TypeGuard for response 'models.Release' caught inconsistency.`, res)));
   }
 
+  /**
+   * List assets for a release
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoReleasesIdAssets(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Assets> {
-    return super.getReposOwnerRepoReleasesIdAssets(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Assets>;
+  getReposOwnerRepoReleasesIdAssets(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Assets>>;
+  getReposOwnerRepoReleasesIdAssets(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Assets>>;
+  getReposOwnerRepoReleasesIdAssets(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Assets | HttpResponse<models.Assets> | HttpEvent<models.Assets>> {
+
+    return super.getReposOwnerRepoReleasesIdAssets(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isAssets(res) || console.error(`TypeGuard for response 'models.Assets' caught inconsistency.`, res)));
   }
 
+  /**
+   * List Stargazers.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoStargazers(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
-    return super.getReposOwnerRepoStargazers(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getReposOwnerRepoStargazers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getReposOwnerRepoStargazers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getReposOwnerRepoStargazers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
+
+    return super.getReposOwnerRepoStargazers(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get the number of additions and deletions per week.
+   * Returns a weekly aggregate of the number of additions and deletions pushed
+   * to a repository.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoStatsCodeFrequency(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CodeFrequencyStats> {
-    return super.getReposOwnerRepoStatsCodeFrequency(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CodeFrequencyStats>;
+  getReposOwnerRepoStatsCodeFrequency(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CodeFrequencyStats>>;
+  getReposOwnerRepoStatsCodeFrequency(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CodeFrequencyStats>>;
+  getReposOwnerRepoStatsCodeFrequency(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CodeFrequencyStats | HttpResponse<models.CodeFrequencyStats> | HttpEvent<models.CodeFrequencyStats>> {
+
+    return super.getReposOwnerRepoStatsCodeFrequency(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCodeFrequencyStats(res) || console.error(`TypeGuard for response 'models.CodeFrequencyStats' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get the last year of commit activity data.
+   * Returns the last year of commit activity grouped by week. The days array
+   * is a group of commits per day, starting on Sunday.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoStatsCommitActivity(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitActivityStats> {
-    return super.getReposOwnerRepoStatsCommitActivity(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitActivityStats>;
+  getReposOwnerRepoStatsCommitActivity(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitActivityStats>>;
+  getReposOwnerRepoStatsCommitActivity(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitActivityStats>>;
+  getReposOwnerRepoStatsCommitActivity(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitActivityStats | HttpResponse<models.CommitActivityStats> | HttpEvent<models.CommitActivityStats>> {
+
+    return super.getReposOwnerRepoStatsCommitActivity(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCommitActivityStats(res) || console.error(`TypeGuard for response 'models.CommitActivityStats' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get contributors list with additions, deletions, and commit counts.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoStatsContributors(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ContributorsStats> {
-    return super.getReposOwnerRepoStatsContributors(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ContributorsStats>;
+  getReposOwnerRepoStatsContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ContributorsStats>>;
+  getReposOwnerRepoStatsContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ContributorsStats>>;
+  getReposOwnerRepoStatsContributors(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ContributorsStats | HttpResponse<models.ContributorsStats> | HttpEvent<models.ContributorsStats>> {
+
+    return super.getReposOwnerRepoStatsContributors(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isContributorsStats(res) || console.error(`TypeGuard for response 'models.ContributorsStats' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get the weekly commit count for the repo owner and everyone else.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoStatsParticipation(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ParticipationStats> {
-    return super.getReposOwnerRepoStatsParticipation(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ParticipationStats>;
+  getReposOwnerRepoStatsParticipation(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ParticipationStats>>;
+  getReposOwnerRepoStatsParticipation(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ParticipationStats>>;
+  getReposOwnerRepoStatsParticipation(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ParticipationStats | HttpResponse<models.ParticipationStats> | HttpEvent<models.ParticipationStats>> {
+
+    return super.getReposOwnerRepoStatsParticipation(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isParticipationStats(res) || console.error(`TypeGuard for response 'models.ParticipationStats' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get the number of commits per hour in each day.
+   * Each array contains the day number, hour number, and number of commits
+   * 0-6 Sunday - Saturday
+   * 0-23 Hour of day
+   * Number of commits
+   * 
+   * 
+   * For example, [2, 14, 25] indicates that there were 25 total commits, during
+   * the 2.00pm hour on Tuesdays. All times are based on the time zone of
+   * individual commits.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoStatsPunchCard(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CodeFrequencyStats> {
-    return super.getReposOwnerRepoStatsPunchCard(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CodeFrequencyStats>;
+  getReposOwnerRepoStatsPunchCard(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CodeFrequencyStats>>;
+  getReposOwnerRepoStatsPunchCard(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CodeFrequencyStats>>;
+  getReposOwnerRepoStatsPunchCard(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CodeFrequencyStats | HttpResponse<models.CodeFrequencyStats> | HttpEvent<models.CodeFrequencyStats>> {
+
+    return super.getReposOwnerRepoStatsPunchCard(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCodeFrequencyStats(res) || console.error(`TypeGuard for response 'models.CodeFrequencyStats' caught inconsistency.`, res)));
   }
 
+  /**
+   * List Statuses for a specific Ref.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoStatusesRef(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Ref> {
-    return super.getReposOwnerRepoStatusesRef(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Ref>;
+  getReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Ref>>;
+  getReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Ref>>;
+  getReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Ref | HttpResponse<models.Ref> | HttpEvent<models.Ref>> {
+
+    return super.getReposOwnerRepoStatusesRef(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRef(res) || console.error(`TypeGuard for response 'models.Ref' caught inconsistency.`, res)));
   }
 
+  /**
+   * Create a Status.
+   * Response generated for [ 201 ] HTTP response code.
+   */
   postReposOwnerRepoStatusesRef(
     args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Ref> {
-    return super.postReposOwnerRepoStatusesRef(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Ref>;
+  postReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Ref>>;
+  postReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Ref>>;
+  postReposOwnerRepoStatusesRef(
+    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Ref | HttpResponse<models.Ref> | HttpEvent<models.Ref>> {
+
+    return super.postReposOwnerRepoStatusesRef(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRef(res) || console.error(`TypeGuard for response 'models.Ref' caught inconsistency.`, res)));
   }
 
+  /**
+   * List watchers.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoSubscribers(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
-    return super.getReposOwnerRepoSubscribers(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getReposOwnerRepoSubscribers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getReposOwnerRepoSubscribers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getReposOwnerRepoSubscribers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
+
+    return super.getReposOwnerRepoSubscribers(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
+  /**
+   * Delete a Repository Subscription.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteReposOwnerRepoSubscription(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get a Repository Subscription.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoSubscription(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Subscribition> {
-    return super.getReposOwnerRepoSubscription(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Subscribition>;
+  getReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscribition>>;
+  getReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscribition>>;
+  getReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Subscribition | HttpResponse<models.Subscribition> | HttpEvent<models.Subscribition>> {
+
+    return super.getReposOwnerRepoSubscription(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSubscribition(res) || console.error(`TypeGuard for response 'models.Subscribition' caught inconsistency.`, res)));
   }
 
+  /**
+   * Set a Repository Subscription
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putReposOwnerRepoSubscription(
     args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Subscribition> {
-    return super.putReposOwnerRepoSubscription(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Subscribition>;
+  putReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscribition>>;
+  putReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscribition>>;
+  putReposOwnerRepoSubscription(
+    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Subscribition | HttpResponse<models.Subscribition> | HttpEvent<models.Subscribition>> {
+
+    return super.putReposOwnerRepoSubscription(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSubscribition(res) || console.error(`TypeGuard for response 'models.Subscribition' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get list of tags.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoTags(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Tags> {
-    return super.getReposOwnerRepoTags(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Tags>;
+  getReposOwnerRepoTags(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Tags>>;
+  getReposOwnerRepoTags(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Tags>>;
+  getReposOwnerRepoTags(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Tags | HttpResponse<models.Tags> | HttpEvent<models.Tags>> {
+
+    return super.getReposOwnerRepoTags(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTags(res) || console.error(`TypeGuard for response 'models.Tags' caught inconsistency.`, res)));
   }
 
+  /**
+   * Get list of teams
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoTeams(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Teams> {
-    return super.getReposOwnerRepoTeams(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Teams>;
+  getReposOwnerRepoTeams(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Teams>>;
+  getReposOwnerRepoTeams(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Teams>>;
+  getReposOwnerRepoTeams(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Teams | HttpResponse<models.Teams> | HttpEvent<models.Teams>> {
+
+    return super.getReposOwnerRepoTeams(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTeams(res) || console.error(`TypeGuard for response 'models.Teams' caught inconsistency.`, res)));
   }
 
+  /**
+   * List Stargazers. New implementation.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getReposOwnerRepoWatchers(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
-    return super.getReposOwnerRepoWatchers(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getReposOwnerRepoWatchers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getReposOwnerRepoWatchers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getReposOwnerRepoWatchers(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
+
+    return super.getReposOwnerRepoWatchers(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
+  }
+
+  /**
+   * Get archive link.
+   * This method will return a 302 to a URL to download a tarball or zipball
+   * archive for a repository. Please make sure your HTTP framework is
+   * configured to follow redirects or you will need to use the Location header
+   * to make a second GET request.
+   * Note: For private repositories, these links are temporary and expire quickly.
+   * 
+   * Response generated for [ missing ] HTTP response code.
+   */
+  getReposOwnerRepoArchiveFormatPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getReposOwnerRepoArchiveFormatPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getReposOwnerRepoArchiveFormatPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getReposOwnerRepoArchiveFormatPath(
+    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.getReposOwnerRepoArchiveFormatPath(args, requestHttpOptions, observe);
   }
 
 }

@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface GitignoreAPIClientInterface {
-
   /**
    * Arguments object for method `getGitignoreTemplates`.
    */
@@ -38,8 +36,24 @@ export interface GitignoreAPIClientInterface {
    */
   getGitignoreTemplates(
     args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Gitignore>;
+  getGitignoreTemplates(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gitignore>>;
+  getGitignoreTemplates(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gitignore>>;
+  getGitignoreTemplates(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `getGitignoreTemplatesLanguage`.
@@ -62,8 +76,23 @@ export interface GitignoreAPIClientInterface {
    */
   getGitignoreTemplatesLanguage(
     args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.GitignoreLang>;
-
+  getGitignoreTemplatesLanguage(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.GitignoreLang>>;
+  getGitignoreTemplatesLanguage(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.GitignoreLang>>;
+  getGitignoreTemplatesLanguage(
+    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.GitignoreLang | HttpResponse<models.GitignoreLang> | HttpEvent<models.GitignoreLang>>;
 
 }

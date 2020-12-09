@@ -1,39 +1,40 @@
 {{> header}}
 
-{{#if (templateType 'service')}}import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { {{#if (templateType 'service' 'guardedService')}}HttpClient, {{/if}}{{#if (templateType 'service')}}HttpHeaders, HttpParams, {{/if}}HttpResponse, HttpEvent } from '@angular/common/http';
+{{#if (templateType 'service' 'guardedService')}}import { Inject, Injectable, {{#if (templateType 'service')}}InjectionToken, {{/if}}Optional } from '@angular/core';
 import { {{&interfaceName}} } from './{{&interfaceFileName}}';
-{{/if}}import { Observable{{#if (templateType 'service')}}, throwError{{/if}} } from 'rxjs';
-import { {{#if (templateType 'service')}}DefaultHttpOptions, {{/if}}HttpOptions } from '{{#if serviceTag}}../.{{/if}}./types';
+{{/if}}import { Observable } from 'rxjs';{{#if (templateType 'guardedService')}}
+import { tap } from 'rxjs/operators';
+import { USE_DOMAIN, USE_HTTP_OPTIONS, {{&serviceName}} } from './{{&serviceFileName}}';
+{{/if}}import { {{#if (templateType 'service' 'guardedService')}}DefaultHttpOptions, {{/if}}HttpOptions } from '{{#if serviceTag}}../.{{/if}}./types';
 
 {{#if definitions.length}}
-import * as models from '.{{#if swaggerTag}}./..{{/if}}/models';
-{{/if}}
-{{#if (templateType 'service')}}
+import * as models from '.{{#if swaggerTag}}./..{{/if}}/models';{{#if (templateType 'guardedService')}}
+import * as guards from '.{{#if swaggerTag}}./..{{/if}}/guards';
+{{/if}}{{/if}}{{#if (templateType 'service')}}
 export const USE_DOMAIN = new InjectionToken<string>('{{&serviceName}}_USE_DOMAIN');
 export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('{{&serviceName}}_USE_HTTP_OPTIONS');
 
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 {{/if}}
 
-{{#if (templateType 'service')}}@Injectable()
-export class {{&serviceName}} implements {{&interfaceName}}{{/if}}{{#if (templateType 'interface')}}export interface {{&interfaceName}}{{/if}} {
-
-{{#if (templateType 'service')}}
+{{#if (templateType 'service' 'guardedService')}}@Injectable()
+export class {{#if (templateType 'guardedService')}}Guarded{{&serviceName}} extends {{/if}}{{&serviceName}} implements {{&interfaceName}}{{/if}}{{#if (templateType 'interface')}}export interface {{&interfaceName}}{{/if}} {
+{{#if (templateType 'service' 'guardedService')}}{{#if (templateType 'service')}}
   readonly options: APIHttpOptions;
 
   readonly domain: string = `{{&domain}}`;
+  {{/if}}
 
   constructor(
-    private readonly http: HttpClient,
+    {{#if (templateType 'service')}}private {{/if}}readonly http{{#if (templateType 'guardedService')}}Client{{/if}}: HttpClient,
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
+  {{#if (templateType 'service')}}
     if (domain != null) {
       this.domain = domain;
     }
@@ -44,6 +45,9 @@ export class {{&serviceName}} implements {{&interfaceName}}{{/if}}{{#if (templat
       ...(options && options.reportProgress ? { reportProgress: options.reportProgress } : {}),
       ...(options && options.withCredentials ? { withCredentials: options.withCredentials } : {})
     };
+  {{else}}
+    super(httpClient, domain, options);
+  {{/if}}
   }
 
 {{/if}}
@@ -64,13 +68,37 @@ export class {{&serviceName}} implements {{&interfaceName}}{{/if}}{{#if (templat
   {{#if parameters.length}}
     args: Exclude<{{&../interfaceName}}['{{&methodName}}Params'], undefined>,
   {{/if}}
-    requestHttpOptions?: HttpOptions
-  ): Observable<{{&responseTypeSchema.type}}>{{#if (templateType 'service')}} {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<{{&responseTypeSchema.type}}>;
+  {{&methodName}}(
+  {{#if parameters.length}}
+    args: Exclude<{{&../interfaceName}}['{{&methodName}}Params'], undefined>,
+  {{/if}}
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<{{&responseTypeSchema.type}}>>;
+  {{&methodName}}(
+  {{#if parameters.length}}
+    args: Exclude<{{&../interfaceName}}['{{&methodName}}Params'], undefined>,
+  {{/if}}
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<{{&responseTypeSchema.type}}>>;
+  {{&methodName}}(
+  {{#if parameters.length}}
+    args: Exclude<{{&../interfaceName}}['{{&methodName}}Params'], undefined>,
+  {{/if}}
+    requestHttpOptions?: HttpOptions,
+    observe{{#if (templateType 'service' 'guardedService')}}: any = 'body'{{else}}?: any{{/if}},
+  ): Observable<{{&responseTypeSchema.type}} | HttpResponse<{{&responseTypeSchema.type}}> | HttpEvent<{{&responseTypeSchema.type}}>>{{#if (templateType 'service' 'guardedService')}} {
+{{#if (templateType 'service')}}
     const path = `{{&path}}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
-      ...requestHttpOptions,{{#requestResponseType}}
-      responseType: 'blob',{{/requestResponseType}}
+      ...requestHttpOptions,
+      observe,{{#requestResponseType}}
+      responseType: 'blob' as 'json',{{/requestResponseType}}
     };
 
     {{#parameters}}
@@ -108,28 +136,10 @@ export class {{&serviceName}} implements {{&interfaceName}}{{/if}}{{#if (templat
     {{/formData}}
 
     {{/if}}
-    return this.sendRequest<{{&responseTypeSchema.type}}>('{{methodType}}', path, options{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{/parameters}}{{#if formData.length}}, formData{{/if}});
+    return this.http.{{methodType}}<{{&responseTypeSchema.type}}>(`${this.domain}${path}`{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{/parameters}}{{#if formData.length}}, formData{{/if}}, options);{{else}}
+    return super.{{&methodName}}({{#if parameters.length}}args, {{/if}}requestHttpOptions, observe){{#responseGuard}}
+      .pipe(tap((res: any) => {{&../responseGuard}} || console.error(`TypeGuard for response '{{&../responseTypeSchema.type}}' caught inconsistency.`, res))){{/responseGuard}};{{/if}}
   }{{else}};{{/if}}
 
-{{/methods}}{{#if (templateType 'service')}}  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }{{/if}}
+{{/methods}}
 }

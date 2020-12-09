@@ -6,21 +6,49 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 * provided options, headers and params will be used as default for each request
 */
 export interface DefaultHttpOptions {
+
+  /** Default headers for all of the requests sent by this API client service */
   headers?: {[key: string]: string};
+
+  /** Default parameters for all of the requests sent by this API client service */
   params?: {[key: string]: string};
+
+  /**
+   *  Whether all of this API client service requests should be made in a way that exposes progress events.
+   *  NOTE: Progress events are expensive (change detection runs on each event) and so they should only be requested if the consumer intends to monitor them.
+   */
   reportProgress?: boolean;
+
+  /** Whether all of this API client service requests should be sent with outgoing credentials (cookies). */
   withCredentials?: boolean;
 }
 
 export interface HttpOptions {
+
+  /** Headers for the outgoing request. */
   headers?: HttpHeaders;
+
+  /** URL parameters for the outgoing request. */
   params?: HttpParams;
+
+  /**
+   *  Whether this request should be made in a way that exposes progress events.
+   *  NOTE: Progress events are expensive (change detection runs on each event) and so they should only be requested if the consumer intends to monitor them.
+   */
   reportProgress?: boolean;
+
+  /** Whether request should be sent with outgoing credentials (cookies). */
   withCredentials?: boolean;
 }
 
 export interface APIClientModuleConfig {
+
+  /** Domain URL that will be used as the base for all of the API client service requests */
   domain?: string;
+
+  /** Flag to enable/disable response type guards */
   guardResponses?: boolean; // validate responses with type guards
+
+  /** Default HTTP options configuration for the API client service */
   httpOptions?: DefaultHttpOptions;
 }

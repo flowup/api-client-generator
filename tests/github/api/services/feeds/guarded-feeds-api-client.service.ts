@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { FeedsAPIClientInterface } from './feeds-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, FeedsAPIClient } from './feeds-api-client.service';
-import { FeedsAPIClientInterface } from './feeds-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,17 +23,44 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedFeedsAPIClient extends FeedsAPIClient implements FeedsAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * List Feeds.
+   * GitHub provides several timeline resources in Atom format. The Feeds API
+   * 
+   *  lists all the feeds available to the authenticating user.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getFeeds(
     args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Feeds> {
-    return super.getFeeds(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Feeds>;
+  getFeeds(
+    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Feeds>>;
+  getFeeds(
+    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Feeds>>;
+  getFeeds(
+    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Feeds | HttpResponse<models.Feeds> | HttpEvent<models.Feeds>> {
+
+    return super.getFeeds(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isFeeds(res) || console.error(`TypeGuard for response 'models.Feeds' caught inconsistency.`, res)));
   }
 

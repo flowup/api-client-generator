@@ -86,9 +86,6 @@ export async function generateAPIClient(
     service: await compileTemplate(
       `${__dirname}/../templates/ngx-service.handlebars`,
     ),
-    guardedService: await compileTemplate(
-      `${__dirname}/../templates/ngx-guarded-service.handlebars`,
-    ),
     moduleExport: await compileTemplate(
       `${__dirname}/../templates/ngx-module-export.handlebars`,
     ),
@@ -145,7 +142,7 @@ export async function generateAPIClient(
           clientOutputPath,
         ),
         generateFile(
-          compiledTemplates['guardedService'],
+          compiledTemplates['service'],
           `guarded-${apiTagData.serviceFileName}.ts`,
           { ...apiTagData, templateType: 'guardedService' },
           clientOutputPath,

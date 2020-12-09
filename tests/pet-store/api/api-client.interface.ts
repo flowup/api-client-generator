@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from './types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from './types';
 
 import * as models from './models';
-
 export interface APIClientInterface {
-
   /**
    * Arguments object for method `getPetById`.
    */
@@ -30,8 +28,24 @@ export interface APIClientInterface {
    */
   getPetById(
     args: Exclude<APIClientInterface['getPetByIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Pet>;
+  getPetById(
+    args: Exclude<APIClientInterface['getPetByIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pet>>;
+  getPetById(
+    args: Exclude<APIClientInterface['getPetByIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pet>>;
+  getPetById(
+    args: Exclude<APIClientInterface['getPetByIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Pet | HttpResponse<models.Pet> | HttpEvent<models.Pet>>;
 
   /**
    * Arguments object for method `updatePetWithForm`.
@@ -50,8 +64,24 @@ export interface APIClientInterface {
    */
   updatePetWithForm(
     args: Exclude<APIClientInterface['updatePetWithFormParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  updatePetWithForm(
+    args: Exclude<APIClientInterface['updatePetWithFormParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  updatePetWithForm(
+    args: Exclude<APIClientInterface['updatePetWithFormParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  updatePetWithForm(
+    args: Exclude<APIClientInterface['updatePetWithFormParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `deletePet`.
@@ -67,8 +97,24 @@ export interface APIClientInterface {
    */
   deletePet(
     args: Exclude<APIClientInterface['deletePetParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deletePet(
+    args: Exclude<APIClientInterface['deletePetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deletePet(
+    args: Exclude<APIClientInterface['deletePetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deletePet(
+    args: Exclude<APIClientInterface['deletePetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `uploadFile`.
@@ -87,8 +133,24 @@ export interface APIClientInterface {
    */
   uploadFile(
     args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.ApiResponse>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ApiResponse>>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ApiResponse>>;
+  uploadFile(
+    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.ApiResponse | HttpResponse<models.ApiResponse> | HttpEvent<models.ApiResponse>>;
 
   /**
    * Arguments object for method `addPet`.
@@ -103,8 +165,24 @@ export interface APIClientInterface {
    */
   addPet(
     args: Exclude<APIClientInterface['addPetParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  addPet(
+    args: Exclude<APIClientInterface['addPetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  addPet(
+    args: Exclude<APIClientInterface['addPetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  addPet(
+    args: Exclude<APIClientInterface['addPetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `updatePet`.
@@ -119,8 +197,24 @@ export interface APIClientInterface {
    */
   updatePet(
     args: Exclude<APIClientInterface['updatePetParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  updatePet(
+    args: Exclude<APIClientInterface['updatePetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  updatePet(
+    args: Exclude<APIClientInterface['updatePetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  updatePet(
+    args: Exclude<APIClientInterface['updatePetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `findPetsByStatus`.
@@ -136,8 +230,24 @@ export interface APIClientInterface {
    */
   findPetsByStatus(
     args: Exclude<APIClientInterface['findPetsByStatusParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Pet[]>;
+  findPetsByStatus(
+    args: Exclude<APIClientInterface['findPetsByStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pet[]>>;
+  findPetsByStatus(
+    args: Exclude<APIClientInterface['findPetsByStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pet[]>>;
+  findPetsByStatus(
+    args: Exclude<APIClientInterface['findPetsByStatusParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Pet[] | HttpResponse<models.Pet[]> | HttpEvent<models.Pet[]>>;
 
   /**
    * Arguments object for method `findPetsByTags`.
@@ -153,16 +263,45 @@ export interface APIClientInterface {
    */
   findPetsByTags(
     args: Exclude<APIClientInterface['findPetsByTagsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Pet[]>;
+  findPetsByTags(
+    args: Exclude<APIClientInterface['findPetsByTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pet[]>>;
+  findPetsByTags(
+    args: Exclude<APIClientInterface['findPetsByTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pet[]>>;
+  findPetsByTags(
+    args: Exclude<APIClientInterface['findPetsByTagsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Pet[] | HttpResponse<models.Pet[]> | HttpEvent<models.Pet[]>>;
 
   /**
    * Returns a map of status codes to quantities
    * Response generated for [ 200 ] HTTP response code.
    */
   getInventory(
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<{ [key: string]: number }>;
+  getInventory(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<{ [key: string]: number }>>;
+  getInventory(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<{ [key: string]: number }>>;
+  getInventory(
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<{ [key: string]: number } | HttpResponse<{ [key: string]: number }> | HttpEvent<{ [key: string]: number }>>;
 
   /**
    * Arguments object for method `getOrderById`.
@@ -178,8 +317,24 @@ export interface APIClientInterface {
    */
   getOrderById(
     args: Exclude<APIClientInterface['getOrderByIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Order>;
+  getOrderById(
+    args: Exclude<APIClientInterface['getOrderByIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Order>>;
+  getOrderById(
+    args: Exclude<APIClientInterface['getOrderByIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Order>>;
+  getOrderById(
+    args: Exclude<APIClientInterface['getOrderByIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Order | HttpResponse<models.Order> | HttpEvent<models.Order>>;
 
   /**
    * Arguments object for method `deleteOrder`.
@@ -195,8 +350,24 @@ export interface APIClientInterface {
    */
   deleteOrder(
     args: Exclude<APIClientInterface['deleteOrderParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteOrder(
+    args: Exclude<APIClientInterface['deleteOrderParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteOrder(
+    args: Exclude<APIClientInterface['deleteOrderParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteOrder(
+    args: Exclude<APIClientInterface['deleteOrderParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `placeOrder`.
@@ -211,8 +382,24 @@ export interface APIClientInterface {
    */
   placeOrder(
     args: Exclude<APIClientInterface['placeOrderParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Order>;
+  placeOrder(
+    args: Exclude<APIClientInterface['placeOrderParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Order>>;
+  placeOrder(
+    args: Exclude<APIClientInterface['placeOrderParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Order>>;
+  placeOrder(
+    args: Exclude<APIClientInterface['placeOrderParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Order | HttpResponse<models.Order> | HttpEvent<models.Order>>;
 
   /**
    * Arguments object for method `getUserByName`.
@@ -227,8 +414,24 @@ export interface APIClientInterface {
    */
   getUserByName(
     args: Exclude<APIClientInterface['getUserByNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.User>;
+  getUserByName(
+    args: Exclude<APIClientInterface['getUserByNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.User>>;
+  getUserByName(
+    args: Exclude<APIClientInterface['getUserByNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.User>>;
+  getUserByName(
+    args: Exclude<APIClientInterface['getUserByNameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.User | HttpResponse<models.User> | HttpEvent<models.User>>;
 
   /**
    * Arguments object for method `updateUser`.
@@ -246,8 +449,24 @@ export interface APIClientInterface {
    */
   updateUser(
     args: Exclude<APIClientInterface['updateUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  updateUser(
+    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `deleteUser`.
@@ -263,8 +482,24 @@ export interface APIClientInterface {
    */
   deleteUser(
     args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteUser(
+    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `loginUser`.
@@ -281,15 +516,44 @@ export interface APIClientInterface {
    */
   loginUser(
     args: Exclude<APIClientInterface['loginUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<string>;
+  loginUser(
+    args: Exclude<APIClientInterface['loginUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<string>>;
+  loginUser(
+    args: Exclude<APIClientInterface['loginUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<string>>;
+  loginUser(
+    args: Exclude<APIClientInterface['loginUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<string | HttpResponse<string> | HttpEvent<string>>;
 
   /**
    * Response generated for [ missing ] HTTP response code.
    */
   logoutUser(
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  logoutUser(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  logoutUser(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  logoutUser(
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `createUser`.
@@ -305,8 +569,24 @@ export interface APIClientInterface {
    */
   createUser(
     args: Exclude<APIClientInterface['createUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  createUser(
+    args: Exclude<APIClientInterface['createUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `createUsersWithArrayInput`.
@@ -321,8 +601,24 @@ export interface APIClientInterface {
    */
   createUsersWithArrayInput(
     args: Exclude<APIClientInterface['createUsersWithArrayInputParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  createUsersWithArrayInput(
+    args: Exclude<APIClientInterface['createUsersWithArrayInputParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  createUsersWithArrayInput(
+    args: Exclude<APIClientInterface['createUsersWithArrayInputParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  createUsersWithArrayInput(
+    args: Exclude<APIClientInterface['createUsersWithArrayInputParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `createUsersWithListInput`.
@@ -337,8 +633,23 @@ export interface APIClientInterface {
    */
   createUsersWithListInput(
     args: Exclude<APIClientInterface['createUsersWithListInputParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
-
+  createUsersWithListInput(
+    args: Exclude<APIClientInterface['createUsersWithListInputParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  createUsersWithListInput(
+    args: Exclude<APIClientInterface['createUsersWithListInputParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  createUsersWithListInput(
+    args: Exclude<APIClientInterface['createUsersWithListInputParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
 }

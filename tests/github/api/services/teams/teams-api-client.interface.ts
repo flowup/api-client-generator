@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface TeamsAPIClientInterface {
-
   /**
    * Arguments object for method `deleteTeamsTeamId`.
    */
@@ -41,8 +39,24 @@ export interface TeamsAPIClientInterface {
    */
   deleteTeamsTeamId(
     args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getTeamsTeamId`.
@@ -66,8 +80,24 @@ export interface TeamsAPIClientInterface {
    */
   getTeamsTeamId(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Team>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>>;
 
   /**
    * Arguments object for method `patchTeamsTeamId`.
@@ -95,8 +125,24 @@ export interface TeamsAPIClientInterface {
    */
   patchTeamsTeamId(
     args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Team>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>>;
 
   /**
    * Arguments object for method `getTeamsTeamIdMembers`.
@@ -123,8 +169,24 @@ export interface TeamsAPIClientInterface {
    */
   getTeamsTeamIdMembers(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Users>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `deleteTeamsTeamIdMembersUsername`.
@@ -158,8 +220,24 @@ export interface TeamsAPIClientInterface {
    */
   deleteTeamsTeamIdMembersUsername(
     args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getTeamsTeamIdMembersUsername`.
@@ -191,8 +269,24 @@ export interface TeamsAPIClientInterface {
    */
   getTeamsTeamIdMembersUsername(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putTeamsTeamIdMembersUsername`.
@@ -225,8 +319,24 @@ export interface TeamsAPIClientInterface {
    */
   putTeamsTeamIdMembersUsername(
     args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `deleteTeamsTeamIdMembershipsUsername`.
@@ -254,8 +364,24 @@ export interface TeamsAPIClientInterface {
    */
   deleteTeamsTeamIdMembershipsUsername(
     args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getTeamsTeamIdMembershipsUsername`.
@@ -283,8 +409,24 @@ export interface TeamsAPIClientInterface {
    */
   getTeamsTeamIdMembershipsUsername(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.TeamMembership>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamMembership>>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamMembership>>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.TeamMembership | HttpResponse<models.TeamMembership> | HttpEvent<models.TeamMembership>>;
 
   /**
    * Arguments object for method `putTeamsTeamIdMembershipsUsername`.
@@ -318,8 +460,24 @@ export interface TeamsAPIClientInterface {
    */
   putTeamsTeamIdMembershipsUsername(
     args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.TeamMembership>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamMembership>>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamMembership>>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.TeamMembership | HttpResponse<models.TeamMembership> | HttpEvent<models.TeamMembership>>;
 
   /**
    * Arguments object for method `getTeamsTeamIdRepos`.
@@ -343,8 +501,24 @@ export interface TeamsAPIClientInterface {
    */
   getTeamsTeamIdRepos(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.TeamRepos>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamRepos>>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamRepos>>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.TeamRepos | HttpResponse<models.TeamRepos> | HttpEvent<models.TeamRepos>>;
 
   /**
    * Arguments object for method `putTeamsTeamIdReposOrgRepo`.
@@ -372,8 +546,24 @@ export interface TeamsAPIClientInterface {
    */
   putTeamsTeamIdReposOrgRepo(
     args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `deleteTeamsTeamIdReposOwnerRepo`.
@@ -401,8 +591,24 @@ export interface TeamsAPIClientInterface {
    */
   deleteTeamsTeamIdReposOwnerRepo(
     args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getTeamsTeamIdReposOwnerRepo`.
@@ -430,8 +636,23 @@ export interface TeamsAPIClientInterface {
    */
   getTeamsTeamIdReposOwnerRepo(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
-
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
 }

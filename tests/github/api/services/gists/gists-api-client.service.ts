@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { GistsAPIClientInterface } from './gists-api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 export const USE_DOMAIN = new InjectionToken<string>('GistsAPIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('GistsAPIClient_
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -58,12 +55,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   getGists(
     args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gists> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gists>;
+  getGists(
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gists>>;
+  getGists(
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gists>>;
+  getGists(
+    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>> {
     const path = `/gists`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('since' in args) {
@@ -87,7 +101,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gists>('GET', path, options);
+    return this.http.get<models.Gists>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -96,12 +110,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   postGists(
     args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gist> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gist>;
+  postGists(
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gist>>;
+  postGists(
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gist>>;
+  postGists(
+    args: Exclude<GistsAPIClientInterface['postGistsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gist | HttpResponse<models.Gist> | HttpEvent<models.Gist>> {
     const path = `/gists`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -122,7 +153,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gist>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Gist>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -131,12 +162,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   getGistsPublic(
     args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gists> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gists>;
+  getGistsPublic(
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gists>>;
+  getGistsPublic(
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gists>>;
+  getGistsPublic(
+    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>> {
     const path = `/gists/public`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('since' in args) {
@@ -160,7 +208,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gists>('GET', path, options);
+    return this.http.get<models.Gists>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -169,12 +217,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   getGistsStarred(
     args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gists> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gists>;
+  getGistsStarred(
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gists>>;
+  getGistsStarred(
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gists>>;
+  getGistsStarred(
+    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>> {
     const path = `/gists/starred`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('since' in args) {
@@ -198,7 +263,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gists>('GET', path, options);
+    return this.http.get<models.Gists>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -207,12 +272,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   deleteGistsId(
     args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteGistsId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteGistsId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteGistsId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/gists/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -233,7 +315,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -242,12 +324,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   getGistsId(
     args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gist> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gist>;
+  getGistsId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gist>>;
+  getGistsId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gist>>;
+  getGistsId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gist | HttpResponse<models.Gist> | HttpEvent<models.Gist>> {
     const path = `/gists/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -268,7 +367,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gist>('GET', path, options);
+    return this.http.get<models.Gist>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -277,12 +376,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   patchGistsId(
     args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gist> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gist>;
+  patchGistsId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gist>>;
+  patchGistsId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gist>>;
+  patchGistsId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gist | HttpResponse<models.Gist> | HttpEvent<models.Gist>> {
     const path = `/gists/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -303,7 +419,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gist>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Gist>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -312,12 +428,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   getGistsIdComments(
     args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Comments> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Comments>;
+  getGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Comments>>;
+  getGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Comments>>;
+  getGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Comments | HttpResponse<models.Comments> | HttpEvent<models.Comments>> {
     const path = `/gists/${args.id}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -338,7 +471,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Comments>('GET', path, options);
+    return this.http.get<models.Comments>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -347,12 +480,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   postGistsIdComments(
     args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Comment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Comment>;
+  postGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Comment>>;
+  postGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Comment>>;
+  postGistsIdComments(
+    args: Exclude<GistsAPIClientInterface['postGistsIdCommentsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Comment | HttpResponse<models.Comment> | HttpEvent<models.Comment>> {
     const path = `/gists/${args.id}/comments`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -373,7 +523,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Comment>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Comment>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -382,12 +532,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   deleteGistsIdCommentsCommentId(
     args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -408,7 +575,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -417,12 +584,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   getGistsIdCommentsCommentId(
     args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Comment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Comment>;
+  getGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Comment>>;
+  getGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Comment>>;
+  getGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['getGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Comment | HttpResponse<models.Comment> | HttpEvent<models.Comment>> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -443,7 +627,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Comment>('GET', path, options);
+    return this.http.get<models.Comment>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -452,12 +636,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   patchGistsIdCommentsCommentId(
     args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Comment> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Comment>;
+  patchGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Comment>>;
+  patchGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Comment>>;
+  patchGistsIdCommentsCommentId(
+    args: Exclude<GistsAPIClientInterface['patchGistsIdCommentsCommentIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Comment | HttpResponse<models.Comment> | HttpEvent<models.Comment>> {
     const path = `/gists/${args.id}/comments/${args.commentId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -478,7 +679,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Comment>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.Comment>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -487,12 +688,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   postGistsIdForks(
     args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  postGistsIdForks(
+    args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postGistsIdForks(
+    args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postGistsIdForks(
+    args: Exclude<GistsAPIClientInterface['postGistsIdForksParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/gists/${args.id}/forks`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -513,7 +731,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('POST', path, options);
+    return this.http.post<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -522,12 +740,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   deleteGistsIdStar(
     args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['deleteGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/gists/${args.id}/star`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -548,7 +783,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -557,12 +792,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   getGistsIdStar(
     args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['getGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/gists/${args.id}/star`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -583,7 +835,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -592,12 +844,29 @@ export class GistsAPIClient implements GistsAPIClientInterface {
    */
   putGistsIdStar(
     args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putGistsIdStar(
+    args: Exclude<GistsAPIClientInterface['putGistsIdStarParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/gists/${args.id}/star`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -618,28 +887,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

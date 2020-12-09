@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { DummySelectorAPIClientInterface } from './dummy-selector-api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 export const USE_DOMAIN = new InjectionToken<string>('DummySelectorAPIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('DummySelectorAP
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -55,15 +52,32 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
    */
   get(
     args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DummySelectorViewModel> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DummySelectorViewModel>;
+  get(
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DummySelectorViewModel>>;
+  get(
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DummySelectorViewModel>>;
+  get(
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DummySelectorViewModel | HttpResponse<models.DummySelectorViewModel> | HttpEvent<models.DummySelectorViewModel>> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.DummySelectorViewModel>('GET', path, options);
+    return this.http.get<models.DummySelectorViewModel>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -71,15 +85,32 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
    */
   getSettings(
     args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DummySelectorSettings> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DummySelectorSettings>;
+  getSettings(
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DummySelectorSettings>>;
+  getSettings(
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DummySelectorSettings>>;
+  getSettings(
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DummySelectorSettings | HttpResponse<models.DummySelectorSettings> | HttpEvent<models.DummySelectorSettings>> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.DummySelectorSettings>('GET', path, options);
+    return this.http.get<models.DummySelectorSettings>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -87,15 +118,32 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
    */
   putSettings(
     args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  putSettings(
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  putSettings(
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  putSettings(
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<object>('PUT', path, options, JSON.stringify(args.betriebSelectorSettings));
+    return this.http.put<object>(`${this.domain}${path}`, JSON.stringify(args.betriebSelectorSettings), options);
   }
 
   /**
@@ -103,36 +151,32 @@ export class DummySelectorAPIClient implements DummySelectorAPIClientInterface {
    */
   deleteSettings(
     args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  deleteSettings(
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  deleteSettings(
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  deleteSettings(
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/api/dummyselector/${args.organizerTaskElementId}/Settings`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<object>('DELETE', path, options);
+    return this.http.delete<object>(`${this.domain}${path}`, options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

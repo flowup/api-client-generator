@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { LegacyAPIClientInterface } from './legacy-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, LegacyAPIClient } from './legacy-api-client.service';
-import { LegacyAPIClientInterface } from './legacy-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,41 +23,127 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedLegacyAPIClient extends LegacyAPIClient implements LegacyAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Find issues by state and keyword.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getLegacyIssuesSearchOwnerRepositoryStateKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchIssuesByKeyword> {
-    return super.getLegacyIssuesSearchOwnerRepositoryStateKeyword(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchIssuesByKeyword>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchIssuesByKeyword>>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchIssuesByKeyword>>;
+  getLegacyIssuesSearchOwnerRepositoryStateKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyIssuesSearchOwnerRepositoryStateKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchIssuesByKeyword | HttpResponse<models.SearchIssuesByKeyword> | HttpEvent<models.SearchIssuesByKeyword>> {
+
+    return super.getLegacyIssuesSearchOwnerRepositoryStateKeyword(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSearchIssuesByKeyword(res) || console.error(`TypeGuard for response 'models.SearchIssuesByKeyword' caught inconsistency.`, res)));
   }
 
+  /**
+   * Find repositories by keyword. Note, this legacy method does not follow the v3 pagination pattern. This method returns up to 100 results per page and pages can be fetched using the start_page parameter.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getLegacyReposSearchKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchRepositoriesByKeyword> {
-    return super.getLegacyReposSearchKeyword(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchRepositoriesByKeyword>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchRepositoriesByKeyword>>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchRepositoriesByKeyword>>;
+  getLegacyReposSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyReposSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchRepositoriesByKeyword | HttpResponse<models.SearchRepositoriesByKeyword> | HttpEvent<models.SearchRepositoriesByKeyword>> {
+
+    return super.getLegacyReposSearchKeyword(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSearchRepositoriesByKeyword(res) || console.error(`TypeGuard for response 'models.SearchRepositoriesByKeyword' caught inconsistency.`, res)));
   }
 
+  /**
+   * This API call is added for compatibility reasons only.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getLegacyUserEmail(
     args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchUserByEmail> {
-    return super.getLegacyUserEmail(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchUserByEmail>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchUserByEmail>>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchUserByEmail>>;
+  getLegacyUserEmail(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserEmailParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchUserByEmail | HttpResponse<models.SearchUserByEmail> | HttpEvent<models.SearchUserByEmail>> {
+
+    return super.getLegacyUserEmail(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSearchUserByEmail(res) || console.error(`TypeGuard for response 'models.SearchUserByEmail' caught inconsistency.`, res)));
   }
 
+  /**
+   * Find users by keyword.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getLegacyUserSearchKeyword(
     args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchUsersByKeyword> {
-    return super.getLegacyUserSearchKeyword(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchUsersByKeyword>;
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchUsersByKeyword>>;
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchUsersByKeyword>>;
+  getLegacyUserSearchKeyword(
+    args: Exclude<LegacyAPIClientInterface['getLegacyUserSearchKeywordParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchUsersByKeyword | HttpResponse<models.SearchUsersByKeyword> | HttpEvent<models.SearchUsersByKeyword>> {
+
+    return super.getLegacyUserSearchKeyword(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSearchUsersByKeyword(res) || console.error(`TypeGuard for response 'models.SearchUsersByKeyword' caught inconsistency.`, res)));
   }
 

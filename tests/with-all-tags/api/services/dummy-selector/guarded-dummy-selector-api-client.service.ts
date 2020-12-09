@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { DummySelectorAPIClientInterface } from './dummy-selector-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, DummySelectorAPIClient } from './dummy-selector-api-client.service';
-import { DummySelectorAPIClientInterface } from './dummy-selector-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,41 +23,123 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedDummySelectorAPIClient extends DummySelectorAPIClient implements DummySelectorAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   get(
     args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DummySelectorViewModel> {
-    return super.get(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DummySelectorViewModel>;
+  get(
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DummySelectorViewModel>>;
+  get(
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DummySelectorViewModel>>;
+  get(
+    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DummySelectorViewModel | HttpResponse<models.DummySelectorViewModel> | HttpEvent<models.DummySelectorViewModel>> {
+
+    return super.get(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDummySelectorViewModel(res) || console.error(`TypeGuard for response 'models.DummySelectorViewModel' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSettings(
     args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.DummySelectorSettings> {
-    return super.getSettings(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.DummySelectorSettings>;
+  getSettings(
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DummySelectorSettings>>;
+  getSettings(
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DummySelectorSettings>>;
+  getSettings(
+    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.DummySelectorSettings | HttpResponse<models.DummySelectorSettings> | HttpEvent<models.DummySelectorSettings>> {
+
+    return super.getSettings(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDummySelectorSettings(res) || console.error(`TypeGuard for response 'models.DummySelectorSettings' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putSettings(
     args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.putSettings(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  putSettings(
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  putSettings(
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  putSettings(
+    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.putSettings(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 
+  /**
+   * Response generated for [ 200 ] HTTP response code.
+   */
   deleteSettings(
     args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
-    return super.deleteSettings(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  deleteSettings(
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  deleteSettings(
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  deleteSettings(
+    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
+
+    return super.deleteSettings(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => typeof res === 'object' || console.error(`TypeGuard for response 'object' caught inconsistency.`, res)));
   }
 

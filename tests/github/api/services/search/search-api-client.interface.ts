@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface SearchAPIClientInterface {
-
   /**
    * Arguments object for method `getSearchCode`.
    */
@@ -42,8 +40,24 @@ export interface SearchAPIClientInterface {
    */
   getSearchCode(
     args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.SearchCode>;
+  getSearchCode(
+    args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchCode>>;
+  getSearchCode(
+    args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchCode>>;
+  getSearchCode(
+    args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.SearchCode | HttpResponse<models.SearchCode> | HttpEvent<models.SearchCode>>;
 
   /**
    * Arguments object for method `getSearchIssues`.
@@ -71,8 +85,24 @@ export interface SearchAPIClientInterface {
    */
   getSearchIssues(
     args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.SearchIssues>;
+  getSearchIssues(
+    args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchIssues>>;
+  getSearchIssues(
+    args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchIssues>>;
+  getSearchIssues(
+    args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.SearchIssues | HttpResponse<models.SearchIssues> | HttpEvent<models.SearchIssues>>;
 
   /**
    * Arguments object for method `getSearchRepositories`.
@@ -100,8 +130,24 @@ export interface SearchAPIClientInterface {
    */
   getSearchRepositories(
     args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.SearchRepositories>;
+  getSearchRepositories(
+    args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchRepositories>>;
+  getSearchRepositories(
+    args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchRepositories>>;
+  getSearchRepositories(
+    args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.SearchRepositories | HttpResponse<models.SearchRepositories> | HttpEvent<models.SearchRepositories>>;
 
   /**
    * Arguments object for method `getSearchUsers`.
@@ -129,8 +175,23 @@ export interface SearchAPIClientInterface {
    */
   getSearchUsers(
     args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.SearchUsers>;
-
+  getSearchUsers(
+    args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchUsers>>;
+  getSearchUsers(
+    args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchUsers>>;
+  getSearchUsers(
+    args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.SearchUsers | HttpResponse<models.SearchUsers> | HttpEvent<models.SearchUsers>>;
 
 }

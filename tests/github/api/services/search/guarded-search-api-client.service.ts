@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { SearchAPIClientInterface } from './search-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, SearchAPIClient } from './search-api-client.service';
-import { SearchAPIClientInterface } from './search-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,41 +23,127 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedSearchAPIClient extends SearchAPIClient implements SearchAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Search code.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSearchCode(
     args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchCode> {
-    return super.getSearchCode(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchCode>;
+  getSearchCode(
+    args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchCode>>;
+  getSearchCode(
+    args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchCode>>;
+  getSearchCode(
+    args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchCode | HttpResponse<models.SearchCode> | HttpEvent<models.SearchCode>> {
+
+    return super.getSearchCode(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSearchCode(res) || console.error(`TypeGuard for response 'models.SearchCode' caught inconsistency.`, res)));
   }
 
+  /**
+   * Find issues by state and keyword. (This method returns up to 100 results per page.)
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSearchIssues(
     args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchIssues> {
-    return super.getSearchIssues(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchIssues>;
+  getSearchIssues(
+    args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchIssues>>;
+  getSearchIssues(
+    args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchIssues>>;
+  getSearchIssues(
+    args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchIssues | HttpResponse<models.SearchIssues> | HttpEvent<models.SearchIssues>> {
+
+    return super.getSearchIssues(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSearchIssues(res) || console.error(`TypeGuard for response 'models.SearchIssues' caught inconsistency.`, res)));
   }
 
+  /**
+   * Search repositories.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSearchRepositories(
     args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchRepositories> {
-    return super.getSearchRepositories(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchRepositories>;
+  getSearchRepositories(
+    args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchRepositories>>;
+  getSearchRepositories(
+    args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchRepositories>>;
+  getSearchRepositories(
+    args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchRepositories | HttpResponse<models.SearchRepositories> | HttpEvent<models.SearchRepositories>> {
+
+    return super.getSearchRepositories(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSearchRepositories(res) || console.error(`TypeGuard for response 'models.SearchRepositories' caught inconsistency.`, res)));
   }
 
+  /**
+   * Search users.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getSearchUsers(
     args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.SearchUsers> {
-    return super.getSearchUsers(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.SearchUsers>;
+  getSearchUsers(
+    args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.SearchUsers>>;
+  getSearchUsers(
+    args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.SearchUsers>>;
+  getSearchUsers(
+    args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.SearchUsers | HttpResponse<models.SearchUsers> | HttpEvent<models.SearchUsers>> {
+
+    return super.getSearchUsers(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isSearchUsers(res) || console.error(`TypeGuard for response 'models.SearchUsers' caught inconsistency.`, res)));
   }
 

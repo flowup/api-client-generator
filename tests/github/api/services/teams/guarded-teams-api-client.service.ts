@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { TeamsAPIClientInterface } from './teams-api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, TeamsAPIClient } from './teams-api-client.service';
-import { TeamsAPIClientInterface } from './teams-api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 import * as guards from '../../guards';
@@ -23,58 +23,452 @@ import * as guards from '../../guards';
 @Injectable()
 export class GuardedTeamsAPIClient extends TeamsAPIClient implements TeamsAPIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Delete team.
+   * In order to delete a team, the authenticated user must be an owner of the
+   * org that the team is associated with.
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteTeamsTeamId(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get team.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getTeamsTeamId(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Team> {
-    return super.getTeamsTeamId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Team>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  getTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>> {
+
+    return super.getTeamsTeamId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTeam(res) || console.error(`TypeGuard for response 'models.Team' caught inconsistency.`, res)));
   }
 
+  /**
+   * Edit team.
+   * In order to edit a team, the authenticated user must be an owner of the org
+   * that the team is associated with.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   patchTeamsTeamId(
     args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Team> {
-    return super.patchTeamsTeamId(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Team>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Team>>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Team>>;
+  patchTeamsTeamId(
+    args: Exclude<TeamsAPIClientInterface['patchTeamsTeamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>> {
+
+    return super.patchTeamsTeamId(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTeam(res) || console.error(`TypeGuard for response 'models.Team' caught inconsistency.`, res)));
   }
 
+  /**
+   * List team members.
+   * In order to list members in a team, the authenticated user must be a member
+   * of the team.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getTeamsTeamIdMembers(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
-    return super.getTeamsTeamIdMembers(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getTeamsTeamIdMembers(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
+
+    return super.getTeamsTeamIdMembers(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isUsers(res) || console.error(`TypeGuard for response 'models.Users' caught inconsistency.`, res)));
   }
 
+  /**
+   * The "Remove team member" API is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Remove team membership API instead. It allows you to remove both active and pending memberships.
+   * 
+   * 
+   * Remove team member.
+   * In order to remove a user from a team, the authenticated user must have 'admin'
+   * permissions to the team or be an owner of the org that the team is associated
+   * with.
+   * NOTE This does not delete the user, it just remove them from the team.
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteTeamsTeamIdMembersUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * The "Get team member" API is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Get team membership API instead. It allows you to get both active and pending memberships.
+   * 
+   * 
+   * Get team member.
+   * In order to get if a user is a member of a team, the authenticated user mus
+   * be a member of the team.
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.getTeamsTeamIdMembersUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * The API (described below) is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Add team membership API instead. It allows you to invite new organization members to your teams.
+   * 
+   * 
+   * Add team member.
+   * In order to add a user to a team, the authenticated user must have 'admin'
+   * permissions to the team or be an owner of the org that the team is associated
+   * with.
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putTeamsTeamIdMembersUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembersUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.putTeamsTeamIdMembersUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Remove team membership.
+   * In order to remove a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with. NOTE: This does not delete the user, it just removes their membership from the team.
+   * 
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteTeamsTeamIdMembershipsUsername(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Get team membership.
+   * In order to get a user's membership with a team, the authenticated user must be a member of the team or an owner of the team's organization.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getTeamsTeamIdMembershipsUsername(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TeamMembership> {
-    return super.getTeamsTeamIdMembershipsUsername(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TeamMembership>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamMembership>>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamMembership>>;
+  getTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TeamMembership | HttpResponse<models.TeamMembership> | HttpEvent<models.TeamMembership>> {
+
+    return super.getTeamsTeamIdMembershipsUsername(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTeamMembership(res) || console.error(`TypeGuard for response 'models.TeamMembership' caught inconsistency.`, res)));
   }
 
+  /**
+   * Add team membership.
+   * In order to add a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with.
+   * 
+   * 
+   * If the user is already a part of the team's organization (meaning they're on at least one other team in the organization), this endpoint will add the user to the team.
+   * 
+   * 
+   * If the user is completely unaffiliated with the team's organization (meaning they're on none of the organization's teams), this endpoint will send an invitation to the user via email. This newly-created membership will be in the 'pending' state until the user accepts the invitation, at which point the membership will transition to the 'active' state and the user will be added as a member of the team.
+   * 
+   * Response generated for [ 200 ] HTTP response code.
+   */
   putTeamsTeamIdMembershipsUsername(
     args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TeamMembership> {
-    return super.putTeamsTeamIdMembershipsUsername(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TeamMembership>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamMembership>>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamMembership>>;
+  putTeamsTeamIdMembershipsUsername(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdMembershipsUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TeamMembership | HttpResponse<models.TeamMembership> | HttpEvent<models.TeamMembership>> {
+
+    return super.putTeamsTeamIdMembershipsUsername(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTeamMembership(res) || console.error(`TypeGuard for response 'models.TeamMembership' caught inconsistency.`, res)));
   }
 
+  /**
+   * List team repos
+   * Response generated for [ 200 ] HTTP response code.
+   */
   getTeamsTeamIdRepos(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TeamRepos> {
-    return super.getTeamsTeamIdRepos(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TeamRepos>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamRepos>>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamRepos>>;
+  getTeamsTeamIdRepos(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TeamRepos | HttpResponse<models.TeamRepos> | HttpEvent<models.TeamRepos>> {
+
+    return super.getTeamsTeamIdRepos(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isTeamRepos(res) || console.error(`TypeGuard for response 'models.TeamRepos' caught inconsistency.`, res)));
+  }
+
+  /**
+   * In order to add a repository to a team, the authenticated user must be an owner of the org that the team is associated with. Also, the repository must be owned by the organization, or a direct fork of a repository owned by the organization.
+   * Response generated for [ missing ] HTTP response code.
+   */
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putTeamsTeamIdReposOrgRepo(
+    args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.putTeamsTeamIdReposOrgRepo(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * In order to remove a repository from a team, the authenticated user must be an owner of the org that the team is associated with. NOTE: This does not delete the repository, it just removes it from the team.
+   * Response generated for [ 204 ] HTTP response code.
+   */
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['deleteTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.deleteTeamsTeamIdReposOwnerRepo(args, requestHttpOptions, observe);
+  }
+
+  /**
+   * Check if a team manages a repository
+   * Response generated for [ missing ] HTTP response code.
+   */
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getTeamsTeamIdReposOwnerRepo(
+    args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.getTeamsTeamIdReposOwnerRepo(args, requestHttpOptions, observe);
   }
 
 }

@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { UserAPIClientInterface } from './user-api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 export const USE_DOMAIN = new InjectionToken<string>('UserAPIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('UserAPIClient_U
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class UserAPIClient implements UserAPIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -56,12 +53,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUser(
     args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.User> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.User>;
+  getUser(
+    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.User>>;
+  getUser(
+    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.User>>;
+  getUser(
+    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.User | HttpResponse<models.User> | HttpEvent<models.User>> {
     const path = `/user`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -82,7 +96,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.User>('GET', path, options);
+    return this.http.get<models.User>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -91,12 +105,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   patchUser(
     args: Exclude<UserAPIClientInterface['patchUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.User> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.User>;
+  patchUser(
+    args: Exclude<UserAPIClientInterface['patchUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.User>>;
+  patchUser(
+    args: Exclude<UserAPIClientInterface['patchUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.User>>;
+  patchUser(
+    args: Exclude<UserAPIClientInterface['patchUserParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.User | HttpResponse<models.User> | HttpEvent<models.User>> {
     const path = `/user`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -117,7 +148,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.User>('PATCH', path, options, JSON.stringify(args.body));
+    return this.http.patch<models.User>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -128,12 +159,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   deleteUserEmails(
     args: Exclude<UserAPIClientInterface['deleteUserEmailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteUserEmails(
+    args: Exclude<UserAPIClientInterface['deleteUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteUserEmails(
+    args: Exclude<UserAPIClientInterface['deleteUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteUserEmails(
+    args: Exclude<UserAPIClientInterface['deleteUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/emails`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -154,7 +202,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options, JSON.stringify(args.body));
+    return this.http.delete<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -169,12 +217,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserEmails(
     args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserEmails> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserEmails>;
+  getUserEmails(
+    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserEmails>>;
+  getUserEmails(
+    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserEmails>>;
+  getUserEmails(
+    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserEmails | HttpResponse<models.UserEmails> | HttpEvent<models.UserEmails>> {
     const path = `/user/emails`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -195,7 +260,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.UserEmails>('GET', path, options);
+    return this.http.get<models.UserEmails>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -206,12 +271,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   postUserEmails(
     args: Exclude<UserAPIClientInterface['postUserEmailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  postUserEmails(
+    args: Exclude<UserAPIClientInterface['postUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  postUserEmails(
+    args: Exclude<UserAPIClientInterface['postUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  postUserEmails(
+    args: Exclude<UserAPIClientInterface['postUserEmailsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/emails`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -232,7 +314,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -241,12 +323,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserFollowers(
     args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getUserFollowers(
+    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getUserFollowers(
+    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getUserFollowers(
+    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/user/followers`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -267,7 +366,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -276,12 +375,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserFollowing(
     args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Users> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Users>;
+  getUserFollowing(
+    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Users>>;
+  getUserFollowing(
+    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Users>>;
+  getUserFollowing(
+    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
     const path = `/user/following`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -302,7 +418,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Users>('GET', path, options);
+    return this.http.get<models.Users>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -314,12 +430,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   deleteUserFollowingUsername(
     args: Exclude<UserAPIClientInterface['deleteUserFollowingUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['deleteUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['deleteUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['deleteUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/following/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -340,7 +473,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -349,12 +482,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserFollowingUsername(
     args: Exclude<UserAPIClientInterface['getUserFollowingUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['getUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['getUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['getUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/following/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -375,7 +525,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -387,12 +537,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   putUserFollowingUsername(
     args: Exclude<UserAPIClientInterface['putUserFollowingUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['putUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['putUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putUserFollowingUsername(
+    args: Exclude<UserAPIClientInterface['putUserFollowingUsernameParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/following/${args.username}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -413,7 +580,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -425,12 +592,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserIssues(
     args: Exclude<UserAPIClientInterface['getUserIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Issues> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Issues>;
+  getUserIssues(
+    args: Exclude<UserAPIClientInterface['getUserIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Issues>>;
+  getUserIssues(
+    args: Exclude<UserAPIClientInterface['getUserIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Issues>>;
+  getUserIssues(
+    args: Exclude<UserAPIClientInterface['getUserIssuesParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>> {
     const path = `/user/issues`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('filter' in args) {
@@ -469,7 +653,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Issues>('GET', path, options);
+    return this.http.get<models.Issues>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -481,12 +665,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserKeys(
     args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gitignore> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gitignore>;
+  getUserKeys(
+    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gitignore>>;
+  getUserKeys(
+    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gitignore>>;
+  getUserKeys(
+    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>> {
     const path = `/user/keys`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -507,7 +708,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gitignore>('GET', path, options);
+    return this.http.get<models.Gitignore>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -516,12 +717,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   postUserKeys(
     args: Exclude<UserAPIClientInterface['postUserKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserKeysKeyId> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserKeysKeyId>;
+  postUserKeys(
+    args: Exclude<UserAPIClientInterface['postUserKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserKeysKeyId>>;
+  postUserKeys(
+    args: Exclude<UserAPIClientInterface['postUserKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserKeysKeyId>>;
+  postUserKeys(
+    args: Exclude<UserAPIClientInterface['postUserKeysParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>> {
     const path = `/user/keys`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -542,7 +760,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.UserKeysKeyId>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.UserKeysKeyId>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -551,12 +769,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   deleteUserKeysKeyId(
     args: Exclude<UserAPIClientInterface['deleteUserKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteUserKeysKeyId(
+    args: Exclude<UserAPIClientInterface['deleteUserKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteUserKeysKeyId(
+    args: Exclude<UserAPIClientInterface['deleteUserKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteUserKeysKeyId(
+    args: Exclude<UserAPIClientInterface['deleteUserKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/keys/${args.keyId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -577,7 +812,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -586,12 +821,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserKeysKeyId(
     args: Exclude<UserAPIClientInterface['getUserKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserKeysKeyId> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserKeysKeyId>;
+  getUserKeysKeyId(
+    args: Exclude<UserAPIClientInterface['getUserKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserKeysKeyId>>;
+  getUserKeysKeyId(
+    args: Exclude<UserAPIClientInterface['getUserKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserKeysKeyId>>;
+  getUserKeysKeyId(
+    args: Exclude<UserAPIClientInterface['getUserKeysKeyIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>> {
     const path = `/user/keys/${args.keyId}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -612,7 +864,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.UserKeysKeyId>('GET', path, options);
+    return this.http.get<models.UserKeysKeyId>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -621,12 +873,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserOrgs(
     args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gitignore> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gitignore>;
+  getUserOrgs(
+    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gitignore>>;
+  getUserOrgs(
+    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gitignore>>;
+  getUserOrgs(
+    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>> {
     const path = `/user/orgs`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -647,7 +916,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gitignore>('GET', path, options);
+    return this.http.get<models.Gitignore>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -659,12 +928,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserRepos(
     args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repos> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repos>;
+  getUserRepos(
+    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  getUserRepos(
+    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  getUserRepos(
+    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>> {
     const path = `/user/repos`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('type' in args) {
@@ -688,7 +974,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Repos>('GET', path, options);
+    return this.http.get<models.Repos>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -699,12 +985,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   postUserRepos(
     args: Exclude<UserAPIClientInterface['postUserReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Repos> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Repos>;
+  postUserRepos(
+    args: Exclude<UserAPIClientInterface['postUserReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Repos>>;
+  postUserRepos(
+    args: Exclude<UserAPIClientInterface['postUserReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Repos>>;
+  postUserRepos(
+    args: Exclude<UserAPIClientInterface['postUserReposParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>> {
     const path = `/user/repos`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -725,7 +1028,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Repos>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Repos>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -734,12 +1037,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserStarred(
     args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Gitignore> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Gitignore>;
+  getUserStarred(
+    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Gitignore>>;
+  getUserStarred(
+    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Gitignore>>;
+  getUserStarred(
+    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>> {
     const path = `/user/starred`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('direction' in args) {
@@ -766,7 +1086,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Gitignore>('GET', path, options);
+    return this.http.get<models.Gitignore>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -775,12 +1095,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   deleteUserStarredOwnerRepo(
     args: Exclude<UserAPIClientInterface['deleteUserStarredOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['deleteUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['deleteUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['deleteUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -801,7 +1138,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -810,12 +1147,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserStarredOwnerRepo(
     args: Exclude<UserAPIClientInterface['getUserStarredOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['getUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['getUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['getUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -836,7 +1190,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -845,12 +1199,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   putUserStarredOwnerRepo(
     args: Exclude<UserAPIClientInterface['putUserStarredOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['putUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['putUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putUserStarredOwnerRepo(
+    args: Exclude<UserAPIClientInterface['putUserStarredOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/starred/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -871,7 +1242,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -880,12 +1251,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserSubscriptions(
     args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.UserIdSubscribitions> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.UserIdSubscribitions>;
+  getUserSubscriptions(
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.UserIdSubscribitions>>;
+  getUserSubscriptions(
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.UserIdSubscribitions>>;
+  getUserSubscriptions(
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.UserIdSubscribitions | HttpResponse<models.UserIdSubscribitions> | HttpEvent<models.UserIdSubscribitions>> {
     const path = `/user/subscriptions`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -906,7 +1294,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.UserIdSubscribitions>('GET', path, options);
+    return this.http.get<models.UserIdSubscribitions>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -915,12 +1303,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   deleteUserSubscriptionsOwnerRepo(
     args: Exclude<UserAPIClientInterface['deleteUserSubscriptionsOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['deleteUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['deleteUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['deleteUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -941,7 +1346,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -950,12 +1355,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserSubscriptionsOwnerRepo(
     args: Exclude<UserAPIClientInterface['getUserSubscriptionsOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  getUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  getUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  getUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['getUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -976,7 +1398,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('GET', path, options);
+    return this.http.get<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -985,12 +1407,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   putUserSubscriptionsOwnerRepo(
     args: Exclude<UserAPIClientInterface['putUserSubscriptionsOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['putUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['putUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putUserSubscriptionsOwnerRepo(
+    args: Exclude<UserAPIClientInterface['putUserSubscriptionsOwnerRepoParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/user/subscriptions/${args.owner}/${args.repo}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1011,7 +1450,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options);
+    return this.http.put<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -1020,12 +1459,29 @@ export class UserAPIClient implements UserAPIClientInterface {
    */
   getUserTeams(
     args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.TeamsList> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.TeamsList>;
+  getUserTeams(
+    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.TeamsList>>;
+  getUserTeams(
+    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.TeamsList>>;
+  getUserTeams(
+    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.TeamsList | HttpResponse<models.TeamsList> | HttpEvent<models.TeamsList>> {
     const path = `/user/teams`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -1046,28 +1502,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.TeamsList>('GET', path, options);
+    return this.http.get<models.TeamsList>(`${this.domain}${path}`, options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

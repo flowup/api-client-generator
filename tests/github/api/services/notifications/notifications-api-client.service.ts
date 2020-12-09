@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { NotificationsAPIClientInterface } from './notifications-api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from '../../types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from '../../types';
 
 import * as models from '../../models';
 export const USE_DOMAIN = new InjectionToken<string>('NotificationsAPIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('NotificationsAP
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -58,12 +55,29 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    */
   getNotifications(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Notifications> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Notifications>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Notifications>>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Notifications>>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>> {
     const path = `/notifications`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('all' in args) {
@@ -93,7 +107,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Notifications>('GET', path, options);
+    return this.http.get<models.Notifications>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -104,12 +118,29 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    */
   putNotifications(
     args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/notifications`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -130,7 +161,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -139,12 +170,29 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    */
   getNotificationsThreadsId(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Notifications> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Notifications>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Notifications>>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Notifications>>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>> {
     const path = `/notifications/threads/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -165,7 +213,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Notifications>('GET', path, options);
+    return this.http.get<models.Notifications>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -174,12 +222,29 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    */
   patchNotificationsThreadsId(
     args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/notifications/threads/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -200,7 +265,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('PATCH', path, options);
+    return this.http.patch<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -209,12 +274,29 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    */
   deleteNotificationsThreadsIdSubscription(
     args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -235,7 +317,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -244,12 +326,29 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    */
   getNotificationsThreadsIdSubscription(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Subscription> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Subscription>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscription>>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscription>>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Subscription | HttpResponse<models.Subscription> | HttpEvent<models.Subscription>> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -270,7 +369,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Subscription>('GET', path, options);
+    return this.http.get<models.Subscription>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -283,12 +382,29 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    */
   putNotificationsThreadsIdSubscription(
     args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Subscription> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Subscription>;
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscription>>;
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscription>>;
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Subscription | HttpResponse<models.Subscription> | HttpEvent<models.Subscription>> {
     const path = `/notifications/threads/${args.id}/subscription`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('xGitHubMediaType' in args) {
@@ -309,28 +425,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.sendRequest<models.Subscription>('PUT', path, options, JSON.stringify(args.body));
+    return this.http.put<models.Subscription>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

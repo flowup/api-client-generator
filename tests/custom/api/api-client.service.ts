@@ -9,11 +9,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { APIClientInterface } from './api-client.interface';
-import { Observable, throwError } from 'rxjs';
-import { DefaultHttpOptions, HttpOptions } from './types';
+import { Observable } from 'rxjs';import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 export const USE_DOMAIN = new InjectionToken<string>('APIClient_USE_DOMAIN');
@@ -22,7 +21,6 @@ export const USE_HTTP_OPTIONS = new InjectionToken<HttpOptions>('APIClient_USE_H
 type APIHttpOptions = HttpOptions & {
   headers: HttpHeaders;
   params: HttpParams;
-  responseType?: 'arraybuffer' | 'blob' | 'text' | 'json';
 };
 
 @Injectable()
@@ -37,7 +35,6 @@ export class APIClient implements APIClientInterface {
     @Optional() @Inject(USE_DOMAIN) domain?: string,
     @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
   ) {
-
     if (domain != null) {
       this.domain = domain;
     }
@@ -55,12 +52,29 @@ export class APIClient implements APIClientInterface {
    */
   getItems(
     args: Exclude<APIClientInterface['getItemsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ItemList> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ItemList>;
+  getItems(
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ItemList>>;
+  getItems(
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ItemList>>;
+  getItems(
+    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ItemList | HttpResponse<models.ItemList> | HttpEvent<models.ItemList>> {
     const path = `/items`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('pageSize' in args) {
@@ -69,7 +83,7 @@ export class APIClient implements APIClientInterface {
     if ('page' in args) {
       options.params = options.params.set('page', String(args.page));
     }
-    return this.sendRequest<models.ItemList>('GET', path, options);
+    return this.http.get<models.ItemList>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -77,12 +91,29 @@ export class APIClient implements APIClientInterface {
    */
   getItemModels(
     args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getItemModels(
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getItemModels(
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getItemModels(
+    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/itemModels`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('pageSize' in args) {
@@ -91,7 +122,7 @@ export class APIClient implements APIClientInterface {
     if ('page' in args) {
       options.params = options.params.set('page', String(args.page));
     }
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -99,15 +130,32 @@ export class APIClient implements APIClientInterface {
    */
   getPetsId(
     args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Pet[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pet[]>;
+  getPetsId(
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pet[]>>;
+  getPetsId(
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pet[]>>;
+  getPetsId(
+    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pet[] | HttpResponse<models.Pet[]> | HttpEvent<models.Pet[]>> {
     const path = `/pets/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Pet[]>('GET', path, options);
+    return this.http.get<models.Pet[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -115,45 +163,90 @@ export class APIClient implements APIClientInterface {
    */
   deletePetsId(
     args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<void> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  deletePetsId(
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deletePetsId(
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deletePetsId(
+    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
     const path = `/pets/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<void>('DELETE', path, options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getCustomers(
-    requestHttpOptions?: HttpOptions
-  ): Observable<(models.Customer[]) | null> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<(models.Customer[]) | null>;
+  getCustomers(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<(models.Customer[]) | null>>;
+  getCustomers(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<(models.Customer[]) | null>>;
+  getCustomers(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<(models.Customer[]) | null | HttpResponse<(models.Customer[]) | null> | HttpEvent<(models.Customer[]) | null>> {
     const path = `/customers`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<(models.Customer[]) | null>('GET', path, options);
+    return this.http.get<(models.Customer[]) | null>(`${this.domain}${path}`, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getDictionaries(
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Dictionary> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Dictionary>;
+  getDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Dictionary>>;
+  getDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Dictionary>>;
+  getDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Dictionary | HttpResponse<models.Dictionary> | HttpEvent<models.Dictionary>> {
     const path = `/dictionaries`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<models.Dictionary>('GET', path, options);
+    return this.http.get<models.Dictionary>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -161,91 +254,178 @@ export class APIClient implements APIClientInterface {
    */
   getFileId(
     args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  getFileId(
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  getFileId(
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  getFileId(
+    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
     const path = `/file/${args.id}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
-      responseType: 'blob',
+      observe,
+      responseType: 'blob' as 'json',
     };
 
-    return this.sendRequest<File>('GET', path, options);
+    return this.http.get<File>(`${this.domain}${path}`, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getRandomObject(
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getRandomObject(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getRandomObject(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getRandomObject(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/randomObject`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getRandomModel(
-    requestHttpOptions?: HttpOptions
-  ): Observable<object> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<object>;
+  getRandomModel(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  getRandomModel(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  getRandomModel(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>> {
     const path = `/randomModel`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<object>('GET', path, options);
+    return this.http.get<object>(`${this.domain}${path}`, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getRandomString(
-    requestHttpOptions?: HttpOptions
-  ): Observable<string> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<string>;
+  getRandomString(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<string>>;
+  getRandomString(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<string>>;
+  getRandomString(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<string | HttpResponse<string> | HttpEvent<string>> {
     const path = `/randomString`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<string>('GET', path, options);
+    return this.http.get<string>(`${this.domain}${path}`, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getDictionary(
-    requestHttpOptions?: HttpOptions
-  ): Observable<{ [key: string]: number }> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<{ [key: string]: number }>;
+  getDictionary(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<{ [key: string]: number }>>;
+  getDictionary(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<{ [key: string]: number }>>;
+  getDictionary(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<{ [key: string]: number } | HttpResponse<{ [key: string]: number }> | HttpEvent<{ [key: string]: number }>> {
     const path = `/store/dictionary`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<{ [key: string]: number }>('GET', path, options);
+    return this.http.get<{ [key: string]: number }>(`${this.domain}${path}`, options);
   }
 
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getArrayOfDictionaries(
-    requestHttpOptions?: HttpOptions
-  ): Observable<{ [key: string]: number }[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<{ [key: string]: number }[]>;
+  getArrayOfDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<{ [key: string]: number }[]>>;
+  getArrayOfDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<{ [key: string]: number }[]>>;
+  getArrayOfDictionaries(
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<{ [key: string]: number }[] | HttpResponse<{ [key: string]: number }[]> | HttpEvent<{ [key: string]: number }[]>> {
     const path = `/store/arrayOfdictionaries`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
-    return this.sendRequest<{ [key: string]: number }[]>('GET', path, options);
+    return this.http.get<{ [key: string]: number }[]>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -254,12 +434,29 @@ export class APIClient implements APIClientInterface {
    */
   firestoreProjectsDatabasesDocumentsCommit(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Dictionary> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Dictionary>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Dictionary>>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Dictionary>>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Dictionary | HttpResponse<models.Dictionary> | HttpEvent<models.Dictionary>> {
     const path = `/${args.database}/write`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('wololo' in args) {
@@ -283,7 +480,7 @@ export class APIClient implements APIClientInterface {
     if ('simpleArrayQueryParam' in args) {
       options.params = options.params.set('simpleArrayQueryParam', String(args.simpleArrayQueryParam));
     }
-    return this.sendRequest<models.Dictionary>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Dictionary>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -292,18 +489,35 @@ export class APIClient implements APIClientInterface {
    */
   postReposOwnerRepoGitBlobs(
     args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Blob[]> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Blob[]>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Blob[]>>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Blob[]>>;
+  postReposOwnerRepoGitBlobs(
+    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Blob[] | HttpResponse<models.Blob[]> | HttpEvent<models.Blob[]>> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
+      observe,
     };
 
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    return this.sendRequest<models.Blob[]>('POST', path, options, JSON.stringify(args.body));
+    return this.http.post<models.Blob[]>(`${this.domain}${path}`, JSON.stringify(args.body), options);
   }
 
   /**
@@ -312,40 +526,36 @@ export class APIClient implements APIClientInterface {
    */
   getReposOwnerRepoGitBlobsShaCode(
     args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<File> {
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<File>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<File>>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<File>>;
+  getReposOwnerRepoGitBlobsShaCode(
+    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<File | HttpResponse<File> | HttpEvent<File>> {
     const path = `/repos/${args.owner}/${args.repo}/git/blobs/${args.shaCode}`;
-    const options: APIHttpOptions = {
+    const options = {
       ...this.options,
       ...requestHttpOptions,
-      responseType: 'blob',
+      observe,
+      responseType: 'blob' as 'json',
     };
 
     if ('accept' in args) {
       options.headers = options.headers.set('Accept', String(args.accept));
     }
-    return this.sendRequest<File>('GET', path, options, JSON.stringify(args.body));
+    return this.http.get<File>(`${this.domain}${path}`, options);
   }
 
-  private sendRequest<T>(method: string, path: string, options: HttpOptions, body?: any): Observable<T> {
-    switch (method) {
-      case 'DELETE':
-        return this.http.delete<T>(`${this.domain}${path}`, options);
-      case 'GET':
-        return this.http.get<T>(`${this.domain}${path}`, options);
-      case 'HEAD':
-        return this.http.head<T>(`${this.domain}${path}`, options);
-      case 'OPTIONS':
-        return this.http.options<T>(`${this.domain}${path}`, options);
-      case 'PATCH':
-        return this.http.patch<T>(`${this.domain}${path}`, body, options);
-      case 'POST':
-        return this.http.post<T>(`${this.domain}${path}`, body, options);
-      case 'PUT':
-        return this.http.put<T>(`${this.domain}${path}`, body, options);
-      default:
-        console.error(`Unsupported request: ${method}`);
-        return throwError(`Unsupported request: ${method}`);
-    }
-  }
 }

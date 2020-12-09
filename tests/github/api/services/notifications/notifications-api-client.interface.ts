@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface NotificationsAPIClientInterface {
-
   /**
    * Arguments object for method `getNotifications`.
    */
@@ -44,8 +42,24 @@ export interface NotificationsAPIClientInterface {
    */
   getNotifications(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Notifications>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Notifications>>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Notifications>>;
+  getNotifications(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>>;
 
   /**
    * Arguments object for method `putNotifications`.
@@ -70,8 +84,24 @@ export interface NotificationsAPIClientInterface {
    */
   putNotifications(
     args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  putNotifications(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getNotificationsThreadsId`.
@@ -95,8 +125,24 @@ export interface NotificationsAPIClientInterface {
    */
   getNotificationsThreadsId(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Notifications>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Notifications>>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Notifications>>;
+  getNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>>;
 
   /**
    * Arguments object for method `patchNotificationsThreadsId`.
@@ -120,8 +166,24 @@ export interface NotificationsAPIClientInterface {
    */
   patchNotificationsThreadsId(
     args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  patchNotificationsThreadsId(
+    args: Exclude<NotificationsAPIClientInterface['patchNotificationsThreadsIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `deleteNotificationsThreadsIdSubscription`.
@@ -145,8 +207,24 @@ export interface NotificationsAPIClientInterface {
    */
   deleteNotificationsThreadsIdSubscription(
     args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<void>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  deleteNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['deleteNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getNotificationsThreadsIdSubscription`.
@@ -170,8 +248,24 @@ export interface NotificationsAPIClientInterface {
    */
   getNotificationsThreadsIdSubscription(
     args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Subscription>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscription>>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscription>>;
+  getNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['getNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Subscription | HttpResponse<models.Subscription> | HttpEvent<models.Subscription>>;
 
   /**
    * Arguments object for method `putNotificationsThreadsIdSubscription`.
@@ -200,8 +294,23 @@ export interface NotificationsAPIClientInterface {
    */
   putNotificationsThreadsIdSubscription(
     args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.Subscription>;
-
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Subscription>>;
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Subscription>>;
+  putNotificationsThreadsIdSubscription(
+    args: Exclude<NotificationsAPIClientInterface['putNotificationsThreadsIdSubscriptionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.Subscription | HttpResponse<models.Subscription> | HttpEvent<models.Subscription>>;
 
 }

@@ -9,19 +9,30 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface DashboardAPIClientInterface {
-
   /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getWidgetTypes(
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.WidgetTypeViewModel[]>;
+  getWidgetTypes(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.WidgetTypeViewModel[]>>;
+  getWidgetTypes(
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.WidgetTypeViewModel[]>>;
+  getWidgetTypes(
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.WidgetTypeViewModel[] | HttpResponse<models.WidgetTypeViewModel[]> | HttpEvent<models.WidgetTypeViewModel[]>>;
 
   /**
    * Arguments object for method `get`.
@@ -35,8 +46,24 @@ export interface DashboardAPIClientInterface {
    */
   get(
     args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.DashboardViewModel>;
+  get(
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.DashboardViewModel>>;
+  get(
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.DashboardViewModel>>;
+  get(
+    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.DashboardViewModel | HttpResponse<models.DashboardViewModel> | HttpEvent<models.DashboardViewModel>>;
 
   /**
    * Arguments object for method `getSettings`.
@@ -50,8 +77,24 @@ export interface DashboardAPIClientInterface {
    */
   getSettings(
     args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.RowModel[]>;
+  getSettings(
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RowModel[]>>;
+  getSettings(
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RowModel[]>>;
+  getSettings(
+    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.RowModel[] | HttpResponse<models.RowModel[]> | HttpEvent<models.RowModel[]>>;
 
   /**
    * Arguments object for method `putSettings`.
@@ -66,8 +109,23 @@ export interface DashboardAPIClientInterface {
    */
   putSettings(
     args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<object>;
-
+  putSettings(
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<object>>;
+  putSettings(
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<object>>;
+  putSettings(
+    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
 }

@@ -9,13 +9,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
+import { APIClientInterface } from './api-client.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DefaultHttpOptions, HttpOptions } from './types';
 import { USE_DOMAIN, USE_HTTP_OPTIONS, APIClient } from './api-client.service';
-import { APIClientInterface } from './api-client.interface';
+import { DefaultHttpOptions, HttpOptions } from './types';
 
 import * as models from './models';
 import * as guards from './guards';
@@ -23,129 +23,464 @@ import * as guards from './guards';
 @Injectable()
 export class GuardedAPIClient extends APIClient implements APIClientInterface {
 
-  constructor(readonly httpClient: HttpClient,
-              @Optional() @Inject(USE_DOMAIN) domain?: string,
-              @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions) {
+  constructor(
+    readonly httpClient: HttpClient,
+    @Optional() @Inject(USE_DOMAIN) domain?: string,
+    @Optional() @Inject(USE_HTTP_OPTIONS) options?: DefaultHttpOptions,
+  ) {
     super(httpClient, domain, options);
   }
 
+  /**
+   * Gets multiple documents.
+   * 
+   * 
+   * Documents returned by this method are not guaranteed to be returned in the
+   * same order that they were requested.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsBatchGet(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.BatchGetDocumentsResponse> {
-    return super.firestoreProjectsDatabasesDocumentsBatchGet(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.BatchGetDocumentsResponse>;
+  firestoreProjectsDatabasesDocumentsBatchGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.BatchGetDocumentsResponse>>;
+  firestoreProjectsDatabasesDocumentsBatchGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.BatchGetDocumentsResponse>>;
+  firestoreProjectsDatabasesDocumentsBatchGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.BatchGetDocumentsResponse | HttpResponse<models.BatchGetDocumentsResponse> | HttpEvent<models.BatchGetDocumentsResponse>> {
+
+    return super.firestoreProjectsDatabasesDocumentsBatchGet(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isBatchGetDocumentsResponse(res) || console.error(`TypeGuard for response 'models.BatchGetDocumentsResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * Starts a new transaction.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsBeginTransaction(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.BeginTransactionResponse> {
-    return super.firestoreProjectsDatabasesDocumentsBeginTransaction(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.BeginTransactionResponse>;
+  firestoreProjectsDatabasesDocumentsBeginTransaction(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.BeginTransactionResponse>>;
+  firestoreProjectsDatabasesDocumentsBeginTransaction(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.BeginTransactionResponse>>;
+  firestoreProjectsDatabasesDocumentsBeginTransaction(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.BeginTransactionResponse | HttpResponse<models.BeginTransactionResponse> | HttpEvent<models.BeginTransactionResponse>> {
+
+    return super.firestoreProjectsDatabasesDocumentsBeginTransaction(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isBeginTransactionResponse(res) || console.error(`TypeGuard for response 'models.BeginTransactionResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * Commits a transaction, while optionally updating documents.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsCommit(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.CommitResponse> {
-    return super.firestoreProjectsDatabasesDocumentsCommit(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.CommitResponse>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.CommitResponse>>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.CommitResponse>>;
+  firestoreProjectsDatabasesDocumentsCommit(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.CommitResponse | HttpResponse<models.CommitResponse> | HttpEvent<models.CommitResponse>> {
+
+    return super.firestoreProjectsDatabasesDocumentsCommit(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isCommitResponse(res) || console.error(`TypeGuard for response 'models.CommitResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * Listens to changes.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsListen(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ListenResponse> {
-    return super.firestoreProjectsDatabasesDocumentsListen(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ListenResponse>;
+  firestoreProjectsDatabasesDocumentsListen(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ListenResponse>>;
+  firestoreProjectsDatabasesDocumentsListen(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ListenResponse>>;
+  firestoreProjectsDatabasesDocumentsListen(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ListenResponse | HttpResponse<models.ListenResponse> | HttpEvent<models.ListenResponse>> {
+
+    return super.firestoreProjectsDatabasesDocumentsListen(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isListenResponse(res) || console.error(`TypeGuard for response 'models.ListenResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * Rolls back a transaction.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsRollback(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Empty> {
-    return super.firestoreProjectsDatabasesDocumentsRollback(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Empty>;
+  firestoreProjectsDatabasesDocumentsRollback(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Empty>>;
+  firestoreProjectsDatabasesDocumentsRollback(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Empty>>;
+  firestoreProjectsDatabasesDocumentsRollback(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Empty | HttpResponse<models.Empty> | HttpEvent<models.Empty>> {
+
+    return super.firestoreProjectsDatabasesDocumentsRollback(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isEmpty(res) || console.error(`TypeGuard for response 'models.Empty' caught inconsistency.`, res)));
   }
 
+  /**
+   * Streams batches of document updates and deletes, in order.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsWrite(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.WriteResponse> {
-    return super.firestoreProjectsDatabasesDocumentsWrite(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.WriteResponse>;
+  firestoreProjectsDatabasesDocumentsWrite(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.WriteResponse>>;
+  firestoreProjectsDatabasesDocumentsWrite(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.WriteResponse>>;
+  firestoreProjectsDatabasesDocumentsWrite(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.WriteResponse | HttpResponse<models.WriteResponse> | HttpEvent<models.WriteResponse>> {
+
+    return super.firestoreProjectsDatabasesDocumentsWrite(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isWriteResponse(res) || console.error(`TypeGuard for response 'models.WriteResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * Deletes an index.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesIndexesDelete(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Empty> {
-    return super.firestoreProjectsDatabasesIndexesDelete(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Empty>;
+  firestoreProjectsDatabasesIndexesDelete(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Empty>>;
+  firestoreProjectsDatabasesIndexesDelete(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Empty>>;
+  firestoreProjectsDatabasesIndexesDelete(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Empty | HttpResponse<models.Empty> | HttpEvent<models.Empty>> {
+
+    return super.firestoreProjectsDatabasesIndexesDelete(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isEmpty(res) || console.error(`TypeGuard for response 'models.Empty' caught inconsistency.`, res)));
   }
 
+  /**
+   * Gets an index.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesIndexesGet(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Index> {
-    return super.firestoreProjectsDatabasesIndexesGet(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Index>;
+  firestoreProjectsDatabasesIndexesGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Index>>;
+  firestoreProjectsDatabasesIndexesGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Index>>;
+  firestoreProjectsDatabasesIndexesGet(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Index | HttpResponse<models.Index> | HttpEvent<models.Index>> {
+
+    return super.firestoreProjectsDatabasesIndexesGet(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isIndex(res) || console.error(`TypeGuard for response 'models.Index' caught inconsistency.`, res)));
   }
 
+  /**
+   * Updates or inserts a document.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsPatch(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Document> {
-    return super.firestoreProjectsDatabasesDocumentsPatch(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Document>;
+  firestoreProjectsDatabasesDocumentsPatch(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Document>>;
+  firestoreProjectsDatabasesDocumentsPatch(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Document>>;
+  firestoreProjectsDatabasesDocumentsPatch(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Document | HttpResponse<models.Document> | HttpEvent<models.Document>> {
+
+    return super.firestoreProjectsDatabasesDocumentsPatch(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDocument(res) || console.error(`TypeGuard for response 'models.Document' caught inconsistency.`, res)));
   }
 
+  /**
+   * Lists the indexes that match the specified filters.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesIndexesList(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ListIndexesResponse> {
-    return super.firestoreProjectsDatabasesIndexesList(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ListIndexesResponse>;
+  firestoreProjectsDatabasesIndexesList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ListIndexesResponse>>;
+  firestoreProjectsDatabasesIndexesList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ListIndexesResponse>>;
+  firestoreProjectsDatabasesIndexesList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ListIndexesResponse | HttpResponse<models.ListIndexesResponse> | HttpEvent<models.ListIndexesResponse>> {
+
+    return super.firestoreProjectsDatabasesIndexesList(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isListIndexesResponse(res) || console.error(`TypeGuard for response 'models.ListIndexesResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * Creates the specified index.
+   * A newly created index's initial state is `CREATING`. On completion of the
+   * returned google.longrunning.Operation, the state will be `READY`.
+   * If the index already exists, the call will return an `ALREADY_EXISTS`
+   * status.
+   * 
+   * 
+   * During creation, the process could result in an error, in which case the
+   * index will move to the `ERROR` state. The process can be recovered by
+   * fixing the data that caused the error, removing the index with
+   * delete, then re-creating the index with
+   * create.
+   * 
+   * 
+   * Indexes with a single field cannot be created.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesIndexesCreate(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Operation> {
-    return super.firestoreProjectsDatabasesIndexesCreate(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Operation>;
+  firestoreProjectsDatabasesIndexesCreate(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Operation>>;
+  firestoreProjectsDatabasesIndexesCreate(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Operation>>;
+  firestoreProjectsDatabasesIndexesCreate(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Operation | HttpResponse<models.Operation> | HttpEvent<models.Operation>> {
+
+    return super.firestoreProjectsDatabasesIndexesCreate(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isOperation(res) || console.error(`TypeGuard for response 'models.Operation' caught inconsistency.`, res)));
   }
 
+  /**
+   * Lists documents.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsList(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ListDocumentsResponse> {
-    return super.firestoreProjectsDatabasesDocumentsList(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ListDocumentsResponse>;
+  firestoreProjectsDatabasesDocumentsList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ListDocumentsResponse>>;
+  firestoreProjectsDatabasesDocumentsList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ListDocumentsResponse>>;
+  firestoreProjectsDatabasesDocumentsList(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ListDocumentsResponse | HttpResponse<models.ListDocumentsResponse> | HttpEvent<models.ListDocumentsResponse>> {
+
+    return super.firestoreProjectsDatabasesDocumentsList(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isListDocumentsResponse(res) || console.error(`TypeGuard for response 'models.ListDocumentsResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * Creates a new document.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsCreateDocument(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.Document> {
-    return super.firestoreProjectsDatabasesDocumentsCreateDocument(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Document>;
+  firestoreProjectsDatabasesDocumentsCreateDocument(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Document>>;
+  firestoreProjectsDatabasesDocumentsCreateDocument(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Document>>;
+  firestoreProjectsDatabasesDocumentsCreateDocument(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Document | HttpResponse<models.Document> | HttpEvent<models.Document>> {
+
+    return super.firestoreProjectsDatabasesDocumentsCreateDocument(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isDocument(res) || console.error(`TypeGuard for response 'models.Document' caught inconsistency.`, res)));
   }
 
+  /**
+   * Lists all the collection IDs underneath a document.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsListCollectionIds(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.ListCollectionIdsResponse> {
-    return super.firestoreProjectsDatabasesDocumentsListCollectionIds(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.ListCollectionIdsResponse>;
+  firestoreProjectsDatabasesDocumentsListCollectionIds(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.ListCollectionIdsResponse>>;
+  firestoreProjectsDatabasesDocumentsListCollectionIds(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.ListCollectionIdsResponse>>;
+  firestoreProjectsDatabasesDocumentsListCollectionIds(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.ListCollectionIdsResponse | HttpResponse<models.ListCollectionIdsResponse> | HttpEvent<models.ListCollectionIdsResponse>> {
+
+    return super.firestoreProjectsDatabasesDocumentsListCollectionIds(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isListCollectionIdsResponse(res) || console.error(`TypeGuard for response 'models.ListCollectionIdsResponse' caught inconsistency.`, res)));
   }
 
+  /**
+   * Runs a query.
+   * Response generated for [ 200 ] HTTP response code.
+   */
   firestoreProjectsDatabasesDocumentsRunQuery(
     args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
-    requestHttpOptions?: HttpOptions
-  ): Observable<models.RunQueryResponse> {
-    return super.firestoreProjectsDatabasesDocumentsRunQuery(args, requestHttpOptions)
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.RunQueryResponse>;
+  firestoreProjectsDatabasesDocumentsRunQuery(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RunQueryResponse>>;
+  firestoreProjectsDatabasesDocumentsRunQuery(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RunQueryResponse>>;
+  firestoreProjectsDatabasesDocumentsRunQuery(
+    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.RunQueryResponse | HttpResponse<models.RunQueryResponse> | HttpEvent<models.RunQueryResponse>> {
+
+    return super.firestoreProjectsDatabasesDocumentsRunQuery(args, requestHttpOptions, observe)
       .pipe(tap((res: any) => guards.isRunQueryResponse(res) || console.error(`TypeGuard for response 'models.RunQueryResponse' caught inconsistency.`, res)));
   }
 

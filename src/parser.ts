@@ -152,7 +152,7 @@ function parseMethods(
                   : operation.operationId.replace(`${swaggerTag}_`, '')
                 : `${methodType}_${pathName.replace(/[{}]/g, '')}`,
             ),
-            methodType: methodType.toUpperCase() as MethodType,
+            methodType: methodType.toLowerCase() as MethodType,
             parameters: transformedParams,
             formData: transformedParams
               .filter(({ name, isFormParameter }) => name && isFormParameter)

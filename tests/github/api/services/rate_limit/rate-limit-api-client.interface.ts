@@ -9,13 +9,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Observable } from 'rxjs';
-import { HttpOptions } from '../../types';
+import { HttpResponse, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';import { HttpOptions } from '../../types';
 
 import * as models from '../../models';
-
 export interface RateLimitAPIClientInterface {
-
   /**
    * Arguments object for method `getRateLimit`.
    */
@@ -38,8 +36,23 @@ export interface RateLimitAPIClientInterface {
    */
   getRateLimit(
     args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
-    requestHttpOptions?: HttpOptions
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
   ): Observable<models.RateLimit>;
-
+  getRateLimit(
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.RateLimit>>;
+  getRateLimit(
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.RateLimit>>;
+  getRateLimit(
+    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: any,
+  ): Observable<models.RateLimit | HttpResponse<models.RateLimit> | HttpEvent<models.RateLimit>>;
 
 }
