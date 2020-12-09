@@ -648,7 +648,7 @@ export class OrgsAPIClient implements OrgsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.put<void>(`${this.domain}${path}`, options);
+    return this.http.put<void>(`${this.domain}${path}`, null, options);
   }
 
   /**

@@ -148,7 +148,7 @@ export class MarkdownAPIClient implements MarkdownAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.post<void>(`${this.domain}${path}`, options);
+    return this.http.post<void>(`${this.domain}${path}`, null, options);
   }
 
 }

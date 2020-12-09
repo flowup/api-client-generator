@@ -57,6 +57,7 @@ export interface Parameter extends Property {
 
 export interface Method {
   readonly path?: string; // path appended to base in method
+  readonly body?: string; // body that will be used for post, put and patch methods
   readonly methodName?: string; // mane of the generated method
   readonly methodType?: MethodType; // type of the http method
   readonly description?: string;

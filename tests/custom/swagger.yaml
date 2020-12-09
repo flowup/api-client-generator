@@ -269,7 +269,6 @@ paths:
     get:
       description: Get standard File
       parameters:
-        - $ref: '#/parameters/modelParam'
         - description: Name of repository owner.
           in: path
           name: owner

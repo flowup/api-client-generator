@@ -106,7 +106,7 @@ export class APIClient implements APIClientInterface {
       observe,
     };
 
-    return this.http.post<object>(`${this.domain}${path}`, options);
+    return this.http.post<object>(`${this.domain}${path}`, null, options);
   }
 
   /**
@@ -788,7 +788,7 @@ export class APIClient implements APIClientInterface {
       observe,
     };
 
-    return this.http.post<models.ImportResponse>(`${this.domain}${path}`, options);
+    return this.http.post<models.ImportResponse>(`${this.domain}${path}`, null, options);
   }
 
   /**
@@ -895,7 +895,7 @@ export class APIClient implements APIClientInterface {
       observe,
     };
 
-    return this.http.post<void>(`${this.domain}${path}`, options);
+    return this.http.post<void>(`${this.domain}${path}`, null, options);
   }
 
   /**
@@ -1748,7 +1748,7 @@ export class APIClient implements APIClientInterface {
       observe,
     };
 
-    return this.http.put<void>(`${this.domain}${path}`, options);
+    return this.http.put<void>(`${this.domain}${path}`, null, options);
   }
 
   /**
@@ -1781,7 +1781,7 @@ export class APIClient implements APIClientInterface {
       observe,
     };
 
-    return this.http.put<void>(`${this.domain}${path}`, options);
+    return this.http.put<void>(`${this.domain}${path}`, null, options);
   }
 
   /**

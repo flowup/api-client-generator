@@ -731,7 +731,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.post<void>(`${this.domain}${path}`, options);
+    return this.http.post<void>(`${this.domain}${path}`, null, options);
   }
 
   /**
@@ -887,7 +887,7 @@ export class GistsAPIClient implements GistsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.put<void>(`${this.domain}${path}`, options);
+    return this.http.put<void>(`${this.domain}${path}`, null, options);
   }
 
 }

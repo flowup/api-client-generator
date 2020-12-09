@@ -136,7 +136,7 @@ export class {{#if (templateType 'guardedService')}}Guarded{{&serviceName}} exte
     {{/formData}}
 
     {{/if}}
-    return this.http.{{methodType}}<{{&responseTypeSchema.type}}>(`${this.domain}${path}`{{#parameters}}{{#isBodyParameter}}, JSON.stringify(args.{{&camelCaseName}}){{/isBodyParameter}}{{/parameters}}{{#if formData.length}}, formData{{/if}}, options);{{else}}
+    return this.http.{{methodType}}<{{&responseTypeSchema.type}}>(`${this.domain}${path}`{{#if body}}, {{body}}{{/if}}, options);{{else}}
     return super.{{&methodName}}({{#if parameters.length}}args, {{/if}}requestHttpOptions, observe){{#responseGuard}}
       .pipe(tap((res: any) => {{&../responseGuard}} || console.error(`TypeGuard for response '{{&../responseTypeSchema.type}}' caught inconsistency.`, res))){{/responseGuard}};{{/if}}
   }{{else}};{{/if}}

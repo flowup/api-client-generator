@@ -115,8 +115,8 @@ function parseMethods(
           const op = <Operation>operation;
           return (
             supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
-            (!swaggerTag || (op.tags && op.tags.includes(swaggerTag)))
-          ); // if tag exists take only paths including this tag
+            (!swaggerTag || (op.tags && op.tags.includes(swaggerTag))) // if tag exists take only paths including this tag
+          );
         })
         .map(([methodType, operation]: [string, Operation]) => {
           // select the lowest success (code 20x) response
@@ -143,6 +143,25 @@ function parseMethods(
             parameters || {},
           );
 
+          const methodTypeLowered = methodType.toLowerCase() as MethodType;
+          const formData = transformedParams
+            .filter(({ name, isFormParameter }) => name && isFormParameter)
+            .map(({ name, camelCaseName }) => ({
+              name,
+              camelCaseName: camelCaseName || name,
+            }));
+          const stringifyBody = (param?: Parameter) =>
+            param ? `JSON.stringify(args.${param.camelCaseName})` : 'null';
+          const body = /^(?:post|put|patch)\b/.test(methodTypeLowered)
+            ? formData.length
+              ? 'formData'
+              : stringifyBody(
+                  transformedParams.find(
+                    ({ isBodyParameter }) => isBodyParameter,
+                  ),
+                )
+            : undefined;
+
           return {
             hasJsonResponse: true,
             methodName: toCamelCase(
@@ -150,16 +169,12 @@ function parseMethods(
                 ? !swaggerTag
                   ? operation.operationId
                   : operation.operationId.replace(`${swaggerTag}_`, '')
-                : `${methodType}_${pathName.replace(/[{}]/g, '')}`,
+                : `${methodTypeLowered}_${pathName.replace(/[{}]/g, '')}`,
             ),
-            methodType: methodType.toLowerCase() as MethodType,
+            methodType: methodTypeLowered,
+            body,
             parameters: transformedParams,
-            formData: transformedParams
-              .filter(({ name, isFormParameter }) => name && isFormParameter)
-              .map(({ name, camelCaseName }) => ({
-                name,
-                camelCaseName: camelCaseName || name,
-              })),
+            formData,
             // turn path interpolation `{this}` into string template `${args.this}
             path: pathName.replace(
               /{(.*?)}/g,

@@ -265,7 +265,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.patch<void>(`${this.domain}${path}`, options);
+    return this.http.patch<void>(`${this.domain}${path}`, null, options);
   }
 
   /**

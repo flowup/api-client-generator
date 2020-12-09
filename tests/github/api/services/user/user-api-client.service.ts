@@ -202,7 +202,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.delete<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
+    return this.http.delete<void>(`${this.domain}${path}`, options);
   }
 
   /**
@@ -580,7 +580,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.put<void>(`${this.domain}${path}`, options);
+    return this.http.put<void>(`${this.domain}${path}`, null, options);
   }
 
   /**
@@ -1242,7 +1242,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.put<void>(`${this.domain}${path}`, options);
+    return this.http.put<void>(`${this.domain}${path}`, null, options);
   }
 
   /**
@@ -1450,7 +1450,7 @@ export class UserAPIClient implements UserAPIClientInterface {
     if ('xGitHubRequestId' in args) {
       options.headers = options.headers.set('X-GitHub-Request-Id', String(args.xGitHubRequestId));
     }
-    return this.http.put<void>(`${this.domain}${path}`, options);
+    return this.http.put<void>(`${this.domain}${path}`, null, options);
   }
 
   /**
