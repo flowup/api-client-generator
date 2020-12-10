@@ -10,6 +10,7 @@
 npm-debug.log
 yarn-error.log
 test-report.xml
+/coverage
 
 # System Files
 .DS_Store

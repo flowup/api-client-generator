@@ -6,6 +6,7 @@ obj
 temp
 npm-debug.log
 **/test-report.xml
+coverage
 output*/
 ref*/
 dist/
