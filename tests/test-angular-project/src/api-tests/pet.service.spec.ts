@@ -2,7 +2,6 @@ import { HttpHeaders, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
-  TestRequest,
 } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 import { Pet } from '../api-all-tags/models';
@@ -142,6 +141,42 @@ describe('PetService', () => {
       });
 
       await expect(req.request.headers.get('api_key')).toEqual('DUMMY_API_KEY');
+    },
+  ));
+
+  it('should post pet image file as form data', inject(
+    [PetAPIClient, HttpTestingController],
+    async (api: PetAPIClient, backend: HttpTestingController) => {
+      const arrayBuffer = Uint8Array.from(
+        window.atob(
+          'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkiPr/HwAEFQJa+iYUogAAAABJRU5ErkJggg==',
+        ),
+        c => c.charCodeAt(0),
+      );
+      const file = new File([arrayBuffer], '1px-005aff.png', {
+        type: 'image/png',
+      });
+
+      api
+        .uploadPetImageFile({
+          petId: 1,
+          additionalMetadata: 'wololo',
+          file,
+        })
+        .subscribe(() => {});
+
+      const { params, body }: HttpRequest<FormData> = backend.expectOne({
+        method: 'POST',
+        url: '/pet/1/uploadImage',
+      }).request;
+
+      await expect(params.getAll('name')).toBeFalsy();
+      await expect(body?.get('additionalMetadata')).toEqual('wololo');
+
+      const responseFile = body?.get('file') as File;
+      await expect(responseFile.name).toEqual('1px-005aff.png');
+      await expect(responseFile.size).toEqual(70);
+      await expect(responseFile.type).toEqual('image/png');
     },
   ));
 });
