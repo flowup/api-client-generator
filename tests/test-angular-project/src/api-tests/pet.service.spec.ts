@@ -1,8 +1,11 @@
+import { HttpHeaders, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
+  TestRequest,
 } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
+import { Pet } from '../api-all-tags/models';
 import { PetAPIClient, PetAPIClientModule } from '../api-all-tags/services/pet';
 import { DUMMY_DOMAIN } from './tests-constants';
 
@@ -42,25 +45,84 @@ describe('PetService', () => {
     },
   ));
 
-  it('should set name and status to query', inject(
+  it('should set Pet name and status with query', inject(
     [PetAPIClient, HttpTestingController],
     async (api: PetAPIClient, backend: HttpTestingController) => {
       api
         .updatePetWithQuery({
           petId: 42,
           name: 'wololo',
-          status: 'OK',
+          status: 'pending',
         })
         .subscribe(() => {});
 
-      const req = backend.expectOne(
-        req => req.method === 'POST' && req.url === '/pet/42',
-      );
+      const { params } = backend.expectOne(
+        ({ method, url }) => method === 'PATCH' && url.startsWith('/pet/42'),
+      ).request;
 
-      console.log('req.request', req.request.params);
+      await expect(params.getAll('name')).toEqual(['wololo']);
+      await expect(params.getAll('status')).toEqual(['pending']);
+    },
+  ));
 
-      await expect(req.request.params.getAll('name')).toEqual(['wololo']);
-      await expect(req.request.params.getAll('status')).toEqual(['OK']);
+  it('should add new pet', inject(
+    [PetAPIClient, HttpTestingController],
+    async (api: PetAPIClient, backend: HttpTestingController) => {
+      const newPet: Pet = {
+        id: 1337,
+        name: 'Very interesting pet',
+        photoUrls: ['random.url'],
+        status: 'available',
+        category: { id: 42, name: 'interesting animals' },
+      };
+
+      api
+        .addPet(
+          {
+            body: newPet,
+          },
+          { headers: new HttpHeaders({ auth: 'custom auth header' }) },
+        )
+        .subscribe(() => {});
+
+      const { headers, body } = backend.expectOne({
+        method: 'POST',
+        url: '/pet',
+      }).request;
+
+      await expect(body).toEqual(JSON.stringify(newPet));
+      await expect(headers.get('auth')).toEqual('custom auth header');
+    },
+  ));
+
+  it('should update pet with form data', inject(
+    [PetAPIClient, HttpTestingController],
+    async (api: PetAPIClient, backend: HttpTestingController) => {
+      api
+        .updatePetWithForm(
+          {
+            petId: 1,
+            status: 'sold',
+            name: 'some name',
+          },
+          { headers: new HttpHeaders({ auth: 'custom auth header' }) },
+        )
+        .subscribe(() => {});
+
+      const {
+        headers,
+        params,
+        body,
+      }: HttpRequest<FormData> = backend.expectOne({
+        method: 'POST',
+        url: '/pet/1',
+      }).request;
+
+      await expect(headers.get('auth')).toEqual('custom auth header');
+
+      await expect(params.getAll('name')).toBeFalsy();
+      await expect(body?.getAll('status')).toEqual(['sold']);
+      await expect(body?.get('name')).toEqual('some name');
     },
   ));
 

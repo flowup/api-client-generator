@@ -156,10 +156,10 @@ paths:
           description: 'Pet not found'
       security:
         - api_key: []
-    post:
+    patch:
       tags:
         - 'pet'
-      summary: 'Updates a pet in the store with form data'
+      summary: 'Updates a pet in the store with query parameters'
       operationId: 'updatePetWithQuery'
       produces:
         - 'application/json'
@@ -180,6 +180,10 @@ paths:
           description: 'Updated status of the pet'
           required: false
           type: 'string'
+          enum:
+            - 'available'
+            - 'pending'
+            - 'sold'
       responses:
         405:
           description: 'Invalid input'
@@ -187,6 +191,46 @@ paths:
         - petstore_auth:
             - 'write:pets'
             - 'read:pets'
+    post:
+      tags:
+        - 'pet'
+      summary: 'Updates a pet in the store with form data'
+      description: ''
+      operationId: 'updatePetWithForm'
+      consumes:
+        - 'application/x-www-form-urlencoded'
+      produces:
+        - 'application/json'
+        - 'application/xml'
+      parameters:
+        - name: 'petId'
+          in: 'path'
+          description: 'ID of pet that needs to be updated'
+          required: true
+          type: 'integer'
+          format: 'int64'
+        - name: 'name'
+          in: 'formData'
+          description: 'Updated name of the pet'
+          required: false
+          type: 'string'
+        - name: 'status'
+          in: 'formData'
+          description: 'Updated status of the pet'
+          required: false
+          type: 'string'
+          enum:
+            - 'available'
+            - 'pending'
+            - 'sold'
+      responses:
+        405:
+          description: 'Invalid input'
+      security:
+        - petstore_auth:
+            - 'write:pets'
+            - 'read:pets'
+
     delete:
       tags:
         - 'pet'
