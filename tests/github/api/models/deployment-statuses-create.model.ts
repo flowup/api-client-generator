@@ -13,5 +13,5 @@
 export interface DeploymentStatusesCreate {
   description?: string;
   state?: string;
-  targetUrl?: string;
+  target_url?: string;
 }

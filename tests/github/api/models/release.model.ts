@@ -12,20 +12,20 @@
 
 export interface Release {
   assets?: object[];
-  assetsUrl?: string;
+  assets_url?: string;
   author?: object;
   body?: string;
-  createdAt?: string;
+  created_at?: string;
   draft?: boolean;
-  htmlUrl?: string;
+  html_url?: string;
   id?: number;
   name?: string;
   prerelease?: boolean;
-  publishedAt?: string;
-  tagName?: string;
-  tarballUrl?: string;
-  targetCommitish?: string;
-  uploadUrl?: string;
+  published_at?: string;
+  tag_name?: string;
+  tarball_url?: string;
+  target_commitish?: string;
+  upload_url?: string;
   url?: string;
-  zipballUrl?: string;
+  zipball_url?: string;
 }

@@ -12,5 +12,5 @@
 
 export interface HookBody {
   active?: boolean;
-  addEvents?: string[];
+  add_events?: string[];
 }

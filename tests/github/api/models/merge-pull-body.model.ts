@@ -11,5 +11,5 @@
 
 
 export interface MergePullBody {
-  commitMessage?: string;
+  commit_message?: string;
 }

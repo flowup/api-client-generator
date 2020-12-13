@@ -11,30 +11,30 @@
 
 
 export interface User {
-  avatarUrl?: string;
+  avatar_url?: string;
   bio?: string;
   blog?: string;
   collaborators?: number;
   company?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  createdAt?: string;
-  diskUsage?: number;
+  created_at?: string;
+  disk_usage?: number;
   email?: string;
   followers?: number;
   following?: number;
-  gravatarId?: string;
+  gravatar_id?: string;
   hireable?: boolean;
-  htmlUrl?: string;
+  html_url?: string;
   id?: number;
   location?: string;
   login?: string;
   name?: string;
-  ownedPrivateRepos?: number;
+  owned_private_repos?: number;
   plan?: object;
-  privateGists?: number;
-  publicGists?: number;
-  publicRepos?: number;
-  totalPrivateRepos?: number;
+  private_gists?: number;
+  public_gists?: number;
+  public_repos?: number;
+  total_private_repos?: number;
   type?: string;
   url?: string;
 }

@@ -11,7 +11,8 @@
 
 
 export interface RestoreForm {
-  &#x27;passwordСonfirm&#x27;: string;
+  /** `C` is the cyrillic character `С` http://www.codetable.net/decimal/1057 (key should be escaped) */
+  'passwordСonfirm': string;
   guid?: string;
   password: string;
 }

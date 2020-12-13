@@ -11,34 +11,34 @@
 
 
 export interface Fork {
-  cloneUrl?: string;
+  clone_url?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  createdAt?: string;
+  created_at?: string;
   description?: string;
   fork?: boolean;
   forks?: number;
-  forksCount?: number;
-  fullName?: string;
-  gitUrl?: string;
+  forks_count?: number;
+  full_name?: string;
+  git_url?: string;
   homepage?: string;
-  htmlUrl?: string;
+  html_url?: string;
   id?: number;
   language?: string;
-  masterBranch?: string;
-  mirrorUrl?: string;
+  master_branch?: string;
+  mirror_url?: string;
   name?: string;
-  openIssues?: number;
-  openIssuesCount?: number;
+  open_issues?: number;
+  open_issues_count?: number;
   owner?: object;
   private?: boolean;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  pushedAt?: string;
+  pushed_at?: string;
   size?: number;
-  sshUrl?: string;
-  svnUrl?: string;
+  ssh_url?: string;
+  svn_url?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  updatedAt?: string;
+  updated_at?: string;
   url?: string;
   watchers?: number;
-  watchersCount?: number;
+  watchers_count?: number;
 }

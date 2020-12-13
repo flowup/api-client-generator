@@ -12,11 +12,11 @@
 
 export interface Notifications {
   id?: number;
-  lastReadAt?: string;
+  last_read_at?: string;
   reason?: string;
   repository?: object;
   subject?: object;
   unread?: boolean;
-  updatedAt?: string;
+  updated_at?: string;
   url?: string;
 }

@@ -12,16 +12,16 @@
 
 export interface Gist {
   comments?: number;
-  commentsUrl?: string;
+  comments_url?: string;
   /** Timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. */
-  createdAt?: string;
+  created_at?: string;
   description?: string;
   files?: object;
   forks?: object[];
-  gitPullUrl?: string;
-  gitPushUrl?: string;
+  git_pull_url?: string;
+  git_push_url?: string;
   history?: object[];
-  htmlUrl?: string;
+  html_url?: string;
   id?: string;
   public?: boolean;
   url?: string;

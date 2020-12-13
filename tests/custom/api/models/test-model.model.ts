@@ -11,10 +11,16 @@
 
 
 export interface TestModel {
-  &#x27;42test&#x27;?: string;
-  &#x27;anotherKey@&#x27;?: string;
-  &#x27;someKey&#x27;?: string;
-  &#x27;yet@notherKey&#x27;?: string;
+  /** '42test' */
+  '42test'?: string;
+  /** 'anotherKey@' */
+  'anotherKey@'?: string;
+  /** 'some-key' */
+  'some-key'?: string;
+  /** 'yet@notherKey' */
+  'yet@notherKey'?: string;
+  /** $name */
+  $name?: string;
   /** sum of everything there is converted to bananas */
   count?: number;
 }

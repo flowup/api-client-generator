@@ -11,7 +11,7 @@
 
 
 export interface Trees {
-  baseTree?: string;
+  base_tree?: string;
   /** SHA1 checksum ID of the object in the tree. */
   sha?: string;
   tree?: object[];

@@ -12,9 +12,9 @@
 
 export interface RepoEdit {
   description?: string;
-  hasDownloads?: boolean;
-  hasIssues?: boolean;
-  hasWiki?: boolean;
+  has_downloads?: boolean;
+  has_issues?: boolean;
+  has_wiki?: boolean;
   homepage?: string;
   name?: string;
   private?: boolean;

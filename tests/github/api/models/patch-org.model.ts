@@ -12,7 +12,7 @@
 
 export interface PatchOrg {
   /** Billing email address. This address is not publicized. */
-  billingEmail?: string;
+  billing_email?: string;
   company?: string;
   /** Publicly visible email address. */
   email?: string;

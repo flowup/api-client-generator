@@ -412,6 +412,8 @@ export function isTestModel(arg: any): arg is models.TestModel {
     ( typeof arg['some-key'] === 'undefined' || typeof arg['some-key'] === 'string' ) &&
     // 'yet@notherKey'?: string
     ( typeof arg['yet@notherKey'] === 'undefined' || typeof arg['yet@notherKey'] === 'string' ) &&
+    // $name?: string
+    ( typeof arg.$name === 'undefined' || typeof arg.$name === 'string' ) &&
     // count?: number
     ( typeof arg.count === 'undefined' || typeof arg.count === 'number' ) &&
 

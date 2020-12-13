@@ -11,9 +11,9 @@
 
 
 export interface WidgetModel {
-  id?: number;
-  parentId?: number;
-  position?: number;
-  settings?: string;
-  typeId?: number;
+  Id?: number;
+  ParentId?: number;
+  Position?: number;
+  Settings?: string;
+  TypeId?: number;
 }

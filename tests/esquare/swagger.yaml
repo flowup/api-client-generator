@@ -1982,9 +1982,10 @@ definitions:
       password:
         type: string
         format: password
-      passwordСonfirm: # `C` is the cyrillic character `С` http://www.codetable.net/decimal/1057 (key should be escaped)
+      passwordСonfirm:
         type: string
         format: password
+        description: '`C` is the cyrillic character `С` http://www.codetable.net/decimal/1057 (key should be escaped)'
       guid:
         type: string
 

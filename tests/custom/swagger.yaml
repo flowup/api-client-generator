@@ -424,12 +424,19 @@ definitions:
         description: sum of everything there is converted to bananas
       42test:
         type: string
+        description: "'42test'"
       some-key:
         type: string
+        description: "'some-key'"
       anotherKey@:
         type: string
+        description: "'anotherKey@'"
       yet@notherKey:
         type: string
+        description: "'yet@notherKey'"
+      $name:
+        type: string
+        description: '$name'
   Pet:
     type: object
     required:

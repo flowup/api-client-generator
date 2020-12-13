@@ -12,5 +12,5 @@
 
 export interface SearchRepositories {
   items?: object[];
-  totalCount?: number;
+  total_count?: number;
 }

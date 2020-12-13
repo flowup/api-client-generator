@@ -11,5 +11,5 @@
 
 
 export interface NotificationMarkRead {
-  lastReadAt?: string;
+  last_read_at?: string;
 }

@@ -11,21 +11,21 @@
 
 
 export interface Organization {
-  avatarUrl?: string;
+  avatar_url?: string;
   blog?: string;
   company?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  createdAt?: string;
+  created_at?: string;
   email?: string;
   followers?: number;
   following?: number;
-  htmlUrl?: string;
+  html_url?: string;
   id?: number;
   location?: string;
   login?: string;
   name?: string;
-  publicGists?: number;
-  publicRepos?: number;
+  public_gists?: number;
+  public_repos?: number;
   type?: string;
   url?: string;
 }

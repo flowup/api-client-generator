@@ -11,15 +11,15 @@
 
 
 export interface Asset {
-  contentType?: string;
-  createdAt?: string;
-  downloadCount?: number;
+  content_type?: string;
+  created_at?: string;
+  download_count?: number;
   id?: number;
   label?: string;
   name?: string;
   size?: number;
   state?: string;
-  updatedAt?: string;
+  updated_at?: string;
   uploader?: object;
   url?: string;
 }

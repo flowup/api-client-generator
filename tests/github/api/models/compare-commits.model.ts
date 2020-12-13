@@ -11,16 +11,16 @@
 
 
 export interface CompareCommits {
-  aheadBy?: number;
-  baseCommit?: object;
-  behindBy?: number;
+  ahead_by?: number;
+  base_commit?: object;
+  behind_by?: number;
   commits?: object[];
-  diffUrl?: string;
+  diff_url?: string;
   files?: object[];
-  htmlUrl?: string;
-  patchUrl?: string;
-  permalinkUrl?: string;
+  html_url?: string;
+  patch_url?: string;
+  permalink_url?: string;
   status?: string;
-  totalCommits?: number;
+  total_commits?: number;
   url?: string;
 }

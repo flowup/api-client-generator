@@ -12,9 +12,9 @@
 
 export interface Event {
   actor?: object;
-  commitId?: string;
+  commit_id?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  createdAt?: string;
+  created_at?: string;
   event?: string;
   issue?: object;
   url?: string;

@@ -17,5 +17,5 @@ export interface FieldTransform {
   /** The path of the field. See Document.fields for the field path syntaxreference. */
   fieldPath?: string;
   /** Sets the field to the given server value. */
-  setToSerValue?: ('SERVER_VALUE_UNSPECIFIED' | 'REQUEST_TIME');
+  setToServerValue?: ('SERVER_VALUE_UNSPECIFIED' | 'REQUEST_TIME');
 }

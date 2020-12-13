@@ -11,11 +11,11 @@
 
 
 export interface Feeds {
-  links?: object;
-  currentUserActorUrl?: string;
-  currentUserOrganizationUrl?: string;
-  currentUserPublic?: string;
-  currentUserUrl?: string;
-  timelineUrl?: string;
-  userUrl?: string;
+  _links?: object;
+  current_user_actor_url?: string;
+  current_user_organization_url?: string;
+  current_user_public?: string;
+  current_user_url?: string;
+  timeline_url?: string;
+  user_url?: string;
 }

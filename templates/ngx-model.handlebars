@@ -16,7 +16,7 @@ import {
 {{/if}}export interface {{&definitionName}} {{#extend}}extends {{.}} {{/extend}}{
 {{#properties}}
   {{#if description}}/** {{&description}} */
-  {{/if}}{{camelCase name}}{{^isRequired}}?{{/isRequired}}: {{&type}};
+  {{/if}}{{&name}}{{^isRequired}}?{{/isRequired}}: {{&type}};
 {{/properties}}
 }
 {{/isEnum}}

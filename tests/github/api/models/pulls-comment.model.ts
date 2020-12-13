@@ -11,16 +11,16 @@
 
 
 export interface PullsComment {
-  links?: object;
+  _links?: object;
   body?: string;
-  commitId?: string;
+  commit_id?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  createdAt?: string;
+  created_at?: string;
   id?: number;
   path?: string;
   position?: number;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  updatedAt?: string;
+  updated_at?: string;
   url?: string;
   user?: object;
 }

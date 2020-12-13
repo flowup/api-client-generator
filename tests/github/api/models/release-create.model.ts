@@ -15,6 +15,6 @@ export interface ReleaseCreate {
   draft?: boolean;
   name?: string;
   prerelease?: boolean;
-  tagName?: string;
-  targetCommitish?: string;
+  tag_name?: string;
+  target_commitish?: string;
 }

@@ -11,5 +11,5 @@
 
 
 export interface Pet {
-  petType: string;
+  pet_type: string;
 }

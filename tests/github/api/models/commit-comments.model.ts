@@ -12,16 +12,16 @@
 
 export interface CommitComments {
   body?: string;
-  commitId?: string;
+  commit_id?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  createdAt?: string;
-  htmlUrl?: string;
+  created_at?: string;
+  html_url?: string;
   id?: number;
   line?: number;
   path?: string;
   position?: number;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  updatedAt?: string;
+  updated_at?: string;
   url?: string;
   user?: object;
 }

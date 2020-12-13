@@ -12,7 +12,7 @@
 
 export interface MilestoneUpdate {
   description?: string;
-  dueOn?: string;
+  due_on?: string;
   state?: string;
   title?: string;
 }

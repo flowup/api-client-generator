@@ -11,15 +11,15 @@
 
 
 export interface Milestone {
-  closedIssues?: number;
+  closed_issues?: number;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  createdAt?: string;
+  created_at?: string;
   creator?: object;
   description?: string;
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  dueOn?: string;
+  due_on?: string;
   number?: number;
-  openIssues?: number;
+  open_issues?: number;
   state?: ('open' | 'closed');
   title?: string;
   url?: string;

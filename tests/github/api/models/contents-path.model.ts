@@ -11,11 +11,11 @@
 
 
 export interface ContentsPath {
-  links?: object;
+  _links?: object;
   content?: string;
   encoding?: string;
-  gitUrl?: string;
-  htmlUrl?: string;
+  git_url?: string;
+  html_url?: string;
   name?: string;
   path?: string;
   sha?: string;

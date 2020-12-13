@@ -13,7 +13,7 @@ export function toCamelCase(
   }
 
   let camelText = text
-    .split(/[-._\/\\+*]/)
+    .split(/[^a-zA-Z0-9$]/)
     .filter(word => !!word) // skip empty words
     .map(word => `${word[0].toUpperCase()}${word.substring(1)}`)
     .join('');

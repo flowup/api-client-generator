@@ -12,10 +12,10 @@
 
 export interface Subscribition {
   /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-  createdAt?: string;
+  created_at?: string;
   ignored?: boolean;
   reason?: string;
-  repositoryUrl?: string;
+  repository_url?: string;
   subscribed?: boolean;
   url?: string;
 }

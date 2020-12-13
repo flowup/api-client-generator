@@ -16,6 +16,18 @@ describe('[helpers] to camelCase', () => {
     );
   });
 
+  it('should convert spaces separators to camelCase', () => {
+    expect(toCamelCase('some service')).toEqual('someService');
+    expect(toCamelCase('text   with lot of spaces')).toEqual(
+      'textWithLotOfSpaces',
+    );
+  });
+
+  it('should not mess with the dollar sign', () => {
+    expect(toCamelCase('$Xgafv')).toEqual('$Xgafv');
+    expect(toCamelCase('$value')).toEqual('$value');
+  });
+
   it('should convert to camelCase and capitalize firs letter', () => {
     expect(toCamelCase('my-awesome.model', false)).toEqual('MyAwesomeModel');
   });

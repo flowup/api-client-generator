@@ -12,5 +12,5 @@
 
 export interface SearchUsers {
   items?: object[];
-  totalCount?: number;
+  total_count?: number;
 }
