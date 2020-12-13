@@ -30,6 +30,7 @@ import {
   guardOptional,
   guardArray,
   guardDictionary,
+  unicodeEscape,
 } from './helper';
 
 interface Parameters {
@@ -346,7 +347,7 @@ function parseInterfaceProperties(
       const property: Property = {
         parsedSchema,
         isRequired,
-        name,
+        name: unicodeEscape(name),
         description: replaceNewLines(propSchema.description),
         //description: replaceNewLines( // todo: uncomment this for titles with description, consider refactoring to multi line ("docs") comments
         //           `${(propSchema.title || '') + '\n' || ''}${

@@ -404,6 +404,8 @@ export function isTestModel(arg: any): arg is models.TestModel {
   return (
   arg != null &&
   typeof arg === 'object' &&
+    // '\u6c49\u5b57'?: string
+    ( typeof arg['汉字'] === 'undefined' || typeof arg['汉字'] === 'string' ) &&
     // '42test'?: string
     ( typeof arg['42test'] === 'undefined' || typeof arg['42test'] === 'string' ) &&
     // 'anotherKey@'?: string

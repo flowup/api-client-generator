@@ -11,6 +11,8 @@
 
 
 export interface TestModel {
+  /** '汉字' escaped is '\u6c49\u5b57' */
+  '\u6c49\u5b57'?: string;
   /** '42test' */
   '42test'?: string;
   /** 'anotherKey@' */

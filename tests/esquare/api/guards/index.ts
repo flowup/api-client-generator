@@ -531,7 +531,7 @@ export function isRestoreForm(arg: any): arg is models.RestoreForm {
   return (
   arg != null &&
   typeof arg === 'object' &&
-    // 'passwordСonfirm': string
+    // 'password\u0421onfirm': string
     typeof arg['passwordСonfirm'] === 'string' &&
     // guid?: string
     ( typeof arg.guid === 'undefined' || typeof arg.guid === 'string' ) &&

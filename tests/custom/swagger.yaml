@@ -419,9 +419,12 @@ definitions:
   TestModel:
     type: object
     properties:
-      count:
-        type: integer
-        description: sum of everything there is converted to bananas
+      汉字:
+        type: string
+        description: "'汉字' escaped is '\\u6c49\\u5b57'"
+      $name:
+        type: string
+        description: '$name'
       42test:
         type: string
         description: "'42test'"
@@ -434,9 +437,9 @@ definitions:
       yet@notherKey:
         type: string
         description: "'yet@notherKey'"
-      $name:
-        type: string
-        description: '$name'
+      count:
+        type: integer
+        description: sum of everything there is converted to bananas
   Pet:
     type: object
     required:

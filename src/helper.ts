@@ -140,3 +140,21 @@ export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
   return (a, b) =>
     a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`) : -1;
 }
+
+/**
+ * Escape all the non ASCII characters in the string.
+ *
+ * @param string that will be escaped
+ * @return string with non ASCII characters escaped in format `\u####`
+ */
+export function unicodeEscape(string: string): string {
+  return string
+    .split('')
+    .map(char => {
+      const charCode = char.charCodeAt(0);
+      return charCode > 127
+        ? `\\u${charCode.toString(16).padStart(4, '0')}`
+        : char;
+    })
+    .join('');
+}
