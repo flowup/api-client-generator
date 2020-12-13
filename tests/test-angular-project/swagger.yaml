@@ -295,6 +295,40 @@ paths:
         - petstore_auth:
             - 'write:pets'
             - 'read:pets'
+  /pet/{petId}/downloadImage:
+    get:
+      tags:
+        - pet
+      operationId: download pet image
+      summary: Download image of a certain pet
+      description: A PNG file should be returned
+      parameters:
+        - name: petId
+          in: path
+          description: Id of pet
+          required: true
+          type: integer
+          format: int64
+        - name: all
+          in: query
+          description: Indicator of downloading data(all or errors only)
+          required: false
+          type: boolean
+      produces:
+        - application/vnd.ms-excel
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: Exported file.
+          schema:
+            type: file
+        401:
+          description: Unauthorized access
+        404:
+          description: Import not found
+        405:
+          description: Invalid input
 
   /user:
     post:

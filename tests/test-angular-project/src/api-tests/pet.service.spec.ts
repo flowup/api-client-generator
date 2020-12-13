@@ -179,4 +179,18 @@ describe('PetService', () => {
       await expect(responseFile.type).toEqual('image/png');
     },
   ));
+
+  it('should set correct response type for pet image file download', inject(
+    [PetAPIClient, HttpTestingController],
+    async (api: PetAPIClient, backend: HttpTestingController) => {
+      api.downloadPetImage({ petId: 1 }).subscribe(() => {});
+
+      const { responseType }: HttpRequest<FormData> = backend.expectOne({
+        method: 'GET',
+        url: '/pet/1/downloadImage',
+      }).request;
+
+      await expect(responseType).toEqual('blob');
+    },
+  ));
 });
