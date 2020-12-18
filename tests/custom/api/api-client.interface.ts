@@ -24,6 +24,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get items list
    * Response generated for [ 200 ] HTTP response code.
    */
   getItems(
@@ -57,6 +58,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get item models list
    * Response generated for [ 200 ] HTTP response code.
    */
   getItemModels(

@@ -23,6 +23,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Find pet by ID
    * Returns a single pet
    * Response generated for [ 200 ] HTTP response code.
    */
@@ -60,6 +61,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Updates a pet in the store with form data
    * Response generated for [ default ] HTTP response code.
    */
   updatePetWithForm(
@@ -93,6 +95,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Deletes a pet
    * Response generated for [ default ] HTTP response code.
    */
   deletePet(
@@ -129,6 +132,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * uploads an image
    * Response generated for [ 200 ] HTTP response code.
    */
   uploadFile(
@@ -161,6 +165,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Add a new pet to the store
    * Response generated for [ default ] HTTP response code.
    */
   addPet(
@@ -193,6 +198,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Update an existing pet
    * Response generated for [ default ] HTTP response code.
    */
   updatePet(
@@ -225,6 +231,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Finds Pets by status
    * Multiple status values can be provided with comma separated strings
    * Response generated for [ 200 ] HTTP response code.
    */
@@ -258,6 +265,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Finds Pets by tags
    * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
    * @deprecated this method has been deprecated and may be removed in future.
    * Response generated for [ 200 ] HTTP response code.
@@ -284,6 +292,7 @@ export interface APIClientInterface {
   ): Observable<models.Pet[] | HttpResponse<models.Pet[]> | HttpEvent<models.Pet[]>>;
 
   /**
+   * Returns pet inventories by status
    * Returns a map of status codes to quantities
    * Response generated for [ 200 ] HTTP response code.
    */
@@ -313,6 +322,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Find purchase order by ID
    * For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
    * Response generated for [ 200 ] HTTP response code.
    */
@@ -346,6 +356,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Delete purchase order by ID
    * For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
    * Response generated for [ default ] HTTP response code.
    */
@@ -379,6 +390,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Place an order for a pet
    * Response generated for [ 200 ] HTTP response code.
    */
   placeOrder(
@@ -411,6 +423,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get user by user name
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserByName(
@@ -445,6 +458,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Updated user
    * This can only be done by the logged in user.
    * Response generated for [ default ] HTTP response code.
    */
@@ -478,6 +492,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Delete user
    * This can only be done by the logged in user.
    * Response generated for [ default ] HTTP response code.
    */
@@ -513,6 +528,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Logs user into the system
    * Response generated for [ 200 ] HTTP response code.
    */
   loginUser(
@@ -537,6 +553,7 @@ export interface APIClientInterface {
   ): Observable<string | HttpResponse<string> | HttpEvent<string>>;
 
   /**
+   * Logs out current logged in user session
    * Response generated for [ default ] HTTP response code.
    */
   logoutUser(
@@ -565,6 +582,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Create user
    * This can only be done by the logged in user.
    * Response generated for [ default ] HTTP response code.
    */
@@ -598,6 +616,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Creates list of users with given input array
    * Response generated for [ default ] HTTP response code.
    */
   createUsersWithArrayInput(
@@ -630,6 +649,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Creates list of users with given input array
    * Response generated for [ default ] HTTP response code.
    */
   createUsersWithListInput(

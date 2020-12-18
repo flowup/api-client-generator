@@ -32,6 +32,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Find pet by ID
    * Returns a single pet
    * Response generated for [ 200 ] HTTP response code.
    */
@@ -61,6 +62,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Updates a pet in the store with form data
    * Response generated for [ default ] HTTP response code.
    */
   updatePetWithForm(
@@ -88,6 +90,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Deletes a pet
    * Response generated for [ default ] HTTP response code.
    */
   deletePet(
@@ -115,6 +118,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * uploads an image
    * Response generated for [ 200 ] HTTP response code.
    */
   uploadFile(
@@ -143,6 +147,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Add a new pet to the store
    * Response generated for [ default ] HTTP response code.
    */
   addPet(
@@ -170,6 +175,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Update an existing pet
    * Response generated for [ default ] HTTP response code.
    */
   updatePet(
@@ -197,6 +203,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Finds Pets by status
    * Multiple status values can be provided with comma separated strings
    * Response generated for [ 200 ] HTTP response code.
    */
@@ -226,6 +233,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Finds Pets by tags
    * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
    * @deprecated this method has been deprecated and may be removed in future.
    * Response generated for [ 200 ] HTTP response code.
@@ -256,6 +264,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Returns pet inventories by status
    * Returns a map of status codes to quantities
    * Response generated for [ 200 ] HTTP response code.
    */
@@ -281,6 +290,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Find purchase order by ID
    * For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
    * Response generated for [ 200 ] HTTP response code.
    */
@@ -310,6 +320,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Delete purchase order by ID
    * For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
    * Response generated for [ default ] HTTP response code.
    */
@@ -338,6 +349,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Place an order for a pet
    * Response generated for [ 200 ] HTTP response code.
    */
   placeOrder(
@@ -366,6 +378,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get user by user name
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserByName(
@@ -394,6 +407,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Updated user
    * This can only be done by the logged in user.
    * Response generated for [ default ] HTTP response code.
    */
@@ -422,6 +436,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Delete user
    * This can only be done by the logged in user.
    * Response generated for [ default ] HTTP response code.
    */
@@ -450,6 +465,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Logs user into the system
    * Response generated for [ 200 ] HTTP response code.
    */
   loginUser(
@@ -478,6 +494,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Logs out current logged in user session
    * Response generated for [ default ] HTTP response code.
    */
   logoutUser(
@@ -501,6 +518,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Create user
    * This can only be done by the logged in user.
    * Response generated for [ default ] HTTP response code.
    */
@@ -529,6 +547,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Creates list of users with given input array
    * Response generated for [ default ] HTTP response code.
    */
   createUsersWithArrayInput(
@@ -556,6 +575,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Creates list of users with given input array
    * Response generated for [ default ] HTTP response code.
    */
   createUsersWithListInput(

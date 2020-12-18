@@ -32,6 +32,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get items list
    * Response generated for [ 200 ] HTTP response code.
    */
   getItems(
@@ -60,6 +61,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get item models list
    * Response generated for [ 200 ] HTTP response code.
    */
   getItemModels(

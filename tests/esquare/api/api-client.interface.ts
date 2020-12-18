@@ -163,6 +163,7 @@ export interface APIClientInterface {
   ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
+   * Get list of roles to permissions mapping
    * Response generated for [ 200 ] HTTP response code.
    */
   getAclList(
@@ -183,6 +184,7 @@ export interface APIClientInterface {
   ): Observable<models.AclItem[] | HttpResponse<models.AclItem[]> | HttpEvent<models.AclItem[]>>;
 
   /**
+   * Get structure entities list
    * Response generated for [ 200 ] HTTP response code.
    */
   getStructureEntitiesList(
@@ -211,6 +213,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Add a new structure entity
    * Response generated for [ 200 ] HTTP response code.
    */
   addStructureEntity(
@@ -245,6 +248,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Update an existing structure entity
    * Response generated for [ 200 ] HTTP response code.
    */
   updateStructureEntity(
@@ -277,6 +281,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Deletes a structure entity
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteStructureEntity(
@@ -316,6 +321,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get reports list
    * [Screenshot from design](http://prntscr.com/hy4z8d)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -350,6 +356,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get report details
    * [Screenshot from design](http://prntscr.com/hywkd5)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -391,6 +398,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get report preview
    * [Screenshot from design](http://prntscr.com/i3z8zb)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -425,6 +433,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get import history
    * [Screenshot from design](http://prntscr.com/i3ym4j)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -461,6 +470,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Upload a completed template
    * [Screenshot from design](http://prntscr.com/hy521p)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -495,6 +505,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get list of current Import template columns
    * [Screenshot from design](http://prntscr.com/hy52hi)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -529,6 +540,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get list of current Import template columns
    * [Screenshot from design](http://prntscr.com/hy52zr)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -565,6 +577,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Save columns mapping
    * [Screenshot from design](http://prntscr.com/hy53jt)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -599,6 +612,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get validation table
    * [Screenshot from design](http://prntscr.com/hy5fct)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -635,6 +649,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Download imported data
    * [Screenshot from design](http://prntscr.com/hy55ga)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -669,6 +684,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Confirm final import
    * [Screenshot from design](http://prntscr.com/hy57nj)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -703,6 +719,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Download original file
    * [Screenshot from design](http://prntscr.com/hy5a54)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -737,6 +754,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Download skipped rows file
    * [Screenshot from design](http://prntscr.com/hy5ae7)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -771,6 +789,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Cancel current import
    * [Screenshot from design](http://prntscr.com/hy5aqq)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -809,6 +828,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Request override data for import
    * [Screenshot from design](http://prntscr.com/hy5bi6)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -843,6 +863,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get import stats
    * [Screenshot from design](http://prntscr.com/i4052r)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -886,6 +907,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get issues list
    * [Screenshot from design](http://prntscr.com/i40s18)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -929,6 +951,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get import statuses list
    * [Screenshot from design](http://prntscr.com/i4byyx)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -976,6 +999,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get users list
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersList(
@@ -1008,6 +1032,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Create user
    * Response generated for [ 200 ] HTTP response code.
    */
   createUser(
@@ -1032,6 +1057,7 @@ export interface APIClientInterface {
   ): Observable<models.UserDetails | HttpResponse<models.UserDetails> | HttpEvent<models.UserDetails>>;
 
   /**
+   * Get acl structure
    * Response generated for [ 200 ] HTTP response code.
    */
   getAclStructure(
@@ -1059,6 +1085,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * getUserDetails
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserDetails(
@@ -1092,6 +1119,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * update user by id
    * Response generated for [ 200 ] HTTP response code.
    */
   updateUser(
@@ -1123,6 +1151,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * delete user by id
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteUser(
@@ -1147,6 +1176,7 @@ export interface APIClientInterface {
   ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
+   * Get roles list
    * [Screenshot from design](http://prntscr.com/i93q0s)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1177,6 +1207,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Create role
    * Response generated for [ 200 ] HTTP response code.
    */
   createRole(
@@ -1201,6 +1232,7 @@ export interface APIClientInterface {
   ): Observable<models.RoleDetailsItem | HttpResponse<models.RoleDetailsItem> | HttpEvent<models.RoleDetailsItem>>;
 
   /**
+   * Get privileges list
    * [Screenshot from design](http://prntscr.com/i947a3)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1230,6 +1262,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get role details
    * Response generated for [ 200 ] HTTP response code.
    */
   getRoleDetails(
@@ -1262,6 +1295,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Update role by id
    * Response generated for [ 200 ] HTTP response code.
    */
   updateRole(
@@ -1293,6 +1327,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Ddelete role by id
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteRole(
@@ -1317,6 +1352,7 @@ export interface APIClientInterface {
   ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
+   * Get unviewed notifications list
    * [Screenshot from design](http://prntscr.com/iba7xr)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1346,6 +1382,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Mark notifications as viewed
    * Response generated for [ 200 ] HTTP response code.
    */
   markViewedNotifications(
@@ -1383,6 +1420,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get user's notifications list
    * [Screenshot from design](http://prntscr.com/iba8tq)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1409,6 +1447,7 @@ export interface APIClientInterface {
   ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
+   * Get modules list
    * [Screenshot from design](http://prntscr.com/ibac47) |
    * [Screenshot from design](http://prntscr.com/ibacgu)
    * 
@@ -1432,6 +1471,7 @@ export interface APIClientInterface {
   ): Observable<models.NotificationModule[] | HttpResponse<models.NotificationModule[]> | HttpEvent<models.NotificationModule[]>>;
 
   /**
+   * Get triggers list
    * [Screenshot from design](http://prntscr.com/ibad9m)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1468,6 +1508,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get module's notifications list
    * [Screenshot from design](http://prntscr.com/iba8tq)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1501,6 +1542,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Enable notification
    * Response generated for [ 200 ] HTTP response code.
    */
   enableNotification(
@@ -1532,6 +1574,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Disable notification
    * Response generated for [ 200 ] HTTP response code.
    */
   disableNotification(
@@ -1563,6 +1606,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Get notification details
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotification(
@@ -1595,6 +1639,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Update notification
    * Response generated for [ 200 ] HTTP response code.
    */
   updateNotification(
@@ -1626,6 +1671,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Create notification
    * Response generated for [ 200 ] HTTP response code.
    */
   createNotification(
@@ -1650,6 +1696,7 @@ export interface APIClientInterface {
   ): Observable<number | HttpResponse<number> | HttpEvent<number>>;
 
   /**
+   * Get password verefication settings
    * [Screenshot from design](http://prntscr.com/ijzt2b)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1679,6 +1726,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Update password verefication settings
    * [Screenshot from design](http://prntscr.com/ijzt2b)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1705,6 +1753,7 @@ export interface APIClientInterface {
   ): Observable<models.PasswordVerificationPolicies | HttpResponse<models.PasswordVerificationPolicies> | HttpEvent<models.PasswordVerificationPolicies>>;
 
   /**
+   * Get password creation settings
    * [Screenshot from design](http://prntscr.com/ijzuv3)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1734,6 +1783,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Update password creation settings
    * [Screenshot from design](http://prntscr.com/ijzuv3)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1760,6 +1810,7 @@ export interface APIClientInterface {
   ): Observable<models.PasswordCreationPolicies | HttpResponse<models.PasswordCreationPolicies> | HttpEvent<models.PasswordCreationPolicies>>;
 
   /**
+   * Get other security settings settings
    * [Screenshot from design](http://prntscr.com/ijzvo3)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1789,6 +1840,7 @@ export interface APIClientInterface {
   };
 
   /**
+   * Update other security settings settings
    * [Screenshot from design](http://prntscr.com/ijzvo3)
    * 
    * Response generated for [ 200 ] HTTP response code.

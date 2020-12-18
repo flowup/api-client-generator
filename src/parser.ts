@@ -186,6 +186,7 @@ function parseMethods(
             responseGuard: responseTypeSchema.guard?.('response'),
             description: createDocsComment(
               [
+                operation.summary,
                 operation.description,
                 operation.deprecated
                   ? `@deprecated this method has been deprecated and may be removed in future.`

@@ -168,6 +168,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get list of roles to permissions mapping
    * Response generated for [ 200 ] HTTP response code.
    */
   getAclList(
@@ -192,6 +193,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get structure entities list
    * Response generated for [ 200 ] HTTP response code.
    */
   getStructureEntitiesList(
@@ -216,6 +218,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Add a new structure entity
    * Response generated for [ 200 ] HTTP response code.
    */
   addStructureEntity(
@@ -244,6 +247,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Update an existing structure entity
    * Response generated for [ 200 ] HTTP response code.
    */
   updateStructureEntity(
@@ -272,6 +276,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Deletes a structure entity
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteStructureEntity(
@@ -299,6 +304,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get reports list
    * [Screenshot from design](http://prntscr.com/hy4z8d)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -329,6 +335,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get report details
    * [Screenshot from design](http://prntscr.com/hywkd5)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -359,6 +366,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get report preview
    * [Screenshot from design](http://prntscr.com/i3z8zb)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -389,6 +397,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get import history
    * [Screenshot from design](http://prntscr.com/i3ym4j)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -419,6 +428,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Upload a completed template
    * [Screenshot from design](http://prntscr.com/hy521p)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -449,6 +459,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get list of current Import template columns
    * [Screenshot from design](http://prntscr.com/hy52hi)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -479,6 +490,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get list of current Import template columns
    * [Screenshot from design](http://prntscr.com/hy52zr)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -509,6 +521,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Save columns mapping
    * [Screenshot from design](http://prntscr.com/hy53jt)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -539,6 +552,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get validation table
    * [Screenshot from design](http://prntscr.com/hy5fct)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -569,6 +583,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Download imported data
    * [Screenshot from design](http://prntscr.com/hy55ga)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -599,6 +614,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Confirm final import
    * [Screenshot from design](http://prntscr.com/hy57nj)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -629,6 +645,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Download original file
    * [Screenshot from design](http://prntscr.com/hy5a54)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -659,6 +676,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Download skipped rows file
    * [Screenshot from design](http://prntscr.com/hy5ae7)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -689,6 +707,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Cancel current import
    * [Screenshot from design](http://prntscr.com/hy5aqq)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -718,6 +737,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Request override data for import
    * [Screenshot from design](http://prntscr.com/hy5bi6)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -747,6 +767,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get import stats
    * [Screenshot from design](http://prntscr.com/i4052r)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -777,6 +798,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get issues list
    * [Screenshot from design](http://prntscr.com/i40s18)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -807,6 +829,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get import statuses list
    * [Screenshot from design](http://prntscr.com/i4byyx)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -837,6 +860,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get users list
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersList(
@@ -865,6 +889,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Create user
    * Response generated for [ 200 ] HTTP response code.
    */
   createUser(
@@ -893,6 +918,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get acl structure
    * Response generated for [ 200 ] HTTP response code.
    */
   getAclStructure(
@@ -917,6 +943,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * getUserDetails
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserDetails(
@@ -945,6 +972,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * update user by id
    * Response generated for [ 200 ] HTTP response code.
    */
   updateUser(
@@ -973,6 +1001,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * delete user by id
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteUser(
@@ -1000,6 +1029,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get roles list
    * [Screenshot from design](http://prntscr.com/i93q0s)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1026,6 +1056,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Create role
    * Response generated for [ 200 ] HTTP response code.
    */
   createRole(
@@ -1054,6 +1085,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get privileges list
    * [Screenshot from design](http://prntscr.com/i947a3)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1080,6 +1112,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get role details
    * Response generated for [ 200 ] HTTP response code.
    */
   getRoleDetails(
@@ -1108,6 +1141,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Update role by id
    * Response generated for [ 200 ] HTTP response code.
    */
   updateRole(
@@ -1136,6 +1170,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Ddelete role by id
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteRole(
@@ -1163,6 +1198,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get unviewed notifications list
    * [Screenshot from design](http://prntscr.com/iba7xr)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1189,6 +1225,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Mark notifications as viewed
    * Response generated for [ 200 ] HTTP response code.
    */
   markViewedNotifications(
@@ -1216,6 +1253,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get user's notifications list
    * [Screenshot from design](http://prntscr.com/iba8tq)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1246,6 +1284,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get modules list
    * [Screenshot from design](http://prntscr.com/ibac47) |
    * [Screenshot from design](http://prntscr.com/ibacgu)
    * 
@@ -1273,6 +1312,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get triggers list
    * [Screenshot from design](http://prntscr.com/ibad9m)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1299,6 +1339,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get module's notifications list
    * [Screenshot from design](http://prntscr.com/iba8tq)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1329,6 +1370,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Enable notification
    * Response generated for [ 200 ] HTTP response code.
    */
   enableNotification(
@@ -1356,6 +1398,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Disable notification
    * Response generated for [ 200 ] HTTP response code.
    */
   disableNotification(
@@ -1383,6 +1426,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get notification details
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotification(
@@ -1411,6 +1455,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Update notification
    * Response generated for [ 200 ] HTTP response code.
    */
   updateNotification(
@@ -1438,6 +1483,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Create notification
    * Response generated for [ 200 ] HTTP response code.
    */
   createNotification(
@@ -1466,6 +1512,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get password verefication settings
    * [Screenshot from design](http://prntscr.com/ijzt2b)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1492,6 +1539,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Update password verefication settings
    * [Screenshot from design](http://prntscr.com/ijzt2b)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1522,6 +1570,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get password creation settings
    * [Screenshot from design](http://prntscr.com/ijzuv3)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1548,6 +1597,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Update password creation settings
    * [Screenshot from design](http://prntscr.com/ijzuv3)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1578,6 +1628,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get other security settings settings
    * [Screenshot from design](http://prntscr.com/ijzvo3)
    * 
    * Response generated for [ 200 ] HTTP response code.
@@ -1604,6 +1655,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Update other security settings settings
    * [Screenshot from design](http://prntscr.com/ijzvo3)
    * 
    * Response generated for [ 200 ] HTTP response code.
