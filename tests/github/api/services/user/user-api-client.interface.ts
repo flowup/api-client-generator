@@ -199,7 +199,7 @@ export interface UserAPIClientInterface {
    * Add email address(es).
    * You can post a single email address or an array of addresses.
    * 
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   postUserEmails(
     args: Exclude<UserAPIClientInterface['postUserEmailsParams'], undefined>,

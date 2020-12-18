@@ -389,7 +389,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient implements TeamsAPICli
 
   /**
    * In order to add a repository to a team, the authenticated user must be an owner of the org that the team is associated with. Also, the repository must be owned by the organization, or a direct fork of a repository owned by the organization.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   putTeamsTeamIdReposOrgRepo(
     args: Exclude<TeamsAPIClientInterface['putTeamsTeamIdReposOrgRepoParams'], undefined>,
@@ -445,7 +445,7 @@ export class GuardedTeamsAPIClient extends TeamsAPIClient implements TeamsAPICli
 
   /**
    * Check if a team manages a repository
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   getTeamsTeamIdReposOwnerRepo(
     args: Exclude<TeamsAPIClientInterface['getTeamsTeamIdReposOwnerRepoParams'], undefined>,

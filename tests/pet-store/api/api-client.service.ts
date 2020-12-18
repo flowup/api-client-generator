@@ -82,7 +82,7 @@ export class APIClient implements APIClientInterface {
   }
 
   /**
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   updatePetWithForm(
     args: Exclude<APIClientInterface['updatePetWithFormParams'], undefined>,
@@ -123,7 +123,7 @@ export class APIClient implements APIClientInterface {
   }
 
   /**
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   deletePet(
     args: Exclude<APIClientInterface['deletePetParams'], undefined>,
@@ -200,7 +200,7 @@ export class APIClient implements APIClientInterface {
   }
 
   /**
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   addPet(
     args: Exclude<APIClientInterface['addPetParams'], undefined>,
@@ -233,7 +233,7 @@ export class APIClient implements APIClientInterface {
   }
 
   /**
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   updatePet(
     args: Exclude<APIClientInterface['updatePetParams'], undefined>,
@@ -406,7 +406,7 @@ export class APIClient implements APIClientInterface {
 
   /**
    * For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   deleteOrder(
     args: Exclude<APIClientInterface['deleteOrderParams'], undefined>,
@@ -506,7 +506,7 @@ export class APIClient implements APIClientInterface {
 
   /**
    * This can only be done by the logged in user.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   updateUser(
     args: Exclude<APIClientInterface['updateUserParams'], undefined>,
@@ -540,7 +540,7 @@ export class APIClient implements APIClientInterface {
 
   /**
    * This can only be done by the logged in user.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   deleteUser(
     args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
@@ -612,7 +612,7 @@ export class APIClient implements APIClientInterface {
   }
 
   /**
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   logoutUser(
     requestHttpOptions?: HttpOptions,
@@ -642,7 +642,7 @@ export class APIClient implements APIClientInterface {
 
   /**
    * This can only be done by the logged in user.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   createUser(
     args: Exclude<APIClientInterface['createUserParams'], undefined>,
@@ -675,7 +675,7 @@ export class APIClient implements APIClientInterface {
   }
 
   /**
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   createUsersWithArrayInput(
     args: Exclude<APIClientInterface['createUsersWithArrayInputParams'], undefined>,
@@ -708,7 +708,7 @@ export class APIClient implements APIClientInterface {
   }
 
   /**
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   createUsersWithListInput(
     args: Exclude<APIClientInterface['createUsersWithListInputParams'], undefined>,

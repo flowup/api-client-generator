@@ -5981,7 +5981,7 @@ export interface ReposAPIClientInterface {
    * to make a second GET request.
    * Note: For private repositories, these links are temporary and expire quickly.
    * 
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   getReposOwnerRepoArchiveFormatPath(
     args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,

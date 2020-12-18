@@ -118,7 +118,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   getUsersUsernameEvents(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsParams'], undefined>,
@@ -160,7 +160,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * This is the user's organization dashboard. You must be authenticated as the user to view this.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   getUsersUsernameEventsOrg(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsOrgParams'], undefined>,
@@ -412,7 +412,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * These are events that you'll only see public events.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   getUsersUsernameReceivedEvents(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsParams'], undefined>,
@@ -453,7 +453,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * List public events that a user has received
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   getUsersUsernameReceivedEventsPublic(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsPublicParams'], undefined>,
@@ -536,7 +536,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * List repositories being starred by a user.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   getUsersUsernameStarred(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameStarredParams'], undefined>,
@@ -577,7 +577,7 @@ export interface UsersAPIClientInterface {
 
   /**
    * List repositories being watched by a user.
-   * Response generated for [ missing ] HTTP response code.
+   * Response generated for [ default ] HTTP response code.
    */
   getUsersUsernameSubscriptions(
     args: Exclude<UsersAPIClientInterface['getUsersUsernameSubscriptionsParams'], undefined>,

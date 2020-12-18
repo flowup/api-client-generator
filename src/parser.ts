@@ -126,7 +126,7 @@ function parseMethods(
             Object.keys(operation.responses)
               .slice()
               .sort()
-              .filter(code => code.startsWith('2'))[0] || 'missing';
+              .filter(code => code.startsWith('2'))[0] || 'default';
 
           const okResponse: Response | Reference | undefined =
             operation.responses[successResponseCode];
