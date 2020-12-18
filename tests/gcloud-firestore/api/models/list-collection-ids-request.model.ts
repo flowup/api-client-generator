@@ -16,6 +16,9 @@
 export interface ListCollectionIdsRequest {
   /** The maximum number of results to return. */
   pageSize?: number;
-  /** A page token. Must be a value fromListCollectionIdsResponse. */
+  /**
+   * A page token. Must be a value from
+   * ListCollectionIdsResponse.
+   */
   pageToken?: string;
 }

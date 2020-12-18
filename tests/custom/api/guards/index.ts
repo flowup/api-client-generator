@@ -119,6 +119,10 @@ export function isDataModel(arg: any): arg is models.DataModel {
     ( typeof arg.testWithArray === 'undefined' || ( ( Array.isArray(arg.testWithArray) && arg.testWithArray.every((item: any) => isPet(item)) ) && isData(arg.testWithArray) ) ) &&
     // text?: ItemList & Data
     ( typeof arg.text === 'undefined' || ( isItemList(arg.text) && isData(arg.text) ) ) &&
+    // willAlsoBeRemoved?: string
+    ( typeof arg.willAlsoBeRemoved === 'undefined' || typeof arg.willAlsoBeRemoved === 'string' ) &&
+    // willBeRemoved?: string
+    ( typeof arg.willBeRemoved === 'undefined' || typeof arg.willBeRemoved === 'string' ) &&
 
   true
   );

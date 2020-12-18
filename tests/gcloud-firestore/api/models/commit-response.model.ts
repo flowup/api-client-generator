@@ -19,6 +19,11 @@ import {
 export interface CommitResponse {
   /** The time at which the commit occurred. */
   commitTime?: string;
-  /** The result of applying the writes.This i-th write result corresponds to the i-th write in therequest. */
+  /**
+   * The result of applying the writes.
+   * 
+   * This i-th write result corresponds to the i-th write in the
+   * request.
+   */
   writeResults?: WriteResult[];
 }

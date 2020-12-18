@@ -14,6 +14,9 @@
  * Options for a transaction that can only be used to read documents.
  */
 export interface ReadOnly {
-  /** Reads documents at the given time.This may not be older than 60 seconds. */
+  /**
+   * Reads documents at the given time.
+   * This may not be older than 60 seconds.
+   */
   readTime?: string;
 }

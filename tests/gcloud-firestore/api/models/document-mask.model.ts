@@ -18,6 +18,9 @@
  * Document, and takes in account the dynamic nature of Value.
  */
 export interface DocumentMask {
-  /** The list of field paths in the mask. See Document.fields for a fieldpath syntax reference. */
+  /**
+   * The list of field paths in the mask. See Document.fields for a field
+   * path syntax reference.
+   */
   fieldPaths?: string[];
 }

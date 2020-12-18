@@ -397,6 +397,14 @@ definitions:
             description: Properties of the object. Contains field @type with type URL.
           type: object
         type: array
+      willBeRemoved:
+        type: string
+        title: This is deprecated. Do not use.
+        description: Use some other property.
+      willAlsoBeRemoved:
+        type: string
+        x-deprecated: true
+        description: Use something else instead.
   Table:
     type: object
     properties:

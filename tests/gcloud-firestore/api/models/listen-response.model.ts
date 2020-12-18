@@ -25,9 +25,19 @@ export interface ListenResponse {
   documentChange?: DocumentChange;
   /** A Document has been deleted. */
   documentDelete?: DocumentDelete;
-  /** A Document has been removed from a target (because it is no longerrelevant to that target). */
+  /**
+   * A Document has been removed from a target (because it is no longer
+   * relevant to that target).
+   */
   documentRemove?: DocumentRemove;
-  /** A filter to apply to the set of documents previously returned for thegiven target.Returned when documents may have been removed from the given target, butthe exact documents are unknown. */
+  /**
+   * A filter to apply to the set of documents previously returned for the
+   * given target.
+   * 
+   * 
+   * Returned when documents may have been removed from the given target, but
+   * the exact documents are unknown.
+   */
   filter?: ExistenceFilter;
   /** Targets have changed. */
   targetChange?: TargetChange;

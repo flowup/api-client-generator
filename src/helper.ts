@@ -123,6 +123,22 @@ export function replaceNewLines(
   return str.replace(/(\r\n|\r|\n)/g, replaceValue);
 }
 
+export function createDocsComment(
+  desc: string,
+  indent: number = 2,
+  forceMultiline = false,
+): string {
+  const indentSpaces = ' '.repeat(indent);
+  return desc
+    ? forceMultiline || desc.includes('\n')
+      ? `${replaceNewLines(
+          `/**\n${desc}`,
+          `$1${indentSpaces} * `,
+        )}\n${indentSpaces} */`
+      : `/** ${desc} */`
+    : '';
+}
+
 export function logWarn(str: string): void {
   console.warn('\x1b[33m%s\x1b[0m', str);
 }

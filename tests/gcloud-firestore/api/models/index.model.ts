@@ -21,8 +21,14 @@ export interface Index {
   collectionId?: string;
   /** The fields to index. */
   fields?: IndexField[];
-  /** The resource name of the index.Output only. */
+  /**
+   * The resource name of the index.
+   * Output only.
+   */
   name?: string;
-  /** The state of the index.Output only. */
+  /**
+   * The state of the index.
+   * Output only.
+   */
   state?: ('STATE_UNSPECIFIED' | 'CREATING' | 'READY' | 'ERROR');
 }

@@ -17,8 +17,18 @@ import {
  * The result of applying a write.
  */
 export interface WriteResult {
-  /** The results of applying each DocumentTransform.FieldTransform, in thesame order. */
+  /**
+   * The results of applying each DocumentTransform.FieldTransform, in the
+   * same order.
+   */
   transformResults?: Value[];
-  /** The last update time of the document after applying the write. Not setafter a `delete`.If the write did not actually change the document, this will be theprevious update_time. */
+  /**
+   * The last update time of the document after applying the write. Not set
+   * after a `delete`.
+   * 
+   * 
+   * If the write did not actually change the document, this will be the
+   * previous update_time.
+   */
   updateTime?: string;
 }

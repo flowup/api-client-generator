@@ -19,11 +19,20 @@ import {
  * A message that can hold any of the supported value types.
  */
 export interface Value {
-  /** An array value.Cannot contain another array value. */
+  /**
+   * An array value.
+   * 
+   * Cannot contain another array value.
+   */
   arrayValue?: ArrayValue;
   /** A boolean value. */
   booleanValue?: boolean;
-  /** A bytes value.Must not exceed 1 MiB - 89 bytes.Only the first 1,500 bytes are considered by queries. */
+  /**
+   * A bytes value.
+   * 
+   * Must not exceed 1 MiB - 89 bytes.
+   * Only the first 1,500 bytes are considered by queries.
+   */
   bytesValue?: string;
   /** A double value. */
   doubleValue?: number;
@@ -35,10 +44,26 @@ export interface Value {
   mapValue?: MapValue;
   /** A null value. */
   nullValue?: ('NULL_VALUE');
-  /** A reference to a document. For example:`projects/{project_id}/databases/{database_id}/documents/{document_path}`. */
+  /**
+   * A reference to a document. For example:
+   * `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+   */
   referenceValue?: string;
-  /** A string value.The string, represented as UTF-8, must not exceed 1 MiB - 89 bytes.Only the first 1,500 bytes of the UTF-8 representation are considered byqueries. */
+  /**
+   * A string value.
+   * 
+   * 
+   * The string, represented as UTF-8, must not exceed 1 MiB - 89 bytes.
+   * Only the first 1,500 bytes of the UTF-8 representation are considered by
+   * queries.
+   */
   stringValue?: string;
-  /** A timestamp value.Precise only to microseconds. When stored, any additional precision isrounded down. */
+  /**
+   * A timestamp value.
+   * 
+   * 
+   * Precise only to microseconds. When stored, any additional precision is
+   * rounded down.
+   */
   timestampValue?: string;
 }

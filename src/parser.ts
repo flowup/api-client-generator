@@ -31,6 +31,7 @@ import {
   guardArray,
   guardDictionary,
   unicodeEscape,
+  createDocsComment,
 } from './helper';
 
 interface Parameters {
@@ -183,9 +184,19 @@ function parseMethods(
                 `\${args.${toCamelCase(args[0])}}`,
             ),
             responseGuard: responseTypeSchema.guard?.('response'),
-            description: `${replaceNewLines(operation.description, '$1   * ')}${
-              operation.description ? '\n   * ' : ''
-            }Response generated for [ ${successResponseCode} ] HTTP response code.`,
+            description: createDocsComment(
+              [
+                operation.description,
+                operation.deprecated
+                  ? `@deprecated this method has been deprecated and may be removed in future.`
+                  : null,
+                `Response generated for [ ${successResponseCode} ] HTTP response code.`,
+              ]
+                .filter(str => !!str)
+                .join('\n'),
+              2,
+              true,
+            ),
             responseTypeSchema,
             ...(responseTypeSchema.type === 'File' && {
               requestResponseType: 'blob' as 'blob',
@@ -348,12 +359,18 @@ function parseInterfaceProperties(
         parsedSchema,
         isRequired,
         name: unicodeEscape(name),
-        description: replaceNewLines(propSchema.description),
-        //description: replaceNewLines( // todo: uncomment this for titles with description, consider refactoring to multi line ("docs") comments
-        //           `${(propSchema.title || '') + '\n' || ''}${
-        //             propSchema.description || ''
-        //           }`,
-        //         ),
+        description: createDocsComment(
+          [
+            propSchema.description,
+            (propSchema as any)['x-deprecated'] ||
+            propSchema.title?.includes('deprecated')
+              ? `@deprecated this method has been deprecated and may be removed in future.`
+              : null,
+          ]
+            .filter(str => str != null)
+            .join('\n'),
+          2,
+        ),
         type: propertyAllOf.length
           ? propertyAllOf
               .map(({ type }) => type)

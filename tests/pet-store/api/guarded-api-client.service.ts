@@ -227,6 +227,7 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
 
   /**
    * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+   * @deprecated this method has been deprecated and may be removed in future.
    * Response generated for [ 200 ] HTTP response code.
    */
   findPetsByTags(

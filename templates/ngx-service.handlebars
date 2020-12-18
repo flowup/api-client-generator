@@ -61,10 +61,8 @@ export class {{#if (templateType 'guardedService')}}Guarded{{&serviceName}} exte
     {{/each}}
   };
 
-{{/if}}{{/if}}{{#description}}  /**
-   * {{&.}}
-   */
-{{/description}}  {{&methodName}}(
+{{/if}}{{/if}}{{#if description}}  {{&description}}
+{{/if}}  {{&methodName}}(
   {{#if parameters.length}}
     args: Exclude<{{&../interfaceName}}['{{&methodName}}Params'], undefined>,
   {{/if}}

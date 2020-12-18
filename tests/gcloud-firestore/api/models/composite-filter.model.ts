@@ -17,7 +17,10 @@ import {
  * A filter that merges multiple other filters using the given operator.
  */
 export interface CompositeFilter {
-  /** The list of filters to combine.Must contain at least one filter. */
+  /**
+   * The list of filters to combine.
+   * Must contain at least one filter.
+   */
   filters?: Filter[];
   /** The operator for combining multiple filters. */
   op?: ('OPERATOR_UNSPECIFIED' | 'AND');

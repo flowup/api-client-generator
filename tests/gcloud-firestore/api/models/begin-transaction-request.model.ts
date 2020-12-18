@@ -17,6 +17,9 @@ import {
  * The request for Firestore.BeginTransaction.
  */
 export interface BeginTransactionRequest {
-  /** The options for the transaction.Defaults to a read-write transaction. */
+  /**
+   * The options for the transaction.
+   * Defaults to a read-write transaction.
+   */
   options?: TransactionOptions;
 }

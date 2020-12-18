@@ -24,10 +24,29 @@ export interface Target {
   once?: boolean;
   /** A target specified by a query. */
   query?: QueryTarget;
-  /** Start listening after a specific `read_time`.The client must know the state of matching documents at this time. */
+  /**
+   * Start listening after a specific `read_time`.
+   * 
+   * The client must know the state of matching documents at this time.
+   */
   readTime?: string;
-  /** A resume token from a prior TargetChange for an identical target.Using a resume token with a different target is unsupported and may fail. */
+  /**
+   * A resume token from a prior TargetChange for an identical target.
+   * 
+   * Using a resume token with a different target is unsupported and may fail.
+   */
   resumeToken?: string;
-  /** A client provided target ID.If not set, the server will assign an ID for the target.Used for resuming a target without changing IDs. The IDs can either beclient-assigned or be server-assigned in a previous stream. All targetswith client provided IDs must be added before adding a target that needsa server-assigned id. */
+  /**
+   * A client provided target ID.
+   * 
+   * 
+   * If not set, the server will assign an ID for the target.
+   * 
+   * 
+   * Used for resuming a target without changing IDs. The IDs can either be
+   * client-assigned or be server-assigned in a previous stream. All targets
+   * with client provided IDs must be added before adding a target that needs
+   * a server-assigned id.
+   */
   targetId?: number;
 }
