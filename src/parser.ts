@@ -139,6 +139,7 @@ function parseMethods(
 
           const transformedParams = transformParameters(
             [
+              // tslint:disable-next-line:no-any
               ...(<any>pathDef.parameters || []), // fixme: there seems to be an inconsistency in swagger / internal param typing
               ...(operation.parameters || []),
             ],
@@ -210,7 +211,7 @@ function parseMethods(
 
 function parseDefinitions(
   definitions: Definitions = {},
-  parameters: Parameters = {},
+  params: Parameters = {},
   tagMethods?: Method[], // methods tagged with tag that is currently generated
 ): Definition[] {
   const allDefs = [
@@ -219,7 +220,7 @@ function parseDefinitions(
     ),
 
     ...Object.entries(
-      parameters as ExtendedParameters, // type cast because of wrong typing in BaseParameter (should contain enum property)
+      params as ExtendedParameters, // type cast because of wrong typing in BaseParameter (should contain enum property)
     )
       .filter(
         ([, definition]) =>
@@ -363,6 +364,7 @@ function parseInterfaceProperties(
         description: createDocsComment(
           [
             propSchema.description,
+            // tslint:disable-next-line:no-any
             (propSchema as any)['x-deprecated'] ||
             propSchema.title?.includes('deprecated')
               ? `@deprecated this method has been deprecated and may be removed in future.`
@@ -384,7 +386,7 @@ function parseInterfaceProperties(
         ),
       };
 
-      const guard = propertyAllOf.length
+      const propGuard = propertyAllOf.length
         ? guardOptional(
             accessProp(name),
             false,
@@ -400,8 +402,8 @@ function parseInterfaceProperties(
         ...property,
         guard:
           name === ADDITIONAL_PROPERTIES_KEY
-            ? guardDictionary('arg', () => guard)
-            : guard,
+            ? guardDictionary('arg', () => propGuard)
+            : propGuard,
       };
     })
     .sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
@@ -436,7 +438,8 @@ function parseSchema(
             guardOptional(
               name,
               isRequired,
-              (name: string) => `[${enumValues.join(', ')}].includes(${name})`,
+              (iterName: string) =>
+                `[${enumValues.join(', ')}].includes(${iterName})`,
             ),
     };
   }
@@ -449,7 +452,7 @@ function parseSchema(
         guardOptional(
           name,
           isRequired,
-          (name: string) => `typeof ${name} === 'object'`,
+          (iterName: string) => `typeof ${iterName} === 'object'`,
         ),
     }; // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
   }
@@ -466,22 +469,18 @@ function parseSchema(
             guardOptional(
               name,
               isRequired,
-              (name: string) =>
-                `${prefixGuards ? 'guards.' : ''}is${refType}(${name})`,
+              (iterName: string) =>
+                `${prefixGuards ? 'guards.' : ''}is${refType}(${iterName})`,
             ),
     };
   }
 
   if (property.items) {
-    const parsedArrayItemsSchema = parseSchema(
-      property.items as Schema,
-      skipGuards,
-      {
-        name: 'item',
-        isRequired: true,
-        prefixGuards,
-      },
-    );
+    const parsedArrayItemsSchema = parseSchema(property.items, skipGuards, {
+      name: 'item',
+      isRequired: true,
+      prefixGuards,
+    });
 
     return {
       type: `${parsedArrayItemsSchema.type}[]`,
@@ -490,8 +489,8 @@ function parseSchema(
         skipGuards || !parsedArrayItemsSchema.guard
           ? undefined
           : () =>
-              guardOptional(name, isRequired, (name: string) =>
-                guardArray(name, parsedArrayItemsSchema.guard!),
+              guardOptional(name, isRequired, (iterName: string) =>
+                guardArray(iterName, parsedArrayItemsSchema.guard!),
               ),
     };
   }
@@ -514,10 +513,10 @@ function parseSchema(
         skipGuards || !parsedDictionarySchema.guard
           ? undefined
           : () =>
-              guardOptional(name, isRequired, (name: string) =>
+              guardOptional(name, isRequired, (iterName: string) =>
                 isJustObject
-                  ? `typeof ${name} === 'object'`
-                  : guardDictionary(name, parsedDictionarySchema.guard!),
+                  ? `typeof ${iterName} === 'object'`
+                  : guardDictionary(iterName, parsedDictionarySchema.guard!),
               ),
     };
   }
@@ -532,10 +531,10 @@ function parseSchema(
       : () =>
           type === 'any'
             ? ''
-            : guardOptional(name, isRequired, (name: string) =>
+            : guardOptional(name, isRequired, (iterName: string) =>
                 type === 'File'
-                  ? `${name} instanceof File`
-                  : `typeof ${name} === '${type}'`,
+                  ? `${iterName} instanceof File`
+                  : `typeof ${iterName} === '${type}'`,
               ),
   };
 }
@@ -642,7 +641,8 @@ function transformParameters(
         !('schema' in paramRef && paramRef.schema?.type === 'object')
           ? (paramRef as Schema)
           : 'schema' in param
-          ? (param as any).schema // body param has a schema but the typing of Parameter does not reflect that right now
+          ? // tslint:disable-next-line:no-any
+            (param as any).schema // body param has a schema but the typing of Parameter does not reflect that right now
           : (param as Schema),
     });
 

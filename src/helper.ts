@@ -126,7 +126,7 @@ export function replaceNewLines(
 export function createDocsComment(
   desc: string,
   indent: number = 2,
-  forceMultiline = false,
+  forceMultiline: boolean = false,
 ): string {
   const indentSpaces = ' '.repeat(indent);
   return desc
@@ -160,16 +160,18 @@ export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
 /**
  * Escape all the non ASCII characters in the string.
  *
- * @param string that will be escaped
+ * @param str that will be escaped
  * @return string with non ASCII characters escaped in format `\u####`
  */
-export function unicodeEscape(string: string): string {
-  return string
+export function unicodeEscape(str: string): string {
+  const unicodeMaxChar = 127;
+  const padToLength = 4;
+  return str
     .split('')
     .map(char => {
       const charCode = char.charCodeAt(0);
-      return charCode > 127
-        ? `\\u${charCode.toString(16).padStart(4, '0')}`
+      return charCode > unicodeMaxChar
+        ? `\\u${charCode.toString(16).padStart(padToLength, '0')}`
         : char;
     })
     .join('');

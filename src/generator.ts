@@ -1,4 +1,4 @@
-import { exists, mkdir, readFile, writeFile } from 'fs';
+import { mkdir, readFile, stat, writeFile } from 'fs';
 import {
   compile,
   HelperOptions,
@@ -100,16 +100,20 @@ export async function generateAPIClient(
   registerPartial('header', compiledTemplates['header']);
 
   registerHelper('camelCase', toCamelCase);
-  registerHelper('templateType', (
-    ...args: any[] /* fixme: with latest TS it should be [...string[], any] */
-  ) => {
-    const conditions: string[] = args.slice(0, -1);
-    const {
-      data: { root },
-    }: HelperOptions = args[args.length - 1];
+  registerHelper(
+    'templateType',
+    (
+      // tslint:disable-next-line:no-any
+      ...args: [string[], any]
+    ) => {
+      const conditions: string[] = args.slice(0, -1);
+      const {
+        data: { root },
+      }: HelperOptions = args[args.length - 1];
 
-    return conditions.includes(root.templateType);
-  });
+      return conditions.includes(root.templateType);
+    },
+  );
 
   return flattenAll([
     ...apiTagsData.map(async apiTagData => {
@@ -124,9 +128,9 @@ export async function generateAPIClient(
           : '';
       const clientOutputPath = join(options.outputPath, subFolder);
 
-      if (!(await promisify(exists)(clientOutputPath))) {
-        await promisify(mkdir)(clientOutputPath, { recursive: true });
-      }
+      await promisify(stat)(clientOutputPath).catch(() =>
+        promisify(mkdir)(clientOutputPath, { recursive: true }),
+      );
 
       return flattenAll([
         generateFile(
@@ -190,9 +194,9 @@ async function generateFile<T = TemplateData | undefined>(
   const result = compiledTemplate(viewContext);
   const outfile = join(outputPath, fileName);
 
-  if (!(await promisify(exists)(outputPath))) {
-    await promisify(mkdir)(outputPath, { recursive: true });
-  }
+  await promisify(stat)(outputPath).catch(() =>
+    promisify(mkdir)(outputPath, { recursive: true }),
+  );
 
   await promisify(writeFile)(outfile, result, 'utf-8');
   return [outfile];
@@ -209,9 +213,9 @@ async function generateModels(
   const outputDir = join(outputPath, MODEL_DIR_NAME);
   const outIndexFile = join(outputDir, '/index.ts');
 
-  if (!(await promisify(exists)(outputDir))) {
-    await promisify(mkdir)(outputDir, { recursive: true });
-  }
+  await promisify(stat)(outputDir).catch(() =>
+    promisify(mkdir)(outputDir, { recursive: true }),
+  );
 
   // generate model export index for all the generated models
   await promisify(writeFile)(
@@ -227,9 +231,9 @@ async function generateModels(
       const outfile = join(outputDir, `${definition.fileName}.ts`);
 
       const directoryName = dirname(outfile);
-      if (!(await promisify(exists)(directoryName))) {
-        await promisify(mkdir)(directoryName, { recursive: true });
-      }
+      await promisify(stat)(directoryName).catch(() =>
+        promisify(mkdir)(directoryName, { recursive: true }),
+      );
       await promisify(writeFile)(outfile, result, 'utf-8');
       return outfile;
     }),
