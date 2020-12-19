@@ -36,28 +36,23 @@ export interface RepositoriesAPIClientInterface {
    * were created.
    * Note: Pagination is powered exclusively by the since parameter. is the
    * Link header to get the URL for the next page of repositories.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getRepositories(
-    args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
+    args?: RepositoriesAPIClientInterface['getRepositoriesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Repositories>;
   getRepositories(
-    args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
+    args?: RepositoriesAPIClientInterface['getRepositoriesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Repositories>>;
   getRepositories(
-    args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
+    args?: RepositoriesAPIClientInterface['getRepositoriesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repositories>>;
-  getRepositories(
-    args: Exclude<RepositoriesAPIClientInterface['getRepositoriesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repositories | HttpResponse<models.Repositories> | HttpEvent<models.Repositories>>;
 
 }

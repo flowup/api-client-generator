@@ -72,11 +72,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.BatchGetDocumentsResponse>>;
-  firestoreProjectsDatabasesDocumentsBatchGet(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBatchGetParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.BatchGetDocumentsResponse | HttpResponse<models.BatchGetDocumentsResponse> | HttpEvent<models.BatchGetDocumentsResponse>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsBeginTransaction`.
@@ -132,11 +127,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.BeginTransactionResponse>>;
-  firestoreProjectsDatabasesDocumentsBeginTransaction(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsBeginTransactionParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.BeginTransactionResponse | HttpResponse<models.BeginTransactionResponse> | HttpEvent<models.BeginTransactionResponse>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsCommit`.
@@ -192,11 +182,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CommitResponse>>;
-  firestoreProjectsDatabasesDocumentsCommit(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CommitResponse | HttpResponse<models.CommitResponse> | HttpEvent<models.CommitResponse>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsListen`.
@@ -252,11 +237,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ListenResponse>>;
-  firestoreProjectsDatabasesDocumentsListen(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListenParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ListenResponse | HttpResponse<models.ListenResponse> | HttpEvent<models.ListenResponse>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsRollback`.
@@ -312,11 +292,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Empty>>;
-  firestoreProjectsDatabasesDocumentsRollback(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRollbackParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Empty | HttpResponse<models.Empty> | HttpEvent<models.Empty>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsWrite`.
@@ -372,11 +347,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.WriteResponse>>;
-  firestoreProjectsDatabasesDocumentsWrite(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsWriteParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.WriteResponse | HttpResponse<models.WriteResponse> | HttpEvent<models.WriteResponse>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesIndexesDelete`.
@@ -435,11 +405,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Empty>>;
-  firestoreProjectsDatabasesIndexesDelete(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesDeleteParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Empty | HttpResponse<models.Empty> | HttpEvent<models.Empty>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesIndexesGet`.
@@ -500,11 +465,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Index>>;
-  firestoreProjectsDatabasesIndexesGet(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesGetParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Index | HttpResponse<models.Index> | HttpEvent<models.Index>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsPatch`.
@@ -568,11 +528,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Document>>;
-  firestoreProjectsDatabasesDocumentsPatch(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsPatchParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Document | HttpResponse<models.Document> | HttpEvent<models.Document>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesIndexesList`.
@@ -632,11 +587,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ListIndexesResponse>>;
-  firestoreProjectsDatabasesIndexesList(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ListIndexesResponse | HttpResponse<models.ListIndexesResponse> | HttpEvent<models.ListIndexesResponse>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesIndexesCreate`.
@@ -706,11 +656,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Operation>>;
-  firestoreProjectsDatabasesIndexesCreate(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesIndexesCreateParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Operation | HttpResponse<models.Operation> | HttpEvent<models.Operation>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsList`.
@@ -781,11 +726,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ListDocumentsResponse>>;
-  firestoreProjectsDatabasesDocumentsList(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ListDocumentsResponse | HttpResponse<models.ListDocumentsResponse> | HttpEvent<models.ListDocumentsResponse>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsCreateDocument`.
@@ -847,11 +787,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Document>>;
-  firestoreProjectsDatabasesDocumentsCreateDocument(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCreateDocumentParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Document | HttpResponse<models.Document> | HttpEvent<models.Document>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsListCollectionIds`.
@@ -907,11 +842,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ListCollectionIdsResponse>>;
-  firestoreProjectsDatabasesDocumentsListCollectionIds(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsListCollectionIdsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ListCollectionIdsResponse | HttpResponse<models.ListCollectionIdsResponse> | HttpEvent<models.ListCollectionIdsResponse>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsRunQuery`.
@@ -967,10 +897,5 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RunQueryResponse>>;
-  firestoreProjectsDatabasesDocumentsRunQuery(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsRunQueryParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RunQueryResponse | HttpResponse<models.RunQueryResponse> | HttpEvent<models.RunQueryResponse>>;
 
 }

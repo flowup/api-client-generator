@@ -29,9 +29,5 @@ export interface ProjectAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ProjectTypeViewModel[]>>;
-  getProjectTypes(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ProjectTypeViewModel[] | HttpResponse<models.ProjectTypeViewModel[]> | HttpEvent<models.ProjectTypeViewModel[]>>;
 
 }

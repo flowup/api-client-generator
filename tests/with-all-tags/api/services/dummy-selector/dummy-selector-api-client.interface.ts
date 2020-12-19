@@ -39,11 +39,6 @@ export interface DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.DummySelectorViewModel>>;
-  get(
-    args: Exclude<DummySelectorAPIClientInterface['getParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.DummySelectorViewModel | HttpResponse<models.DummySelectorViewModel> | HttpEvent<models.DummySelectorViewModel>>;
 
   /**
    * Arguments object for method `getSettings`.
@@ -70,11 +65,6 @@ export interface DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.DummySelectorSettings>>;
-  getSettings(
-    args: Exclude<DummySelectorAPIClientInterface['getSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.DummySelectorSettings | HttpResponse<models.DummySelectorSettings> | HttpEvent<models.DummySelectorSettings>>;
 
   /**
    * Arguments object for method `putSettings`.
@@ -102,11 +92,6 @@ export interface DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  putSettings(
-    args: Exclude<DummySelectorAPIClientInterface['putSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `deleteSettings`.
@@ -133,10 +118,5 @@ export interface DummySelectorAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  deleteSettings(
-    args: Exclude<DummySelectorAPIClientInterface['deleteSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
 }

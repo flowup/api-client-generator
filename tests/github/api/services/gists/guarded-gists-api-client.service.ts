@@ -34,26 +34,26 @@ export class GuardedGistsAPIClient extends GistsAPIClient implements GistsAPICli
   /**
    * List the authenticated user's gists or if called anonymously, this will
    * return all public gists.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getGists(
-    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Gists>;
   getGists(
-    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Gists>>;
   getGists(
-    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gists>>;
   getGists(
-    args: Exclude<GistsAPIClientInterface['getGistsParams'], undefined>,
+    args: GistsAPIClientInterface['getGistsParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>> {
@@ -96,22 +96,22 @@ export class GuardedGistsAPIClient extends GistsAPIClient implements GistsAPICli
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsPublic(
-    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsPublicParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Gists>;
   getGistsPublic(
-    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsPublicParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Gists>>;
   getGistsPublic(
-    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsPublicParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gists>>;
   getGistsPublic(
-    args: Exclude<GistsAPIClientInterface['getGistsPublicParams'], undefined>,
+    args: GistsAPIClientInterface['getGistsPublicParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>> {
@@ -125,22 +125,22 @@ export class GuardedGistsAPIClient extends GistsAPIClient implements GistsAPICli
    * Response generated for [ 200 ] HTTP response code.
    */
   getGistsStarred(
-    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsStarredParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Gists>;
   getGistsStarred(
-    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsStarredParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Gists>>;
   getGistsStarred(
-    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    args?: GistsAPIClientInterface['getGistsStarredParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gists>>;
   getGistsStarred(
-    args: Exclude<GistsAPIClientInterface['getGistsStarredParams'], undefined>,
+    args: GistsAPIClientInterface['getGistsStarredParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>> {

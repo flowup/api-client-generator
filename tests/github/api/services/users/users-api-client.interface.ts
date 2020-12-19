@@ -35,29 +35,24 @@ export interface UsersAPIClientInterface {
    * This provides a dump of every user, in the order that they signed up for GitHub.
    * Note: Pagination is powered exclusively by the since parameter. Use the Link
    * header to get the URL for the next page of users.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsers(
-    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    args?: UsersAPIClientInterface['getUsersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Users>;
   getUsers(
-    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    args?: UsersAPIClientInterface['getUsersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Users>>;
   getUsers(
-    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    args?: UsersAPIClientInterface['getUsersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getUsers(
-    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getUsersUsername`.
@@ -94,11 +89,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getUsersUsername(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getUsersUsernameEvents`.
@@ -135,11 +125,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUsersUsernameEvents(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameEventsOrg`.
@@ -177,11 +162,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUsersUsernameEventsOrg(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameEventsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameFollowers`.
@@ -218,11 +198,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getUsersUsernameFollowers(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getUsersUsernameFollowingTargetUser`.
@@ -261,11 +236,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUsersUsernameFollowingTargetUser(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameFollowingTargetUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameGists`.
@@ -304,11 +274,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gists>>;
-  getUsersUsernameGists(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameGistsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Gists | HttpResponse<models.Gists> | HttpEvent<models.Gists>>;
 
   /**
    * Arguments object for method `getUsersUsernameKeys`.
@@ -329,7 +294,7 @@ export interface UsersAPIClientInterface {
   /**
    * List public keys for a user.
    * Lists the verified public keys for a user. This is accessible by anyone.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameKeys(
@@ -347,11 +312,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gitignore>>;
-  getUsersUsernameKeys(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `getUsersUsernameOrgs`.
@@ -388,11 +348,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gitignore>>;
-  getUsersUsernameOrgs(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameOrgsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `getUsersUsernameReceivedEvents`.
@@ -429,11 +384,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUsersUsernameReceivedEvents(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameReceivedEventsPublic`.
@@ -470,11 +420,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUsersUsernameReceivedEventsPublic(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameReceivedEventsPublicParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameRepos`.
@@ -512,11 +457,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repos>>;
-  getUsersUsernameRepos(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>>;
 
   /**
    * Arguments object for method `getUsersUsernameStarred`.
@@ -553,11 +493,6 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUsersUsernameStarred(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameStarredParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUsersUsernameSubscriptions`.
@@ -594,10 +529,5 @@ export interface UsersAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUsersUsernameSubscriptions(
-    args: Exclude<UsersAPIClientInterface['getUsersUsernameSubscriptionsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
 }

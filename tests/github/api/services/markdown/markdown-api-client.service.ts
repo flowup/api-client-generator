@@ -104,22 +104,22 @@ export class MarkdownAPIClient implements MarkdownAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   postMarkdownRaw(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    args?: MarkdownAPIClientInterface['postMarkdownRawParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<void>;
   postMarkdownRaw(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    args?: MarkdownAPIClientInterface['postMarkdownRawParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<void>>;
   postMarkdownRaw(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    args?: MarkdownAPIClientInterface['postMarkdownRawParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
   postMarkdownRaw(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    args: MarkdownAPIClientInterface['postMarkdownRawParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<void | HttpResponse<void> | HttpEvent<void>> {

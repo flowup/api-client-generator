@@ -40,7 +40,7 @@ export interface IssuesAPIClientInterface {
   /**
    * List issues.
    * List all issues across all the authenticated user's visible repositories.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getIssues(
@@ -58,10 +58,5 @@ export interface IssuesAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Issues>>;
-  getIssues(
-    args: Exclude<IssuesAPIClientInterface['getIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>>;
 
 }

@@ -53,11 +53,6 @@ export interface SearchAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.SearchCode>>;
-  getSearchCode(
-    args: Exclude<SearchAPIClientInterface['getSearchCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.SearchCode | HttpResponse<models.SearchCode> | HttpEvent<models.SearchCode>>;
 
   /**
    * Arguments object for method `getSearchIssues`.
@@ -98,11 +93,6 @@ export interface SearchAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.SearchIssues>>;
-  getSearchIssues(
-    args: Exclude<SearchAPIClientInterface['getSearchIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.SearchIssues | HttpResponse<models.SearchIssues> | HttpEvent<models.SearchIssues>>;
 
   /**
    * Arguments object for method `getSearchRepositories`.
@@ -143,11 +133,6 @@ export interface SearchAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.SearchRepositories>>;
-  getSearchRepositories(
-    args: Exclude<SearchAPIClientInterface['getSearchRepositoriesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.SearchRepositories | HttpResponse<models.SearchRepositories> | HttpEvent<models.SearchRepositories>>;
 
   /**
    * Arguments object for method `getSearchUsers`.
@@ -188,10 +173,5 @@ export interface SearchAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.SearchUsers>>;
-  getSearchUsers(
-    args: Exclude<SearchAPIClientInterface['getSearchUsersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.SearchUsers | HttpResponse<models.SearchUsers> | HttpEvent<models.SearchUsers>>;
 
 }

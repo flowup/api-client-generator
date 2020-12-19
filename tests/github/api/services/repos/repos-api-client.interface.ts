@@ -36,7 +36,7 @@ export interface ReposAPIClientInterface {
    * Delete a Repository.
    * Deleting a repository requires admin access. If OAuth is used, the delete_repo
    * scope is required.
-   * 
+   *
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepo(
@@ -54,11 +54,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepo(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepo`.
@@ -97,11 +92,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repo>>;
-  getReposOwnerRepo(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepo`.
@@ -141,11 +131,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repo>>;
-  patchReposOwnerRepo(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoAssignees`.
@@ -169,7 +154,7 @@ export interface ReposAPIClientInterface {
    * List assignees.
    * This call lists all the available assignees (owner + collaborators) to which
    * issues may be assigned.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoAssignees(
@@ -187,11 +172,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Assignees>>;
-  getReposOwnerRepoAssignees(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Assignees | HttpResponse<models.Assignees> | HttpEvent<models.Assignees>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoAssigneesAssignee`.
@@ -216,7 +196,7 @@ export interface ReposAPIClientInterface {
   /**
    * Check assignee.
    * You may also check to see if a particular user is an assignee for a repository.
-   * 
+   *
    * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoAssigneesAssignee(
@@ -234,11 +214,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getReposOwnerRepoAssigneesAssignee(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoAssigneesAssigneeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoBranches`.
@@ -277,11 +252,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Branches>>;
-  getReposOwnerRepoBranches(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Branches | HttpResponse<models.Branches> | HttpEvent<models.Branches>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoBranchesBranch`.
@@ -322,11 +292,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Branch>>;
-  getReposOwnerRepoBranchesBranch(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoBranchesBranchParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Branch | HttpResponse<models.Branch> | HttpEvent<models.Branch>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoCollaborators`.
@@ -352,7 +317,7 @@ export interface ReposAPIClientInterface {
    * repository, all organization owners are included in the list of
    * collaborators. Otherwise, only users with access to the repository are
    * returned in the collaborators list.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCollaborators(
@@ -370,11 +335,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getReposOwnerRepoCollaborators(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoCollaboratorsUser`.
@@ -415,11 +375,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoCollaboratorsUser(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCollaboratorsUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoCollaboratorsUser`.
@@ -460,11 +415,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getReposOwnerRepoCollaboratorsUser(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCollaboratorsUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putReposOwnerRepoCollaboratorsUser`.
@@ -505,11 +455,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  putReposOwnerRepoCollaboratorsUser(
-    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoCollaboratorsUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoComments`.
@@ -532,7 +477,7 @@ export interface ReposAPIClientInterface {
   /**
    * List commit comments for a repository.
    * Comments are ordered by ascending ID.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoComments(
@@ -550,11 +495,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RepoComments>>;
-  getReposOwnerRepoComments(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RepoComments | HttpResponse<models.RepoComments> | HttpEvent<models.RepoComments>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoCommentsCommentId`.
@@ -595,11 +535,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoCommentsCommentId(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoCommentsCommentId`.
@@ -640,11 +575,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CommitComments>>;
-  getReposOwnerRepoCommentsCommentId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoCommentsCommentId`.
@@ -686,11 +616,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CommitComments>>;
-  patchReposOwnerRepoCommentsCommentId(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoCommentsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoCommits`.
@@ -739,11 +664,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Commits>>;
-  getReposOwnerRepoCommits(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Commits | HttpResponse<models.Commits> | HttpEvent<models.Commits>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoCommitsRefStatus`.
@@ -769,7 +689,7 @@ export interface ReposAPIClientInterface {
    * The Combined status endpoint is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the blog post for full details.
    * To access this endpoint during the preview period, you must provide a custom media type in the Accept header:
    * application/vnd.github.she-hulk-preview+json
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsRefStatus(
@@ -787,11 +707,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RefStatus>>;
-  getReposOwnerRepoCommitsRefStatus(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsRefStatusParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RefStatus | HttpResponse<models.RefStatus> | HttpEvent<models.RefStatus>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoCommitsShaCode`.
@@ -832,11 +747,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Commit>>;
-  getReposOwnerRepoCommitsShaCode(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Commit | HttpResponse<models.Commit> | HttpEvent<models.Commit>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoCommitsShaCodeComments`.
@@ -877,11 +787,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RepoComments>>;
-  getReposOwnerRepoCommitsShaCodeComments(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RepoComments | HttpResponse<models.RepoComments> | HttpEvent<models.RepoComments>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoCommitsShaCodeComments`.
@@ -923,11 +828,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CommitComments>>;
-  postReposOwnerRepoCommitsShaCodeComments(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoCommitsShaCodeCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CommitComments | HttpResponse<models.CommitComments> | HttpEvent<models.CommitComments>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoCompareBaseIdHeadId`.
@@ -968,11 +868,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CompareCommits>>;
-  getReposOwnerRepoCompareBaseIdHeadId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoCompareBaseIdHeadIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CompareCommits | HttpResponse<models.CompareCommits> | HttpEvent<models.CompareCommits>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoContentsPath`.
@@ -997,7 +892,7 @@ export interface ReposAPIClientInterface {
   /**
    * Delete a file.
    * This method deletes a file in a repository.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteReposOwnerRepoContentsPath(
@@ -1015,11 +910,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.DeleteFile>>;
-  deleteReposOwnerRepoContentsPath(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.DeleteFile | HttpResponse<models.DeleteFile> | HttpEvent<models.DeleteFile>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoContentsPath`.
@@ -1051,7 +941,7 @@ export interface ReposAPIClientInterface {
    * Directories and submodules do not support custom media types.
    * Note: This API supports files up to 1 megabyte in size.
    * Here can be many outcomes. For details see "http://developer.github.com/v3/repos/contents/"
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoContentsPath(
@@ -1069,11 +959,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ContentsPath>>;
-  getReposOwnerRepoContentsPath(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ContentsPath | HttpResponse<models.ContentsPath> | HttpEvent<models.ContentsPath>>;
 
   /**
    * Arguments object for method `putReposOwnerRepoContentsPath`.
@@ -1114,11 +999,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CreateFile>>;
-  putReposOwnerRepoContentsPath(
-    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoContentsPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CreateFile | HttpResponse<models.CreateFile> | HttpEvent<models.CreateFile>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoContributors`.
@@ -1159,11 +1039,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Contributors>>;
-  getReposOwnerRepoContributors(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoContributorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Contributors | HttpResponse<models.Contributors> | HttpEvent<models.Contributors>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoDeployments`.
@@ -1202,11 +1077,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RepoDeployments>>;
-  getReposOwnerRepoDeployments(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RepoDeployments | HttpResponse<models.RepoDeployments> | HttpEvent<models.RepoDeployments>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoDeployments`.
@@ -1246,11 +1116,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.DeploymentResp>>;
-  postReposOwnerRepoDeployments(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.DeploymentResp | HttpResponse<models.DeploymentResp> | HttpEvent<models.DeploymentResp>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoDeploymentsIdStatuses`.
@@ -1291,11 +1156,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.DeploymentStatuses>>;
-  getReposOwnerRepoDeploymentsIdStatuses(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.DeploymentStatuses | HttpResponse<models.DeploymentStatuses> | HttpEvent<models.DeploymentStatuses>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoDeploymentsIdStatuses`.
@@ -1321,7 +1181,7 @@ export interface ReposAPIClientInterface {
   /**
    * Create a Deployment Status
    * Users with push access can create deployment statuses for a given deployment:
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoDeploymentsIdStatuses(
@@ -1339,11 +1199,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  postReposOwnerRepoDeploymentsIdStatuses(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoDeploymentsIdStatusesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoDownloads`.
@@ -1382,11 +1237,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Downloads>>;
-  getReposOwnerRepoDownloads(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Downloads | HttpResponse<models.Downloads> | HttpEvent<models.Downloads>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoDownloadsDownloadId`.
@@ -1427,11 +1277,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoDownloadsDownloadId(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoDownloadsDownloadId`.
@@ -1472,11 +1317,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Downloads>>;
-  getReposOwnerRepoDownloadsDownloadId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoDownloadsDownloadIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Downloads | HttpResponse<models.Downloads> | HttpEvent<models.Downloads>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoEvents`.
@@ -1515,11 +1355,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Events>>;
-  getReposOwnerRepoEvents(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoForks`.
@@ -1559,11 +1394,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Forks>>;
-  getReposOwnerRepoForks(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoForksParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Forks | HttpResponse<models.Forks> | HttpEvent<models.Forks>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoForks`.
@@ -1589,7 +1419,7 @@ export interface ReposAPIClientInterface {
    * Forking a Repository happens asynchronously. Therefore, you may have to wai
    * a short period before accessing the git objects. If this takes longer than 5
    * minutes, be sure to contact Support.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoForks(
@@ -1607,11 +1437,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Fork>>;
-  postReposOwnerRepoForks(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoForksParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Fork | HttpResponse<models.Fork> | HttpEvent<models.Fork>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoGitBlobs`.
@@ -1651,11 +1476,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Blobs>>;
-  postReposOwnerRepoGitBlobs(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Blobs | HttpResponse<models.Blobs> | HttpEvent<models.Blobs>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoGitBlobsShaCode`.
@@ -1683,7 +1503,7 @@ export interface ReposAPIClientInterface {
    * the blob API takes an encoding parameter that can be either utf-8 or
    * base64. If your data cannot be losslessly sent as a UTF-8 string, you can
    * base64 encode it.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitBlobsShaCode(
@@ -1701,11 +1521,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Blob>>;
-  getReposOwnerRepoGitBlobsShaCode(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Blob | HttpResponse<models.Blob> | HttpEvent<models.Blob>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoGitCommits`.
@@ -1745,11 +1560,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.GitCommit>>;
-  postReposOwnerRepoGitCommits(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.GitCommit | HttpResponse<models.GitCommit> | HttpEvent<models.GitCommit>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoGitCommitsShaCode`.
@@ -1790,11 +1600,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RepoCommit>>;
-  getReposOwnerRepoGitCommitsShaCode(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitCommitsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RepoCommit | HttpResponse<models.RepoCommit> | HttpEvent<models.RepoCommit>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoGitRefs`.
@@ -1833,11 +1638,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Refs>>;
-  getReposOwnerRepoGitRefs(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Refs | HttpResponse<models.Refs> | HttpEvent<models.Refs>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoGitRefs`.
@@ -1877,11 +1677,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.HeadBranch>>;
-  postReposOwnerRepoGitRefs(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitRefsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoGitRefsRef`.
@@ -1904,9 +1699,9 @@ export interface ReposAPIClientInterface {
 
   /**
    * Delete a Reference
-   * Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a 
+   * Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a
    * Example: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
-   * 
+   *
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoGitRefsRef(
@@ -1924,11 +1719,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoGitRefsRef(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoGitRefsRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoGitRefsRef`.
@@ -1968,11 +1758,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.HeadBranch>>;
-  getReposOwnerRepoGitRefsRef(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitRefsRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoGitRefsRef`.
@@ -2013,11 +1798,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.HeadBranch>>;
-  patchReposOwnerRepoGitRefsRef(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoGitRefsRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.HeadBranch | HttpResponse<models.HeadBranch> | HttpEvent<models.HeadBranch>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoGitTags`.
@@ -2045,7 +1825,7 @@ export interface ReposAPIClientInterface {
    * this call to create the tag object, and then create the refs/tags/[tag]
    * reference. If you want to create a lightweight tag, you only have to create
    * the tag reference - this call would be unnecessary.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTags(
@@ -2063,11 +1843,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Tags>>;
-  postReposOwnerRepoGitTags(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTagsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Tags | HttpResponse<models.Tags> | HttpEvent<models.Tags>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoGitTagsShaCode`.
@@ -2107,11 +1882,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Tag>>;
-  getReposOwnerRepoGitTagsShaCode(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTagsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Tag | HttpResponse<models.Tag> | HttpEvent<models.Tag>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoGitTrees`.
@@ -2137,7 +1907,7 @@ export interface ReposAPIClientInterface {
    * The tree creation API will take nested entries as well. If both a tree and
    * a nested path modifying that tree are specified, it will overwrite the
    * contents of that tree with the new path contents and write a new tree out.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTrees(
@@ -2155,11 +1925,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Trees>>;
-  postReposOwnerRepoGitTrees(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoGitTreesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Trees | HttpResponse<models.Trees> | HttpEvent<models.Trees>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoGitTreesShaCode`.
@@ -2202,11 +1967,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Tree>>;
-  getReposOwnerRepoGitTreesShaCode(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoGitTreesShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Tree | HttpResponse<models.Tree> | HttpEvent<models.Tree>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoHooks`.
@@ -2245,11 +2005,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Hook>>;
-  getReposOwnerRepoHooks(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoHooks`.
@@ -2289,11 +2044,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Hook>>;
-  postReposOwnerRepoHooks(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoHooksHookId`.
@@ -2334,11 +2084,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoHooksHookId(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoHooksHookIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoHooksHookId`.
@@ -2379,11 +2124,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Hook>>;
-  getReposOwnerRepoHooksHookId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoHooksHookIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoHooksHookId`.
@@ -2425,11 +2165,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Hook>>;
-  patchReposOwnerRepoHooksHookId(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoHooksHookIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Hook | HttpResponse<models.Hook> | HttpEvent<models.Hook>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoHooksHookIdTests`.
@@ -2458,7 +2193,7 @@ export interface ReposAPIClientInterface {
    * to push events, the server will respond with 204 but no test POST will
    * be generated.
    * Note: Previously /repos/:owner/:repo/hooks/:id/tes
-   * 
+   *
    * Response generated for [ 204 ] HTTP response code.
    */
   postReposOwnerRepoHooksHookIdTests(
@@ -2476,11 +2211,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  postReposOwnerRepoHooksHookIdTests(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoHooksHookIdTestsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssues`.
@@ -2528,11 +2258,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Issues>>;
-  getReposOwnerRepoIssues(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoIssues`.
@@ -2556,7 +2281,7 @@ export interface ReposAPIClientInterface {
   /**
    * Create an issue.
    * Any user with pull access to a repository can create an issue.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssues(
@@ -2574,11 +2299,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Issue>>;
-  postReposOwnerRepoIssues(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssuesComments`.
@@ -2622,11 +2342,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.IssuesComments>>;
-  getReposOwnerRepoIssuesComments(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoIssuesCommentId`.
@@ -2667,11 +2382,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoIssuesCommentId(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssuesCommentId`.
@@ -2712,11 +2422,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.IssuesComment>>;
-  getReposOwnerRepoIssuesCommentId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoIssuesCommentId`.
@@ -2758,11 +2463,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.IssuesComment>>;
-  patchReposOwnerRepoIssuesCommentId(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssuesEvents`.
@@ -2801,11 +2501,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Events>>;
-  getReposOwnerRepoIssuesEvents(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssuesEventId`.
@@ -2846,11 +2541,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Event>>;
-  getReposOwnerRepoIssuesEventId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesEventIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Event | HttpResponse<models.Event> | HttpEvent<models.Event>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssuesNumber`.
@@ -2891,11 +2581,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Issue>>;
-  getReposOwnerRepoIssuesNumber(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoIssuesNumber`.
@@ -2921,7 +2606,7 @@ export interface ReposAPIClientInterface {
   /**
    * Edit an issue.
    * Issue owners and users with push access can edit an issue.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoIssuesNumber(
@@ -2939,11 +2624,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Issue>>;
-  patchReposOwnerRepoIssuesNumber(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoIssuesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Issue | HttpResponse<models.Issue> | HttpEvent<models.Issue>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssuesNumberComments`.
@@ -2984,11 +2664,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.IssuesComments>>;
-  getReposOwnerRepoIssuesNumberComments(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoIssuesNumberComments`.
@@ -3030,11 +2705,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.IssuesComment>>;
-  postReposOwnerRepoIssuesNumberComments(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.IssuesComment | HttpResponse<models.IssuesComment> | HttpEvent<models.IssuesComment>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssuesNumberEvents`.
@@ -3075,11 +2745,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Events>>;
-  getReposOwnerRepoIssuesNumberEvents(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoIssuesNumberLabels`.
@@ -3120,11 +2785,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoIssuesNumberLabels(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoIssuesNumberLabels`.
@@ -3165,11 +2825,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Labels>>;
-  getReposOwnerRepoIssuesNumberLabels(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoIssuesNumberLabels`.
@@ -3211,11 +2866,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Label>>;
-  postReposOwnerRepoIssuesNumberLabels(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>>;
 
   /**
    * Arguments object for method `putReposOwnerRepoIssuesNumberLabels`.
@@ -3241,7 +2891,7 @@ export interface ReposAPIClientInterface {
   /**
    * Replace all labels for an issue.
    * Sending an empty array ([]) will remove all Labels from the Issue.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   putReposOwnerRepoIssuesNumberLabels(
@@ -3259,11 +2909,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Label>>;
-  putReposOwnerRepoIssuesNumberLabels(
-    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoIssuesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoIssuesNumberLabelsName`.
@@ -3306,11 +2951,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoIssuesNumberLabelsName(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoIssuesNumberLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoKeys`.
@@ -3349,11 +2989,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Keys>>;
-  getReposOwnerRepoKeys(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Keys | HttpResponse<models.Keys> | HttpEvent<models.Keys>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoKeys`.
@@ -3393,11 +3028,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserKeysKeyId>>;
-  postReposOwnerRepoKeys(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoKeysKeyId`.
@@ -3438,11 +3068,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoKeysKeyId(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoKeysKeyId`.
@@ -3483,11 +3108,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserKeysKeyId>>;
-  getReposOwnerRepoKeysKeyId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoLabels`.
@@ -3526,11 +3146,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Labels>>;
-  getReposOwnerRepoLabels(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoLabels`.
@@ -3570,11 +3185,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Label>>;
-  postReposOwnerRepoLabels(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoLabelsName`.
@@ -3615,11 +3225,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoLabelsName(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoLabelsName`.
@@ -3660,11 +3265,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Label>>;
-  getReposOwnerRepoLabelsName(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoLabelsName`.
@@ -3706,11 +3306,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Label>>;
-  patchReposOwnerRepoLabelsName(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoLabelsNameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Label | HttpResponse<models.Label> | HttpEvent<models.Label>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoLanguages`.
@@ -3734,7 +3329,7 @@ export interface ReposAPIClientInterface {
    * List languages.
    * List languages for the specified repository. The value on the right of a
    * language is the number of bytes of code written in that language.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLanguages(
@@ -3752,11 +3347,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Languages>>;
-  getReposOwnerRepoLanguages(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoLanguagesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Languages | HttpResponse<models.Languages> | HttpEvent<models.Languages>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoMerges`.
@@ -3796,11 +3386,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.MergesSuccessful>>;
-  postReposOwnerRepoMerges(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMergesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.MergesSuccessful | HttpResponse<models.MergesSuccessful> | HttpEvent<models.MergesSuccessful>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoMilestones`.
@@ -3844,11 +3429,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Milestone>>;
-  getReposOwnerRepoMilestones(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoMilestones`.
@@ -3888,11 +3468,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Milestone>>;
-  postReposOwnerRepoMilestones(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoMilestonesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoMilestonesNumber`.
@@ -3933,11 +3508,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoMilestonesNumber(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoMilestonesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoMilestonesNumber`.
@@ -3978,11 +3548,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Milestone>>;
-  getReposOwnerRepoMilestonesNumber(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoMilestonesNumber`.
@@ -4024,11 +3589,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Milestone>>;
-  patchReposOwnerRepoMilestonesNumber(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoMilestonesNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Milestone | HttpResponse<models.Milestone> | HttpEvent<models.Milestone>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoMilestonesNumberLabels`.
@@ -4069,11 +3629,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Labels>>;
-  getReposOwnerRepoMilestonesNumberLabels(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoMilestonesNumberLabelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Labels | HttpResponse<models.Labels> | HttpEvent<models.Labels>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoNotifications`.
@@ -4102,7 +3657,7 @@ export interface ReposAPIClientInterface {
   /**
    * List your notifications in a repository
    * List all notifications for the current user.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoNotifications(
@@ -4120,11 +3675,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Notifications>>;
-  getReposOwnerRepoNotifications(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>>;
 
   /**
    * Arguments object for method `putReposOwnerRepoNotifications`.
@@ -4149,7 +3699,7 @@ export interface ReposAPIClientInterface {
    * Mark notifications as read in a repository.
    * Marking all notifications in a repository as "read" removes them from the
    * default view on GitHub.com.
-   * 
+   *
    * Response generated for [ 205 ] HTTP response code.
    */
   putReposOwnerRepoNotifications(
@@ -4167,11 +3717,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  putReposOwnerRepoNotifications(
-    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoPulls`.
@@ -4216,11 +3761,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Pulls>>;
-  getReposOwnerRepoPulls(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoPulls`.
@@ -4260,11 +3800,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Pulls>>;
-  postReposOwnerRepoPulls(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoPullsComments`.
@@ -4292,7 +3827,7 @@ export interface ReposAPIClientInterface {
   /**
    * List comments in a repository.
    * By default, Review Comments are ordered by ascending ID.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsComments(
@@ -4310,11 +3845,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.IssuesComments>>;
-  getReposOwnerRepoPullsComments(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.IssuesComments | HttpResponse<models.IssuesComments> | HttpEvent<models.IssuesComments>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoPullsCommentId`.
@@ -4355,11 +3885,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoPullsCommentId(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoPullsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoPullsCommentId`.
@@ -4400,11 +3925,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PullsComment>>;
-  getReposOwnerRepoPullsCommentId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoPullsCommentId`.
@@ -4446,11 +3966,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PullsComment>>;
-  patchReposOwnerRepoPullsCommentId(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsCommentIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoPullsNumber`.
@@ -4491,11 +4006,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PullRequest>>;
-  getReposOwnerRepoPullsNumber(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PullRequest | HttpResponse<models.PullRequest> | HttpEvent<models.PullRequest>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoPullsNumber`.
@@ -4537,11 +4047,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repo>>;
-  patchReposOwnerRepoPullsNumber(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoPullsNumberParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repo | HttpResponse<models.Repo> | HttpEvent<models.Repo>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoPullsNumberComments`.
@@ -4582,11 +4087,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PullsComment>>;
-  getReposOwnerRepoPullsNumberComments(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoPullsNumberComments`.
@@ -4611,28 +4111,28 @@ export interface ReposAPIClientInterface {
 
   /**
    * Create a comment.
-   * 
+   *
    *   #TODO Alternative input
    * ( http://developer.github.com/v3/pulls/comments/ )
-   * 
+   *
    *   description: |
-   * 
+   *
    *     Alternative Input.
-   * 
+   *
    *     Instead of passing commit_id, path, and position you can reply to an
-   * 
+   *
    *     existing Pull Request Comment like this:
-   * 
-   * 
-   * 
+   *
+   *
+   *
    *         body
-   * 
+   *
    *            Required string
-   * 
+   *
    *         in_reply_to
-   * 
+   *
    *            Required number - Comment id to reply to.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoPullsNumberComments(
@@ -4650,11 +4150,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PullsComment>>;
-  postReposOwnerRepoPullsNumberComments(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoPullsNumberCommentsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PullsComment | HttpResponse<models.PullsComment> | HttpEvent<models.PullsComment>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoPullsNumberCommits`.
@@ -4695,11 +4190,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Commits>>;
-  getReposOwnerRepoPullsNumberCommits(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberCommitsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Commits | HttpResponse<models.Commits> | HttpEvent<models.Commits>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoPullsNumberFiles`.
@@ -4740,11 +4230,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Pulls>>;
-  getReposOwnerRepoPullsNumberFiles(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberFilesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Pulls | HttpResponse<models.Pulls> | HttpEvent<models.Pulls>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoPullsNumberMerge`.
@@ -4785,11 +4270,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getReposOwnerRepoPullsNumberMerge(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoPullsNumberMergeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putReposOwnerRepoPullsNumberMerge`.
@@ -4831,11 +4311,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Merge>>;
-  putReposOwnerRepoPullsNumberMerge(
-    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoPullsNumberMergeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Merge | HttpResponse<models.Merge> | HttpEvent<models.Merge>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoReadme`.
@@ -4860,7 +4335,7 @@ export interface ReposAPIClientInterface {
   /**
    * Get the README.
    * This method returns the preferred README for a repository.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReadme(
@@ -4878,11 +4353,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ContentsPath>>;
-  getReposOwnerRepoReadme(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReadmeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ContentsPath | HttpResponse<models.ContentsPath> | HttpEvent<models.ContentsPath>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoReleases`.
@@ -4921,11 +4391,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Releases>>;
-  getReposOwnerRepoReleases(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Releases | HttpResponse<models.Releases> | HttpEvent<models.Releases>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoReleases`.
@@ -4949,7 +4414,7 @@ export interface ReposAPIClientInterface {
   /**
    * Create a release
    * Users with push access to the repository can create a release.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoReleases(
@@ -4967,11 +4432,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Release>>;
-  postReposOwnerRepoReleases(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoReleasesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoReleasesAssetsId`.
@@ -5011,11 +4471,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoReleasesAssetsId(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesAssetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoReleasesAssetsId`.
@@ -5055,11 +4510,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Asset>>;
-  getReposOwnerRepoReleasesAssetsId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesAssetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Asset | HttpResponse<models.Asset> | HttpEvent<models.Asset>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoReleasesAssetsId`.
@@ -5084,7 +4534,7 @@ export interface ReposAPIClientInterface {
   /**
    * Edit a release asset
    * Users with push access to the repository can edit a release asset.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoReleasesAssetsId(
@@ -5102,11 +4552,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Asset>>;
-  patchReposOwnerRepoReleasesAssetsId(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesAssetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Asset | HttpResponse<models.Asset> | HttpEvent<models.Asset>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoReleasesId`.
@@ -5146,11 +4591,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoReleasesId(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoReleasesIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoReleasesId`.
@@ -5190,11 +4630,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Release>>;
-  getReposOwnerRepoReleasesId(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>>;
 
   /**
    * Arguments object for method `patchReposOwnerRepoReleasesId`.
@@ -5235,11 +4670,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Release>>;
-  patchReposOwnerRepoReleasesId(
-    args: Exclude<ReposAPIClientInterface['patchReposOwnerRepoReleasesIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Release | HttpResponse<models.Release> | HttpEvent<models.Release>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoReleasesIdAssets`.
@@ -5279,11 +4709,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Assets>>;
-  getReposOwnerRepoReleasesIdAssets(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoReleasesIdAssetsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Assets | HttpResponse<models.Assets> | HttpEvent<models.Assets>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoStargazers`.
@@ -5322,11 +4747,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getReposOwnerRepoStargazers(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStargazersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoStatsCodeFrequency`.
@@ -5350,7 +4770,7 @@ export interface ReposAPIClientInterface {
    * Get the number of additions and deletions per week.
    * Returns a weekly aggregate of the number of additions and deletions pushed
    * to a repository.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCodeFrequency(
@@ -5368,11 +4788,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CodeFrequencyStats>>;
-  getReposOwnerRepoStatsCodeFrequency(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCodeFrequencyParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CodeFrequencyStats | HttpResponse<models.CodeFrequencyStats> | HttpEvent<models.CodeFrequencyStats>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoStatsCommitActivity`.
@@ -5396,7 +4811,7 @@ export interface ReposAPIClientInterface {
    * Get the last year of commit activity data.
    * Returns the last year of commit activity grouped by week. The days array
    * is a group of commits per day, starting on Sunday.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCommitActivity(
@@ -5414,11 +4829,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CommitActivityStats>>;
-  getReposOwnerRepoStatsCommitActivity(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsCommitActivityParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CommitActivityStats | HttpResponse<models.CommitActivityStats> | HttpEvent<models.CommitActivityStats>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoStatsContributors`.
@@ -5457,11 +4867,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ContributorsStats>>;
-  getReposOwnerRepoStatsContributors(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsContributorsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ContributorsStats | HttpResponse<models.ContributorsStats> | HttpEvent<models.ContributorsStats>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoStatsParticipation`.
@@ -5500,11 +4905,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ParticipationStats>>;
-  getReposOwnerRepoStatsParticipation(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsParticipationParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ParticipationStats | HttpResponse<models.ParticipationStats> | HttpEvent<models.ParticipationStats>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoStatsPunchCard`.
@@ -5530,12 +4930,12 @@ export interface ReposAPIClientInterface {
    * 0-6 Sunday - Saturday
    * 0-23 Hour of day
    * Number of commits
-   * 
-   * 
+   *
+   *
    * For example, [2, 14, 25] indicates that there were 25 total commits, during
    * the 2.00pm hour on Tuesdays. All times are based on the time zone of
    * individual commits.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsPunchCard(
@@ -5553,11 +4953,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.CodeFrequencyStats>>;
-  getReposOwnerRepoStatsPunchCard(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatsPunchCardParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.CodeFrequencyStats | HttpResponse<models.CodeFrequencyStats> | HttpEvent<models.CodeFrequencyStats>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoStatusesRef`.
@@ -5598,11 +4993,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Ref>>;
-  getReposOwnerRepoStatusesRef(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoStatusesRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Ref | HttpResponse<models.Ref> | HttpEvent<models.Ref>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoStatusesRef`.
@@ -5644,11 +5034,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Ref>>;
-  postReposOwnerRepoStatusesRef(
-    args: Exclude<ReposAPIClientInterface['postReposOwnerRepoStatusesRefParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Ref | HttpResponse<models.Ref> | HttpEvent<models.Ref>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoSubscribers`.
@@ -5687,11 +5072,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getReposOwnerRepoSubscribers(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscribersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `deleteReposOwnerRepoSubscription`.
@@ -5730,11 +5110,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteReposOwnerRepoSubscription(
-    args: Exclude<ReposAPIClientInterface['deleteReposOwnerRepoSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoSubscription`.
@@ -5773,11 +5148,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Subscribition>>;
-  getReposOwnerRepoSubscription(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Subscribition | HttpResponse<models.Subscribition> | HttpEvent<models.Subscribition>>;
 
   /**
    * Arguments object for method `putReposOwnerRepoSubscription`.
@@ -5817,11 +5187,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Subscribition>>;
-  putReposOwnerRepoSubscription(
-    args: Exclude<ReposAPIClientInterface['putReposOwnerRepoSubscriptionParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Subscribition | HttpResponse<models.Subscribition> | HttpEvent<models.Subscribition>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoTags`.
@@ -5860,11 +5225,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Tags>>;
-  getReposOwnerRepoTags(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTagsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Tags | HttpResponse<models.Tags> | HttpEvent<models.Tags>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoTeams`.
@@ -5903,11 +5263,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Teams>>;
-  getReposOwnerRepoTeams(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Teams | HttpResponse<models.Teams> | HttpEvent<models.Teams>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoWatchers`.
@@ -5946,11 +5301,6 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getReposOwnerRepoWatchers(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoWatchersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoArchiveFormatPath`.
@@ -5980,7 +5330,7 @@ export interface ReposAPIClientInterface {
    * configured to follow redirects or you will need to use the Location header
    * to make a second GET request.
    * Note: For private repositories, these links are temporary and expire quickly.
-   * 
+   *
    * Response generated for [ default ] HTTP response code.
    */
   getReposOwnerRepoArchiveFormatPath(
@@ -5998,10 +5348,5 @@ export interface ReposAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getReposOwnerRepoArchiveFormatPath(
-    args: Exclude<ReposAPIClientInterface['getReposOwnerRepoArchiveFormatPathParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
 }

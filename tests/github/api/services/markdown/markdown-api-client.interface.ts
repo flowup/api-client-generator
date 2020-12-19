@@ -48,11 +48,6 @@ export interface MarkdownAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  postMarkdown(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `postMarkdownRaw`.
@@ -73,24 +68,19 @@ export interface MarkdownAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   postMarkdownRaw(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    args?: MarkdownAPIClientInterface['postMarkdownRawParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<void>;
   postMarkdownRaw(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    args?: MarkdownAPIClientInterface['postMarkdownRawParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<void>>;
   postMarkdownRaw(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
+    args?: MarkdownAPIClientInterface['postMarkdownRawParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  postMarkdownRaw(
-    args: Exclude<MarkdownAPIClientInterface['postMarkdownRawParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
 }

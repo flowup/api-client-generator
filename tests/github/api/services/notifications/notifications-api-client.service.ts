@@ -50,26 +50,26 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
   /**
    * List your notifications.
    * List all notifications for the current user, grouped by repository.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotifications(
-    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    args?: NotificationsAPIClientInterface['getNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Notifications>;
   getNotifications(
-    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    args?: NotificationsAPIClientInterface['getNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Notifications>>;
   getNotifications(
-    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    args?: NotificationsAPIClientInterface['getNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Notifications>>;
   getNotifications(
-    args: Exclude<NotificationsAPIClientInterface['getNotificationsParams'], undefined>,
+    args: NotificationsAPIClientInterface['getNotificationsParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.Notifications | HttpResponse<models.Notifications> | HttpEvent<models.Notifications>> {
@@ -113,7 +113,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
   /**
    * Mark as read.
    * Marking a notification as "read" removes it from the default view on GitHub.com.
-   * 
+   *
    * Response generated for [ 205 ] HTTP response code.
    */
   putNotifications(
@@ -377,7 +377,7 @@ export class NotificationsAPIClient implements NotificationsAPIClientInterface {
    * This lets you subscribe to a thread, or ignore it. Subscribing to a thread
    * is unnecessary if the user is already subscribed to the repository. Ignoring
    * a thread will mute all future notifications (until you comment or get @mentioned).
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   putNotificationsThreadsIdSubscription(

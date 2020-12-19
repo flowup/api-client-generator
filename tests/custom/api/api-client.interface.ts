@@ -42,11 +42,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ItemList>>;
-  getItems(
-    args: Exclude<APIClientInterface['getItemsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ItemList | HttpResponse<models.ItemList> | HttpEvent<models.ItemList>>;
 
   /**
    * Arguments object for method `getItemModels`.
@@ -76,11 +71,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getItemModels(
-    args: Exclude<APIClientInterface['getItemModelsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `getPetsId`.
@@ -107,11 +97,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Pet[]>>;
-  getPetsId(
-    args: Exclude<APIClientInterface['getPetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Pet[] | HttpResponse<models.Pet[]> | HttpEvent<models.Pet[]>>;
 
   /**
    * Arguments object for method `deletePetsId`.
@@ -138,11 +123,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deletePetsId(
-    args: Exclude<APIClientInterface['deletePetsIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -159,10 +139,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<(models.Customer[]) | null>>;
-  getCustomers(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<(models.Customer[]) | null | HttpResponse<(models.Customer[]) | null> | HttpEvent<(models.Customer[]) | null>>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -179,10 +155,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Dictionary>>;
-  getDictionaries(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Dictionary | HttpResponse<models.Dictionary> | HttpEvent<models.Dictionary>>;
 
   /**
    * Arguments object for method `getFileId`.
@@ -209,11 +181,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<File>>;
-  getFileId(
-    args: Exclude<APIClientInterface['getFileIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<File | HttpResponse<File> | HttpEvent<File>>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -230,10 +197,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getRandomObject(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -250,10 +213,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getRandomModel(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -270,10 +229,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<string>>;
-  getRandomString(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<string | HttpResponse<string> | HttpEvent<string>>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -290,10 +245,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<{ [key: string]: number }>>;
-  getDictionary(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<{ [key: string]: number } | HttpResponse<{ [key: string]: number }> | HttpEvent<{ [key: string]: number }>>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -310,10 +261,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<{ [key: string]: number }[]>>;
-  getArrayOfDictionaries(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<{ [key: string]: number }[] | HttpResponse<{ [key: string]: number }[]> | HttpEvent<{ [key: string]: number }[]>>;
 
   /**
    * Arguments object for method `firestoreProjectsDatabasesDocumentsCommit`.
@@ -355,11 +302,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Dictionary>>;
-  firestoreProjectsDatabasesDocumentsCommit(
-    args: Exclude<APIClientInterface['firestoreProjectsDatabasesDocumentsCommitParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Dictionary | HttpResponse<models.Dictionary> | HttpEvent<models.Dictionary>>;
 
   /**
    * Arguments object for method `postReposOwnerRepoGitBlobs`.
@@ -394,11 +336,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Blob[]>>;
-  postReposOwnerRepoGitBlobs(
-    args: Exclude<APIClientInterface['postReposOwnerRepoGitBlobsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Blob[] | HttpResponse<models.Blob[]> | HttpEvent<models.Blob[]>>;
 
   /**
    * Arguments object for method `getReposOwnerRepoGitBlobsShaCode`.
@@ -433,10 +370,5 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<File>>;
-  getReposOwnerRepoGitBlobsShaCode(
-    args: Exclude<APIClientInterface['getReposOwnerRepoGitBlobsShaCodeParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<File | HttpResponse<File> | HttpEvent<File>>;
 
 }

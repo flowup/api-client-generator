@@ -31,30 +31,25 @@ export interface FeedsAPIClientInterface {
   /**
    * List Feeds.
    * GitHub provides several timeline resources in Atom format. The Feeds API
-   * 
+   *
    *  lists all the feeds available to the authenticating user.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getFeeds(
-    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    args?: FeedsAPIClientInterface['getFeedsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Feeds>;
   getFeeds(
-    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    args?: FeedsAPIClientInterface['getFeedsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Feeds>>;
   getFeeds(
-    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
+    args?: FeedsAPIClientInterface['getFeedsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Feeds>>;
-  getFeeds(
-    args: Exclude<FeedsAPIClientInterface['getFeedsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Feeds | HttpResponse<models.Feeds> | HttpEvent<models.Feeds>>;
 
 }

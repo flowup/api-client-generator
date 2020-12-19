@@ -29,10 +29,6 @@ export interface DashboardAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.WidgetTypeViewModel[]>>;
-  getWidgetTypes(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.WidgetTypeViewModel[] | HttpResponse<models.WidgetTypeViewModel[]> | HttpEvent<models.WidgetTypeViewModel[]>>;
 
   /**
    * Arguments object for method `get`.
@@ -59,11 +55,6 @@ export interface DashboardAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.DashboardViewModel>>;
-  get(
-    args: Exclude<DashboardAPIClientInterface['getParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.DashboardViewModel | HttpResponse<models.DashboardViewModel> | HttpEvent<models.DashboardViewModel>>;
 
   /**
    * Arguments object for method `getSettings`.
@@ -90,11 +81,6 @@ export interface DashboardAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RowModel[]>>;
-  getSettings(
-    args: Exclude<DashboardAPIClientInterface['getSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RowModel[] | HttpResponse<models.RowModel[]> | HttpEvent<models.RowModel[]>>;
 
   /**
    * Arguments object for method `putSettings`.
@@ -122,10 +108,5 @@ export interface DashboardAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  putSettings(
-    args: Exclude<DashboardAPIClientInterface['putSettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
 }

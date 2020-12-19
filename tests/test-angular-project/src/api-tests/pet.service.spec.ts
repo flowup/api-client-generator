@@ -193,4 +193,32 @@ describe('PetService', () => {
       await expect(responseType).toEqual('blob');
     },
   ));
+
+  it('should work with optional parameters args object that is empty', inject(
+    [PetAPIClient, HttpTestingController],
+    async (api: PetAPIClient, backend: HttpTestingController) => {
+      api.getPets().subscribe(() => {});
+
+      const { params }: HttpRequest<FormData> = backend.expectOne({
+        method: 'GET',
+        url: '/pets',
+      }).request;
+
+      await expect(params.getAll('status')).toEqual(null);
+    },
+  ));
+
+  it('should work with optional parameters args object that is set', inject(
+    [PetAPIClient, HttpTestingController],
+    async (api: PetAPIClient, backend: HttpTestingController) => {
+      api.getPets({ status: 'available' }).subscribe(() => {});
+
+      const { params }: HttpRequest<FormData> = backend.expectOne({
+        method: 'GET',
+        url: '/pets?status=available',
+      }).request;
+
+      await expect(params.getAll('status')).toEqual(['available']);
+    },
+  ));
 });

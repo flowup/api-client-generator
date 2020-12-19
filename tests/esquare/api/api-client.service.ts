@@ -968,22 +968,22 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   geImportStats(
-    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    args?: APIClientInterface['geImportStatsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.TotalImportStats>;
   geImportStats(
-    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    args?: APIClientInterface['geImportStatsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.TotalImportStats>>;
   geImportStats(
-    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    args?: APIClientInterface['geImportStatsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.TotalImportStats>>;
   geImportStats(
-    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    args: APIClientInterface['geImportStatsParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.TotalImportStats | HttpResponse<models.TotalImportStats> | HttpEvent<models.TotalImportStats>> {
@@ -1569,22 +1569,22 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   markViewedNotifications(
-    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    args?: APIClientInterface['markViewedNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<void>;
   markViewedNotifications(
-    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    args?: APIClientInterface['markViewedNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<void>>;
   markViewedNotifications(
-    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    args?: APIClientInterface['markViewedNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
   markViewedNotifications(
-    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    args: APIClientInterface['markViewedNotificationsParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
@@ -1900,22 +1900,22 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   createNotification(
-    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    args?: APIClientInterface['createNotificationParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<number>;
   createNotification(
-    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    args?: APIClientInterface['createNotificationParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<number>>;
   createNotification(
-    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    args?: APIClientInterface['createNotificationParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<number>>;
   createNotification(
-    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    args: APIClientInterface['createNotificationParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<number | HttpResponse<number> | HttpEvent<number>> {
@@ -1968,22 +1968,22 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udatePassVerificationPolicies(
-    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassVerificationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.PasswordVerificationPolicies>;
   udatePassVerificationPolicies(
-    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassVerificationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.PasswordVerificationPolicies>>;
   udatePassVerificationPolicies(
-    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassVerificationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PasswordVerificationPolicies>>;
   udatePassVerificationPolicies(
-    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    args: APIClientInterface['udatePassVerificationPoliciesParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.PasswordVerificationPolicies | HttpResponse<models.PasswordVerificationPolicies> | HttpEvent<models.PasswordVerificationPolicies>> {
@@ -2036,22 +2036,22 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udatePassCreationPolicies(
-    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassCreationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.PasswordCreationPolicies>;
   udatePassCreationPolicies(
-    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassCreationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.PasswordCreationPolicies>>;
   udatePassCreationPolicies(
-    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassCreationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PasswordCreationPolicies>>;
   udatePassCreationPolicies(
-    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    args: APIClientInterface['udatePassCreationPoliciesParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.PasswordCreationPolicies | HttpResponse<models.PasswordCreationPolicies> | HttpEvent<models.PasswordCreationPolicies>> {
@@ -2104,22 +2104,22 @@ export class APIClient implements APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udateOtherSecuritySettings(
-    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    args?: APIClientInterface['udateOtherSecuritySettingsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.OtherSecuritySettings>;
   udateOtherSecuritySettings(
-    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    args?: APIClientInterface['udateOtherSecuritySettingsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.OtherSecuritySettings>>;
   udateOtherSecuritySettings(
-    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    args?: APIClientInterface['udateOtherSecuritySettingsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.OtherSecuritySettings>>;
   udateOtherSecuritySettings(
-    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    args: APIClientInterface['udateOtherSecuritySettingsParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.OtherSecuritySettings | HttpResponse<models.OtherSecuritySettings> | HttpEvent<models.OtherSecuritySettings>> {

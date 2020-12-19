@@ -52,22 +52,22 @@ export class MetaAPIClient implements MetaAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getMeta(
-    args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
+    args?: MetaAPIClientInterface['getMetaParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Meta>;
   getMeta(
-    args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
+    args?: MetaAPIClientInterface['getMetaParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Meta>>;
   getMeta(
-    args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
+    args?: MetaAPIClientInterface['getMetaParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Meta>>;
   getMeta(
-    args: Exclude<MetaAPIClientInterface['getMetaParams'], undefined>,
+    args: MetaAPIClientInterface['getMetaParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.Meta | HttpResponse<models.Meta> | HttpEvent<models.Meta>> {

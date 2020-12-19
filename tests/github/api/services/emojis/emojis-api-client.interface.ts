@@ -33,24 +33,19 @@ export interface EmojisAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getEmojis(
-    args: Exclude<EmojisAPIClientInterface['getEmojisParams'], undefined>,
+    args?: EmojisAPIClientInterface['getEmojisParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Emojis>;
   getEmojis(
-    args: Exclude<EmojisAPIClientInterface['getEmojisParams'], undefined>,
+    args?: EmojisAPIClientInterface['getEmojisParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Emojis>>;
   getEmojis(
-    args: Exclude<EmojisAPIClientInterface['getEmojisParams'], undefined>,
+    args?: EmojisAPIClientInterface['getEmojisParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Emojis>>;
-  getEmojis(
-    args: Exclude<EmojisAPIClientInterface['getEmojisParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Emojis | HttpResponse<models.Emojis> | HttpEvent<models.Emojis>>;
 
 }

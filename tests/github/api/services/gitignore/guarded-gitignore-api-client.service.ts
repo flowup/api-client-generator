@@ -34,26 +34,26 @@ export class GuardedGitignoreAPIClient extends GitignoreAPIClient implements Git
   /**
    * Listing available templates.
    * List all templates available to pass as an option when creating a repository.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getGitignoreTemplates(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    args?: GitignoreAPIClientInterface['getGitignoreTemplatesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Gitignore>;
   getGitignoreTemplates(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    args?: GitignoreAPIClientInterface['getGitignoreTemplatesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Gitignore>>;
   getGitignoreTemplates(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    args?: GitignoreAPIClientInterface['getGitignoreTemplatesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gitignore>>;
   getGitignoreTemplates(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    args: GitignoreAPIClientInterface['getGitignoreTemplatesParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>> {

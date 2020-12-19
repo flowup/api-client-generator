@@ -49,11 +49,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Organization>>;
-  getOrgsOrg(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Organization | HttpResponse<models.Organization> | HttpEvent<models.Organization>>;
 
   /**
    * Arguments object for method `patchOrgsOrg`.
@@ -91,11 +86,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Organization>>;
-  patchOrgsOrg(
-    args: Exclude<OrgsAPIClientInterface['patchOrgsOrgParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Organization | HttpResponse<models.Organization> | HttpEvent<models.Organization>>;
 
   /**
    * Arguments object for method `getOrgsOrgEvents`.
@@ -132,11 +122,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Events>>;
-  getOrgsOrgEvents(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>>;
 
   /**
    * Arguments object for method `getOrgsOrgIssues`.
@@ -166,7 +151,7 @@ export interface OrgsAPIClientInterface {
   /**
    * List issues.
    * List all issues for a given organization for the authenticated user.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgIssues(
@@ -184,11 +169,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Issues>>;
-  getOrgsOrgIssues(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>>;
 
   /**
    * Arguments object for method `getOrgsOrgMembers`.
@@ -213,7 +193,7 @@ export interface OrgsAPIClientInterface {
    * is also an owner of this organization then both concealed and public members
    * will be returned. If the requester is not an owner of the organization the
    * query will be redirected to the public members list.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgMembers(
@@ -231,11 +211,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getOrgsOrgMembers(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `deleteOrgsOrgMembersUsername`.
@@ -259,7 +234,7 @@ export interface OrgsAPIClientInterface {
    * Remove a member.
    * Removing a user from this list will remove them from all teams and they
    * will no longer have any access to the organization's repositories.
-   * 
+   *
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteOrgsOrgMembersUsername(
@@ -277,11 +252,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteOrgsOrgMembersUsername(
-    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getOrgsOrgMembersUsername`.
@@ -320,11 +290,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getOrgsOrgMembersUsername(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getOrgsOrgPublicMembers`.
@@ -346,7 +311,7 @@ export interface OrgsAPIClientInterface {
    * Public members list.
    * Members of an organization can choose to have their membership publicized
    * or not.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgPublicMembers(
@@ -364,11 +329,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getOrgsOrgPublicMembers(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `deleteOrgsOrgPublicMembersUsername`.
@@ -407,11 +367,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteOrgsOrgPublicMembersUsername(
-    args: Exclude<OrgsAPIClientInterface['deleteOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getOrgsOrgPublicMembersUsername`.
@@ -450,11 +405,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getOrgsOrgPublicMembersUsername(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putOrgsOrgPublicMembersUsername`.
@@ -493,11 +443,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  putOrgsOrgPublicMembersUsername(
-    args: Exclude<OrgsAPIClientInterface['putOrgsOrgPublicMembersUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getOrgsOrgRepos`.
@@ -535,11 +480,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repos>>;
-  getOrgsOrgRepos(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>>;
 
   /**
    * Arguments object for method `postOrgsOrgRepos`.
@@ -561,7 +501,7 @@ export interface OrgsAPIClientInterface {
   /**
    * Create a new repository for the authenticated user. OAuth users must supply
    * repo scope.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postOrgsOrgRepos(
@@ -579,11 +519,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repos>>;
-  postOrgsOrgRepos(
-    args: Exclude<OrgsAPIClientInterface['postOrgsOrgReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>>;
 
   /**
    * Arguments object for method `getOrgsOrgTeams`.
@@ -620,11 +555,6 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Teams>>;
-  getOrgsOrgTeams(
-    args: Exclude<OrgsAPIClientInterface['getOrgsOrgTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Teams | HttpResponse<models.Teams> | HttpEvent<models.Teams>>;
 
   /**
    * Arguments object for method `postOrgsOrgTeams`.
@@ -646,7 +576,7 @@ export interface OrgsAPIClientInterface {
   /**
    * Create team.
    * In order to create a team, the authenticated user must be an owner of organization.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postOrgsOrgTeams(
@@ -664,10 +594,5 @@ export interface OrgsAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Team>>;
-  postOrgsOrgTeams(
-    args: Exclude<OrgsAPIClientInterface['postOrgsOrgTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Team | HttpResponse<models.Team> | HttpEvent<models.Team>>;
 
 }

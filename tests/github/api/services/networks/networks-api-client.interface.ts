@@ -51,10 +51,5 @@ export interface NetworksAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Events>>;
-  getNetworksOwnerRepoEvents(
-    args: Exclude<NetworksAPIClientInterface['getNetworksOwnerRepoEventsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>>;
 
 }

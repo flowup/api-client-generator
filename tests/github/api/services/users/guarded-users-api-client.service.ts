@@ -36,26 +36,26 @@ export class GuardedUsersAPIClient extends UsersAPIClient implements UsersAPICli
    * This provides a dump of every user, in the order that they signed up for GitHub.
    * Note: Pagination is powered exclusively by the since parameter. Use the Link
    * header to get the URL for the next page of users.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsers(
-    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    args?: UsersAPIClientInterface['getUsersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Users>;
   getUsers(
-    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    args?: UsersAPIClientInterface['getUsersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Users>>;
   getUsers(
-    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    args?: UsersAPIClientInterface['getUsersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
   getUsers(
-    args: Exclude<UsersAPIClientInterface['getUsersParams'], undefined>,
+    args: UsersAPIClientInterface['getUsersParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>> {
@@ -238,7 +238,7 @@ export class GuardedUsersAPIClient extends UsersAPIClient implements UsersAPICli
   /**
    * List public keys for a user.
    * Lists the verified public keys for a user. This is accessible by anyone.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameKeys(

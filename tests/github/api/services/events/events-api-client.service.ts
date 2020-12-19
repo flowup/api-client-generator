@@ -52,22 +52,22 @@ export class EventsAPIClient implements EventsAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getEvents(
-    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
+    args?: EventsAPIClientInterface['getEventsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Events>;
   getEvents(
-    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
+    args?: EventsAPIClientInterface['getEventsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Events>>;
   getEvents(
-    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
+    args?: EventsAPIClientInterface['getEventsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Events>>;
   getEvents(
-    args: Exclude<EventsAPIClientInterface['getEventsParams'], undefined>,
+    args: EventsAPIClientInterface['getEventsParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.Events | HttpResponse<models.Events> | HttpEvent<models.Events>> {

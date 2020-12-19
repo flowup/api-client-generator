@@ -177,6 +177,9 @@ function parseMethods(
             methodType: methodTypeLowered,
             body,
             parameters: transformedParams,
+            paramsOptional: transformedParams.every(
+              ({ isRequired }) => !isRequired,
+            ),
             formData,
             // turn path interpolation `{this}` into string template `${args.this}
             path: pathName.replace(

@@ -329,6 +329,31 @@ paths:
           description: Import not found
         405:
           description: Invalid input
+  /pets:
+    get:
+      tags:
+        - 'pet'
+      summary: 'Get pets from the store'
+      operationId: 'getPets'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'query'
+          name: 'status'
+          type: 'string'
+          description: 'pet status in the store'
+          enum:
+            - 'available'
+            - 'pending'
+            - 'sold'
+      responses:
+        200:
+          description: 'Pets that fulfill the filter'
+      security:
+        - petstore_auth:
+            - 'read:pets'
 
   /user:
     post:

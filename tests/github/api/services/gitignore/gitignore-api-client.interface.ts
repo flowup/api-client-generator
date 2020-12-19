@@ -31,29 +31,24 @@ export interface GitignoreAPIClientInterface {
   /**
    * Listing available templates.
    * List all templates available to pass as an option when creating a repository.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getGitignoreTemplates(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    args?: GitignoreAPIClientInterface['getGitignoreTemplatesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Gitignore>;
   getGitignoreTemplates(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    args?: GitignoreAPIClientInterface['getGitignoreTemplatesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Gitignore>>;
   getGitignoreTemplates(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
+    args?: GitignoreAPIClientInterface['getGitignoreTemplatesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gitignore>>;
-  getGitignoreTemplates(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `getGitignoreTemplatesLanguage`.
@@ -89,10 +84,5 @@ export interface GitignoreAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.GitignoreLang>>;
-  getGitignoreTemplatesLanguage(
-    args: Exclude<GitignoreAPIClientInterface['getGitignoreTemplatesLanguageParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.GitignoreLang | HttpResponse<models.GitignoreLang> | HttpEvent<models.GitignoreLang>>;
 
 }

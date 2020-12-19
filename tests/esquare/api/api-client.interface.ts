@@ -40,11 +40,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  auth(
-    args: Exclude<APIClientInterface['authParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Response generated for [ 200 ] HTTP response code.
@@ -61,10 +56,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  authRef(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `passwordRestoreRequest`.
@@ -92,11 +83,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  passwordRestoreRequest(
-    args: Exclude<APIClientInterface['passwordRestoreRequestParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `passwordRestoreEmailRequest`.
@@ -124,11 +110,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  passwordRestoreEmailRequest(
-    args: Exclude<APIClientInterface['passwordRestoreEmailRequestParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `passwordRestoreCheckRestoreGuid`.
@@ -156,11 +137,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  passwordRestoreCheckRestoreGuid(
-    args: Exclude<APIClientInterface['passwordRestoreCheckRestoreGuidParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Get list of roles to permissions mapping
@@ -178,10 +154,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.AclItem[]>>;
-  getAclList(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.AclItem[] | HttpResponse<models.AclItem[]> | HttpEvent<models.AclItem[]>>;
 
   /**
    * Get structure entities list
@@ -199,10 +171,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Structure[]>>;
-  getStructureEntitiesList(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Structure[] | HttpResponse<models.Structure[]> | HttpEvent<models.Structure[]>>;
 
   /**
    * Arguments object for method `addStructureEntity`.
@@ -231,11 +199,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Structure>>;
-  addStructureEntity(
-    args: Exclude<APIClientInterface['addStructureEntityParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Structure | HttpResponse<models.Structure> | HttpEvent<models.Structure>>;
 
   /**
    * Arguments object for method `updateStructureEntity`.
@@ -266,11 +229,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Structure>>;
-  updateStructureEntity(
-    args: Exclude<APIClientInterface['updateStructureEntityParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Structure | HttpResponse<models.Structure> | HttpEvent<models.Structure>>;
 
   /**
    * Arguments object for method `deleteStructureEntity`.
@@ -299,11 +257,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteStructureEntity(
-    args: Exclude<APIClientInterface['deleteStructureEntityParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getReportsList`.
@@ -341,11 +294,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getReportsList(
-    args: Exclude<APIClientInterface['getReportsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `getReportDetails`.
@@ -376,11 +324,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ReportItem[]>>;
-  getReportDetails(
-    args: Exclude<APIClientInterface['getReportDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ReportItem[] | HttpResponse<models.ReportItem[]> | HttpEvent<models.ReportItem[]>>;
 
   /**
    * Arguments object for method `getReportPreview`.
@@ -418,11 +361,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getReportPreview(
-    args: Exclude<APIClientInterface['getReportPreviewParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `getImportHistory`.
@@ -453,11 +391,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ImportHistoryItem[]>>;
-  getImportHistory(
-    args: Exclude<APIClientInterface['getImportHistoryParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ImportHistoryItem[] | HttpResponse<models.ImportHistoryItem[]> | HttpEvent<models.ImportHistoryItem[]>>;
 
   /**
    * Arguments object for method `uploadFile`.
@@ -490,11 +423,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<number>>;
-  uploadFile(
-    args: Exclude<APIClientInterface['uploadFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<number | HttpResponse<number> | HttpEvent<number>>;
 
   /**
    * Arguments object for method `listTemplateColumns`.
@@ -525,11 +453,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Column[]>>;
-  listTemplateColumns(
-    args: Exclude<APIClientInterface['listTemplateColumnsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Column[] | HttpResponse<models.Column[]> | HttpEvent<models.Column[]>>;
 
   /**
    * Arguments object for method `listReportColumns`.
@@ -560,11 +483,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Column[]>>;
-  listReportColumns(
-    args: Exclude<APIClientInterface['listReportColumnsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Column[] | HttpResponse<models.Column[]> | HttpEvent<models.Column[]>>;
 
   /**
    * Arguments object for method `saveColumnsMapping`.
@@ -597,11 +515,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Table>>;
-  saveColumnsMapping(
-    args: Exclude<APIClientInterface['saveColumnsMappingParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Table | HttpResponse<models.Table> | HttpEvent<models.Table>>;
 
   /**
    * Arguments object for method `getValidationTable`.
@@ -632,11 +545,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ValidatedTable>>;
-  getValidationTable(
-    args: Exclude<APIClientInterface['getValidationTableParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ValidatedTable | HttpResponse<models.ValidatedTable> | HttpEvent<models.ValidatedTable>>;
 
   /**
    * Arguments object for method `downloadImportedFile`.
@@ -669,11 +577,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<File>>;
-  downloadImportedFile(
-    args: Exclude<APIClientInterface['downloadImportedFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<File | HttpResponse<File> | HttpEvent<File>>;
 
   /**
    * Arguments object for method `importConfirmation`.
@@ -704,11 +607,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.ImportResponse>>;
-  importConfirmation(
-    args: Exclude<APIClientInterface['importConfirmationParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.ImportResponse | HttpResponse<models.ImportResponse> | HttpEvent<models.ImportResponse>>;
 
   /**
    * Arguments object for method `downloadImportOriginalFile`.
@@ -739,11 +637,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<File>>;
-  downloadImportOriginalFile(
-    args: Exclude<APIClientInterface['downloadImportOriginalFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<File | HttpResponse<File> | HttpEvent<File>>;
 
   /**
    * Arguments object for method `downloadImportSkippedFile`.
@@ -774,11 +667,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<File>>;
-  downloadImportSkippedFile(
-    args: Exclude<APIClientInterface['downloadImportSkippedFileParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<File | HttpResponse<File> | HttpEvent<File>>;
 
   /**
    * Arguments object for method `cancelImport`.
@@ -809,11 +697,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  cancelImport(
-    args: Exclude<APIClientInterface['cancelImportParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `overrideImport`.
@@ -848,11 +731,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  overrideImport(
-    args: Exclude<APIClientInterface['overrideImportParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `geImportStats`.
@@ -869,25 +747,20 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   geImportStats(
-    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    args?: APIClientInterface['geImportStatsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.TotalImportStats>;
   geImportStats(
-    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    args?: APIClientInterface['geImportStatsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.TotalImportStats>>;
   geImportStats(
-    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
+    args?: APIClientInterface['geImportStatsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.TotalImportStats>>;
-  geImportStats(
-    args: Exclude<APIClientInterface['geImportStatsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.TotalImportStats | HttpResponse<models.TotalImportStats> | HttpEvent<models.TotalImportStats>>;
 
   /**
    * Arguments object for method `getIssuesList`.
@@ -927,11 +800,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getIssuesList(
-    args: Exclude<APIClientInterface['getIssuesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `getStatusesList`.
@@ -971,11 +839,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getStatusesList(
-    args: Exclude<APIClientInterface['getStatusesListParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `getUsersList`.
@@ -1017,11 +880,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getUsersList(
-    args: Exclude<APIClientInterface['getUsersListParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `createUser`.
@@ -1050,11 +908,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserDetails>>;
-  createUser(
-    args: Exclude<APIClientInterface['createUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserDetails | HttpResponse<models.UserDetails> | HttpEvent<models.UserDetails>>;
 
   /**
    * Get acl structure
@@ -1072,10 +925,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Acl[]>>;
-  getAclStructure(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Acl[] | HttpResponse<models.Acl[]> | HttpEvent<models.Acl[]>>;
 
   /**
    * Arguments object for method `getUserDetails`.
@@ -1103,11 +952,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserDetails[]>>;
-  getUserDetails(
-    args: Exclude<APIClientInterface['getUserDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserDetails[] | HttpResponse<models.UserDetails[]> | HttpEvent<models.UserDetails[]>>;
 
   /**
    * Arguments object for method `updateUser`.
@@ -1137,11 +981,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserDetails>>;
-  updateUser(
-    args: Exclude<APIClientInterface['updateUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserDetails | HttpResponse<models.UserDetails> | HttpEvent<models.UserDetails>>;
 
   /**
    * Arguments object for method `deleteUser`.
@@ -1169,11 +1008,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteUser(
-    args: Exclude<APIClientInterface['deleteUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Get roles list
@@ -1193,10 +1027,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RoleListItem[]>>;
-  getRolesList(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RoleListItem[] | HttpResponse<models.RoleListItem[]> | HttpEvent<models.RoleListItem[]>>;
 
   /**
    * Arguments object for method `createRole`.
@@ -1225,11 +1055,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RoleDetailsItem>>;
-  createRole(
-    args: Exclude<APIClientInterface['createRoleParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RoleDetailsItem | HttpResponse<models.RoleDetailsItem> | HttpEvent<models.RoleDetailsItem>>;
 
   /**
    * Get privileges list
@@ -1249,10 +1074,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PrivilegeTreeItem[]>>;
-  getList(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PrivilegeTreeItem[] | HttpResponse<models.PrivilegeTreeItem[]> | HttpEvent<models.PrivilegeTreeItem[]>>;
 
   /**
    * Arguments object for method `getRoleDetails`.
@@ -1280,11 +1101,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RoleDetailsItem[]>>;
-  getRoleDetails(
-    args: Exclude<APIClientInterface['getRoleDetailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RoleDetailsItem[] | HttpResponse<models.RoleDetailsItem[]> | HttpEvent<models.RoleDetailsItem[]>>;
 
   /**
    * Arguments object for method `updateRole`.
@@ -1313,11 +1129,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RoleDetailsItem>>;
-  updateRole(
-    args: Exclude<APIClientInterface['updateRoleParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.RoleDetailsItem | HttpResponse<models.RoleDetailsItem> | HttpEvent<models.RoleDetailsItem>>;
 
   /**
    * Arguments object for method `deleteRole`.
@@ -1345,11 +1156,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteRole(
-    args: Exclude<APIClientInterface['deleteRoleParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Get unviewed notifications list
@@ -1369,10 +1175,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.NotificationListItem[]>>;
-  getNewNotificationsList(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.NotificationListItem[] | HttpResponse<models.NotificationListItem[]> | HttpEvent<models.NotificationListItem[]>>;
 
   /**
    * Arguments object for method `markViewedNotifications`.
@@ -1386,25 +1188,20 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   markViewedNotifications(
-    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    args?: APIClientInterface['markViewedNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<void>;
   markViewedNotifications(
-    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    args?: APIClientInterface['markViewedNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<void>>;
   markViewedNotifications(
-    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
+    args?: APIClientInterface['markViewedNotificationsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  markViewedNotifications(
-    args: Exclude<APIClientInterface['markViewedNotificationsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getNotificationsList`.
@@ -1440,11 +1237,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getNotificationsList(
-    args: Exclude<APIClientInterface['getNotificationsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Get modules list
@@ -1465,10 +1257,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.NotificationModule[]>>;
-  getModulesList(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.NotificationModule[] | HttpResponse<models.NotificationModule[]> | HttpEvent<models.NotificationModule[]>>;
 
   /**
    * Get triggers list
@@ -1488,10 +1276,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.NotificationTrigger[]>>;
-  getTriggersList(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.NotificationTrigger[] | HttpResponse<models.NotificationTrigger[]> | HttpEvent<models.NotificationTrigger[]>>;
 
   /**
    * Arguments object for method `getModuleNotificationsList`.
@@ -1528,11 +1312,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<object>>;
-  getModuleNotificationsList(
-    args: Exclude<APIClientInterface['getModuleNotificationsListParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<object | HttpResponse<object> | HttpEvent<object>>;
 
   /**
    * Arguments object for method `enableNotification`.
@@ -1560,11 +1339,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  enableNotification(
-    args: Exclude<APIClientInterface['enableNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `disableNotification`.
@@ -1592,11 +1366,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  disableNotification(
-    args: Exclude<APIClientInterface['disableNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getNotification`.
@@ -1624,11 +1393,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.NotificationEditableListItem>>;
-  getNotification(
-    args: Exclude<APIClientInterface['getNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.NotificationEditableListItem | HttpResponse<models.NotificationEditableListItem> | HttpEvent<models.NotificationEditableListItem>>;
 
   /**
    * Arguments object for method `updateNotification`.
@@ -1657,11 +1421,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  updateNotification(
-    args: Exclude<APIClientInterface['updateNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `createNotification`.
@@ -1675,25 +1434,20 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   createNotification(
-    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    args?: APIClientInterface['createNotificationParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<number>;
   createNotification(
-    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    args?: APIClientInterface['createNotificationParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<number>>;
   createNotification(
-    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
+    args?: APIClientInterface['createNotificationParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<number>>;
-  createNotification(
-    args: Exclude<APIClientInterface['createNotificationParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<number | HttpResponse<number> | HttpEvent<number>>;
 
   /**
    * Get password verefication settings
@@ -1713,10 +1467,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PasswordVerificationPolicies>>;
-  getPassVerificationPolicies(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PasswordVerificationPolicies | HttpResponse<models.PasswordVerificationPolicies> | HttpEvent<models.PasswordVerificationPolicies>>;
 
   /**
    * Arguments object for method `udatePassVerificationPolicies`.
@@ -1732,25 +1482,20 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udatePassVerificationPolicies(
-    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassVerificationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.PasswordVerificationPolicies>;
   udatePassVerificationPolicies(
-    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassVerificationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.PasswordVerificationPolicies>>;
   udatePassVerificationPolicies(
-    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassVerificationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PasswordVerificationPolicies>>;
-  udatePassVerificationPolicies(
-    args: Exclude<APIClientInterface['udatePassVerificationPoliciesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PasswordVerificationPolicies | HttpResponse<models.PasswordVerificationPolicies> | HttpEvent<models.PasswordVerificationPolicies>>;
 
   /**
    * Get password creation settings
@@ -1770,10 +1515,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PasswordCreationPolicies>>;
-  getPassCreationPolicies(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PasswordCreationPolicies | HttpResponse<models.PasswordCreationPolicies> | HttpEvent<models.PasswordCreationPolicies>>;
 
   /**
    * Arguments object for method `udatePassCreationPolicies`.
@@ -1789,25 +1530,20 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udatePassCreationPolicies(
-    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassCreationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.PasswordCreationPolicies>;
   udatePassCreationPolicies(
-    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassCreationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.PasswordCreationPolicies>>;
   udatePassCreationPolicies(
-    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
+    args?: APIClientInterface['udatePassCreationPoliciesParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.PasswordCreationPolicies>>;
-  udatePassCreationPolicies(
-    args: Exclude<APIClientInterface['udatePassCreationPoliciesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.PasswordCreationPolicies | HttpResponse<models.PasswordCreationPolicies> | HttpEvent<models.PasswordCreationPolicies>>;
 
   /**
    * Get other security settings settings
@@ -1827,10 +1563,6 @@ export interface APIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.OtherSecuritySettings>>;
-  getOtherSecuritySettings(
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.OtherSecuritySettings | HttpResponse<models.OtherSecuritySettings> | HttpEvent<models.OtherSecuritySettings>>;
 
   /**
    * Arguments object for method `udateOtherSecuritySettings`.
@@ -1846,24 +1578,19 @@ export interface APIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   udateOtherSecuritySettings(
-    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    args?: APIClientInterface['udateOtherSecuritySettingsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.OtherSecuritySettings>;
   udateOtherSecuritySettings(
-    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    args?: APIClientInterface['udateOtherSecuritySettingsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.OtherSecuritySettings>>;
   udateOtherSecuritySettings(
-    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
+    args?: APIClientInterface['udateOtherSecuritySettingsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.OtherSecuritySettings>>;
-  udateOtherSecuritySettings(
-    args: Exclude<APIClientInterface['udateOtherSecuritySettingsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.OtherSecuritySettings | HttpResponse<models.OtherSecuritySettings> | HttpEvent<models.OtherSecuritySettings>>;
 
 }

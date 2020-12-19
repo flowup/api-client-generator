@@ -62,6 +62,7 @@ export interface Method {
   readonly methodType?: MethodType; // type of the http method
   readonly description?: string;
   readonly parameters: Parameter[];
+  readonly paramsOptional: boolean; // indicates that parameters object can be empty
   readonly hasJsonResponse?: boolean; // if false, default toJson() should not be called TODO
   readonly responseTypeSchema: ParsedSchema; // method return type schema
   readonly requestResponseType?: 'blob'; // supported types of Angular HTTP ResponseContentType

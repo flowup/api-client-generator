@@ -33,25 +33,20 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUser(
-    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
+    args?: UserAPIClientInterface['getUserParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.User>;
   getUser(
-    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
+    args?: UserAPIClientInterface['getUserParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.User>>;
   getUser(
-    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
+    args?: UserAPIClientInterface['getUserParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.User>>;
-  getUser(
-    args: Exclude<UserAPIClientInterface['getUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.User | HttpResponse<models.User> | HttpEvent<models.User>>;
 
   /**
    * Arguments object for method `patchUser`.
@@ -87,11 +82,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.User>>;
-  patchUser(
-    args: Exclude<UserAPIClientInterface['patchUserParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.User | HttpResponse<models.User> | HttpEvent<models.User>>;
 
   /**
    * Arguments object for method `deleteUserEmails`.
@@ -111,7 +101,7 @@ export interface UserAPIClientInterface {
   /**
    * Delete email address(es).
    * You can include a single email address or an array of addresses.
-   * 
+   *
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserEmails(
@@ -129,11 +119,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteUserEmails(
-    args: Exclude<UserAPIClientInterface['deleteUserEmailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserEmails`.
@@ -156,29 +141,24 @@ export interface UserAPIClientInterface {
    * has been verified and if it's primary email address for GitHub.
    * Until API v3 is finalized, use the application/vnd.github.v3 media type to
    * get other response format.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserEmails(
-    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserEmailsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.UserEmails>;
   getUserEmails(
-    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserEmailsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.UserEmails>>;
   getUserEmails(
-    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserEmailsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserEmails>>;
-  getUserEmails(
-    args: Exclude<UserAPIClientInterface['getUserEmailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserEmails | HttpResponse<models.UserEmails> | HttpEvent<models.UserEmails>>;
 
   /**
    * Arguments object for method `postUserEmails`.
@@ -198,7 +178,7 @@ export interface UserAPIClientInterface {
   /**
    * Add email address(es).
    * You can post a single email address or an array of addresses.
-   * 
+   *
    * Response generated for [ default ] HTTP response code.
    */
   postUserEmails(
@@ -216,11 +196,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  postUserEmails(
-    args: Exclude<UserAPIClientInterface['postUserEmailsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserFollowers`.
@@ -241,25 +216,20 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserFollowers(
-    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
+    args?: UserAPIClientInterface['getUserFollowersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Users>;
   getUserFollowers(
-    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
+    args?: UserAPIClientInterface['getUserFollowersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Users>>;
   getUserFollowers(
-    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
+    args?: UserAPIClientInterface['getUserFollowersParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getUserFollowers(
-    args: Exclude<UserAPIClientInterface['getUserFollowersParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `getUserFollowing`.
@@ -280,25 +250,20 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserFollowing(
-    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
+    args?: UserAPIClientInterface['getUserFollowingParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Users>;
   getUserFollowing(
-    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
+    args?: UserAPIClientInterface['getUserFollowingParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Users>>;
   getUserFollowing(
-    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
+    args?: UserAPIClientInterface['getUserFollowingParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Users>>;
-  getUserFollowing(
-    args: Exclude<UserAPIClientInterface['getUserFollowingParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Users | HttpResponse<models.Users> | HttpEvent<models.Users>>;
 
   /**
    * Arguments object for method `deleteUserFollowingUsername`.
@@ -320,7 +285,7 @@ export interface UserAPIClientInterface {
    * Unfollow a user.
    * Unfollowing a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
-   * 
+   *
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserFollowingUsername(
@@ -338,11 +303,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteUserFollowingUsername(
-    args: Exclude<UserAPIClientInterface['deleteUserFollowingUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserFollowingUsername`.
@@ -379,11 +339,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUserFollowingUsername(
-    args: Exclude<UserAPIClientInterface['getUserFollowingUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putUserFollowingUsername`.
@@ -405,7 +360,7 @@ export interface UserAPIClientInterface {
    * Follow a user.
    * Following a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
-   * 
+   *
    * Response generated for [ 204 ] HTTP response code.
    */
   putUserFollowingUsername(
@@ -423,11 +378,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  putUserFollowingUsername(
-    args: Exclude<UserAPIClientInterface['putUserFollowingUsernameParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserIssues`.
@@ -456,7 +406,7 @@ export interface UserAPIClientInterface {
    * List issues.
    * List all issues across owned and member repositories for the authenticated
    * user.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserIssues(
@@ -474,11 +424,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Issues>>;
-  getUserIssues(
-    args: Exclude<UserAPIClientInterface['getUserIssuesParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Issues | HttpResponse<models.Issues> | HttpEvent<models.Issues>>;
 
   /**
    * Arguments object for method `getUserKeys`.
@@ -498,29 +443,24 @@ export interface UserAPIClientInterface {
    * List your public keys.
    * Lists the current user's keys. Management of public keys via the API requires
    * that you are authenticated through basic auth, or OAuth with the 'user', 'write:public_key' scopes.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeys(
-    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
+    args?: UserAPIClientInterface['getUserKeysParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Gitignore>;
   getUserKeys(
-    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
+    args?: UserAPIClientInterface['getUserKeysParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Gitignore>>;
   getUserKeys(
-    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
+    args?: UserAPIClientInterface['getUserKeysParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gitignore>>;
-  getUserKeys(
-    args: Exclude<UserAPIClientInterface['getUserKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `postUserKeys`.
@@ -556,11 +496,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserKeysKeyId>>;
-  postUserKeys(
-    args: Exclude<UserAPIClientInterface['postUserKeysParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>>;
 
   /**
    * Arguments object for method `deleteUserKeysKeyId`.
@@ -597,11 +532,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteUserKeysKeyId(
-    args: Exclude<UserAPIClientInterface['deleteUserKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserKeysKeyId`.
@@ -638,11 +568,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserKeysKeyId>>;
-  getUserKeysKeyId(
-    args: Exclude<UserAPIClientInterface['getUserKeysKeyIdParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserKeysKeyId | HttpResponse<models.UserKeysKeyId> | HttpEvent<models.UserKeysKeyId>>;
 
   /**
    * Arguments object for method `getUserOrgs`.
@@ -663,25 +588,20 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserOrgs(
-    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserOrgsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Gitignore>;
   getUserOrgs(
-    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserOrgsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Gitignore>>;
   getUserOrgs(
-    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserOrgsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gitignore>>;
-  getUserOrgs(
-    args: Exclude<UserAPIClientInterface['getUserOrgsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `getUserRepos`.
@@ -702,29 +622,24 @@ export interface UserAPIClientInterface {
    * List repositories for the authenticated user. Note that this does not include
    * repositories owned by organizations which the user can access. You can lis
    * user organizations and list organization repositories separately.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserRepos(
-    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
+    args?: UserAPIClientInterface['getUserReposParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Repos>;
   getUserRepos(
-    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
+    args?: UserAPIClientInterface['getUserReposParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Repos>>;
   getUserRepos(
-    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
+    args?: UserAPIClientInterface['getUserReposParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repos>>;
-  getUserRepos(
-    args: Exclude<UserAPIClientInterface['getUserReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>>;
 
   /**
    * Arguments object for method `postUserRepos`.
@@ -744,7 +659,7 @@ export interface UserAPIClientInterface {
   /**
    * Create a new repository for the authenticated user. OAuth users must supply
    * repo scope.
-   * 
+   *
    * Response generated for [ 201 ] HTTP response code.
    */
   postUserRepos(
@@ -762,11 +677,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Repos>>;
-  postUserRepos(
-    args: Exclude<UserAPIClientInterface['postUserReposParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Repos | HttpResponse<models.Repos> | HttpEvent<models.Repos>>;
 
   /**
    * Arguments object for method `getUserStarred`.
@@ -790,25 +700,20 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserStarred(
-    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
+    args?: UserAPIClientInterface['getUserStarredParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.Gitignore>;
   getUserStarred(
-    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
+    args?: UserAPIClientInterface['getUserStarredParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.Gitignore>>;
   getUserStarred(
-    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
+    args?: UserAPIClientInterface['getUserStarredParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.Gitignore>>;
-  getUserStarred(
-    args: Exclude<UserAPIClientInterface['getUserStarredParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.Gitignore | HttpResponse<models.Gitignore> | HttpEvent<models.Gitignore>>;
 
   /**
    * Arguments object for method `deleteUserStarredOwnerRepo`.
@@ -847,11 +752,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteUserStarredOwnerRepo(
-    args: Exclude<UserAPIClientInterface['deleteUserStarredOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserStarredOwnerRepo`.
@@ -890,11 +790,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUserStarredOwnerRepo(
-    args: Exclude<UserAPIClientInterface['getUserStarredOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putUserStarredOwnerRepo`.
@@ -933,11 +828,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  putUserStarredOwnerRepo(
-    args: Exclude<UserAPIClientInterface['putUserStarredOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserSubscriptions`.
@@ -958,25 +848,20 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserSubscriptions(
-    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserSubscriptionsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.UserIdSubscribitions>;
   getUserSubscriptions(
-    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserSubscriptionsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.UserIdSubscribitions>>;
   getUserSubscriptions(
-    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserSubscriptionsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.UserIdSubscribitions>>;
-  getUserSubscriptions(
-    args: Exclude<UserAPIClientInterface['getUserSubscriptionsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.UserIdSubscribitions | HttpResponse<models.UserIdSubscribitions> | HttpEvent<models.UserIdSubscribitions>>;
 
   /**
    * Arguments object for method `deleteUserSubscriptionsOwnerRepo`.
@@ -1015,11 +900,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  deleteUserSubscriptionsOwnerRepo(
-    args: Exclude<UserAPIClientInterface['deleteUserSubscriptionsOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserSubscriptionsOwnerRepo`.
@@ -1058,11 +938,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  getUserSubscriptionsOwnerRepo(
-    args: Exclude<UserAPIClientInterface['getUserSubscriptionsOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `putUserSubscriptionsOwnerRepo`.
@@ -1101,11 +976,6 @@ export interface UserAPIClientInterface {
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<void>>;
-  putUserSubscriptionsOwnerRepo(
-    args: Exclude<UserAPIClientInterface['putUserSubscriptionsOwnerRepoParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<void | HttpResponse<void> | HttpEvent<void>>;
 
   /**
    * Arguments object for method `getUserTeams`.
@@ -1126,24 +996,19 @@ export interface UserAPIClientInterface {
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserTeams(
-    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserTeamsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.TeamsList>;
   getUserTeams(
-    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserTeamsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.TeamsList>>;
   getUserTeams(
-    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
+    args?: UserAPIClientInterface['getUserTeamsParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.TeamsList>>;
-  getUserTeams(
-    args: Exclude<UserAPIClientInterface['getUserTeamsParams'], undefined>,
-    requestHttpOptions?: HttpOptions,
-    observe?: any,
-  ): Observable<models.TeamsList | HttpResponse<models.TeamsList> | HttpEvent<models.TeamsList>>;
 
 }

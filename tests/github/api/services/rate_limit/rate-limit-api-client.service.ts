@@ -50,26 +50,26 @@ export class RateLimitAPIClient implements RateLimitAPIClientInterface {
   /**
    * Get your current rate limit status
    * Note: Accessing this endpoint does not count against your rate limit.
-   * 
+   *
    * Response generated for [ 200 ] HTTP response code.
    */
   getRateLimit(
-    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    args?: RateLimitAPIClientInterface['getRateLimitParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'body',
   ): Observable<models.RateLimit>;
   getRateLimit(
-    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    args?: RateLimitAPIClientInterface['getRateLimitParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'response',
   ): Observable<HttpResponse<models.RateLimit>>;
   getRateLimit(
-    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    args?: RateLimitAPIClientInterface['getRateLimitParams'],
     requestHttpOptions?: HttpOptions,
     observe?: 'events',
   ): Observable<HttpEvent<models.RateLimit>>;
   getRateLimit(
-    args: Exclude<RateLimitAPIClientInterface['getRateLimitParams'], undefined>,
+    args: RateLimitAPIClientInterface['getRateLimitParams'] = {},
     requestHttpOptions?: HttpOptions,
     observe: any = 'body',
   ): Observable<models.RateLimit | HttpResponse<models.RateLimit> | HttpEvent<models.RateLimit>> {
