@@ -18,9 +18,12 @@ export interface RateLimitAPIClientInterface {
    * Arguments object for method `getRateLimit`.
    */
   getRateLimitParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -31,7 +34,7 @@ export interface RateLimitAPIClientInterface {
   /**
    * Get your current rate limit status
    * Note: Accessing this endpoint does not count against your rate limit.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getRateLimit(

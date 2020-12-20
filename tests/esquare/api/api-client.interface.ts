@@ -18,7 +18,7 @@ export interface APIClientInterface {
    * Arguments object for method `auth`.
    */
   authParams?: {
-    /**  Structure entity object that needs to be added */
+    /** Structure entity object that needs to be added */
     body: models.AuthForm,
   };
 
@@ -61,7 +61,7 @@ export interface APIClientInterface {
    * Arguments object for method `passwordRestoreRequest`.
    */
   passwordRestoreRequestParams?: {
-    /**  Structure entity object that needs to be added */
+    /** Structure entity object that needs to be added */
     body: models.RestoreForm,
   };
 
@@ -88,7 +88,7 @@ export interface APIClientInterface {
    * Arguments object for method `passwordRestoreEmailRequest`.
    */
   passwordRestoreEmailRequestParams?: {
-    /**  Structure entity object that needs to be added */
+    /** Structure entity object that needs to be added */
     body: models.RestoreRequestForm,
   };
 
@@ -115,7 +115,7 @@ export interface APIClientInterface {
    * Arguments object for method `passwordRestoreCheckRestoreGuid`.
    */
   passwordRestoreCheckRestoreGuidParams?: {
-    /**  RestoreGuid for check */
+    /** RestoreGuid for check */
     restoreGuid: string,
   };
 
@@ -176,7 +176,7 @@ export interface APIClientInterface {
    * Arguments object for method `addStructureEntity`.
    */
   addStructureEntityParams?: {
-    /**  Structure entity object that needs to be added */
+    /** Structure entity object that needs to be added */
     body: models.StructureAddParameters,
   };
 
@@ -204,9 +204,9 @@ export interface APIClientInterface {
    * Arguments object for method `updateStructureEntity`.
    */
   updateStructureEntityParams?: {
-    /**  structure id to update */
+    /** structure id to update */
     structureId: number,
-    /**  Structure entity object that needs to be updated */
+    /** Structure entity object that needs to be updated */
     body: models.StructureForm,
   };
 
@@ -234,7 +234,7 @@ export interface APIClientInterface {
    * Arguments object for method `deleteStructureEntity`.
    */
   deleteStructureEntityParams?: {
-    /**  structure id to delete */
+    /** structure id to delete */
     structureId: number,
   };
 
@@ -262,14 +262,23 @@ export interface APIClientInterface {
    * Arguments object for method `getReportsList`.
    */
   getReportsListParams?: {
-    /**  (optional) - 1 Pending - 2 InProgress - 3 Complete  */
+    /**
+     * - 1 Pending
+     * - 2 InProgress
+     * - 3 Complete
+     * 
+     */
     status?: models.Status,
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
-    /**  id | title | subtitle | criticality | status | issues | deadline */
+    /** id | title | subtitle | criticality | status | issues | deadline */
     orderBy: ('id' | 'title' | 'subtitle' | 'criticality' | 'status' | 'issues' | 'deadline'),
-    /**  (optional) - asc - desc  */
+    /**
+     * - asc
+     * - desc
+     * 
+     */
     order?: models.Order,
   };
 
@@ -299,7 +308,7 @@ export interface APIClientInterface {
    * Arguments object for method `getReportDetails`.
    */
   getReportDetailsParams?: {
-    /**  report id to get */
+    /** report id to get */
     id: number,
   };
 
@@ -329,14 +338,21 @@ export interface APIClientInterface {
    * Arguments object for method `getReportPreview`.
    */
   getReportPreviewParams?: {
-    /**  [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)  */
+    /**
+     * [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)
+     * 
+     */
     templateId: number,
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
-    /**  (optional) column id */
+    /** column id */
     orderBy?: number,
-    /**  (optional) - asc - desc  */
+    /**
+     * - asc
+     * - desc
+     * 
+     */
     order?: models.Order,
   };
 
@@ -366,7 +382,10 @@ export interface APIClientInterface {
    * Arguments object for method `getImportHistory`.
    */
   getImportHistoryParams?: {
-    /**  [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)  */
+    /**
+     * [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)
+     * 
+     */
     templateId: number,
   };
 
@@ -396,9 +415,12 @@ export interface APIClientInterface {
    * Arguments object for method `uploadFile`.
    */
   uploadFileParams?: {
-    /**  [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)  */
+    /**
+     * [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)
+     * 
+     */
     templateId: number,
-    /**  file to upload */
+    /** file to upload */
     file: File,
   };
 
@@ -428,7 +450,10 @@ export interface APIClientInterface {
    * Arguments object for method `listTemplateColumns`.
    */
   listTemplateColumnsParams?: {
-    /**  [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)  */
+    /**
+     * [See #/definitions/ReportTemplate](#/Data_Import/getReportDetails)
+     * 
+     */
     templateId: number,
   };
 
@@ -458,7 +483,7 @@ export interface APIClientInterface {
    * Arguments object for method `listReportColumns`.
    */
   listReportColumnsParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
   };
 
@@ -488,9 +513,9 @@ export interface APIClientInterface {
    * Arguments object for method `saveColumnsMapping`.
    */
   saveColumnsMappingParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
-    /**  Column mappint for current import */
+    /** Column mappint for current import */
     body: models.ColumnMapping[],
   };
 
@@ -520,7 +545,7 @@ export interface APIClientInterface {
    * Arguments object for method `getValidationTable`.
    */
   getValidationTableParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
   };
 
@@ -550,9 +575,9 @@ export interface APIClientInterface {
    * Arguments object for method `downloadImportedFile`.
    */
   downloadImportedFileParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
-    /**  (optional) Indicator of downloading data(all or errors only) */
+    /** Indicator of downloading data(all or errors only) */
     all?: boolean,
   };
 
@@ -582,7 +607,7 @@ export interface APIClientInterface {
    * Arguments object for method `importConfirmation`.
    */
   importConfirmationParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
   };
 
@@ -612,7 +637,7 @@ export interface APIClientInterface {
    * Arguments object for method `downloadImportOriginalFile`.
    */
   downloadImportOriginalFileParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
   };
 
@@ -642,7 +667,7 @@ export interface APIClientInterface {
    * Arguments object for method `downloadImportSkippedFile`.
    */
   downloadImportSkippedFileParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
   };
 
@@ -672,7 +697,7 @@ export interface APIClientInterface {
    * Arguments object for method `cancelImport`.
    */
   cancelImportParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
   };
 
@@ -702,11 +727,11 @@ export interface APIClientInterface {
    * Arguments object for method `overrideImport`.
    */
   overrideImportParams?: {
-    /**  Id of current import */
+    /** Id of current import */
     id: number,
-    /**  description of override request */
+    /** description of override request */
     description: string,
-    /**  file to upload */
+    /** file to upload */
     file: File,
   };
 
@@ -736,7 +761,12 @@ export interface APIClientInterface {
    * Arguments object for method `geImportStats`.
    */
   geImportStatsParams?: {
-    /**  (optional) - 1 Year - 2 Month - 3 Week  */
+    /**
+     * - 1 Year
+     * - 2 Month
+     * - 3 Week
+     * 
+     */
     period?: models.Period,
   };
 
@@ -766,16 +796,29 @@ export interface APIClientInterface {
    * Arguments object for method `getIssuesList`.
    */
   getIssuesListParams?: {
-    /**  (optional) - 1 Year - 2 Month - 3 Week  */
+    /**
+     * - 1 Year
+     * - 2 Month
+     * - 3 Week
+     * 
+     */
     period?: models.Period,
-    /**  (optional) - 1 Pending - 2 Resolved  */
+    /**
+     * - 1 Pending
+     * - 2 Resolved
+     * 
+     */
     status?: models.IssueStatus,
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
-    /**  name | school | dueDate | alert */
+    /** name | school | dueDate | alert */
     orderBy: ('name' | 'school' | 'dueDate' | 'alert'),
-    /**  (optional) - asc - desc  */
+    /**
+     * - asc
+     * - desc
+     * 
+     */
     order?: models.Order,
   };
 
@@ -805,16 +848,29 @@ export interface APIClientInterface {
    * Arguments object for method `getStatusesList`.
    */
   getStatusesListParams?: {
-    /**  (optional) - 1 Year - 2 Month - 3 Week  */
+    /**
+     * - 1 Year
+     * - 2 Month
+     * - 3 Week
+     * 
+     */
     period?: models.Period,
-    /**  (optional) - 1 Live - 2 PastDeadline  */
+    /**
+     * - 1 Live
+     * - 2 PastDeadline
+     * 
+     */
     status?: models.ImportStatus,
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
-    /**  name | issues | dueDate | progress */
+    /** name | issues | dueDate | progress */
     orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),
-    /**  (optional) - asc - desc  */
+    /**
+     * - asc
+     * - desc
+     * 
+     */
     order?: models.Order,
   };
 
@@ -844,20 +900,33 @@ export interface APIClientInterface {
    * Arguments object for method `getUsersList`.
    */
   getUsersListParams?: {
-    /**  (optional) - 1 Year - 2 Month - 3 Week  */
+    /**
+     * - 1 Year
+     * - 2 Month
+     * - 3 Week
+     * 
+     */
     period?: models.Period,
-    /**  (optional) - 1 Live - 2 PastDeadline  */
+    /**
+     * - 1 Live
+     * - 2 PastDeadline
+     * 
+     */
     status?: models.ImportStatus,
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
-    /**  name | issues | dueDate | progress */
+    /** name | issues | dueDate | progress */
     orderBy: ('name' | 'issues' | 'dueDate' | 'progress'),
-    /**  (optional) - asc - desc  */
+    /**
+     * - asc
+     * - desc
+     * 
+     */
     order?: models.Order,
-    /**  (optional) role id | [Screenshot from design](http://prntscr.com/ib9yal) */
+    /** role id | [Screenshot from design](http://prntscr.com/ib9yal) */
     assignedToRole?: number,
-    /**  (optional) role id | [Screenshot from design](http://prntscr.com/ib9z16) */
+    /** role id | [Screenshot from design](http://prntscr.com/ib9z16) */
     unassignedFromRole?: number,
   };
 
@@ -885,7 +954,7 @@ export interface APIClientInterface {
    * Arguments object for method `createUser`.
    */
   createUserParams?: {
-    /**  User entity object that needs to be added */
+    /** User entity object that needs to be added */
     body: models.UserDetails,
   };
 
@@ -958,7 +1027,7 @@ export interface APIClientInterface {
    */
   updateUserParams?: {
     id: number,
-    /**  User entity object that needs to be updated */
+    /** User entity object that needs to be updated */
     body: models.UserDetails,
   };
 
@@ -1032,7 +1101,7 @@ export interface APIClientInterface {
    * Arguments object for method `createRole`.
    */
   createRoleParams?: {
-    /**  Role entity object that needs to be added */
+    /** Role entity object that needs to be added */
     body: object,
   };
 
@@ -1208,11 +1277,15 @@ export interface APIClientInterface {
    */
   getNotificationsListParams?: {
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
-    /**  name | description | priority | date */
+    /** name | description | priority | date */
     orderBy: ('name' | 'description' | 'priority' | 'date'),
-    /**  (optional) - asc - desc  */
+    /**
+     * - asc
+     * - desc
+     * 
+     */
     order?: models.Order,
   };
 
@@ -1283,11 +1356,15 @@ export interface APIClientInterface {
   getModuleNotificationsListParams?: {
     moduleId: number,
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
-    /**  name | description | priority | date */
+    /** name | description | priority | date */
     orderBy: ('name' | 'description' | 'priority' | 'date'),
-    /**  (optional) - asc - desc  */
+    /**
+     * - asc
+     * - desc
+     * 
+     */
     order?: models.Order,
   };
 

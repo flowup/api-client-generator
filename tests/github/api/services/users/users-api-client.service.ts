@@ -52,7 +52,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
    * This provides a dump of every user, in the order that they signed up for GitHub.
    * Note: Pagination is powered exclusively by the since parameter. Use the Link
    * header to get the URL for the next page of users.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsers(
@@ -424,7 +424,7 @@ export class UsersAPIClient implements UsersAPIClientInterface {
   /**
    * List public keys for a user.
    * Lists the verified public keys for a user. This is accessible by anyone.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUsersUsernameKeys(

@@ -50,7 +50,7 @@ export class GitignoreAPIClient implements GitignoreAPIClientInterface {
   /**
    * Listing available templates.
    * List all templates available to pass as an option when creating a repository.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getGitignoreTemplates(

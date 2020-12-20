@@ -19,7 +19,7 @@ export interface APIClientInterface {
    */
   getItemsParams?: {
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
   };
 
@@ -48,7 +48,7 @@ export interface APIClientInterface {
    */
   getItemModelsParams?: {
     pageSize: number,
-    /**  page number */
+    /** page number */
     page: number,
   };
 
@@ -266,20 +266,39 @@ export interface APIClientInterface {
    * Arguments object for method `firestoreProjectsDatabasesDocumentsCommit`.
    */
   firestoreProjectsDatabasesDocumentsCommitParams?: {
-    /**  (optional) - error format - 1 V1 - 2 V2  */
+    /**
+     * - error format
+     * - 1 V1
+     * - 2 V2
+     * 
+     */
     wololo?: models.NumberEnumParam,
-    /**  (optional) Data format for response. */
+    /**
+     * Data format for response.
+     * If not set, server will use the default value: json
+     */
     alt?: models.StringEnumParam,
-    /**  (optional) OAuth access token. */
+    /** OAuth access token. */
     accessToken?: string,
-    /**  (optional) Pretty-print response. */
+    /**
+     * Pretty-print response.
+     * If not set, server will use the default value: true
+     */
     pp?: boolean,
-    /**  (optional) should pretty print */
+    /**
+     * should pretty print
+     * If not set, server will use the default value: true
+     */
     prettyPrint?: boolean,
+    /**
+     * this params is deprecated
+     * @deprecated this parameter has been deprecated and may be removed in future.
+     */
     simpleQueryParam?: string,
+    /** @deprecated this parameter has been deprecated and may be removed in future. */
     simpleArrayQueryParam?: number[],
     body?: models.Data,
-    /**  The database name. In the format `database:{{name}}` */
+    /** The database name. In the format `database:{{name}}` */
     database: string,
   };
 
@@ -307,13 +326,13 @@ export interface APIClientInterface {
    * Arguments object for method `postReposOwnerRepoGitBlobs`.
    */
   postReposOwnerRepoGitBlobsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
-    /**  Custom blob (should be imported from models) */
+    /** Custom blob (should be imported from models) */
     body: models.Blob,
   };
 
@@ -341,13 +360,13 @@ export interface APIClientInterface {
    * Arguments object for method `getReposOwnerRepoGitBlobsShaCode`.
    */
   getReposOwnerRepoGitBlobsShaCodeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  SHA-1 code. */
+    /** SHA-1 code. */
     shaCode: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
   };
 

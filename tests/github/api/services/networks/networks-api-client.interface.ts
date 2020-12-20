@@ -18,13 +18,16 @@ export interface NetworksAPIClientInterface {
    * Arguments object for method `getNetworksOwnerRepoEvents`.
    */
   getNetworksOwnerRepoEventsParams?: {
-    /**  Name of the owner. */
+    /** Name of the owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,

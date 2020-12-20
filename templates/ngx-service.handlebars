@@ -56,7 +56,7 @@ export class {{#if (templateType 'guardedService')}}Guarded{{&serviceName}} exte
    */
   {{&methodName}}Params?: {
     {{#each parameters}}
-    {{#if description}}/** {{#unless isRequired}} (optional){{/unless}} {{&description}} */
+    {{#if description}}{{&description}}
     {{/if}}{{camelCase name}}{{^isRequired}}?{{/isRequired}}: {{&type}},
     {{/each}}
   };

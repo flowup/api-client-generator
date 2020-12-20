@@ -18,7 +18,7 @@ export interface APIClientInterface {
    * Arguments object for method `getPetById`.
    */
   getPetByIdParams?: {
-    /**  ID of pet to return */
+    /** ID of pet to return */
     petId: number,
   };
 
@@ -47,11 +47,11 @@ export interface APIClientInterface {
    * Arguments object for method `updatePetWithForm`.
    */
   updatePetWithFormParams?: {
-    /**  ID of pet that needs to be updated */
+    /** ID of pet that needs to be updated */
     petId: number,
-    /**  (optional) Updated name of the pet */
+    /** Updated name of the pet */
     name?: string,
-    /**  (optional) Updated status of the pet */
+    /** Updated status of the pet */
     status?: string,
   };
 
@@ -80,7 +80,7 @@ export interface APIClientInterface {
    */
   deletePetParams?: {
     apiKey?: string,
-    /**  Pet id to delete */
+    /** Pet id to delete */
     petId: number,
   };
 
@@ -108,11 +108,11 @@ export interface APIClientInterface {
    * Arguments object for method `uploadFile`.
    */
   uploadFileParams?: {
-    /**  ID of pet to update */
+    /** ID of pet to update */
     petId: number,
-    /**  (optional) Additional data to pass to server */
+    /** Additional data to pass to server */
     additionalMetadata?: string,
-    /**  (optional) file to upload */
+    /** file to upload */
     file?: File,
   };
 
@@ -140,7 +140,7 @@ export interface APIClientInterface {
    * Arguments object for method `addPet`.
    */
   addPetParams?: {
-    /**  Pet object that needs to be added to the store */
+    /** Pet object that needs to be added to the store */
     body: models.Pet,
   };
 
@@ -168,7 +168,7 @@ export interface APIClientInterface {
    * Arguments object for method `updatePet`.
    */
   updatePetParams?: {
-    /**  Pet object that needs to be added to the store */
+    /** Pet object that needs to be added to the store */
     body: models.Pet,
   };
 
@@ -196,7 +196,7 @@ export interface APIClientInterface {
    * Arguments object for method `findPetsByStatus`.
    */
   findPetsByStatusParams?: {
-    /**  Status values that need to be considered for filter */
+    /** Status values that need to be considered for filter */
     status: ('available' | 'pending' | 'sold')[],
   };
 
@@ -225,7 +225,7 @@ export interface APIClientInterface {
    * Arguments object for method `findPetsByTags`.
    */
   findPetsByTagsParams?: {
-    /**  Tags to filter by */
+    /** Tags to filter by */
     tags: string[],
   };
 
@@ -273,7 +273,7 @@ export interface APIClientInterface {
    * Arguments object for method `getOrderById`.
    */
   getOrderByIdParams?: {
-    /**  ID of pet that needs to be fetched */
+    /** ID of pet that needs to be fetched */
     orderId: number,
   };
 
@@ -302,7 +302,7 @@ export interface APIClientInterface {
    * Arguments object for method `deleteOrder`.
    */
   deleteOrderParams?: {
-    /**  ID of the order that needs to be deleted */
+    /** ID of the order that needs to be deleted */
     orderId: number,
   };
 
@@ -331,7 +331,7 @@ export interface APIClientInterface {
    * Arguments object for method `placeOrder`.
    */
   placeOrderParams?: {
-    /**  order placed for purchasing the pet */
+    /** order placed for purchasing the pet */
     body: models.Order,
   };
 
@@ -359,7 +359,7 @@ export interface APIClientInterface {
    * Arguments object for method `getUserByName`.
    */
   getUserByNameParams?: {
-    /**  The name that needs to be fetched. Use user1 for testing.  */
+    /** The name that needs to be fetched. Use user1 for testing.  */
     username: string,
   };
 
@@ -387,9 +387,9 @@ export interface APIClientInterface {
    * Arguments object for method `updateUser`.
    */
   updateUserParams?: {
-    /**  name that need to be updated */
+    /** name that need to be updated */
     username: string,
-    /**  Updated user object */
+    /** Updated user object */
     body: models.User,
   };
 
@@ -418,7 +418,7 @@ export interface APIClientInterface {
    * Arguments object for method `deleteUser`.
    */
   deleteUserParams?: {
-    /**  The name that needs to be deleted */
+    /** The name that needs to be deleted */
     username: string,
   };
 
@@ -447,9 +447,9 @@ export interface APIClientInterface {
    * Arguments object for method `loginUser`.
    */
   loginUserParams?: {
-    /**  The user name for login */
+    /** The user name for login */
     username: string,
-    /**  The password for login in clear text */
+    /** The password for login in clear text */
     password: string,
   };
 
@@ -494,7 +494,7 @@ export interface APIClientInterface {
    * Arguments object for method `createUser`.
    */
   createUserParams?: {
-    /**  Created user object */
+    /** Created user object */
     body: models.User,
   };
 
@@ -523,7 +523,7 @@ export interface APIClientInterface {
    * Arguments object for method `createUsersWithArrayInput`.
    */
   createUsersWithArrayInputParams?: {
-    /**  List of user object */
+    /** List of user object */
     body: models.User[],
   };
 
@@ -551,7 +551,7 @@ export interface APIClientInterface {
    * Arguments object for method `createUsersWithListInput`.
    */
   createUsersWithListInputParams?: {
-    /**  List of user object */
+    /** List of user object */
     body: models.User[],
   };
 

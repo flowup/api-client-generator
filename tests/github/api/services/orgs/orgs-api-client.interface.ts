@@ -18,11 +18,14 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrg`.
    */
   getOrgsOrgParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -54,11 +57,14 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `patchOrgsOrg`.
    */
   patchOrgsOrgParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -91,11 +97,14 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrgEvents`.
    */
   getOrgsOrgEventsParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -127,20 +136,35 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrgIssues`.
    */
   getOrgsOrgIssuesParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see  */
+    /**
+     * Issues assigned to you / created by you / mentioning you / you're
+     * subscribed to updates for / All issues the authenticated user can see
+     * 
+     * If not set, server will use the default value: all
+     */
     filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),
+    /** If not set, server will use the default value: open */
     state: ('open' | 'closed'),
-    /**  String list of comma separated Label names. Example - bug,ui,@high. */
+    /** String list of comma separated Label names. Example - bug,ui,@high. */
     labels: string,
+    /** If not set, server will use the default value: created */
     sort: ('created' | 'updated' | 'comments'),
+    /** If not set, server will use the default value: desc */
     direction: ('asc' | 'desc'),
-    /**  (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.  */
+    /**
+     * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Only issues updated at or after this time are returned.
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -151,7 +175,7 @@ export interface OrgsAPIClientInterface {
   /**
    * List issues.
    * List all issues for a given organization for the authenticated user.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgIssues(
@@ -174,11 +198,14 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrgMembers`.
    */
   getOrgsOrgMembersParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -193,7 +220,7 @@ export interface OrgsAPIClientInterface {
    * is also an owner of this organization then both concealed and public members
    * will be returned. If the requester is not an owner of the organization the
    * query will be redirected to the public members list.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgMembers(
@@ -216,13 +243,16 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `deleteOrgsOrgMembersUsername`.
    */
   deleteOrgsOrgMembersUsernameParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  Name of the user. */
+    /** Name of the user. */
     username: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -234,7 +264,7 @@ export interface OrgsAPIClientInterface {
    * Remove a member.
    * Removing a user from this list will remove them from all teams and they
    * will no longer have any access to the organization's repositories.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteOrgsOrgMembersUsername(
@@ -257,13 +287,16 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrgMembersUsername`.
    */
   getOrgsOrgMembersUsernameParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  Name of the user. */
+    /** Name of the user. */
     username: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -295,11 +328,14 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrgPublicMembers`.
    */
   getOrgsOrgPublicMembersParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -311,7 +347,7 @@ export interface OrgsAPIClientInterface {
    * Public members list.
    * Members of an organization can choose to have their membership publicized
    * or not.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getOrgsOrgPublicMembers(
@@ -334,13 +370,16 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `deleteOrgsOrgPublicMembersUsername`.
    */
   deleteOrgsOrgPublicMembersUsernameParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  Name of the user. */
+    /** Name of the user. */
     username: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -372,13 +411,16 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrgPublicMembersUsername`.
    */
   getOrgsOrgPublicMembersUsernameParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  Name of the user. */
+    /** Name of the user. */
     username: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -410,13 +452,16 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `putOrgsOrgPublicMembersUsername`.
    */
   putOrgsOrgPublicMembersUsernameParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  Name of the user. */
+    /** Name of the user. */
     username: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -448,12 +493,16 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrgRepos`.
    */
   getOrgsOrgReposParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
+    /** If not set, server will use the default value: all */
     type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -485,11 +534,14 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `postOrgsOrgRepos`.
    */
   postOrgsOrgReposParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -501,7 +553,7 @@ export interface OrgsAPIClientInterface {
   /**
    * Create a new repository for the authenticated user. OAuth users must supply
    * repo scope.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postOrgsOrgRepos(
@@ -524,11 +576,14 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `getOrgsOrgTeams`.
    */
   getOrgsOrgTeamsParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -560,11 +615,14 @@ export interface OrgsAPIClientInterface {
    * Arguments object for method `postOrgsOrgTeams`.
    */
   postOrgsOrgTeamsParams?: {
-    /**  Name of organisation. */
+    /** Name of organisation. */
     org: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -576,7 +634,7 @@ export interface OrgsAPIClientInterface {
   /**
    * Create team.
    * In order to create a team, the authenticated user must be an owner of organization.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postOrgsOrgTeams(

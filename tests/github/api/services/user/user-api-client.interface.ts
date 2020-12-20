@@ -18,9 +18,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUser`.
    */
   getUserParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -52,9 +55,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `patchUser`.
    */
   patchUserParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -87,9 +93,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `deleteUserEmails`.
    */
   deleteUserEmailsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -101,7 +110,7 @@ export interface UserAPIClientInterface {
   /**
    * Delete email address(es).
    * You can include a single email address or an array of addresses.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserEmails(
@@ -124,9 +133,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserEmails`.
    */
   getUserEmailsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -141,7 +153,7 @@ export interface UserAPIClientInterface {
    * has been verified and if it's primary email address for GitHub.
    * Until API v3 is finalized, use the application/vnd.github.v3 media type to
    * get other response format.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserEmails(
@@ -164,9 +176,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `postUserEmails`.
    */
   postUserEmailsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -178,7 +193,7 @@ export interface UserAPIClientInterface {
   /**
    * Add email address(es).
    * You can post a single email address or an array of addresses.
-   *
+   * 
    * Response generated for [ default ] HTTP response code.
    */
   postUserEmails(
@@ -201,9 +216,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserFollowers`.
    */
   getUserFollowersParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -235,9 +253,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserFollowing`.
    */
   getUserFollowingParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -269,11 +290,14 @@ export interface UserAPIClientInterface {
    * Arguments object for method `deleteUserFollowingUsername`.
    */
   deleteUserFollowingUsernameParams?: {
-    /**  Name of user. */
+    /** Name of user. */
     username: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -285,7 +309,7 @@ export interface UserAPIClientInterface {
    * Unfollow a user.
    * Unfollowing a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserFollowingUsername(
@@ -308,11 +332,14 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserFollowingUsername`.
    */
   getUserFollowingUsernameParams?: {
-    /**  Name of user. */
+    /** Name of user. */
     username: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -344,11 +371,14 @@ export interface UserAPIClientInterface {
    * Arguments object for method `putUserFollowingUsername`.
    */
   putUserFollowingUsernameParams?: {
-    /**  Name of user. */
+    /** Name of user. */
     username: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -360,7 +390,7 @@ export interface UserAPIClientInterface {
    * Follow a user.
    * Following a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   putUserFollowingUsername(
@@ -383,18 +413,33 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserIssues`.
    */
   getUserIssuesParams?: {
-    /**  Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see  */
+    /**
+     * Issues assigned to you / created by you / mentioning you / you're
+     * subscribed to updates for / All issues the authenticated user can see
+     * 
+     * If not set, server will use the default value: all
+     */
     filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),
+    /** If not set, server will use the default value: open */
     state: ('open' | 'closed'),
-    /**  String list of comma separated Label names. Example - bug,ui,@high. */
+    /** String list of comma separated Label names. Example - bug,ui,@high. */
     labels: string,
+    /** If not set, server will use the default value: created */
     sort: ('created' | 'updated' | 'comments'),
+    /** If not set, server will use the default value: desc */
     direction: ('asc' | 'desc'),
-    /**  (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.  */
+    /**
+     * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Only issues updated at or after this time are returned.
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -406,7 +451,7 @@ export interface UserAPIClientInterface {
    * List issues.
    * List all issues across owned and member repositories for the authenticated
    * user.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserIssues(
@@ -429,9 +474,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserKeys`.
    */
   getUserKeysParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -443,7 +491,7 @@ export interface UserAPIClientInterface {
    * List your public keys.
    * Lists the current user's keys. Management of public keys via the API requires
    * that you are authenticated through basic auth, or OAuth with the 'user', 'write:public_key' scopes.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeys(
@@ -466,9 +514,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `postUserKeys`.
    */
   postUserKeysParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -501,11 +552,14 @@ export interface UserAPIClientInterface {
    * Arguments object for method `deleteUserKeysKeyId`.
    */
   deleteUserKeysKeyIdParams?: {
-    /**  ID of key. */
+    /** ID of key. */
     keyId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -537,11 +591,14 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserKeysKeyId`.
    */
   getUserKeysKeyIdParams?: {
-    /**  ID of key. */
+    /** ID of key. */
     keyId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -573,9 +630,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserOrgs`.
    */
   getUserOrgsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -607,10 +667,14 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserRepos`.
    */
   getUserReposParams?: {
+    /** If not set, server will use the default value: all */
     type?: ('all' | 'public' | 'private' | 'forks' | 'sources' | 'member'),
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -622,7 +686,7 @@ export interface UserAPIClientInterface {
    * List repositories for the authenticated user. Note that this does not include
    * repositories owned by organizations which the user can access. You can lis
    * user organizations and list organization repositories separately.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserRepos(
@@ -645,9 +709,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `postUserRepos`.
    */
   postUserReposParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -659,7 +726,7 @@ export interface UserAPIClientInterface {
   /**
    * Create a new repository for the authenticated user. OAuth users must supply
    * repo scope.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postUserRepos(
@@ -682,12 +749,16 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserStarred`.
    */
   getUserStarredParams?: {
-    /**  (optional) Ignored without 'sort' parameter. */
+    /** Ignored without 'sort' parameter. */
     direction?: string,
+    /** If not set, server will use the default value: created */
     sort?: ('created' | 'updated'),
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -719,13 +790,16 @@ export interface UserAPIClientInterface {
    * Arguments object for method `deleteUserStarredOwnerRepo`.
    */
   deleteUserStarredOwnerRepoParams?: {
-    /**  Name of a repository owner. */
+    /** Name of a repository owner. */
     owner: string,
-    /**  Name of a repository. */
+    /** Name of a repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -757,13 +831,16 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserStarredOwnerRepo`.
    */
   getUserStarredOwnerRepoParams?: {
-    /**  Name of a repository owner. */
+    /** Name of a repository owner. */
     owner: string,
-    /**  Name of a repository. */
+    /** Name of a repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -795,13 +872,16 @@ export interface UserAPIClientInterface {
    * Arguments object for method `putUserStarredOwnerRepo`.
    */
   putUserStarredOwnerRepoParams?: {
-    /**  Name of a repository owner. */
+    /** Name of a repository owner. */
     owner: string,
-    /**  Name of a repository. */
+    /** Name of a repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -833,9 +913,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserSubscriptions`.
    */
   getUserSubscriptionsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -867,13 +950,16 @@ export interface UserAPIClientInterface {
    * Arguments object for method `deleteUserSubscriptionsOwnerRepo`.
    */
   deleteUserSubscriptionsOwnerRepoParams?: {
-    /**  Name of the owner. */
+    /** Name of the owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -905,13 +991,16 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserSubscriptionsOwnerRepo`.
    */
   getUserSubscriptionsOwnerRepoParams?: {
-    /**  Name of the owner. */
+    /** Name of the owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -943,13 +1032,16 @@ export interface UserAPIClientInterface {
    * Arguments object for method `putUserSubscriptionsOwnerRepo`.
    */
   putUserSubscriptionsOwnerRepoParams?: {
-    /**  Name of the owner. */
+    /** Name of the owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -981,9 +1073,12 @@ export interface UserAPIClientInterface {
    * Arguments object for method `getUserTeams`.
    */
   getUserTeamsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,

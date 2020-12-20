@@ -131,9 +131,9 @@ export function createDocsComment(
   const indentSpaces = ' '.repeat(indent);
   return desc
     ? forceMultiline || desc.includes('\n')
-      ? `${replaceNewLines(
-          `/**\n${desc}`,
-          `$1${indentSpaces} * `,
+      ? `${replaceNewLines(`/**\n${desc}`, `$1${indentSpaces} * `).replace(
+          /\* (\\r\\n|\\r|\\n)/g,
+          '*$1',
         )}\n${indentSpaces} */`
       : `/** ${desc} */`
     : '';

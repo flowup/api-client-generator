@@ -18,11 +18,18 @@ export interface RepositoriesAPIClientInterface {
    * Arguments object for method `getRepositories`.
    */
   getRepositoriesParams?: {
-    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    /**
+     * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Example: "2012-10-09T23:39:01Z".
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -36,7 +43,7 @@ export interface RepositoriesAPIClientInterface {
    * were created.
    * Note: Pagination is powered exclusively by the since parameter. is the
    * Link header to get the URL for the next page of repositories.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getRepositories(

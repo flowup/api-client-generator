@@ -18,9 +18,12 @@ export interface GitignoreAPIClientInterface {
    * Arguments object for method `getGitignoreTemplates`.
    */
   getGitignoreTemplatesParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -31,7 +34,7 @@ export interface GitignoreAPIClientInterface {
   /**
    * Listing available templates.
    * List all templates available to pass as an option when creating a repository.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getGitignoreTemplates(
@@ -55,9 +58,12 @@ export interface GitignoreAPIClientInterface {
    */
   getGitignoreTemplatesLanguageParams?: {
     language: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,

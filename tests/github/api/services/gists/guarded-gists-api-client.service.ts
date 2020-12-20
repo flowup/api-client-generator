@@ -34,7 +34,7 @@ export class GuardedGistsAPIClient extends GistsAPIClient implements GistsAPICli
   /**
    * List the authenticated user's gists or if called anonymously, this will
    * return all public gists.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getGists(

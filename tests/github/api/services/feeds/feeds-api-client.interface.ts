@@ -18,9 +18,12 @@ export interface FeedsAPIClientInterface {
    * Arguments object for method `getFeeds`.
    */
   getFeedsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -31,9 +34,9 @@ export interface FeedsAPIClientInterface {
   /**
    * List Feeds.
    * GitHub provides several timeline resources in Atom format. The Feeds API
-   *
+   * 
    *  lists all the feeds available to the authenticating user.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getFeeds(

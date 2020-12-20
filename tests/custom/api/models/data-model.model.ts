@@ -32,12 +32,12 @@ export interface DataModel {
   text?: ItemList & Data;
   /**
    * Use something else instead.
-   * @deprecated this method has been deprecated and may be removed in future.
+   * @deprecated this property has been deprecated and may be removed in future.
    */
   willAlsoBeRemoved?: string;
   /**
    * Use some other property.
-   * @deprecated this method has been deprecated and may be removed in future.
+   * @deprecated this property has been deprecated and may be removed in future.
    */
   willBeRemoved?: string;
 }

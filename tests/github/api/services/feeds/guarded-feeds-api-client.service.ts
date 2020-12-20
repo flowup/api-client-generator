@@ -34,9 +34,9 @@ export class GuardedFeedsAPIClient extends FeedsAPIClient implements FeedsAPICli
   /**
    * List Feeds.
    * GitHub provides several timeline resources in Atom format. The Feeds API
-   *
+   * 
    *  lists all the feeds available to the authenticating user.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getFeeds(

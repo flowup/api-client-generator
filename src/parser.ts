@@ -46,6 +46,7 @@ type ExtendedParameter = SwaggerParameter & {
   enum?: EnumType;
   type?: 'string' | 'integer';
   'x-enumNames'?: string[];
+  'x-deprecated'?: boolean;
   $ref?: string;
 };
 
@@ -370,7 +371,7 @@ function parseInterfaceProperties(
             // tslint:disable-next-line:no-any
             (propSchema as any)['x-deprecated'] ||
             propSchema.title?.includes('deprecated')
-              ? `@deprecated this method has been deprecated and may be removed in future.`
+              ? `@deprecated this property has been deprecated and may be removed in future.`
               : null,
           ]
             .filter(str => str != null)
@@ -608,10 +609,9 @@ function determineResponseType(response: Response): ParsedSchema {
     prefixGuards: true,
   });
 
-  const type = responseSchema.imports.reduce(
-    (prefixedType, tokenToPrefix) =>
-      prefixedType.split(tokenToPrefix).join(`models.${tokenToPrefix}`),
+  const type = prefixTypeBasedOnImports(
     responseSchema.type,
+    responseSchema.imports,
   );
 
   return {
@@ -624,49 +624,79 @@ function determineResponseType(response: Response): ParsedSchema {
   };
 }
 
+/**
+ * iterate over imports and find them in the response, prefix each type that needs to be imported
+ * @param type
+ * @param imports
+ */
+function prefixTypeBasedOnImports(type: string, imports: string[]): string {
+  return imports.reduce(
+    (prefixedType, tokenToPrefix) =>
+      prefixedType.split(tokenToPrefix).join(`models.${tokenToPrefix}`),
+    type,
+  );
+}
+
 function transformParameters(
   parameters: ExtendedParameter[],
   allParams: Parameters,
 ): Parameter[] {
   return parameters.map((param: ExtendedParameter) => {
-    const ref = param.$ref;
-    const derefName = ref ? dereferenceType(ref) : undefined;
-    const paramRef: SwaggerParameter | undefined = derefName
+    const derefName = param.$ref ? dereferenceType(param.$ref) : undefined;
+    const derefParam: SwaggerParameter | ExtendedParameter = derefName
       ? allParams[derefName]
-      : undefined;
-    const name = paramRef?.name || (param as Parameter).name || '';
+      : param;
+    const name = derefParam?.name || '';
 
-    const parsedSchema = determineResponseType({
-      description: '',
-      schema:
-        paramRef &&
-        !('enum' in paramRef) &&
-        !('schema' in paramRef && paramRef.schema?.type === 'object')
-          ? (paramRef as Schema)
-          : 'schema' in param
-          ? // tslint:disable-next-line:no-any
-            (param as any).schema // body param has a schema but the typing of Parameter does not reflect that right now
-          : (param as Schema),
-    });
+    const parsedSchema = parseSchema(
+      // tslint:disable-next-line:no-any
+      param.$ref &&
+        ('enum' in derefParam ||
+          ('schema' in derefParam && derefParam.schema?.type === 'object'))
+        ? param
+        : derefParam.in === 'body' && derefParam.schema
+        ? derefParam.schema
+        : // fixme: Schema should be there but "body" param seems to be off
+          // tslint:disable-next-line:no-any
+          (derefParam as any),
+
+      false,
+      {
+        name,
+        isRequired: derefParam.required,
+        prefixGuards: true,
+      },
+    );
+
+    const type = prefixTypeBasedOnImports(
+      parsedSchema.type,
+      parsedSchema.imports,
+    );
 
     return {
-      ...determineParamType(
-        paramRef && 'in' in paramRef ? paramRef.in : param.in,
-      ),
+      ...determineParamType(derefParam.in),
 
-      description: replaceNewLines(
-        (param as Parameter).description || paramRef?.description,
-        ' ',
+      description: createDocsComment(
+        [
+          derefParam?.description,
+          'default' in derefParam && derefParam.default
+            ? `If not set, server will use the default value: ${derefParam.default}`
+            : null,
+          ('x-deprecated' in derefParam && derefParam['x-deprecated']) ||
+          derefParam.description?.includes('deprecated')
+            ? `@deprecated this parameter has been deprecated and may be removed in future.`
+            : null,
+        ]
+          .filter(str => !!str)
+          .join('\n'),
+        // tslint:disable-next-line:no-magic-numbers
+        4,
       ),
       camelCaseName: toCamelCase(name),
-      isRequired:
-        (param as Parameter).isRequired ||
-        // tslint:disable-next-line:no-any
-        (<any>param).required ||
-        paramRef?.required,
+      isRequired: derefParam.required,
       name,
-      type: parsedSchema.type,
-      parsedSchema,
+      type,
+      parsedSchema: { ...parsedSchema, type },
     };
   });
 }

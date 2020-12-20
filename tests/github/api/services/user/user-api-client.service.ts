@@ -154,7 +154,7 @@ export class UserAPIClient implements UserAPIClientInterface {
   /**
    * Delete email address(es).
    * You can include a single email address or an array of addresses.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserEmails(
@@ -212,7 +212,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * has been verified and if it's primary email address for GitHub.
    * Until API v3 is finalized, use the application/vnd.github.v3 media type to
    * get other response format.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserEmails(
@@ -266,7 +266,7 @@ export class UserAPIClient implements UserAPIClientInterface {
   /**
    * Add email address(es).
    * You can post a single email address or an array of addresses.
-   *
+   * 
    * Response generated for [ default ] HTTP response code.
    */
   postUserEmails(
@@ -425,7 +425,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Unfollow a user.
    * Unfollowing a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteUserFollowingUsername(
@@ -532,7 +532,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * Follow a user.
    * Following a user requires the user to be logged in and authenticated with
    * basic auth or OAuth with the user:follow scope.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   putUserFollowingUsername(
@@ -587,7 +587,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * List issues.
    * List all issues across owned and member repositories for the authenticated
    * user.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserIssues(
@@ -660,7 +660,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * List your public keys.
    * Lists the current user's keys. Management of public keys via the API requires
    * that you are authenticated through basic auth, or OAuth with the 'user', 'write:public_key' scopes.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserKeys(
@@ -923,7 +923,7 @@ export class UserAPIClient implements UserAPIClientInterface {
    * List repositories for the authenticated user. Note that this does not include
    * repositories owned by organizations which the user can access. You can lis
    * user organizations and list organization repositories separately.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getUserRepos(
@@ -980,7 +980,7 @@ export class UserAPIClient implements UserAPIClientInterface {
   /**
    * Create a new repository for the authenticated user. OAuth users must supply
    * repo scope.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postUserRepos(

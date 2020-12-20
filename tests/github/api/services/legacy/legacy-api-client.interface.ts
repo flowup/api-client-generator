@@ -18,15 +18,18 @@ export interface LegacyAPIClientInterface {
    * Arguments object for method `getLegacyIssuesSearchOwnerRepositoryStateKeyword`.
    */
   getLegacyIssuesSearchOwnerRepositoryStateKeywordParams?: {
-    /**  The search term. */
+    /** The search term. */
     keyword: string,
-    /**  Indicates the state of the issues to return. Can be either open or closed. */
+    /** Indicates the state of the issues to return. Can be either open or closed. */
     state: ('open' | 'closed'),
     owner: string,
     repository: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -58,19 +61,25 @@ export interface LegacyAPIClientInterface {
    * Arguments object for method `getLegacyReposSearchKeyword`.
    */
   getLegacyReposSearchKeywordParams?: {
-    /**  The search term */
+    /** The search term */
     keyword: string,
-    /**  (optional) The sort field. if sort param is provided. Can be either asc or desc. */
+    /**
+     * The sort field. if sort param is provided. Can be either asc or desc.
+     * If not set, server will use the default value: desc
+     */
     order?: ('desc' | 'asc'),
-    /**  (optional) Filter results by language */
+    /** Filter results by language */
     language?: string,
-    /**  (optional) The page number to fetch */
+    /** The page number to fetch */
     startPage?: string,
-    /**  (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match. */
+    /** The sort field. One of stars, forks, or updated. Default: results are sorted by best match. */
     sort?: ('updated' | 'stars' | 'forks'),
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -102,11 +111,14 @@ export interface LegacyAPIClientInterface {
    * Arguments object for method `getLegacyUserEmail`.
    */
   getLegacyUserEmailParams?: {
-    /**  The email address */
+    /** The email address */
     email: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -138,17 +150,23 @@ export interface LegacyAPIClientInterface {
    * Arguments object for method `getLegacyUserSearchKeyword`.
    */
   getLegacyUserSearchKeywordParams?: {
-    /**  The search term */
+    /** The search term */
     keyword: string,
-    /**  (optional) The sort field. if sort param is provided. Can be either asc or desc. */
+    /**
+     * The sort field. if sort param is provided. Can be either asc or desc.
+     * If not set, server will use the default value: desc
+     */
     order?: ('desc' | 'asc'),
-    /**  (optional) The page number to fetch */
+    /** The page number to fetch */
     startPage?: string,
-    /**  (optional) The sort field. One of stars, forks, or updated. Default: results are sorted by best match. */
+    /** The sort field. One of stars, forks, or updated. Default: results are sorted by best match. */
     sort?: ('updated' | 'stars' | 'forks'),
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,

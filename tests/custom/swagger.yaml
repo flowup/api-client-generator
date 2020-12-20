@@ -210,9 +210,11 @@ paths:
       - name: simpleQueryParam
         in: query
         type: string
+        description: this params is deprecated
       - name: simpleArrayQueryParam
         in: query
         type: array
+        x-deprecated: true
         items:
           type: number
     post:

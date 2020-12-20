@@ -34,7 +34,7 @@ export class GuardedNotificationsAPIClient extends NotificationsAPIClient implem
   /**
    * List your notifications.
    * List all notifications for the current user, grouped by repository.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotifications(
@@ -65,7 +65,7 @@ export class GuardedNotificationsAPIClient extends NotificationsAPIClient implem
   /**
    * Mark as read.
    * Marking a notification as "read" removes it from the default view on GitHub.com.
-   *
+   * 
    * Response generated for [ 205 ] HTTP response code.
    */
   putNotifications(
@@ -211,7 +211,7 @@ export class GuardedNotificationsAPIClient extends NotificationsAPIClient implem
    * This lets you subscribe to a thread, or ignore it. Subscribing to a thread
    * is unnecessary if the user is already subscribed to the repository. Ignoring
    * a thread will mute all future notifications (until you comment or get @mentioned).
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   putNotificationsThreadsIdSubscription(

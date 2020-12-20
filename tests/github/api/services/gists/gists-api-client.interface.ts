@@ -18,11 +18,18 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `getGists`.
    */
   getGistsParams?: {
-    /**  (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned.  */
+    /**
+     * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
+     * Only gists updated at or after this time are returned.
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -33,7 +40,7 @@ export interface GistsAPIClientInterface {
   /**
    * List the authenticated user's gists or if called anonymously, this will
    * return all public gists.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getGists(
@@ -56,9 +63,12 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `postGists`.
    */
   postGistsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -91,11 +101,18 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `getGistsPublic`.
    */
   getGistsPublicParams?: {
-    /**  (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned.  */
+    /**
+     * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
+     * Only gists updated at or after this time are returned.
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -127,11 +144,18 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `getGistsStarred`.
    */
   getGistsStarredParams?: {
-    /**  (optional) Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ. Only gists updated at or after this time are returned.  */
+    /**
+     * Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
+     * Only gists updated at or after this time are returned.
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -163,11 +187,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `deleteGistsId`.
    */
   deleteGistsIdParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -199,11 +226,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `getGistsId`.
    */
   getGistsIdParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -235,11 +265,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `patchGistsId`.
    */
   patchGistsIdParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -272,11 +305,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `getGistsIdComments`.
    */
   getGistsIdCommentsParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -308,11 +344,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `postGistsIdComments`.
    */
   postGistsIdCommentsParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -345,13 +384,16 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `deleteGistsIdCommentsCommentId`.
    */
   deleteGistsIdCommentsCommentIdParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -383,13 +425,16 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `getGistsIdCommentsCommentId`.
    */
   getGistsIdCommentsCommentIdParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -421,13 +466,16 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `patchGistsIdCommentsCommentId`.
    */
   patchGistsIdCommentsCommentIdParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -460,11 +508,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `postGistsIdForks`.
    */
   postGistsIdForksParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -496,11 +547,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `deleteGistsIdStar`.
    */
   deleteGistsIdStarParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -532,11 +586,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `getGistsIdStar`.
    */
   getGistsIdStarParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -568,11 +625,14 @@ export interface GistsAPIClientInterface {
    * Arguments object for method `putGistsIdStar`.
    */
   putGistsIdStarParams?: {
-    /**  Id of gist. */
+    /** Id of gist. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,

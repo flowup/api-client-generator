@@ -18,15 +18,26 @@ export interface NotificationsAPIClientInterface {
    * Arguments object for method `getNotifications`.
    */
   getNotificationsParams?: {
-    /**  (optional) True to show notifications marked as read. */
+    /** True to show notifications marked as read. */
     all?: boolean,
-    /**  (optional) True to show only notifications in which the user is directly participating or mentioned.  */
+    /**
+     * True to show only notifications in which the user is directly participating
+     * or mentioned.
+     * 
+     */
     participating?: boolean,
-    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    /**
+     * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Example: "2012-10-09T23:39:01Z".
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -37,7 +48,7 @@ export interface NotificationsAPIClientInterface {
   /**
    * List your notifications.
    * List all notifications for the current user, grouped by repository.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getNotifications(
@@ -60,9 +71,12 @@ export interface NotificationsAPIClientInterface {
    * Arguments object for method `putNotifications`.
    */
   putNotificationsParams?: {
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -74,7 +88,7 @@ export interface NotificationsAPIClientInterface {
   /**
    * Mark as read.
    * Marking a notification as "read" removes it from the default view on GitHub.com.
-   *
+   * 
    * Response generated for [ 205 ] HTTP response code.
    */
   putNotifications(
@@ -97,11 +111,14 @@ export interface NotificationsAPIClientInterface {
    * Arguments object for method `getNotificationsThreadsId`.
    */
   getNotificationsThreadsIdParams?: {
-    /**  Id of thread. */
+    /** Id of thread. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -133,11 +150,14 @@ export interface NotificationsAPIClientInterface {
    * Arguments object for method `patchNotificationsThreadsId`.
    */
   patchNotificationsThreadsIdParams?: {
-    /**  Id of thread. */
+    /** Id of thread. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -169,11 +189,14 @@ export interface NotificationsAPIClientInterface {
    * Arguments object for method `deleteNotificationsThreadsIdSubscription`.
    */
   deleteNotificationsThreadsIdSubscriptionParams?: {
-    /**  Id of thread. */
+    /** Id of thread. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -205,11 +228,14 @@ export interface NotificationsAPIClientInterface {
    * Arguments object for method `getNotificationsThreadsIdSubscription`.
    */
   getNotificationsThreadsIdSubscriptionParams?: {
-    /**  Id of thread. */
+    /** Id of thread. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -241,11 +267,14 @@ export interface NotificationsAPIClientInterface {
    * Arguments object for method `putNotificationsThreadsIdSubscription`.
    */
   putNotificationsThreadsIdSubscriptionParams?: {
-    /**  Id of thread. */
+    /** Id of thread. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -259,7 +288,7 @@ export interface NotificationsAPIClientInterface {
    * This lets you subscribe to a thread, or ignore it. Subscribing to a thread
    * is unnecessary if the user is already subscribed to the repository. Ignoring
    * a thread will mute all future notifications (until you comment or get @mentioned).
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   putNotificationsThreadsIdSubscription(

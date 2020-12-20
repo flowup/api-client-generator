@@ -18,13 +18,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepo`.
    */
   deleteReposOwnerRepoParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -36,7 +39,7 @@ export interface ReposAPIClientInterface {
    * Delete a Repository.
    * Deleting a repository requires admin access. If OAuth is used, the delete_repo
    * scope is required.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepo(
@@ -59,13 +62,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepo`.
    */
   getReposOwnerRepoParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -97,13 +103,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepo`.
    */
   patchReposOwnerRepoParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -136,13 +145,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoAssignees`.
    */
   getReposOwnerRepoAssigneesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -154,7 +166,7 @@ export interface ReposAPIClientInterface {
    * List assignees.
    * This call lists all the available assignees (owner + collaborators) to which
    * issues may be assigned.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoAssignees(
@@ -177,15 +189,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoAssigneesAssignee`.
    */
   getReposOwnerRepoAssigneesAssigneeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Login of the assignee. */
+    /** Login of the assignee. */
     assignee: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -196,7 +211,7 @@ export interface ReposAPIClientInterface {
   /**
    * Check assignee.
    * You may also check to see if a particular user is an assignee for a repository.
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   getReposOwnerRepoAssigneesAssignee(
@@ -219,13 +234,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoBranches`.
    */
   getReposOwnerRepoBranchesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -257,15 +275,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoBranchesBranch`.
    */
   getReposOwnerRepoBranchesBranchParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Name of the branch. */
+    /** Name of the branch. */
     branch: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -297,13 +318,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoCollaborators`.
    */
   getReposOwnerRepoCollaboratorsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -317,7 +341,7 @@ export interface ReposAPIClientInterface {
    * repository, all organization owners are included in the list of
    * collaborators. Otherwise, only users with access to the repository are
    * returned in the collaborators list.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCollaborators(
@@ -340,15 +364,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoCollaboratorsUser`.
    */
   deleteReposOwnerRepoCollaboratorsUserParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Login of the user. */
+    /** Login of the user. */
     user: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -380,15 +407,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoCollaboratorsUser`.
    */
   getReposOwnerRepoCollaboratorsUserParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Login of the user. */
+    /** Login of the user. */
     user: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -420,15 +450,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `putReposOwnerRepoCollaboratorsUser`.
    */
   putReposOwnerRepoCollaboratorsUserParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Login of the user. */
+    /** Login of the user. */
     user: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -460,13 +493,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoComments`.
    */
   getReposOwnerRepoCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -477,7 +513,7 @@ export interface ReposAPIClientInterface {
   /**
    * List commit comments for a repository.
    * Comments are ordered by ascending ID.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoComments(
@@ -500,15 +536,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoCommentsCommentId`.
    */
   deleteReposOwnerRepoCommentsCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -540,15 +579,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoCommentsCommentId`.
    */
   getReposOwnerRepoCommentsCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -580,15 +622,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoCommentsCommentId`.
    */
   patchReposOwnerRepoCommentsCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -621,23 +666,30 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoCommits`.
    */
   getReposOwnerRepoCommitsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    /**
+     * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Example: "2012-10-09T23:39:01Z".
+     * 
+     */
     since?: string,
-    /**  (optional) Sha or branch to start listing commits from. */
+    /** Sha or branch to start listing commits from. */
     sha?: string,
-    /**  (optional) Only commits containing this file path will be returned. */
+    /** Only commits containing this file path will be returned. */
     path?: string,
-    /**  (optional) GitHub login, name, or email by which to filter by commit author. */
+    /** GitHub login, name, or email by which to filter by commit author. */
     author?: string,
-    /**  (optional) ISO 8601 Date - Only commits before this date will be returned. */
+    /** ISO 8601 Date - Only commits before this date will be returned. */
     until?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -669,14 +721,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoCommitsRefStatus`.
    */
   getReposOwnerRepoCommitsRefStatusParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     ref: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -689,7 +744,7 @@ export interface ReposAPIClientInterface {
    * The Combined status endpoint is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the blog post for full details.
    * To access this endpoint during the preview period, you must provide a custom media type in the Accept header:
    * application/vnd.github.she-hulk-preview+json
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoCommitsRefStatus(
@@ -712,15 +767,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoCommitsShaCode`.
    */
   getReposOwnerRepoCommitsShaCodeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  SHA-1 code of the commit. */
+    /** SHA-1 code of the commit. */
     shaCode: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -752,15 +810,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoCommitsShaCodeComments`.
    */
   getReposOwnerRepoCommitsShaCodeCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  SHA-1 code of the commit. */
+    /** SHA-1 code of the commit. */
     shaCode: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -792,15 +853,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoCommitsShaCodeComments`.
    */
   postReposOwnerRepoCommitsShaCodeCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  SHA-1 code of the commit. */
+    /** SHA-1 code of the commit. */
     shaCode: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -833,15 +897,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoCompareBaseIdHeadId`.
    */
   getReposOwnerRepoCompareBaseIdHeadIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     baseId: string,
     headId: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -873,14 +940,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoContentsPath`.
    */
   deleteReposOwnerRepoContentsPathParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     path: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -892,7 +962,7 @@ export interface ReposAPIClientInterface {
   /**
    * Delete a file.
    * This method deletes a file in a repository.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   deleteReposOwnerRepoContentsPath(
@@ -915,18 +985,21 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoContentsPath`.
    */
   getReposOwnerRepoContentsPathParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     path: string,
-    /**  (optional) The content path. */
+    /** The content path. */
     queryPath?: string,
-    /**  (optional) The String name of the Commit/Branch/Tag. Defaults to 'master'. */
+    /** The String name of the Commit/Branch/Tag. Defaults to 'master'. */
     ref?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -941,7 +1014,7 @@ export interface ReposAPIClientInterface {
    * Directories and submodules do not support custom media types.
    * Note: This API supports files up to 1 megabyte in size.
    * Here can be many outcomes. For details see "http://developer.github.com/v3/repos/contents/"
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoContentsPath(
@@ -964,14 +1037,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `putReposOwnerRepoContentsPath`.
    */
   putReposOwnerRepoContentsPathParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     path: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1004,15 +1080,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoContributors`.
    */
   getReposOwnerRepoContributorsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Set to 1 or true to include anonymous contributors in results. */
+    /** Set to 1 or true to include anonymous contributors in results. */
     anon: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1044,13 +1123,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoDeployments`.
    */
   getReposOwnerRepoDeploymentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1082,13 +1164,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoDeployments`.
    */
   postReposOwnerRepoDeploymentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1121,15 +1206,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoDeploymentsIdStatuses`.
    */
   getReposOwnerRepoDeploymentsIdStatusesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  The Deployment ID to list the statuses from. */
+    /** The Deployment ID to list the statuses from. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1161,15 +1249,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoDeploymentsIdStatuses`.
    */
   postReposOwnerRepoDeploymentsIdStatusesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  The Deployment ID to list the statuses from. */
+    /** The Deployment ID to list the statuses from. */
     id: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1181,7 +1272,7 @@ export interface ReposAPIClientInterface {
   /**
    * Create a Deployment Status
    * Users with push access can create deployment statuses for a given deployment:
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoDeploymentsIdStatuses(
@@ -1204,13 +1295,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoDownloads`.
    */
   getReposOwnerRepoDownloadsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1242,15 +1336,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoDownloadsDownloadId`.
    */
   deleteReposOwnerRepoDownloadsDownloadIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of download. */
+    /** Id of download. */
     downloadId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1282,15 +1379,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoDownloadsDownloadId`.
    */
   getReposOwnerRepoDownloadsDownloadIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of download. */
+    /** Id of download. */
     downloadId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1322,13 +1422,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoEvents`.
    */
   getReposOwnerRepoEventsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1360,14 +1463,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoForks`.
    */
   getReposOwnerRepoForksParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
+    /** If not set, server will use the default value: newes */
     sort?: ('newes' | 'oldes' | 'watchers'),
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1399,13 +1506,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoForks`.
    */
   postReposOwnerRepoForksParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1419,7 +1529,7 @@ export interface ReposAPIClientInterface {
    * Forking a Repository happens asynchronously. Therefore, you may have to wai
    * a short period before accessing the git objects. If this takes longer than 5
    * minutes, be sure to contact Support.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoForks(
@@ -1442,13 +1552,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoGitBlobs`.
    */
   postReposOwnerRepoGitBlobsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1481,15 +1594,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoGitBlobsShaCode`.
    */
   getReposOwnerRepoGitBlobsShaCodeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  SHA-1 code. */
+    /** SHA-1 code. */
     shaCode: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1503,7 +1619,7 @@ export interface ReposAPIClientInterface {
    * the blob API takes an encoding parameter that can be either utf-8 or
    * base64. If your data cannot be losslessly sent as a UTF-8 string, you can
    * base64 encode it.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoGitBlobsShaCode(
@@ -1526,13 +1642,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoGitCommits`.
    */
   postReposOwnerRepoGitCommitsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1565,15 +1684,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoGitCommitsShaCode`.
    */
   getReposOwnerRepoGitCommitsShaCodeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  SHA-1 code. */
+    /** SHA-1 code. */
     shaCode: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1605,13 +1727,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoGitRefs`.
    */
   getReposOwnerRepoGitRefsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1643,13 +1768,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoGitRefs`.
    */
   postReposOwnerRepoGitRefsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1682,14 +1810,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoGitRefsRef`.
    */
   deleteReposOwnerRepoGitRefsRefParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     ref: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1699,9 +1830,9 @@ export interface ReposAPIClientInterface {
 
   /**
    * Delete a Reference
-   * Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a
+   * Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a 
    * Example: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   deleteReposOwnerRepoGitRefsRef(
@@ -1724,14 +1855,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoGitRefsRef`.
    */
   getReposOwnerRepoGitRefsRefParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     ref: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1763,14 +1897,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoGitRefsRef`.
    */
   patchReposOwnerRepoGitRefsRefParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     ref: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1803,13 +1940,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoGitTags`.
    */
   postReposOwnerRepoGitTagsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1825,7 +1965,7 @@ export interface ReposAPIClientInterface {
    * this call to create the tag object, and then create the refs/tags/[tag]
    * reference. If you want to create a lightweight tag, you only have to create
    * the tag reference - this call would be unnecessary.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTags(
@@ -1848,14 +1988,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoGitTagsShaCode`.
    */
   getReposOwnerRepoGitTagsShaCodeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     shaCode: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1887,13 +2030,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoGitTrees`.
    */
   postReposOwnerRepoGitTreesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1907,7 +2053,7 @@ export interface ReposAPIClientInterface {
    * The tree creation API will take nested entries as well. If both a tree and
    * a nested path modifying that tree are specified, it will overwrite the
    * contents of that tree with the new path contents and write a new tree out.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoGitTrees(
@@ -1930,17 +2076,20 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoGitTreesShaCode`.
    */
   getReposOwnerRepoGitTreesShaCodeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Tree SHA. */
+    /** Tree SHA. */
     shaCode: string,
-    /**  (optional) Get a Tree Recursively. (0 or 1) */
+    /** Get a Tree Recursively. (0 or 1) */
     recursive?: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -1972,13 +2121,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoHooks`.
    */
   getReposOwnerRepoHooksParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2010,13 +2162,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoHooks`.
    */
   postReposOwnerRepoHooksParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2049,15 +2204,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoHooksHookId`.
    */
   deleteReposOwnerRepoHooksHookIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of hook. */
+    /** Id of hook. */
     hookId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2089,15 +2247,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoHooksHookId`.
    */
   getReposOwnerRepoHooksHookIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of hook. */
+    /** Id of hook. */
     hookId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2129,15 +2290,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoHooksHookId`.
    */
   patchReposOwnerRepoHooksHookIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of hook. */
+    /** Id of hook. */
     hookId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2170,15 +2334,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoHooksHookIdTests`.
    */
   postReposOwnerRepoHooksHookIdTestsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of hook. */
+    /** Id of hook. */
     hookId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2193,7 +2360,7 @@ export interface ReposAPIClientInterface {
    * to push events, the server will respond with 204 but no test POST will
    * be generated.
    * Note: Previously /repos/:owner/:repo/hooks/:id/tes
-   *
+   * 
    * Response generated for [ 204 ] HTTP response code.
    */
   postReposOwnerRepoHooksHookIdTests(
@@ -2216,22 +2383,37 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssues`.
    */
   getReposOwnerRepoIssuesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Issues assigned to you / created by you / mentioning you / you're subscribed to updates for / All issues the authenticated user can see  */
+    /**
+     * Issues assigned to you / created by you / mentioning you / you're
+     * subscribed to updates for / All issues the authenticated user can see
+     * 
+     * If not set, server will use the default value: all
+     */
     filter: ('assigned' | 'created' | 'mentioned' | 'subscribed' | 'all'),
+    /** If not set, server will use the default value: open */
     state: ('open' | 'closed'),
-    /**  String list of comma separated Label names. Example - bug,ui,@high. */
+    /** String list of comma separated Label names. Example - bug,ui,@high. */
     labels: string,
+    /** If not set, server will use the default value: created */
     sort: ('created' | 'updated' | 'comments'),
+    /** If not set, server will use the default value: desc */
     direction: ('asc' | 'desc'),
-    /**  (optional) Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.  */
+    /**
+     * Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Only issues updated at or after this time are returned.
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2263,13 +2445,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoIssues`.
    */
   postReposOwnerRepoIssuesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2281,7 +2466,7 @@ export interface ReposAPIClientInterface {
   /**
    * Create an issue.
    * Any user with pull access to a repository can create an issue.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoIssues(
@@ -2304,18 +2489,25 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssuesComments`.
    */
   getReposOwnerRepoIssuesCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) Ignored without 'sort' parameter. */
+    /** Ignored without 'sort' parameter. */
     direction?: string,
     sort?: ('created' | 'updated'),
-    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    /**
+     * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Example: "2012-10-09T23:39:01Z".
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2347,15 +2539,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoIssuesCommentId`.
    */
   deleteReposOwnerRepoIssuesCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  ID of comment. */
+    /** ID of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2387,15 +2582,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssuesCommentId`.
    */
   getReposOwnerRepoIssuesCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  ID of comment. */
+    /** ID of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2427,15 +2625,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoIssuesCommentId`.
    */
   patchReposOwnerRepoIssuesCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  ID of comment. */
+    /** ID of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2468,13 +2669,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssuesEvents`.
    */
   getReposOwnerRepoIssuesEventsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2506,15 +2710,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssuesEventId`.
    */
   getReposOwnerRepoIssuesEventIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of the event. */
+    /** Id of the event. */
     eventId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2546,15 +2753,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssuesNumber`.
    */
   getReposOwnerRepoIssuesNumberParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2586,15 +2796,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoIssuesNumber`.
    */
   patchReposOwnerRepoIssuesNumberParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2606,7 +2819,7 @@ export interface ReposAPIClientInterface {
   /**
    * Edit an issue.
    * Issue owners and users with push access can edit an issue.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoIssuesNumber(
@@ -2629,15 +2842,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssuesNumberComments`.
    */
   getReposOwnerRepoIssuesNumberCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2669,15 +2885,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoIssuesNumberComments`.
    */
   postReposOwnerRepoIssuesNumberCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2710,15 +2929,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssuesNumberEvents`.
    */
   getReposOwnerRepoIssuesNumberEventsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2750,15 +2972,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoIssuesNumberLabels`.
    */
   deleteReposOwnerRepoIssuesNumberLabelsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2790,15 +3015,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoIssuesNumberLabels`.
    */
   getReposOwnerRepoIssuesNumberLabelsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2830,15 +3058,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoIssuesNumberLabels`.
    */
   postReposOwnerRepoIssuesNumberLabelsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2871,15 +3102,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `putReposOwnerRepoIssuesNumberLabels`.
    */
   putReposOwnerRepoIssuesNumberLabelsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2891,7 +3125,7 @@ export interface ReposAPIClientInterface {
   /**
    * Replace all labels for an issue.
    * Sending an empty array ([]) will remove all Labels from the Issue.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   putReposOwnerRepoIssuesNumberLabels(
@@ -2914,17 +3148,20 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoIssuesNumberLabelsName`.
    */
   deleteReposOwnerRepoIssuesNumberLabelsNameParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of issue. */
+    /** Number of issue. */
     number: number,
-    /**  Name of the label. */
+    /** Name of the label. */
     name: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2956,13 +3193,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoKeys`.
    */
   getReposOwnerRepoKeysParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -2994,13 +3234,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoKeys`.
    */
   postReposOwnerRepoKeysParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3033,15 +3276,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoKeysKeyId`.
    */
   deleteReposOwnerRepoKeysKeyIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of key. */
+    /** Id of key. */
     keyId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3073,15 +3319,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoKeysKeyId`.
    */
   getReposOwnerRepoKeysKeyIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of key. */
+    /** Id of key. */
     keyId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3113,13 +3362,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoLabels`.
    */
   getReposOwnerRepoLabelsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3151,13 +3403,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoLabels`.
    */
   postReposOwnerRepoLabelsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3190,15 +3445,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoLabelsName`.
    */
   deleteReposOwnerRepoLabelsNameParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Name of the label. */
+    /** Name of the label. */
     name: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3230,15 +3488,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoLabelsName`.
    */
   getReposOwnerRepoLabelsNameParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Name of the label. */
+    /** Name of the label. */
     name: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3270,15 +3531,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoLabelsName`.
    */
   patchReposOwnerRepoLabelsNameParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Name of the label. */
+    /** Name of the label. */
     name: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3311,13 +3575,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoLanguages`.
    */
   getReposOwnerRepoLanguagesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3329,7 +3596,7 @@ export interface ReposAPIClientInterface {
    * List languages.
    * List languages for the specified repository. The value on the right of a
    * language is the number of bytes of code written in that language.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoLanguages(
@@ -3352,13 +3619,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoMerges`.
    */
   postReposOwnerRepoMergesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3391,18 +3661,25 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoMilestones`.
    */
   getReposOwnerRepoMilestonesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) String to filter by state. */
+    /**
+     * String to filter by state.
+     * If not set, server will use the default value: open
+     */
     state?: ('open' | 'closed'),
-    /**  (optional) Ignored without 'sort' parameter. */
+    /** Ignored without 'sort' parameter. */
     direction?: string,
+    /** If not set, server will use the default value: due_date */
     sort?: ('due_date' | 'completeness'),
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3434,13 +3711,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoMilestones`.
    */
   postReposOwnerRepoMilestonesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3473,15 +3753,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoMilestonesNumber`.
    */
   deleteReposOwnerRepoMilestonesNumberParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of milestone. */
+    /** Number of milestone. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3513,15 +3796,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoMilestonesNumber`.
    */
   getReposOwnerRepoMilestonesNumberParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of milestone. */
+    /** Number of milestone. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3553,15 +3839,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoMilestonesNumber`.
    */
   patchReposOwnerRepoMilestonesNumberParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of milestone. */
+    /** Number of milestone. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3594,15 +3883,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoMilestonesNumberLabels`.
    */
   getReposOwnerRepoMilestonesNumberLabelsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Number of milestone. */
+    /** Number of milestone. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3634,19 +3926,30 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoNotifications`.
    */
   getReposOwnerRepoNotificationsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) True to show notifications marked as read. */
+    /** True to show notifications marked as read. */
     all?: boolean,
-    /**  (optional) True to show only notifications in which the user is directly participating or mentioned.  */
+    /**
+     * True to show only notifications in which the user is directly participating
+     * or mentioned.
+     * 
+     */
     participating?: boolean,
-    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    /**
+     * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Example: "2012-10-09T23:39:01Z".
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3657,7 +3960,7 @@ export interface ReposAPIClientInterface {
   /**
    * List your notifications in a repository
    * List all notifications for the current user.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoNotifications(
@@ -3680,13 +3983,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `putReposOwnerRepoNotifications`.
    */
   putReposOwnerRepoNotificationsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3699,7 +4005,7 @@ export interface ReposAPIClientInterface {
    * Mark notifications as read in a repository.
    * Marking all notifications in a repository as "read" removes them from the
    * default view on GitHub.com.
-   *
+   * 
    * Response generated for [ 205 ] HTTP response code.
    */
   putReposOwnerRepoNotifications(
@@ -3722,19 +4028,29 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoPulls`.
    */
   getReposOwnerRepoPullsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) String to filter by state. */
+    /**
+     * String to filter by state.
+     * If not set, server will use the default value: open
+     */
     state?: ('open' | 'closed'),
-    /**  (optional) Filter pulls by head user and branch name in the format of 'user:ref-name'. Example: github:new-script-format.  */
+    /**
+     * Filter pulls by head user and branch name in the format of 'user:ref-name'.
+     * Example: github:new-script-format.
+     * 
+     */
     head?: string,
-    /**  (optional) Filter pulls by base branch name. Example - gh-pages. */
+    /** Filter pulls by base branch name. Example - gh-pages. */
     base?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3766,13 +4082,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoPulls`.
    */
   postReposOwnerRepoPullsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3805,18 +4124,25 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoPullsComments`.
    */
   getReposOwnerRepoPullsCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) Ignored without 'sort' parameter. */
+    /** Ignored without 'sort' parameter. */
     direction?: string,
     sort?: ('created' | 'updated'),
-    /**  (optional) The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: "2012-10-09T23:39:01Z".  */
+    /**
+     * The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+     * Example: "2012-10-09T23:39:01Z".
+     * 
+     */
     since?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3827,7 +4153,7 @@ export interface ReposAPIClientInterface {
   /**
    * List comments in a repository.
    * By default, Review Comments are ordered by ascending ID.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoPullsComments(
@@ -3850,15 +4176,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoPullsCommentId`.
    */
   deleteReposOwnerRepoPullsCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3890,15 +4219,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoPullsCommentId`.
    */
   getReposOwnerRepoPullsCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3930,15 +4262,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoPullsCommentId`.
    */
   patchReposOwnerRepoPullsCommentIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of comment. */
+    /** Id of comment. */
     commentId: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -3971,15 +4306,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoPullsNumber`.
    */
   getReposOwnerRepoPullsNumberParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of pull. */
+    /** Id of pull. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4011,15 +4349,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoPullsNumber`.
    */
   patchReposOwnerRepoPullsNumberParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of pull. */
+    /** Id of pull. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4052,15 +4393,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoPullsNumberComments`.
    */
   getReposOwnerRepoPullsNumberCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of pull. */
+    /** Id of pull. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4092,15 +4436,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoPullsNumberComments`.
    */
   postReposOwnerRepoPullsNumberCommentsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of pull. */
+    /** Id of pull. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4111,28 +4458,28 @@ export interface ReposAPIClientInterface {
 
   /**
    * Create a comment.
-   *
+   * 
    *   #TODO Alternative input
    * ( http://developer.github.com/v3/pulls/comments/ )
-   *
+   * 
    *   description: |
-   *
+   * 
    *     Alternative Input.
-   *
+   * 
    *     Instead of passing commit_id, path, and position you can reply to an
-   *
+   * 
    *     existing Pull Request Comment like this:
-   *
-   *
-   *
+   * 
+   * 
+   * 
    *         body
-   *
+   * 
    *            Required string
-   *
+   * 
    *         in_reply_to
-   *
+   * 
    *            Required number - Comment id to reply to.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoPullsNumberComments(
@@ -4155,15 +4502,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoPullsNumberCommits`.
    */
   getReposOwnerRepoPullsNumberCommitsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of pull. */
+    /** Id of pull. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4195,15 +4545,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoPullsNumberFiles`.
    */
   getReposOwnerRepoPullsNumberFilesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of pull. */
+    /** Id of pull. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4235,15 +4588,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoPullsNumberMerge`.
    */
   getReposOwnerRepoPullsNumberMergeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of pull. */
+    /** Id of pull. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4275,15 +4631,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `putReposOwnerRepoPullsNumberMerge`.
    */
   putReposOwnerRepoPullsNumberMergeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Id of pull. */
+    /** Id of pull. */
     number: number,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4316,15 +4675,18 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoReadme`.
    */
   getReposOwnerRepoReadmeParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) The String name of the Commit/Branch/Tag. Defaults to master. */
+    /** The String name of the Commit/Branch/Tag. Defaults to master. */
     ref?: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4335,7 +4697,7 @@ export interface ReposAPIClientInterface {
   /**
    * Get the README.
    * This method returns the preferred README for a repository.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoReadme(
@@ -4358,13 +4720,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoReleases`.
    */
   getReposOwnerRepoReleasesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4396,13 +4761,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoReleases`.
    */
   postReposOwnerRepoReleasesParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4414,7 +4782,7 @@ export interface ReposAPIClientInterface {
   /**
    * Create a release
    * Users with push access to the repository can create a release.
-   *
+   * 
    * Response generated for [ 201 ] HTTP response code.
    */
   postReposOwnerRepoReleases(
@@ -4437,14 +4805,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoReleasesAssetsId`.
    */
   deleteReposOwnerRepoReleasesAssetsIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     id: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4476,14 +4847,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoReleasesAssetsId`.
    */
   getReposOwnerRepoReleasesAssetsIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     id: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4515,14 +4889,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoReleasesAssetsId`.
    */
   patchReposOwnerRepoReleasesAssetsIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     id: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4534,7 +4911,7 @@ export interface ReposAPIClientInterface {
   /**
    * Edit a release asset
    * Users with push access to the repository can edit a release asset.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   patchReposOwnerRepoReleasesAssetsId(
@@ -4557,14 +4934,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoReleasesId`.
    */
   deleteReposOwnerRepoReleasesIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     id: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4596,14 +4976,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoReleasesId`.
    */
   getReposOwnerRepoReleasesIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     id: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4635,14 +5018,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `patchReposOwnerRepoReleasesId`.
    */
   patchReposOwnerRepoReleasesIdParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     id: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4675,14 +5061,17 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoReleasesIdAssets`.
    */
   getReposOwnerRepoReleasesIdAssetsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     id: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4714,13 +5103,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoStargazers`.
    */
   getReposOwnerRepoStargazersParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4752,13 +5144,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoStatsCodeFrequency`.
    */
   getReposOwnerRepoStatsCodeFrequencyParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4770,7 +5165,7 @@ export interface ReposAPIClientInterface {
    * Get the number of additions and deletions per week.
    * Returns a weekly aggregate of the number of additions and deletions pushed
    * to a repository.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCodeFrequency(
@@ -4793,13 +5188,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoStatsCommitActivity`.
    */
   getReposOwnerRepoStatsCommitActivityParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4811,7 +5209,7 @@ export interface ReposAPIClientInterface {
    * Get the last year of commit activity data.
    * Returns the last year of commit activity grouped by week. The days array
    * is a group of commits per day, starting on Sunday.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsCommitActivity(
@@ -4834,13 +5232,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoStatsContributors`.
    */
   getReposOwnerRepoStatsContributorsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4872,13 +5273,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoStatsParticipation`.
    */
   getReposOwnerRepoStatsParticipationParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4910,13 +5314,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoStatsPunchCard`.
    */
   getReposOwnerRepoStatsPunchCardParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4930,12 +5337,12 @@ export interface ReposAPIClientInterface {
    * 0-6 Sunday - Saturday
    * 0-23 Hour of day
    * Number of commits
-   *
-   *
+   * 
+   * 
    * For example, [2, 14, 25] indicates that there were 25 total commits, during
    * the 2.00pm hour on Tuesdays. All times are based on the time zone of
    * individual commits.
-   *
+   * 
    * Response generated for [ 200 ] HTTP response code.
    */
   getReposOwnerRepoStatsPunchCard(
@@ -4958,15 +5365,21 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoStatusesRef`.
    */
   getReposOwnerRepoStatusesRefParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.  */
+    /**
+     * Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.
+     * 
+     */
     ref: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -4998,15 +5411,21 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `postReposOwnerRepoStatusesRef`.
    */
   postReposOwnerRepoStatusesRefParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.  */
+    /**
+     * Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.
+     * 
+     */
     ref: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5039,13 +5458,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoSubscribers`.
    */
   getReposOwnerRepoSubscribersParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5077,13 +5499,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `deleteReposOwnerRepoSubscription`.
    */
   deleteReposOwnerRepoSubscriptionParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5115,13 +5540,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoSubscription`.
    */
   getReposOwnerRepoSubscriptionParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5153,13 +5581,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `putReposOwnerRepoSubscription`.
    */
   putReposOwnerRepoSubscriptionParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5192,13 +5623,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoTags`.
    */
   getReposOwnerRepoTagsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5230,13 +5664,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoTeams`.
    */
   getReposOwnerRepoTeamsParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5268,13 +5705,16 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoWatchers`.
    */
   getReposOwnerRepoWatchersParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5306,16 +5746,19 @@ export interface ReposAPIClientInterface {
    * Arguments object for method `getReposOwnerRepoArchiveFormatPath`.
    */
   getReposOwnerRepoArchiveFormatPathParams?: {
-    /**  Name of repository owner. */
+    /** Name of repository owner. */
     owner: string,
-    /**  Name of repository. */
+    /** Name of repository. */
     repo: string,
     archiveFormat: ('tarball' | 'zipball'),
-    /**  Valid Git reference, defaults to 'master'. */
+    /** Valid Git reference, defaults to 'master'. */
     path: string,
-    /**  (optional) You can check the current version of media type in responses.  */
+    /**
+     * You can check the current version of media type in responses.
+     * 
+     */
     xGitHubMediaType?: string,
-    /**  (optional) Is used to set specified media type. */
+    /** Is used to set specified media type. */
     accept?: string,
     xRateLimit?: number,
     xRateLimitRemaining?: number,
@@ -5330,7 +5773,7 @@ export interface ReposAPIClientInterface {
    * configured to follow redirects or you will need to use the Location header
    * to make a second GET request.
    * Note: For private repositories, these links are temporary and expire quickly.
-   *
+   * 
    * Response generated for [ default ] HTTP response code.
    */
   getReposOwnerRepoArchiveFormatPath(
