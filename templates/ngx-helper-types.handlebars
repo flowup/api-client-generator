@@ -44,10 +44,10 @@ export interface HttpOptions {
 export interface APIClientModuleConfig {
 
   /** Domain URL that will be used as the base for all of the API client service requests */
-  domain?: string;
+  domain?: string;{{#unless options.skipGuards}}
 
   /** Flag to enable/disable response type guards */
-  guardResponses?: boolean; // validate responses with type guards
+  guardResponses?: boolean; // validate responses with type guards{{/unless}}
 
   /** Default HTTP options configuration for the API client service */
   httpOptions?: DefaultHttpOptions;

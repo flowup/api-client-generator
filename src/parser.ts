@@ -7,6 +7,7 @@ import {
   Parameter as SwaggerParameter,
   Reference,
 } from 'swagger-schema-official';
+import { GLOBAL_OPTIONS } from './main';
 import {
   Definition,
   Method,
@@ -347,7 +348,7 @@ function parseInterfaceProperties(
 
       const propertyAllOf = propSchema.allOf?.length
         ? propSchema.allOf.map(allOfItemSchema =>
-            parseSchema(allOfItemSchema, false, {
+            parseSchema(allOfItemSchema, {
               name: accessProp(name),
               isRequired: true,
             }),
@@ -356,7 +357,7 @@ function parseInterfaceProperties(
 
       const isRequired = requiredProps.includes(propName);
 
-      const parsedSchema = parseSchema(propSchema, false, {
+      const parsedSchema = parseSchema(propSchema, {
         name: name === ADDITIONAL_PROPERTIES_KEY ? 'value' : accessProp(name),
         isRequired,
       });
@@ -390,7 +391,9 @@ function parseInterfaceProperties(
         ),
       };
 
-      const propGuard = propertyAllOf.length
+      const propGuard = GLOBAL_OPTIONS.skipGuards
+        ? undefined
+        : propertyAllOf.length
         ? guardOptional(
             accessProp(name),
             false,
@@ -404,10 +407,11 @@ function parseInterfaceProperties(
 
       return {
         ...property,
-        guard:
-          name === ADDITIONAL_PROPERTIES_KEY
-            ? guardDictionary('arg', () => propGuard)
-            : propGuard,
+        guard: GLOBAL_OPTIONS.skipGuards
+          ? undefined
+          : name === ADDITIONAL_PROPERTIES_KEY
+          ? guardDictionary('arg', () => propGuard)
+          : propGuard,
       };
     })
     .sort(compareStringByKey('name')); // tslint:disable-line:no-array-mutation
@@ -415,7 +419,6 @@ function parseInterfaceProperties(
 
 function parseSchema(
   property: Schema,
-  skipGuards: boolean,
   {
     name,
     isRequired,
@@ -436,7 +439,7 @@ function parseSchema(
     return {
       type: `(${enumValues.join(' | ')})`,
       imports: [],
-      guard: skipGuards
+      guard: GLOBAL_OPTIONS.skipGuards
         ? undefined
         : () =>
             guardOptional(
@@ -452,12 +455,14 @@ function parseSchema(
     return {
       type: 'object',
       imports: [],
-      guard: () =>
-        guardOptional(
-          name,
-          isRequired,
-          (iterName: string) => `typeof ${iterName} === 'object'`,
-        ),
+      guard: GLOBAL_OPTIONS.skipGuards
+        ? undefined
+        : () =>
+            guardOptional(
+              name,
+              isRequired,
+              (iterName: string) => `typeof ${iterName} === 'object'`,
+            ),
     }; // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
   }
 
@@ -467,7 +472,7 @@ function parseSchema(
     return {
       type: refType,
       imports: [refType],
-      guard: skipGuards
+      guard: GLOBAL_OPTIONS.skipGuards
         ? undefined
         : () =>
             guardOptional(
@@ -480,7 +485,7 @@ function parseSchema(
   }
 
   if (property.items) {
-    const parsedArrayItemsSchema = parseSchema(property.items, skipGuards, {
+    const parsedArrayItemsSchema = parseSchema(property.items, {
       name: 'item',
       isRequired: true,
       prefixGuards,
@@ -490,7 +495,7 @@ function parseSchema(
       type: `${parsedArrayItemsSchema.type}[]`,
       imports: parsedArrayItemsSchema.imports,
       guard:
-        skipGuards || !parsedArrayItemsSchema.guard
+        GLOBAL_OPTIONS.skipGuards || !parsedArrayItemsSchema.guard
           ? undefined
           : () =>
               guardOptional(name, isRequired, (iterName: string) =>
@@ -502,7 +507,6 @@ function parseSchema(
   if (property.additionalProperties) {
     const parsedDictionarySchema = parseSchema(
       property.additionalProperties as Schema,
-      skipGuards,
       { name: 'value', isRequired: true, prefixGuards },
     );
 
@@ -514,7 +518,7 @@ function parseSchema(
         : `{ ${ADDITIONAL_PROPERTIES_KEY}: ${parsedDictionarySchema.type} }`,
       imports: parsedDictionarySchema.imports,
       guard:
-        skipGuards || !parsedDictionarySchema.guard
+        GLOBAL_OPTIONS.skipGuards || !parsedDictionarySchema.guard
           ? undefined
           : () =>
               guardOptional(name, isRequired, (iterName: string) =>
@@ -530,7 +534,7 @@ function parseSchema(
   return {
     type,
     imports: [],
-    guard: skipGuards
+    guard: GLOBAL_OPTIONS.skipGuards
       ? undefined
       : () =>
           type === 'any'
@@ -603,7 +607,7 @@ function determineResponseType(response: Response): ParsedSchema {
 
   const nullable =
     (schema as Schema & { 'x-nullable'?: boolean })['x-nullable'] || false;
-  const responseSchema = parseSchema(schema, false, {
+  const responseSchema = parseSchema(schema, {
     name: 'res',
     isRequired: true,
     prefixGuards: true,
@@ -617,10 +621,12 @@ function determineResponseType(response: Response): ParsedSchema {
   return {
     ...responseSchema,
     type: nullable ? `(${type}) | null` : type,
-    guard: () =>
-      nullable
-        ? `(res == null || ${responseSchema.guard?.('')})`
-        : responseSchema.guard?.('') || '',
+    guard: GLOBAL_OPTIONS.skipGuards
+      ? undefined
+      : () =>
+          nullable
+            ? `(res == null || ${responseSchema.guard?.('')})`
+            : responseSchema.guard?.('') || '',
   };
 }
 
@@ -660,7 +666,6 @@ function transformParameters(
           // tslint:disable-next-line:no-any
           (derefParam as any),
 
-      false,
       {
         name,
         isRequired: derefParam.required,

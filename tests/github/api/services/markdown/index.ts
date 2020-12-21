@@ -14,7 +14,6 @@ import { MarkdownAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './markdown-api-
 import { GuardedMarkdownAPIClient } from './guarded-markdown-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
-export { MarkdownAPIClient } from './markdown-api-client.service';
 export { MarkdownAPIClientInterface } from './markdown-api-client.interface';
 export { GuardedMarkdownAPIClient } from './guarded-markdown-api-client.service';
 

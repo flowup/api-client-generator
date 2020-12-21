@@ -14,7 +14,6 @@ import { RepositoriesAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './repositor
 import { GuardedRepositoriesAPIClient } from './guarded-repositories-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
-export { RepositoriesAPIClient } from './repositories-api-client.service';
 export { RepositoriesAPIClientInterface } from './repositories-api-client.interface';
 export { GuardedRepositoriesAPIClient } from './guarded-repositories-api-client.service';
 

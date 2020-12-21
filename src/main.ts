@@ -15,6 +15,7 @@ const optimist = opt
   .alias('C', 'commit')
   .alias('v', 'verbose')
   .alias('t', 'splitPathTags')
+  .alias('g', 'skipGuards')
   .alias('m', 'skipModule')
   .describe('s', 'Path to the swagger file')
   .describe('o', 'Path where generated files should be emitted')
@@ -25,6 +26,7 @@ const optimist = opt
     'Generates services and models only for the specified tags.' +
       ' Use `,` (comma) as the separator for multiple tags. Use `all` to emit a service per tag',
   )
+  .describe('g', 'Skip creating type guards and guarded client')
   .describe('m', 'Skip creating index file with module export');
 
 const argv = optimist.argv;
@@ -45,6 +47,7 @@ export const GLOBAL_OPTIONS = {
   splitPathTags:
     'splitPathTags' in argv ? (argv.splitPathTags || 'all').split(',') : [],
   skipModuleExport: argv.skipModule === true || argv.skipModule === 'true',
+  skipGuards: argv.skipGuards,
 } as const;
 
 const generate: typeof generateAPIClient = argv.commit

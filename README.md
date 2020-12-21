@@ -117,6 +117,7 @@ This will download and save the swagger.yaml, and later on use the file to gener
 |                        | specify what particular tags should be generated. Use `,` as the separator for multiple tags |
 |                        | use `all` to emit all as a service per tag                                                   |
 | `-m`/`--skipModule`    | skip creating the index file with module export                                              |
+| `-g`/`--skipGuards`    | skip creating type guards and guarded service                                                |
 
 <small>\* The author of the commit will be `api-client-generator <api-client-generator@flowup.cz>`.
 If there are any staged changes in your repository, the generator will halt pre-generation with an error to prevent including your changes in the automatic commit.\*</small>

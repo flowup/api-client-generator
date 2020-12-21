@@ -14,7 +14,6 @@ import { OrgsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './orgs-api-client.s
 import { GuardedOrgsAPIClient } from './guarded-orgs-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
-export { OrgsAPIClient } from './orgs-api-client.service';
 export { OrgsAPIClientInterface } from './orgs-api-client.interface';
 export { GuardedOrgsAPIClient } from './guarded-orgs-api-client.service';
 

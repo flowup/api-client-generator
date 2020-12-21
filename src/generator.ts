@@ -144,28 +144,32 @@ export async function generateAPIClient(): Promise<string[]> {
           { ...apiTagData, templateType: 'interface' },
           clientOutputPath,
         ),
-        generateFile(
-          compiledTemplates['service'],
-          `guarded-${apiTagData.serviceFileName}.ts`,
-          { ...apiTagData, templateType: 'guardedService' },
-          clientOutputPath,
-        ),
-        ...(!GLOBAL_OPTIONS.skipModuleExport
-          ? [
+        ...(GLOBAL_OPTIONS.skipGuards
+          ? []
+          : [
+              generateFile(
+                compiledTemplates['service'],
+                `guarded-${apiTagData.serviceFileName}.ts`,
+                { ...apiTagData, templateType: 'guardedService' },
+                clientOutputPath,
+              ),
+            ]),
+        ...(GLOBAL_OPTIONS.skipModuleExport
+          ? []
+          : [
               generateFile(
                 compiledTemplates['moduleExport'],
                 `index.ts`,
-                apiTagData,
+                { ...apiTagData, options: GLOBAL_OPTIONS },
                 clientOutputPath,
               ),
-            ]
-          : []),
+            ]),
       ]);
     }),
     generateFile(
       compiledTemplates['helperTypes'],
       `types.ts`,
-      undefined,
+      { options: GLOBAL_OPTIONS },
       GLOBAL_OPTIONS.outputPath,
     ),
     generateModels(
@@ -174,12 +178,16 @@ export async function generateAPIClient(): Promise<string[]> {
       allDefinitions,
       GLOBAL_OPTIONS.outputPath,
     ),
-    generateFile(
-      compiledTemplates['modelsGuards'],
-      `index.ts`,
-      { definitions: allDefinitions },
-      join(GLOBAL_OPTIONS.outputPath, MODEL_GUARDS_DIR_NAME),
-    ),
+    ...(GLOBAL_OPTIONS.skipGuards
+      ? []
+      : [
+          generateFile(
+            compiledTemplates['modelsGuards'],
+            `index.ts`,
+            { definitions: allDefinitions },
+            join(GLOBAL_OPTIONS.outputPath, MODEL_GUARDS_DIR_NAME),
+          ),
+        ]),
   ]);
 }
 

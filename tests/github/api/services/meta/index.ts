@@ -14,7 +14,6 @@ import { MetaAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './meta-api-client.s
 import { GuardedMetaAPIClient } from './guarded-meta-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
-export { MetaAPIClient } from './meta-api-client.service';
 export { MetaAPIClientInterface } from './meta-api-client.interface';
 export { GuardedMetaAPIClient } from './guarded-meta-api-client.service';
 

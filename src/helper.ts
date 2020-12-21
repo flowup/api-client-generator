@@ -98,7 +98,7 @@ export function guardOptional(
 
 export function guardDictionary(
   name: string,
-  guard: (name: string) => string,
+  guard: (name: string) => string | undefined,
 ): string {
   return `Object.values(${name}).every((value: any) => ${guard('value')})`;
 }

@@ -14,7 +14,6 @@ import { UserAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './user-api-client.s
 import { GuardedUserAPIClient } from './guarded-user-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
-export { UserAPIClient } from './user-api-client.service';
 export { UserAPIClientInterface } from './user-api-client.interface';
 export { GuardedUserAPIClient } from './guarded-user-api-client.service';
 
