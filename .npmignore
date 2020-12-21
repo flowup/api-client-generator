@@ -2,12 +2,16 @@ node_modules/
 output*/
 src/*
 tests/
-cloudbuild.yml
 .gitignore
+.prettierignore
 .idea
+cloudbuild.yml
 CODE_OF_CONDUCT.md
 package-lock.json
+prettier.config.json
 PULL_REQUEST_TEMPLATE.md
+setupJest.ts
 tsconfig.json
+tsconfig.tests.json
 tslint.json
 yarn.lock
