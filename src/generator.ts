@@ -9,7 +9,8 @@ import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { Operation, Path, Spec as Swagger } from 'swagger-schema-official';
 import { promisify } from 'util';
-import { TemplateData, GenOptions, Definition } from './types';
+import { GLOBAL_OPTIONS } from './main';
+import { TemplateData, Definition } from './types';
 import {
   logWarn,
   dashCase,
@@ -23,10 +24,8 @@ const ALL_TAGS_OPTION = 'all';
 export const MODEL_DIR_NAME = 'models';
 export const MODEL_GUARDS_DIR_NAME = 'guards';
 
-export async function generateAPIClient(
-  options: GenOptions,
-): Promise<string[]> {
-  const swaggerFilePath = options.sourceFile;
+export async function generateAPIClient(): Promise<string[]> {
+  const swaggerFilePath = GLOBAL_OPTIONS.sourceFile;
 
   try {
     await validate(swaggerFilePath, {
@@ -49,7 +48,7 @@ export async function generateAPIClient(
 
   const swaggerDef: Swagger = await swaggerFile(swaggerFilePath);
   const allTags = getAllSwaggerTags(swaggerDef.paths);
-  const specifiedTags = options.splitPathTags || [];
+  const specifiedTags = GLOBAL_OPTIONS.splitPathTags || [];
   const usedTags: (string | undefined)[] =
     specifiedTags.length === 0
       ? [undefined]
@@ -126,7 +125,7 @@ export async function generateAPIClient(
         usedTags && usedTags[0]
           ? `services/${dashCase(apiTagData.swaggerTag)}`
           : '';
-      const clientOutputPath = join(options.outputPath, subFolder);
+      const clientOutputPath = join(GLOBAL_OPTIONS.outputPath, subFolder);
 
       await promisify(stat)(clientOutputPath).catch(() =>
         promisify(mkdir)(clientOutputPath, { recursive: true }),
@@ -151,7 +150,7 @@ export async function generateAPIClient(
           { ...apiTagData, templateType: 'guardedService' },
           clientOutputPath,
         ),
-        ...(!options.skipModuleExport
+        ...(!GLOBAL_OPTIONS.skipModuleExport
           ? [
               generateFile(
                 compiledTemplates['moduleExport'],
@@ -167,19 +166,19 @@ export async function generateAPIClient(
       compiledTemplates['helperTypes'],
       `types.ts`,
       undefined,
-      options.outputPath,
+      GLOBAL_OPTIONS.outputPath,
     ),
     generateModels(
       compiledTemplates['model'],
       compiledTemplates['modelsExport'],
       allDefinitions,
-      options.outputPath,
+      GLOBAL_OPTIONS.outputPath,
     ),
     generateFile(
       compiledTemplates['modelsGuards'],
       `index.ts`,
       { definitions: allDefinitions },
-      join(options.outputPath, MODEL_GUARDS_DIR_NAME),
+      join(GLOBAL_OPTIONS.outputPath, MODEL_GUARDS_DIR_NAME),
     ),
   ]);
 }

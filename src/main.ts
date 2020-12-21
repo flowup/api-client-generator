@@ -2,7 +2,6 @@
 
 import { generateAPIClient, MODEL_DIR_NAME } from './generator';
 import * as opt from 'optimist';
-import { GenOptions } from './types';
 import { commitAfter } from './git';
 import { readdirSync } from 'fs';
 import { join } from 'path';
@@ -40,19 +39,19 @@ if (typeof argv.source === 'undefined' && argv.source !== true) {
   process.exit(1);
 }
 
-const options: GenOptions = {
+export const GLOBAL_OPTIONS = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,
   splitPathTags:
     'splitPathTags' in argv ? (argv.splitPathTags || 'all').split(',') : [],
   skipModuleExport: argv.skipModule === true || argv.skipModule === 'true',
-};
+} as const;
 
 const generate: typeof generateAPIClient = argv.commit
   ? commitAfter(generateAPIClient)
   : generateAPIClient;
 
-generate(options)
+generate()
   .then(newFiles => {
     console.info('Angular API client generated successfully');
 

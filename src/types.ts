@@ -69,32 +69,6 @@ export interface Method {
   readonly formData?: Pick<Parameter, 'name' | 'camelCaseName'>[]; // list of parameter names which are form data params
 }
 
-/**
- * Options for generator
- */
-export interface GenOptions {
-  /**
-   * Path to the swagger file
-   */
-  sourceFile: string;
-  /**
-   * Path where generated files should be emitted
-   */
-  outputPath: string;
-  /**
-   * Generate actions and models only for the specified api
-   */
-  splitPathTags?: string[];
-  /**
-   * Skip creating index file with module export
-   */
-  skipModuleExport?: boolean;
-  /**
-   * Skip creating type guards and guarded API client service
-   */
-  skipGuards?: boolean;
-}
-
 // tslint:disable-next-line no-any
 export type ClientGenerator = (...args: any[]) => Promise<string[]>;
 
