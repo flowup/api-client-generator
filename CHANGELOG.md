@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.0](https://github.com/flowup/api-client-generator/compare/4.7.1...5.0.0-beta.0) (2020-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api-client:** generator now ignores bodies for requests that should not send any body, only PUT, PATCH and POST should contain body and it is handled as optional
+* **generator:** if you import `DefaultHttpOptions`, `HttpOptions` or `APIClientModuleConfig` you need to adjust your imports to file `./types` at the top of your "output" path
+
+### Features
+
+* **api-client:** body request based on the request type and the parameter ([d0309b0](https://github.com/flowup/api-client-generator/commit/d0309b06a91f7c7b5f315f1071620818299fe4da))
+* **api-client:** method params property docs comments ([7a1eddf](https://github.com/flowup/api-client-generator/commit/7a1eddf6accd0e519ab0a17e481ef1056b14b740))
+* **api-client:** methods params extracted to separate property in api client interface ([53f3015](https://github.com/flowup/api-client-generator/commit/53f30150dcde9d803daafed5e711d19d0eea58ee)), closes [#91](https://github.com/flowup/api-client-generator/issues/91)
+* **api-client:** observe support for HttpResponse and HttpEvent ([cdf2c6d](https://github.com/flowup/api-client-generator/commit/cdf2c6de045bb71e635be51112f45cad01b32f4d))
+* **generator:** descriptions generated as single/multi line docs comments ([96a512d](https://github.com/flowup/api-client-generator/commit/96a512d3b91c25b79200b4bf12e41e47c9efb04c)), closes [#88](https://github.com/flowup/api-client-generator/issues/88)
+* **generator:** https protocol preferred if mentioned in schemes ([c7f7d6f](https://github.com/flowup/api-client-generator/commit/c7f7d6fbba376f157a9290a2b795da61c68566b5))
+* **generator:** method parameters args object optional if all of the params are optional ([9b77d74](https://github.com/flowup/api-client-generator/commit/9b77d740ddc55082da8b7cade4125f9fc78a4ad2)), closes [#69](https://github.com/flowup/api-client-generator/issues/69)
+* **generator:** operation summary in descriptions ([b573759](https://github.com/flowup/api-client-generator/commit/b5737590aa912a39f904f6fe1e451d9bdb73b5ab)), closes [#112](https://github.com/flowup/api-client-generator/issues/112)
+* **generator:** option to skip guards ([f4cc59f](https://github.com/flowup/api-client-generator/commit/f4cc59fc5d5393e3500d0779152d0b6e02613988)), closes [#105](https://github.com/flowup/api-client-generator/issues/105)
+* **generator:** type interfaces for API client moved to one separate file ([f08ffb6](https://github.com/flowup/api-client-generator/commit/f08ffb628dc5d62fb446d4575b7f4f7b42469fc9))
+* **generator:** united file header ([86fd135](https://github.com/flowup/api-client-generator/commit/86fd135359be2f681ea0e67a4f3ef6ace4cb2607)), closes [#108](https://github.com/flowup/api-client-generator/issues/108)
+* **guard:** check for null at enum guards ([14320d5](https://github.com/flowup/api-client-generator/commit/14320d5d25d16a09e44bed38a02c7868431de016))
+* **guard:** typeof object check for dictionaries of any ([4bf917a](https://github.com/flowup/api-client-generator/commit/4bf917ada9180bffe55ee0a2bfaa68b6f572d916))
+* **models:** basic object properties as dictionary with key string and value of any ([7233c2d](https://github.com/flowup/api-client-generator/commit/7233c2d9cba0249bca3ba31bcd63b598eb6daf0b))
+* **models:** description comments as docs comments before each property ([8c81f6c](https://github.com/flowup/api-client-generator/commit/8c81f6c294c4e4e8c0b99e7720bbb3569b3a8643))
+* **models:** interface properties holding dictionaries and array combinations ([e3a33b6](https://github.com/flowup/api-client-generator/commit/e3a33b68959a68310b62508bc8a1664bad0092c7))
+* **models:** property name non unicode chars escaped ([4dd4089](https://github.com/flowup/api-client-generator/commit/4dd4089f565e81f2ad6f5f97b85d3da8a24b16f5))
+
+
+### Bug Fixes
+
+* **api-client:** form data not set if undefined ([cd541a0](https://github.com/flowup/api-client-generator/commit/cd541a09ca1e6a9ad5eb419753608a3492e828ba))
+* **generator:** default response used if no success code specified ([bc316f6](https://github.com/flowup/api-client-generator/commit/bc316f6f86cd5d28c6ba35e0ac2bbba824df920a))
+* **generator:** service interface imported directly from interface file instead of export index ([d768fed](https://github.com/flowup/api-client-generator/commit/d768fed409ab04bb629a267290decb9b8ba0d9ed))
+* **guard:** dictionaries as interface properties ([58b9126](https://github.com/flowup/api-client-generator/commit/58b91263a09094236ded5c3ab0087a48833a58fc))
+* **guards:** any type results in empty guard ([83917a9](https://github.com/flowup/api-client-generator/commit/83917a9b8b26292778c61076533e208ddc880502)), closes [#98](https://github.com/flowup/api-client-generator/issues/98)
+* **guards:** any used as type of array/object iteration items ([ef7be58](https://github.com/flowup/api-client-generator/commit/ef7be58ee053c7701dcf930ac3fd3d1c75b3dbc3))
+
 ### [4.7.1](https://github.com/flowup/api-client-generator/compare/4.7.0...4.7.1) (2020-10-19)
 
 
