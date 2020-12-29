@@ -3,7 +3,7 @@
   "version": "5.0.0-beta.1",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settings",
   "homepage": "https://github.com/flowup/api-client-generator/blob/master/README.md",
-  "main": "src/main.ts",
+  "main": "dist/src/main.js",
   "author": {
     "name": "FlowUp",
     "email": "hello@flowup.cz",
@@ -45,8 +45,8 @@
     "HTTPClient"
   ],
   "engines": {
-    "node": ">=8.9.1",
-    "yarn": ">=1.4.0"
+    "node": ">=10.0.0",
+    "yarn": ">=1.20.0"
   },
   "license": "MIT",
   "scripts": {
