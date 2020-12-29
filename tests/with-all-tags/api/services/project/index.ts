@@ -14,6 +14,7 @@ import { ProjectAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './project-api-cl
 import { GuardedProjectAPIClient } from './guarded-project-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
+export { ProjectAPIClient } from './project-api-client.service';
 export { ProjectAPIClientInterface } from './project-api-client.interface';
 export { GuardedProjectAPIClient } from './guarded-project-api-client.service';
 

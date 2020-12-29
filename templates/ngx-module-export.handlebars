@@ -1,10 +1,11 @@
 {{> header}}
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { {{#unless options.skipGuards}}{{&serviceName}}, {{/unless}}USE_DOMAIN, USE_HTTP_OPTIONS } from './{{&serviceFileName}}';{{#unless options.skipGuards}}
+import { {{&serviceName}}, USE_DOMAIN, USE_HTTP_OPTIONS } from './{{&serviceFileName}}';{{#unless options.skipGuards}}
 import { Guarded{{&serviceName}} } from './guarded-{{&serviceFileName}}';{{/unless}}
 import { APIClientModuleConfig } from '{{#if serviceTag}}../.{{/if}}./types';
 
+export { {{&serviceName}} } from './{{&serviceFileName}}';
 export { {{&interfaceName}} } from './{{&interfaceFileName}}';{{#unless options.skipGuards}}
 export { Guarded{{&serviceName}} } from './guarded-{{&serviceFileName}}';{{/unless}}
 
@@ -22,8 +23,8 @@ export class {{&serviceName}}Module {
       ngModule: {{&serviceName}}Module,
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
-        ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),{{#unless options.skipGuards}}
-        ...(config.guardResponses ? [{provide: {{&serviceName}}, useClass: Guarded{{&serviceName}} }] : [{{&serviceName}}]),{{/unless}}
+        ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
+        {{#unless options.skipGuards}}...(config.guardResponses ? [{provide: {{&serviceName}}, useClass: Guarded{{&serviceName}} }] : [{{&serviceName}}]){{else}}{{&serviceName}}{{/unless}},
       ]
     };
   }

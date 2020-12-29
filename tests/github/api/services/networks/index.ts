@@ -14,6 +14,7 @@ import { NetworksAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './networks-api-
 import { GuardedNetworksAPIClient } from './guarded-networks-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
+export { NetworksAPIClient } from './networks-api-client.service';
 export { NetworksAPIClientInterface } from './networks-api-client.interface';
 export { GuardedNetworksAPIClient } from './guarded-networks-api-client.service';
 

@@ -14,6 +14,7 @@ import { SearchAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './search-api-clie
 import { GuardedSearchAPIClient } from './guarded-search-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
+export { SearchAPIClient } from './search-api-client.service';
 export { SearchAPIClientInterface } from './search-api-client.interface';
 export { GuardedSearchAPIClient } from './guarded-search-api-client.service';
 

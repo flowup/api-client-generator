@@ -10,9 +10,10 @@
 /* eslint-disable */
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
+import { APIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './api-client.service';
 import { APIClientModuleConfig } from './types';
 
+export { APIClient } from './api-client.service';
 export { APIClientInterface } from './api-client.interface';
 
 @NgModule({})
@@ -30,6 +31,7 @@ export class APIClientModule {
       providers: [
         ...(config.domain != null ? [{provide: USE_DOMAIN, useValue: config.domain}] : []),
         ...(config.httpOptions ? [{provide: USE_HTTP_OPTIONS, useValue: config.httpOptions}] : []),
+        APIClient,
       ]
     };
   }

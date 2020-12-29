@@ -14,6 +14,7 @@ import { NotificationsAPIClient, USE_DOMAIN, USE_HTTP_OPTIONS } from './notifica
 import { GuardedNotificationsAPIClient } from './guarded-notifications-api-client.service';
 import { APIClientModuleConfig } from '../../types';
 
+export { NotificationsAPIClient } from './notifications-api-client.service';
 export { NotificationsAPIClientInterface } from './notifications-api-client.interface';
 export { GuardedNotificationsAPIClient } from './guarded-notifications-api-client.service';
 
