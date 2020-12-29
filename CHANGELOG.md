@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.1](https://github.com/flowup/api-client-generator/compare/5.0.0-beta.0...5.0.0-beta.1) (2020-12-29)
+
+
+### Features
+
+* **api-client:** parameters of operation prioritized over path default params ([26b6b4a](https://github.com/flowup/api-client-generator/commit/26b6b4a3518e87b48e594318456dad56b51ff5fa))
+
 ## [5.0.0-beta.0](https://github.com/flowup/api-client-generator/compare/4.7.1...5.0.0-beta.0) (2020-12-22)
 
 
