@@ -194,6 +194,75 @@ export class APIClient implements APIClientInterface {
   }
 
   /**
+   * Get details of the game.
+   * Default id param should be overriden to string
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pet>;
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pet>>;
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pet>>;
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pet | HttpResponse<models.Pet> | HttpEvent<models.Pet>> {
+    const path = `/pets-with-default-id-param/${args.id}`;
+    const options = {
+      ...this.options,
+      ...requestHttpOptions,
+      observe,
+    };
+
+    return this.http.get<models.Pet>(`${this.domain}${path}`, options);
+  }
+
+  /**
+   * Default id param should be number and not string
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+    const path = `/pets-with-default-id-param/${args.id}`;
+    const options = {
+      ...this.options,
+      ...requestHttpOptions,
+      observe,
+    };
+
+    return this.http.patch<void>(`${this.domain}${path}`, JSON.stringify(args.body), options);
+  }
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getCustomers(

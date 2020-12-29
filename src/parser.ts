@@ -108,98 +108,111 @@ function parseMethods(
       ([pathName, pathDef]) =>
         Object.entries(pathDef)
           .filter(
-            ([methodType, operation]) =>
+            ([methodType, operation]: [string, OpenAPIV2.OperationObject]) =>
               supportedMethods.indexOf(methodType?.toUpperCase()) !== -1 && // skip unsupported methods
               (!swaggerTag ||
                 (operation &&
                   'tags' in operation &&
-                  operation.tags.includes(swaggerTag))), // if tag exists take only paths including this tag
+                  operation.tags?.includes(swaggerTag))), // if tag exists take only paths including this tag
           )
-          .map(([methodType, operation]) => {
-            // select the lowest success (code 20x) response
-            const successResponseCode =
-              ('responses' in operation &&
-                Object.keys(operation.responses)
-                  .slice()
-                  .sort()
-                  .filter(code => code.startsWith('2'))[0]) ||
-              'default';
+          .map(
+            ([methodType, operation]: [string, OpenAPIV2.OperationObject]) => {
+              // select the lowest success (code 20x) response
+              const successResponseCode =
+                ('responses' in operation &&
+                  Object.keys(operation.responses)
+                    .slice()
+                    .sort()
+                    .filter(code => code.startsWith('2'))[0]) ||
+                'default';
 
-            const okResponse = operation.responses[successResponseCode];
+              const okResponse = operation.responses[successResponseCode];
 
-            const responseTypeSchema = determineResponseType(
-              okResponse && '$ref' in okResponse
-                ? responses[dereferenceType(okResponse.$ref)]
-                : okResponse,
-            );
+              const responseTypeSchema = determineResponseType(
+                okResponse && '$ref' in okResponse
+                  ? responses[dereferenceType(okResponse.$ref)]
+                  : okResponse,
+              );
 
-            const transformedParams = transformParameters(
-              [...(pathDef.parameters || []), ...(operation.parameters || [])],
-              parameters || {},
-            );
-
-            const methodTypeLowered = methodType.toLowerCase() as MethodType;
-            const formData = transformedParams
-              .filter(({ name, isFormParameter }) => name && isFormParameter)
-              .map(({ name, camelCaseName }) => ({
-                name,
-                camelCaseName: camelCaseName || name,
-              }));
-            const stringifyBody = (param?: Parameter) =>
-              param ? `JSON.stringify(args.${param.camelCaseName})` : 'null';
-            const body = /^(?:post|put|patch)\b/.test(methodTypeLowered)
-              ? formData.length
-                ? 'formData'
-                : stringifyBody(
-                    transformedParams.find(
-                      ({ isBodyParameter }) => isBodyParameter,
-                    ),
-                  )
-              : undefined;
-
-            return {
-              hasJsonResponse: true,
-              methodName: toCamelCase(
-                operation.operationId
-                  ? !swaggerTag
-                    ? operation.operationId
-                    : operation.operationId.replace(`${swaggerTag}_`, '')
-                  : `${methodTypeLowered}_${pathName.replace(/[{}]/g, '')}`,
-              ),
-              methodType: methodTypeLowered,
-              body,
-              parameters: transformedParams,
-              paramsOptional: transformedParams.every(
-                ({ isRequired }) => !isRequired,
-              ),
-              formData,
-              // turn path interpolation `{this}` into string template `${args.this}
-              path: pathName.replace(
-                /{(.*?)}/g,
-                (_: string, ...args: string[]): string =>
-                  `\${args.${toCamelCase(args[0])}}`,
-              ),
-              responseGuard: responseTypeSchema.guard?.('response'),
-              description: createDocsComment(
+              const transformedParams = transformParameters(
                 [
-                  operation.summary,
-                  operation.description,
-                  operation.deprecated
-                    ? `@deprecated this method has been deprecated and may be removed in future.`
-                    : null,
-                  `Response generated for [ ${successResponseCode} ] HTTP response code.`,
-                ]
-                  .filter(str => !!str)
-                  .join('\n'),
-                2,
-                true,
-              ),
-              responseTypeSchema,
-              ...(responseTypeSchema.type === 'File' && {
-                requestResponseType: 'blob' as 'blob',
-              }),
-            };
-          }),
+                  ...(pathDef.parameters?.length && operation.parameters?.length
+                    ? pathDef.parameters.filter(parameter =>
+                        operation.parameters?.some(
+                          param =>
+                            (param as OpenAPIV2.ParameterObject).name !==
+                            (parameter as OpenAPIV2.ParameterObject).name,
+                        ),
+                      )
+                    : pathDef.parameters || []),
+                  ...(operation.parameters || []),
+                ] as ExtendedParameter[],
+                parameters || {},
+              );
+
+              const methodTypeLowered = methodType.toLowerCase() as MethodType;
+              const formData = transformedParams
+                .filter(({ name, isFormParameter }) => name && isFormParameter)
+                .map(({ name, camelCaseName }) => ({
+                  name,
+                  camelCaseName: camelCaseName || name,
+                }));
+              const stringifyBody = (param?: Parameter) =>
+                param ? `JSON.stringify(args.${param.camelCaseName})` : 'null';
+              const body = /^(?:post|put|patch)\b/.test(methodTypeLowered)
+                ? formData.length
+                  ? 'formData'
+                  : stringifyBody(
+                      transformedParams.find(
+                        ({ isBodyParameter }) => isBodyParameter,
+                      ),
+                    )
+                : undefined;
+
+              return {
+                hasJsonResponse: true,
+                methodName: toCamelCase(
+                  operation.operationId
+                    ? !swaggerTag
+                      ? operation.operationId
+                      : operation.operationId.replace(`${swaggerTag}_`, '')
+                    : `${methodTypeLowered}_${pathName.replace(/[{}]/g, '')}`,
+                ),
+                methodType: methodTypeLowered,
+                body,
+                parameters: transformedParams,
+                paramsOptional: transformedParams.every(
+                  ({ isRequired }) => !isRequired,
+                ),
+                formData,
+                // turn path interpolation `{this}` into string template `${args.this}
+                path: pathName.replace(
+                  /{(.*?)}/g,
+                  (_: string, ...args: string[]): string =>
+                    `\${args.${toCamelCase(args[0])}}`,
+                ),
+                responseGuard: responseTypeSchema.guard?.('response'),
+                description: createDocsComment(
+                  [
+                    operation.summary,
+                    operation.description,
+                    operation.deprecated
+                      ? `@deprecated this method has been deprecated and may be removed in future.`
+                      : null,
+                    `Response generated for [ ${successResponseCode} ] HTTP response code.`,
+                  ]
+                    .filter(str => !!str)
+                    .join('\n'),
+                  2,
+                  true,
+                ),
+                responseTypeSchema,
+                ...(responseTypeSchema.type === 'File' && {
+                  requestResponseType: 'blob' as 'blob',
+                }),
+              };
+            },
+          ),
     ),
   );
 }

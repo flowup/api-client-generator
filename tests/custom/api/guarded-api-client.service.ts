@@ -145,6 +145,64 @@ export class GuardedAPIClient extends APIClient implements APIClientInterface {
   }
 
   /**
+   * Get details of the game.
+   * Default id param should be overriden to string
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pet>;
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pet>>;
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pet>>;
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<models.Pet | HttpResponse<models.Pet> | HttpEvent<models.Pet>> {
+
+    return super.getPetsWithDefaultIdParamId(args, requestHttpOptions, observe)
+      .pipe(tap((res: any) => guards.isPet(res) || console.error(`TypeGuard for response 'models.Pet' caught inconsistency.`, res)));
+  }
+
+  /**
+   * Default id param should be number and not string
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe: any = 'body',
+  ): Observable<void | HttpResponse<void> | HttpEvent<void>> {
+
+    return super.patchPetsWithDefaultIdParamId(args, requestHttpOptions, observe);
+  }
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getCustomers(

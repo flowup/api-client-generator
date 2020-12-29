@@ -125,6 +125,64 @@ export interface APIClientInterface {
   ): Observable<HttpEvent<void>>;
 
   /**
+   * Arguments object for method `getPetsWithDefaultIdParamId`.
+   */
+  getPetsWithDefaultIdParamIdParams?: {
+    /** An ID or a slug identifying this Pet. */
+    id: string,
+  };
+
+  /**
+   * Get details of the game.
+   * Default id param should be overriden to string
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<models.Pet>;
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<models.Pet>>;
+  getPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['getPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<models.Pet>>;
+
+  /**
+   * Arguments object for method `patchPetsWithDefaultIdParamId`.
+   */
+  patchPetsWithDefaultIdParamIdParams?: {
+    /** A unique integer value identifying this Pet. */
+    id: number,
+    body?: any,
+  };
+
+  /**
+   * Default id param should be number and not string
+   * Response generated for [ 200 ] HTTP response code.
+   */
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'body',
+  ): Observable<void>;
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'response',
+  ): Observable<HttpResponse<void>>;
+  patchPetsWithDefaultIdParamId(
+    args: Exclude<APIClientInterface['patchPetsWithDefaultIdParamIdParams'], undefined>,
+    requestHttpOptions?: HttpOptions,
+    observe?: 'events',
+  ): Observable<HttpEvent<void>>;
+
+  /**
    * Response generated for [ 200 ] HTTP response code.
    */
   getCustomers(

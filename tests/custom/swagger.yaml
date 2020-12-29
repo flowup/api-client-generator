@@ -79,44 +79,45 @@ paths:
       responses:
         200:
           description: OK
-  #  # an example of overriding parameter from RAWG API
-  #  '/games/{id}':
-  #    get:
-  #      description: ''
-  #      operationId: games_read
-  #      parameters:
-  #        - description: An ID or a slug identifying this Game.
-  #          in: path
-  #          name: id
-  #          required: true
-  #          type: string
-  #      responses:
-  #        '200':
-  #          description: ''
-  #          schema:
-  #            $ref: '#/definitions/Pet'
-  #      summary: Get details of the game.
-  #      tags:
-  #        - games
-  #    parameters:
-  #      - description: A unique integer value identifying this Game.
-  #        in: path
-  #        name: id
-  #        required: true
-  #        type: integer
-  #    patch:
-  #      requestBody:
-  #        content:
-  #          application/json:
-  #            schema:
-  #              oneOf:
-  #                - $ref: '#/definitions/Cat'
-  #                - $ref: '#/definitions/Dog'
-  #              discriminator:
-  #                propertyName: pet_type
-  #      responses:
-  #        '200':
-  #          description: Updated
+
+  # an example of overriding parameter from RAWG
+  '/pets-with-default-id-param/{id}':
+    get:
+      description: 'Default id param should be overridden to string'
+      parameters:
+        - description: An ID or a slug identifying this Pet.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Pet'
+      summary: Get details of the game.
+      tags:
+        - games
+    parameters:
+      - description: A unique integer value identifying this Pet.
+        in: path
+        name: id
+        required: true
+        type: integer
+    patch:
+      description: 'Default id param should be number and not string'
+      parameters:
+        - in: body
+          name: body
+          schema:
+            allOf:
+              - $ref: '#/definitions/Cat'
+              - $ref: '#/definitions/Dog'
+            discriminator: 'pet_type'
+      responses:
+        '200':
+          description: Updated
+
   /customers:
     get:
       responses:
