@@ -1,11 +1,15 @@
-import Global = NodeJS.Global;
+export {};
 
-declare var global: Global & {
-  GLOBAL_OPTIONS: {
-    outputPath: string;
-    splitPathTags: string[];
-    skipModuleExport: boolean;
-    skipGuards: boolean;
-    sourceFile: string;
-  };
-};
+declare global {
+  namespace NodeJS {
+    interface Global {
+      GLOBAL_OPTIONS: {
+        outputPath: string;
+        splitPathTags: string[];
+        skipModuleExport: boolean;
+        skipGuards: boolean;
+        sourceFile: string;
+      };
+    }
+  }
+}
