@@ -294,7 +294,7 @@ function defineEnumOrInterface(
       )
     : defineInterface(
         'schema' in definition
-          ? definition.schema!
+          ? definition.schema
           : (definition as OpenAPIV2.SchemaObject),
         key,
       );

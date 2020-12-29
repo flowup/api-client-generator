@@ -41,6 +41,7 @@ if (typeof argv.source === 'undefined' && argv.source !== true) {
   process.exit(1);
 }
 
+// tslint:disable-next-line:no-object-mutation
 global.GLOBAL_OPTIONS = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,

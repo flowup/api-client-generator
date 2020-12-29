@@ -27,6 +27,7 @@ export async function generateAPIClient(
   options?: typeof global.GLOBAL_OPTIONS,
 ): Promise<string[]> {
   if (options) {
+    // tslint:disable-next-line:no-object-mutation
     global.GLOBAL_OPTIONS = options;
   }
 
