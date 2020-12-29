@@ -1,12 +1,4 @@
-import {
-  Operation,
-  Path,
-  Response,
-  Schema,
-  Spec as Swagger,
-  Parameter as SwaggerParameter,
-  Reference,
-} from 'swagger-schema-official';
+import { OpenAPIV2 } from 'openapi-types';
 import { GLOBAL_OPTIONS } from './main';
 import {
   Definition,
@@ -35,15 +27,11 @@ import {
   createDocsComment,
 } from './helper';
 
-interface Parameters {
-  [parameterName: string]: SwaggerParameter;
-}
-
 interface ExtendedParameters {
   [parameterName: string]: ExtendedParameter;
 }
 
-type ExtendedParameter = SwaggerParameter & {
+type ExtendedParameter = OpenAPIV2.Parameter & {
   enum?: EnumType;
   type?: 'string' | 'integer';
   'x-enumNames'?: string[];
@@ -52,13 +40,13 @@ type ExtendedParameter = SwaggerParameter & {
 };
 
 interface Definitions {
-  [definitionsName: string]: Schema;
+  [definitionsName: string]: OpenAPIV2.Schema;
 }
 
 type EnumType = string[] | number[] | boolean[] | {}[];
 
 export function createTemplateViewModel(
-  swagger: Swagger,
+  swagger: OpenAPIV2.Document,
   swaggerTag?: string,
 ): TemplateData {
   const methods = parseMethods(swagger, swaggerTag);
@@ -81,7 +69,11 @@ export function createTemplateViewModel(
   };
 }
 
-export function determineDomain({ schemes, host, basePath }: Swagger): string {
+export function determineDomain({
+  schemes,
+  host,
+  basePath,
+}: OpenAPIV2.Document): string {
   // if the host definition exists then try to use a protocol from the swagger file
   // otherwise, use the current protocol of loaded app
   // prefer https protocol
@@ -99,7 +91,7 @@ export function determineDomain({ schemes, host, basePath }: Swagger): string {
 }
 
 function parseMethods(
-  { paths, parameters, responses = {} }: Swagger,
+  { paths, parameters, responses = {} }: Readonly<OpenAPIV2.Document>,
   swaggerTag?: string,
 ): Method[] {
   const supportedMethods = [
@@ -113,110 +105,109 @@ function parseMethods(
   ];
 
   return ([] as Method[]).concat(
-    ...Object.entries(paths).map(([pathName, pathDef]: [string, Path]) =>
-      Object.entries(pathDef)
-        .filter(([methodType, operation]) => {
-          const op = <Operation>operation;
-          return (
-            supportedMethods.indexOf(methodType.toUpperCase()) !== -1 && // skip unsupported methods
-            (!swaggerTag || (op.tags && op.tags.includes(swaggerTag))) // if tag exists take only paths including this tag
-          );
-        })
-        .map(([methodType, operation]: [string, Operation]) => {
-          // select the lowest success (code 20x) response
-          const successResponseCode =
-            Object.keys(operation.responses)
-              .slice()
-              .sort()
-              .filter(code => code.startsWith('2'))[0] || 'default';
+    ...Object.entries<OpenAPIV2.PathItemObject>(paths).map(
+      ([pathName, pathDef]) =>
+        Object.entries(pathDef)
+          .filter(
+            ([methodType, operation]) =>
+              supportedMethods.indexOf(methodType?.toUpperCase()) !== -1 && // skip unsupported methods
+              (!swaggerTag ||
+                (operation &&
+                  'tags' in operation &&
+                  operation.tags.includes(swaggerTag))), // if tag exists take only paths including this tag
+          )
+          .map(([methodType, operation]) => {
+            // select the lowest success (code 20x) response
+            const successResponseCode =
+              ('responses' in operation &&
+                Object.keys(operation.responses)
+                  .slice()
+                  .sort()
+                  .filter(code => code.startsWith('2'))[0]) ||
+              'default';
 
-          const okResponse: Response | Reference | undefined =
-            operation.responses[successResponseCode];
+            const okResponse = operation.responses[successResponseCode];
 
-          const responseTypeSchema = determineResponseType(
-            okResponse && '$ref' in okResponse
-              ? responses[dereferenceType(okResponse.$ref)]
-              : okResponse,
-          );
+            const responseTypeSchema = determineResponseType(
+              okResponse && '$ref' in okResponse
+                ? responses[dereferenceType(okResponse.$ref)]
+                : okResponse,
+            );
 
-          const transformedParams = transformParameters(
-            [
-              // tslint:disable-next-line:no-any
-              ...(<any>pathDef.parameters || []), // fixme: there seems to be an inconsistency in swagger / internal param typing
-              ...(operation.parameters || []),
-            ],
-            parameters || {},
-          );
+            const transformedParams = transformParameters(
+              [...(pathDef.parameters || []), ...(operation.parameters || [])],
+              parameters || {},
+            );
 
-          const methodTypeLowered = methodType.toLowerCase() as MethodType;
-          const formData = transformedParams
-            .filter(({ name, isFormParameter }) => name && isFormParameter)
-            .map(({ name, camelCaseName }) => ({
-              name,
-              camelCaseName: camelCaseName || name,
-            }));
-          const stringifyBody = (param?: Parameter) =>
-            param ? `JSON.stringify(args.${param.camelCaseName})` : 'null';
-          const body = /^(?:post|put|patch)\b/.test(methodTypeLowered)
-            ? formData.length
-              ? 'formData'
-              : stringifyBody(
-                  transformedParams.find(
-                    ({ isBodyParameter }) => isBodyParameter,
-                  ),
-                )
-            : undefined;
+            const methodTypeLowered = methodType.toLowerCase() as MethodType;
+            const formData = transformedParams
+              .filter(({ name, isFormParameter }) => name && isFormParameter)
+              .map(({ name, camelCaseName }) => ({
+                name,
+                camelCaseName: camelCaseName || name,
+              }));
+            const stringifyBody = (param?: Parameter) =>
+              param ? `JSON.stringify(args.${param.camelCaseName})` : 'null';
+            const body = /^(?:post|put|patch)\b/.test(methodTypeLowered)
+              ? formData.length
+                ? 'formData'
+                : stringifyBody(
+                    transformedParams.find(
+                      ({ isBodyParameter }) => isBodyParameter,
+                    ),
+                  )
+              : undefined;
 
-          return {
-            hasJsonResponse: true,
-            methodName: toCamelCase(
-              operation.operationId
-                ? !swaggerTag
-                  ? operation.operationId
-                  : operation.operationId.replace(`${swaggerTag}_`, '')
-                : `${methodTypeLowered}_${pathName.replace(/[{}]/g, '')}`,
-            ),
-            methodType: methodTypeLowered,
-            body,
-            parameters: transformedParams,
-            paramsOptional: transformedParams.every(
-              ({ isRequired }) => !isRequired,
-            ),
-            formData,
-            // turn path interpolation `{this}` into string template `${args.this}
-            path: pathName.replace(
-              /{(.*?)}/g,
-              (_: string, ...args: string[]): string =>
-                `\${args.${toCamelCase(args[0])}}`,
-            ),
-            responseGuard: responseTypeSchema.guard?.('response'),
-            description: createDocsComment(
-              [
-                operation.summary,
-                operation.description,
-                operation.deprecated
-                  ? `@deprecated this method has been deprecated and may be removed in future.`
-                  : null,
-                `Response generated for [ ${successResponseCode} ] HTTP response code.`,
-              ]
-                .filter(str => !!str)
-                .join('\n'),
-              2,
-              true,
-            ),
-            responseTypeSchema,
-            ...(responseTypeSchema.type === 'File' && {
-              requestResponseType: 'blob' as 'blob',
-            }),
-          };
-        }),
+            return {
+              hasJsonResponse: true,
+              methodName: toCamelCase(
+                operation.operationId
+                  ? !swaggerTag
+                    ? operation.operationId
+                    : operation.operationId.replace(`${swaggerTag}_`, '')
+                  : `${methodTypeLowered}_${pathName.replace(/[{}]/g, '')}`,
+              ),
+              methodType: methodTypeLowered,
+              body,
+              parameters: transformedParams,
+              paramsOptional: transformedParams.every(
+                ({ isRequired }) => !isRequired,
+              ),
+              formData,
+              // turn path interpolation `{this}` into string template `${args.this}
+              path: pathName.replace(
+                /{(.*?)}/g,
+                (_: string, ...args: string[]): string =>
+                  `\${args.${toCamelCase(args[0])}}`,
+              ),
+              responseGuard: responseTypeSchema.guard?.('response'),
+              description: createDocsComment(
+                [
+                  operation.summary,
+                  operation.description,
+                  operation.deprecated
+                    ? `@deprecated this method has been deprecated and may be removed in future.`
+                    : null,
+                  `Response generated for [ ${successResponseCode} ] HTTP response code.`,
+                ]
+                  .filter(str => !!str)
+                  .join('\n'),
+                2,
+                true,
+              ),
+              responseTypeSchema,
+              ...(responseTypeSchema.type === 'File' && {
+                requestResponseType: 'blob' as 'blob',
+              }),
+            };
+          }),
     ),
   );
 }
 
 function parseDefinitions(
   definitions: Definitions = {},
-  params: Parameters = {},
+  params: OpenAPIV2.ParametersDefinitionsObject = {},
   tagMethods?: Method[], // methods tagged with tag that is currently generated
 ): Definition[] {
   const allDefs = [
@@ -279,7 +270,7 @@ function parseDefinitions(
 
 function defineEnumOrInterface(
   key: string,
-  definition: Schema | ExtendedParameter,
+  definition: OpenAPIV2.SchemaObject | ExtendedParameter,
 ): Definition {
   return definition.enum && definition.enum.length !== 0
     ? defineEnum(
@@ -290,7 +281,9 @@ function defineEnumOrInterface(
         (definition as ExtendedParameter)['x-enumNames'],
       )
     : defineInterface(
-        'schema' in definition ? definition.schema! : (definition as Schema),
+        'schema' in definition
+          ? definition.schema!
+          : (definition as OpenAPIV2.SchemaObject),
         key,
       );
 }
@@ -335,11 +328,11 @@ function defineEnum(
 }
 
 function parseInterfaceProperties(
-  properties: { [propertyName: string]: Schema } = {},
+  properties: { [propertyName: string]: OpenAPIV2.SchemaObject } = {},
   requiredProps: string[] = [],
 ): Property[] {
-  return Object.entries<Schema>(properties)
-    .map(([propName, propSchema]: [string, Schema]) => {
+  return Object.entries<OpenAPIV2.SchemaObject>(properties)
+    .map(([propName, propSchema]: [string, OpenAPIV2.SchemaObject]) => {
       const name =
         /^[A-Za-z_$][\w$]*$/.test(propName) ||
         propName === ADDITIONAL_PROPERTIES_KEY // todo: check if this is needed here
@@ -348,7 +341,7 @@ function parseInterfaceProperties(
 
       const propertyAllOf = propSchema.allOf?.length
         ? propSchema.allOf.map(allOfItemSchema =>
-            parseSchema(allOfItemSchema, {
+            parseSchema(allOfItemSchema as OpenAPIV2.SchemaObject, {
               name: accessProp(name),
               isRequired: true,
             }),
@@ -418,7 +411,7 @@ function parseInterfaceProperties(
 }
 
 function parseSchema(
-  property: Schema,
+  property: OpenAPIV2.SchemaObject,
   {
     name,
     isRequired,
@@ -506,7 +499,7 @@ function parseSchema(
 
   if (property.additionalProperties) {
     const parsedDictionarySchema = parseSchema(
-      property.additionalProperties as Schema,
+      property.additionalProperties as OpenAPIV2.SchemaObject,
       { name: 'value', isRequired: true, prefixGuards },
     );
 
@@ -529,7 +522,8 @@ function parseSchema(
     };
   }
 
-  const type = typeName(property.type);
+  // fixme: type casting to string here (can be causing problems if type is an array of types)
+  const type = typeName(property.type as string);
 
   return {
     type,
@@ -547,17 +541,23 @@ function parseSchema(
   };
 }
 
-function defineInterface(schema: Schema, definitionKey: string): Definition {
+function defineInterface(
+  schema: OpenAPIV2.SchemaObject,
+  definitionKey: string,
+): Definition {
   const name = typeName(definitionKey);
   const extendInterface: string | undefined = schema.allOf
     ? toCamelCase(
         dereferenceType(
-          (schema.allOf.find(allOfSchema => !!allOfSchema.$ref) || {}).$ref,
+          ((schema.allOf.find(allOfSchema => '$ref' in allOfSchema) || {
+            $ref: '',
+            // tslint:disable-next-line:no-any
+          }) as any)['$ref'],
         ),
         false,
       )
     : undefined;
-  const allOfProps: Schema = schema.allOf
+  const allOfProps = schema.allOf
     ? schema.allOf.reduce(
         (props, allOfSchema) => ({ ...props, ...allOfSchema.properties }),
         {},
@@ -569,7 +569,7 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
         ? { [ADDITIONAL_PROPERTIES_KEY]: schema.additionalProperties }
         : schema.properties),
       ...(!schema.additionalProperties && allOfProps),
-    } as { [propertyName: string]: Schema },
+    } as { [propertyName: string]: OpenAPIV2.SchemaObject },
     [...(schema.required || []), ADDITIONAL_PROPERTIES_KEY],
   );
 
@@ -594,7 +594,9 @@ function defineInterface(schema: Schema, definitionKey: string): Definition {
   };
 }
 
-function determineResponseType(response: Response): ParsedSchema {
+function determineResponseType(
+  response: OpenAPIV2.ResponseObject,
+): ParsedSchema {
   if (response == null) {
     return { type: 'void', imports: [] };
   }
@@ -606,7 +608,8 @@ function determineResponseType(response: Response): ParsedSchema {
   }
 
   const nullable =
-    (schema as Schema & { 'x-nullable'?: boolean })['x-nullable'] || false;
+    (schema as OpenAPIV2.Schema & { 'x-nullable'?: boolean })['x-nullable'] ||
+    false;
   const responseSchema = parseSchema(schema, {
     name: 'res',
     isRequired: true,
@@ -645,13 +648,11 @@ function prefixTypeBasedOnImports(type: string, imports: string[]): string {
 
 function transformParameters(
   parameters: ExtendedParameter[],
-  allParams: Parameters,
+  allParams: OpenAPIV2.ParametersDefinitionsObject,
 ): Parameter[] {
   return parameters.map((param: ExtendedParameter) => {
     const derefName = param.$ref ? dereferenceType(param.$ref) : undefined;
-    const derefParam: SwaggerParameter | ExtendedParameter = derefName
-      ? allParams[derefName]
-      : param;
+    const derefParam = derefName ? allParams[derefName] : param;
     const name = derefParam?.name || '';
 
     const parsedSchema = parseSchema(

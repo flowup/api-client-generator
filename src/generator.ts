@@ -5,9 +5,9 @@ import {
   registerHelper,
   registerPartial,
 } from 'handlebars';
+import { OpenAPIV2 } from 'openapi-types';
 import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
-import { Operation, Path, Spec as Swagger } from 'swagger-schema-official';
 import { promisify } from 'util';
 import { GLOBAL_OPTIONS } from './main';
 import { TemplateData, Definition } from './types';
@@ -29,11 +29,11 @@ export async function generateAPIClient(): Promise<string[]> {
 
   try {
     await validate(swaggerFilePath, {
-      allow: {
-        json: true,
-        yaml: true,
-        empty: false,
-        unknown: false,
+      parse: {
+        json: { allowEmpty: false },
+        yaml: { allowEmpty: false },
+        binary: false,
+        text: false,
       },
       validate: {
         schema: true,
@@ -46,8 +46,8 @@ export async function generateAPIClient(): Promise<string[]> {
     );
   }
 
-  const swaggerDef: Swagger = await swaggerFile(swaggerFilePath);
-  const allTags = getAllSwaggerTags(swaggerDef.paths);
+  const swaggerDef = await swaggerFile(swaggerFilePath);
+  const allTags = getAllSwaggerTags(swaggerDef.paths as OpenAPIV2.PathsObject);
   const specifiedTags = GLOBAL_OPTIONS.splitPathTags || [];
   const usedTags: (string | undefined)[] =
     specifiedTags.length === 0
@@ -57,7 +57,7 @@ export async function generateAPIClient(): Promise<string[]> {
       : specifiedTags;
 
   const apiTagsData = usedTags.map(tag =>
-    createTemplateViewModel(swaggerDef, tag),
+    createTemplateViewModel(swaggerDef as OpenAPIV2.Document, tag),
   );
 
   // sort the definitions by name and removes duplicates
@@ -249,13 +249,13 @@ async function generateModels(
 }
 
 export function getAllSwaggerTags(paths: {
-  [pathName: string]: Path;
+  [pathName: string]: OpenAPIV2.PathsObject;
 }): string[] {
   const allTags = Object.values(paths)
     .map(pathDef =>
       // get tags from all the paths and flatten with reduce
       Object.values(pathDef)
-        .map(({ tags }: Operation) => tags || [])
+        .map(({ tags }: OpenAPIV2.OperationObject) => tags || [])
         .reduce<string[]>((acc, tags) => [...acc, ...tags], []),
     )
     .reduce<string[]>((acc, tags) => [...acc, ...tags], []); // array of tags fatten with reduce
