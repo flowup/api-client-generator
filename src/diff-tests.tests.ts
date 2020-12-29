@@ -1,4 +1,4 @@
-import { compare, DiffSet, State } from 'dir-compare';
+import { compare, Difference, DifferenceState } from 'dir-compare';
 import { existsSync, mkdir } from 'fs';
 import * as rimraf from 'rimraf';
 import { promisify } from 'util';
@@ -22,7 +22,7 @@ const COMPARE_OPTIONS = {
   compareSize: true,
 };
 
-const stateSymbols: { [key in State]: string } = {
+const stateSymbols: { [key in DifferenceState]: string } = {
   equal: '==',
   left: '->',
   right: '<-',
@@ -67,7 +67,7 @@ async function compareWithReference(
     result += `right: ${right}\n`;
     result += '[ reference dir ]               [ test dir ]\n';
 
-    diffSet.forEach(({ name1, name2, state, type1, type2 }: DiffSet) => {
+    diffSet?.forEach(({ name1, name2, state, type1, type2 }: Difference) => {
       if (stateSymbols[state] !== stateSymbols.equal) {
         result += `(${type1}) ${name1}  ${stateSymbols[state]}  ${name2} (${type2})\n`;
       }
