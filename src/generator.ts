@@ -9,7 +9,6 @@ import { OpenAPIV2 } from 'openapi-types';
 import { dirname, join } from 'path';
 import { parse as swaggerFile, validate } from 'swagger-parser';
 import { promisify } from 'util';
-import { GLOBAL_OPTIONS } from './main';
 import { TemplateData, Definition } from './types';
 import {
   logWarn,
@@ -24,8 +23,14 @@ const ALL_TAGS_OPTION = 'all';
 export const MODEL_DIR_NAME = 'models';
 export const MODEL_GUARDS_DIR_NAME = 'guards';
 
-export async function generateAPIClient(): Promise<string[]> {
-  const swaggerFilePath = GLOBAL_OPTIONS.sourceFile;
+export async function generateAPIClient(
+  options?: typeof global.GLOBAL_OPTIONS,
+): Promise<string[]> {
+  if (options) {
+    global.GLOBAL_OPTIONS = options;
+  }
+
+  const swaggerFilePath = global.GLOBAL_OPTIONS.sourceFile;
 
   try {
     await validate(swaggerFilePath, {
@@ -48,7 +53,7 @@ export async function generateAPIClient(): Promise<string[]> {
 
   const swaggerDef = await swaggerFile(swaggerFilePath);
   const allTags = getAllSwaggerTags(swaggerDef.paths as OpenAPIV2.PathsObject);
-  const specifiedTags = GLOBAL_OPTIONS.splitPathTags || [];
+  const specifiedTags = global.GLOBAL_OPTIONS.splitPathTags || [];
   const usedTags: (string | undefined)[] =
     specifiedTags.length === 0
       ? [undefined]
@@ -125,7 +130,10 @@ export async function generateAPIClient(): Promise<string[]> {
         usedTags && usedTags[0]
           ? `services/${dashCase(apiTagData.swaggerTag)}`
           : '';
-      const clientOutputPath = join(GLOBAL_OPTIONS.outputPath, subFolder);
+      const clientOutputPath = join(
+        global.GLOBAL_OPTIONS.outputPath,
+        subFolder,
+      );
 
       await promisify(stat)(clientOutputPath).catch(() =>
         promisify(mkdir)(clientOutputPath, { recursive: true }),
@@ -144,7 +152,7 @@ export async function generateAPIClient(): Promise<string[]> {
           { ...apiTagData, templateType: 'interface' },
           clientOutputPath,
         ),
-        ...(GLOBAL_OPTIONS.skipGuards
+        ...(global.GLOBAL_OPTIONS.skipGuards
           ? []
           : [
               generateFile(
@@ -154,13 +162,13 @@ export async function generateAPIClient(): Promise<string[]> {
                 clientOutputPath,
               ),
             ]),
-        ...(GLOBAL_OPTIONS.skipModuleExport
+        ...(global.GLOBAL_OPTIONS.skipModuleExport
           ? []
           : [
               generateFile(
                 compiledTemplates['moduleExport'],
                 `index.ts`,
-                { ...apiTagData, options: GLOBAL_OPTIONS },
+                { ...apiTagData, options: global.GLOBAL_OPTIONS },
                 clientOutputPath,
               ),
             ]),
@@ -169,23 +177,23 @@ export async function generateAPIClient(): Promise<string[]> {
     generateFile(
       compiledTemplates['helperTypes'],
       `types.ts`,
-      { options: GLOBAL_OPTIONS },
-      GLOBAL_OPTIONS.outputPath,
+      { options: global.GLOBAL_OPTIONS },
+      global.GLOBAL_OPTIONS.outputPath,
     ),
     generateModels(
       compiledTemplates['model'],
       compiledTemplates['modelsExport'],
       allDefinitions,
-      GLOBAL_OPTIONS.outputPath,
+      global.GLOBAL_OPTIONS.outputPath,
     ),
-    ...(GLOBAL_OPTIONS.skipGuards
+    ...(global.GLOBAL_OPTIONS.skipGuards
       ? []
       : [
           generateFile(
             compiledTemplates['modelsGuards'],
             `index.ts`,
             { definitions: allDefinitions },
-            join(GLOBAL_OPTIONS.outputPath, MODEL_GUARDS_DIR_NAME),
+            join(global.GLOBAL_OPTIONS.outputPath, MODEL_GUARDS_DIR_NAME),
           ),
         ]),
   ]);

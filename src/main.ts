@@ -41,14 +41,14 @@ if (typeof argv.source === 'undefined' && argv.source !== true) {
   process.exit(1);
 }
 
-export const GLOBAL_OPTIONS = {
+global.GLOBAL_OPTIONS = {
   outputPath: argv.output || './output',
   sourceFile: argv.source,
   splitPathTags:
     'splitPathTags' in argv ? (argv.splitPathTags || 'all').split(',') : [],
   skipModuleExport: argv.skipModule === true || argv.skipModule === 'true',
   skipGuards: argv.skipGuards,
-} as const;
+};
 
 const generate: typeof generateAPIClient = argv.commit
   ? commitAfter(generateAPIClient)

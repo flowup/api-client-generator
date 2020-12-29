@@ -1,5 +1,4 @@
 import { OpenAPIV2 } from 'openapi-types';
-import { GLOBAL_OPTIONS } from './main';
 import {
   Definition,
   Method,
@@ -384,7 +383,7 @@ function parseInterfaceProperties(
         ),
       };
 
-      const propGuard = GLOBAL_OPTIONS.skipGuards
+      const propGuard = global.GLOBAL_OPTIONS.skipGuards
         ? undefined
         : propertyAllOf.length
         ? guardOptional(
@@ -400,7 +399,7 @@ function parseInterfaceProperties(
 
       return {
         ...property,
-        guard: GLOBAL_OPTIONS.skipGuards
+        guard: global.GLOBAL_OPTIONS.skipGuards
           ? undefined
           : name === ADDITIONAL_PROPERTIES_KEY
           ? guardDictionary('arg', () => propGuard)
@@ -432,7 +431,7 @@ function parseSchema(
     return {
       type: `(${enumValues.join(' | ')})`,
       imports: [],
-      guard: GLOBAL_OPTIONS.skipGuards
+      guard: global.GLOBAL_OPTIONS.skipGuards
         ? undefined
         : () =>
             guardOptional(
@@ -448,7 +447,7 @@ function parseSchema(
     return {
       type: 'object',
       imports: [],
-      guard: GLOBAL_OPTIONS.skipGuards
+      guard: global.GLOBAL_OPTIONS.skipGuards
         ? undefined
         : () =>
             guardOptional(
@@ -465,7 +464,7 @@ function parseSchema(
     return {
       type: refType,
       imports: [refType],
-      guard: GLOBAL_OPTIONS.skipGuards
+      guard: global.GLOBAL_OPTIONS.skipGuards
         ? undefined
         : () =>
             guardOptional(
@@ -488,7 +487,7 @@ function parseSchema(
       type: `${parsedArrayItemsSchema.type}[]`,
       imports: parsedArrayItemsSchema.imports,
       guard:
-        GLOBAL_OPTIONS.skipGuards || !parsedArrayItemsSchema.guard
+        global.GLOBAL_OPTIONS.skipGuards || !parsedArrayItemsSchema.guard
           ? undefined
           : () =>
               guardOptional(name, isRequired, (iterName: string) =>
@@ -511,7 +510,7 @@ function parseSchema(
         : `{ ${ADDITIONAL_PROPERTIES_KEY}: ${parsedDictionarySchema.type} }`,
       imports: parsedDictionarySchema.imports,
       guard:
-        GLOBAL_OPTIONS.skipGuards || !parsedDictionarySchema.guard
+        global.GLOBAL_OPTIONS.skipGuards || !parsedDictionarySchema.guard
           ? undefined
           : () =>
               guardOptional(name, isRequired, (iterName: string) =>
@@ -528,7 +527,7 @@ function parseSchema(
   return {
     type,
     imports: [],
-    guard: GLOBAL_OPTIONS.skipGuards
+    guard: global.GLOBAL_OPTIONS.skipGuards
       ? undefined
       : () =>
           type === 'any'
@@ -624,7 +623,7 @@ function determineResponseType(
   return {
     ...responseSchema,
     type: nullable ? `(${type}) | null` : type,
-    guard: GLOBAL_OPTIONS.skipGuards
+    guard: global.GLOBAL_OPTIONS.skipGuards
       ? undefined
       : () =>
           nullable

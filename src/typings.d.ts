@@ -1,6 +1,14 @@
-declare module '*package.json' {
-  export const version: string;
-}
+import Global = NodeJS.Global;
+
+declare var global: Global & {
+  GLOBAL_OPTIONS: {
+    outputPath: string;
+    splitPathTags: string[];
+    skipModuleExport: boolean;
+    skipGuards: boolean;
+    sourceFile: string;
+  };
+};
 
 declare module 'dir-compare' {
   export function compare(
