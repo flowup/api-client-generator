@@ -195,7 +195,7 @@ export class APIClient implements APIClientInterface {
 
   /**
    * Get details of the game.
-   * Default id param should be overriden to string
+   * Default id param should be overridden to string
    * Response generated for [ 200 ] HTTP response code.
    */
   getPetsWithDefaultIdParamId(
