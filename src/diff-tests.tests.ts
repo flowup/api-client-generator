@@ -12,8 +12,10 @@ class TestReference {
 
   constructor(
     public readonly name: string,
-    public readonly swaggerFileExt: string = 'yaml',
+    /** path relative to the test folder determined by provided name */
+    public readonly swaggerFile: string = 'swagger.yaml',
     public readonly skipIndex: boolean = false,
+    public readonly skipGuards: boolean = false,
     public readonly tags?: string,
   ) {}
 }
@@ -33,10 +35,11 @@ async function compareWithReference(
   reference: TestReference,
 ): Promise<string | null> {
   await generateAPIClient({
-    sourceFile: `${reference.refDir}/swagger.${reference.swaggerFileExt}`,
+    sourceFile: `${reference.refDir}/${reference.swaggerFile}`,
     outputPath: reference.genDir,
     skipModuleExport: reference.skipIndex,
     splitPathTags: reference.tags ? reference.tags.split(',') : [],
+    skipGuards: reference.skipGuards,
   }).catch((err: Error) =>
     console.error(
       `Error has occurred while generating api client for ${reference.name}`,
@@ -94,6 +97,16 @@ describe('Diff compare', () => {
     expect(await compareWithReference(reference)).toBeNull();
   });
 
+  it('should check with [ custom-without-guards ] reference (same as custom but with guards skipped)', async () => {
+    const reference = new TestReference(
+      'custom-without-guards',
+      '../custom/swagger.yaml',
+      false,
+      true,
+    );
+    expect(await compareWithReference(reference)).toBeNull();
+  });
+
   it('should check with [ esquare ] reference', async () => {
     const reference = new TestReference('esquare');
     expect(await compareWithReference(reference)).toBeNull();
@@ -105,22 +118,35 @@ describe('Diff compare', () => {
   });
 
   it('should check with [ GitHub ] reference', async () => {
-    const reference = new TestReference('github', 'yaml', false, 'all');
+    const reference = new TestReference(
+      'github',
+      'swagger.yaml',
+      false,
+      false,
+      'all',
+    );
     expect(await compareWithReference(reference)).toBeNull();
   });
 
   it('should check with [ filtered API ] reference', async () => {
     const reference = new TestReference(
       'filtered-api',
-      'json',
+      'swagger.json',
       true,
+      false,
       'DummySelector,NonExistingTag,Project,Products',
     );
     expect(await compareWithReference(reference)).toBeNull();
   });
 
   it('should check with [ All tags ] reference', async () => {
-    const reference = new TestReference('with-all-tags', 'json', false, 'all');
+    const reference = new TestReference(
+      'with-all-tags',
+      'swagger.json',
+      false,
+      false,
+      'all',
+    );
     expect(await compareWithReference(reference)).toBeNull();
   });
 });
