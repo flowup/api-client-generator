@@ -1,8 +1,0 @@
-{
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../out-tsc/tests",
-    "types": ["jest", "node"]
-  },
-  "include": ["**/*.tests.ts", "**/*.d.ts"]
-}

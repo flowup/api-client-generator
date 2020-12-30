@@ -1,35 +1,14 @@
 {
+  "extends": "./src/tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types", "./src/typings.d.ts"],
+    "rootDir": ".",
+    "outDir": ".", // if out path for a file is same as its src path, nothing will be emitted
     "resolveJsonModule": true,
-    "target": "es2020",
-    "module": "commonjs",
-    "lib": [
-      "es2015",
-      "es2016",
-      "es2017",
-      "es2018",
-      "es2019",
-      "es2020",
-      "ESNext",
-      "dom"
-    ],
-    "noLib": false,
-    "removeComments": true,
-    "strict": true,
-    "sourceMap": true,
-    "declaration": false,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "noImplicitAny": true,
-    "emitDecoratorMetadata": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "outDir": "dist",
-    "typeRoots": ["node_modules/@types", "src/typings.d.ts"]
+    "composite": true // required on the dependency project for references to work
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/**/*.tests.ts"]
+  "include": ["./src/typings.d.ts"],
+  "files": [
+    "package.json" // by whitelisting the files to include, TS won't automatically include all source below root, which is the default.
+  ]
 }

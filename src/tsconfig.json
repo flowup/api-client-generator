@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es2020",
+    "module": "commonjs",
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "es2018",
+      "es2019",
+      "es2020",
+      "ESNext",
+      "dom"
+    ],
+    "noLib": false,
+    "removeComments": true,
+    "strict": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "emitDecoratorMetadata": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": ["../node_modules/@types", "typings.d.ts"],
+
+    "rootDir": ".",
+    "outDir": "../dist/",
+    "resolveJsonModule": true
+  },
+  "references": [
+    { "path": "../" } // this is how we declare a dependency from this project to the one at the root dir`
+  ],
+  "exclude": ["**/*.tests.ts"]
+}

@@ -3,14 +3,14 @@
   "version": "5.0.0-beta.3",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settings",
   "homepage": "https://github.com/flowup/api-client-generator/blob/master/README.md",
-  "main": "./dist/src/main.js",
+  "main": "./dist/main.js",
   "author": {
     "name": "FlowUp",
     "email": "hello@flowup.cz",
     "url": "https://flowup.cz"
   },
   "bin": {
-    "api-client-generator": "./dist/src/main.js"
+    "api-client-generator": "./dist/main.js"
   },
   "bugs": {
     "url": "https://github.com/flowup/api-client-generator/issues"
@@ -51,23 +51,24 @@
   "license": "MIT",
   "scripts": {
     "generate": "node ./dist/main.js",
-    "build": "npm run lint && rimraf dist && tsc",
-    "lint": "tslint -p tsconfig.json -c tslint.json src/**/*.ts",
+    "build": "npm run lint && rimraf dist && tsc --build src",
+    "lint": "tslint -p src/tsconfig.json -c tslint.json src/**/*.ts",
     "gen": "ts-node --files ./src/main.ts",
     "gen:all": "npm run gen-custom && npm run gen-custom-without-guards && npm run gen-esquare && npm run gen-gcloud-firestore && npm run gen-github && npm run gen-filtered-api && npm run gen-pet-store && npm run gen-with-all-tags",
     "gen:all:parallel": "concurrently --kill-others-on-fail \"npm:gen-*\"",
-    "gen-custom": "rimraf ./tests/custom/api && ts-node --files ./src/main.ts -s ./tests/custom/swagger.yaml -o ./tests/custom/api",
-    "gen-custom-without-guards": "rimraf ./tests/custom-without-guards/api && ts-node --files ./src/main.ts -s ./tests/custom/swagger.yaml -o ./tests/custom-without-guards/api -g",
-    "gen-esquare": "rimraf ./tests/esquare/api && ts-node --files ./src/main.ts -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
-    "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && ts-node --files ./src/main.ts -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
-    "gen-github": "rimraf ./tests/github/api && ts-node --files ./src/main.ts -s ./tests/github/swagger.yaml -o ./tests/github/api -t all",
-    "gen-filtered-api": "rimraf ./tests/filtered-api/api && ts-node --files ./src/main.ts -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -t DummySelector,Project,NonExistingTag -m",
-    "gen-pet-store": "rimraf ./tests/pet-store/api && ts-node --files ./src/main.ts --verbose -s ./tests/pet-store/swagger.yaml -o ./tests/pet-store/api",
-    "gen-with-all-tags": "rimraf ./tests/with-all-tags/api && ts-node --files ./src/main.ts -s ./tests/with-all-tags/swagger.json -o ./tests/with-all-tags/api -t all",
+    "gen-custom": "rimraf ./tests/custom/api && npm run gen -- -s ./tests/custom/swagger.yaml -o ./tests/custom/api",
+    "gen-custom-without-guards": "rimraf ./tests/custom-without-guards/api && npm run gen -- -s ./tests/custom/swagger.yaml -o ./tests/custom-without-guards/api -g",
+    "gen-esquare": "rimraf ./tests/esquare/api && npm run gen -- -s ./tests/esquare/swagger.yaml -o ./tests/esquare/api",
+    "gen-gcloud-firestore": "rimraf ./tests/gcloud-firestore/api && npm run gen -- -s ./tests/gcloud-firestore/swagger.yaml -o ./tests/gcloud-firestore/api",
+    "gen-github": "rimraf ./tests/github/api && npm run gen -- -s ./tests/github/swagger.yaml -o ./tests/github/api -t all",
+    "gen-filtered-api": "rimraf ./tests/filtered-api/api && npm run gen -- -s ./tests/filtered-api/swagger.json -o ./tests/filtered-api/api -t DummySelector,Project,NonExistingTag -m",
+    "gen-pet-store": "rimraf ./tests/pet-store/api && npm run gen -- --verbose -s ./tests/pet-store/swagger.yaml -o ./tests/pet-store/api",
+    "gen-with-all-tags": "rimraf ./tests/with-all-tags/api && npm run gen -- -s ./tests/with-all-tags/swagger.json -o ./tests/with-all-tags/api -t all",
     "release": "npm run tests && npm run build && standard-version --tag-prefix=''",
     "test": "jest",
-    "intg-tests:gen-all-tags": "rimraf tests/test-angular-project/src/api-all-tags && npm run gen -- src/main.ts -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-all-tags -t all",
-    "intg-tests:gen-no-tag": "rimraf tests/test-angular-project/src/api-no-tags && npm run gen -- src/main.ts -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-no-tags",
+    "test--showConfig ": "jest --showConfig ",
+    "intg-tests:gen-all-tags": "rimraf tests/test-angular-project/src/api-all-tags && npm run gen -- -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-all-tags -t all",
+    "intg-tests:gen-no-tag": "rimraf tests/test-angular-project/src/api-no-tags && npm run gen -- -s tests/test-angular-project/swagger.yaml -o tests/test-angular-project/src/api-no-tags",
     "intg-tests:clear-gen": "rimraf tests/test-angular-project/src/api-no-tags && rimraf tests/test-angular-project/src/api-all-tags",
     "intg-tests:run-tests": "cd tests/test-angular-project && npm run test",
     "intg-tests:run-build": "cd tests/test-angular-project && npm run build",
@@ -119,7 +120,8 @@
   "jest": {
     "preset": "jest-preset-typescript",
     "setupFilesAfterEnv": [
-      "<rootDir>/setupJest.ts"
+      "<rootDir>/setupJest.ts",
+      "<rootDir>/src/typings.d.ts"
     ],
     "testRegex": "^\\/src\\/.*|\\.tests?\\.ts$",
     "modulePaths": [

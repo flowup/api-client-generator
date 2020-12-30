@@ -10,3 +10,4 @@ coverage
 output*/
 ref*/
 dist/
+tsconfig.tsbuildinfo
