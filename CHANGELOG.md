@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.5](https://github.com/flowup/api-client-generator/compare/5.0.0-beta.4...5.0.0-beta.5) (2021-02-02)
+
 ## [5.0.0-beta.4](https://github.com/flowup/api-client-generator/compare/5.0.0-beta.3...5.0.0-beta.4) (2020-12-30)
 
 ## [5.0.0-beta.3](https://github.com/flowup/api-client-generator/compare/5.0.0-beta.2...5.0.0-beta.3) (2020-12-29)
