@@ -361,11 +361,20 @@ function parseInterfaceProperties(
         : [];
 
       const isRequired = requiredProps.includes(propName);
-
+      const nullable = propSchema['x-nullable'] || false;
       const parsedSchema = parseSchema(propSchema, {
         name: name === ADDITIONAL_PROPERTIES_KEY ? 'value' : accessProp(name),
         isRequired,
+        nullable,
       });
+      const parsedType = propertyAllOf.length
+        ? propertyAllOf
+            .map(({ type }) => type)
+            .filter((type): type is string => !!type)
+            .join(' & ')
+        : nullable
+        ? `${parsedSchema.type} | null`
+        : parsedSchema.type;
 
       const property: Property = {
         parsedSchema,
@@ -384,12 +393,7 @@ function parseInterfaceProperties(
             .join('\n'),
           2,
         ),
-        type: propertyAllOf.length
-          ? propertyAllOf
-              .map(({ type }) => type)
-              .filter((type): type is string => !!type)
-              .join(' & ')
-          : parsedSchema.type,
+        type: parsedType,
         imports: propertyAllOf.reduce(
           (allImports, { imports }) => [...imports, ...allImports],
           parsedSchema.imports,
@@ -402,6 +406,7 @@ function parseInterfaceProperties(
         ? guardOptional(
             accessProp(name),
             false,
+            nullable,
             () =>
               `( ${propertyAllOf
                 .map(({ guard }) => guard?.('this can be anything'))
@@ -427,8 +432,9 @@ function parseSchema(
   {
     name,
     isRequired,
+    nullable,
     prefixGuards,
-  }: ParseSchemaMetadata & { prefixGuards?: boolean },
+  }: ParseSchemaMetadata & { prefixGuards?: boolean; nullable?: boolean },
 ): ParsedSchema {
   if (Array.isArray(property.items)) {
     logWarn('Arrays with type diversity are currently not supported');
@@ -450,6 +456,7 @@ function parseSchema(
             guardOptional(
               name,
               isRequired,
+              nullable,
               (iterName: string) =>
                 `[${enumValues.join(', ')}].includes(${iterName})`,
             ),
@@ -466,6 +473,7 @@ function parseSchema(
             guardOptional(
               name,
               isRequired,
+              nullable,
               (iterName: string) => `typeof ${iterName} === 'object'`,
             ),
     }; // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
@@ -483,6 +491,7 @@ function parseSchema(
             guardOptional(
               name,
               isRequired,
+              nullable,
               (iterName: string) =>
                 `${prefixGuards ? 'guards.' : ''}is${refType}(${iterName})`,
             ),
@@ -503,7 +512,7 @@ function parseSchema(
         global.GLOBAL_OPTIONS.skipGuards || !parsedArrayItemsSchema.guard
           ? undefined
           : () =>
-              guardOptional(name, isRequired, (iterName: string) =>
+              guardOptional(name, isRequired, nullable, (iterName: string) =>
                 guardArray(iterName, parsedArrayItemsSchema.guard!),
               ),
     };
@@ -526,7 +535,7 @@ function parseSchema(
         global.GLOBAL_OPTIONS.skipGuards || !parsedDictionarySchema.guard
           ? undefined
           : () =>
-              guardOptional(name, isRequired, (iterName: string) =>
+              guardOptional(name, isRequired, nullable, (iterName: string) =>
                 isJustObject
                   ? `typeof ${iterName} === 'object'`
                   : guardDictionary(iterName, parsedDictionarySchema.guard!),
@@ -545,7 +554,7 @@ function parseSchema(
       : () =>
           type === 'any'
             ? ''
-            : guardOptional(name, isRequired, (iterName: string) =>
+            : guardOptional(name, isRequired, nullable, (iterName: string) =>
                 type === 'File'
                   ? `${iterName} instanceof File`
                   : `typeof ${iterName} === '${type}'`,

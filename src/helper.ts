@@ -89,11 +89,16 @@ export function accessProp(name: string): string {
 export function guardOptional(
   name: string,
   isRequired: boolean | undefined,
+  nullable: boolean | undefined,
   guard: (name: string) => string,
 ): string {
-  return isRequired
-    ? guard(name)
-    : `( typeof ${name} === 'undefined' || ${guard(name)} )`;
+  const guards = [
+    ...(isRequired ? [`typeof ${name} === 'undefined'`] : []),
+    ...(nullable ? [`${name} === null`] : []),
+    guard(name),
+  ];
+
+  return guards.length > 1 ? `( ${guards.join(' || ')} )` : guards.join('');
 }
 
 export function guardDictionary(
