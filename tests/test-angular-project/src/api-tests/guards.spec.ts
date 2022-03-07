@@ -44,6 +44,7 @@ describe('TypeGuards', () => {
     expect(isPet(validPet)).toBeTruthy();
     expect(isPet({ name: 'Pes', photoUrls: [] })).toBeTruthy();
     expect(isPet({ ...validPet, category: { foo: 'bar' } })).toBeTruthy();
+    expect(isPet({ ...validPet, category: null })).toBeTruthy();
   }));
 
   test('invalid Pet is not Pet', inject([], () => {
@@ -68,6 +69,7 @@ describe('TypeGuards', () => {
     expect(isCustomer({ right: Right.READ_WRITE })).toBeFalsy();
     expect(isCustomer({ ...validCustomer, name: 42 })).toBeFalsy();
     expect(isCustomer({ ...validCustomer, email: 42 })).toBeFalsy(); // test for interface extend
+    expect(isCustomer({ ...validCustomer, name: null })).toBeFalsy();
   }));
 
   test('null is not valid object', inject([], () => {
