@@ -403,16 +403,16 @@ function parseInterfaceProperties(
       const propGuard = global.GLOBAL_OPTIONS.skipGuards
         ? undefined
         : propertyAllOf.length
-        ? guardOptional(
-            accessProp(name),
-            false,
+        ? guardOptional({
+            name: accessProp(name),
+            isRequired: false,
             nullable,
-            () =>
+            guard: () =>
               `( ${propertyAllOf
                 .map(({ guard }) => guard?.('this can be anything'))
                 .filter((type): type is string => !!type)
                 .join(' && ')} )`,
-          )
+          })
         : parsedSchema.guard?.('this can be anything') || ''; // todo: check the typing on the guards as the name probably should not be passed here (it does not seem to have any effect)
 
       return {
@@ -453,13 +453,13 @@ function parseSchema(
       guard: global.GLOBAL_OPTIONS.skipGuards
         ? undefined
         : () =>
-            guardOptional(
+            guardOptional({
               name,
               isRequired,
               nullable,
-              (iterName: string) =>
+              guard: (iterName: string) =>
                 `[${enumValues.join(', ')}].includes(${iterName})`,
-            ),
+            }),
     };
   }
 
@@ -470,12 +470,12 @@ function parseSchema(
       guard: global.GLOBAL_OPTIONS.skipGuards
         ? undefined
         : () =>
-            guardOptional(
+            guardOptional({
               name,
               isRequired,
               nullable,
-              (iterName: string) => `typeof ${iterName} === 'object'`,
-            ),
+              guard: (iterName: string) => `typeof ${iterName} === 'object'`,
+            }),
     }; // type occurrence of inlined properties as object instead of any (TODO: consider supporting inlined properties)
   }
 
@@ -488,13 +488,13 @@ function parseSchema(
       guard: global.GLOBAL_OPTIONS.skipGuards
         ? undefined
         : () =>
-            guardOptional(
+            guardOptional({
               name,
               isRequired,
               nullable,
-              (iterName: string) =>
+              guard: (iterName: string) =>
                 `${prefixGuards ? 'guards.' : ''}is${refType}(${iterName})`,
-            ),
+            }),
     };
   }
 
@@ -512,9 +512,13 @@ function parseSchema(
         global.GLOBAL_OPTIONS.skipGuards || !parsedArrayItemsSchema.guard
           ? undefined
           : () =>
-              guardOptional(name, isRequired, nullable, (iterName: string) =>
-                guardArray(iterName, parsedArrayItemsSchema.guard!),
-              ),
+              guardOptional({
+                name,
+                isRequired,
+                nullable,
+                guard: (iterName: string) =>
+                  guardArray(iterName, parsedArrayItemsSchema.guard!),
+              }),
     };
   }
 
@@ -535,11 +539,15 @@ function parseSchema(
         global.GLOBAL_OPTIONS.skipGuards || !parsedDictionarySchema.guard
           ? undefined
           : () =>
-              guardOptional(name, isRequired, nullable, (iterName: string) =>
-                isJustObject
-                  ? `typeof ${iterName} === 'object'`
-                  : guardDictionary(iterName, parsedDictionarySchema.guard!),
-              ),
+              guardOptional({
+                name,
+                isRequired,
+                nullable,
+                guard: (iterName: string) =>
+                  isJustObject
+                    ? `typeof ${iterName} === 'object'`
+                    : guardDictionary(iterName, parsedDictionarySchema.guard!),
+              }),
     };
   }
 
@@ -554,11 +562,15 @@ function parseSchema(
       : () =>
           type === 'any'
             ? ''
-            : guardOptional(name, isRequired, nullable, (iterName: string) =>
-                type === 'File'
-                  ? `${iterName} instanceof File`
-                  : `typeof ${iterName} === '${type}'`,
-              ),
+            : guardOptional({
+                name,
+                isRequired,
+                nullable,
+                guard: (iterName: string) =>
+                  type === 'File'
+                    ? `${iterName} instanceof File`
+                    : `typeof ${iterName} === '${type}'`,
+              }),
   };
 }
 
