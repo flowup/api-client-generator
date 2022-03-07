@@ -95,7 +95,7 @@ export function guardOptional({
   name: string;
   isRequired?: boolean;
   nullable?: boolean;
-  guard: (name: string) => string;
+  guard(name: string): string;
 }): string {
   const guards = [
     ...(isRequired ? [] : [`typeof ${name} === 'undefined'`]),
