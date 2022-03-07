@@ -86,14 +86,19 @@ export function accessProp(name: string): string {
   return name.startsWith("'") ? `arg[${name}]` : `arg.${name}`;
 }
 
-export function guardOptional(
-  name: string,
-  isRequired: boolean | undefined,
-  nullable: boolean | undefined,
-  guard: (name: string) => string,
-): string {
+export function guardOptional({
+  name,
+  isRequired = false,
+  nullable = false,
+  guard,
+}: {
+  name: string;
+  isRequired?: boolean;
+  nullable?: boolean;
+  guard: (name: string) => string;
+}): string {
   const guards = [
-    ...(isRequired ? [`typeof ${name} === 'undefined'`] : []),
+    ...(isRequired ? [] : [`typeof ${name} === 'undefined'`]),
     ...(nullable ? [`${name} === null`] : []),
     guard(name),
   ];
