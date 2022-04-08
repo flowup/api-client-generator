@@ -1,13 +1,8 @@
 import { mkdir, readFile, stat, writeFile } from 'fs';
-import {
-  compile,
-  HelperOptions,
-  registerHelper,
-  registerPartial,
-} from 'handlebars';
+import * as Handlebars from 'handlebars';
 import { OpenAPIV2 } from 'openapi-types';
 import { dirname, join } from 'path';
-import { parse as swaggerFile, validate } from 'swagger-parser';
+import * as SwaggerParser from 'swagger-parser';
 import { promisify } from 'util';
 import { TemplateData, Definition } from './types';
 import {
@@ -34,7 +29,7 @@ export async function generateAPIClient(
   const swaggerFilePath = global.GLOBAL_OPTIONS.sourceFile;
 
   try {
-    await validate(swaggerFilePath, {
+    await SwaggerParser.validate(swaggerFilePath, {
       parse: {
         json: { allowEmpty: false },
         yaml: { allowEmpty: false },
@@ -52,7 +47,7 @@ export async function generateAPIClient(
     );
   }
 
-  const swaggerDef = await swaggerFile(swaggerFilePath);
+  const swaggerDef = await SwaggerParser.parse(swaggerFilePath);
   const allTags = getAllSwaggerTags(swaggerDef.paths as OpenAPIV2.PathsObject);
   const specifiedTags = global.GLOBAL_OPTIONS.splitPathTags || [];
   const usedTags: (string | undefined)[] =
@@ -76,7 +71,7 @@ export async function generateAPIClient(
     );
 
   const compileTemplate = async (fileName: string) =>
-    compile((await promisify(readFile)(fileName)).toString());
+    Handlebars.compile((await promisify(readFile)(fileName)).toString());
 
   const compiledTemplates = {
     model: await compileTemplate(
@@ -102,10 +97,10 @@ export async function generateAPIClient(
     ),
   };
 
-  registerPartial('header', compiledTemplates['header']);
+  Handlebars.registerPartial('header', compiledTemplates['header']);
 
-  registerHelper('camelCase', toCamelCase);
-  registerHelper(
+  Handlebars.registerHelper('camelCase', toCamelCase);
+  Handlebars.registerHelper(
     'templateType',
     (
       // tslint:disable-next-line:no-any
@@ -114,7 +109,7 @@ export async function generateAPIClient(
       const conditions: string[] = args.slice(0, -1);
       const {
         data: { root },
-      }: HelperOptions = args[args.length - 1];
+      }: Handlebars.HelperOptions = args[args.length - 1];
 
       return conditions.includes(root.templateType);
     },
