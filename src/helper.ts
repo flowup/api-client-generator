@@ -1,6 +1,7 @@
 import { FileInfix } from './types';
 
-const BUILD_IN_TS_TYPE_REGEX = /^(?:string|number|integer|bigint|boolean|null|undefined|any|void|object|Object|File)\b/; // integer is mapped to number in later step of `typeName` conversion
+const BUILD_IN_TS_TYPE_REGEX =
+  /^(?:string|number|integer|bigint|boolean|null|undefined|any|void|object|Object|File)\b/; // integer is mapped to number in later step of `typeName` conversion
 
 export const ADDITIONAL_PROPERTIES_KEY = '[key: string]';
 

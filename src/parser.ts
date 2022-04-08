@@ -582,10 +582,12 @@ function defineInterface(
   const extendInterface: string | undefined = schema.allOf
     ? toCamelCase(
         dereferenceType(
-          ((schema.allOf.find(allOfSchema => '$ref' in allOfSchema) || {
-            $ref: '',
-            // tslint:disable-next-line:no-any
-          }) as any)['$ref'],
+          (
+            (schema.allOf.find(allOfSchema => '$ref' in allOfSchema) || {
+              $ref: '',
+              // tslint:disable-next-line:no-any
+            }) as any
+          )['$ref'],
         ),
         false,
       )

@@ -1,8 +1,8 @@
 steps:
-- id: build
-  name: gcr.io/flowcloud-153422/npm-chrome:current
-  entrypoint: '/bin/bash'
-  args:
-  - '-c'
-  - 'npm run dev:install && npm run lint && npm run tests && npm run build'
-  waitFor: ['-']
+  - id: build
+    name: gcr.io/flowcloud-153422/npm-chrome:current
+    entrypoint: '/bin/bash'
+    args:
+      - '-c'
+      - 'npm run dev:install && npm run lint && npm run tests && npm run build'
+    waitFor: ['-']

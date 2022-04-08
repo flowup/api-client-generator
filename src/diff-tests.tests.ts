@@ -47,19 +47,8 @@ async function compareWithReference(
     ),
   );
 
-  const {
-    same,
-    equal,
-    distinct,
-    differences,
-    left,
-    right,
-    diffSet,
-  } = await compare(
-    `${reference.refDir}/api`,
-    reference.genDir,
-    COMPARE_OPTIONS,
-  );
+  const { same, equal, distinct, differences, left, right, diffSet } =
+    await compare(`${reference.refDir}/api`, reference.genDir, COMPARE_OPTIONS);
 
   if (!same) {
     let result = ' Output should be the same, but there are differences.\n\n';
