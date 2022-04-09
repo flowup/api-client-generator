@@ -108,14 +108,11 @@ describe('PetService', () => {
         )
         .subscribe(() => {});
 
-      const {
-        headers,
-        params,
-        body,
-      }: HttpRequest<FormData> = backend.expectOne({
-        method: 'POST',
-        url: '/pet/1',
-      }).request;
+      const { headers, params, body }: HttpRequest<FormData> =
+        backend.expectOne({
+          method: 'POST',
+          url: '/pet/1',
+        }).request;
 
       await expect(headers.get('auth')).toEqual('custom auth header');
 
