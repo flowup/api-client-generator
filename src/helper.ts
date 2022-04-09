@@ -165,7 +165,7 @@ export async function flattenAll<T>(promises: Promise<T[]>[]): Promise<T[]> {
 
 export function compareStringByKey<T>(key: keyof T): (a: T, b: T) => number {
   return (a, b) =>
-    a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`) : -1;
+    a[key] && b[key] ? `${a[key]}`.localeCompare(`${b[key]}`, 'en') : -1;
 }
 
 /**
