@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.6](https://github.com/flowup/api-client-generator/compare/5.0.0-beta.5...5.0.0-beta.6) (2022-04-11)
+
+
+### Bug Fixes
+
+* correct isRequired guard + use named parameters ([25df534](https://github.com/flowup/api-client-generator/commit/25df534cd4d4141588581f9ecc240f3c1f958a41))
+* handle property `x-nullable` ([8873d16](https://github.com/flowup/api-client-generator/commit/8873d1605aea473f43d9cdbc36e039634b0547fb))
+* use en locale for sorting compare fn ([6f3962c](https://github.com/flowup/api-client-generator/commit/6f3962cbe8c30d741c83bccb2f65d10f6aa9d841))
+
 ## [5.0.0-beta.5](https://github.com/flowup/api-client-generator/compare/5.0.0-beta.4...5.0.0-beta.5) (2021-02-02)
 
 ## [5.0.0-beta.4](https://github.com/flowup/api-client-generator/compare/5.0.0-beta.3...5.0.0-beta.4) (2020-12-30)

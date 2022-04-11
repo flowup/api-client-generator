@@ -1,6 +1,6 @@
 {
   "name": "api-client-generator",
-  "version": "5.0.0-beta.5",
+  "version": "5.0.0-beta.6",
   "description": "Angular REST API client generator from Swagger YAML or JSON file with camel case settings",
   "homepage": "https://github.com/flowup/api-client-generator/blob/master/README.md",
   "main": "./dist/main.js",
