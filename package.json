@@ -77,13 +77,28 @@
     "which": "^2.0.2"
   },
   "devDependencies": {
+    "@code-pushup/cli": "^0.45.1",
+    "@code-pushup/coverage-plugin": "^0.45.1",
+    "@code-pushup/eslint-config": "^0.6.5",
+    "@code-pushup/eslint-plugin": "^0.45.1",
+    "@code-pushup/js-packages-plugin": "^0.45.1",
     "@types/jest": "^27.4.1",
     "@types/node": "^14.14.14",
     "@types/optimist": "^0.0.30",
     "@types/rimraf": "^3.0.2",
     "@types/which": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
     "concurrently": "^7.1.0",
     "dir-compare": "^4.0.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-deprecation": "^3.0.0",
+    "eslint-plugin-functional": "^6.5.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-promise": "^6.2.0",
+    "eslint-plugin-sonarjs": "^0.25.1",
+    "eslint-plugin-unicorn": "^54.0.0",
     "husky": "^4.3.6",
     "jest": "^27.5.1",
     "jest-preset-typescript": "^1.2.0",
@@ -121,6 +136,9 @@
       "<rootDir>/node_modules",
       "<rootDir>"
     ],
-    "testResultsProcessor": "jest-sonar-reporter"
+    "testResultsProcessor": "jest-sonar-reporter",
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ]
   }
 }
