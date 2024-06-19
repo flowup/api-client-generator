@@ -11,3 +11,4 @@ output*/
 ref*/
 dist/
 tsconfig.tsbuildinfo
+.code-pushup
