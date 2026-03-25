@@ -85,7 +85,7 @@
     "concurrently": "^7.1.0",
     "dir-compare": "^4.0.0",
     "husky": "^4.3.6",
-    "jest": "^27.5.1",
+    "jest": "^30.3.0",
     "jest-preset-typescript": "^1.2.0",
     "jest-sonar-reporter": "^2.0.0",
     "openapi-types": "^7.0.1",
@@ -100,8 +100,8 @@
     "typescript": "^4.6.3"
   },
   "optionalDependencies": {
-    "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0",
+    "@angular/common": "^19.2.16",
+    "@angular/core": "^21.2.6",
     "rxjs": "^6.0.0"
   },
   "husky": {
